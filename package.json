@@ -1,0 +1,28 @@
+{
+  "name": "trunk-logistics",
+  "version": "1.0.0",
+  "description": "TrunkLogistics - MVP platform connecting customers with logistics providers",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "install-all": "npm install && cd client && npm install && cd ../server && npm install",
+    "dev": "concurrently \"cd server && npm run dev\" \"cd client && npm run dev\"",
+    "build": "cd client && npm run build",
+    "start": "cd server && npm start",
+    "deploy:prep": "node cleanup-for-production-safe.js",
+    "deploy:build": "npm run deploy:prep && cd client && npm run build",
+    "deploy:migrate": "cd server && npm run db:migrate",
+    "deploy:full": "npm run deploy:build && npm run deploy:migrate",
+    "test": "echo \"Run tests in client and server directories\""
+  },
+  "keywords": ["logistics", "trucking", "booking", "transportation"],
+  "author": "TrunkLogistics Team",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  }
+}

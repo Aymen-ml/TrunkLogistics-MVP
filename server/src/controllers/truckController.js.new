@@ -1,0 +1,26 @@
+export const getAllTrucks = async (req, res) => {
+  try {
+    const query = `
+      SELECT t.*, pp.company_name as provider_name
+      FROM trucks t
+      JOIN provider_profiles pp ON t.provider_id = pp.id
+      WHERE pp.is_validated = true 
+      AND pp.validation_status = 'approved'
+      AND t.is_active = true
+      ORDER BY t.created_at DESC
+    `;
+
+    const trucks = await Truck.query(query);
+
+    res.status(200).json({
+      success: true,
+      data: trucks.rows
+    });
+  } catch (error) {
+    logger.error('Error getting trucks:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Error retrieving trucks'
+    });
+  }
+};

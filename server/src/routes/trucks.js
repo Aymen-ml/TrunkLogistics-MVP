@@ -1,0 +1,27 @@
+import express from 'express';
+import { createTruck, getTrucks, getTruck, updateTruck, deleteTruck, getMyTrucks } from '../controllers/truckController.js';
+import { authenticate, requireProvider, requireProviderOrAdmin } from '../middleware/auth.js';
+import { validateTruckCreate, validateTruckSearch, validateUUID } from '../middleware/validation.js';
+import { uploadTruckFiles, processUploadedFiles } from '../utils/fileUpload.js';
+
+const router = express.Router();
+
+// GET /api/trucks - Search trucks (authenticated)
+router.get('/', authenticate, getTrucks);
+
+// GET /api/trucks/my - Get provider's trucks
+router.get('/my', authenticate, requireProvider, getMyTrucks);
+
+// POST /api/trucks - Create truck listing with file uploads
+router.post('/', authenticate, requireProvider, uploadTruckFiles, validateTruckCreate, createTruck);
+
+// GET /api/trucks/:id - Get truck details
+router.get('/:id', authenticate, validateUUID, getTruck);
+
+// PUT /api/trucks/:id - Update truck
+router.put('/:id', authenticate, requireProviderOrAdmin, validateUUID, uploadTruckFiles, validateTruckCreate, updateTruck);
+
+// DELETE /api/trucks/:id - Delete truck
+router.delete('/:id', authenticate, requireProviderOrAdmin, validateUUID, deleteTruck);
+
+export default router;

@@ -1,0 +1,84 @@
+export const completeProviderRegistration = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const {
+      businessRegistrationNumber,
+      taxIdentificationNumber,
+      vatNumber,
+      businessPhone,
+      emergencyContactName,
+      emergencyContactPhone,
+      streetAddress,
+      city,
+      stateProvince,
+      postalCode,
+      country,
+      yearsInBusiness,
+      businessDescription,
+      serviceAreas
+    } = req.body;
+
+    // Check if provider profile exists
+    const existingProfile = await ProviderProfile.findByUserId(userId);
+    if (!existingProfile) {
+      return res.status(404).json({
+        success: false,
+        error: 'Provider profile not found'
+      });
+    }
+
+    // Validate file uploads
+    const documents = req.files;
+    if (!documents?.businessLicense || !documents?.taxDocument || !documents?.ownerId) {
+      return res.status(400).json({
+        success: false,
+        error: 'All required documents must be uploaded'
+      });
+    }
+
+    // Process document uploads
+    const businessLicenseDoc = await processDocument(documents.businessLicense[0]);
+    const taxDocumentDoc = await processDocument(documents.taxDocument[0]);
+    const ownerIdDoc = await processDocument(documents.ownerId[0]);
+
+    // Update provider profile
+    const updatedProfile = await ProviderProfile.update(existingProfile.id, {
+      businessRegistrationNumber,
+      taxIdentificationNumber,
+      vatNumber,
+      businessPhone,
+      emergencyContactName,
+      emergencyContactPhone,
+      streetAddress,
+      city,
+      stateProvince,
+      postalCode,
+      country,
+      yearsInBusiness,
+      businessDescription,
+      serviceAreas,
+      businessLicenseDocUrl: businessLicenseDoc.url,
+      taxDocumentUrl: taxDocumentDoc.url,
+      ownerIdUrl: ownerIdDoc.url,
+      documents_submitted_at: new Date()
+    });
+
+    // Notify admins about new provider registration
+    await notifyAdminsNewProvider(updatedProfile);
+
+    res.status(200).json({
+      success: true,
+      message: 'Provider registration completed successfully. Pending admin review.',
+      data: {
+        profile: updatedProfile
+      }
+    });
+
+  } catch (error) {
+    logger.error('Error completing provider registration:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Failed to complete provider registration'
+    });
+  }
+};

@@ -1,0 +1,536 @@
+import Booking from '../models/Booking.js';
+import CustomerProfile from '../models/CustomerProfile.js';
+import ProviderProfile from '../models/ProviderProfile.js';
+import Truck from '../models/Truck.js';
+import User from '../models/User.js';
+import notificationService from '../services/notificationService.js';
+import distanceService from '../services/distanceService.js';
+import { validationResult } from 'express-validator';
+import logger from '../utils/logger.js';
+
+export const createBooking = async (req, res) => {
+  try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({
+        success: false,
+        error: 'Validation failed',
+        details: errors.array()
+      });
+    }
+
+    // Only customers can create bookings
+    if (req.user.role !== 'customer') {
+      return res.status(403).json({
+        success: false,
+        error: 'Only customers can create booking requests'
+      });
+    }
+
+    // Get customer profile
+    const customerProfile = await CustomerProfile.findByUserId(req.user.id);
+    if (!customerProfile) {
+      return res.status(400).json({
+        success: false,
+        error: 'Customer profile not found. Please complete your profile first.'
+      });
+    }
+
+    const {
+      truckId,
+      pickupAddress,
+      pickupCity,
+      destinationAddress,
+      destinationCity,
+      pickupDate,
+      pickupTime,
+      cargoDescription,
+      cargoWeight,
+      cargoVolume,
+      notes
+    } = req.body;
+
+    // Get the truck details
+    const truck = await Truck.findById(truckId);
+    if (!truck) {
+      return res.status(404).json({
+        success: false,
+        error: 'Truck not found'
+      });
+    }
+
+    // Get provider profile
+    const providerProfile = await ProviderProfile.findById(truck.provider_id);
+    if (!providerProfile) {
+      return res.status(404).json({
+        success: false,
+        error: 'Provider not found'
+      });
+    }
+
+    // Calculate estimated price
+    const distance = await distanceService.calculateDistance(pickupCity, destinationCity);
+    const pricePerKm = truck.price_per_km;
+    const totalPrice = distance * pricePerKm;
+
+    // Create the booking
+    const booking = await Booking.create({
+      customer_id: customerProfile.id,
+      provider_id: providerProfile.id,
+      truck_id: truckId,
+      pickup_address: pickupAddress,
+      pickup_city: pickupCity,
+      destination_address: destinationAddress,
+      destination_city: destinationCity,
+      pickup_date: pickupDate,
+      pickup_time: pickupTime,
+      cargo_description: cargoDescription,
+      cargo_weight: cargoWeight,
+      cargo_volume: cargoVolume,
+      distance,
+      price_per_km: pricePerKm,
+      total_price: totalPrice,
+      notes,
+      status: 'pending_review'
+    });
+
+    // Send notification to provider
+    await notificationService.notifyProvider(providerProfile.user_id, {
+      type: 'new_booking_request',
+      booking_id: booking.id,
+      message: `New booking request from ${customerProfile.company_name || 'a customer'}`
+    });
+
+    res.status(201).json({
+      success: true,
+      data: { booking }
+    });
+
+  } catch (error) {
+    logger.error('Error in createBooking:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Failed to create booking'
+    });
+  }
+};
+
+export const getBookings = async (req, res) => {
+  try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({
+        success: false,
+        error: 'Validation failed',
+        details: errors.array()
+      });
+    }
+
+    let bookings;
+    const {
+      status,
+      date_from,
+      date_to,
+      search
+    } = req.query;
+
+    // Build query conditions
+    const conditions = {};
+
+    if (req.user.role === 'customer') {
+      const customerProfile = await CustomerProfile.findByUserId(req.user.id);
+      if (!customerProfile) {
+        return res.status(400).json({
+          success: false,
+          error: 'Customer profile not found'
+        });
+      }
+      conditions.customer_id = customerProfile.id;
+    } else if (req.user.role === 'provider') {
+      const providerProfile = await ProviderProfile.findByUserId(req.user.id);
+      if (!providerProfile) {
+        return res.status(400).json({
+          success: false,
+          error: 'Provider profile not found'
+        });
+      }
+      conditions.provider_id = providerProfile.id;
+    }
+
+    if (status && status !== 'all') {
+      conditions.status = status;
+    }
+
+    if (date_from || date_to) {
+      conditions.pickup_date = {};
+      if (date_from) conditions.pickup_date.$gte = new Date(date_from);
+      if (date_to) conditions.pickup_date.$lte = new Date(date_to);
+    }
+
+    if (search) {
+      conditions.$or = [
+        { reference: { $regex: search, $options: 'i' } },
+        { pickup_city: { $regex: search, $options: 'i' } },
+        { destination_city: { $regex: search, $options: 'i' } }
+      ];
+    }
+
+    // Get bookings with related data
+    bookings = await Booking.findAll(conditions);
+
+    res.status(200).json({
+      success: true,
+      data: { bookings }
+    });
+
+  } catch (error) {
+    logger.error('Error in getBookings:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Failed to fetch bookings'
+    });
+  }
+};
+
+export const getBooking = async (req, res) => {
+  try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({
+        success: false,
+        error: 'Validation failed',
+        details: errors.array()
+      });
+    }
+
+    const { id } = req.params;
+    const booking = await Booking.findById(id);
+
+    if (!booking) {
+      return res.status(404).json({
+        success: false,
+        error: 'Booking not found'
+      });
+    }
+
+    // Check access permissions
+    if (req.user.role === 'customer') {
+      const customerProfile = await CustomerProfile.findByUserId(req.user.id);
+      if (!customerProfile || booking.customer_id !== customerProfile.id) {
+        return res.status(403).json({
+          success: false,
+          error: 'Access denied'
+        });
+      }
+    } else if (req.user.role === 'provider') {
+      const providerProfile = await ProviderProfile.findByUserId(req.user.id);
+      if (!providerProfile || booking.provider_id !== providerProfile.id) {
+        return res.status(403).json({
+          success: false,
+          error: 'Access denied'
+        });
+      }
+    }
+
+    res.status(200).json({
+      success: true,
+      data: { booking }
+    });
+
+  } catch (error) {
+    logger.error('Error in getBooking:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Failed to fetch booking'
+    });
+  }
+};
+
+export const updateBookingStatus = async (req, res) => {
+  try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({
+        success: false,
+        error: 'Validation failed',
+        details: errors.array()
+      });
+    }
+
+    const { id } = req.params;
+    const { status, notes } = req.body;
+
+    const booking = await Booking.findById(id);
+    if (!booking) {
+      return res.status(404).json({
+        success: false,
+        error: 'Booking not found'
+      });
+    }
+
+    // Check permissions based on role and booking status
+    if (req.user.role === 'provider') {
+      const providerProfile = await ProviderProfile.findByUserId(req.user.id);
+      if (!providerProfile || booking.provider_id !== providerProfile.id) {
+        return res.status(403).json({
+          success: false,
+          error: 'You can only update status of bookings assigned to you'
+        });
+      }
+    } else if (req.user.role === 'customer') {
+      const customerProfile = await CustomerProfile.findByUserId(req.user.id);
+      if (!customerProfile || booking.customer_id !== customerProfile.id) {
+        return res.status(403).json({
+          success: false,
+          error: 'You can only update status of your own bookings'
+        });
+      }
+    }
+
+    // Update booking status
+    const updatedBooking = await Booking.updateStatus(id, status, notes);
+
+    // Send notifications based on status change
+    if (status === 'approved') {
+      await notificationService.notifyCustomer(booking.customer_id, {
+        type: 'booking_approved',
+        booking_id: booking.id,
+        message: 'Your booking has been approved'
+      });
+    } else if (status === 'cancelled') {
+      const notifyUserId = req.user.role === 'customer' ? booking.provider_id : booking.customer_id;
+      await notificationService.notify(notifyUserId, {
+        type: 'booking_cancelled',
+        booking_id: booking.id,
+        message: `Booking #${booking.reference} has been cancelled`
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      data: { booking: updatedBooking }
+    });
+
+  } catch (error) {
+    logger.error('Error in updateBookingStatus:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Failed to update booking status'
+    });
+  }
+};
+
+export const updateBooking = async (req, res) => {
+  try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({
+        success: false,
+        error: 'Validation failed',
+        details: errors.array()
+      });
+    }
+
+    const { id } = req.params;
+    const updateData = req.body;
+
+    const booking = await Booking.findById(id);
+    if (!booking) {
+      return res.status(404).json({
+        success: false,
+        error: 'Booking not found'
+      });
+    }
+
+    // Only allow updates by the customer who created the booking
+    if (req.user.role === 'customer') {
+      const customerProfile = await CustomerProfile.findByUserId(req.user.id);
+      if (!customerProfile || booking.customer_id !== customerProfile.id) {
+        return res.status(403).json({
+          success: false,
+          error: 'You can only update your own bookings'
+        });
+      }
+    } else {
+      return res.status(403).json({
+        success: false,
+        error: 'Only customers can update bookings'
+      });
+    }
+
+    // Only allow updates for pending bookings
+    if (booking.status !== 'pending_review') {
+      return res.status(400).json({
+        success: false,
+        error: 'Can only update pending bookings'
+      });
+    }
+
+    // Update the booking
+    const updatedBooking = await Booking.update(id, updateData);
+
+    // Notify provider about the update
+    await notificationService.notifyProvider(booking.provider_id, {
+      type: 'booking_updated',
+      booking_id: booking.id,
+      message: `Booking #${booking.reference} has been updated`
+    });
+
+    res.status(200).json({
+      success: true,
+      data: { booking: updatedBooking }
+    });
+
+  } catch (error) {
+    logger.error('Error in updateBooking:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Failed to update booking'
+    });
+  }
+};
+
+export const deleteBooking = async (req, res) => {
+  try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({
+        success: false,
+        error: 'Validation failed',
+        details: errors.array()
+      });
+    }
+
+    const { id } = req.params;
+    const booking = await Booking.findById(id);
+
+    if (!booking) {
+      return res.status(404).json({
+        success: false,
+        error: 'Booking not found'
+      });
+    }
+
+    // Check permissions for deletion
+    if (req.user.role === 'customer') {
+      // Customers can only delete their own bookings
+      const customerProfile = await CustomerProfile.findByUserId(req.user.id);
+      if (!customerProfile || booking.customer_id !== customerProfile.id) {
+        return res.status(403).json({
+          success: false,
+          error: 'You can only delete your own bookings'
+        });
+      }
+    } else if (req.user.role === 'provider') {
+      // Providers can only delete their own cancelled bookings
+      const providerProfile = await ProviderProfile.findByUserId(req.user.id);
+      if (!providerProfile || booking.provider_id !== providerProfile.id) {
+        return res.status(403).json({
+          success: false,
+          error: 'You can only delete bookings assigned to you'
+        });
+      }
+      if (booking.status !== 'cancelled') {
+        return res.status(403).json({
+          success: false,
+          error: 'You can only delete cancelled bookings'
+        });
+      }
+    } else {
+      return res.status(403).json({
+        success: false,
+        error: 'Access denied'
+      });
+    }
+
+    // Proceed with deletion
+    await Booking.delete(id);
+
+    // Log the deletion
+    logger.info(`Booking ${id} deleted by ${req.user.role} (ID: ${req.user.id})`);
+
+    // Send success response
+    res.status(200).json({
+      success: true,
+      message: 'Booking deleted successfully'
+    });
+
+  } catch (error) {
+    logger.error('Error in deleteBooking:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Failed to delete booking'
+    });
+  }
+};
+
+export const getBookingStats = async (req, res) => {
+  try {
+    // Only admin can access stats
+    if (req.user.role !== 'admin') {
+      return res.status(403).json({
+        success: false,
+        error: 'Access denied'
+      });
+    }
+
+    const stats = await Booking.getStats();
+
+    res.status(200).json({
+      success: true,
+      data: { stats }
+    });
+
+  } catch (error) {
+    logger.error('Error in getBookingStats:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Failed to fetch booking stats'
+    });
+  }
+};
+
+export const getPriceEstimate = async (req, res) => {
+  try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({
+        success: false,
+        error: 'Validation failed',
+        details: errors.array()
+      });
+    }
+
+    const { truckId, pickupCity, destinationCity } = req.query;
+
+    // Get the truck details
+    const truck = await Truck.findById(truckId);
+    if (!truck) {
+      return res.status(404).json({
+        success: false,
+        error: 'Truck not found'
+      });
+    }
+
+    // Calculate distance and price
+    const distance = await distanceService.calculateDistance(pickupCity, destinationCity);
+    const pricePerKm = truck.price_per_km;
+    const totalPrice = distance * pricePerKm;
+
+    res.status(200).json({
+      success: true,
+      data: {
+        distance,
+        price_per_km: pricePerKm,
+        total_price: totalPrice
+      }
+    });
+
+  } catch (error) {
+    logger.error('Error in getPriceEstimate:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Failed to calculate price estimate'
+    });
+  }
+};

@@ -1,0 +1,68 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: trunk-logistics-db
+    environment:
+      POSTGRES_DB: trunk_logistics
+      POSTGRES_USER: trunk_user
+      POSTGRES_PASSWORD: trunk_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./server/src/database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - trunk-network
+
+  # Backend API
+  api:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: trunk-logistics-api
+    environment:
+      NODE_ENV: development
+      PORT: 5000
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: trunk_logistics
+      DB_USER: trunk_user
+      DB_PASSWORD: trunk_password
+      JWT_SECRET: your_jwt_secret_here
+    ports:
+      - "5000:5000"
+    depends_on:
+      - postgres
+    volumes:
+      - ./server:/app
+      - /app/node_modules
+    networks:
+      - trunk-network
+    command: npm run dev
+
+  # Frontend
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: trunk-logistics-client
+    environment:
+      VITE_API_URL: http://localhost:5000/api
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./client:/app
+      - /app/node_modules
+    networks:
+      - trunk-network
+    command: npm run dev
+
+volumes:
+  postgres_data:
+
+networks:
+  trunk-network:
+    driver: bridge
