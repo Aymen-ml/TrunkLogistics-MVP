@@ -244,60 +244,65 @@ class EmailService {
   }
 
   async sendPasswordResetEmail(userEmail, userName, resetUrl) {
-    const subject = 'Reset Your Password - TrunkLogistics';
+    const subject = 'Password Reset Request - TrunkLogistics';
     
     const html = `
-      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-        <div style="text-align: center; margin-bottom: 30px;">
-          <h1 style="color: #2563eb; margin: 0;">🚛 TrunkLogistics</h1>
+      <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #ffffff;">
+        <div style="text-align: center; margin-bottom: 30px; border-bottom: 2px solid #e5e7eb; padding-bottom: 20px;">
+          <h1 style="color: #1f2937; margin: 0; font-size: 24px;">TrunkLogistics</h1>
+          <p style="color: #6b7280; margin: 5px 0 0 0; font-size: 14px;">Logistics Management Platform</p>
         </div>
         
-        <div style="background-color: #f8fafc; padding: 30px; border-radius: 8px; margin-bottom: 30px;">
-          <h2 style="color: #1f2937; margin-top: 0;">Reset Your Password</h2>
+        <div style="margin-bottom: 30px;">
+          <h2 style="color: #1f2937; margin-top: 0; font-size: 20px;">Password Reset Request</h2>
           
-          <p style="margin-bottom: 20px; color: #374151;">Hello ${userName},</p>
+          <p style="margin-bottom: 20px; color: #374151; line-height: 1.6;">Dear ${userName},</p>
           
-          <p style="margin-bottom: 20px; color: #374151;">
-            We received a request to reset your password for your TrunkLogistics account. 
-            If you didn't make this request, you can safely ignore this email.
+          <p style="margin-bottom: 20px; color: #374151; line-height: 1.6;">
+            You have requested to reset your password for your TrunkLogistics account. 
+            This is a security-protected action to ensure your account remains safe.
           </p>
           
-          <p style="margin-bottom: 30px; color: #374151;">
-            To reset your password, click the button below. This link will expire in 1 hour for security reasons.
+          <p style="margin-bottom: 30px; color: #374151; line-height: 1.6;">
+            Please click the secure link below to create a new password. This link will expire in 60 minutes for your security.
           </p>
           
           <div style="text-align: center; margin: 30px 0;">
             <a href="${resetUrl}" style="
               display: inline-block;
-              background-color: #2563eb;
+              background-color: #059669;
               color: white;
-              padding: 12px 30px;
+              padding: 14px 32px;
               text-decoration: none;
-              border-radius: 6px;
-              font-weight: bold;
+              border-radius: 8px;
+              font-weight: 600;
               font-size: 16px;
-            ">Reset My Password</a>
+              letter-spacing: 0.5px;
+              box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            ">Reset Password Securely</a>
           </div>
           
-          <p style="margin-bottom: 20px; color: #6b7280; font-size: 14px;">
-            If the button doesn't work, you can copy and paste this link into your browser:
-          </p>
-          
-          <p style="margin-bottom: 20px; color: #6b7280; font-size: 14px; word-break: break-all;">
-            ${resetUrl}
+          <div style="background-color: #f9fafb; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #6b7280;">
+            <p style="margin: 0; color: #374151; font-size: 14px; line-height: 1.5;">
+              <strong>Alternative method:</strong> If the button above doesn't work, copy and paste this secure link into your browser:
+            </p>
+            <p style="margin: 10px 0 0 0; color: #2563eb; font-size: 13px; word-break: break-all; font-family: monospace;">
+              ${resetUrl}
+            </p>
+          </div>
+        </div>
+        
+        <div style="background-color: #fef3c7; border: 1px solid #f59e0b; border-radius: 8px; padding: 15px; margin-bottom: 30px;">
+          <p style="margin: 0; color: #92400e; font-size: 14px; line-height: 1.5;">
+            <strong>⚠️ Security Notice:</strong> If you did not request this password reset, please ignore this email. 
+            Your account remains secure and no changes will be made.
           </p>
         </div>
         
-        <div style="background-color: #fef2f2; border-left: 4px solid #ef4444; padding: 15px; margin-bottom: 30px;">
-          <p style="margin: 0; color: #dc2626; font-size: 14px;">
-            <strong>Security Notice:</strong> If you didn't request this password reset, 
-            please contact our support team immediately at support@trunklogistics.com
-          </p>
-        </div>
-        
-        <div style="text-align: center; color: #6b7280; font-size: 12px;">
-          <p>This email was sent by TrunkLogistics</p>
-          <p>© 2025 TrunkLogistics. All rights reserved.</p>
+        <div style="text-align: center; color: #6b7280; font-size: 12px; border-top: 1px solid #e5e7eb; padding-top: 20px;">
+          <p style="margin: 0 0 5px 0;">This is an automated security email from TrunkLogistics</p>
+          <p style="margin: 0 0 5px 0;">© 2025 TrunkLogistics. All rights reserved.</p>
+          <p style="margin: 0;">Need help? Contact us at support@trunklogistics.com</p>
         </div>
       </div>
     `;
