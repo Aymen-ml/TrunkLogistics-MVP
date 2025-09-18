@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Truck, Mail, AlertCircle, CheckCircle, Loader, ArrowLeft } from 'lucide-react';
-import axios from 'axios';
+import { apiClient } from '../../utils/apiClient';
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
@@ -26,9 +26,7 @@ const ForgotPassword = () => {
     setError('');
 
     try {
-      const response = await axios.post('/api/auth/forgot-password', { email }, {
-        baseURL: '' // Override the baseURL for this request
-      });
+      const response = await apiClient.post('/auth/forgot-password', { email });
       
       if (response.data.success) {
         setSuccess(true);
