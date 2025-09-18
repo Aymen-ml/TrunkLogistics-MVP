@@ -23,9 +23,9 @@ const resolveIPv4 = async (hostname) => {
 };
 
 // Use Supavisor connection pooler for IPv4 support
-// Format: postgresql://[user].[project_ref]:[password]@[host]:6543/[db_name]
+// Correct format from Supabase dashboard: postgresql://postgres.[project_ref]:[password]@[region].pooler.supabase.com:5432/postgres
 const connectionString = process.env.DATABASE_URL || 
-  `postgresql://postgres.drqkwioicbcihakxgsoe:${process.env.DB_PASSWORD}@aws-0-eu-central-1.pooler.supabase.com:6543/postgres`;
+  `postgresql://postgres.drqkwioicbcihakxgsoe:${process.env.DB_PASSWORD}@aws-1-eu-west-3.pooler.supabase.com:5432/postgres`;
 
 console.log('🔄 Attempting connection with Supavisor pooler for IPv4 support...');
 
