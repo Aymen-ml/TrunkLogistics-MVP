@@ -10,6 +10,9 @@ dotenv.config();
 
 const PORT = process.env.PORT || 5000;
 
+// Trust proxy for Render deployment (fixes X-Forwarded-For header issues)
+app.set('trust proxy', 1);
+
 // Rate limiting (disabled for development)
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
