@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { Truck, Lock, AlertCircle, CheckCircle, Loader, Eye, EyeOff } from 'lucide-react';
-import { apiClient } from '../../utils/apiClient';
+import axios from 'axios';
 
 const ResetPassword = () => {
   const { token } = useParams();
@@ -84,7 +84,14 @@ const ResetPassword = () => {
     setError('');
 
     try {
-      const response = await apiClient.post(`/auth/reset-password/${token}`, {
+      // Use the same API URL configuration as other components
+      const API_BASE_URL = import.meta.env.VITE_API_URL || '';
+      const fullUrl = `${API_BASE_URL}/auth/reset-password/${token}`;
+      
+      console.log('Making request to:', fullUrl);
+      console.log('API_BASE_URL:', API_BASE_URL);
+      
+      const response = await axios.post(fullUrl, {
         password: formData.password
       });
       
