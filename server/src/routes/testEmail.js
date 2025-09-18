@@ -47,6 +47,15 @@ router.post('/send-test-email', async (req, res) => {
       });
     }
 
+    console.log('Attempting to send test email to:', email);
+    console.log('Email service configuration:', {
+      service: process.env.EMAIL_SERVICE,
+      hasApiKey: !!process.env.SENDGRID_API_KEY,
+      apiKeyPrefix: process.env.SENDGRID_API_KEY ? process.env.SENDGRID_API_KEY.substring(0, 10) + '...' : 'not set',
+      emailFrom: process.env.EMAIL_FROM,
+      hasTransporter: !!emailService.transporter
+    });
+
     const result = await emailService.sendEmail(
       email,
       'Test Email from TrunkLogistics',
@@ -54,16 +63,25 @@ router.post('/send-test-email', async (req, res) => {
       'Test Email - This is a test email to verify email service is working.'
     );
 
+    console.log('Email send result:', result);
+
     res.json({
       success: !!result,
       message: result ? 'Test email sent successfully' : 'Failed to send test email',
-      result: result
+      result: result,
+      debug: {
+        hasTransporter: !!emailService.transporter,
+        emailService: process.env.EMAIL_SERVICE,
+        hasApiKey: !!process.env.SENDGRID_API_KEY
+      }
     });
   } catch (error) {
+    console.error('Test email send error:', error);
     logger.error('Test email send error:', error);
     res.status(500).json({
       success: false,
-      error: error.message
+      error: error.message,
+      stack: error.stack
     });
   }
 });
