@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { Truck, Lock, AlertCircle, CheckCircle, Loader, Eye, EyeOff } from 'lucide-react';
-import axios from 'axios';
+import { apiClient } from '../../utils/apiClient';
 
 const ResetPassword = () => {
   const { token } = useParams();
@@ -84,10 +84,8 @@ const ResetPassword = () => {
     setError('');
 
     try {
-      const response = await axios.post(`/api/auth/reset-password/${token}`, {
+      const response = await apiClient.post(`/auth/reset-password/${token}`, {
         password: formData.password
-      }, {
-        baseURL: '' // Override the baseURL for this request
       });
       
       if (response.data.success) {
@@ -108,8 +106,15 @@ const ResetPassword = () => {
       console.error('❌ Status:', err.response?.status);
       console.error('❌ Response Data:', err.response?.data);
       console.error('❌ Request URL:', err.config?.url);
-      if (err.response?.status === 400) {
-        setError(err.response.data.error || 'Invalid or expired reset token');
+      
+      if (err.response?.data?.error) {
+        setError(err.response.data.error);
+      } else if (err.response?.status === 400) {
+        setError('Invalid or expired reset token. Please request a new password reset.');
+      } else if (err.response?.status === 500) {
+        setError('Server error. Please try again later.');
+      } else if (err.message?.includes('Network')) {
+        setError('Network error. Please check your connection and try again.');
       } else {
         setError('Failed to reset password. Please try again.');
       }
