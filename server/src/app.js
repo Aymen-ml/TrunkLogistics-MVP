@@ -14,6 +14,7 @@ import notificationRoutes from './routes/notifications.js';
 import downloadRoutes from './routes/downloads.js';
 import documentRoutes from './routes/documents.js';
 import adminRoutes from './routes/admin.js';
+import testRoutes from './routes/test.js';
 import errorHandler from './middleware/errorHandler.js';
 import { securityHeaders, corsOptions, sanitizeData } from './middleware/security.js';
 import { generalLimiter } from './middleware/rateLimiter.js';
@@ -122,6 +123,7 @@ app.use('/api/notifications', notificationRoutes);
 app.use('/api/downloads', downloadRoutes);
 app.use('/api/documents', documentRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/test', testRoutes);
 
 // Health check
 app.get('/api/health', (req, res) => {
