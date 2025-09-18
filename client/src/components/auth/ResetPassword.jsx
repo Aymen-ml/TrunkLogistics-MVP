@@ -84,15 +84,21 @@ const ResetPassword = () => {
     setError('');
 
     try {
-      // Use the same API URL configuration as other components
-      const API_BASE_URL = import.meta.env.VITE_API_URL || '';
-      const fullUrl = `${API_BASE_URL}/auth/reset-password/${token}`;
+      // Hardcode the API URL to ensure it works
+      const API_URL = 'https://trunklogistics-api.onrender.com/api';
+      const fullUrl = `${API_URL}/auth/reset-password/${token}`;
       
-      console.log('Making request to:', fullUrl);
-      console.log('API_BASE_URL:', API_BASE_URL);
+      console.log('🔄 Making request to:', fullUrl);
+      console.log('🔧 Using hardcoded API URL:', API_URL);
+      console.log('🎯 Token:', token);
       
       const response = await axios.post(fullUrl, {
         password: formData.password
+      }, {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        timeout: 30000 // 30 second timeout
       });
       
       if (response.data.success) {
