@@ -1,14 +1,36 @@
 import pg from 'pg';
 import dotenv from 'dotenv';
+import dns from 'dns';
 import logger from '../utils/logger.js';
 
 dotenv.config();
 
 const { Pool } = pg;
 
-// Use DATABASE_URL with proper SSL configuration for Supabase
+// Try to resolve IPv4 address for the host
+const resolveIPv4 = async (hostname) => {
+  return new Promise((resolve, reject) => {
+    dns.resolve4(hostname, (err, addresses) => {
+      if (err) {
+        console.log(`No IPv4 address found for ${hostname}, using hostname`);
+        resolve(hostname);
+      } else {
+        console.log(`Resolved IPv4 for ${hostname}:`, addresses[0]);
+        resolve(addresses[0]);
+      }
+    });
+  });
+};
+
+// Use Supavisor connection pooler for IPv4 support
+// Format: postgresql://[user].[project_ref]:[password]@[host]:6543/[db_name]
+const connectionString = process.env.DATABASE_URL || 
+  `postgresql://postgres.drqkwioicbcihakxgsoe:${process.env.DB_PASSWORD}@aws-0-eu-central-1.pooler.supabase.com:6543/postgres`;
+
+console.log('🔄 Attempting connection with Supavisor pooler for IPv4 support...');
+
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL || `postgresql://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`,
+  connectionString: connectionString,
   ssl: process.env.NODE_ENV === 'production' ? { 
     rejectUnauthorized: false 
   } : false,
