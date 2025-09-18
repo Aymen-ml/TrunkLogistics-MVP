@@ -169,10 +169,21 @@ export const register = async (req, res) => {
 
     // Generate verification token and send email
     try {
+      logger.info(`🔄 Starting verification email process for user: ${user.email}`);
       const verificationToken = await EmailVerification.createVerificationToken(user.id);
-      await EmailVerification.sendVerificationEmail(user, verificationToken);
+      logger.info(`✅ Verification token created: ${verificationToken.substring(0, 10)}...`);
+      
+      const emailResult = await EmailVerification.sendVerificationEmail(user, verificationToken);
+      logger.info(`📧 Verification email result:`, emailResult);
+      
+      if (emailResult) {
+        logger.info(`✅ Verification email sent successfully to: ${user.email}`);
+      } else {
+        logger.error(`❌ Verification email failed to send to: ${user.email}`);
+      }
     } catch (emailError) {
-      logger.error('Error sending verification email:', emailError);
+      logger.error('❌ Error in verification email process:', emailError);
+      logger.error('❌ Error stack:', emailError.stack);
       // Continue with registration even if email fails
     }
 
