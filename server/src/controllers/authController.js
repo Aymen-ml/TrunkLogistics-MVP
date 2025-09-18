@@ -407,10 +407,14 @@ export const login = async (req, res) => {
       message: 'Login successful'
     });
   } catch (error) {
+    console.error('LOGIN ERROR DETAILS:', error);
+    console.error('Error message:', error.message);
+    console.error('Error stack:', error.stack);
     logger.error('Login error:', error);
     res.status(500).json({
       success: false,
-      error: 'Server error during login'
+      error: 'Server error during login',
+      details: process.env.NODE_ENV === 'development' ? error.message : undefined
     });
   }
 };
