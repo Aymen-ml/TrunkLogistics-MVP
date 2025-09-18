@@ -1,7 +1,7 @@
 import { query } from '../config/database.js';
 import crypto from 'crypto';
-import nodemailer from 'nodemailer';
 import logger from '../utils/logger.js';
+import emailService from '../services/emailService.js';
 
 // List of commonly used disposable email domains
 const disposableEmailDomains = [
@@ -17,30 +17,8 @@ const disposableEmailDomains = [
   'sharklasers.com'
 ];
 
-// Email configuration - update these with your email service settings
-const emailConfig = {
-  host: process.env.EMAIL_HOST || process.env.SMTP_HOST || 'smtp.gmail.com',
-  port: parseInt(process.env.EMAIL_PORT || process.env.SMTP_PORT || '587'),
-  secure: process.env.EMAIL_SECURE === 'true' || process.env.SMTP_SECURE === 'true',
-  auth: {
-    user: process.env.EMAIL_USER || process.env.SMTP_USER,
-    pass: process.env.EMAIL_PASSWORD || process.env.SMTP_PASSWORD
-  }
-};
-
-let transporter = null;
-
-// Initialize transporter with error handling
-try {
-  if (emailConfig.auth.user && emailConfig.auth.pass) {
-    transporter = nodemailer.createTransport(emailConfig);
-    logger.info('Email transporter initialized for verification emails');
-  } else {
-    logger.warn('Email credentials not configured - verification emails will not be sent');
-  }
-} catch (error) {
-  logger.error('Failed to initialize email transporter:', error);
-}
+// Email verification now uses the centralized emailService
+// which handles SendGrid configuration
 
 class EmailVerification {
   static async createVerificationToken(userId) {
@@ -97,63 +75,81 @@ class EmailVerification {
   }
 
   static async sendVerificationEmail(user, token) {
-    if (!transporter) {
-      logger.warn('Email transporter not configured - cannot send verification email');
-      return false;
-    }
+    try {
+      const verificationUrl = `${process.env.CLIENT_URL || 'https://trunklogistics-mvp.netlify.app'}/verify-email/${token}`;
 
-    const verificationUrl = `${process.env.CLIENT_URL || 'http://localhost:5173'}/verify-email/${token}`;
-
-    const mailOptions = {
-      from: `${process.env.EMAIL_FROM_NAME || 'TrunkLogistics'} <${process.env.EMAIL_FROM || 'noreply@trunklogistics.com'}>`,
-      to: user.email,
-      subject: 'Verify your email address - TrunkLogistics',
-      html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-          <div style="text-align: center; margin-bottom: 30px;">
-            <h1 style="color: #2563eb; margin-bottom: 10px;">Welcome to TrunkLogistics!</h1>
-            <p style="color: #6b7280; font-size: 16px;">Please verify your email address to complete your registration</p>
+      const subject = 'Verify Your Email Address - TrunkLogistics';
+      
+      const html = `
+        <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #ffffff;">
+          <div style="text-align: center; margin-bottom: 30px; border-bottom: 2px solid #e5e7eb; padding-bottom: 20px;">
+            <h1 style="color: #1f2937; margin: 0; font-size: 24px;">TrunkLogistics</h1>
+            <p style="color: #6b7280; margin: 5px 0 0 0; font-size: 14px;">Logistics Management Platform</p>
           </div>
           
-          <div style="background-color: #f8fafc; padding: 30px; border-radius: 8px; margin-bottom: 30px;">
-            <p style="margin-bottom: 20px; color: #374151;">Hello ${user.first_name || 'there'},</p>
-            <p style="margin-bottom: 20px; color: #374151;">Thank you for registering with TrunkLogistics. To complete your account setup, please verify your email address by clicking the button below:</p>
+          <div style="margin-bottom: 30px;">
+            <h2 style="color: #1f2937; margin-top: 0; font-size: 20px;">Welcome to TrunkLogistics!</h2>
+            
+            <p style="margin-bottom: 20px; color: #374151; line-height: 1.6;">Hello ${user.first_name || 'there'},</p>
+            
+            <p style="margin-bottom: 20px; color: #374151; line-height: 1.6;">
+              Thank you for registering with TrunkLogistics! We're excited to have you join our logistics management platform.
+            </p>
+            
+            <p style="margin-bottom: 30px; color: #374151; line-height: 1.6;">
+              To complete your account setup and start using all features, please verify your email address by clicking the button below:
+            </p>
             
             <div style="text-align: center; margin: 30px 0;">
               <a href="${verificationUrl}" style="
-                background-color: #2563eb;
-                border: none;
-                color: white;
-                padding: 15px 30px;
-                text-align: center;
-                text-decoration: none;
                 display: inline-block;
+                background-color: #059669;
+                color: white;
+                padding: 14px 32px;
+                text-decoration: none;
+                border-radius: 8px;
+                font-weight: 600;
                 font-size: 16px;
-                font-weight: bold;
-                border-radius: 6px;
-                cursor: pointer;
+                letter-spacing: 0.5px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
               ">Verify Email Address</a>
             </div>
             
-            <p style="color: #6b7280; font-size: 14px; margin-bottom: 10px;">If the button doesn't work, copy and paste this link into your browser:</p>
-            <p style="color: #2563eb; font-size: 14px; word-break: break-all;">${verificationUrl}</p>
+            <div style="background-color: #f9fafb; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #6b7280;">
+              <p style="margin: 0; color: #374151; font-size: 14px; line-height: 1.5;">
+                <strong>Alternative method:</strong> If the button above doesn't work, copy and paste this secure link into your browser:
+              </p>
+              <p style="margin: 10px 0 0 0; color: #2563eb; font-size: 13px; word-break: break-all; font-family: monospace;">
+                ${verificationUrl}
+              </p>
+            </div>
           </div>
           
-          <div style="border-top: 1px solid #e5e7eb; padding-top: 20px; color: #6b7280; font-size: 14px;">
-            <p><strong>Important:</strong> This verification link will expire in 24 hours.</p>
-            <p>If you did not create an account with TrunkLogistics, please ignore this email.</p>
-            <p style="margin-top: 20px;">Best regards,<br>The TrunkLogistics Team</p>
+          <div style="background-color: #fef3c7; border: 1px solid #f59e0b; border-radius: 8px; padding: 15px; margin-bottom: 30px;">
+            <p style="margin: 0; color: #92400e; font-size: 14px; line-height: 1.5;">
+              <strong>⏰ Important:</strong> This verification link will expire in 24 hours for security reasons.
+            </p>
+          </div>
+          
+          <div style="text-align: center; color: #6b7280; font-size: 12px; border-top: 1px solid #e5e7eb; padding-top: 20px;">
+            <p style="margin: 0 0 5px 0;">If you did not create an account with TrunkLogistics, please ignore this email.</p>
+            <p style="margin: 0 0 5px 0;">© 2025 TrunkLogistics. All rights reserved.</p>
+            <p style="margin: 0;">Need help? Contact us at support@trunklogistics.com</p>
           </div>
         </div>
-      `
-    };
+      `;
 
-    try {
-      const result = await transporter.sendMail(mailOptions);
-      logger.info(`Verification email sent successfully to ${user.email}`);
-      return result;
+      const result = await emailService.sendEmail(user.email, subject, html);
+      
+      if (result) {
+        logger.info(`✅ Verification email sent successfully to ${user.email}`);
+        return result;
+      } else {
+        logger.error(`❌ Failed to send verification email to ${user.email}`);
+        return false;
+      }
     } catch (error) {
-      logger.error('Error sending verification email:', error);
+      logger.error('❌ Error sending verification email:', error);
       throw new Error('Failed to send verification email');
     }
   }
