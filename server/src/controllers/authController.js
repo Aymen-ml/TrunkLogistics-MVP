@@ -592,10 +592,14 @@ export const forgotPassword = async (req, res) => {
     });
 
   } catch (error) {
+    console.error('FORGOT PASSWORD ERROR DETAILS:', error);
+    console.error('Error message:', error.message);
+    console.error('Error stack:', error.stack);
     logger.error('Forgot password error:', error);
     res.status(500).json({
       success: false,
-      error: 'Server error while processing password reset request'
+      error: 'Service not available. Please contact support.',
+      details: process.env.NODE_ENV === 'development' ? error.message : undefined
     });
   }
 };
