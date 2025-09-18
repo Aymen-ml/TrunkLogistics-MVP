@@ -4,16 +4,16 @@
 NODE_ENV=production
 PORT=10000
 
-# Database Configuration (Replace with your Supabase details)
-DB_HOST=db.[YOUR-PROJECT-REF].supabase.co
+# Database Configuration (Your Supabase details)
+DB_HOST=db.drqkwioicbcihakxgsoe.supabase.co
 DB_PORT=5432
 DB_NAME=postgres
 DB_USER=postgres
 DB_PASSWORD=[YOUR-SUPABASE-PASSWORD]
-DATABASE_URL=postgresql://postgres:[YOUR-PASSWORD]@db.[PROJECT-REF].supabase.co:5432/postgres
+DATABASE_URL=postgresql://postgres:[YOUR-SUPABASE-PASSWORD]@db.drqkwioicbcihakxgsoe.supabase.co:5432/postgres
 
 # JWT Configuration (Generate a strong secret)
-JWT_SECRET=[GENERATE-A-STRONG-32-CHAR-SECRET]
+JWT_SECRET=bfaa828f8e267b7c29d4f45764b975142d4415640b1979af7b41d22e831044cb
 JWT_EXPIRE=30d
 
 # URLs (Update after frontend deployment)
