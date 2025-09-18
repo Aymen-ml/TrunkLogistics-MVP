@@ -86,4 +86,57 @@ router.post('/send-test-email', async (req, res) => {
   }
 });
 
+// Test endpoint to send verification email
+router.post('/send-verification-email', async (req, res) => {
+  try {
+    const { email } = req.body;
+    
+    if (!email) {
+      return res.status(400).json({
+        success: false,
+        error: 'Email address required'
+      });
+    }
+
+    // Create a test user object
+    const testUser = {
+      id: 'test-user-id',
+      email: email,
+      first_name: 'Test',
+      last_name: 'User'
+    };
+
+    // Import EmailVerification
+    const { default: EmailVerification } = await import('../utils/emailVerification.js');
+    
+    console.log('🧪 Testing verification email for:', email);
+    
+    // Create verification token
+    const token = 'test-verification-token-' + Date.now();
+    
+    // Send verification email
+    const result = await EmailVerification.sendVerificationEmail(testUser, token);
+    
+    console.log('📧 Verification email result:', result);
+
+    res.json({
+      success: !!result,
+      message: result ? 'Verification email sent successfully' : 'Failed to send verification email',
+      result: result,
+      debug: {
+        user: testUser,
+        token: token
+      }
+    });
+  } catch (error) {
+    console.error('❌ Verification email test error:', error);
+    logger.error('Verification email test error:', error);
+    res.status(500).json({
+      success: false,
+      error: error.message,
+      stack: error.stack
+    });
+  }
+});
+
 export default router;
