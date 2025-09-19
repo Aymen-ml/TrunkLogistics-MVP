@@ -358,7 +358,7 @@ export const verifyEmail = async (req, res) => {
         
         if (user && !user.email_verified) {
           // Manually verify the user since direct tokens bypass database storage
-          await User.updateProfile(user.id, { email_verified: true });
+          await User.setEmailVerified(user.id, true);
           userId = user.id;
           logger.info(`✅ Direct verification successful for user: ${user.email}`);
         } else if (user && user.email_verified) {
@@ -381,7 +381,7 @@ export const verifyEmail = async (req, res) => {
         
         if (user && !user.email_verified) {
           // Manually verify the user since fallback tokens bypass database storage
-          await User.updateProfile(user.id, { email_verified: true });
+          await User.setEmailVerified(user.id, true);
           userId = user.id;
           logger.info(`✅ Fallback verification successful for user: ${user.email}`);
         } else if (user && user.email_verified) {
