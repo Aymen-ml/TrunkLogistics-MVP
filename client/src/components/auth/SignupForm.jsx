@@ -12,7 +12,6 @@ import {
   Lock,
   MapPin, 
   CreditCard,
-  Briefcase,
   ChevronRight,
   Loader
 } from 'lucide-react';
@@ -33,7 +32,7 @@ const SignupForm = () => {
     phone: '',
     role: 'customer',
     companyName: '',
-    businessType: 'individual',
+    businessType: 'company',
     industrySector: '',
     businessPhone: '',
     contactPersonName: '',
@@ -70,7 +69,7 @@ const SignupForm = () => {
       case 'postalCode':
         return '';
       case 'businessType':
-        return ['individual', 'company'].includes(value) ? '' : 'Invalid business type';
+        return ['company'].includes(value) ? '' : 'Invalid business type';
       default:
         return '';
     }
@@ -101,7 +100,13 @@ const SignupForm = () => {
 
     // Required fields validation
     const requiredFields = ['firstName', 'lastName', 'email', 'streetAddress', 'city', 'stateProvince', 'postalCode'];
-        for (const field of requiredFields) {
+    
+    // Add company name as required for customers (they are always companies now)
+    if (formData.role === 'customer') {
+      requiredFields.push('companyName');
+    }
+    
+    for (const field of requiredFields) {
       if (!formData[field]?.trim()) {
         throw new Error(`${field.charAt(0).toUpperCase() + field.slice(1).replace(/([A-Z])/g, ' $1')} is required`);
       }
@@ -126,8 +131,8 @@ const SignupForm = () => {
     }
 
     // Business type validation
-    if (formData.businessType && !['individual', 'company'].includes(formData.businessType)) {
-      throw new Error('Business type must be either individual or company');
+    if (formData.businessType && !['company'].includes(formData.businessType)) {
+      throw new Error('Business type must be company');
     }
 
     // Payment methods validation
@@ -495,41 +500,22 @@ const SignupForm = () => {
             ) : (
               <>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Business Type</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Company Name *</label>
                   <div className="relative">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                      <Briefcase className="h-5 w-5 text-gray-400" />
+                      <Building2 className="h-5 w-5 text-gray-400" />
                     </div>
-                    <select
-                      name="businessType"
-                      value={formData.businessType}
+                    <input
+                      type="text"
+                      name="companyName"
+                      value={formData.companyName}
                       onChange={handleInputChange}
-                      className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 appearance-none bg-white"
-                    >
-                      <option value="individual">Individual</option>
-                      <option value="company">Company</option>
-                    </select>
+                      required
+                      className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                      placeholder="Enter your company name"
+                    />
                   </div>
                 </div>
-
-                {formData.businessType === 'company' && (
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Company Name</label>
-                    <div className="relative">
-                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <Building2 className="h-5 w-5 text-gray-400" />
-                      </div>
-                      <input
-                        type="text"
-                        name="companyName"
-                        value={formData.companyName}
-                        onChange={handleInputChange}
-                        className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-                        placeholder="Enter company name"
-                      />
-                    </div>
-                  </div>
-                )}
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">Street Address *</label>
