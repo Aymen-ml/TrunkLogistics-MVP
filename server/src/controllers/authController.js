@@ -89,56 +89,8 @@ export const register = async (req, res) => {
 
     // Handle profile creation based on role
     if (role === 'customer') {
-      try {
-        const customerData = {
-          userId: user.id,
-          businessType: businessType || 'individual',
-          companyName: companyName || (businessType === 'company' ? `${firstName} ${lastName} Company` : null),
-          industrySector: industrySector || null,
-          businessPhone: businessPhone || phone,
-          contactPersonName: contactPersonName || null,
-          contactPersonPosition: contactPersonPosition || null,
-          contactPersonEmail: contactPersonEmail || null,
-          contactPersonPhone: contactPersonPhone || null,
-          streetAddress: streetAddress || '',
-          city: city || '',
-          stateProvince: stateProvince || '',
-          postalCode: postalCode || '',
-          deliveryInstructions: deliveryInstructions || null,
-          preferredPaymentMethods: Array.isArray(preferredPaymentMethods) && preferredPaymentMethods.length > 0 ? preferredPaymentMethods : null
-        };
-        
-        logger.info(`Attempting to create customer profile for user: ${user.id}`, {
-          ...customerData,
-          userId: user.id
-        });
-        
-        try {
-          const customerProfile = await CustomerProfile.create(customerData);
-          logger.info(`✅ Customer profile created successfully for user: ${user.id}`, { profileId: customerProfile.id });
-        } catch (dbError) {
-          logger.error('❌ Database error while creating customer profile:', {
-            error: dbError.message,
-            code: dbError.code,
-            detail: dbError.detail,
-            table: dbError.table,
-            constraint: dbError.constraint
-          });
-          
-          // For customer profiles, we continue registration even if profile creation fails
-          logger.error(`❌ Customer profile creation failed for ${user.email}, but continuing with registration`);
-        }
-      } catch (profileError) {
-        logger.error('❌ Unexpected error in customer profile creation flow:', {
-          error: profileError.message,
-          userId: user.id,
-          stack: profileError.stack
-        });
-        // Don't fail registration if profile creation fails, but log extensively
-        logger.error(`❌ CRITICAL: Customer ${user.email} profile creation failed unexpectedly. Continuing with registration...`);
-      }
-      
-      // Ensure we always continue to email verification for customers
+      // TEMPORARY FIX: Skip customer profile creation to focus on email verification
+      logger.info(`⚠️ TEMPORARY: Skipping customer profile creation for ${user.email} to ensure email verification works`);
       logger.info(`✓ Customer registration phase completed for user: ${user.email} - proceeding to email verification`);
     } else if (role === 'provider') {
       try {
