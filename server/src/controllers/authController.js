@@ -174,9 +174,9 @@ export const register = async (req, res) => {
       // TEMPORARY FIX: Use direct email sending like password reset (bypassing database token creation)
       logger.info(`🔄 Using direct email sending approach for user: ${user.email}`);
       
-      // Generate a simple token similar to password reset
-      const verificationToken = `verify-${user.id}-${Date.now()}-${Math.random().toString(36).substring(2)}`;
-      logger.info(`✅ Direct verification token created: ${verificationToken.substring(0, 15)}...`);
+      // Generate a simple token similar to password reset (use underscore to avoid UUID conflicts)
+      const verificationToken = `verify_${user.id}_${Date.now()}_${Math.random().toString(36).substring(2)}`;
+      logger.info(`✅ Direct verification token created: ${verificationToken.substring(0, 20)}...`);
       
       // Send verification email directly using emailService (like password reset)
       try {
@@ -333,13 +333,27 @@ export const verifyEmail = async (req, res) => {
     let user;
 
     // Check if this is a direct verification token (new approach)
-    if (token.startsWith('verify-')) {
-      logger.info(`🔄 Processing direct verification token: ${token.substring(0, 20)}...`);
+    if (token.startsWith('verify_') || token.startsWith('verify-')) {
+      logger.info(`🔄 Processing direct verification token: ${token.substring(0, 30)}...`);
       
-      // Extract user ID from direct token format: verify-{userId}-{timestamp}-{random}
-      const tokenParts = token.split('-');
-      if (tokenParts.length >= 2) {
-        const extractedUserId = tokenParts[1];
+      let extractedUserId;
+      
+      if (token.startsWith('verify_')) {
+        // New format: verify_{userId}_{timestamp}_{random}
+        const tokenParts = token.split('_');
+        if (tokenParts.length >= 2) {
+          extractedUserId = tokenParts[1];
+        }
+      } else {
+        // Old format: verify-{userId}-{timestamp}-{random} (need to reconstruct UUID)
+        const tokenParts = token.split('-');
+        if (tokenParts.length >= 6) {
+          // UUID has 5 parts when split by hyphen: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+          extractedUserId = `${tokenParts[1]}-${tokenParts[2]}-${tokenParts[3]}-${tokenParts[4]}-${tokenParts[5]}`;
+        }
+      }
+      
+      if (extractedUserId) {
         user = await User.findById(extractedUserId);
         
         if (user && !user.email_verified) {
@@ -356,11 +370,11 @@ export const verifyEmail = async (req, res) => {
       } else {
         throw new Error('Invalid direct verification token format');
       }
-    } else if (token.startsWith('fallback-')) {
-      logger.info(`🔄 Processing fallback verification token: ${token.substring(0, 20)}...`);
+    } else if (token.startsWith('fallback_')) {
+      logger.info(`🔄 Processing fallback verification token: ${token.substring(0, 30)}...`);
       
-      // Extract user ID from fallback token format: fallback-{userId}-{timestamp}-{random}
-      const tokenParts = token.split('-');
+      // Extract user ID from fallback token format: fallback_{userId}_{timestamp}_{random}
+      const tokenParts = token.split('_');
       if (tokenParts.length >= 2) {
         const extractedUserId = tokenParts[1];
         user = await User.findById(extractedUserId);
@@ -465,8 +479,8 @@ export const resendVerification = async (req, res) => {
       logger.info(`🔄 Resending verification email for user: ${user.email}`);
       
       // Generate a direct verification token (consistent with registration flow)
-      const verificationToken = `verify-${user.id}-${Date.now()}-${Math.random().toString(36).substring(2)}`;
-      logger.info(`✅ Direct verification token created for resend: ${verificationToken.substring(0, 15)}...`);
+      const verificationToken = `verify_${user.id}_${Date.now()}_${Math.random().toString(36).substring(2)}`;
+      logger.info(`✅ Direct verification token created for resend: ${verificationToken.substring(0, 20)}...`);
       
       // Send verification email directly using emailService
       const verificationUrl = `${process.env.CLIENT_URL || 'https://trunklogistics-mvp.netlify.app'}/verify-email/${verificationToken}`;

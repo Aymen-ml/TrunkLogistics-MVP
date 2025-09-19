@@ -74,8 +74,9 @@ Periodically test the complete flow:
 ## Technical Details
 
 ### Token Format
-- **Registration/Resend**: `verify-{userId}-{timestamp}-{randomString}`
-- **Parsing**: Extract userId from position 1 of split('-')
+- **New Format**: `verify_{userId}_{timestamp}_{randomString}` (underscore separators to avoid UUID conflicts)
+- **Legacy Format**: `verify-{userId}-{timestamp}-{randomString}` (still supported for backward compatibility)
+- **Parsing**: Extract userId from position 1 after splitting by underscore or reconstruct from hyphen-split UUID parts
 - **Validation**: Check user exists and isn't already verified
 - **Security**: Include timestamp and random component
 
