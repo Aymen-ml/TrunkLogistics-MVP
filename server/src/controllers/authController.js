@@ -93,19 +93,19 @@ export const register = async (req, res) => {
         const customerData = {
           userId: user.id,
           businessType: businessType || 'individual',
-          companyName: companyName || (businessType === 'company' ? `${firstName}'s Company` : ''),
-          industrySector: industrySector || '',
+          companyName: companyName || (businessType === 'company' ? `${firstName} ${lastName} Company` : null),
+          industrySector: industrySector || null,
           businessPhone: businessPhone || phone,
-          contactPersonName: contactPersonName || '',
-          contactPersonPosition: contactPersonPosition || '',
-          contactPersonEmail: contactPersonEmail || '',
-          contactPersonPhone: contactPersonPhone || '',
+          contactPersonName: contactPersonName || null,
+          contactPersonPosition: contactPersonPosition || null,
+          contactPersonEmail: contactPersonEmail || null,
+          contactPersonPhone: contactPersonPhone || null,
           streetAddress: streetAddress || '',
           city: city || '',
           stateProvince: stateProvince || '',
           postalCode: postalCode || '',
-          deliveryInstructions: deliveryInstructions || '',
-          preferredPaymentMethods: Array.isArray(preferredPaymentMethods) ? preferredPaymentMethods : []
+          deliveryInstructions: deliveryInstructions || null,
+          preferredPaymentMethods: Array.isArray(preferredPaymentMethods) && preferredPaymentMethods.length > 0 ? preferredPaymentMethods : null
         };
         
         logger.info(`Attempting to create customer profile for user: ${user.id}`, {
@@ -137,6 +137,9 @@ export const register = async (req, res) => {
         // Don't fail registration if profile creation fails, but log extensively
         logger.error(`❌ CRITICAL: Customer ${user.email} profile creation failed unexpectedly. Continuing with registration...`);
       }
+      
+      // Ensure we always continue to email verification for customers
+      logger.info(`✓ Customer registration phase completed for user: ${user.email} - proceeding to email verification`);
     } else if (role === 'provider') {
       try {
         // Create complete provider profile
@@ -193,10 +196,16 @@ export const register = async (req, res) => {
     }
 
     logger.info(`🔄 Profile creation completed for ${role} user: ${user.email}`);
+    
+    // Safety check - ensure user object is valid before email verification
+    if (!user || !user.id || !user.email) {
+      logger.error(`❌ CRITICAL: User object invalid before email verification`, { user, role });
+      throw new Error('User object is invalid');
+    }
 
     // Generate verification token and send email
     try {
-      logger.info(`🔄 Starting verification email process for ${role} user: ${user.email}`);
+      logger.info(`🔄 Starting verification email process for ${role} user: ${user.email} (ID: ${user.id})`);
       
       // TEMPORARY FIX: Use direct email sending like password reset (bypassing database token creation)
       logger.info(`🔄 Using direct email sending approach for user: ${user.email}`);
