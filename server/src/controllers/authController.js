@@ -622,15 +622,19 @@ export const login = async (req, res) => {
     }
 
     const { email, password } = req.body;
+    logger.info(`Login attempt for email: ${email}`);
 
     // Find user by email
     const user = await User.findByEmail(email);
     if (!user) {
+      logger.warn(`Login failed - user not found: ${email}`);
       return res.status(401).json({
         success: false,
         error: 'Invalid credentials'
       });
     }
+    
+    logger.info(`User found - role: ${user.role}, active: ${user.is_active}, verified: ${user.email_verified}`);
 
     // Check if user is active
     if (!user.is_active) {
@@ -650,11 +654,26 @@ export const login = async (req, res) => {
     }
 
     // Get provider profile if user is a provider to include verification status
-    let isVerified = true; // Default for non-providers
+    let isVerified = true; // Default for non-providers (customers and admins)
     if (user.role === 'provider') {
-      const ProviderProfile = (await import('../models/ProviderProfile.js')).default;
-      const profile = await ProviderProfile.findByUserId(user.id);
-      isVerified = profile?.is_verified || false;
+      try {
+        const ProviderProfile = (await import('../models/ProviderProfile.js')).default;
+        const profile = await ProviderProfile.findByUserId(user.id);
+        isVerified = profile?.is_verified || false;
+        logger.info(`Provider login - verification status: ${isVerified}`);
+      } catch (profileError) {
+        logger.error(`Error fetching provider profile for login:`, profileError);
+        // Default to false for providers if profile fetch fails
+        isVerified = false;
+      }
+    } else if (user.role === 'admin') {
+      // Admins are always considered verified
+      isVerified = true;
+      logger.info(`Admin login: ${user.email}`);
+    } else if (user.role === 'customer') {
+      // Customers don't need additional verification beyond email verification
+      isVerified = true;
+      logger.info(`Customer login: ${user.email}`);
     }
 
     // Generate token for the authenticated user
@@ -689,11 +708,19 @@ export const login = async (req, res) => {
     console.error('LOGIN ERROR DETAILS:', error);
     console.error('Error message:', error.message);
     console.error('Error stack:', error.stack);
-    logger.error('Login error:', error);
+    logger.error('Login error details:', {
+      error: error.message,
+      stack: error.stack,
+      email: req.body?.email,
+      userRole: req.body?.email ? 'unknown' : 'no email provided'
+    });
     res.status(500).json({
       success: false,
       error: 'Server error during login',
-      details: process.env.NODE_ENV === 'development' ? error.message : undefined
+      details: process.env.NODE_ENV === 'development' ? {
+        message: error.message,
+        stack: error.stack.split('\n').slice(0, 5)
+      } : undefined
     });
   }
 };
