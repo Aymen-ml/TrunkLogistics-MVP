@@ -460,8 +460,91 @@ export const resendVerification = async (req, res) => {
       });
     }
 
-    const token = await EmailVerification.resendVerificationEmail(userId);
-    await EmailVerification.sendVerificationEmail(user, token);
+    // Use the same direct token approach as registration
+    try {
+      logger.info(`🔄 Resending verification email for user: ${user.email}`);
+      
+      // Generate a direct verification token (consistent with registration flow)
+      const verificationToken = `verify-${user.id}-${Date.now()}-${Math.random().toString(36).substring(2)}`;
+      logger.info(`✅ Direct verification token created for resend: ${verificationToken.substring(0, 15)}...`);
+      
+      // Send verification email directly using emailService
+      const verificationUrl = `${process.env.CLIENT_URL || 'https://trunklogistics-mvp.netlify.app'}/verify-email/${verificationToken}`;
+      
+      const result = await emailService.sendEmail(
+        user.email,
+        'Verify Your Email Address - TrunkLogistics',
+        `
+          <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #ffffff;">
+            <div style="text-align: center; margin-bottom: 30px; border-bottom: 2px solid #e5e7eb; padding-bottom: 20px;">
+              <h1 style="color: #1f2937; margin: 0; font-size: 24px;">TrunkLogistics</h1>
+              <p style="color: #6b7280; margin: 5px 0 0 0; font-size: 14px;">Logistics Management Platform</p>
+            </div>
+            
+            <div style="margin-bottom: 30px;">
+              <h2 style="color: #1f2937; margin-top: 0; font-size: 20px;">Email Verification Required</h2>
+              
+              <p style="margin-bottom: 20px; color: #374151; line-height: 1.6;">Hello ${user.first_name || 'there'},</p>
+              
+              <p style="margin-bottom: 20px; color: #374151; line-height: 1.6;">
+                You requested a new email verification link for your TrunkLogistics account.
+              </p>
+              
+              <p style="margin-bottom: 30px; color: #374151; line-height: 1.6;">
+                Please verify your email address by clicking the button below:
+              </p>
+              
+              <div style="text-align: center; margin: 30px 0;">
+                <a href="${verificationUrl}" style="
+                  display: inline-block;
+                  background-color: #059669;
+                  color: white;
+                  padding: 14px 32px;
+                  text-decoration: none;
+                  border-radius: 8px;
+                  font-weight: 600;
+                  font-size: 16px;
+                  letter-spacing: 0.5px;
+                  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                ">Verify Email Address</a>
+              </div>
+              
+              <div style="background-color: #f9fafb; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #6b7280;">
+                <p style="margin: 0; color: #374151; font-size: 14px; line-height: 1.5;">
+                  <strong>Alternative method:</strong> If the button above doesn't work, copy and paste this secure link into your browser:
+                </p>
+                <p style="margin: 10px 0 0 0; color: #2563eb; font-size: 13px; word-break: break-all; font-family: monospace;">
+                  ${verificationUrl}
+                </p>
+              </div>
+            </div>
+            
+            <div style="background-color: #fef3c7; border: 1px solid #f59e0b; border-radius: 8px; padding: 15px; margin-bottom: 30px;">
+              <p style="margin: 0; color: #92400e; font-size: 14px; line-height: 1.5;">
+                <strong>⏰ Important:</strong> This verification link will expire in 24 hours for security reasons.
+              </p>
+            </div>
+            
+            <div style="text-align: center; color: #6b7280; font-size: 12px; border-top: 1px solid #e5e7eb; padding-top: 20px;">
+              <p style="margin: 0 0 5px 0;">If you did not request this verification email, please ignore it.</p>
+              <p style="margin: 0 0 5px 0;">© 2025 TrunkLogistics. All rights reserved.</p>
+              <p style="margin: 0;">Need help? Contact us at support@trunklogistics.com</p>
+            </div>
+          </div>
+        `
+      );
+      
+      if (result) {
+        logger.info(`✅ Verification email resent successfully to: ${user.email}`);
+      } else {
+        logger.error(`❌ Failed to resend verification email to: ${user.email}`);
+        throw new Error('Failed to send email');
+      }
+      
+    } catch (emailError) {
+      logger.error(`❌ Error resending verification email to ${user.email}:`, emailError);
+      throw new Error('Failed to resend verification email');
+    }
 
     res.status(200).json({
       success: true,
