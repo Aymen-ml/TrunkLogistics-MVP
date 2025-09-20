@@ -24,7 +24,7 @@ export const NotificationProvider = ({ children }) => {
     if (!isAuthenticated || !user) return;
     
     try {
-      const response = await apiClient.get('/notifications/unread-count');
+      const response = await apiClient.notifications.getUnreadCount();
       setUnreadCount(response.data.data.count || 0);
     } catch (error) {
       console.error('Error fetching unread count:', error);
@@ -43,7 +43,7 @@ export const NotificationProvider = ({ children }) => {
         ...options
       };
 
-      const response = await apiClient.get('/notifications', { params });
+      const response = await apiClient.notifications.getAll(params);
       const newNotifications = response.data.data.notifications || [];
       
       if (options.append) {
@@ -64,7 +64,7 @@ export const NotificationProvider = ({ children }) => {
   // Mark notification as read
   const markAsRead = useCallback(async (notificationId) => {
     try {
-      await apiClient.put(`/notifications/${notificationId}/read`);
+      await apiClient.notifications.markAsRead(notificationId);
       
       // Update local state
       setNotifications(prev =>
@@ -92,9 +92,7 @@ export const NotificationProvider = ({ children }) => {
 
       if (unreadIds.length === 0) return true;
 
-      await Promise.all(
-        unreadIds.map(id => apiClient.put(`/notifications/${id}/read`))
-      );
+      await apiClient.notifications.markAllAsRead();
 
       // Update local state
       setNotifications(prev =>
@@ -112,7 +110,7 @@ export const NotificationProvider = ({ children }) => {
   // Delete notification
   const deleteNotification = useCallback(async (notificationId) => {
     try {
-      await apiClient.delete(`/notifications/${notificationId}`);
+      await apiClient.notifications.remove(notificationId);
       
       // Update local state
       const deletedNotification = notifications.find(n => n.id === notificationId);

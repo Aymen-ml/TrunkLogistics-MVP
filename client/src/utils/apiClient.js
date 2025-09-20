@@ -174,8 +174,9 @@ const api = {
   // Notifications
   notifications: {
     getAll: (params) => apiClient.get('/notifications', { params }),
-    markAsRead: (id) => apiClient.patch(`/notifications/${id}/read`),
-    markAllAsRead: () => apiClient.patch('/notifications/read-all'),
+    getUnreadCount: () => apiClient.get('/notifications/unread-count'),
+    markAsRead: (id) => apiClient.put(`/notifications/${id}/read`),
+    markAllAsRead: () => apiClient.put('/notifications/read-all'),
     remove: (id) => apiClient.delete(`/notifications/${id}`),
     getStats: () => apiClient.get('/notifications/stats')
   }
