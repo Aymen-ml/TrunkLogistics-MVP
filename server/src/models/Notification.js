@@ -1,4 +1,4 @@
-import pool from '../config/database.js';
+import { query } from '../config/database.js';
 import logger from '../utils/logger.js';
 
 class Notification {
@@ -13,7 +13,7 @@ class Notification {
       priority = 'medium'
     } = notificationData;
 
-    const query = `
+    const queryText = `
       INSERT INTO notifications (
         user_id, type, title, message, related_entity_type, 
         related_entity_id, priority
@@ -27,7 +27,7 @@ class Notification {
     ];
 
     try {
-      const result = await pool.query(query, values);
+      const result = await query(queryText, values);
       logger.info(`Notification created: ${result.rows[0].id} for user ${userId}`);
       return result.rows[0];
     } catch (error) {
@@ -37,7 +37,7 @@ class Notification {
   }
 
   static async findById(id) {
-    const query = `
+    const queryText = `
       SELECT n.*, u.email, u.first_name, u.last_name
       FROM notifications n
       LEFT JOIN users u ON n.user_id = u.id
@@ -45,7 +45,7 @@ class Notification {
     `;
 
     try {
-      const result = await pool.query(query, [id]);
+      const result = await query(queryText, [id]);
       return result.rows[0] || null;
     } catch (error) {
       logger.error('Error finding notification by ID:', error);
@@ -54,7 +54,7 @@ class Notification {
   }
 
   static async findByUserId(userId, options = {}) {
-    let query = `
+    let queryText = `
       SELECT * FROM notifications 
       WHERE user_id = $1
     `;
@@ -63,30 +63,30 @@ class Notification {
     let paramCount = 1;
 
     if (options.type) {
-      query += ` AND type = $${++paramCount}`;
+      queryText += ` AND type = $${++paramCount}`;
       values.push(options.type);
     }
 
     if (options.isRead !== undefined) {
-      query += ` AND is_read = $${++paramCount}`;
+      queryText += ` AND is_read = $${++paramCount}`;
       values.push(options.isRead);
     }
 
     if (options.priority) {
-      query += ` AND priority = $${++paramCount}`;
+      queryText += ` AND priority = $${++paramCount}`;
       values.push(options.priority);
     }
 
-    query += ` ORDER BY created_at DESC`;
+    queryText += ` ORDER BY created_at DESC`;
 
     const limit = options.limit || 50;
     const offset = options.offset || 0;
 
-    query += ` LIMIT $${++paramCount} OFFSET $${++paramCount}`;
+    queryText += ` LIMIT $${++paramCount} OFFSET $${++paramCount}`;
     values.push(limit, offset);
 
     try {
-      const result = await pool.query(query, values);
+      const result = await query(queryText, values);
       return result.rows;
     } catch (error) {
       logger.error('Error finding notifications by user ID:', error);
@@ -95,18 +95,18 @@ class Notification {
   }
 
   static async markAsRead(id, userId = null) {
-    let query = 'UPDATE notifications SET is_read = true, read_at = CURRENT_TIMESTAMP WHERE id = $1';
+    let queryText = 'UPDATE notifications SET is_read = true, read_at = CURRENT_TIMESTAMP WHERE id = $1';
     let values = [id];
 
     if (userId) {
-      query += ' AND user_id = $2';
+      queryText += ' AND user_id = $2';
       values.push(userId);
     }
 
-    query += ' RETURNING *';
+    queryText += ' RETURNING *';
 
     try {
-      const result = await pool.query(query, values);
+      const result = await query(queryText, values);
       if (result.rows.length === 0) {
         throw new Error('Notification not found or access denied');
       }
@@ -120,15 +120,14 @@ class Notification {
   }
 
   static async markAllAsRead(userId) {
-    const query = `
+    const queryText = `
       UPDATE notifications 
       SET is_read = true, read_at = CURRENT_TIMESTAMP 
       WHERE user_id = $1 AND is_read = false
-      RETURNING COUNT(*)
     `;
 
     try {
-      const result = await pool.query(query, [userId]);
+      const result = await query(queryText, [userId]);
       const count = result.rowCount;
       
       logger.info(`${count} notifications marked as read for user ${userId}`);
@@ -140,18 +139,18 @@ class Notification {
   }
 
   static async delete(id, userId = null) {
-    let query = 'DELETE FROM notifications WHERE id = $1';
+    let queryText = 'DELETE FROM notifications WHERE id = $1';
     let values = [id];
 
     if (userId) {
-      query += ' AND user_id = $2';
+      queryText += ' AND user_id = $2';
       values.push(userId);
     }
 
-    query += ' RETURNING *';
+    queryText += ' RETURNING *';
 
     try {
-      const result = await pool.query(query, values);
+      const result = await query(queryText, values);
       if (result.rows.length === 0) {
         throw new Error('Notification not found or access denied');
       }
@@ -165,10 +164,10 @@ class Notification {
   }
 
   static async getUnreadCount(userId) {
-    const query = 'SELECT COUNT(*) as count FROM notifications WHERE user_id = $1 AND is_read = false';
+    const queryText = 'SELECT COUNT(*) as count FROM notifications WHERE user_id = $1 AND is_read = false';
 
     try {
-      const result = await pool.query(query, [userId]);
+      const result = await query(queryText, [userId]);
       return parseInt(result.rows[0].count);
     } catch (error) {
       logger.error('Error getting unread count:', error);
@@ -177,7 +176,7 @@ class Notification {
   }
 
   static async getAll(options = {}) {
-    let query = `
+    let queryText = `
       SELECT n.*, u.email, u.first_name, u.last_name
       FROM notifications n
       LEFT JOIN users u ON n.user_id = u.id
@@ -188,30 +187,30 @@ class Notification {
     let paramCount = 0;
 
     if (options.type) {
-      query += ` AND n.type = $${++paramCount}`;
+      queryText += ` AND n.type = $${++paramCount}`;
       values.push(options.type);
     }
 
     if (options.priority) {
-      query += ` AND n.priority = $${++paramCount}`;
+      queryText += ` AND n.priority = $${++paramCount}`;
       values.push(options.priority);
     }
 
     if (options.isRead !== undefined) {
-      query += ` AND n.is_read = $${++paramCount}`;
+      queryText += ` AND n.is_read = $${++paramCount}`;
       values.push(options.isRead);
     }
 
-    query += ` ORDER BY n.created_at DESC`;
+    queryText += ` ORDER BY n.created_at DESC`;
 
     const limit = options.limit || 100;
     const offset = options.offset || 0;
 
-    query += ` LIMIT $${++paramCount} OFFSET $${++paramCount}`;
+    queryText += ` LIMIT $${++paramCount} OFFSET $${++paramCount}`;
     values.push(limit, offset);
 
     try {
-      const result = await pool.query(query, values);
+      const result = await query(queryText, values);
       return result.rows;
     } catch (error) {
       logger.error('Error getting all notifications:', error);
@@ -220,7 +219,7 @@ class Notification {
   }
 
   static async getNotificationStats() {
-    const query = `
+    const queryText = `
       SELECT 
         COUNT(*) as total_notifications,
         COUNT(CASE WHEN is_read = false THEN 1 END) as unread_notifications,
@@ -234,7 +233,7 @@ class Notification {
     `;
 
     try {
-      const result = await pool.query(query);
+      const result = await query(queryText);
       return result.rows[0];
     } catch (error) {
       logger.error('Error getting notification statistics:', error);
@@ -243,14 +242,14 @@ class Notification {
   }
 
   static async cleanupOldNotifications(daysOld = 90) {
-    const query = `
+    const queryText = `
       DELETE FROM notifications 
       WHERE created_at < NOW() - INTERVAL '${daysOld} days'
       AND is_read = true
     `;
 
     try {
-      const result = await pool.query(query);
+      const result = await query(queryText);
       const deletedCount = result.rowCount;
       
       logger.info(`Cleaned up ${deletedCount} old notifications`);
@@ -267,7 +266,7 @@ class Notification {
       return [];
     }
 
-    const query = `
+    const queryText = `
       INSERT INTO notifications (
         user_id, type, title, message, related_entity_type, 
         related_entity_id, priority
@@ -283,7 +282,7 @@ class Notification {
     ]);
 
     try {
-      const result = await pool.query(query, values);
+      const result = await query(queryText, values);
       logger.info(`${result.rows.length} bulk notifications created`);
       return result.rows;
     } catch (error) {

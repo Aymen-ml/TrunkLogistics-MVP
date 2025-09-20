@@ -27,7 +27,7 @@ router.get('/all', authenticate, requireAdmin, getAllNotifications);
 router.get('/stats', authenticate, requireAdmin, getNotificationStats);
 
 // POST /api/notifications/system - Create system notification (admin only)
-router.post('/system', authenticate, requireAdmin, validateSystemNotification, createSystemNotification);
+router.post('/system', authenticate, requireAdmin, createSystemNotification);
 
 // GET /api/notifications/test-email - Test email service (admin only)
 router.get('/test-email', authenticate, requireAdmin, testEmailService);

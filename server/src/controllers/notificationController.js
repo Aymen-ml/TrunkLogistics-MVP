@@ -234,18 +234,31 @@ export const createSystemNotification = async (req, res) => {
       });
     }
 
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
+    // Manual validation instead of relying on express-validator middleware
+    const { message, priority = 'medium' } = req.body;
+    
+    if (!message || typeof message !== 'string' || message.trim().length === 0) {
       return res.status(400).json({
         success: false,
-        error: 'Validation failed',
-        details: errors.array()
+        error: 'Message is required and must be a non-empty string'
+      });
+    }
+    
+    if (message.trim().length > 1000) {
+      return res.status(400).json({
+        success: false,
+        error: 'Message must be less than 1000 characters'
+      });
+    }
+    
+    if (priority && !['low', 'medium', 'high'].includes(priority)) {
+      return res.status(400).json({
+        success: false,
+        error: 'Priority must be low, medium, or high'
       });
     }
 
-    const { message, priority = 'medium' } = req.body;
-
-    const notifications = await notificationService.notifySystemMaintenance(message, priority);
+    const notifications = await notificationService.notifySystemMaintenance(message.trim(), priority);
 
     logger.info(`System notification sent to ${notifications.length} users by admin ${req.user.email}`);
 
