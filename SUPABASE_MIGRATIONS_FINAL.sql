@@ -435,3 +435,41 @@ SELECT 'deleted_trucks', COUNT(*) FROM deleted_trucks
 UNION ALL
 SELECT 'migrations', COUNT(*) FROM migrations
 ORDER BY table_name;
+
+-- =====================================================
+-- 16. UPDATE CUSTOMER PROFILES STRUCTURE
+-- =====================================================
+-- First, create a backup of existing data if needed
+CREATE TABLE IF NOT EXISTS customer_profiles_backup AS SELECT * FROM customer_profiles;
+
+-- Drop the existing customer_profiles table
+DROP TABLE IF EXISTS customer_profiles CASCADE;
+
+-- Recreate customer_profiles table with updated structure
+CREATE TABLE IF NOT EXISTS customer_profiles (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    user_id UUID UNIQUE REFERENCES users(id) ON DELETE CASCADE,
+    address TEXT,
+    city VARCHAR(100),
+    postal_code VARCHAR(20),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Restore data from backup, excluding company_name
+INSERT INTO customer_profiles (id, user_id, address, city, postal_code, created_at, updated_at)
+SELECT id, user_id, address, city, postal_code, created_at, updated_at
+FROM customer_profiles_backup;
+
+-- Drop the backup table
+DROP TABLE IF EXISTS customer_profiles_backup;
+
+-- Add this migration to the tracking table
+INSERT INTO migrations (filename) VALUES ('20250917_remove_company_from_customer_profiles.sql')
+ON CONFLICT (filename) DO NOTHING;
+
+-- Recreate the updated_at trigger for customer_profiles
+CREATE TRIGGER update_customer_profiles_updated_at
+    BEFORE UPDATE ON customer_profiles
+    FOR EACH ROW
+    EXECUTE FUNCTION update_updated_at_column();
