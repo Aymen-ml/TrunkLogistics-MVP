@@ -235,10 +235,40 @@ export const getTrucks = async (req, res) => {
       adminView: req.user?.role === 'admin'
     });
 
+    // Apply role-based filtering to truck list
+    let filteredTrucks = result.trucks;
+    
+    if (req.user?.role === 'customer') {
+      // Filter sensitive information from truck listings for customers
+      filteredTrucks = result.trucks.map(truck => ({
+        id: truck.id,
+        license_plate: truck.license_plate,
+        truck_type: truck.truck_type,
+        capacity_weight: truck.capacity_weight,
+        capacity_volume: truck.capacity_volume,
+        price_per_km: truck.price_per_km,
+        fixed_price: truck.fixed_price,
+        pricing_type: truck.pricing_type,
+        status: truck.status,
+        year: truck.year,
+        make: truck.make,
+        model: truck.model,
+        images: truck.images,
+        created_at: truck.created_at,
+        updated_at: truck.updated_at,
+        // Remove sensitive provider information
+        // first_name, last_name, phone, company_name are excluded
+        total_documents: truck.total_documents,
+        approved_documents: truck.approved_documents,
+        pending_documents: truck.pending_documents,
+        rejected_documents: truck.rejected_documents
+      }));
+    }
+
     res.json({
       success: true,
       data: {
-        trucks: result.trucks,
+        trucks: filteredTrucks,
         pagination: {
           currentPage: result.currentPage,
           totalPages: result.totalPages,
@@ -268,7 +298,7 @@ export const getTruck = async (req, res) => {
     }
 
     const { id } = req.params;
-    logger.info(`Getting truck details for ID: ${id}`);
+    logger.info(`Getting truck details for ID: ${id} by user role: ${req.user.role}`);
     
     const truck = await Truck.getWithDocuments(id);
 
@@ -280,30 +310,67 @@ export const getTruck = async (req, res) => {
       });
     }
 
-    logger.info(`Truck found: ${truck.license_plate}, getting drivers...`);
+    logger.info(`Truck found: ${truck.license_plate}, applying role-based filtering...`);
     
-    // Get assigned drivers (with error handling)
+    // Apply role-based data filtering
+    let filteredTruck = { ...truck };
     let drivers = [];
-    try {
-      drivers = await Truck.getDrivers(id);
-      logger.info(`Found ${drivers.length} drivers for truck ${id}`);
-    } catch (driverError) {
-      logger.error('Error getting drivers for truck:', driverError);
-      // Continue without drivers rather than failing the whole request
+    
+    if (req.user.role === 'customer') {
+      // Customers should only see basic truck info, no sensitive provider/driver details
+      logger.info('Filtering truck data for customer view');
+      
+      // Remove sensitive provider information
+      delete filteredTruck.first_name;
+      delete filteredTruck.last_name;
+      delete filteredTruck.phone;
+      delete filteredTruck.company_name;
+      
+      // Keep only essential truck information for customers
+      filteredTruck = {
+        id: filteredTruck.id,
+        license_plate: filteredTruck.license_plate,
+        truck_type: filteredTruck.truck_type,
+        capacity_weight: filteredTruck.capacity_weight,
+        capacity_volume: filteredTruck.capacity_volume,
+        price_per_km: filteredTruck.price_per_km,
+        fixed_price: filteredTruck.fixed_price,
+        pricing_type: filteredTruck.pricing_type,
+        status: filteredTruck.status,
+        year: filteredTruck.year,
+        make: filteredTruck.make,
+        model: filteredTruck.model,
+        images: filteredTruck.images,
+        created_at: filteredTruck.created_at,
+        updated_at: filteredTruck.updated_at,
+        documents: filteredTruck.documents || []
+      };
+      
+      // No driver information for customers
       drivers = [];
+      
+    } else if (req.user.role === 'provider' || req.user.role === 'admin') {
+      // Providers and admins can see full details including drivers
+      try {
+        drivers = await Truck.getDrivers(id);
+        logger.info(`Found ${drivers.length} drivers for truck ${id}`);
+      } catch (driverError) {
+        logger.error('Error getting drivers for truck:', driverError);
+        drivers = [];
+      }
     }
 
     const response = {
       success: true,
       data: {
         truck: {
-          ...truck,
+          ...filteredTruck,
           drivers
         }
       }
     };
     
-    logger.info(`Successfully retrieved truck details for ${truck.license_plate}`);
+    logger.info(`Successfully retrieved truck details for ${truck.license_plate} (role: ${req.user.role})`);
     res.json(response);
     
   } catch (error) {
