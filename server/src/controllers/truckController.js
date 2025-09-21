@@ -309,7 +309,14 @@ export const getTruck = async (req, res) => {
     const { id } = req.params;
     logger.info(`Getting truck details for ID: ${id} by user role: ${req.user.role}`);
     
-    const truck = await Truck.getWithDocuments(id);
+    let truck;
+    try {
+      truck = await Truck.getWithDocuments(id);
+      logger.info(`Truck.getWithDocuments result:`, truck ? 'Found truck' : 'No truck found');
+    } catch (truckError) {
+      logger.error('Error in Truck.getWithDocuments:', truckError);
+      throw truckError;
+    }
 
     if (!truck) {
       logger.warn(`Truck not found: ${id}`);

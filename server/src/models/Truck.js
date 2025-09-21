@@ -63,18 +63,34 @@ class Truck {
   }
 
   static async findById(id) {
-    const result = await query(
-      `SELECT t.*, 
-              pp.company_name, pp.address, pp.city, pp.postal_code, pp.business_license,
-              u.first_name, u.last_name, u.phone, u.email
-       FROM trucks t
-       JOIN provider_profiles pp ON t.provider_id = pp.id
-       JOIN users u ON pp.user_id = u.id
-       WHERE t.id = $1`,
-      [id]
-    );
+    try {
+      // First try a simple query to see if the truck exists
+      const basicResult = await query(
+        `SELECT t.* FROM trucks t WHERE t.id = $1`,
+        [id]
+      );
 
-    return result.rows[0];
+      if (!basicResult.rows[0]) {
+        return null;
+      }
+
+      // Then try to get provider information
+      const result = await query(
+        `SELECT t.*, 
+                pp.company_name, pp.address, pp.city, pp.postal_code, pp.business_license,
+                u.first_name, u.last_name, u.phone, u.email
+         FROM trucks t
+         JOIN provider_profiles pp ON t.provider_id = pp.id
+         JOIN users u ON pp.user_id = u.id
+         WHERE t.id = $1`,
+        [id]
+      );
+
+      return result.rows[0];
+    } catch (error) {
+      console.error('Error in findById:', error);
+      throw error;
+    }
   }
 
   static async findByProviderId(providerId) {
