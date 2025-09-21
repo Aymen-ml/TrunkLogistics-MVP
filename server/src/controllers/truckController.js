@@ -262,10 +262,10 @@ export const getTrucks = async (req, res) => {
         last_name: truck.last_name,
         phone: truck.phone, // Company/business phone number
         // Include location and business information
-        street_address: truck.street_address,
-        provider_city: truck.provider_city,
-        provider_postal_code: truck.provider_postal_code,
-        provider_email: truck.provider_email,
+        address: truck.address,
+        city: truck.city,
+        postal_code: truck.postal_code,
+        email: truck.email,
         business_license: truck.business_license,
         total_documents: truck.total_documents,
         approved_documents: truck.approved_documents,
@@ -362,10 +362,10 @@ export const getTruck = async (req, res) => {
         last_name: filteredTruck.last_name,
         phone: filteredTruck.phone, // Company/business phone number
         // Include location and business information
-        street_address: filteredTruck.street_address,
-        provider_city: filteredTruck.provider_city,
-        provider_postal_code: filteredTruck.provider_postal_code,
-        provider_email: filteredTruck.provider_email,
+        address: filteredTruck.address,
+        city: filteredTruck.city,
+        postal_code: filteredTruck.postal_code,
+        email: filteredTruck.email,
         business_license: filteredTruck.business_license
       };
       
