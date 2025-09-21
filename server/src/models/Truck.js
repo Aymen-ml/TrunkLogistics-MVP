@@ -354,16 +354,36 @@ class Truck {
   }
 
   static async getDrivers(truckId) {
-    const result = await query(
-      `SELECT d.*, td.is_primary, td.assigned_at
-       FROM drivers d
-       JOIN truck_drivers td ON d.id = td.driver_id
-       WHERE td.truck_id = $1
-       ORDER BY td.is_primary DESC, td.assigned_at DESC`,
-      [truckId]
-    );
+    try {
+      // Check if the drivers and truck_drivers tables exist
+      const tableCheckResult = await query(`
+        SELECT table_name 
+        FROM information_schema.tables 
+        WHERE table_schema = 'public' 
+          AND table_name IN ('drivers', 'truck_drivers')
+      `);
+      
+      const existingTables = tableCheckResult.rows.map(row => row.table_name);
+      
+      if (!existingTables.includes('drivers') || !existingTables.includes('truck_drivers')) {
+        logger.warn(`Driver tables not found. Existing tables: ${existingTables.join(', ')}`);
+        return []; // Return empty array if tables don't exist
+      }
+      
+      const result = await query(
+        `SELECT d.*, td.is_primary, td.assigned_at
+         FROM drivers d
+         JOIN truck_drivers td ON d.id = td.driver_id
+         WHERE td.truck_id = $1
+         ORDER BY td.is_primary DESC, td.assigned_at DESC`,
+        [truckId]
+      );
 
-    return result.rows;
+      return result.rows;
+    } catch (error) {
+      logger.error('Error getting truck drivers:', error);
+      return []; // Return empty array on error
+    }
   }
 
   static async assignDriver(truckId, driverId, isPrimary = false) {
@@ -552,14 +572,19 @@ class Truck {
   }
 
   static async getDocuments(truckId) {
-    const result = await query(
-      `SELECT * FROM documents 
-       WHERE entity_type = 'truck' AND entity_id = $1 
-       ORDER BY uploaded_at DESC`,
-      [truckId]
-    );
-    
-    return result.rows;
+    try {
+      const result = await query(
+        `SELECT * FROM documents 
+         WHERE entity_type = 'truck' AND entity_id = $1 
+         ORDER BY uploaded_at DESC`,
+        [truckId]
+      );
+      
+      return result.rows;
+    } catch (error) {
+      logger.error('Error getting truck documents:', error);
+      return []; // Return empty array on error
+    }
   }
 
   static async updateImages(truckId, images) {

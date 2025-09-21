@@ -268,19 +268,32 @@ export const getTruck = async (req, res) => {
     }
 
     const { id } = req.params;
+    logger.info(`Getting truck details for ID: ${id}`);
+    
     const truck = await Truck.getWithDocuments(id);
 
     if (!truck) {
+      logger.warn(`Truck not found: ${id}`);
       return res.status(404).json({
         success: false,
         error: 'Truck not found'
       });
     }
 
-    // Get assigned drivers
-    const drivers = await Truck.getDrivers(id);
+    logger.info(`Truck found: ${truck.license_plate}, getting drivers...`);
+    
+    // Get assigned drivers (with error handling)
+    let drivers = [];
+    try {
+      drivers = await Truck.getDrivers(id);
+      logger.info(`Found ${drivers.length} drivers for truck ${id}`);
+    } catch (driverError) {
+      logger.error('Error getting drivers for truck:', driverError);
+      // Continue without drivers rather than failing the whole request
+      drivers = [];
+    }
 
-    res.json({
+    const response = {
       success: true,
       data: {
         truck: {
@@ -288,12 +301,23 @@ export const getTruck = async (req, res) => {
           drivers
         }
       }
-    });
+    };
+    
+    logger.info(`Successfully retrieved truck details for ${truck.license_plate}`);
+    res.json(response);
+    
   } catch (error) {
     logger.error('Get truck error:', error);
+    logger.error('Error details:', {
+      message: error.message,
+      code: error.code,
+      stack: error.stack
+    });
+    
     res.status(500).json({
       success: false,
-      error: 'Server error while fetching truck'
+      error: 'Server error while fetching truck',
+      details: process.env.NODE_ENV === 'development' ? error.message : undefined
     });
   }
 };
