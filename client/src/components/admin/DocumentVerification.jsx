@@ -194,6 +194,37 @@ const DocumentVerification = () => {
     return typeLabels[type] || type.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase());
   };
 
+  const handleViewDocument = async (documentId, fileName) => {
+    try {
+      const response = await apiClient.documents.download(documentId);
+      
+      // Create blob URL and open in new tab
+      const blob = new Blob([response.data], { 
+        type: response.headers['content-type'] || 'application/pdf' 
+      });
+      const url = window.URL.createObjectURL(blob);
+      const newWindow = window.open(url, '_blank');
+      
+      // Clean up the URL after a delay
+      setTimeout(() => {
+        window.URL.revokeObjectURL(url);
+      }, 1000);
+      
+      if (!newWindow) {
+        // Fallback: download the file if popup is blocked
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = fileName || 'document.pdf';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+    } catch (error) {
+      console.error('Error viewing document:', error);
+      alert(`Error viewing document: ${error.response?.data?.error || error.message}`);
+    }
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
@@ -590,16 +621,14 @@ const DocumentVerification = () => {
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                         <div className="flex items-center space-x-2">
                           {/* View Document Button */}
-                          <a
-                            href={`/api${document.file_path}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
+                          <button
+                            onClick={() => handleViewDocument(document.id, document.file_name)}
                             className="inline-flex items-center px-2 py-1 border border-gray-300 text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50"
                             title="View Document"
                           >
                             <Eye className="h-3 w-3 mr-1" />
                             View
-                          </a>
+                          </button>
 
                           {document.verification_status === 'pending' && (
                             <>

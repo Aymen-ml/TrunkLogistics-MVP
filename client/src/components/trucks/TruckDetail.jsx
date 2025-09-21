@@ -707,12 +707,6 @@ const TruckDetail = () => {
             <div className="p-6">
               <div className="space-y-4">
                 {truck.documents.map((doc, index) => {
-                  // Build absolute URL to the API for documents (mirrors images logic)
-                  const apiBase = import.meta.env.VITE_API_URL || 'http://localhost:5000';
-                  const cleanDocPath = doc.file_path.startsWith('/') ? doc.file_path : `/${doc.file_path}`;
-                  const documentUrl = doc.file_path.startsWith('http')
-                    ? doc.file_path
-                    : `${apiBase}${cleanDocPath}`;
                   // Use actual filename for all document types, with fallback to descriptive name
                   const getDocumentTitle = (fileName, documentType) => {
                     // Always prefer the actual filename if available
@@ -785,34 +779,49 @@ const TruckDetail = () => {
                         </div>
                         <div className="flex items-center space-x-2 ml-4">
                           <button
-                            onClick={() => {
-                              window.open(documentUrl, '_blank', 'noopener,noreferrer');
+                            onClick={async () => {
+                              try {
+                                const response = await apiClient.documents.download(doc.id);
+                                
+                                // Create blob URL and open in new tab
+                                const blob = new Blob([response.data], { 
+                                  type: response.headers['content-type'] || 'application/pdf' 
+                                });
+                                const url = window.URL.createObjectURL(blob);
+                                const newWindow = window.open(url, '_blank');
+                                
+                                // Clean up the URL after a delay
+                                setTimeout(() => {
+                                  window.URL.revokeObjectURL(url);
+                                }, 1000);
+                                
+                                if (!newWindow) {
+                                  alert('Popup blocked. Please allow popups for this site to view documents.');
+                                }
+                              } catch (error) {
+                                console.error('Error viewing document:', error);
+                                alert(`Error viewing document: ${error.response?.data?.error || error.message}`);
+                              }
                             }}
                             className="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                           >
                             <Eye className="h-4 w-4 mr-1" />
                             View
                           </button>
-                          <a
-                            href={documentUrl}
+                          <button
                             className="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                             onClick={async (e) => {
                               e.preventDefault();
                               try {
-                                const fileName = doc.file_name || doc.file_path.split('/').pop() || 'document.pdf';
+                                const fileName = doc.file_name || 'document.pdf';
                                 
-                                // Use apiClient to get the file with proper response type
-                                const response = await fetch(documentUrl, {
-                                  method: 'GET',
-                                  headers: {
-                                    'Accept': 'application/pdf',
-                                  },
-                                });
-                                
-                                if (!response.ok) throw new Error('Download failed');
+                                // Use the proper API endpoint with authentication
+                                const response = await apiClient.documents.download(doc.id);
                                 
                                 // Create blob from response
-                                const blob = await response.blob();
+                                const blob = new Blob([response.data], { 
+                                  type: response.headers['content-type'] || 'application/pdf' 
+                                });
                                 const downloadUrl = window.URL.createObjectURL(blob);
                                 
                                 // Create and trigger download
@@ -826,13 +835,13 @@ const TruckDetail = () => {
                                 window.document.body.removeChild(downloadLink);
                               } catch (error) {
                                 console.error('Download error:', error);
-                                alert('Failed to download the document. Please try again.');
+                                alert(`Failed to download the document: ${error.response?.data?.error || error.message}`);
                               }
                             }}
                           >
                             <Download className="h-4 w-4 mr-1" />
                             Download
-                          </a>
+                          </button>
                         </div>
                       </div>
                     </div>
