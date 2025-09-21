@@ -275,10 +275,24 @@ export const getTruck = async (req, res) => {
     
     let truck;
     try {
-      truck = await Truck.getWithDocuments(id);
-      logger.info(`Truck.getWithDocuments result:`, truck ? 'Found truck' : 'No truck found');
+      // First try to get the truck without documents to isolate the issue
+      logger.info(`Step 1: Getting truck by ID: ${id}`);
+      truck = await Truck.findById(id);
+      logger.info(`Step 1 result:`, truck ? `Found truck: ${truck.license_plate}` : 'No truck found');
+      
+      if (truck) {
+        // Then try to get documents
+        logger.info(`Step 2: Getting documents for truck: ${id}`);
+        truck.documents = await Truck.getDocuments(id);
+        logger.info(`Step 2 result: Found ${truck.documents ? truck.documents.length : 0} documents`);
+      }
     } catch (truckError) {
-      logger.error('Error in Truck.getWithDocuments:', truckError);
+      logger.error('Error in truck fetching:', truckError);
+      logger.error('Error details:', {
+        message: truckError.message,
+        code: truckError.code,
+        stack: truckError.stack
+      });
       throw truckError;
     }
 
