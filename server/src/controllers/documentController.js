@@ -180,7 +180,6 @@ const getFilterOptions = async () => {
     const allSupportedTypes = [
       'registration',
       'technical_inspection',
-      'insurance',
       'license',
       'business_license',
       'additional_docs',
@@ -191,7 +190,6 @@ const getFilterOptions = async () => {
       'safety_certificate',
       'emission_certificate',
       'weight_certificate',
-      'cargo_insurance',
       'transport_license',
       'route_permit',
       'hazmat_permit',

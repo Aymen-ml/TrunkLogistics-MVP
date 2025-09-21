@@ -1,18 +1,16 @@
 import React, { useCallback } from 'react';
 import { X, Shield, Car, FileCheck, Building2, Plus, FileText } from 'lucide-react';
 
-const DocumentUpload = ({
+const DocumentUploadNew = ({
   // Individual document types
   inspectionDoc = null,
   registrationDoc = null,
-  insuranceDoc = null,
   licenseDoc = null,
   businessLicenseDoc = null,
   additionalDocs = [],
   // Change handlers for each document type
   onInspectionDocChange,
   onRegistrationDocChange,
-  onInsuranceDocChange,
   onLicenseDocChange,
   onBusinessLicenseDocChange,
   onAdditionalDocsChange,
@@ -39,15 +37,6 @@ const DocumentUpload = ({
       value: registrationDoc,
       onChange: onRegistrationDocChange,
       description: 'Upload vehicle registration document'
-    },
-    {
-      id: 'insurance',
-      name: 'Insurance',
-      icon: Shield,
-      required: false,
-      value: insuranceDoc,
-      onChange: onInsuranceDocChange,
-      description: 'Upload insurance certificate'
     },
     {
       id: 'license',

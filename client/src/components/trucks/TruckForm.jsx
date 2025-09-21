@@ -33,7 +33,6 @@ const TruckForm = () => {
   const [images, setImages] = useState([]);
   const [inspectionDoc, setInspectionDoc] = useState(null);
   const [registrationDoc, setRegistrationDoc] = useState(null);
-  const [insuranceDoc, setInsuranceDoc] = useState(null);
   const [licenseDoc, setLicenseDoc] = useState(null);
   const [businessLicenseDoc, setBusinessLicenseDoc] = useState(null);
   const [additionalDocs, setAdditionalDocs] = useState([]);
@@ -108,7 +107,6 @@ const TruckForm = () => {
             const setDocumentTypes = {
               inspection: false,
               registration: false,
-              insurance: false,
               license: false,
               business_license: false
             };
@@ -152,16 +150,6 @@ const TruckForm = () => {
                     setDocumentTypes.registration = true;
                   } else {
                     console.log('📄 REGISTRATION DOC - Adding to additional (duplicate):', docData);
-                    setAdditionalDocs(prev => [...prev, docData]);
-                  }
-                  break;
-                case 'insurance':
-                  if (!setDocumentTypes.insurance) {
-                    console.log('🛡️ INSURANCE DOC - Setting:', docData);
-                    setInsuranceDoc(docData);
-                    setDocumentTypes.insurance = true;
-                  } else {
-                    console.log('🛡️ INSURANCE DOC - Adding to additional (duplicate):', docData);
                     setAdditionalDocs(prev => [...prev, docData]);
                   }
                   break;
@@ -447,14 +435,6 @@ const TruckForm = () => {
         }
       }
       
-      // Handle insurance document
-      if (insuranceDoc) {
-        if (!insuranceDoc.isExisting && insuranceDoc.file) {
-          formDataToSend.append('insuranceDoc', insuranceDoc.file);
-        } else if (insuranceDoc.isExisting && insuranceDoc.file_path) {
-          formDataToSend.append('existingInsuranceDoc', insuranceDoc.file_path);
-        }
-      }
       
       // Handle license document
       if (licenseDoc) {
@@ -848,13 +828,11 @@ const TruckForm = () => {
               <DocumentUpload 
                 inspectionDoc={inspectionDoc}
                 registrationDoc={registrationDoc}
-                insuranceDoc={insuranceDoc}
                 licenseDoc={licenseDoc}
                 businessLicenseDoc={businessLicenseDoc}
                 additionalDocs={additionalDocs}
                 onInspectionDocChange={setInspectionDoc}
                 onRegistrationDocChange={setRegistrationDoc}
-                onInsuranceDocChange={setInsuranceDoc}
                 onLicenseDocChange={setLicenseDoc}
                 onBusinessLicenseDocChange={setBusinessLicenseDoc}
                 onAdditionalDocsChange={setAdditionalDocs}

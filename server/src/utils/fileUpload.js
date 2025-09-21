@@ -91,7 +91,7 @@ export const uploadTruckFiles = multer({
       if (file.fieldname === 'images') {
         subDir = 'images';
       } else if ([
-        'inspectionDoc', 'registrationDoc', 'insuranceDoc', 
+        'inspectionDoc', 'registrationDoc', 
         'licenseDoc', 'businessLicenseDoc', 'additionalDocs',
         'permitDoc', 'maintenanceRecordDoc', 'driverCertificateDoc',
         'customsDocumentsDoc', 'safetyCertificateDoc', 'emissionCertificateDoc',
@@ -114,7 +114,7 @@ export const uploadTruckFiles = multer({
     if (file.fieldname === 'images') {
       imageFilter(req, file, cb);
     } else if ([
-      'inspectionDoc', 'registrationDoc', 'insuranceDoc', 
+      'inspectionDoc', 'registrationDoc', 
       'licenseDoc', 'businessLicenseDoc', 'additionalDocs',
       'permitDoc', 'maintenanceRecordDoc', 'driverCertificateDoc',
       'customsDocumentsDoc', 'safetyCertificateDoc', 'emissionCertificateDoc',
@@ -135,7 +135,6 @@ export const uploadTruckFiles = multer({
   { name: 'images', maxCount: 10 },
   { name: 'inspectionDoc', maxCount: 1 },
   { name: 'registrationDoc', maxCount: 1 },
-  { name: 'insuranceDoc', maxCount: 1 },
   { name: 'licenseDoc', maxCount: 1 },
   { name: 'businessLicenseDoc', maxCount: 1 },
   { name: 'additionalDocs', maxCount: 5 },
@@ -198,9 +197,6 @@ export const processUploadedFiles = async (req) => {
         result.documents.push(...processDocumentType(req.files.registrationDoc, 'registration'));
       }
       
-      if (req.files.insuranceDoc) {
-        result.documents.push(...processDocumentType(req.files.insuranceDoc, 'insurance'));
-      }
       
       if (req.files.licenseDoc) {
         result.documents.push(...processDocumentType(req.files.licenseDoc, 'license'));

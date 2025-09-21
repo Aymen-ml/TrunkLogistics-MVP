@@ -169,7 +169,6 @@ const DocumentVerification = () => {
     const typeLabels = {
       registration: 'Vehicle Registration',
       technical_inspection: 'Technical Inspection',
-      insurance: 'Insurance Certificate',
       license: 'Driver License',
       business_license: 'Business License',
       additional_docs: 'Additional Documents',
@@ -180,7 +179,6 @@ const DocumentVerification = () => {
       safety_certificate: 'Safety Certificate',
       emission_certificate: 'Emission Certificate',
       weight_certificate: 'Weight Certificate',
-      cargo_insurance: 'Cargo Insurance',
       transport_license: 'Transport License',
       route_permit: 'Route Permit',
       hazmat_permit: 'Hazmat Permit',

@@ -419,7 +419,6 @@ class Truck {
         'inspection': 'technical_inspection',
         'technical_inspection': 'technical_inspection',
         'registration': 'registration',
-        'insurance': 'insurance',
         'license': 'license',
         'business_license': 'business_license',
         'additional': 'additional_docs',
@@ -439,7 +438,6 @@ class Truck {
         'emission': 'emission_certificate',
         'weight_certificate': 'weight_certificate',
         'weight': 'weight_certificate',
-        'cargo_insurance': 'cargo_insurance',
         'transport_license': 'transport_license',
         'transport': 'transport_license',
         'route_permit': 'route_permit',
@@ -469,12 +467,6 @@ class Truck {
             documentType = 'technical_inspection';
           } else if (normalizedType.includes('registration')) {
             documentType = 'registration';
-          } else if (normalizedType.includes('insurance')) {
-            if (normalizedType.includes('cargo')) {
-              documentType = 'cargo_insurance';
-            } else {
-              documentType = 'insurance';
-            }
           } else if (normalizedType.includes('license')) {
             if (normalizedType.includes('business')) {
               documentType = 'business_license';
