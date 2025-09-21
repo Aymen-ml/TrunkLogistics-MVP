@@ -64,7 +64,9 @@ class Truck {
 
   static async findById(id) {
     const result = await query(
-      `SELECT t.*, pp.company_name, u.first_name, u.last_name, u.phone
+      `SELECT t.*, 
+              pp.company_name, pp.address, pp.city, pp.postal_code, pp.business_license,
+              u.first_name, u.last_name, u.phone, u.email
        FROM trucks t
        JOIN provider_profiles pp ON t.provider_id = pp.id
        JOIN users u ON pp.user_id = u.id
@@ -199,10 +201,8 @@ class Truck {
     if (isAdminSearch) {
       // Admin view - show ALL trucks regardless of verification status
       queryText = `
-        SELECT t.*, pp.company_name, pp.street_address, pp.city as provider_city, 
-                pp.state_province as provider_state, 
-                pp.postal_code as provider_postal_code, pp.business_phone as provider_business_phone,
-                u.first_name, u.last_name, u.phone, u.email as provider_email,
+        SELECT t.*, pp.company_name, pp.address, pp.city, pp.postal_code, pp.business_license,
+                u.first_name, u.last_name, u.phone, u.email,
                 COUNT(*) OVER() as total_count,
                 pp.is_verified as provider_verified,
                 u.is_active as user_active,
@@ -227,10 +227,8 @@ class Truck {
     } else {
       // Customer/Provider view - only verified trucks with approved documents
       queryText = `
-        SELECT t.*, pp.company_name, pp.street_address, pp.city as provider_city, 
-                pp.state_province as provider_state, 
-                pp.postal_code as provider_postal_code, pp.business_phone as provider_business_phone,
-                u.first_name, u.last_name, u.phone, u.email as provider_email,
+        SELECT t.*, pp.company_name, pp.address, pp.city, pp.postal_code, pp.business_license,
+                u.first_name, u.last_name, u.phone, u.email,
                 COUNT(*) OVER() as total_count,
                 pp.is_verified as provider_verified,
                 CASE 
