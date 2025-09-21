@@ -647,10 +647,33 @@ export const debugFileSystem = async (req, res) => {
 
     for (const pathToCheck of pathsToCheck) {
       const exists = fs.existsSync(pathToCheck);
+      let files = [];
+      let fileDetails = [];
+      
+      if (exists) {
+        try {
+          files = fs.readdirSync(pathToCheck).slice(0, 10);
+          // Get detailed info for each file
+          fileDetails = files.map(file => {
+            const filePath = path.join(pathToCheck, file);
+            const stats = fs.statSync(filePath);
+            return {
+              name: file,
+              size: stats.size,
+              isFile: stats.isFile(),
+              modified: stats.mtime.toISOString()
+            };
+          });
+        } catch (error) {
+          files = [`Error reading directory: ${error.message}`];
+        }
+      }
+      
       debugInfo.uploadPaths.push({
         path: pathToCheck,
         exists,
-        files: exists ? (fs.readdirSync(pathToCheck).slice(0, 5)) : []
+        files,
+        fileDetails
       });
     }
 
