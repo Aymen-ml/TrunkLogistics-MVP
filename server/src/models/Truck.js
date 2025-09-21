@@ -66,8 +66,7 @@ class Truck {
     const result = await query(
       `SELECT t.*, 
               pp.company_name, pp.address as street_address, pp.city as provider_city, 
-              pp.postal_code as provider_postal_code, pp.state_province as provider_state,
-              pp.business_phone as provider_business_phone, pp.business_license,
+              pp.postal_code as provider_postal_code, pp.business_license,
               u.first_name, u.last_name, u.phone, u.email as provider_email
        FROM trucks t
        JOIN provider_profiles pp ON t.provider_id = pp.id

@@ -264,9 +264,7 @@ export const getTrucks = async (req, res) => {
         // Include location and business information
         street_address: truck.street_address,
         provider_city: truck.provider_city,
-        provider_state: truck.provider_state,
         provider_postal_code: truck.provider_postal_code,
-        provider_business_phone: truck.provider_business_phone,
         provider_email: truck.provider_email,
         business_license: truck.business_license,
         total_documents: truck.total_documents,
@@ -366,9 +364,7 @@ export const getTruck = async (req, res) => {
         // Include location and business information
         street_address: filteredTruck.street_address,
         provider_city: filteredTruck.provider_city,
-        provider_state: filteredTruck.provider_state,
         provider_postal_code: filteredTruck.provider_postal_code,
-        provider_business_phone: filteredTruck.provider_business_phone,
         provider_email: filteredTruck.provider_email,
         business_license: filteredTruck.business_license
       };
