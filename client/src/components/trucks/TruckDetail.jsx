@@ -34,6 +34,7 @@ const TruckDetail = () => {
   const { user } = useAuth();
   const [truck, setTruck] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [truckStats, setTruckStats] = useState({ completedBookings: 0, totalRevenue: 0 });
 
   useEffect(() => {
@@ -43,22 +44,33 @@ const TruckDetail = () => {
 
   const fetchTruck = async () => {
     try {
+      console.log(`Fetching truck details for ID: ${id}`);
       const response = await apiClient.get(`/trucks/${id}`);
-      if (response.data.data.truck) {
+      console.log('Truck API response:', response.data);
+      
+      if (response.data.success && response.data.data.truck) {
         setTruck(response.data.data.truck);
+        console.log('Truck data loaded successfully:', response.data.data.truck);
       } else {
+        console.error('Truck data not found in response:', response.data);
         throw new Error('Truck data not found');
       }
     } catch (error) {
       console.error('Error fetching truck:', error);
-      // Navigate based on user role
-      if (user?.role === 'customer') {
-        navigate('/find-trucks');
-      } else if (user?.role === 'admin') {
-        navigate('/admin/trucks');
-      } else {
-        navigate('/trucks');
-      }
+      console.error('Error details:', {
+        status: error.response?.status,
+        statusText: error.response?.statusText,
+        data: error.response?.data,
+        message: error.message
+      });
+      
+      // Set error state with detailed information
+      setError({
+        message: error.response?.data?.error || error.message || 'Failed to load truck details',
+        status: error.response?.status,
+        details: error.response?.data
+      });
+      setTruck(null);
     } finally {
       setLoading(false);
     }
@@ -213,13 +225,32 @@ const TruckDetail = () => {
   if (!truck) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center">
-          <h2 className="text-2xl font-bold text-gray-900">Truck not found</h2>
-          <p className="mt-2 text-gray-600">The truck you're looking for doesn't exist.</p>
+        <div className="text-center max-w-md">
+          <AlertCircle className="h-12 w-12 text-red-500 mx-auto mb-4" />
+          <h2 className="text-2xl font-bold text-gray-900">
+            {error ? 'Error Loading Truck' : 'Truck not found'}
+          </h2>
+          <p className="mt-2 text-gray-600">
+            {error ? error.message : "The truck you're looking for doesn't exist."}
+          </p>
+          {error && error.status && (
+            <p className="mt-1 text-sm text-gray-500">
+              Error {error.status}: {error.details?.error || 'Unknown error'}
+            </p>
+          )}
+          {error && (
+            <div className="mt-4 p-3 bg-gray-100 rounded-md text-left">
+              <p className="text-xs text-gray-600">Debug Info:</p>
+              <p className="text-xs text-gray-800">Truck ID: {id}</p>
+              <p className="text-xs text-gray-800">User Role: {user?.role}</p>
+              <p className="text-xs text-gray-800">Status: {error.status}</p>
+            </div>
+          )}
           <Link
             to={user?.role === 'customer' ? '/find-trucks' : '/trucks'}
             className="mt-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
           >
+            <ArrowLeft className="h-4 w-4 mr-2" />
             Back to {user?.role === 'customer' ? 'Search' : 'Trucks'}
           </Link>
         </div>
