@@ -40,7 +40,8 @@ export const corsOptions = {
       'http://127.0.0.1:5174',
       process.env.FRONTEND_URL,
       'https://trucklogistics.netlify.app',
-      'https://trunklogistics-mvp.netlify.app'
+      'https://trunklogistics-mvp.netlify.app',
+      'https://truck-logistics-mvp.vercel.app/'
     ].filter(Boolean);
 
     // Allow requests with no origin (mobile apps, etc.)
