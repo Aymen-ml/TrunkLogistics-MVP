@@ -261,14 +261,14 @@ export const getTrucks = async (req, res) => {
         first_name: truck.first_name,
         last_name: truck.last_name,
         phone: truck.phone, // Company/business phone number
-        // Include any location information that exists
-        ...Object.keys(truck).reduce((acc, key) => {
-          if (key.includes('address') || key.includes('city') || key.includes('state') || 
-              key.includes('country') || key.includes('postal') || key.includes('location')) {
-            acc[key] = truck[key];
-          }
-          return acc;
-        }, {}),
+        // Include location and business information
+        street_address: truck.street_address,
+        provider_city: truck.provider_city,
+        provider_state: truck.provider_state,
+        provider_postal_code: truck.provider_postal_code,
+        provider_business_phone: truck.provider_business_phone,
+        provider_email: truck.provider_email,
+        business_license: truck.business_license,
         total_documents: truck.total_documents,
         approved_documents: truck.approved_documents,
         pending_documents: truck.pending_documents,
@@ -363,14 +363,14 @@ export const getTruck = async (req, res) => {
         first_name: filteredTruck.first_name,
         last_name: filteredTruck.last_name,
         phone: filteredTruck.phone, // Company/business phone number
-        // Include any location information that exists
-        ...Object.keys(filteredTruck).reduce((acc, key) => {
-          if (key.includes('address') || key.includes('city') || key.includes('state') || 
-              key.includes('country') || key.includes('postal') || key.includes('location')) {
-            acc[key] = filteredTruck[key];
-          }
-          return acc;
-        }, {})
+        // Include location and business information
+        street_address: filteredTruck.street_address,
+        provider_city: filteredTruck.provider_city,
+        provider_state: filteredTruck.provider_state,
+        provider_postal_code: filteredTruck.provider_postal_code,
+        provider_business_phone: filteredTruck.provider_business_phone,
+        provider_email: filteredTruck.provider_email,
+        business_license: filteredTruck.business_license
       };
       
     } else if (req.user.role === 'provider' || req.user.role === 'admin') {
