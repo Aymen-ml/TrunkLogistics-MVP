@@ -402,75 +402,65 @@ export const downloadDocument = async (req, res) => {
       });
     }
 
-    // Check if file exists - handle both relative and absolute paths
-    let filePath;
-    if (path.isAbsolute(document.file_path)) {
-      filePath = document.file_path;
-    } else {
-      // Handle relative paths like /uploads/trucks/documents/filename.pdf
-      if (document.file_path.startsWith('/uploads/')) {
-        // Remove leading slash and resolve from server root
-        const relativePath = document.file_path.substring(1);
-        filePath = path.resolve(process.cwd(), relativePath);
-      } else {
-        // Legacy handling - assume it's in the uploads directory
-        filePath = path.resolve(process.cwd(), 'uploads', document.file_path);
+    // Resolve file path based on server structure
+    const filename = path.basename(document.file_path);
+    
+    // Primary path: current working directory + uploads structure
+    const primaryPath = path.resolve(process.cwd(), 'uploads', 'trucks', 'documents', filename);
+    
+    // Alternative paths to check
+    const pathsToTry = [
+      primaryPath,
+      path.resolve(__dirname, '../../uploads/trucks/documents', filename),
+      path.resolve(process.cwd(), document.file_path.startsWith('/') ? document.file_path.substring(1) : document.file_path)
+    ];
+    
+    let filePath = null;
+    
+    logger.info(`Looking for document file: ${filename}`);
+    logger.info(`Database path: ${document.file_path}`);
+    
+    // Try each path until we find the file
+    for (const pathToTry of pathsToTry) {
+      logger.info(`Checking path: ${pathToTry}`);
+      if (fs.existsSync(pathToTry)) {
+        filePath = pathToTry;
+        logger.info(`✅ Found document at: ${filePath}`);
+        break;
       }
     }
     
-    logger.info(`Looking for document file at: ${filePath}`);
-    
-    if (!fs.existsSync(filePath)) {
-      logger.error(`Document file not found: ${filePath}`);
-      logger.error(`Original file_path from database: ${document.file_path}`);
+    if (!filePath) {
+      logger.error(`❌ Document file not found anywhere`);
+      logger.error(`Searched paths:`, pathsToTry);
       
-      // Try alternative paths
-      const alternativePaths = [
-        path.resolve(process.cwd(), 'server', 'uploads', 'trucks', 'documents', path.basename(document.file_path)),
-        path.resolve(process.cwd(), 'uploads', 'trucks', 'documents', path.basename(document.file_path)),
-        path.resolve(__dirname, '../../uploads/trucks/documents', path.basename(document.file_path))
-      ];
-      
-      let foundPath = null;
-      for (const altPath of alternativePaths) {
-        logger.info(`Trying alternative path: ${altPath}`);
-        if (fs.existsSync(altPath)) {
-          foundPath = altPath;
-          break;
-        }
-      }
-      
-      if (!foundPath) {
-        return res.status(404).json({
-          success: false,
-          error: 'Document file not found on server',
-          debug: process.env.NODE_ENV === 'development' ? {
-            searchedPaths: [filePath, ...alternativePaths],
-            originalPath: document.file_path
-          } : undefined
-        });
-      }
-      
-      filePath = foundPath;
-      logger.info(`Found document at alternative path: ${filePath}`);
+      return res.status(404).json({
+        success: false,
+        error: 'Document file not found on server',
+        debug: process.env.NODE_ENV === 'development' ? {
+          searchedPaths: pathsToTry,
+          originalPath: document.file_path,
+          filename: filename
+        } : undefined
+      });
     }
 
     // Get file stats
     const stats = fs.statSync(filePath);
     
     // Set appropriate headers
-    const filename = document.file_name || `document-${id}.pdf`;
-    const mimeType = getMimeType(filename);
+    const displayFilename = document.file_name || `document-${id}.pdf`;
+    const mimeType = getMimeType(displayFilename);
     
     res.setHeader('Content-Type', mimeType);
     res.setHeader('Content-Length', stats.size);
-    res.setHeader('Content-Disposition', `inline; filename="${filename}"`);
+    res.setHeader('Content-Disposition', `inline; filename="${displayFilename}"`);
     res.setHeader('Cache-Control', 'private, no-cache');
     
     // Log document access
-    logger.info(`Document accessed: ${id} (${filename}) by ${req.user.email}`, {
+    logger.info(`Document accessed: ${id} (${displayFilename}) by ${req.user.email}`, {
       documentId: id,
-      fileName: filename,
+      fileName: displayFilename,
       userRole: req.user.role,
       truckLicensePlate: document.license_plate,
       providerCompany: document.company_name
@@ -554,43 +544,27 @@ export const getDocumentInfo = async (req, res) => {
     let actualFilePath = null;
     
     if (document.file_path) {
-      // Handle both relative and absolute paths
-      let filePath;
-      if (path.isAbsolute(document.file_path)) {
-        filePath = document.file_path;
-      } else {
-        // Handle relative paths like /uploads/trucks/documents/filename.pdf
-        if (document.file_path.startsWith('/uploads/')) {
-          // Remove leading slash and resolve from server root
-          const relativePath = document.file_path.substring(1);
-          filePath = path.resolve(process.cwd(), relativePath);
-        } else {
-          // Legacy handling - assume it's in the uploads directory
-          filePath = path.resolve(process.cwd(), 'uploads', document.file_path);
-        }
-      }
+      // Resolve file path based on server structure
+      const filename = path.basename(document.file_path);
       
-      if (fs.existsSync(filePath)) {
-        fileExists = true;
-        actualFilePath = filePath;
-        const stats = fs.statSync(filePath);
-        fileSize = stats.size;
-      } else {
-        // Try alternative paths
-        const alternativePaths = [
-          path.resolve(process.cwd(), 'server', 'uploads', 'trucks', 'documents', path.basename(document.file_path)),
-          path.resolve(process.cwd(), 'uploads', 'trucks', 'documents', path.basename(document.file_path)),
-          path.resolve(__dirname, '../../uploads/trucks/documents', path.basename(document.file_path))
-        ];
-        
-        for (const altPath of alternativePaths) {
-          if (fs.existsSync(altPath)) {
-            fileExists = true;
-            actualFilePath = altPath;
-            const stats = fs.statSync(altPath);
-            fileSize = stats.size;
-            break;
-          }
+      // Primary path: current working directory + uploads structure
+      const primaryPath = path.resolve(process.cwd(), 'uploads', 'trucks', 'documents', filename);
+      
+      // Alternative paths to check
+      const pathsToTry = [
+        primaryPath,
+        path.resolve(__dirname, '../../uploads/trucks/documents', filename),
+        path.resolve(process.cwd(), document.file_path.startsWith('/') ? document.file_path.substring(1) : document.file_path)
+      ];
+      
+      // Try each path until we find the file
+      for (const pathToTry of pathsToTry) {
+        if (fs.existsSync(pathToTry)) {
+          fileExists = true;
+          actualFilePath = pathToTry;
+          const stats = fs.statSync(pathToTry);
+          fileSize = stats.size;
+          break;
         }
       }
     }
