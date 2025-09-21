@@ -54,11 +54,27 @@ async function testDirectAPI() {
           if (detailsResponse.data.data && detailsResponse.data.data.truck) {
             const truck = detailsResponse.data.data.truck;
             console.log('   Truck data keys:', Object.keys(truck));
-            console.log('   Company name:', truck.company_name);
-            console.log('   Provider name:', truck.first_name, truck.last_name);
-            console.log('   Address:', truck.address);
-            console.log('   City:', truck.city);
-            console.log('   Drivers:', truck.drivers ? truck.drivers.length : 'none');
+            console.log('\n   📋 Complete Business Information:');
+            console.log('      Company name:', truck.company_name || 'N/A');
+            console.log('      Business license:', truck.business_license || 'N/A');
+            console.log('      Provider name:', truck.first_name, truck.last_name || 'N/A');
+            console.log('      Provider phone:', truck.phone || 'N/A');
+            console.log('      Provider email:', truck.email || 'N/A');
+            console.log('      Address:', truck.address || 'N/A');
+            console.log('      City:', truck.city || 'N/A');
+            console.log('      Postal code:', truck.postal_code || 'N/A');
+            console.log('      Drivers:', truck.drivers ? truck.drivers.length + ' drivers' : 'No drivers');
+            
+            if (truck.drivers && truck.drivers.length > 0) {
+              console.log('\n   👨‍💼 Driver Information:');
+              truck.drivers.forEach((driver, index) => {
+                console.log(`      Driver ${index + 1}:`, driver.first_name, driver.last_name || 'N/A');
+                console.log(`         Phone:`, driver.phone || 'N/A');
+                console.log(`         License:`, driver.license_type || 'N/A');
+                console.log(`         Experience:`, driver.experience_years || 'N/A', 'years');
+                console.log(`         Available:`, driver.is_available ? 'Yes' : 'No');
+              });
+            }
           }
           
         } catch (detailsError) {

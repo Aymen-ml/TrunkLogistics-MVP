@@ -26,7 +26,11 @@ const TruckForm = () => {
     status: '',
     year: '',
     make: '',
-    model: ''
+    model: '',
+    // Driver information
+    driverName: '',
+    driverPhone: '',
+    driverLicenseNumber: ''
   });
   
   // File upload states
@@ -63,7 +67,11 @@ const TruckForm = () => {
             status: truck.status || 'active',
             year: truck.year !== null ? truck.year.toString() : '',
             make: truck.make || '',
-            model: truck.model || ''
+            model: truck.model || '',
+            // Driver information
+            driverName: truck.driver_name || '',
+            driverPhone: truck.driver_phone || '',
+            driverLicenseNumber: truck.driver_license_number || ''
           });
 
           // Set existing images
@@ -393,7 +401,11 @@ const TruckForm = () => {
         year: formData.year,
         make: formData.make,
         model: formData.model,
-        status: formData.status
+        status: formData.status,
+        // Driver information
+        driver_name: formData.driverName,
+        driver_phone: formData.driverPhone,
+        driver_license_number: formData.driverLicenseNumber
       };
 
       // Append truck data to FormData
@@ -805,6 +817,77 @@ const TruckForm = () => {
                 </div>
               )}
 
+            </div>
+
+            {/* Driver Information Section */}
+            <div className="space-y-6 pt-6 border-t border-gray-200">
+              <h2 className="text-lg font-medium text-gray-900">Driver Information</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                
+                {/* Driver Name */}
+                <div>
+                  <label htmlFor="driverName" className="block text-sm font-medium text-gray-700">
+                    Driver Name
+                  </label>
+                  <input
+                    type="text"
+                    id="driverName"
+                    name="driverName"
+                    value={formData.driverName || ''}
+                    onChange={handleChange}
+                    className={`mt-1 block w-full rounded-md ${
+                      errors.driverName ? 'border-red-500 bg-red-50' : 'border-gray-300'
+                    } shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm`}
+                    placeholder="Enter driver's full name"
+                  />
+                  {errors.driverName && (
+                    <p className="mt-1 text-sm text-red-600 font-medium">{errors.driverName}</p>
+                  )}
+                </div>
+
+                {/* Driver Phone */}
+                <div>
+                  <label htmlFor="driverPhone" className="block text-sm font-medium text-gray-700">
+                    Driver Phone
+                  </label>
+                  <input
+                    type="tel"
+                    id="driverPhone"
+                    name="driverPhone"
+                    value={formData.driverPhone || ''}
+                    onChange={handleChange}
+                    className={`mt-1 block w-full rounded-md ${
+                      errors.driverPhone ? 'border-red-500 bg-red-50' : 'border-gray-300'
+                    } shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm`}
+                    placeholder="Enter driver's phone number"
+                  />
+                  {errors.driverPhone && (
+                    <p className="mt-1 text-sm text-red-600 font-medium">{errors.driverPhone}</p>
+                  )}
+                </div>
+
+                {/* Driver License Number */}
+                <div className="md:col-span-2">
+                  <label htmlFor="driverLicenseNumber" className="block text-sm font-medium text-gray-700">
+                    Driver License Number
+                  </label>
+                  <input
+                    type="text"
+                    id="driverLicenseNumber"
+                    name="driverLicenseNumber"
+                    value={formData.driverLicenseNumber || ''}
+                    onChange={handleChange}
+                    className={`mt-1 block w-full rounded-md ${
+                      errors.driverLicenseNumber ? 'border-red-500 bg-red-50' : 'border-gray-300'
+                    } shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm`}
+                    placeholder="Enter driver's license number"
+                  />
+                  {errors.driverLicenseNumber && (
+                    <p className="mt-1 text-sm text-red-600 font-medium">{errors.driverLicenseNumber}</p>
+                  )}
+                </div>
+
+              </div>
             </div>
 
             {/* Upload Sections */}
