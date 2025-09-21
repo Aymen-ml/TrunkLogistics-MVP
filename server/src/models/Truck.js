@@ -65,7 +65,7 @@ class Truck {
   static async findById(id) {
     const result = await query(
       `SELECT t.*, 
-              pp.company_name, pp.address, pp.city, pp.postal_code, pp.business_license,
+              pp.company_name, pp.street_address as address, pp.city, pp.postal_code, pp.business_license,
               u.first_name, u.last_name, u.phone, u.email
        FROM trucks t
        JOIN provider_profiles pp ON t.provider_id = pp.id
