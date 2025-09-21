@@ -79,7 +79,7 @@ const TruckForm = () => {
             const processedImages = truck.images.map(path => {
               const fullPath = path.startsWith('http') 
                 ? path 
-                : `${import.meta.env.VITE_API_URL || 'http://localhost:5000'}${path.startsWith('/') ? path : `/${path}`}`;
+                : `${(import.meta.env.VITE_API_URL || 'http://localhost:5000').replace('/api', '')}${path.startsWith('/') ? path : `/${path}`}`;
               return {
                 preview: fullPath,
                 name: path.split('/').pop(),
@@ -127,7 +127,7 @@ const TruckForm = () => {
             sortedDocuments.forEach(doc => {
               const fullPath = doc.file_path.startsWith('http')
                 ? doc.file_path
-                : `${import.meta.env.VITE_API_URL || 'http://localhost:5000'}${doc.file_path.startsWith('/') ? doc.file_path : `/${doc.file_path}`}`;
+                : `${(import.meta.env.VITE_API_URL || 'http://localhost:5000').replace('/api', '')}${doc.file_path.startsWith('/') ? doc.file_path : `/${doc.file_path}`}`;
               
               const docData = {
                 id: doc.id, // Add document ID for deletion

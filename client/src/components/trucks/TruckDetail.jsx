@@ -680,7 +680,9 @@ const TruckDetail = () => {
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 {truck.images.map((imagePath, index) => {
                   // Ensure the URL points to the API server and remove any double slashes
-                  const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+                  // Remove /api from the base URL for file serving
+                  const apiBaseUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+                  const baseUrl = apiBaseUrl.replace('/api', '');
                   const cleanPath = imagePath.startsWith('/') ? imagePath : `/${imagePath}`;
                   const imageUrl = `${baseUrl}${cleanPath}`;
                   
