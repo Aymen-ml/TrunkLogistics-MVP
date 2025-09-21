@@ -88,6 +88,9 @@ class Truck {
     let whereConditions = [];
     let values = [];
     let paramCount = 1;
+    
+    // Check if this is an admin search (no restrictions)
+    const isAdminSearch = filters.adminView === true;
 
     // For customers, only show available (active) trucks in search
     if (filters.onlyAvailable) {
@@ -191,32 +194,66 @@ class Truck {
 
     const whereClause = whereConditions.join(' AND ');
 
-    const result = await query(
-      `SELECT t.*, pp.company_name, pp.street_address, pp.city as provider_city, 
-              pp.state_province as provider_state, 
-              pp.postal_code as provider_postal_code, pp.business_phone as provider_business_phone,
-              u.first_name, u.last_name, u.phone, u.email as provider_email,
-              COUNT(*) OVER() as total_count,
-              pp.is_verified as provider_verified,
-              CASE 
-                WHEN COUNT(d.id) = 0 THEN false
-                WHEN COUNT(d.id) = COUNT(CASE WHEN d.verification_status = 'approved' THEN 1 END) THEN true
-                ELSE false
-              END as documents_verified
-       FROM trucks t
-       JOIN provider_profiles pp ON t.provider_id = pp.id
-       JOIN users u ON pp.user_id = u.id
-       LEFT JOIN documents d ON d.entity_id = t.id AND d.entity_type = 'truck'
-       WHERE ${whereClause}
-         AND pp.is_verified = true
-         AND u.is_active = true
-       GROUP BY t.id, pp.id, u.id
-       HAVING COUNT(d.id) > 0 
-         AND COUNT(d.id) = COUNT(CASE WHEN d.verification_status = 'approved' THEN 1 END)
-       ORDER BY t.created_at DESC
-       LIMIT $${paramCount} OFFSET $${paramCount + 1}`,
-      [...values, limit, offset]
-    );
+    let queryText, queryValues;
+    
+    if (isAdminSearch) {
+      // Admin view - show ALL trucks regardless of verification status
+      queryText = `
+        SELECT t.*, pp.company_name, pp.street_address, pp.city as provider_city, 
+                pp.state_province as provider_state, 
+                pp.postal_code as provider_postal_code, pp.business_phone as provider_business_phone,
+                u.first_name, u.last_name, u.phone, u.email as provider_email,
+                COUNT(*) OVER() as total_count,
+                pp.is_verified as provider_verified,
+                u.is_active as user_active,
+                CASE 
+                  WHEN COUNT(d.id) = 0 THEN false
+                  WHEN COUNT(d.id) = COUNT(CASE WHEN d.verification_status = 'approved' THEN 1 END) THEN true
+                  ELSE false
+                END as documents_verified,
+                COUNT(d.id) as total_documents,
+                COUNT(CASE WHEN d.verification_status = 'approved' THEN 1 END) as approved_documents,
+                COUNT(CASE WHEN d.verification_status = 'pending' THEN 1 END) as pending_documents,
+                COUNT(CASE WHEN d.verification_status = 'rejected' THEN 1 END) as rejected_documents
+         FROM trucks t
+         JOIN provider_profiles pp ON t.provider_id = pp.id
+         JOIN users u ON pp.user_id = u.id
+         LEFT JOIN documents d ON d.entity_id = t.id AND d.entity_type = 'truck'
+         WHERE ${whereClause}
+         GROUP BY t.id, pp.id, u.id
+         ORDER BY t.created_at DESC
+         LIMIT $${paramCount} OFFSET $${paramCount + 1}`;
+      queryValues = [...values, limit, offset];
+    } else {
+      // Customer/Provider view - only verified trucks with approved documents
+      queryText = `
+        SELECT t.*, pp.company_name, pp.street_address, pp.city as provider_city, 
+                pp.state_province as provider_state, 
+                pp.postal_code as provider_postal_code, pp.business_phone as provider_business_phone,
+                u.first_name, u.last_name, u.phone, u.email as provider_email,
+                COUNT(*) OVER() as total_count,
+                pp.is_verified as provider_verified,
+                CASE 
+                  WHEN COUNT(d.id) = 0 THEN false
+                  WHEN COUNT(d.id) = COUNT(CASE WHEN d.verification_status = 'approved' THEN 1 END) THEN true
+                  ELSE false
+                END as documents_verified
+         FROM trucks t
+         JOIN provider_profiles pp ON t.provider_id = pp.id
+         JOIN users u ON pp.user_id = u.id
+         LEFT JOIN documents d ON d.entity_id = t.id AND d.entity_type = 'truck'
+         WHERE ${whereClause}
+           AND pp.is_verified = true
+           AND u.is_active = true
+         GROUP BY t.id, pp.id, u.id
+         HAVING COUNT(d.id) > 0 
+           AND COUNT(d.id) = COUNT(CASE WHEN d.verification_status = 'approved' THEN 1 END)
+         ORDER BY t.created_at DESC
+         LIMIT $${paramCount} OFFSET $${paramCount + 1}`;
+      queryValues = [...values, limit, offset];
+    }
+    
+    const result = await query(queryText, queryValues);
 
     return {
       trucks: result.rows,

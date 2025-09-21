@@ -231,7 +231,8 @@ export const getTrucks = async (req, res) => {
 
     const result = await Truck.search({
       ...filters,
-      onlyAvailable: req.user?.role === 'customer'
+      onlyAvailable: req.user?.role === 'customer',
+      adminView: req.user?.role === 'admin'
     });
 
     res.json({

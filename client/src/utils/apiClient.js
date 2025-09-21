@@ -159,14 +159,16 @@ const api = {
 
   // Documents
   documents: {
+    getAll: (params) => apiClient.get('/documents', { params }),
     upload: (formData) => apiClient.post('/documents/upload', formData, {
       headers: { 'Content-Type': 'multipart/form-data' }
     }),
     getByEntity: (entityType, entityId) => apiClient.get(`/documents/${entityType}/${entityId}`),
     getById: (id) => apiClient.get(`/documents/file/${id}`),
-    verify: (id, data) => apiClient.patch(`/documents/${id}/verify`, data),
-    remove: (id) => apiClient.delete(`/documents/${id}`),
+    getInfo: (id) => apiClient.get(`/documents/${id}/info`),
     download: (id) => apiClient.get(`/documents/${id}/download`, { responseType: 'blob' }),
+    verify: (id, data) => apiClient.post(`/documents/${id}/verify`, data),
+    remove: (id) => apiClient.delete(`/documents/${id}`),
     getPending: () => apiClient.get('/documents/pending'),
     getStats: () => apiClient.get('/documents/stats')
   },

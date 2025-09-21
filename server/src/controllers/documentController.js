@@ -1,6 +1,8 @@
 import { query } from '../config/database.js';
 import logger from '../utils/logger.js';
 import notificationService from '../services/notificationService.js';
+import path from 'path';
+import fs from 'fs';
 
 // Get all documents for admin review with advanced filtering
 export const getAllDocuments = async (req, res) => {
@@ -360,3 +362,201 @@ export const verifyDocument = async (req, res) => {
     });
   }
 };
+
+// Download/view a document file
+export const downloadDocument = async (req, res) => {
+  try {
+    const { id } = req.params;
+    
+    // Get document details
+    const docResult = await query(`
+      SELECT d.*, t.license_plate, pp.company_name, u.id as owner_user_id
+      FROM documents d
+      LEFT JOIN trucks t ON d.entity_id = t.id AND d.entity_type = 'truck'
+      LEFT JOIN provider_profiles pp ON t.provider_id = pp.id
+      LEFT JOIN users u ON pp.user_id = u.id
+      WHERE d.id = $1
+    `, [id]);
+
+    if (docResult.rows.length === 0) {
+      return res.status(404).json({
+        success: false,
+        error: 'Document not found'
+      });
+    }
+
+    const document = docResult.rows[0];
+    
+    // Check permissions - admins can view all documents
+    const canView = req.user.role === 'admin' || 
+                   req.user.id === document.owner_user_id;
+    
+    if (!canView) {
+      return res.status(403).json({
+        success: false,
+        error: 'Access denied - you can only view your own documents'
+      });
+    }
+
+    // Check if file exists
+    const filePath = path.resolve(document.file_path);
+    
+    if (!fs.existsSync(filePath)) {
+      logger.error(`Document file not found: ${filePath}`);
+      return res.status(404).json({
+        success: false,
+        error: 'Document file not found on server'
+      });
+    }
+
+    // Get file stats
+    const stats = fs.statSync(filePath);
+    
+    // Set appropriate headers
+    const filename = document.file_name || `document-${id}.pdf`;
+    const mimeType = getMimeType(filename);
+    
+    res.setHeader('Content-Type', mimeType);
+    res.setHeader('Content-Length', stats.size);
+    res.setHeader('Content-Disposition', `inline; filename="${filename}"`);
+    res.setHeader('Cache-Control', 'private, no-cache');
+    
+    // Log document access
+    logger.info(`Document accessed: ${id} (${filename}) by ${req.user.email}`, {
+      documentId: id,
+      fileName: filename,
+      userRole: req.user.role,
+      truckLicensePlate: document.license_plate,
+      providerCompany: document.company_name
+    });
+
+    // Stream the file
+    const fileStream = fs.createReadStream(filePath);
+    fileStream.pipe(res);
+    
+    fileStream.on('error', (error) => {
+      logger.error('File stream error:', error);
+      if (!res.headersSent) {
+        res.status(500).json({
+          success: false,
+          error: 'Error reading document file'
+        });
+      }
+    });
+
+  } catch (error) {
+    logger.error('Error downloading document:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Failed to download document'
+    });
+  }
+};
+
+// Get document metadata (for preview)
+export const getDocumentInfo = async (req, res) => {
+  try {
+    const { id } = req.params;
+    
+    // Get document details with extended information
+    const docResult = await query(`
+      SELECT 
+        d.*,
+        t.license_plate,
+        t.truck_type,
+        t.make,
+        t.model,
+        t.year,
+        pp.company_name,
+        u.first_name as provider_first_name,
+        u.last_name as provider_last_name,
+        u.email as provider_email,
+        u.id as owner_user_id,
+        verifier.first_name as verified_by_first_name,
+        verifier.last_name as verified_by_last_name
+      FROM documents d
+      LEFT JOIN trucks t ON d.entity_id = t.id AND d.entity_type = 'truck'
+      LEFT JOIN provider_profiles pp ON t.provider_id = pp.id
+      LEFT JOIN users u ON pp.user_id = u.id
+      LEFT JOIN users verifier ON d.verified_by = verifier.id
+      WHERE d.id = $1
+    `, [id]);
+
+    if (docResult.rows.length === 0) {
+      return res.status(404).json({
+        success: false,
+        error: 'Document not found'
+      });
+    }
+
+    const document = docResult.rows[0];
+    
+    // Check permissions - admins can view all documents
+    const canView = req.user.role === 'admin' || 
+                   req.user.id === document.owner_user_id;
+    
+    if (!canView) {
+      return res.status(403).json({
+        success: false,
+        error: 'Access denied'
+      });
+    }
+
+    // Check if file exists and get file info
+    let fileExists = false;
+    let fileSize = null;
+    
+    if (document.file_path) {
+      const filePath = path.resolve(document.file_path);
+      if (fs.existsSync(filePath)) {
+        fileExists = true;
+        const stats = fs.statSync(filePath);
+        fileSize = stats.size;
+      }
+    }
+
+    res.json({
+      success: true,
+      data: {
+        document: {
+          ...document,
+          file_exists: fileExists,
+          file_size: fileSize,
+          file_size_formatted: fileSize ? formatFileSize(fileSize) : null
+        }
+      }
+    });
+
+  } catch (error) {
+    logger.error('Error getting document info:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Failed to get document information'
+    });
+  }
+};
+
+// Helper function to get MIME type based on file extension
+function getMimeType(filename) {
+  const ext = path.extname(filename).toLowerCase();
+  const mimeTypes = {
+    '.pdf': 'application/pdf',
+    '.jpg': 'image/jpeg',
+    '.jpeg': 'image/jpeg',
+    '.png': 'image/png',
+    '.gif': 'image/gif',
+    '.doc': 'application/msword',
+    '.docx': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    '.txt': 'text/plain'
+  };
+  return mimeTypes[ext] || 'application/octet-stream';
+}
+
+// Helper function to format file size
+function formatFileSize(bytes) {
+  if (bytes === 0) return '0 Bytes';
+  const k = 1024;
+  const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+  const i = Math.floor(Math.log(bytes) / Math.log(k));
+  return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+}

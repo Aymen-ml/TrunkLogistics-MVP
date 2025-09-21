@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-09-20T22:30:27.575Z",
+  "timestamp": "2025-09-21T08:47:57.211Z",
   "changes": [
     "Added missing notification schema columns (priority, related_entity_type, related_entity_id, read_at)",
     "Created database indexes for better performance",
