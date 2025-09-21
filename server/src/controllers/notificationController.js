@@ -201,6 +201,8 @@ export const getAllNotifications = async (req, res) => {
 
 export const getNotificationStats = async (req, res) => {
   try {
+    logger.info('getNotificationStats called by user:', req.user);
+    
     // Only admins can view notification statistics
     if (req.user.role !== 'admin') {
       return res.status(403).json({
@@ -209,7 +211,9 @@ export const getNotificationStats = async (req, res) => {
       });
     }
 
+    logger.info('Calling Notification.getNotificationStats()');
     const stats = await Notification.getNotificationStats();
+    logger.info('Stats result:', stats);
 
     res.json({
       success: true,
@@ -217,15 +221,37 @@ export const getNotificationStats = async (req, res) => {
     });
   } catch (error) {
     logger.error('Get notification stats error:', error);
+    logger.error('Error stack:', error.stack);
+    logger.error('Error details:', {
+      message: error.message,
+      code: error.code,
+      detail: error.detail,
+      hint: error.hint
+    });
+    
+    // Check if it's a database schema issue
+    if (error.message && error.message.includes('column') && error.message.includes('does not exist')) {
+      logger.error('Database schema issue detected - missing column');
+      return res.status(500).json({
+        success: false,
+        error: 'Database schema issue - notification table missing required columns',
+        details: process.env.NODE_ENV === 'development' ? error.message : undefined
+      });
+    }
+    
     res.status(500).json({
       success: false,
-      error: 'Server error while fetching notification statistics'
+      error: 'Server error while fetching notification statistics',
+      details: process.env.NODE_ENV === 'development' ? error.message : undefined
     });
   }
 };
 
 export const createSystemNotification = async (req, res) => {
   try {
+    logger.info('createSystemNotification called by user:', req.user);
+    logger.info('Request body:', req.body);
+    
     // Only admins can create system notifications
     if (req.user.role !== 'admin') {
       return res.status(403).json({
@@ -236,6 +262,8 @@ export const createSystemNotification = async (req, res) => {
 
     // Manual validation instead of relying on express-validator middleware
     const { message, priority = 'medium' } = req.body;
+    
+    logger.info('Parsed message:', message, 'priority:', priority);
     
     if (!message || typeof message !== 'string' || message.trim().length === 0) {
       return res.status(400).json({
@@ -258,7 +286,9 @@ export const createSystemNotification = async (req, res) => {
       });
     }
 
+    logger.info('Calling notificationService.notifySystemMaintenance');
     const notifications = await notificationService.notifySystemMaintenance(message.trim(), priority);
+    logger.info('Service result:', notifications ? notifications.length : 'null/undefined');
 
     logger.info(`System notification sent to ${notifications.length} users by admin ${req.user.email}`);
 
@@ -272,9 +302,29 @@ export const createSystemNotification = async (req, res) => {
     });
   } catch (error) {
     logger.error('Create system notification error:', error);
+    logger.error('Error stack:', error.stack);
+    logger.error('Error details:', {
+      message: error.message,
+      code: error.code,
+      detail: error.detail,
+      hint: error.hint
+    });
+    
+    // Check if it's a database schema issue
+    if (error.message && error.message.includes('column') && error.message.includes('does not exist')) {
+      logger.error('Database schema issue detected - missing column');
+      return res.status(500).json({
+        success: false,
+        error: 'Database schema issue - notification table missing required columns',
+        details: process.env.NODE_ENV === 'development' ? error.message : undefined,
+        hint: 'Please run the notification schema migration'
+      });
+    }
+    
     res.status(500).json({
       success: false,
-      error: 'Server error while creating system notification'
+      error: 'Server error while creating system notification',
+      details: process.env.NODE_ENV === 'development' ? error.message : undefined
     });
   }
 };

@@ -13,25 +13,58 @@ class Notification {
       priority = 'medium'
     } = notificationData;
 
-    const queryText = `
-      INSERT INTO notifications (
-        user_id, type, title, message, related_entity_type, 
-        related_entity_id, priority
-      ) VALUES ($1, $2, $3, $4, $5, $6, $7)
-      RETURNING *
-    `;
-
-    const values = [
-      userId, type, title, message, relatedEntityType, 
-      relatedEntityId, priority
-    ];
-
+    // First, check if the required columns exist
     try {
+      const columnCheckQuery = `
+        SELECT column_name 
+        FROM information_schema.columns 
+        WHERE table_name = 'notifications' 
+          AND table_schema = 'public'
+          AND column_name IN ('priority', 'related_entity_type', 'related_entity_id')
+      `;
+      
+      const columnResult = await query(columnCheckQuery);
+      const existingColumns = columnResult.rows.map(row => row.column_name);
+      
+      const hasPriority = existingColumns.includes('priority');
+      const hasRelatedEntityType = existingColumns.includes('related_entity_type');
+      const hasRelatedEntityId = existingColumns.includes('related_entity_id');
+      
+      // Build query based on available columns
+      let queryText, values;
+      
+      if (hasPriority && hasRelatedEntityType && hasRelatedEntityId) {
+        // All columns exist - use full query
+        queryText = `
+          INSERT INTO notifications (
+            user_id, type, title, message, related_entity_type, 
+            related_entity_id, priority
+          ) VALUES ($1, $2, $3, $4, $5, $6, $7)
+          RETURNING *
+        `;
+        values = [userId, type, title, message, relatedEntityType, relatedEntityId, priority];
+      } else {
+        // Fallback to basic columns only
+        logger.warn('Some notification columns missing, using fallback query');
+        queryText = `
+          INSERT INTO notifications (user_id, type, title, message)
+          VALUES ($1, $2, $3, $4)
+          RETURNING *
+        `;
+        values = [userId, type, title, message];
+      }
+
       const result = await query(queryText, values);
       logger.info(`Notification created: ${result.rows[0].id} for user ${userId}`);
       return result.rows[0];
+      
     } catch (error) {
       logger.error('Error creating notification:', error);
+      logger.error('Error details:', {
+        message: error.message,
+        code: error.code,
+        detail: error.detail
+      });
       throw error;
     }
   }
@@ -219,24 +252,61 @@ class Notification {
   }
 
   static async getNotificationStats() {
-    const queryText = `
-      SELECT 
-        COUNT(*) as total_notifications,
-        COUNT(CASE WHEN is_read = false THEN 1 END) as unread_notifications,
-        COUNT(CASE WHEN type = 'booking_status' THEN 1 END) as booking_notifications,
-        COUNT(CASE WHEN type = 'document_verification' THEN 1 END) as document_notifications,
-        COUNT(CASE WHEN type = 'system' THEN 1 END) as system_notifications,
-        COUNT(CASE WHEN priority = 'high' THEN 1 END) as high_priority,
-        COUNT(CASE WHEN priority = 'medium' THEN 1 END) as medium_priority,
-        COUNT(CASE WHEN priority = 'low' THEN 1 END) as low_priority
-      FROM notifications
-    `;
-
     try {
+      // First check if priority column exists
+      const columnCheckQuery = `
+        SELECT column_name 
+        FROM information_schema.columns 
+        WHERE table_name = 'notifications' 
+          AND table_schema = 'public'
+          AND column_name = 'priority'
+      `;
+      
+      const columnResult = await query(columnCheckQuery);
+      const hasPriorityColumn = columnResult.rows.length > 0;
+      
+      let queryText;
+      
+      if (hasPriorityColumn) {
+        // Full query with priority stats
+        queryText = `
+          SELECT 
+            COUNT(*) as total_notifications,
+            COUNT(CASE WHEN is_read = false THEN 1 END) as unread_notifications,
+            COUNT(CASE WHEN type = 'booking_status' THEN 1 END) as booking_notifications,
+            COUNT(CASE WHEN type = 'document_verification' THEN 1 END) as document_notifications,
+            COUNT(CASE WHEN type = 'system' THEN 1 END) as system_notifications,
+            COUNT(CASE WHEN priority = 'high' THEN 1 END) as high_priority,
+            COUNT(CASE WHEN priority = 'medium' THEN 1 END) as medium_priority,
+            COUNT(CASE WHEN priority = 'low' THEN 1 END) as low_priority
+          FROM notifications
+        `;
+      } else {
+        // Fallback query without priority stats
+        logger.warn('Priority column missing, using fallback stats query');
+        queryText = `
+          SELECT 
+            COUNT(*) as total_notifications,
+            COUNT(CASE WHEN is_read = false THEN 1 END) as unread_notifications,
+            COUNT(CASE WHEN type = 'booking_status' THEN 1 END) as booking_notifications,
+            COUNT(CASE WHEN type = 'document_verification' THEN 1 END) as document_notifications,
+            COUNT(CASE WHEN type = 'system' THEN 1 END) as system_notifications,
+            0 as high_priority,
+            0 as medium_priority,
+            0 as low_priority
+          FROM notifications
+        `;
+      }
+
       const result = await query(queryText);
       return result.rows[0];
     } catch (error) {
       logger.error('Error getting notification statistics:', error);
+      logger.error('Error details:', {
+        message: error.message,
+        code: error.code,
+        detail: error.detail
+      });
       throw error;
     }
   }
