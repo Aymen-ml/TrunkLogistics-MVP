@@ -292,15 +292,18 @@ export const getTruck = async (req, res) => {
 
     logger.info(`Truck found: ${truck.license_plate}, getting drivers...`);
     
-    // Get drivers for all users (no restrictions)
+    // Driver information is stored directly in the truck record
+    // Create driver object from truck data if driver info exists
     let drivers = [];
-    try {
-      drivers = await Truck.getDrivers(id);
-      logger.info(`Found ${drivers.length} drivers for truck ${id}`);
-    } catch (driverError) {
-      logger.error('Error getting drivers for truck:', driverError);
-      drivers = [];
+    if (truck.driver_name || truck.driver_phone || truck.driver_license_number) {
+      drivers = [{
+        name: truck.driver_name,
+        phone: truck.driver_phone,
+        license_number: truck.driver_license_number,
+        is_primary: true
+      }];
     }
+    logger.info(`Found driver info for truck ${id}: ${drivers.length > 0 ? 'Yes' : 'No'}`);
 
     // Return complete truck data without any filtering
     const response = {
