@@ -239,7 +239,7 @@ export const getTrucks = async (req, res) => {
     let filteredTrucks = result.trucks;
     
     if (req.user?.role === 'customer') {
-      // Filter sensitive information from truck listings for customers
+      // Show business information but filter sensitive personal details for customers
       filteredTrucks = result.trucks.map(truck => ({
         id: truck.id,
         license_plate: truck.license_plate,
@@ -256,8 +256,10 @@ export const getTrucks = async (req, res) => {
         images: truck.images,
         created_at: truck.created_at,
         updated_at: truck.updated_at,
-        // Remove sensitive provider information
-        // first_name, last_name, phone, company_name are excluded
+        // Business information for customers
+        company_name: truck.company_name, // Company name for business identification
+        first_name: truck.first_name, // Provider first name for contact context
+        // Exclude sensitive details: last_name, phone
         total_documents: truck.total_documents,
         approved_documents: truck.approved_documents,
         pending_documents: truck.pending_documents,
@@ -317,16 +319,28 @@ export const getTruck = async (req, res) => {
     let drivers = [];
     
     if (req.user.role === 'customer') {
-      // Customers should only see basic truck info, no sensitive provider/driver details
-      logger.info('Filtering truck data for customer view');
+      // Customers should see business information but not sensitive personal details
+      logger.info('Filtering truck data for customer view - showing business info');
       
-      // Remove sensitive provider information
-      delete filteredTruck.first_name;
-      delete filteredTruck.last_name;
-      delete filteredTruck.phone;
-      delete filteredTruck.company_name;
+      // Get basic driver information (without sensitive details)
+      try {
+        const fullDrivers = await Truck.getDrivers(id);
+        // Filter driver information to show only business-relevant details
+        drivers = fullDrivers.map(driver => ({
+          id: driver.id,
+          first_name: driver.first_name, // First name for identification
+          // Exclude: last_name, phone, email, personal details
+          experience_years: driver.experience_years,
+          license_type: driver.license_type,
+          is_available: driver.is_available
+        }));
+        logger.info(`Filtered ${drivers.length} drivers for customer view`);
+      } catch (driverError) {
+        logger.error('Error getting drivers for customer view:', driverError);
+        drivers = [];
+      }
       
-      // Keep only essential truck information for customers
+      // Keep business information but remove sensitive personal details
       filteredTruck = {
         id: filteredTruck.id,
         license_plate: filteredTruck.license_plate,
@@ -343,11 +357,12 @@ export const getTruck = async (req, res) => {
         images: filteredTruck.images,
         created_at: filteredTruck.created_at,
         updated_at: filteredTruck.updated_at,
-        documents: filteredTruck.documents || []
+        documents: filteredTruck.documents || [],
+        // Business information for customers
+        company_name: filteredTruck.company_name, // Company name for business identification
+        first_name: filteredTruck.first_name, // Provider first name for contact context
+        // Exclude: last_name, phone (sensitive personal details)
       };
-      
-      // No driver information for customers
-      drivers = [];
       
     } else if (req.user.role === 'provider' || req.user.role === 'admin') {
       // Providers and admins can see full details including drivers
