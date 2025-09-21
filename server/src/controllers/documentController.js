@@ -398,15 +398,57 @@ export const downloadDocument = async (req, res) => {
       });
     }
 
-    // Check if file exists
-    const filePath = path.resolve(document.file_path);
+    // Check if file exists - handle both relative and absolute paths
+    let filePath;
+    if (path.isAbsolute(document.file_path)) {
+      filePath = document.file_path;
+    } else {
+      // Handle relative paths like /uploads/trucks/documents/filename.pdf
+      if (document.file_path.startsWith('/uploads/')) {
+        // Remove leading slash and resolve from server root
+        const relativePath = document.file_path.substring(1);
+        filePath = path.resolve(process.cwd(), relativePath);
+      } else {
+        // Legacy handling - assume it's in the uploads directory
+        filePath = path.resolve(process.cwd(), 'uploads', document.file_path);
+      }
+    }
+    
+    logger.info(`Looking for document file at: ${filePath}`);
     
     if (!fs.existsSync(filePath)) {
       logger.error(`Document file not found: ${filePath}`);
-      return res.status(404).json({
-        success: false,
-        error: 'Document file not found on server'
-      });
+      logger.error(`Original file_path from database: ${document.file_path}`);
+      
+      // Try alternative paths
+      const alternativePaths = [
+        path.resolve(process.cwd(), 'server', 'uploads', 'trucks', 'documents', path.basename(document.file_path)),
+        path.resolve(process.cwd(), 'uploads', 'trucks', 'documents', path.basename(document.file_path)),
+        path.resolve(__dirname, '../../uploads/trucks/documents', path.basename(document.file_path))
+      ];
+      
+      let foundPath = null;
+      for (const altPath of alternativePaths) {
+        logger.info(`Trying alternative path: ${altPath}`);
+        if (fs.existsSync(altPath)) {
+          foundPath = altPath;
+          break;
+        }
+      }
+      
+      if (!foundPath) {
+        return res.status(404).json({
+          success: false,
+          error: 'Document file not found on server',
+          debug: process.env.NODE_ENV === 'development' ? {
+            searchedPaths: [filePath, ...alternativePaths],
+            originalPath: document.file_path
+          } : undefined
+        });
+      }
+      
+      filePath = foundPath;
+      logger.info(`Found document at alternative path: ${filePath}`);
     }
 
     // Get file stats
@@ -505,13 +547,47 @@ export const getDocumentInfo = async (req, res) => {
     // Check if file exists and get file info
     let fileExists = false;
     let fileSize = null;
+    let actualFilePath = null;
     
     if (document.file_path) {
-      const filePath = path.resolve(document.file_path);
+      // Handle both relative and absolute paths
+      let filePath;
+      if (path.isAbsolute(document.file_path)) {
+        filePath = document.file_path;
+      } else {
+        // Handle relative paths like /uploads/trucks/documents/filename.pdf
+        if (document.file_path.startsWith('/uploads/')) {
+          // Remove leading slash and resolve from server root
+          const relativePath = document.file_path.substring(1);
+          filePath = path.resolve(process.cwd(), relativePath);
+        } else {
+          // Legacy handling - assume it's in the uploads directory
+          filePath = path.resolve(process.cwd(), 'uploads', document.file_path);
+        }
+      }
+      
       if (fs.existsSync(filePath)) {
         fileExists = true;
+        actualFilePath = filePath;
         const stats = fs.statSync(filePath);
         fileSize = stats.size;
+      } else {
+        // Try alternative paths
+        const alternativePaths = [
+          path.resolve(process.cwd(), 'server', 'uploads', 'trucks', 'documents', path.basename(document.file_path)),
+          path.resolve(process.cwd(), 'uploads', 'trucks', 'documents', path.basename(document.file_path)),
+          path.resolve(__dirname, '../../uploads/trucks/documents', path.basename(document.file_path))
+        ];
+        
+        for (const altPath of alternativePaths) {
+          if (fs.existsSync(altPath)) {
+            fileExists = true;
+            actualFilePath = altPath;
+            const stats = fs.statSync(altPath);
+            fileSize = stats.size;
+            break;
+          }
+        }
       }
     }
 
@@ -522,7 +598,8 @@ export const getDocumentInfo = async (req, res) => {
           ...document,
           file_exists: fileExists,
           file_size: fileSize,
-          file_size_formatted: fileSize ? formatFileSize(fileSize) : null
+          file_size_formatted: fileSize ? formatFileSize(fileSize) : null,
+          actual_file_path: actualFilePath
         }
       }
     });
@@ -560,3 +637,68 @@ function formatFileSize(bytes) {
   const i = Math.floor(Math.log(bytes) / Math.log(k));
   return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
 }
+
+// Debug endpoint to check file system structure
+export const debugFileSystem = async (req, res) => {
+  try {
+    // Only admins can access debug info
+    if (req.user.role !== 'admin') {
+      return res.status(403).json({
+        success: false,
+        error: 'Access denied'
+      });
+    }
+
+    const debugInfo = {
+      currentWorkingDirectory: process.cwd(),
+      __dirname: __dirname,
+      uploadPaths: [],
+      existingFiles: [],
+      documentSample: null
+    };
+
+    // Check various upload directory paths
+    const pathsToCheck = [
+      path.resolve(process.cwd(), 'uploads'),
+      path.resolve(process.cwd(), 'server', 'uploads'),
+      path.resolve(__dirname, '../../uploads'),
+      path.resolve(process.cwd(), 'uploads', 'trucks'),
+      path.resolve(process.cwd(), 'uploads', 'trucks', 'documents'),
+      path.resolve(__dirname, '../../uploads/trucks/documents')
+    ];
+
+    for (const pathToCheck of pathsToCheck) {
+      const exists = fs.existsSync(pathToCheck);
+      debugInfo.uploadPaths.push({
+        path: pathToCheck,
+        exists,
+        files: exists ? (fs.readdirSync(pathToCheck).slice(0, 5)) : []
+      });
+    }
+
+    // Get a sample document from database
+    const docResult = await query(`
+      SELECT id, file_name, file_path, file_size 
+      FROM documents 
+      WHERE entity_type = 'truck' 
+      LIMIT 1
+    `);
+
+    if (docResult.rows.length > 0) {
+      debugInfo.documentSample = docResult.rows[0];
+    }
+
+    res.json({
+      success: true,
+      data: debugInfo
+    });
+
+  } catch (error) {
+    logger.error('Error in debug file system:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Debug failed',
+      details: error.message
+    });
+  }
+};
