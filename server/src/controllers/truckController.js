@@ -239,7 +239,7 @@ export const getTrucks = async (req, res) => {
     let filteredTrucks = result.trucks;
     
     if (req.user?.role === 'customer') {
-      // Show business information but filter sensitive personal details for customers
+      // Show comprehensive business information for customer transparency
       filteredTrucks = result.trucks.map(truck => ({
         id: truck.id,
         license_plate: truck.license_plate,
@@ -256,10 +256,19 @@ export const getTrucks = async (req, res) => {
         images: truck.images,
         created_at: truck.created_at,
         updated_at: truck.updated_at,
-        // Business information for customers
-        company_name: truck.company_name, // Company name for business identification
-        first_name: truck.first_name, // Provider first name for contact context
-        // Exclude sensitive details: last_name, phone
+        // Full business information for customers
+        company_name: truck.company_name,
+        first_name: truck.first_name,
+        last_name: truck.last_name,
+        phone: truck.phone, // Company/business phone number
+        // Include any location information that exists
+        ...Object.keys(truck).reduce((acc, key) => {
+          if (key.includes('address') || key.includes('city') || key.includes('state') || 
+              key.includes('country') || key.includes('postal') || key.includes('location')) {
+            acc[key] = truck[key];
+          }
+          return acc;
+        }, {}),
         total_documents: truck.total_documents,
         approved_documents: truck.approved_documents,
         pending_documents: truck.pending_documents,
@@ -319,28 +328,19 @@ export const getTruck = async (req, res) => {
     let drivers = [];
     
     if (req.user.role === 'customer') {
-      // Customers should see business information but not sensitive personal details
-      logger.info('Filtering truck data for customer view - showing business info');
+      // Customers should see comprehensive business information for transparency
+      logger.info('Showing comprehensive business information for customer view');
       
-      // Get basic driver information (without sensitive details)
+      // Get full driver information for customer transparency
       try {
-        const fullDrivers = await Truck.getDrivers(id);
-        // Filter driver information to show only business-relevant details
-        drivers = fullDrivers.map(driver => ({
-          id: driver.id,
-          first_name: driver.first_name, // First name for identification
-          // Exclude: last_name, phone, email, personal details
-          experience_years: driver.experience_years,
-          license_type: driver.license_type,
-          is_available: driver.is_available
-        }));
-        logger.info(`Filtered ${drivers.length} drivers for customer view`);
+        drivers = await Truck.getDrivers(id);
+        logger.info(`Showing ${drivers.length} drivers for customer view`);
       } catch (driverError) {
         logger.error('Error getting drivers for customer view:', driverError);
         drivers = [];
       }
       
-      // Keep business information but remove sensitive personal details
+      // Show comprehensive business information to customers
       filteredTruck = {
         id: filteredTruck.id,
         license_plate: filteredTruck.license_plate,
@@ -358,10 +358,19 @@ export const getTruck = async (req, res) => {
         created_at: filteredTruck.created_at,
         updated_at: filteredTruck.updated_at,
         documents: filteredTruck.documents || [],
-        // Business information for customers
-        company_name: filteredTruck.company_name, // Company name for business identification
-        first_name: filteredTruck.first_name, // Provider first name for contact context
-        // Exclude: last_name, phone (sensitive personal details)
+        // Full business information for customers
+        company_name: filteredTruck.company_name,
+        first_name: filteredTruck.first_name,
+        last_name: filteredTruck.last_name,
+        phone: filteredTruck.phone, // Company/business phone number
+        // Include any location information that exists
+        ...Object.keys(filteredTruck).reduce((acc, key) => {
+          if (key.includes('address') || key.includes('city') || key.includes('state') || 
+              key.includes('country') || key.includes('postal') || key.includes('location')) {
+            acc[key] = filteredTruck[key];
+          }
+          return acc;
+        }, {})
       };
       
     } else if (req.user.role === 'provider' || req.user.role === 'admin') {
