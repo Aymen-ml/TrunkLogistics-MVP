@@ -3,6 +3,10 @@ import logger from '../utils/logger.js';
 import notificationService from '../services/notificationService.js';
 import path from 'path';
 import fs from 'fs';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Get all documents for admin review with advanced filtering
 export const getAllDocuments = async (req, res) => {
