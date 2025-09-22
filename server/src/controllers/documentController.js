@@ -1,6 +1,7 @@
 import { query } from '../config/database.js';
 import logger from '../utils/logger.js';
 import notificationService from '../services/notificationService.js';
+import { getFileInfo } from '../middleware/fileHandler.js';
 import path from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
@@ -400,48 +401,23 @@ export const downloadDocument = async (req, res) => {
       });
     }
 
-    // Resolve file path based on server structure
-    const filename = path.basename(document.file_path);
+    // Use the new file info helper to check if file exists
+    const fileInfo = getFileInfo(document.file_path);
     
-    // Primary path: current working directory + uploads structure
-    const primaryPath = path.resolve(process.cwd(), 'uploads', 'trucks', 'documents', filename);
-    
-    // Alternative paths to check
-    const pathsToTry = [
-      primaryPath,
-      path.resolve(__dirname, '../../uploads/trucks/documents', filename),
-      path.resolve(process.cwd(), document.file_path.startsWith('/') ? document.file_path.substring(1) : document.file_path)
-    ];
-    
-    let filePath = null;
-    
-    logger.info(`Looking for document file: ${filename}`);
-    logger.info(`Database path: ${document.file_path}`);
-    
-    // Try each path until we find the file
-    for (const pathToTry of pathsToTry) {
-      logger.info(`Checking path: ${pathToTry}`);
-      if (fs.existsSync(pathToTry)) {
-        filePath = pathToTry;
-        logger.info(`✅ Found document at: ${filePath}`);
-        break;
-      }
-    }
-    
-    if (!filePath) {
-      logger.error(`❌ Document file not found anywhere`);
-      logger.error(`Searched paths:`, pathsToTry);
+    if (!fileInfo.exists) {
+      logger.error(`❌ Document file not found: ${document.file_path}`);
       
       return res.status(404).json({
         success: false,
-        error: 'Document file not found on server',
-        debug: process.env.NODE_ENV === 'development' ? {
-          searchedPaths: pathsToTry,
-          originalPath: document.file_path,
-          filename: filename
-        } : undefined
+        error: 'Document file not found',
+        message: 'This document may have been uploaded before the current deployment. Files are not persistent on this hosting platform. Please re-upload the document.',
+        filename: document.file_name || path.basename(document.file_path),
+        documentId: id,
+        uploadedAt: document.uploaded_at
       });
     }
+    
+    const filePath = fileInfo.path;
 
     // Get file stats
     const stats = fs.statSync(filePath);
@@ -536,36 +512,11 @@ export const getDocumentInfo = async (req, res) => {
       });
     }
 
-    // Check if file exists and get file info
-    let fileExists = false;
-    let fileSize = null;
-    let actualFilePath = null;
-    
-    if (document.file_path) {
-      // Resolve file path based on server structure
-      const filename = path.basename(document.file_path);
-      
-      // Primary path: current working directory + uploads structure
-      const primaryPath = path.resolve(process.cwd(), 'uploads', 'trucks', 'documents', filename);
-      
-      // Alternative paths to check
-      const pathsToTry = [
-        primaryPath,
-        path.resolve(__dirname, '../../uploads/trucks/documents', filename),
-        path.resolve(process.cwd(), document.file_path.startsWith('/') ? document.file_path.substring(1) : document.file_path)
-      ];
-      
-      // Try each path until we find the file
-      for (const pathToTry of pathsToTry) {
-        if (fs.existsSync(pathToTry)) {
-          fileExists = true;
-          actualFilePath = pathToTry;
-          const stats = fs.statSync(pathToTry);
-          fileSize = stats.size;
-          break;
-        }
-      }
-    }
+    // Check if file exists and get file info using the helper
+    const fileInfo = getFileInfo(document.file_path || '');
+    const fileExists = fileInfo.exists;
+    const fileSize = fileInfo.size;
+    const actualFilePath = fileInfo.path;
 
     res.json({
       success: true,

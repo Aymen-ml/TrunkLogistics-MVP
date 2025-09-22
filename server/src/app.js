@@ -19,6 +19,7 @@ import testEmailRoutes from './routes/testEmail.js';
 import errorHandler from './middleware/errorHandler.js';
 import { securityHeaders, corsOptions, sanitizeData } from './middleware/security.js';
 import { generalLimiter } from './middleware/rateLimiter.js';
+import { serveFileWithFallback, ensureUploadDirectories } from './middleware/fileHandler.js';
 import logger from './utils/logger.js';
 import dotenv from 'dotenv';
 import { dirname, join } from 'path';
@@ -29,6 +30,9 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const app = express();
+
+// Ensure upload directories exist on startup
+ensureUploadDirectories();
 
 // Security middleware
 app.use(securityHeaders);
@@ -49,70 +53,11 @@ app.use(express.urlencoded({ extended: true, limit: '50mb', parameterLimit: 1000
 // Logging middleware
 app.use(morgan('combined', { stream: { write: message => logger.info(message.trim()) } }));
 
-// Custom middleware for handling document viewing (inline display)
-app.use('/uploads/trucks/documents', (req, res, next) => {
-  const filePath = join(__dirname, '../uploads/trucks/documents', req.path);
-  const fileExtension = path.extname(req.path).toLowerCase();
-  
-  // Set appropriate content type based on file extension
-  if (fileExtension === '.pdf') {
-    res.setHeader('Content-Type', 'application/pdf');
-  } else if (['.jpg', '.jpeg'].includes(fileExtension)) {
-    res.setHeader('Content-Type', 'image/jpeg');
-  } else if (fileExtension === '.png') {
-    res.setHeader('Content-Type', 'image/png');
-  } else if (fileExtension === '.gif') {
-    res.setHeader('Content-Type', 'image/gif');
-  } else {
-    res.setHeader('Content-Type', 'application/octet-stream');
-  }
-  
-  // Set Content-Disposition to inline for viewing instead of attachment for download
-  res.setHeader('Content-Disposition', 'inline; filename=' + path.basename(req.path));
-  next();
-});
+// Serve uploaded files with improved error handling and fallback
+app.use('/uploads', serveFileWithFallback);
 
-// Serve uploaded files with proper headers
-app.use('/uploads', (req, res, next) => {
-  const filePath = join(__dirname, '../uploads', req.path);
-  res.sendFile(filePath, (err) => {
-    if (err) {
-      console.error('File send error:', err);
-      res.status(404).send('File not found');
-    }
-  });
-});
-
-// API route for uploads with proper headers for viewing
-app.use('/api/uploads', (req, res, next) => {
-  const filePath = join(__dirname, '../uploads', req.path);
-  const fileExtension = path.extname(req.path).toLowerCase();
-  
-  // Set appropriate content type and disposition for viewing
-  if (fileExtension === '.pdf') {
-    res.setHeader('Content-Type', 'application/pdf');
-    res.setHeader('Content-Disposition', 'inline; filename=' + path.basename(req.path));
-  } else if (['.jpg', '.jpeg'].includes(fileExtension)) {
-    res.setHeader('Content-Type', 'image/jpeg');
-    res.setHeader('Content-Disposition', 'inline; filename=' + path.basename(req.path));
-  } else if (fileExtension === '.png') {
-    res.setHeader('Content-Type', 'image/png');
-    res.setHeader('Content-Disposition', 'inline; filename=' + path.basename(req.path));
-  } else if (fileExtension === '.gif') {
-    res.setHeader('Content-Type', 'image/gif');
-    res.setHeader('Content-Disposition', 'inline; filename=' + path.basename(req.path));
-  } else {
-    res.setHeader('Content-Type', 'application/octet-stream');
-    res.setHeader('Content-Disposition', 'attachment; filename=' + path.basename(req.path));
-  }
-  
-  res.sendFile(filePath, (err) => {
-    if (err) {
-      console.error('File send error:', err);
-      res.status(404).send('File not found');
-    }
-  });
-});
+// API route for uploads (same handler)
+app.use('/api/uploads', serveFileWithFallback);
 
 // API routes
 app.use('/api/auth', authRoutes);
