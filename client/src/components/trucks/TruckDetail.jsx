@@ -679,12 +679,20 @@ const TruckDetail = () => {
             <div className="p-6">
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 {truck.images.map((imagePath, index) => {
-                  // Ensure the URL points to the API server and remove any double slashes
-                  // Remove /api from the base URL for file serving
-                  const apiBaseUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
-                  const baseUrl = apiBaseUrl.replace('/api', '');
-                  const cleanPath = imagePath.startsWith('/') ? imagePath : `/${imagePath}`;
-                  const imageUrl = `${baseUrl}${cleanPath}`;
+                  // Check if it's already a complete URL (Cloudinary or other external URLs)
+                  const isCompleteUrl = imagePath.startsWith('http://') || imagePath.startsWith('https://') || imagePath.includes('res.cloudinary.com');
+                  
+                  let imageUrl;
+                  if (isCompleteUrl) {
+                    // Use the URL directly for Cloudinary and other external URLs
+                    imageUrl = imagePath;
+                  } else {
+                    // For local files, construct the URL with API base
+                    const apiBaseUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+                    const baseUrl = apiBaseUrl.replace('/api', '');
+                    const cleanPath = imagePath.startsWith('/') ? imagePath : `/${imagePath}`;
+                    imageUrl = `${baseUrl}${cleanPath}`;
+                  }
                   
                   return (
                     <div key={index} className="relative group">

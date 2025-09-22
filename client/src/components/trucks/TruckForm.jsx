@@ -77,9 +77,18 @@ const TruckForm = () => {
           // Set existing images
           if (truck.images && Array.isArray(truck.images)) {
             const processedImages = truck.images.map(path => {
-              const fullPath = path.startsWith('http') 
-                ? path 
-                : `${(import.meta.env.VITE_API_URL || 'http://localhost:5000').replace('/api', '')}${path.startsWith('/') ? path : `/${path}`}`;
+              // Check if it's already a complete URL (Cloudinary or other external URLs)
+              const isCompleteUrl = path.startsWith('http://') || path.startsWith('https://') || path.includes('res.cloudinary.com');
+              
+              let fullPath;
+              if (isCompleteUrl) {
+                // Use the URL directly for Cloudinary and other external URLs
+                fullPath = path;
+              } else {
+                // For local files, construct the URL with API base
+                fullPath = `${(import.meta.env.VITE_API_URL || 'http://localhost:5000').replace('/api', '')}${path.startsWith('/') ? path : `/${path}`}`;
+              }
+              
               return {
                 preview: fullPath,
                 name: path.split('/').pop(),
