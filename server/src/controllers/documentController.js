@@ -371,9 +371,17 @@ export const downloadDocument = async (req, res) => {
   try {
     const { id } = req.params;
     
-    // Get document details
+    // Get document details with enhanced joins
     const docResult = await query(`
-      SELECT d.*, t.license_plate, pp.company_name, u.id as owner_user_id
+      SELECT 
+        d.*,
+        t.license_plate,
+        t.provider_id as truck_provider_id,
+        pp.company_name,
+        pp.user_id as provider_user_id,
+        u.id as owner_user_id,
+        u.email as owner_email,
+        u.role as owner_role
       FROM documents d
       LEFT JOIN trucks t ON d.entity_id = t.id AND d.entity_type = 'truck'
       LEFT JOIN provider_profiles pp ON t.provider_id = pp.id
@@ -397,13 +405,43 @@ export const downloadDocument = async (req, res) => {
       requestingUserRole: req.user.role,
       requestingUserEmail: req.user.email,
       documentOwnerId: document.owner_user_id,
+      providerUserId: document.provider_user_id,
+      truckProviderId: document.truck_provider_id,
       truckLicensePlate: document.license_plate,
-      providerCompany: document.company_name
+      providerCompany: document.company_name,
+      ownerEmail: document.owner_email
     });
     
-    // Check permissions - admins can view all documents, providers can view their own
-    const canView = req.user.role === 'admin' || 
-                   req.user.id === document.owner_user_id;
+    // Enhanced permission check - multiple ways to verify ownership
+    const isAdmin = req.user.role === 'admin';
+    const isOwnerByUserId = req.user.id === document.owner_user_id;
+    const isOwnerByProviderUserId = req.user.id === document.provider_user_id;
+    
+    // For providers, check if they own the truck through provider profile
+    let isOwnerByProviderProfile = false;
+    if (req.user.role === 'provider' && document.truck_provider_id) {
+      try {
+        const providerCheck = await query(`
+          SELECT pp.user_id 
+          FROM provider_profiles pp 
+          WHERE pp.id = $1 AND pp.user_id = $2
+        `, [document.truck_provider_id, req.user.id]);
+        
+        isOwnerByProviderProfile = providerCheck.rows.length > 0;
+      } catch (error) {
+        logger.error('Error checking provider profile ownership:', error);
+      }
+    }
+    
+    const canView = isAdmin || isOwnerByUserId || isOwnerByProviderUserId || isOwnerByProviderProfile;
+    
+    logger.info('Permission check results:', {
+      isAdmin,
+      isOwnerByUserId,
+      isOwnerByProviderUserId,
+      isOwnerByProviderProfile,
+      canView
+    });
     
     if (!canView) {
       logger.warn('Document access denied:', {
@@ -498,7 +536,9 @@ export const getDocumentInfo = async (req, res) => {
         t.make,
         t.model,
         t.year,
+        t.provider_id as truck_provider_id,
         pp.company_name,
+        pp.user_id as provider_user_id,
         u.first_name as provider_first_name,
         u.last_name as provider_last_name,
         u.email as provider_email,
@@ -529,13 +569,42 @@ export const getDocumentInfo = async (req, res) => {
       requestingUserRole: req.user.role,
       requestingUserEmail: req.user.email,
       documentOwnerId: document.owner_user_id,
+      providerUserId: document.provider_user_id,
+      truckProviderId: document.truck_provider_id,
       truckLicensePlate: document.license_plate,
       providerCompany: document.company_name
     });
     
-    // Check permissions - admins can view all documents, providers can view their own
-    const canView = req.user.role === 'admin' || 
-                   req.user.id === document.owner_user_id;
+    // Enhanced permission check - multiple ways to verify ownership
+    const isAdmin = req.user.role === 'admin';
+    const isOwnerByUserId = req.user.id === document.owner_user_id;
+    const isOwnerByProviderUserId = req.user.id === document.provider_user_id;
+    
+    // For providers, check if they own the truck through provider profile
+    let isOwnerByProviderProfile = false;
+    if (req.user.role === 'provider' && document.truck_provider_id) {
+      try {
+        const providerCheck = await query(`
+          SELECT pp.user_id 
+          FROM provider_profiles pp 
+          WHERE pp.id = $1 AND pp.user_id = $2
+        `, [document.truck_provider_id, req.user.id]);
+        
+        isOwnerByProviderProfile = providerCheck.rows.length > 0;
+      } catch (error) {
+        logger.error('Error checking provider profile ownership:', error);
+      }
+    }
+    
+    const canView = isAdmin || isOwnerByUserId || isOwnerByProviderUserId || isOwnerByProviderProfile;
+    
+    logger.info('Document info permission check results:', {
+      isAdmin,
+      isOwnerByUserId,
+      isOwnerByProviderUserId,
+      isOwnerByProviderProfile,
+      canView
+    });
     
     if (!canView) {
       logger.warn('Document info access denied:', {
