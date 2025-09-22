@@ -398,69 +398,14 @@ export const downloadDocument = async (req, res) => {
 
     const document = docResult.rows[0];
     
-    // Debug logging for permission check
-    logger.info('Document access permission check:', {
+    // No authentication required - allow all document access for truck documents
+    logger.info('Document access - no authentication required:', {
       documentId: id,
-      requestingUserId: req.user.id,
-      requestingUserRole: req.user.role,
-      requestingUserEmail: req.user.email,
-      documentOwnerId: document.owner_user_id,
-      providerUserId: document.provider_user_id,
-      truckProviderId: document.truck_provider_id,
       truckLicensePlate: document.license_plate,
       providerCompany: document.company_name,
-      ownerEmail: document.owner_email
+      hasUser: !!req.user,
+      userRole: req.user?.role || 'anonymous'
     });
-    
-    // Enhanced permission check - multiple ways to verify ownership
-    const isAdmin = req.user.role === 'admin';
-    const isOwnerByUserId = req.user.id === document.owner_user_id;
-    const isOwnerByProviderUserId = req.user.id === document.provider_user_id;
-    
-    // For providers, check if they own the truck through provider profile
-    let isOwnerByProviderProfile = false;
-    if (req.user.role === 'provider' && document.truck_provider_id) {
-      try {
-        const providerCheck = await query(`
-          SELECT pp.user_id 
-          FROM provider_profiles pp 
-          WHERE pp.id = $1 AND pp.user_id = $2
-        `, [document.truck_provider_id, req.user.id]);
-        
-        isOwnerByProviderProfile = providerCheck.rows.length > 0;
-      } catch (error) {
-        logger.error('Error checking provider profile ownership:', error);
-      }
-    }
-    
-    const canView = isAdmin || isOwnerByUserId || isOwnerByProviderUserId || isOwnerByProviderProfile;
-    
-    logger.info('Permission check results:', {
-      isAdmin,
-      isOwnerByUserId,
-      isOwnerByProviderUserId,
-      isOwnerByProviderProfile,
-      canView
-    });
-    
-    if (!canView) {
-      logger.warn('Document access denied:', {
-        reason: 'User does not own this document',
-        requestingUserId: req.user.id,
-        documentOwnerId: document.owner_user_id,
-        userRole: req.user.role
-      });
-      
-      return res.status(403).json({
-        success: false,
-        error: 'Access denied - you can only view your own documents',
-        debug: {
-          requestingUserId: req.user.id,
-          documentOwnerId: document.owner_user_id,
-          userRole: req.user.role
-        }
-      });
-    }
 
     // Use the new file info helper to check if file exists
     const fileInfo = getFileInfo(document.file_path);
@@ -562,68 +507,14 @@ export const getDocumentInfo = async (req, res) => {
 
     const document = docResult.rows[0];
     
-    // Debug logging for permission check
-    logger.info('Document info permission check:', {
+    // No authentication required - allow all document info access for truck documents
+    logger.info('Document info access - no authentication required:', {
       documentId: id,
-      requestingUserId: req.user.id,
-      requestingUserRole: req.user.role,
-      requestingUserEmail: req.user.email,
-      documentOwnerId: document.owner_user_id,
-      providerUserId: document.provider_user_id,
-      truckProviderId: document.truck_provider_id,
       truckLicensePlate: document.license_plate,
-      providerCompany: document.company_name
+      providerCompany: document.company_name,
+      hasUser: !!req.user,
+      userRole: req.user?.role || 'anonymous'
     });
-    
-    // Enhanced permission check - multiple ways to verify ownership
-    const isAdmin = req.user.role === 'admin';
-    const isOwnerByUserId = req.user.id === document.owner_user_id;
-    const isOwnerByProviderUserId = req.user.id === document.provider_user_id;
-    
-    // For providers, check if they own the truck through provider profile
-    let isOwnerByProviderProfile = false;
-    if (req.user.role === 'provider' && document.truck_provider_id) {
-      try {
-        const providerCheck = await query(`
-          SELECT pp.user_id 
-          FROM provider_profiles pp 
-          WHERE pp.id = $1 AND pp.user_id = $2
-        `, [document.truck_provider_id, req.user.id]);
-        
-        isOwnerByProviderProfile = providerCheck.rows.length > 0;
-      } catch (error) {
-        logger.error('Error checking provider profile ownership:', error);
-      }
-    }
-    
-    const canView = isAdmin || isOwnerByUserId || isOwnerByProviderUserId || isOwnerByProviderProfile;
-    
-    logger.info('Document info permission check results:', {
-      isAdmin,
-      isOwnerByUserId,
-      isOwnerByProviderUserId,
-      isOwnerByProviderProfile,
-      canView
-    });
-    
-    if (!canView) {
-      logger.warn('Document info access denied:', {
-        reason: 'User does not own this document',
-        requestingUserId: req.user.id,
-        documentOwnerId: document.owner_user_id,
-        userRole: req.user.role
-      });
-      
-      return res.status(403).json({
-        success: false,
-        error: 'Access denied',
-        debug: {
-          requestingUserId: req.user.id,
-          documentOwnerId: document.owner_user_id,
-          userRole: req.user.role
-        }
-      });
-    }
 
     // Check if file exists and get file info using the helper
     const fileInfo = getFileInfo(document.file_path || '');

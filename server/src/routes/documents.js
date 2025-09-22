@@ -4,12 +4,14 @@ import { authenticate } from '../middleware/auth.js';
 
 const router = express.Router();
 
-// Admin routes for document management
+// Admin routes for document management (require authentication)
 router.get('/', authenticate, getAllDocuments);
 router.get('/stats', authenticate, getDocumentStats);
 router.get('/debug/filesystem', authenticate, debugFileSystem);
-router.get('/:id/info', authenticate, getDocumentInfo);
-router.get('/:id/download', authenticate, downloadDocument);
 router.post('/:id/verify', authenticate, verifyDocument);
+
+// Document viewing routes (no authentication required for providers to view their truck documents)
+router.get('/:id/info', getDocumentInfo);
+router.get('/:id/download', downloadDocument);
 
 export default router;
