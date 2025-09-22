@@ -839,7 +839,13 @@ const TruckDetail = () => {
                                 }
                               } catch (error) {
                                 console.error('Error viewing document:', error);
-                                alert(`Error viewing document: ${error.response?.data?.error || error.message}`);
+                                
+                                // Handle document authentication errors specifically
+                                if (error.isDocumentAuthError) {
+                                  alert(`Document access failed: ${error.message}\n\nThis might be due to:\n- Session timeout\n- Insufficient permissions\n- Document access restrictions\n\nTry refreshing the page and logging in again.`);
+                                } else {
+                                  alert(`Error viewing document: ${error.response?.data?.error || error.message}`);
+                                }
                               }
                             }}
                             className="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
@@ -874,7 +880,13 @@ const TruckDetail = () => {
                                 window.document.body.removeChild(downloadLink);
                               } catch (error) {
                                 console.error('Download error:', error);
-                                alert(`Failed to download the document: ${error.response?.data?.error || error.message}`);
+                                
+                                // Handle document authentication errors specifically
+                                if (error.isDocumentAuthError) {
+                                  alert(`Document download failed: ${error.message}\n\nThis might be due to:\n- Session timeout\n- Insufficient permissions\n- Document access restrictions\n\nTry refreshing the page and logging in again.`);
+                                } else {
+                                  alert(`Failed to download the document: ${error.response?.data?.error || error.message}`);
+                                }
                               }
                             }}
                           >

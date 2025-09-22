@@ -17,10 +17,42 @@ const apiClient = axios.create({
   }
 });
 
+// Helper function to check if token is expired
+const isTokenExpired = (token) => {
+  if (!token) return true;
+  
+  try {
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    const currentTime = Date.now() / 1000;
+    return payload.exp < currentTime;
+  } catch (error) {
+    console.error('Error parsing token:', error);
+    return true;
+  }
+};
+
 // Request interceptor to add auth token
 apiClient.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('token');
+    
+    // Check if token is expired before making the request
+    if (token && isTokenExpired(token)) {
+      console.warn('Token expired, removing from storage');
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      
+      // For document requests, don't redirect immediately - let the component handle it
+      const isDocumentRequest = config.url?.includes('/documents/') && 
+                               (config.url?.includes('/download') || config.url?.includes('/info'));
+      
+      if (!isDocumentRequest) {
+        window.location.href = '/login';
+      }
+      
+      return Promise.reject(new Error('Token expired'));
+    }
+    
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -43,6 +75,27 @@ apiClient.interceptors.response.use(
       
       // Handle authentication errors
       if (status === 401) {
+        // Check if this is a document download request
+        const isDocumentRequest = error.config?.url?.includes('/documents/') && 
+                                 (error.config?.url?.includes('/download') || error.config?.url?.includes('/info'));
+        
+        // For document requests, provide more specific error handling
+        if (isDocumentRequest) {
+          console.error('Document access failed:', {
+            url: error.config.url,
+            status: status,
+            error: data?.error || 'Authentication failed',
+            hasToken: !!localStorage.getItem('token')
+          });
+          
+          // Don't automatically logout for document requests - let the component handle it
+          const docError = new Error(data?.error || 'Authentication failed for document access. Please try refreshing the page.');
+          docError.response = error.response;
+          docError.isDocumentAuthError = true;
+          return Promise.reject(docError);
+        }
+        
+        // For other requests, do the normal logout flow
         localStorage.removeItem('token');
         localStorage.removeItem('user');
         window.location.href = '/login';
