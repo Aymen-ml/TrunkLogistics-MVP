@@ -1,10 +1,12 @@
+import fs from 'fs';
+import path from 'path';
 import { query } from '../config/database.js';
 import logger from '../utils/logger.js';
-import notificationService from '../services/notificationService.js';
-import { getFileInfo } from '../middleware/fileHandler.js';
-import path from 'path';
-import fs from 'fs';
 import { fileURLToPath } from 'url';
+import { getFileInfo } from '../utils/fileInfo.js';
+import { getMimeType } from '../utils/mimeTypes.js';
+import fetch from 'node-fetch';
+import notificationService from '../services/notificationService.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -423,10 +425,37 @@ export const downloadDocument = async (req, res) => {
       });
     }
     
-    // Handle Cloudinary URLs - redirect to the actual URL
+    // Handle Cloudinary URLs - test access before redirecting
     if (fileInfo.isCloudinary) {
-      logger.info(`🔄 Redirecting to Cloudinary URL: ${fileInfo.path}`);
-      return res.redirect(302, fileInfo.path);
+      logger.info(`🔄 Attempting to access Cloudinary URL: ${fileInfo.path}`);
+      
+      try {
+        // Test if the Cloudinary URL is accessible
+        const testResponse = await fetch(fileInfo.path, { method: 'HEAD' });
+        
+        if (testResponse.ok) {
+          logger.info(`✅ Cloudinary URL accessible, redirecting: ${fileInfo.path}`);
+          return res.redirect(302, fileInfo.path);
+        } else {
+          logger.error(`❌ Cloudinary URL returned ${testResponse.status}: ${fileInfo.path}`);
+          return res.status(404).json({
+            success: false,
+            error: 'Document file is no longer accessible',
+            message: 'This document was stored on external cloud storage but is no longer available. This may happen with temporary uploads or expired URLs.',
+            filename: document.file_name || path.basename(document.file_path),
+            cloudinaryUrl: fileInfo.path,
+            status: testResponse.status
+          });
+        }
+      } catch (cloudinaryError) {
+        logger.error(`❌ Error testing Cloudinary URL: ${cloudinaryError.message}`);
+        return res.status(404).json({
+          success: false,
+          error: 'Document file is not accessible',
+          message: 'Unable to access the document file. The external storage may be temporarily unavailable.',
+          filename: document.file_name || path.basename(document.file_path)
+        });
+      }
     }
     
     // Handle local files
