@@ -417,6 +417,13 @@ export const downloadDocument = async (req, res) => {
       });
     }
     
+    // Handle Cloudinary URLs - redirect to the actual URL
+    if (fileInfo.isCloudinary) {
+      logger.info(`🔄 Redirecting to Cloudinary URL: ${fileInfo.path}`);
+      return res.redirect(302, fileInfo.path);
+    }
+    
+    // Handle local files
     const filePath = fileInfo.path;
 
     // Get file stats
@@ -429,23 +436,14 @@ export const downloadDocument = async (req, res) => {
     res.setHeader('Content-Type', mimeType);
     res.setHeader('Content-Length', stats.size);
     res.setHeader('Content-Disposition', `inline; filename="${displayFilename}"`);
-    res.setHeader('Cache-Control', 'private, no-cache');
+    res.setHeader('Cache-Control', 'public, max-age=31536000');
     
-    // Log document access
-    logger.info(`Document accessed: ${id} (${displayFilename}) by ${req.user.email}`, {
-      documentId: id,
-      fileName: displayFilename,
-      userRole: req.user.role,
-      truckLicensePlate: document.license_plate,
-      providerCompany: document.company_name
-    });
-
     // Stream the file
-    const fileStream = fs.createReadStream(filePath);
-    fileStream.pipe(res);
+    const readStream = fs.createReadStream(filePath);
+    readStream.pipe(res);
     
-    fileStream.on('error', (error) => {
-      logger.error('File stream error:', error);
+    readStream.on('error', (error) => {
+      logger.error('Error streaming file:', error);
       if (!res.headersSent) {
         res.status(500).json({
           success: false,
@@ -517,6 +515,7 @@ export const getDocumentInfo = async (req, res) => {
     const fileExists = fileInfo.exists;
     const fileSize = fileInfo.size;
     const actualFilePath = fileInfo.path;
+    const isCloudinary = fileInfo.isCloudinary;
 
     res.json({
       success: true,

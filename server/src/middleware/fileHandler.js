@@ -11,6 +11,22 @@ export const serveFileWithFallback = (req, res, next) => {
   const requestedPath = req.path;
   const filename = path.basename(requestedPath);
   
+  // Check if this is a Cloudinary URL being accessed through our server
+  if (requestedPath.includes('res.cloudinary.com') || requestedPath.includes('cloudinary.com')) {
+    logger.info(`🔄 Redirecting Cloudinary URL: ${requestedPath}`);
+    
+    // Extract the actual Cloudinary URL
+    let cloudinaryUrl = requestedPath;
+    if (requestedPath.startsWith('/https://')) {
+      cloudinaryUrl = requestedPath.substring(1); // Remove leading slash
+    } else if (requestedPath.startsWith('/')) {
+      cloudinaryUrl = 'https:/' + requestedPath; // Add https protocol
+    }
+    
+    // Redirect to the actual Cloudinary URL
+    return res.redirect(302, cloudinaryUrl);
+  }
+  
   // Determine file type and set appropriate headers
   const fileExtension = path.extname(filename).toLowerCase();
   let contentType = 'application/octet-stream';
@@ -110,8 +126,31 @@ export const ensureUploadDirectories = () => {
   });
 };
 
-// Check if file exists and return file info
+// Check if file exists and return file info (handles both local and Cloudinary URLs)
 export const getFileInfo = (filePath) => {
+  if (!filePath) {
+    return {
+      exists: false,
+      path: null,
+      size: null,
+      modified: null,
+      isCloudinary: false
+    };
+  }
+  
+  // Check if this is a Cloudinary URL
+  if (filePath.includes('res.cloudinary.com') || filePath.includes('cloudinary.com')) {
+    logger.info(`📁 Cloudinary URL detected: ${filePath}`);
+    return {
+      exists: true,
+      path: filePath,
+      size: null, // Size not available for Cloudinary URLs without API call
+      modified: null,
+      isCloudinary: true
+    };
+  }
+  
+  // Handle local files
   const filename = path.basename(filePath);
   
   const possiblePaths = [
@@ -127,7 +166,8 @@ export const getFileInfo = (filePath) => {
         exists: true,
         path: possiblePath,
         size: stats.size,
-        modified: stats.mtime
+        modified: stats.mtime,
+        isCloudinary: false
       };
     }
   }
@@ -136,6 +176,7 @@ export const getFileInfo = (filePath) => {
     exists: false,
     path: null,
     size: null,
-    modified: null
+    modified: null,
+    isCloudinary: false
   };
 };
