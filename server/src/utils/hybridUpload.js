@@ -135,35 +135,77 @@ const getDocumentStorage = () => {
   return isCloudinaryConfigured() ? cloudinaryDocumentStorage : localDocumentStorage;
 };
 
-// Upload middleware for truck images
-export const uploadTruckImages = multer({
-  storage: getImageStorage(),
-  fileFilter: imageFilter,
-  limits: {
-    fileSize: 5 * 1024 * 1024, // 5MB per image
-    files: 10 // Maximum 10 images
-  }
-}).array('images', 10);
+// Dynamic upload middleware for truck images
+export const uploadTruckImages = (req, res, next) => {
+  const upload = multer({
+    storage: getImageStorage(),
+    fileFilter: imageFilter,
+    limits: {
+      fileSize: 5 * 1024 * 1024, // 5MB per image
+      files: 10 // Maximum 10 images
+    }
+  }).array('images', 10);
+  
+  const storageType = isCloudinaryConfigured() ? 'Cloudinary' : 'Local';
+  logger.info(`🔧 Using ${storageType} storage for image upload`);
+  
+  upload(req, res, next);
+};
 
-// Upload middleware for truck documents
-export const uploadTruckDocuments = multer({
-  storage: getDocumentStorage(),
-  fileFilter: documentFilter,
-  limits: {
-    fileSize: 10 * 1024 * 1024, // 10MB per document
-    files: 4 // Maximum 4 documents
-  }
-}).array('documents', 4);
+// Dynamic upload middleware for truck documents
+export const uploadTruckDocuments = (req, res, next) => {
+  const upload = multer({
+    storage: getDocumentStorage(),
+    fileFilter: documentFilter,
+    limits: {
+      fileSize: 10 * 1024 * 1024, // 10MB per document
+      files: 4 // Maximum 4 documents
+    }
+  }).array('documents', 4);
+  
+  const storageType = isCloudinaryConfigured() ? 'Cloudinary' : 'Local';
+  logger.info(`🔧 Using ${storageType} storage for document upload`);
+  
+  upload(req, res, next);
+};
 
-// Combined upload middleware with smart storage selection
-export const uploadTruckFiles = multer({
-  storage: multer.diskStorage({
-    destination: (req, file, cb) => {
-      if (isCloudinaryConfigured()) {
-        // Use Cloudinary - this won't be called but needed for multer
-        cb(null, '/tmp');
-      } else {
-        // Use local storage
+// Get the appropriate storage for combined uploads
+const getCombinedStorage = () => {
+  if (isCloudinaryConfigured()) {
+    return new CloudinaryStorage({
+      cloudinary: cloudinary,
+      params: (req, file) => {
+        // Determine folder based on field name
+        let folder = 'trunklogistics/trucks/temp';
+        let transformation = [];
+        
+        if (file.fieldname === 'images') {
+          folder = 'trunklogistics/trucks/images';
+          transformation = [
+            { width: 1200, height: 800, crop: 'limit', quality: 'auto' },
+            { fetch_format: 'auto' }
+          ];
+        } else if ([
+          'inspectionDoc', 'registrationDoc', 'licenseDoc', 
+          'businessLicenseDoc', 'additionalDocs'
+        ].includes(file.fieldname)) {
+          folder = 'trunklogistics/trucks/documents';
+        }
+        
+        return {
+          folder: folder,
+          allowed_formats: file.fieldname === 'images' 
+            ? ['jpg', 'jpeg', 'png', 'gif', 'webp']
+            : ['pdf', 'doc', 'docx', 'jpg', 'jpeg', 'png'],
+          resource_type: 'auto',
+          transformation: transformation,
+          public_id: `${file.fieldname}_${Date.now()}_${Math.random().toString(36).substring(2, 15)}`,
+        };
+      },
+    });
+  } else {
+    return multer.diskStorage({
+      destination: (req, file, cb) => {
         let subDir = 'temp';
         if (file.fieldname === 'images') {
           subDir = 'images';
@@ -176,32 +218,46 @@ export const uploadTruckFiles = multer({
         
         const uploadPath = path.join(__dirname, '../../uploads/trucks', subDir);
         cb(null, uploadPath);
+      },
+      filename: (req, file, cb) => {
+        const uniqueName = `${uuidv4()}${path.extname(file.originalname)}`;
+        cb(null, uniqueName);
+      }
+    });
+  }
+};
+
+// Dynamic upload middleware that selects storage at request time
+export const uploadTruckFiles = (req, res, next) => {
+  // Create multer instance with current storage configuration
+  const upload = multer({
+    storage: getCombinedStorage(),
+    fileFilter: (req, file, cb) => {
+      if (file.fieldname === 'images') {
+        imageFilter(req, file, cb);
+      } else {
+        documentFilter(req, file, cb);
       }
     },
-    filename: (req, file, cb) => {
-      const uniqueName = `${uuidv4()}${path.extname(file.originalname)}`;
-      cb(null, uniqueName);
+    limits: {
+      fileSize: 10 * 1024 * 1024, // 10MB per file
+      files: 20 // Maximum total files
     }
-  }),
-  fileFilter: (req, file, cb) => {
-    if (file.fieldname === 'images') {
-      imageFilter(req, file, cb);
-    } else {
-      documentFilter(req, file, cb);
-    }
-  },
-  limits: {
-    fileSize: 10 * 1024 * 1024, // 10MB per file
-    files: 20 // Maximum total files
-  }
-}).fields([
-  { name: 'images', maxCount: 10 },
-  { name: 'inspectionDoc', maxCount: 1 },
-  { name: 'registrationDoc', maxCount: 1 },
-  { name: 'licenseDoc', maxCount: 1 },
-  { name: 'businessLicenseDoc', maxCount: 1 },
-  { name: 'additionalDocs', maxCount: 5 }
-]);
+  }).fields([
+    { name: 'images', maxCount: 10 },
+    { name: 'inspectionDoc', maxCount: 1 },
+    { name: 'registrationDoc', maxCount: 1 },
+    { name: 'licenseDoc', maxCount: 1 },
+    { name: 'businessLicenseDoc', maxCount: 1 },
+    { name: 'additionalDocs', maxCount: 5 }
+  ]);
+  
+  // Log storage type being used
+  const storageType = isCloudinaryConfigured() ? 'Cloudinary' : 'Local';
+  logger.info(`🔧 Using ${storageType} storage for file upload`);
+  
+  upload(req, res, next);
+};
 
 // Process uploaded files (works with both Cloudinary and local)
 export const processUploadedFiles = async (req) => {
