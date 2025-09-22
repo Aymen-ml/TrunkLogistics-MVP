@@ -85,10 +85,19 @@ apiClient.interceptors.response.use(
             url: error.config.url,
             status: status,
             error: data?.error || 'Authentication failed',
+            code: data?.code,
             hasToken: !!localStorage.getItem('token')
           });
           
-          // Don't automatically logout for document requests - let the component handle it
+          // Handle token expiration specifically
+          if (data?.code === 'TOKEN_EXPIRED') {
+            const expiredError = new Error('Your session has expired. Please log out and log back in to continue viewing documents.');
+            expiredError.response = error.response;
+            expiredError.isTokenExpired = true;
+            return Promise.reject(expiredError);
+          }
+          
+          // Don't automatically logout for other document auth errors
           const docError = new Error(data?.error || 'Authentication failed for document access. Please try refreshing the page.');
           docError.response = error.response;
           docError.isDocumentAuthError = true;

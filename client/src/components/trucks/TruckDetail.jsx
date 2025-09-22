@@ -841,7 +841,10 @@ const TruckDetail = () => {
                                 console.error('Error viewing document:', error);
                                 
                                 // Handle document authentication errors specifically
-                                if (error.isDocumentAuthError) {
+                                if (error.isTokenExpired) {
+                                  alert(`${error.message}\n\nClick OK to go to the login page.`);
+                                  window.location.href = '/login';
+                                } else if (error.isDocumentAuthError) {
                                   alert(`Document access failed: ${error.message}\n\nThis might be due to:\n- Session timeout\n- Insufficient permissions\n- Document access restrictions\n\nTry refreshing the page and logging in again.`);
                                 } else {
                                   alert(`Error viewing document: ${error.response?.data?.error || error.message}`);
@@ -882,7 +885,10 @@ const TruckDetail = () => {
                                 console.error('Download error:', error);
                                 
                                 // Handle document authentication errors specifically
-                                if (error.isDocumentAuthError) {
+                                if (error.isTokenExpired) {
+                                  alert(`${error.message}\n\nClick OK to go to the login page.`);
+                                  window.location.href = '/login';
+                                } else if (error.isDocumentAuthError) {
                                   alert(`Document download failed: ${error.message}\n\nThis might be due to:\n- Session timeout\n- Insufficient permissions\n- Document access restrictions\n\nTry refreshing the page and logging in again.`);
                                 } else {
                                   alert(`Failed to download the document: ${error.response?.data?.error || error.message}`);

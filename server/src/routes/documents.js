@@ -10,8 +10,8 @@ router.get('/stats', authenticate, getDocumentStats);
 router.get('/debug/filesystem', authenticate, debugFileSystem);
 router.post('/:id/verify', authenticate, verifyDocument);
 
-// Document viewing routes (no authentication required for providers to view their truck documents)
-router.get('/:id/info', getDocumentInfo);
-router.get('/:id/download', downloadDocument);
+// Document viewing routes (require authentication but with permissive provider access)
+router.get('/:id/info', authenticate, getDocumentInfo);
+router.get('/:id/download', authenticate, downloadDocument);
 
 export default router;

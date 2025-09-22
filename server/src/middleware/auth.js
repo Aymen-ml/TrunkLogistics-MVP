@@ -105,7 +105,18 @@ export const authenticate = async (req, res, next) => {
           tokenLength: token.length,
           tokenStart: token.substring(0, 20)
         });
+        
+        // For document requests, provide more helpful error handling
+        // Check if it's a token expiration issue
+        if (tokenError.message.includes('expired') || tokenError.name === 'TokenExpiredError') {
+          return res.status(401).json({
+            success: false,
+            error: 'Token expired. Please refresh your session.',
+            code: 'TOKEN_EXPIRED'
+          });
+        }
       }
+      
       logger.error('Token verification failed:', tokenError);
       return res.status(401).json({
         success: false,

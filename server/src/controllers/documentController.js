@@ -398,14 +398,45 @@ export const downloadDocument = async (req, res) => {
 
     const document = docResult.rows[0];
     
-    // No authentication required - allow all document access for truck documents
-    logger.info('Document access - no authentication required:', {
+    // Provider-specific access - providers can only access their own truck documents
+    const isAdmin = req.user.role === 'admin';
+    const isProvider = req.user.role === 'provider';
+    
+    let canView = isAdmin; // Admins can always view
+    
+    // For providers, check if they own this truck
+    if (isProvider && document.truck_provider_id) {
+      try {
+        const providerCheck = await query(`
+          SELECT pp.user_id 
+          FROM provider_profiles pp 
+          WHERE pp.id = $1 AND pp.user_id = $2
+        `, [document.truck_provider_id, req.user.id]);
+        
+        canView = providerCheck.rows.length > 0;
+      } catch (error) {
+        logger.error('Error checking provider ownership:', error);
+        canView = false;
+      }
+    }
+    
+    logger.info('Provider-specific document access check:', {
       documentId: id,
       truckLicensePlate: document.license_plate,
       providerCompany: document.company_name,
-      hasUser: !!req.user,
-      userRole: req.user?.role || 'anonymous'
+      requestingUserId: req.user.id,
+      requestingUserRole: req.user.role,
+      truckProviderId: document.truck_provider_id,
+      canView,
+      reason: isAdmin ? 'Admin access' : canView ? 'Provider owns truck' : 'Provider does not own truck'
     });
+    
+    if (!canView) {
+      return res.status(403).json({
+        success: false,
+        error: 'Access denied - you can only view documents for your own trucks'
+      });
+    }
 
     // Use the new file info helper to check if file exists
     const fileInfo = getFileInfo(document.file_path);
@@ -507,14 +538,45 @@ export const getDocumentInfo = async (req, res) => {
 
     const document = docResult.rows[0];
     
-    // No authentication required - allow all document info access for truck documents
-    logger.info('Document info access - no authentication required:', {
+    // Provider-specific access - providers can only access their own truck documents
+    const isAdmin = req.user.role === 'admin';
+    const isProvider = req.user.role === 'provider';
+    
+    let canView = isAdmin; // Admins can always view
+    
+    // For providers, check if they own this truck
+    if (isProvider && document.truck_provider_id) {
+      try {
+        const providerCheck = await query(`
+          SELECT pp.user_id 
+          FROM provider_profiles pp 
+          WHERE pp.id = $1 AND pp.user_id = $2
+        `, [document.truck_provider_id, req.user.id]);
+        
+        canView = providerCheck.rows.length > 0;
+      } catch (error) {
+        logger.error('Error checking provider ownership for document info:', error);
+        canView = false;
+      }
+    }
+    
+    logger.info('Provider-specific document info access check:', {
       documentId: id,
       truckLicensePlate: document.license_plate,
       providerCompany: document.company_name,
-      hasUser: !!req.user,
-      userRole: req.user?.role || 'anonymous'
+      requestingUserId: req.user.id,
+      requestingUserRole: req.user.role,
+      truckProviderId: document.truck_provider_id,
+      canView,
+      reason: isAdmin ? 'Admin access' : canView ? 'Provider owns truck' : 'Provider does not own truck'
     });
+    
+    if (!canView) {
+      return res.status(403).json({
+        success: false,
+        error: 'Access denied - you can only view documents for your own trucks'
+      });
+    }
 
     // Check if file exists and get file info using the helper
     const fileInfo = getFileInfo(document.file_path || '');
