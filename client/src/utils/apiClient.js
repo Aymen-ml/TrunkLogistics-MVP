@@ -17,6 +17,15 @@ const apiClient = axios.create({
   }
 });
 
+// Create a separate axios instance for public document access (no auth headers)
+const publicApiClient = axios.create({
+  baseURL: getEnv('API_URL', 'http://localhost:5000/api'),
+  timeout: 120000,
+  headers: {
+    'Content-Type': 'application/json'
+  }
+});
+
 // Helper function to check if token is expired
 const isTokenExpired = (token) => {
   if (!token) return true;
@@ -79,29 +88,14 @@ apiClient.interceptors.response.use(
         const isDocumentRequest = error.config?.url?.includes('/documents/') && 
                                  (error.config?.url?.includes('/download') || error.config?.url?.includes('/info'));
         
-        // For document requests, provide more specific error handling
+        // For document requests, since they're now public, ignore 401 errors
         if (isDocumentRequest) {
-          console.error('Document access failed:', {
+          console.warn('Document request got 401 but documents are public - this should not happen:', {
             url: error.config.url,
-            status: status,
-            error: data?.error || 'Authentication failed',
-            code: data?.code,
-            hasToken: !!localStorage.getItem('token')
+            status: status
           });
-          
-          // Handle token expiration specifically
-          if (data?.code === 'TOKEN_EXPIRED') {
-            const expiredError = new Error('Your session has expired. Please log out and log back in to continue viewing documents.');
-            expiredError.response = error.response;
-            expiredError.isTokenExpired = true;
-            return Promise.reject(expiredError);
-          }
-          
-          // Don't automatically logout for other document auth errors
-          const docError = new Error(data?.error || 'Authentication failed for document access. Please try refreshing the page.');
-          docError.response = error.response;
-          docError.isDocumentAuthError = true;
-          return Promise.reject(docError);
+          // Return the original error but don't show auth error to user
+          return Promise.reject(error);
         }
         
         // For other requests, do the normal logout flow
@@ -227,8 +221,10 @@ const api = {
     }),
     getByEntity: (entityType, entityId) => apiClient.get(`/documents/${entityType}/${entityId}`),
     getById: (id) => apiClient.get(`/documents/file/${id}`),
-    getInfo: (id) => apiClient.get(`/documents/${id}/info`),
-    download: (id) => apiClient.get(`/documents/${id}/download`, { responseType: 'blob' }),
+    getInfo: (id) => publicApiClient.get(`/documents/${id}/info`),
+    download: (id) => publicApiClient.get(`/documents/${id}/download`, { 
+      responseType: 'blob'
+    }),
     verify: (id, data) => apiClient.post(`/documents/${id}/verify`, data),
     remove: (id) => apiClient.delete(`/documents/${id}`),
     getPending: () => apiClient.get('/documents/pending'),
