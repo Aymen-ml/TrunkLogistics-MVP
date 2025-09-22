@@ -2,7 +2,7 @@ import Truck from '../models/Truck.js';
 import ProviderProfile from '../models/ProviderProfile.js';
 import { validationResult } from 'express-validator';
 import logger from '../utils/logger.js';
-import { cleanupFiles, processUploadedFiles } from '../utils/fileUpload.js';
+import { processUploadedFiles, deleteUploadedFile, getStorageInfo } from '../utils/hybridUpload.js';
 import notificationService from '../services/notificationService.js';
 
 export const createTruck = async (req, res) => {
@@ -17,7 +17,20 @@ export const createTruck = async (req, res) => {
       
       // Cleanup uploaded files on validation error
       if (req.files) {
-        cleanupFiles(req.files);
+        // Clean up files using hybrid system
+        try {
+          const processedFiles = await processUploadedFiles(req);
+          // Delete uploaded images
+          for (const image of processedFiles.images) {
+            await deleteUploadedFile(image);
+          }
+          // Delete uploaded documents
+          for (const doc of processedFiles.documents) {
+            await deleteUploadedFile(doc);
+          }
+        } catch (cleanupError) {
+          logger.error('Error cleaning up files:', cleanupError);
+        }
       }
       
       const response = {
@@ -35,7 +48,17 @@ export const createTruck = async (req, res) => {
     if (!providerProfile) {
       // Cleanup uploaded files on error
       if (req.files) {
-        cleanupFiles(req.files);
+        try {
+          const processedFiles = await processUploadedFiles(req);
+          for (const image of processedFiles.images) {
+            await deleteUploadedFile(image);
+          }
+          for (const doc of processedFiles.documents) {
+            await deleteUploadedFile(doc);
+          }
+        } catch (cleanupError) {
+          logger.error('Error cleaning up files:', cleanupError);
+        }
       }
       return res.status(400).json({
         success: false,
@@ -87,7 +110,19 @@ export const createTruck = async (req, res) => {
       } catch (fileError) {
         logger.error('File processing error:', fileError);
         // Cleanup any uploaded files
-        cleanupFiles(req.files);
+        if (req.files) {
+          try {
+            const processedFiles = await processUploadedFiles(req);
+            for (const image of processedFiles.images) {
+              await deleteUploadedFile(image);
+            }
+            for (const doc of processedFiles.documents) {
+              await deleteUploadedFile(doc);
+            }
+          } catch (cleanupError) {
+            logger.error('Error cleaning up files:', cleanupError);
+          }
+        }
         return res.status(400).json({
           success: false,
           error: 'File processing failed',
@@ -171,7 +206,17 @@ export const createTruck = async (req, res) => {
   } catch (error) {
     // Cleanup uploaded files on error
     if (req.files) {
-      cleanupFiles(req.files);
+      try {
+        const processedFiles = await processUploadedFiles(req);
+        for (const image of processedFiles.images) {
+          await deleteUploadedFile(image);
+        }
+        for (const doc of processedFiles.documents) {
+          await deleteUploadedFile(doc);
+        }
+      } catch (cleanupError) {
+        logger.error('Error cleaning up files:', cleanupError);
+      }
     }
     
     if (error.code === '23505') { // Unique violation
@@ -362,7 +407,17 @@ export const updateTruck = async (req, res) => {
         logger.error('File processing error:', fileError);
         // Cleanup any uploaded files
         if (req.files) {
-          cleanupFiles(req.files);
+          try {
+            const processedFiles = await processUploadedFiles(req);
+            for (const image of processedFiles.images) {
+              await deleteUploadedFile(image);
+            }
+            for (const doc of processedFiles.documents) {
+              await deleteUploadedFile(doc);
+            }
+          } catch (cleanupError) {
+            logger.error('Error cleaning up files:', cleanupError);
+          }
         }
         return res.status(400).json({
           success: false,
@@ -376,7 +431,17 @@ export const updateTruck = async (req, res) => {
     if (!errors.isEmpty()) {
       // Cleanup any uploaded files on validation error
       if (req.files) {
-        cleanupFiles(req.files);
+        try {
+          const processedFiles = await processUploadedFiles(req);
+          for (const image of processedFiles.images) {
+            await deleteUploadedFile(image);
+          }
+          for (const doc of processedFiles.documents) {
+            await deleteUploadedFile(doc);
+          }
+        } catch (cleanupError) {
+          logger.error('Error cleaning up files:', cleanupError);
+        }
       }
       return res.status(400).json({
         success: false,
@@ -571,6 +636,29 @@ export const deleteTruck = async (req, res) => {
     res.status(500).json({
       success: false,
       error: 'Server error while deleting truck'
+    });
+  }
+};
+
+// Get storage configuration status
+export const getStorageStatus = async (req, res) => {
+  try {
+    const storageInfo = getStorageInfo();
+    
+    res.json({
+      success: true,
+      data: {
+        ...storageInfo,
+        message: storageInfo.cloudinaryConfigured 
+          ? '✅ Cloudinary cloud storage active - files will persist across deployments'
+          : '⚠️ Using local storage fallback - files may be lost on deployment restart'
+      }
+    });
+  } catch (error) {
+    logger.error('Error getting storage status:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Failed to get storage status'
     });
   }
 };

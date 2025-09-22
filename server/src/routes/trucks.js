@@ -1,13 +1,16 @@
 import express from 'express';
-import { createTruck, getTrucks, getTruck, updateTruck, deleteTruck, getMyTrucks } from '../controllers/truckController.js';
+import { createTruck, getTrucks, getTruck, updateTruck, deleteTruck, getMyTrucks, getStorageStatus } from '../controllers/truckController.js';
 import { authenticate, requireProvider, requireProviderOrAdmin } from '../middleware/auth.js';
 import { validateTruckCreate, validateTruckSearch, validateUUID } from '../middleware/validation.js';
-import { uploadTruckFiles, processUploadedFiles } from '../utils/fileUpload.js';
+import { uploadTruckFiles } from '../utils/hybridUpload.js';
 
 const router = express.Router();
 
 // GET /api/trucks - Search trucks (authenticated)
 router.get('/', authenticate, getTrucks);
+
+// GET /api/trucks/storage-status - Get storage configuration status  
+router.get('/storage-status', authenticate, getStorageStatus);
 
 // GET /api/trucks/my - Get provider's trucks
 router.get('/my', authenticate, requireProvider, getMyTrucks);
