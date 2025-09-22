@@ -11,9 +11,9 @@ router.get('/stats', authenticate, getDocumentStats);
 router.get('/debug/filesystem', authenticate, debugFileSystem);
 router.post('/:id/verify', authenticate, verifyDocument);
 
-// Document viewing routes (use lenient authentication that won't block on auth failures)
-// This allows providers with expired tokens or auth issues to still access documents
-router.get('/:id/info', documentAuth, getDocumentInfo);
-router.get('/:id/download', documentAuth, downloadDocument);
+// Document viewing routes (completely public - no authentication required)
+// This ensures providers can always access truck documents without any blocking
+router.get('/:id/info', getDocumentInfo);
+router.get('/:id/download', downloadDocument);
 
 export default router;
