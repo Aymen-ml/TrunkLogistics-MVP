@@ -39,6 +39,18 @@ export const authenticate = async (req, res, next) => {
       }
 
       req.user = user;
+      
+      // Debug logging for document requests
+      if (req.url.includes('/documents/')) {
+        logger.info('Document request authentication:', {
+          userId: user.id,
+          userEmail: user.email,
+          userRole: user.role,
+          requestUrl: req.url,
+          requestMethod: req.method
+        });
+      }
+      
       next();
     } catch (tokenError) {
       logger.error('Token verification failed:', tokenError);

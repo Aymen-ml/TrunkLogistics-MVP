@@ -390,14 +390,37 @@ export const downloadDocument = async (req, res) => {
 
     const document = docResult.rows[0];
     
-    // Check permissions - admins can view all documents
+    // Debug logging for permission check
+    logger.info('Document access permission check:', {
+      documentId: id,
+      requestingUserId: req.user.id,
+      requestingUserRole: req.user.role,
+      requestingUserEmail: req.user.email,
+      documentOwnerId: document.owner_user_id,
+      truckLicensePlate: document.license_plate,
+      providerCompany: document.company_name
+    });
+    
+    // Check permissions - admins can view all documents, providers can view their own
     const canView = req.user.role === 'admin' || 
                    req.user.id === document.owner_user_id;
     
     if (!canView) {
+      logger.warn('Document access denied:', {
+        reason: 'User does not own this document',
+        requestingUserId: req.user.id,
+        documentOwnerId: document.owner_user_id,
+        userRole: req.user.role
+      });
+      
       return res.status(403).json({
         success: false,
-        error: 'Access denied - you can only view your own documents'
+        error: 'Access denied - you can only view your own documents',
+        debug: {
+          requestingUserId: req.user.id,
+          documentOwnerId: document.owner_user_id,
+          userRole: req.user.role
+        }
       });
     }
 
@@ -499,14 +522,37 @@ export const getDocumentInfo = async (req, res) => {
 
     const document = docResult.rows[0];
     
-    // Check permissions - admins can view all documents
+    // Debug logging for permission check
+    logger.info('Document info permission check:', {
+      documentId: id,
+      requestingUserId: req.user.id,
+      requestingUserRole: req.user.role,
+      requestingUserEmail: req.user.email,
+      documentOwnerId: document.owner_user_id,
+      truckLicensePlate: document.license_plate,
+      providerCompany: document.company_name
+    });
+    
+    // Check permissions - admins can view all documents, providers can view their own
     const canView = req.user.role === 'admin' || 
                    req.user.id === document.owner_user_id;
     
     if (!canView) {
+      logger.warn('Document info access denied:', {
+        reason: 'User does not own this document',
+        requestingUserId: req.user.id,
+        documentOwnerId: document.owner_user_id,
+        userRole: req.user.role
+      });
+      
       return res.status(403).json({
         success: false,
-        error: 'Access denied'
+        error: 'Access denied',
+        debug: {
+          requestingUserId: req.user.id,
+          documentOwnerId: document.owner_user_id,
+          userRole: req.user.role
+        }
       });
     }
 
