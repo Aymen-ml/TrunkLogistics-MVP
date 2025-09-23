@@ -459,9 +459,13 @@ export const downloadDocument = async (req, res) => {
         const testResponse = await fetch(fileInfo.path, { method: 'HEAD' });
         
         if (testResponse.ok) {
-          logger.info(`✅ Cloudinary URL accessible, redirecting: ${fileInfo.path}`);
-          return res.redirect(302, fileInfo.path);
-        } else {
+          logger.info(`✅ Cloudinary URL accessible, forcing download: ${fileInfo.path}`);
+          // Add fl_attachment parameter to force download instead of viewing
+          const downloadUrl = fileInfo.path.includes('?') 
+            ? `${fileInfo.path}&fl_attachment`
+            : `${fileInfo.path}?fl_attachment`;
+          return res.redirect(302, downloadUrl);
+          } else {
           logger.error(`❌ Cloudinary URL returned ${testResponse.status}: ${fileInfo.path}`);
           return res.status(404).json({
             success: false,
@@ -496,7 +500,7 @@ export const downloadDocument = async (req, res) => {
       
       res.setHeader('Content-Type', mimeType);
       res.setHeader('Content-Length', stats.size);
-      res.setHeader('Content-Disposition', `inline; filename="${displayFilename}"`);
+      res.setHeader('Content-Disposition', `attachment; filename="${displayFilename}"`);
       res.setHeader('Cache-Control', 'public, max-age=31536000');
       
       // Stream the file
