@@ -609,7 +609,8 @@ export const getDocumentInfo = async (req, res) => {
           file_exists: fileExists,
           file_size: fileSize,
           file_size_formatted: fileSize ? formatFileSize(fileSize) : null,
-          actual_file_path: actualFilePath
+          actual_file_path: actualFilePath,
+          is_cloudinary: isCloudinary
         }
       }
     });

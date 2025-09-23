@@ -138,12 +138,24 @@ export const getFileInfo = (filePath) => {
     };
   }
   
-  // Check if this is a Cloudinary URL
+  // Check if this is a Cloudinary URL (and normalize it)
   if (filePath.includes('res.cloudinary.com') || filePath.includes('cloudinary.com')) {
-    logger.info(`📁 Cloudinary URL detected: ${filePath}`);
+    // Normalize malformed URLs like: https://api.example.com/https://res.cloudinary.com/...
+    let cleaned = filePath;
+    const httpsIdx = filePath.indexOf('https://res.cloudinary.com');
+    const httpIdx = filePath.indexOf('http://res.cloudinary.com');
+    const startIdx = httpsIdx >= 0 ? httpsIdx : (httpIdx >= 0 ? httpIdx : -1);
+    if (startIdx >= 0) {
+      cleaned = filePath.substring(startIdx);
+    } else if (!/^https?:\/\//i.test(filePath)) {
+      // If protocol missing, add https
+      cleaned = 'https://' + filePath.replace(/^\/+/, '');
+    }
+
+    logger.info(`📁 Cloudinary URL detected: ${filePath} -> normalized: ${cleaned}`);
     return {
       exists: true,
-      path: filePath,
+      path: cleaned,
       size: null, // Size not available for Cloudinary URLs without API call
       modified: null,
       isCloudinary: true

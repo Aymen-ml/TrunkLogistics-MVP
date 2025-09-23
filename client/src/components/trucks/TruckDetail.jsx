@@ -820,20 +820,32 @@ const TruckDetail = () => {
                           <button
                             onClick={async () => {
                               try {
+                                // First fetch document info to determine storage type
+                                const infoRes = await apiClient.documents.getInfo(doc.id);
+                                const infoDoc = infoRes.data?.data?.document || {};
+
+                                // If Cloudinary, open the URL directly to avoid CORS/blob issues
+                                if (infoDoc.is_cloudinary && infoDoc.actual_file_path) {
+                                  const newWindow = window.open(infoDoc.actual_file_path, '_blank', 'noopener,noreferrer');
+                                  if (!newWindow) {
+                                    alert('Popup blocked. Please allow popups for this site to view documents.');
+                                  }
+                                  return;
+                                }
+
+                                // For local files, use the server download endpoint (blob)
                                 const response = await apiClient.documents.download(doc.id);
-                                
-                                // Create blob URL and open in new tab
-                                const blob = new Blob([response.data], { 
-                                  type: response.headers['content-type'] || 'application/pdf' 
+
+                                const blob = new Blob([response.data], {
+                                  type: response.headers['content-type'] || 'application/pdf'
                                 });
                                 const url = window.URL.createObjectURL(blob);
                                 const newWindow = window.open(url, '_blank');
-                                
-                                // Clean up the URL after a delay
+
                                 setTimeout(() => {
                                   window.URL.revokeObjectURL(url);
                                 }, 1000);
-                                
+
                                 if (!newWindow) {
                                   alert('Popup blocked. Please allow popups for this site to view documents.');
                                 }
@@ -861,18 +873,28 @@ const TruckDetail = () => {
                             onClick={async (e) => {
                               e.preventDefault();
                               try {
+                                // Determine storage type first
+                                const infoRes = await apiClient.documents.getInfo(doc.id);
+                                const infoDoc = infoRes.data?.data?.document || {};
                                 const fileName = doc.file_name || 'document.pdf';
-                                
-                                // Use the proper API endpoint with authentication
+
+                                if (infoDoc.is_cloudinary && infoDoc.actual_file_path) {
+                                  // For Cloudinary, open in new tab (user can download from there)
+                                  const newWindow = window.open(infoDoc.actual_file_path, '_blank', 'noopener,noreferrer');
+                                  if (!newWindow) {
+                                    alert('Popup blocked. Please allow popups for this site to download documents.');
+                                  }
+                                  return;
+                                }
+
+                                // For local files, download via blob
                                 const response = await apiClient.documents.download(doc.id);
-                                
-                                // Create blob from response
-                                const blob = new Blob([response.data], { 
-                                  type: response.headers['content-type'] || 'application/pdf' 
+
+                                const blob = new Blob([response.data], {
+                                  type: response.headers['content-type'] || 'application/pdf'
                                 });
                                 const downloadUrl = window.URL.createObjectURL(blob);
-                                
-                                // Create and trigger download
+
                                 const downloadLink = window.document.createElement('a');
                                 downloadLink.style.display = 'none';
                                 downloadLink.href = downloadUrl;

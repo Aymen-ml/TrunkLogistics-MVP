@@ -194,20 +194,35 @@ const DocumentVerification = () => {
 
   const handleViewDocument = async (documentId, fileName) => {
     try {
+      // First get document info to determine if it's Cloudinary-backed
+      const infoRes = await apiClient.documents.getInfo(documentId);
+      const infoDoc = infoRes.data?.data?.document || {};
+
+      if (infoDoc.is_cloudinary && infoDoc.actual_file_path) {
+        // Open Cloudinary URL directly (better for redirects/CORS)
+        const newWindow = window.open(infoDoc.actual_file_path, '_blank', 'noopener,noreferrer');
+        if (!newWindow) {
+          // Fallback: attempt direct download
+          window.location.href = infoDoc.actual_file_path;
+        }
+        return;
+      }
+
+      // Fallback for local files - fetch blob from API
       const response = await apiClient.documents.download(documentId);
-      
+
       // Create blob URL and open in new tab
-      const blob = new Blob([response.data], { 
-        type: response.headers['content-type'] || 'application/pdf' 
+      const blob = new Blob([response.data], {
+        type: response.headers['content-type'] || 'application/pdf'
       });
       const url = window.URL.createObjectURL(blob);
       const newWindow = window.open(url, '_blank');
-      
+
       // Clean up the URL after a delay
       setTimeout(() => {
         window.URL.revokeObjectURL(url);
       }, 1000);
-      
+
       if (!newWindow) {
         // Fallback: download the file if popup is blocked
         const link = document.createElement('a');

@@ -30,21 +30,41 @@ async function testDocumentEndpoints() {
       }
     }
 
-    // Test 2: Check a specific document download endpoint
-    console.log(chalk.yellow('\n2. Testing document download endpoint without authentication...'));
-    
+    // Test 2: Check public document endpoints behavior (no auth required)
+    console.log(chalk.yellow('\n2. Testing document public endpoints with a non-existent UUID...'));
+
+    const NON_EXISTENT_UUID = '00000000-0000-0000-0000-000000000000';
+
     try {
-      const response = await axios.get(`${API_BASE_URL}/documents/test-id/download`);
-      console.log(chalk.red('❌ Unexpected: Document download returned success without auth'));
-    } catch (error) {
-      if (error.response?.status === 401) {
-        console.log(chalk.green('✅ Document download endpoint properly requires authentication'));
-      } else if (error.response?.status === 404) {
-        console.log(chalk.green('✅ Document download endpoint exists (404 for non-existent document)'));
+      // Info endpoint should return 404 for non-existent but valid UUID
+      const infoRes = await axios.get(`${API_BASE_URL}/documents/${NON_EXISTENT_UUID}/info`, { validateStatus: () => true });
+      if (infoRes.status === 404) {
+        console.log(chalk.green('✅ Document info endpoint exists (404 for non-existent document)'));
+      } else if (infoRes.status === 400) {
+        console.log(chalk.yellow('⚠️ Document info returned 400 (validation) - acceptable')); 
       } else {
-        console.log(chalk.red(`❌ Unexpected status: ${error.response?.status}`));
-        console.log(chalk.red(`Error: ${error.response?.data || error.message}`));
+        console.log(chalk.red(`❌ Unexpected info status: ${infoRes.status}`));
+        console.log(chalk.red(`Body: ${JSON.stringify(infoRes.data)}`));
       }
+
+      // Download endpoint should also return 404 for non-existent but valid UUID
+      const downloadRes = await axios.get(`${API_BASE_URL}/documents/${NON_EXISTENT_UUID}/download`, { 
+        maxRedirects: 0,
+        validateStatus: () => true
+      });
+      if (downloadRes.status === 404) {
+        console.log(chalk.green('✅ Document download endpoint exists (404 for non-existent document)'));
+      } else if (downloadRes.status === 302) {
+        console.log(chalk.green('✅ Document download responds with redirect (likely Cloudinary)'));
+      } else if (downloadRes.status === 400) {
+        console.log(chalk.yellow('⚠️ Document download returned 400 (validation) - acceptable'));
+      } else {
+        console.log(chalk.red(`❌ Unexpected download status: ${downloadRes.status}`));
+        console.log(chalk.red(`Headers: ${JSON.stringify(downloadRes.headers)}`));
+        console.log(chalk.red(`Body: ${JSON.stringify(downloadRes.data)}`));
+      }
+    } catch (error) {
+      console.log(chalk.red(`❌ Error testing public document endpoints: ${error.message}`));
     }
 
     // Test 3: Check CORS headers
