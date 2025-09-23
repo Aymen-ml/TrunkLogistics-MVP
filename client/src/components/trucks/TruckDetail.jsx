@@ -15,7 +15,6 @@ import {
   AlertCircle,
   Image,
   FileText,
-  Download,
   Eye,
   User,
   MapPin,
@@ -816,7 +815,7 @@ const TruckDetail = () => {
                             </p>
                           </div>
                         </div>
-                        <div className="flex items-center space-x-2 ml-4">
+                        <div className="flex items-center ml-4">
                           <button
                             onClick={async () => {
                               try {
@@ -824,12 +823,9 @@ const TruckDetail = () => {
                                 const infoRes = await apiClient.documents.getInfo(doc.id);
                                 const infoDoc = infoRes.data?.data?.document || {};
 
-                                // If Cloudinary, open the URL directly to avoid CORS/blob issues
+                                // If Cloudinary, navigate to the URL in the same tab to avoid popup blocking
                                 if (infoDoc.is_cloudinary && infoDoc.actual_file_path) {
-                                  const newWindow = window.open(infoDoc.actual_file_path, '_blank', 'noopener,noreferrer');
-                                  if (!newWindow) {
-                                    alert('Popup blocked. Please allow popups for this site to view documents.');
-                                  }
+                                  window.location.href = infoDoc.actual_file_path;
                                   return;
                                 }
 
@@ -840,15 +836,14 @@ const TruckDetail = () => {
                                   type: response.headers['content-type'] || 'application/pdf'
                                 });
                                 const url = window.URL.createObjectURL(blob);
-                                const newWindow = window.open(url, '_blank');
-
+                                
+                                // Navigate to the blob URL in the same tab to avoid popup blocking
+                                window.location.href = url;
+                                
+                                // Clean up the blob URL after a delay
                                 setTimeout(() => {
                                   window.URL.revokeObjectURL(url);
-                                }, 1000);
-
-                                if (!newWindow) {
-                                  alert('Popup blocked. Please allow popups for this site to view documents.');
-                                }
+                                }, 5000);
                               } catch (error) {
                                 console.error('Error viewing document:', error);
                                 
@@ -867,59 +862,6 @@ const TruckDetail = () => {
                           >
                             <Eye className="h-4 w-4 mr-1" />
                             View
-                          </button>
-                          <button
-                            className="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                            onClick={async (e) => {
-                              e.preventDefault();
-                              try {
-                                // Determine storage type first
-                                const infoRes = await apiClient.documents.getInfo(doc.id);
-                                const infoDoc = infoRes.data?.data?.document || {};
-                                const fileName = doc.file_name || 'document.pdf';
-
-                                if (infoDoc.is_cloudinary && infoDoc.actual_file_path) {
-                                  // For Cloudinary, open in new tab (user can download from there)
-                                  const newWindow = window.open(infoDoc.actual_file_path, '_blank', 'noopener,noreferrer');
-                                  if (!newWindow) {
-                                    alert('Popup blocked. Please allow popups for this site to download documents.');
-                                  }
-                                  return;
-                                }
-
-                                // For local files, download via blob
-                                const response = await apiClient.documents.download(doc.id);
-
-                                const blob = new Blob([response.data], {
-                                  type: response.headers['content-type'] || 'application/pdf'
-                                });
-                                const downloadUrl = window.URL.createObjectURL(blob);
-
-                                const downloadLink = window.document.createElement('a');
-                                downloadLink.style.display = 'none';
-                                downloadLink.href = downloadUrl;
-                                downloadLink.download = fileName;
-                                window.document.body.appendChild(downloadLink);
-                                downloadLink.click();
-                                window.URL.revokeObjectURL(downloadUrl);
-                                window.document.body.removeChild(downloadLink);
-                              } catch (error) {
-                                console.error('Download error:', error);
-                                
-                                // Handle document authentication errors specifically
-                                if (error.isTokenExpired) {
-                                  alert(`${error.message}\n\nClick OK to go to the login page.`);
-                                  window.location.href = '/login';
-                                } else if (error.isDocumentAuthError) {
-                                  alert(`Document download failed: ${error.message}\n\nThis might be due to:\n- Session timeout\n- Insufficient permissions\n- Document access restrictions\n\nTry refreshing the page and logging in again.`);
-                                } else {
-                                  alert(`Failed to download the document: ${error.response?.data?.error || error.message}`);
-                                }
-                              }
-                            }}
-                          >
-                            <Download className="h-4 w-4 mr-1" />
-                            Download
                           </button>
                         </div>
                       </div>
