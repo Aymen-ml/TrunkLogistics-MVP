@@ -3,8 +3,8 @@ import path from 'path';
 import { query } from '../config/database.js';
 import logger from '../utils/logger.js';
 import { fileURLToPath } from 'url';
-import { getFileInfo } from '../utils/fileInfo.js';
-import { getMimeType } from '../utils/mimeTypes.js';
+import { getFileInfo } from '../middleware/fileHandler.js';
+// MIME type helper is defined below
 import fetch from 'node-fetch';
 import notificationService from '../services/notificationService.js';
 
@@ -373,6 +373,17 @@ export const downloadDocument = async (req, res) => {
   try {
     const { id } = req.params;
     
+    // Validate document ID
+    if (!id || id === 'undefined' || id === 'null') {
+      logger.error('Invalid document ID provided:', id);
+      return res.status(400).json({
+        success: false,
+        error: 'Invalid document ID provided'
+      });
+    }
+    
+    logger.info('Document download request:', { documentId: id });
+    
     // Get document details with enhanced joins
     const docResult = await query(`
       SELECT 
@@ -392,6 +403,7 @@ export const downloadDocument = async (req, res) => {
     `, [id]);
 
     if (docResult.rows.length === 0) {
+      logger.error('Document not found in database:', id);
       return res.status(404).json({
         success: false,
         error: 'Document not found'
@@ -399,6 +411,12 @@ export const downloadDocument = async (req, res) => {
     }
 
     const document = docResult.rows[0];
+    
+    logger.info('Document found:', {
+      id: document.id,
+      fileName: document.file_name,
+      filePath: document.file_path
+    });
     
     // Public access - no authentication or permission checks required
     logger.info('Public document access - no restrictions:', {
@@ -409,8 +427,15 @@ export const downloadDocument = async (req, res) => {
       userRole: req.user?.role || 'anonymous'
     });
 
-    // Use the new file info helper to check if file exists
-    const fileInfo = getFileInfo(document.file_path);
+    // Use the file info helper to check if file exists
+    const fileInfo = getFileInfo(document.file_path || '');
+    
+    logger.info('Document file check:', {
+      documentId: id,
+      filePath: document.file_path,
+      fileExists: fileInfo.exists,
+      isCloudinary: fileInfo.isCloudinary
+    });
     
     if (!fileInfo.exists) {
       logger.error(`❌ Document file not found: ${document.file_path}`);
@@ -461,31 +486,44 @@ export const downloadDocument = async (req, res) => {
     // Handle local files
     const filePath = fileInfo.path;
 
-    // Get file stats
-    const stats = fs.statSync(filePath);
-    
-    // Set appropriate headers
-    const displayFilename = document.file_name || `document-${id}.pdf`;
-    const mimeType = getMimeType(displayFilename);
-    
-    res.setHeader('Content-Type', mimeType);
-    res.setHeader('Content-Length', stats.size);
-    res.setHeader('Content-Disposition', `inline; filename="${displayFilename}"`);
-    res.setHeader('Cache-Control', 'public, max-age=31536000');
-    
-    // Stream the file
-    const readStream = fs.createReadStream(filePath);
-    readStream.pipe(res);
-    
-    readStream.on('error', (error) => {
-      logger.error('Error streaming file:', error);
-      if (!res.headersSent) {
-        res.status(500).json({
-          success: false,
-          error: 'Error reading document file'
-        });
-      }
-    });
+    try {
+      // Get file stats with error handling
+      const stats = fs.statSync(filePath);
+      
+      // Set appropriate headers
+      const displayFilename = document.file_name || `document-${id}.pdf`;
+      const mimeType = getMimeType(displayFilename);
+      
+      res.setHeader('Content-Type', mimeType);
+      res.setHeader('Content-Length', stats.size);
+      res.setHeader('Content-Disposition', `inline; filename="${displayFilename}"`);
+      res.setHeader('Cache-Control', 'public, max-age=31536000');
+      
+      // Stream the file
+      const readStream = fs.createReadStream(filePath);
+      readStream.pipe(res);
+      
+      readStream.on('error', (error) => {
+        logger.error('Error streaming file:', error);
+        if (!res.headersSent) {
+          res.status(500).json({
+            success: false,
+            error: 'Error reading document file'
+          });
+        }
+      });
+      
+      logger.info(`✅ Document served successfully: ${displayFilename}`);
+      
+    } catch (fsError) {
+      logger.error('File system error:', fsError);
+      return res.status(404).json({
+        success: false,
+        error: 'Document file is not accessible',
+        message: 'The document file could not be read from storage.',
+        filename: document.file_name || path.basename(document.file_path || '')
+      });
+    }
 
   } catch (error) {
     logger.error('Error downloading document:', error);
@@ -500,6 +538,17 @@ export const downloadDocument = async (req, res) => {
 export const getDocumentInfo = async (req, res) => {
   try {
     const { id } = req.params;
+    
+    // Validate document ID
+    if (!id || id === 'undefined' || id === 'null') {
+      logger.error('Invalid document ID provided for info:', id);
+      return res.status(400).json({
+        success: false,
+        error: 'Invalid document ID provided'
+      });
+    }
+    
+    logger.info('Document info request:', { documentId: id });
     
     // Get document details with extended information
     const docResult = await query(`
