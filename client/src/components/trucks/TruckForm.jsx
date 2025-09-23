@@ -134,9 +134,17 @@ const TruckForm = () => {
             );
             
             sortedDocuments.forEach(doc => {
-              const fullPath = doc.file_path.startsWith('http')
-                ? doc.file_path
-                : `${(import.meta.env.VITE_API_URL || 'http://localhost:5000').replace('/api', '')}${doc.file_path.startsWith('/') ? doc.file_path : `/${doc.file_path}`}`;
+              // Check if it's already a complete URL (Cloudinary or other external URLs)
+              const isCompleteUrl = doc.file_path.startsWith('http://') || doc.file_path.startsWith('https://') || doc.file_path.includes('res.cloudinary.com');
+              
+              let fullPath;
+              if (isCompleteUrl) {
+                // Use the URL directly for Cloudinary and other external URLs
+                fullPath = doc.file_path;
+              } else {
+                // For local files, construct the URL with API base
+                fullPath = `${(import.meta.env.VITE_API_URL || 'http://localhost:5000').replace('/api', '')}${doc.file_path.startsWith('/') ? doc.file_path : `/${doc.file_path}`}`;
+              }
               
               const docData = {
                 id: doc.id, // Add document ID for deletion
