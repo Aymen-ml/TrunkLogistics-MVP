@@ -283,7 +283,18 @@ export const getTrucks = async (req, res) => {
     });
 
     // No filtering - return all truck data to everyone
-    let filteredTrucks = result.trucks;
+    let filteredTrucks = result.trucks.map(truck => ({
+      ...truck,
+      // Ensure numeric fields are properly converted
+      capacity_weight: truck.capacity_weight ? parseFloat(truck.capacity_weight) : null,
+      capacity_volume: truck.capacity_volume ? parseFloat(truck.capacity_volume) : null,
+      price_per_km: truck.price_per_km ? parseFloat(truck.price_per_km) : null,
+      fixed_price: truck.fixed_price ? parseFloat(truck.fixed_price) : null,
+      hourly_rate: truck.hourly_rate ? parseFloat(truck.hourly_rate) : null,
+      daily_rate: truck.daily_rate ? parseFloat(truck.daily_rate) : null,
+      weekly_rate: truck.weekly_rate ? parseFloat(truck.weekly_rate) : null,
+      monthly_rate: truck.monthly_rate ? parseFloat(truck.monthly_rate) : null
+    }));
 
     res.json({
       success: true,

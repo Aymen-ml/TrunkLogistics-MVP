@@ -202,8 +202,24 @@ const BookingForm = () => {
     }
 
     // Check if cargo weight exceeds truck capacity
-    if (selectedTruck && parseFloat(formData.cargo_weight) > parseFloat(selectedTruck.capacity_weight)) {
-      newErrors.cargo_weight = `Weight exceeds truck capacity (${selectedTruck.capacity_weight} kg)`;
+    if (selectedTruck && formData.cargo_weight && selectedTruck.capacity_weight) {
+      const cargoWeight = parseFloat(formData.cargo_weight);
+      const truckCapacity = parseFloat(selectedTruck.capacity_weight);
+      
+      // Debug logging (remove in production)
+      console.log('Weight validation debug:', {
+        cargoWeight: formData.cargo_weight,
+        cargoWeightType: typeof formData.cargo_weight,
+        cargoWeightParsed: cargoWeight,
+        truckCapacity: selectedTruck.capacity_weight,
+        truckCapacityType: typeof selectedTruck.capacity_weight,
+        truckCapacityParsed: truckCapacity,
+        comparison: cargoWeight > truckCapacity
+      });
+      
+      if (!isNaN(cargoWeight) && !isNaN(truckCapacity) && cargoWeight > truckCapacity) {
+        newErrors.cargo_weight = `Weight exceeds truck capacity (${truckCapacity.toFixed(2)} kg)`;
+      }
     }
 
     setErrors(newErrors);
