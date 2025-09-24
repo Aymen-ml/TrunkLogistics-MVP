@@ -374,13 +374,25 @@ export const getTruck = async (req, res) => {
         });
       }
 
-      // Check if truck has verified documents
-      const hasVerifiedDocs = truck.documents && truck.documents.some(doc => doc.verification_status === 'approved');
-      if (!hasVerifiedDocs) {
-        logger.warn(`Customer ${req.user.email} attempted to access truck ${id} without verified documents`);
+      // Check if ALL truck documents are verified (approved)
+      const hasDocuments = truck.documents && truck.documents.length > 0;
+      const allDocsVerified = hasDocuments && truck.documents.every(doc => doc.verification_status === 'approved');
+      
+      if (!hasDocuments) {
+        logger.warn(`Customer ${req.user.email} attempted to access truck ${id} with no documents`);
         return res.status(403).json({
           success: false,
-          error: 'This truck is not available for viewing. Only trucks with verified documents can be viewed by customers.'
+          error: 'This truck is not available for viewing. Trucks must have documents uploaded and verified to be viewed by customers.'
+        });
+      }
+      
+      if (!allDocsVerified) {
+        const pendingDocs = truck.documents.filter(doc => doc.verification_status !== 'approved').length;
+        logger.warn(`Customer ${req.user.email} attempted to access truck ${id} with ${pendingDocs} unverified documents`);
+        return res.status(403).json({
+          success: false,
+          error: 'This truck is not available for viewing. All truck documents must be verified by admin before customers can view the truck.',
+          pendingDocuments: pendingDocs
         });
       }
       logger.info(`Customer ${req.user.email} accessing truck with verified docs: ${truck.license_plate}`);

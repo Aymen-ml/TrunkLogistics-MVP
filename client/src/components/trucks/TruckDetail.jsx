@@ -298,7 +298,7 @@ const TruckDetail = () => {
             <div className="mt-4 p-4 bg-orange-50 border border-orange-200 rounded-md">
               <div className="flex">
                 <div className="flex-shrink-0">
-                  <CheckCircle className="h-5 w-5 text-orange-400" />
+                  <FileText className="h-5 w-5 text-orange-400" />
                 </div>
                 <div className="ml-3">
                   <h3 className="text-sm font-medium text-orange-800">
@@ -306,7 +306,15 @@ const TruckDetail = () => {
                   </h3>
                   <div className="mt-2 text-sm text-orange-700">
                     <p>This truck is not available for viewing.</p>
-                    <p className="mt-1">Only trucks with verified documents can be viewed by customers.</p>
+                    <p className="mt-1">
+                      {error.details?.pendingDocuments 
+                        ? `${error.details.pendingDocuments} document(s) are still pending admin verification.`
+                        : 'All truck documents must be verified by admin before customers can view the truck.'
+                      }
+                    </p>
+                    <p className="mt-1 font-medium">
+                      Only trucks with ALL documents verified are visible to customers.
+                    </p>
                   </div>
                 </div>
               </div>
