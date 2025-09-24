@@ -235,13 +235,13 @@ export const getDocumentStats = async (req, res) => {
     const result = await query(`
       SELECT 
         COUNT(*) as total_documents,
-        COUNT(CASE WHEN verification_status = 'pending' THEN 1 END) as pending_documents,
-        COUNT(CASE WHEN verification_status = 'approved' THEN 1 END) as approved_documents,
-        COUNT(CASE WHEN verification_status = 'rejected' THEN 1 END) as rejected_documents,
-        COUNT(DISTINCT entity_id) as trucks_with_documents,
+        COUNT(CASE WHEN d.verification_status = 'pending' THEN 1 END) as pending_documents,
+        COUNT(CASE WHEN d.verification_status = 'approved' THEN 1 END) as approved_documents,
+        COUNT(CASE WHEN d.verification_status = 'rejected' THEN 1 END) as rejected_documents,
+        COUNT(DISTINCT d.entity_id) as trucks_with_documents,
         COUNT(DISTINCT t.provider_id) as providers_with_documents
       FROM documents d
-      LEFT JOIN trucks t ON d.entity_id = t.id AND d.entity_type = 'truck'
+      INNER JOIN trucks t ON d.entity_id = t.id AND d.entity_type = 'truck'
       WHERE d.entity_type = 'truck'
     `);
 

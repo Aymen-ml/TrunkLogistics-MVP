@@ -781,15 +781,24 @@ export const getAllTrucksForAdmin = async (req, res) => {
              u.email,
              pp.is_verified as provider_verified,
              u.is_active as user_active,
-             COUNT(d.id) as total_documents,
-             COUNT(CASE WHEN d.verification_status = 'approved' THEN 1 END) as approved_documents,
-             COUNT(CASE WHEN d.verification_status = 'pending' THEN 1 END) as pending_documents,
-             COUNT(CASE WHEN d.verification_status = 'rejected' THEN 1 END) as rejected_documents
+             COALESCE(doc_stats.total_documents, 0) as total_documents,
+             COALESCE(doc_stats.approved_documents, 0) as approved_documents,
+             COALESCE(doc_stats.pending_documents, 0) as pending_documents,
+             COALESCE(doc_stats.rejected_documents, 0) as rejected_documents
       FROM trucks t
       JOIN provider_profiles pp ON t.provider_id = pp.id
       JOIN users u ON pp.user_id = u.id
-      LEFT JOIN documents d ON d.entity_id = t.id AND d.entity_type = 'truck'
-      GROUP BY t.id, pp.id, u.id
+      LEFT JOIN (
+        SELECT 
+          entity_id,
+          COUNT(*) as total_documents,
+          COUNT(CASE WHEN verification_status = 'approved' THEN 1 END) as approved_documents,
+          COUNT(CASE WHEN verification_status = 'pending' THEN 1 END) as pending_documents,
+          COUNT(CASE WHEN verification_status = 'rejected' THEN 1 END) as rejected_documents
+        FROM documents 
+        WHERE entity_type = 'truck'
+        GROUP BY entity_id
+      ) doc_stats ON doc_stats.entity_id = t.id
       ORDER BY t.created_at DESC
     `);
 
