@@ -316,7 +316,7 @@ export const getTruck = async (req, res) => {
     }
 
     const { id } = req.params;
-    logger.info(`Getting truck details for ID: ${id} by user role: ${req.user.role}`);
+    logger.info(`Getting truck details for ID: ${id} by user role: ${req.user.role}, email: ${req.user.email}`);
     
     let truck;
     try {
@@ -349,6 +349,53 @@ export const getTruck = async (req, res) => {
       });
     }
 
+    // AUTHORIZATION CHECKS
+    if (req.user.role === 'provider') {
+      // Providers can only see their own trucks
+      const providerProfile = await ProviderProfile.findByUserId(req.user.id);
+      if (!providerProfile || truck.provider_id !== providerProfile.id) {
+        logger.warn(`Provider ${req.user.email} attempted to access truck ${id} owned by provider ${truck.provider_id}`);
+        return res.status(403).json({
+          success: false,
+          error: 'Access denied. You can only view your own trucks.'
+        });
+      }
+      logger.info(`Provider ${req.user.email} accessing their own truck: ${truck.license_plate}`);
+    } else if (req.user.role === 'customer') {
+      // Customers can only see trucks with verified documents AND must have verified email
+      
+      // Check if customer has verified email
+      if (!req.user.email_verified) {
+        logger.warn(`Customer ${req.user.email} attempted to access truck details without verified email`);
+        return res.status(403).json({
+          success: false,
+          error: 'Email verification required. Please verify your email address to view truck details.',
+          requiresEmailVerification: true
+        });
+      }
+
+      // Check if truck has verified documents
+      const hasVerifiedDocs = truck.documents && truck.documents.some(doc => doc.verification_status === 'approved');
+      if (!hasVerifiedDocs) {
+        logger.warn(`Customer ${req.user.email} attempted to access truck ${id} without verified documents`);
+        return res.status(403).json({
+          success: false,
+          error: 'This truck is not available for viewing. Only trucks with verified documents can be viewed by customers.'
+        });
+      }
+      logger.info(`Customer ${req.user.email} accessing truck with verified docs: ${truck.license_plate}`);
+    } else if (req.user.role === 'admin') {
+      // Admins can see all trucks
+      logger.info(`Admin ${req.user.email} accessing truck: ${truck.license_plate}`);
+    } else {
+      // Unknown role
+      logger.warn(`Unknown user role ${req.user.role} attempted to access truck ${id}`);
+      return res.status(403).json({
+        success: false,
+        error: 'Access denied. Invalid user role.'
+      });
+    }
+
     logger.info(`Truck found: ${truck.license_plate}, getting drivers...`);
     
     // Driver information is stored directly in the truck record
@@ -364,7 +411,7 @@ export const getTruck = async (req, res) => {
     }
     logger.info(`Found driver info for truck ${id}: ${drivers.length > 0 ? 'Yes' : 'No'}`);
 
-    // Return complete truck data without any filtering
+    // Return complete truck data
     const response = {
       success: true,
       data: {

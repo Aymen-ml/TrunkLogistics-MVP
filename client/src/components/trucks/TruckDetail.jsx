@@ -63,12 +63,24 @@ const TruckDetail = () => {
         message: error.message
       });
       
-      // Set error state with detailed information
-      setError({
-        message: error.response?.data?.error || error.message || 'Failed to load truck details',
-        status: error.response?.status,
-        details: error.response?.data
-      });
+      // Handle specific authorization errors
+      if (error.response?.status === 403) {
+        const errorData = error.response.data;
+        setError({
+          message: errorData.error || 'Access denied',
+          status: error.response.status,
+          details: errorData,
+          isAuthError: true,
+          requiresEmailVerification: errorData.requiresEmailVerification
+        });
+      } else {
+        // Set error state with detailed information
+        setError({
+          message: error.response?.data?.error || error.message || 'Failed to load truck details',
+          status: error.response?.status,
+          details: error.response?.data
+        });
+      }
       setTruck(null);
     } finally {
       setLoading(false);
@@ -227,17 +239,87 @@ const TruckDetail = () => {
         <div className="text-center max-w-md">
           <AlertCircle className="h-12 w-12 text-red-500 mx-auto mb-4" />
           <h2 className="text-2xl font-bold text-gray-900">
-            {error ? 'Error Loading Truck' : 'Truck not found'}
+            {error?.isAuthError ? 'Access Denied' : error ? 'Error Loading Truck' : 'Truck not found'}
           </h2>
           <p className="mt-2 text-gray-600">
             {error ? error.message : "The truck you're looking for doesn't exist."}
           </p>
-          {error && error.status && (
+          
+          {/* Special handling for email verification requirement */}
+          {error?.requiresEmailVerification && (
+            <div className="mt-4 p-4 bg-yellow-50 border border-yellow-200 rounded-md">
+              <div className="flex">
+                <div className="flex-shrink-0">
+                  <Mail className="h-5 w-5 text-yellow-400" />
+                </div>
+                <div className="ml-3">
+                  <h3 className="text-sm font-medium text-yellow-800">
+                    Email Verification Required
+                  </h3>
+                  <div className="mt-2 text-sm text-yellow-700">
+                    <p>To view truck details, you need to verify your email address.</p>
+                    <p className="mt-1">Check your inbox for a verification email or request a new one.</p>
+                  </div>
+                  <div className="mt-3">
+                    <Link
+                      to="/profile"
+                      className="text-sm font-medium text-yellow-800 underline hover:text-yellow-900"
+                    >
+                      Go to Profile to Verify Email →
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Special handling for provider access denied */}
+          {error?.isAuthError && user?.role === 'provider' && !error?.requiresEmailVerification && (
+            <div className="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-md">
+              <div className="flex">
+                <div className="flex-shrink-0">
+                  <User className="h-5 w-5 text-blue-400" />
+                </div>
+                <div className="ml-3">
+                  <h3 className="text-sm font-medium text-blue-800">
+                    Provider Access Restriction
+                  </h3>
+                  <div className="mt-2 text-sm text-blue-700">
+                    <p>You can only view details of trucks that you own.</p>
+                    <p className="mt-1">This truck belongs to another provider.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Special handling for customer access denied */}
+          {error?.isAuthError && user?.role === 'customer' && !error?.requiresEmailVerification && (
+            <div className="mt-4 p-4 bg-orange-50 border border-orange-200 rounded-md">
+              <div className="flex">
+                <div className="flex-shrink-0">
+                  <CheckCircle className="h-5 w-5 text-orange-400" />
+                </div>
+                <div className="ml-3">
+                  <h3 className="text-sm font-medium text-orange-800">
+                    Document Verification Required
+                  </h3>
+                  <div className="mt-2 text-sm text-orange-700">
+                    <p>This truck is not available for viewing.</p>
+                    <p className="mt-1">Only trucks with verified documents can be viewed by customers.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {error && error.status && !error.isAuthError && (
             <p className="mt-1 text-sm text-gray-500">
               Error {error.status}: {error.details?.error || 'Unknown error'}
             </p>
           )}
-          {error && (
+          
+          {error && !error.isAuthError && (
             <div className="mt-4 p-3 bg-gray-100 rounded-md text-left">
               <p className="text-xs text-gray-600">Debug Info:</p>
               <p className="text-xs text-gray-800">Truck ID: {id}</p>
@@ -245,6 +327,7 @@ const TruckDetail = () => {
               <p className="text-xs text-gray-800">Status: {error.status}</p>
             </div>
           )}
+          
           <Link
             to={user?.role === 'customer' ? '/find-trucks' : '/trucks'}
             className="mt-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
