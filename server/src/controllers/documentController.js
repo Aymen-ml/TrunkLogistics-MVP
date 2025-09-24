@@ -104,7 +104,7 @@ export const getAllDocuments = async (req, res) => {
         verifier.first_name as verified_by_first_name,
         verifier.last_name as verified_by_last_name
       FROM documents d
-      LEFT JOIN trucks t ON d.entity_id = t.id AND d.entity_type = 'truck'
+      INNER JOIN trucks t ON d.entity_id = t.id AND d.entity_type = 'truck'
       LEFT JOIN provider_profiles pp ON t.provider_id = pp.id
       LEFT JOIN users u ON pp.user_id = u.id
       LEFT JOIN users verifier ON d.verified_by = verifier.id
