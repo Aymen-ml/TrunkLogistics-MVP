@@ -93,7 +93,7 @@ const BookingForm = () => {
       }));
     }
 
-    // Trigger price calculation when relevant fields change
+    // Trigger price calculation when relevant fields change (skip for fixed-price trucks)
     if (name === 'truck_id') {
       const selectedTruckForPrice = trucks.find(t => t.id === value);
       if (selectedTruckForPrice?.service_type === 'rental') {
@@ -107,7 +107,8 @@ const BookingForm = () => {
       const updatedFormData = { ...formData, [name]: value };
       if (updatedFormData.truck_id && updatedFormData.pickup_city && updatedFormData.destination_city) {
         const truckForPrice = trucks.find(t => t.id === updatedFormData.truck_id);
-        if (truckForPrice?.service_type === 'transport') {
+        // Only calculate price for per-km trucks, skip fixed-price trucks
+        if (truckForPrice?.service_type === 'transport' && truckForPrice?.pricing_type === 'per_km') {
           calculatePriceEstimate(updatedFormData.truck_id, updatedFormData.pickup_city, updatedFormData.destination_city);
         }
       }
@@ -129,7 +130,8 @@ const BookingForm = () => {
       newErrors.truck_id = 'Please select a truck';
     }
 
-    if (!priceEstimate) {
+    // Skip price estimate validation for fixed-price trucks
+    if (selectedTruck?.pricing_type !== 'fixed' && !priceEstimate) {
       newErrors.general = 'Please wait for price calculation to complete';
       return false;
     }
@@ -289,11 +291,11 @@ const BookingForm = () => {
     try {
       setLoading(true);
       
-      if (!priceEstimate || !priceEstimate.total_price) {
+      // Skip price estimate validation for fixed-price trucks
+      if (selectedTruck?.pricing_type !== 'fixed' && (!priceEstimate || !priceEstimate.total_price)) {
         throw new Error('Price estimate is required. Please wait for price calculation.');
       }
 
-      // Log the price estimate for debugging
       // Skip distance validation for rental equipment and fixed-price trucks
       if (selectedTruck?.service_type !== 'rental' && selectedTruck?.pricing_type === 'per_km' && (!priceEstimate || !priceEstimate.distance)) {
         throw new Error('Invalid price estimate. Please recalculate the price.');
@@ -303,8 +305,8 @@ const BookingForm = () => {
       if (selectedTruck?.service_type === 'rental') {
         totalPrice = priceEstimate.total_price;
       } else if (selectedTruck?.pricing_type === 'fixed') {
-        // For fixed-price trucks, use the total_price directly from the estimate
-        totalPrice = priceEstimate.total_price;
+        // For fixed-price trucks, use the fixed price directly from truck data
+        totalPrice = parseFloat(selectedTruck.fixed_price);
       } else {
         // For per-km pricing, calculate based on distance
         totalPrice = parseFloat(priceEstimate.price_per_km) * priceEstimate.distance;
@@ -847,104 +849,106 @@ const BookingForm = () => {
                     </div>
                   </div>
 
-                  {/* Price Estimate Section */}
-                  <div className="pt-4 border-t border-gray-200">
-                    <div className="flex justify-between items-center">
-                      <span className="font-medium text-gray-900">Price Estimate:</span>
-                      {loadingPrice ? (
-                        <div className="flex items-center">
-                          <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600 mr-2"></div>
-                          <span className="text-sm text-gray-500">Calculating...</span>
-                        </div>
-                      ) : priceEstimate ? (
-                        <span className="font-bold text-green-600">
-                          ${priceEstimate.total_price?.toLocaleString()}
-                        </span>
-                      ) : selectedTruck?.service_type === 'rental' ? (
-                        formData.rental_start_datetime && formData.rental_end_datetime ? (
-                          <span className="text-sm text-gray-500">Select equipment to see price</span>
+                  {/* Price Estimate Section - Hide for fixed-price trucks */}
+                  {selectedTruck?.pricing_type !== 'fixed' && (
+                    <div className="pt-4 border-t border-gray-200">
+                      <div className="flex justify-between items-center">
+                        <span className="font-medium text-gray-900">Price Estimate:</span>
+                        {loadingPrice ? (
+                          <div className="flex items-center">
+                            <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600 mr-2"></div>
+                            <span className="text-sm text-gray-500">Calculating...</span>
+                          </div>
+                        ) : priceEstimate ? (
+                          <span className="font-bold text-green-600">
+                            ${priceEstimate.total_price?.toLocaleString()}
+                          </span>
+                        ) : selectedTruck?.service_type === 'rental' ? (
+                          formData.rental_start_datetime && formData.rental_end_datetime ? (
+                            <span className="text-sm text-gray-500">Select equipment to see price</span>
+                          ) : (
+                            <span className="text-sm text-gray-500">Enter rental dates to calculate</span>
+                          )
                         ) : (
-                          <span className="text-sm text-gray-500">Enter rental dates to calculate</span>
-                        )
-                      ) : (
-                        formData.pickup_city && formData.destination_city ? (
-                          <span className="text-sm text-gray-500">Select truck to see price</span>
-                        ) : (
-                          <span className="text-sm text-gray-500">Enter cities to calculate</span>
-                        )
-                      )}
-                    </div>
-                    
-                    {priceEstimate && (
-                      <div className="mt-3 space-y-2 text-xs text-gray-600">
-                        {selectedTruck?.service_type === 'rental' ? (
-                          <>
-                            <div className="flex justify-between">
-                              <span>Duration:</span>
-                              <span>{priceEstimate.duration_hours || 0} hours</span>
-                            </div>
-                            <div className="flex justify-between">
-                              <span>Days:</span>
-                              <span>{priceEstimate.duration_days || 0} days</span>
-                            </div>
-                            {priceEstimate.breakdown && (
-                              <div className="mt-2 space-y-1">
-                                {priceEstimate.breakdown.hours && (
-                                  <div className="flex justify-between text-xs">
-                                    <span>{priceEstimate.breakdown.hours}h × ${priceEstimate.breakdown.hourly_rate}/hr</span>
-                                  </div>
-                                )}
-                                {priceEstimate.breakdown.days && (
-                                  <div className="flex justify-between text-xs">
-                                    <span>{priceEstimate.breakdown.days}d × ${priceEstimate.breakdown.daily_rate}/day</span>
-                                  </div>
-                                )}
-                                {priceEstimate.breakdown.weeks && (
-                                  <div className="flex justify-between text-xs">
-                                    <span>{priceEstimate.breakdown.weeks}w × ${priceEstimate.breakdown.weekly_rate}/week</span>
-                                  </div>
-                                )}
-                                {priceEstimate.breakdown.months && (
-                                  <div className="flex justify-between text-xs">
-                                    <span>{priceEstimate.breakdown.months}m × ${priceEstimate.breakdown.monthly_rate}/month</span>
-                                  </div>
-                                )}
-                              </div>
-                            )}
-                          </>
-                        ) : (
-                          <>
-                            {selectedTruck?.pricing_type === 'per_km' && priceEstimate.distance && (
-                              <>
-                                <div className="flex justify-between">
-                                  <span>Distance:</span>
-                                  <span>{priceEstimate.distance} km</span>
-                                </div>
-                                <div className="flex justify-between">
-                                  <span>Duration:</span>
-                                  <span>{Math.round(priceEstimate.duration / 60)} hours</span>
-                                </div>
-                              </>
-                            )}
-                            <div className="flex justify-between">
-                              <span>Rate:</span>
-                              <span>
-                                {selectedTruck?.pricing_type === 'per_km' 
-                                  ? `${selectedTruck.price_per_km}/km`
-                                  : 'Fixed price'
-                                }
-                              </span>
-                            </div>
-                            {priceEstimate.estimated && selectedTruck?.pricing_type === 'per_km' && (
-                              <p className="text-xs text-orange-600 mt-2">
-                                * Estimated distance (Google Maps not configured)
-                              </p>
-                            )}
-                          </>
+                          formData.pickup_city && formData.destination_city ? (
+                            <span className="text-sm text-gray-500">Select truck to see price</span>
+                          ) : (
+                            <span className="text-sm text-gray-500">Enter cities to calculate</span>
+                          )
                         )}
                       </div>
-                    )}
-                  </div>
+                      
+                      {priceEstimate && (
+                        <div className="mt-3 space-y-2 text-xs text-gray-600">
+                          {selectedTruck?.service_type === 'rental' ? (
+                            <>
+                              <div className="flex justify-between">
+                                <span>Duration:</span>
+                                <span>{priceEstimate.duration_hours || 0} hours</span>
+                              </div>
+                              <div className="flex justify-between">
+                                <span>Days:</span>
+                                <span>{priceEstimate.duration_days || 0} days</span>
+                              </div>
+                              {priceEstimate.breakdown && (
+                                <div className="mt-2 space-y-1">
+                                  {priceEstimate.breakdown.hours && (
+                                    <div className="flex justify-between text-xs">
+                                      <span>{priceEstimate.breakdown.hours}h × ${priceEstimate.breakdown.hourly_rate}/hr</span>
+                                    </div>
+                                  )}
+                                  {priceEstimate.breakdown.days && (
+                                    <div className="flex justify-between text-xs">
+                                      <span>{priceEstimate.breakdown.days}d × ${priceEstimate.breakdown.daily_rate}/day</span>
+                                    </div>
+                                  )}
+                                  {priceEstimate.breakdown.weeks && (
+                                    <div className="flex justify-between text-xs">
+                                      <span>{priceEstimate.breakdown.weeks}w × ${priceEstimate.breakdown.weekly_rate}/week</span>
+                                    </div>
+                                  )}
+                                  {priceEstimate.breakdown.months && (
+                                    <div className="flex justify-between text-xs">
+                                      <span>{priceEstimate.breakdown.months}m × ${priceEstimate.breakdown.monthly_rate}/month</span>
+                                    </div>
+                                  )}
+                                </div>
+                              )}
+                            </>
+                          ) : (
+                            <>
+                              {selectedTruck?.pricing_type === 'per_km' && priceEstimate.distance && (
+                                <>
+                                  <div className="flex justify-between">
+                                    <span>Distance:</span>
+                                    <span>{priceEstimate.distance} km</span>
+                                  </div>
+                                  <div className="flex justify-between">
+                                    <span>Duration:</span>
+                                    <span>{Math.round(priceEstimate.duration / 60)} hours</span>
+                                  </div>
+                                </>
+                              )}
+                              <div className="flex justify-between">
+                                <span>Rate:</span>
+                                <span>
+                                  {selectedTruck?.pricing_type === 'per_km' 
+                                    ? `${selectedTruck.price_per_km}/km`
+                                    : 'Fixed price'
+                                  }
+                                </span>
+                              </div>
+                              {priceEstimate.estimated && selectedTruck?.pricing_type === 'per_km' && (
+                                <p className="text-xs text-orange-600 mt-2">
+                                  * Estimated distance (Google Maps not configured)
+                                </p>
+                              )}
+                            </>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  )}
                 </div>
               ) : (
                 <div className="text-center py-8">
