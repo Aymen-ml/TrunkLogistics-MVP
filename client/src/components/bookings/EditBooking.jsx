@@ -98,8 +98,23 @@ const EditBooking = () => {
       newErrors.cargo_weight = 'Cargo weight is required';
     } else if (isNaN(weight) || weight <= 0) {
       newErrors.cargo_weight = 'Cargo weight must be a positive number';
-    } else if (truck && weight > truck.capacity_weight) {
-      newErrors.cargo_weight = `Cargo weight (${weight} kg) exceeds truck capacity (${truck.capacity_weight} kg)`;
+    } else if (truck && truck.capacity_weight) {
+      const truckCapacity = parseFloat(truck.capacity_weight);
+      
+      // Debug logging (remove in production)
+      console.log('EditBooking weight validation debug:', {
+        cargoWeight: formData.cargo_weight,
+        cargoWeightType: typeof formData.cargo_weight,
+        cargoWeightParsed: weight,
+        truckCapacity: truck.capacity_weight,
+        truckCapacityType: typeof truck.capacity_weight,
+        truckCapacityParsed: truckCapacity,
+        comparison: weight > truckCapacity
+      });
+      
+      if (!isNaN(weight) && !isNaN(truckCapacity) && weight > truckCapacity) {
+        newErrors.cargo_weight = `Cargo weight (${weight} kg) exceeds truck capacity (${truckCapacity.toFixed(2)} kg)`;
+      }
     }
     
     setErrors(newErrors);

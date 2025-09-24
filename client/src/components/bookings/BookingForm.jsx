@@ -207,14 +207,15 @@ const BookingForm = () => {
       const truckCapacity = parseFloat(selectedTruck.capacity_weight);
       
       // Debug logging (remove in production)
-      console.log('Weight validation debug:', {
+      console.log('Weight validation debug v2.1:', {
         cargoWeight: formData.cargo_weight,
         cargoWeightType: typeof formData.cargo_weight,
         cargoWeightParsed: cargoWeight,
         truckCapacity: selectedTruck.capacity_weight,
         truckCapacityType: typeof selectedTruck.capacity_weight,
         truckCapacityParsed: truckCapacity,
-        comparison: cargoWeight > truckCapacity
+        comparison: cargoWeight > truckCapacity,
+        timestamp: new Date().toISOString()
       });
       
       if (!isNaN(cargoWeight) && !isNaN(truckCapacity) && cargoWeight > truckCapacity) {
