@@ -326,12 +326,34 @@ class Truck {
       }), id]
     );
     
+    // Delete all documents associated with this truck
+    try {
+      const documentsResult = await query(
+        'DELETE FROM documents WHERE entity_type = $1 AND entity_id = $2 RETURNING *',
+        ['truck', id]
+      );
+      
+      const deletedDocuments = documentsResult.rows;
+      if (deletedDocuments.length > 0) {
+        logger.info(`✅ Deleted ${deletedDocuments.length} documents for truck ${id} (${truck.license_plate})`);
+        
+        // Log each deleted document for audit purposes
+        deletedDocuments.forEach(doc => {
+          logger.info(`   - Deleted document: ${doc.file_name} (${doc.document_type}) - ID: ${doc.id}`);
+        });
+      }
+    } catch (error) {
+      logger.error(`❌ Error deleting documents for truck ${id}:`, error);
+      // Continue with truck deletion even if document deletion fails
+    }
+    
     // Now delete the truck
     const result = await query(
       'DELETE FROM trucks WHERE id = $1 RETURNING *',
       [id]
     );
 
+    logger.info(`✅ Successfully deleted truck ${id} (${truck.license_plate}) and all associated documents`);
     return result.rows[0];
   }
 
