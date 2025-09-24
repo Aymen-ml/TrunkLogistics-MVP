@@ -202,7 +202,7 @@ const BookingForm = () => {
     }
 
     // Check if cargo weight exceeds truck capacity
-    if (selectedTruck && formData.cargo_weight > selectedTruck.capacity_weight) {
+    if (selectedTruck && parseFloat(formData.cargo_weight) > parseFloat(selectedTruck.capacity_weight)) {
       newErrors.cargo_weight = `Weight exceeds truck capacity (${selectedTruck.capacity_weight} kg)`;
     }
 
