@@ -136,35 +136,85 @@ export const createBooking = async (req, res) => {
         });
       }
     } else {
-      // For transport trucks, calculate price based on distance
-      try {
-        distanceInfo = await distanceService.calculateDistance(pickupCity, destinationCity);
-        if (distanceInfo && distanceInfo.distance) {
-          estimatedDistance = distanceInfo.distance;
-          totalPrice = truck.price_per_km * estimatedDistance;
-          
-          // Validate price calculation
-          if (!totalPrice || isNaN(totalPrice)) {
-            logger.warn('Invalid price calculation, using default price', {
-              pricePerKm: truck.price_per_km,
-              estimatedDistance,
-              calculatedPrice: totalPrice
-            });
-            totalPrice = 200; // Fallback to default
-            estimatedDistance = null; // Reset distance since calculation failed
-          }
-        } else {
-          logger.warn('Distance calculation returned invalid data, using default price', {
-            pickupCity,
-            destinationCity,
-            distanceInfo
+      // For transport trucks, handle pricing based on truck's pricing type
+      if (truck.pricing_type === 'fixed') {
+        // Fixed price trucks - use the fixed price directly, no distance calculation needed
+        totalPrice = parseFloat(truck.fixed_price);
+        estimatedDistance = null; // Distance not needed for fixed pricing
+        
+        logger.info('Using fixed price for booking', {
+          truckId: truck.id,
+          licensePlate: truck.license_plate,
+          fixedPrice: totalPrice,
+          pricingType: truck.pricing_type
+        });
+        
+        // Validate fixed price
+        if (!totalPrice || isNaN(totalPrice) || totalPrice <= 0) {
+          logger.error('Invalid fixed price for truck', {
+            truckId: truck.id,
+            fixedPrice: truck.fixed_price,
+            parsedPrice: totalPrice
+          });
+          return res.status(400).json({
+            success: false,
+            error: 'This truck has an invalid fixed price configuration. Please contact the provider.'
           });
         }
-      } catch (error) {
-        logger.warn('Distance calculation failed, using default price of $200', {
-          error: error.message,
-          pickupCity,
-          destinationCity
+      } else if (truck.pricing_type === 'per_km') {
+        // Per-km pricing trucks - calculate based on distance
+        try {
+          distanceInfo = await distanceService.calculateDistance(pickupCity, destinationCity);
+          if (distanceInfo && distanceInfo.distance) {
+            estimatedDistance = distanceInfo.distance;
+            totalPrice = parseFloat(truck.price_per_km) * estimatedDistance;
+            
+            logger.info('Calculated per-km price for booking', {
+              truckId: truck.id,
+              licensePlate: truck.license_plate,
+              pricePerKm: truck.price_per_km,
+              distance: estimatedDistance,
+              totalPrice: totalPrice,
+              pricingType: truck.pricing_type
+            });
+            
+            // Validate price calculation
+            if (!totalPrice || isNaN(totalPrice) || totalPrice <= 0) {
+              logger.warn('Invalid per-km price calculation, using default price', {
+                pricePerKm: truck.price_per_km,
+                estimatedDistance,
+                calculatedPrice: totalPrice
+              });
+              totalPrice = 200; // Fallback to default
+              estimatedDistance = null; // Reset distance since calculation failed
+            }
+          } else {
+            logger.warn('Distance calculation returned invalid data, using default price', {
+              pickupCity,
+              destinationCity,
+              distanceInfo
+            });
+            totalPrice = 200; // Fallback to default
+          }
+        } catch (error) {
+          logger.warn('Distance calculation failed for per-km pricing, using default price', {
+            error: error.message,
+            pickupCity,
+            destinationCity,
+            truckId: truck.id,
+            pricingType: truck.pricing_type
+          });
+          totalPrice = 200; // Fallback to default
+        }
+      } else {
+        // Unknown pricing type
+        logger.error('Unknown pricing type for truck', {
+          truckId: truck.id,
+          pricingType: truck.pricing_type
+        });
+        return res.status(400).json({
+          success: false,
+          error: 'This truck has an invalid pricing configuration. Please contact the provider.'
         });
       }
     }
@@ -844,22 +894,62 @@ export const getPriceEstimate = async (req, res) => {
       });
     }
 
-    // Calculate distance and price
-    const distanceInfo = await distanceService.calculateDistance(pickupCity, destinationCity);
-    const pricePerKm = truck.price_per_km;
-    const totalPrice = distanceInfo.distance * pricePerKm;
-
-    res.status(200).json({
-      success: true,
-      data: {
-        distance: distanceInfo.distance,
-        duration: distanceInfo.duration,
-        route: distanceInfo.route,
-        estimated: distanceInfo.estimated,
-        price_per_km: pricePerKm,
-        total_price: totalPrice
+    // Handle pricing based on truck's pricing type
+    if (truck.pricing_type === 'fixed') {
+      // Fixed price trucks - return fixed price directly, no distance calculation needed
+      const totalPrice = parseFloat(truck.fixed_price);
+      
+      if (!totalPrice || isNaN(totalPrice) || totalPrice <= 0) {
+        return res.status(400).json({
+          success: false,
+          error: 'This truck has an invalid fixed price configuration'
+        });
       }
-    });
+
+      res.status(200).json({
+        success: true,
+        data: {
+          pricing_type: 'fixed',
+          fixed_price: totalPrice,
+          total_price: totalPrice,
+          distance: null, // Not applicable for fixed pricing
+          duration: null, // Not applicable for fixed pricing
+          route: `${pickupCity} → ${destinationCity}`,
+          estimated: false,
+          price_breakdown: {
+            type: 'Fixed Price',
+            calculation: `Fixed price for any route: ${totalPrice}`
+          }
+        }
+      });
+    } else if (truck.pricing_type === 'per_km') {
+      // Per-km pricing trucks - calculate based on distance
+      const distanceInfo = await distanceService.calculateDistance(pickupCity, destinationCity);
+      const pricePerKm = parseFloat(truck.price_per_km);
+      const totalPrice = distanceInfo.distance * pricePerKm;
+
+      res.status(200).json({
+        success: true,
+        data: {
+          pricing_type: 'per_km',
+          distance: distanceInfo.distance,
+          duration: distanceInfo.duration,
+          route: distanceInfo.route,
+          estimated: distanceInfo.estimated,
+          price_per_km: pricePerKm,
+          total_price: totalPrice,
+          price_breakdown: {
+            type: 'Per Kilometer',
+            calculation: `${pricePerKm}/km × ${distanceInfo.distance}km = ${totalPrice}`
+          }
+        }
+      });
+    } else {
+      return res.status(400).json({
+        success: false,
+        error: 'This truck has an invalid pricing configuration'
+      });
+    }
 
   } catch (error) {
     logger.error('Error in getPriceEstimate:', error);
