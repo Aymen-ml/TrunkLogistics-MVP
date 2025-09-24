@@ -201,7 +201,7 @@ class Truck {
     if (isAdminSearch) {
       // Admin view - show ALL trucks regardless of verification status
       queryText = `
-        SELECT t.*, pp.company_name, pp.address, pp.city, pp.postal_code, pp.business_license,
+        SELECT t.*, pp.company_name, pp.street_address as address, pp.city, pp.postal_code, pp.business_license,
                 u.first_name, u.last_name, u.phone, u.email,
                 COUNT(*) OVER() as total_count,
                 pp.is_verified as provider_verified,
@@ -222,15 +222,16 @@ class Truck {
          WHERE ${whereClause}
          GROUP BY t.id, pp.id, u.id
          ORDER BY t.created_at DESC
-         LIMIT $${paramCount} OFFSET $${paramCount + 1}`;
+         LIMIT ${paramCount} OFFSET ${paramCount + 1}`;
       queryValues = [...values, limit, offset];
     } else {
       // Customer/Provider view - only verified trucks with approved documents
       queryText = `
-        SELECT t.*, pp.company_name, pp.address, pp.city, pp.postal_code, pp.business_license,
+        SELECT t.*, pp.company_name, pp.street_address as address, pp.city, pp.postal_code, pp.business_license,
                 u.first_name, u.last_name, u.phone, u.email,
                 COUNT(*) OVER() as total_count,
                 pp.is_verified as provider_verified,
+                u.is_active as user_active,
                 CASE 
                   WHEN COUNT(d.id) = 0 THEN false
                   WHEN COUNT(d.id) = COUNT(CASE WHEN d.verification_status = 'approved' THEN 1 END) THEN true
@@ -247,7 +248,7 @@ class Truck {
          HAVING COUNT(d.id) > 0 
            AND COUNT(d.id) = COUNT(CASE WHEN d.verification_status = 'approved' THEN 1 END)
          ORDER BY t.created_at DESC
-         LIMIT $${paramCount} OFFSET $${paramCount + 1}`;
+         LIMIT ${paramCount} OFFSET ${paramCount + 1}`;
       queryValues = [...values, limit, offset];
     }
     

@@ -1,4 +1,5 @@
 import Truck from '../models/Truck.js';
+import TruckFixed from '../models/TruckFixed.js';
 import ProviderProfile from '../models/ProviderProfile.js';
 import { validationResult } from 'express-validator';
 import logger from '../utils/logger.js';
@@ -275,7 +276,7 @@ export const getTrucks = async (req, res) => {
       provider: req.query.provider
     };
 
-    const result = await Truck.search({
+    const result = await TruckFixed.search({
       ...filters,
       onlyAvailable: req.user?.role === 'customer',
       adminView: req.user?.role === 'admin'

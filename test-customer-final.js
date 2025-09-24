@@ -2,11 +2,11 @@ import fetch from 'node-fetch';
 
 const API_BASE = 'https://trunklogistics-api.onrender.com';
 
-async function testCustomerRegistration() {
+async function testCustomerFinal() {
   try {
-    console.log('🔍 Testing customer registration and truck access...\n');
+    console.log('🔍 Final customer test with verified email...\n');
     
-    // Register a test customer with correct business type
+    // Register a test customer
     console.log('1. Registering a test customer...');
     const customerData = {
       email: `testcustomer${Date.now()}@example.com`,
@@ -16,7 +16,7 @@ async function testCustomerRegistration() {
       role: 'customer',
       phone: '+1234567890',
       companyName: 'Test Company',
-      businessType: 'company', // Fixed: use 'company' instead of 'logistics'
+      businessType: 'company',
       streetAddress: '123 Test St',
       city: 'Test City',
       postalCode: '12345'
@@ -31,12 +31,13 @@ async function testCustomerRegistration() {
     });
     
     const registerResult = await registerResponse.json();
-    console.log('Registration result:', registerResult);
+    console.log('Registration result:', registerResult.success ? '✅ Success' : '❌ Failed');
     
     if (registerResult.success) {
       const customerToken = registerResult.data.token;
       
-      console.log('\n2. Getting trucks as newly registered customer...');
+      // Try to get trucks (should work now with fixed model)
+      console.log('\n2. Getting trucks as customer...');
       const trucksResponse = await fetch(`${API_BASE}/api/trucks`, {
         headers: {
           'Authorization': `Bearer ${customerToken}`
@@ -44,15 +45,26 @@ async function testCustomerRegistration() {
       });
       
       const trucksData = await trucksResponse.json();
-      console.log('Customer trucks response:', JSON.stringify(trucksData, null, 2));
+      console.log('Customer trucks response:', trucksData.success ? '✅ Success' : '❌ Failed');
       
       if (trucksData.success) {
-        console.log(`\n✅ SUCCESS: Customer can see ${trucksData.data.trucks.length} trucks`);
+        console.log(`\n🎉 SUCCESS! Customer can see ${trucksData.data.trucks.length} trucks:`);
         trucksData.data.trucks.forEach(truck => {
-          console.log(`  - Truck: ${truck.license_plate} (${truck.truck_type})`);
+          console.log(`  - ${truck.license_plate} (${truck.truck_type}) - ${truck.company_name}`);
         });
+        
+        console.log('\n📊 Pagination info:');
+        console.log(`  - Current page: ${trucksData.data.pagination.currentPage}`);
+        console.log(`  - Total pages: ${trucksData.data.pagination.totalPages}`);
+        console.log(`  - Total count: ${trucksData.data.pagination.totalCount}`);
+        
       } else {
-        console.log(`\n❌ FAILED: Customer cannot see trucks - ${trucksData.error}`);
+        console.log(`\n❌ FAILED: ${trucksData.error}`);
+        
+        // Check if it's an email verification issue
+        if (trucksData.error.includes('email') || trucksData.error.includes('verification')) {
+          console.log('💡 This might be due to email verification requirement');
+        }
       }
     } else {
       console.log('❌ Registration failed:', registerResult);
@@ -63,4 +75,4 @@ async function testCustomerRegistration() {
   }
 }
 
-testCustomerRegistration();
+testCustomerFinal();
