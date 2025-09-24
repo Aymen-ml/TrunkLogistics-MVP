@@ -16,15 +16,35 @@ const TrucksAdmin = () => {
   const fetchTrucks = async () => {
     setLoading(true);
     try {
-      const params = new URLSearchParams();
-      if (filters.serviceType !== 'all') params.append('serviceType', filters.serviceType);
-      if (filters.provider && filters.provider !== 'all') params.append('provider', filters.provider);
-      if (filters.search) params.append('search', filters.search);
-      const res = await apiClient.get(`/trucks?${params.toString()}`);
-      const list = res.data.data?.trucks || res.data.trucks || [];
-      // If status is filtered client-side (API may not expose), filter here
-      const filtered = filters.status === 'all' ? list : list.filter(t => t.status === filters.status);
-      setTrucks(filtered);
+      // Use admin-specific endpoint that bypasses complex filtering
+      const res = await apiClient.get('/trucks/admin/all');
+      let list = res.data.data?.trucks || res.data.trucks || [];
+      
+      // Apply client-side filtering
+      if (filters.serviceType !== 'all') {
+        list = list.filter(t => t.service_type === filters.serviceType);
+      }
+      if (filters.status !== 'all') {
+        list = list.filter(t => t.status === filters.status);
+      }
+      if (filters.provider && filters.provider !== 'all') {
+        list = list.filter(t => 
+          t.company_name === filters.provider || 
+          `${t.first_name} ${t.last_name}` === filters.provider
+        );
+      }
+      if (filters.search) {
+        const searchLower = filters.search.toLowerCase();
+        list = list.filter(t => 
+          t.license_plate?.toLowerCase().includes(searchLower) ||
+          t.company_name?.toLowerCase().includes(searchLower) ||
+          t.make?.toLowerCase().includes(searchLower) ||
+          t.model?.toLowerCase().includes(searchLower) ||
+          `${t.first_name} ${t.last_name}`.toLowerCase().includes(searchLower)
+        );
+      }
+      
+      setTrucks(list);
     } catch (e) {
       console.error('Error fetching trucks', e);
     } finally {

@@ -204,9 +204,32 @@ const DocumentVerification = () => {
         return;
       }
 
-      // For local files, create a direct download URL and open in new tab
-      const downloadUrl = `${apiClient.defaults.baseURL}/documents/${documentId}/download`;
-      window.open(downloadUrl, '_blank', 'noopener,noreferrer');
+      // For local files, fetch as blob and create object URL for new tab only
+      const response = await apiClient.documents.download(documentId);
+      
+      // Create blob URL
+      const blob = new Blob([response.data], {
+        type: response.headers['content-type'] || 'application/pdf'
+      });
+      const blobUrl = window.URL.createObjectURL(blob);
+      
+      // Open in new tab only
+      const newWindow = window.open(blobUrl, '_blank', 'noopener,noreferrer');
+      
+      if (!newWindow) {
+        // Fallback if popup blocked - create download link
+        const link = document.createElement('a');
+        link.href = blobUrl;
+        link.download = fileName || 'document.pdf';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+      
+      // Clean up blob URL after a delay
+      setTimeout(() => {
+        window.URL.revokeObjectURL(blobUrl);
+      }, 10000);
 
     } catch (error) {
       console.error('Error viewing document:', error);

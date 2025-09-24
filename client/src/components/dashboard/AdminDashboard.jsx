@@ -48,7 +48,7 @@ const AdminDashboard = () => {
         apiClient.get('/users'),
         apiClient.get('/users?role=provider'),
         apiClient.get('/bookings'),
-        apiClient.get('/trucks'),
+        apiClient.get('/trucks/admin/all'),
         apiClient.get('/documents/stats')
       ]);
 

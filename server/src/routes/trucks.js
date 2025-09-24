@@ -1,6 +1,6 @@
 import express from 'express';
-import { createTruck, getTrucks, getTruck, updateTruck, deleteTruck, getMyTrucks, getStorageStatus } from '../controllers/truckController.js';
-import { authenticate, requireProvider, requireProviderOrAdmin } from '../middleware/auth.js';
+import { createTruck, getTrucks, getTruck, updateTruck, deleteTruck, getMyTrucks, getStorageStatus, getAllTrucksForAdmin } from '../controllers/truckController.js';
+import { authenticate, requireProvider, requireProviderOrAdmin, requireAdmin } from '../middleware/auth.js';
 import { validateTruckCreate, validateTruckSearch, validateUUID } from '../middleware/validation.js';
 import { uploadTruckFiles } from '../utils/hybridUpload.js';
 
@@ -14,6 +14,9 @@ router.get('/storage-status', authenticate, getStorageStatus);
 
 // GET /api/trucks/my - Get provider's trucks
 router.get('/my', authenticate, requireProvider, getMyTrucks);
+
+// GET /api/trucks/admin/all - Get all trucks for admin dashboard
+router.get('/admin/all', authenticate, requireAdmin, getAllTrucksForAdmin);
 
 // POST /api/trucks - Create truck listing with file uploads
 router.post('/', authenticate, requireProvider, uploadTruckFiles, validateTruckCreate, createTruck);

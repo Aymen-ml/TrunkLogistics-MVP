@@ -4,6 +4,7 @@ import { validationResult } from 'express-validator';
 import logger from '../utils/logger.js';
 import { processUploadedFiles, deleteUploadedFile, getStorageInfo } from '../utils/hybridUpload.js';
 import notificationService from '../services/notificationService.js';
+import { query } from '../config/database.js';
 
 export const createTruck = async (req, res) => {
   try {
@@ -751,6 +752,59 @@ export const getMyTrucks = async (req, res) => {
     res.status(500).json({
       success: false,
       error: 'Server error while fetching trucks'
+    });
+  }
+};
+
+// Get all trucks for admin dashboard (bypasses complex filtering)
+export const getAllTrucksForAdmin = async (req, res) => {
+  try {
+    // Only admins can access this endpoint
+    if (req.user.role !== 'admin') {
+      return res.status(403).json({
+        success: false,
+        error: 'Access denied'
+      });
+    }
+
+    // Get all trucks directly from database without complex filtering
+    const result = await query(`
+      SELECT t.*, 
+             pp.company_name, 
+             pp.street_address as address, 
+             pp.city, 
+             pp.postal_code, 
+             pp.business_license,
+             u.first_name, 
+             u.last_name, 
+             u.phone, 
+             u.email,
+             pp.is_verified as provider_verified,
+             u.is_active as user_active,
+             COUNT(d.id) as total_documents,
+             COUNT(CASE WHEN d.verification_status = 'approved' THEN 1 END) as approved_documents,
+             COUNT(CASE WHEN d.verification_status = 'pending' THEN 1 END) as pending_documents,
+             COUNT(CASE WHEN d.verification_status = 'rejected' THEN 1 END) as rejected_documents
+      FROM trucks t
+      JOIN provider_profiles pp ON t.provider_id = pp.id
+      JOIN users u ON pp.user_id = u.id
+      LEFT JOIN documents d ON d.entity_id = t.id AND d.entity_type = 'truck'
+      GROUP BY t.id, pp.id, u.id
+      ORDER BY t.created_at DESC
+    `);
+
+    res.json({
+      success: true,
+      data: {
+        trucks: result.rows,
+        totalCount: result.rows.length
+      }
+    });
+  } catch (error) {
+    logger.error('Get all trucks for admin error:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Server error while fetching trucks for admin'
     });
   }
 };
