@@ -406,8 +406,8 @@ const TruckDetail = () => {
               </div>
             </div>
             
-            {/* Only show edit/delete buttons to providers who own the truck or admins */}
-            {(user?.role === 'provider' || user?.role === 'admin') && (
+            {/* Only show edit/delete buttons to providers who own the truck */}
+            {user?.role === 'provider' && (
               <div className="mt-4 sm:mt-0 flex items-center space-x-3">
                 <Link
                   to={`/trucks/${truck.id}/edit`}
