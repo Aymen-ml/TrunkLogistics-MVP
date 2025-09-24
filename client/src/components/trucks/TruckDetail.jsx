@@ -910,43 +910,23 @@ const TruckDetail = () => {
                           <button
                             onClick={async () => {
                               try {
-                                // First fetch document info to determine storage type
+                                // First get document info to determine if it's Cloudinary-backed
                                 const infoRes = await apiClient.documents.getInfo(doc.id);
                                 const infoDoc = infoRes.data?.data?.document || {};
 
-                                // If Cloudinary, navigate to the URL in the same tab to avoid popup blocking
                                 if (infoDoc.is_cloudinary && infoDoc.actual_file_path) {
-                                  window.location.href = infoDoc.actual_file_path;
+                                  // For Cloudinary URLs, open directly in new tab
+                                  window.open(infoDoc.actual_file_path, '_blank', 'noopener,noreferrer');
                                   return;
                                 }
 
-                                // For local files, use the server download endpoint (blob)
-                                const response = await apiClient.documents.download(doc.id);
+                                // For local files, create a direct download URL and open in new tab
+                                const downloadUrl = `${apiClient.defaults.baseURL}/documents/${doc.id}/download`;
+                                window.open(downloadUrl, '_blank', 'noopener,noreferrer');
 
-                                const blob = new Blob([response.data], {
-                                  type: response.headers['content-type'] || 'application/pdf'
-                                });
-                                const url = window.URL.createObjectURL(blob);
-                                
-                                // Navigate to the blob URL in the same tab to avoid popup blocking
-                                window.location.href = url;
-                                
-                                // Clean up the blob URL after a delay
-                                setTimeout(() => {
-                                  window.URL.revokeObjectURL(url);
-                                }, 5000);
                               } catch (error) {
                                 console.error('Error viewing document:', error);
-                                
-                                // Handle document authentication errors specifically
-                                if (error.isTokenExpired) {
-                                  alert(`${error.message}\n\nClick OK to go to the login page.`);
-                                  window.location.href = '/login';
-                                } else if (error.isDocumentAuthError) {
-                                  alert(`Document access failed: ${error.message}\n\nThis might be due to:\n- Session timeout\n- Insufficient permissions\n- Document access restrictions\n\nTry refreshing the page and logging in again.`);
-                                } else {
-                                  alert(`Error viewing document: ${error.response?.data?.error || error.message}`);
-                                }
+                                alert(`Error viewing document: ${error.response?.data?.error || error.message}`);
                               }
                             }}
                             className="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"

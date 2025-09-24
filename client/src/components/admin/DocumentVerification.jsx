@@ -199,39 +199,15 @@ const DocumentVerification = () => {
       const infoDoc = infoRes.data?.data?.document || {};
 
       if (infoDoc.is_cloudinary && infoDoc.actual_file_path) {
-        // Open Cloudinary URL directly (better for redirects/CORS)
-        const newWindow = window.open(infoDoc.actual_file_path, '_blank', 'noopener,noreferrer');
-        if (!newWindow) {
-          // Fallback: attempt direct download
-          window.location.href = infoDoc.actual_file_path;
-        }
+        // For Cloudinary URLs, open directly in new tab
+        window.open(infoDoc.actual_file_path, '_blank', 'noopener,noreferrer');
         return;
       }
 
-      // Fallback for local files - fetch blob from API
-      const response = await apiClient.documents.download(documentId);
+      // For local files, create a direct download URL and open in new tab
+      const downloadUrl = `${apiClient.defaults.baseURL}/documents/${documentId}/download`;
+      window.open(downloadUrl, '_blank', 'noopener,noreferrer');
 
-      // Create blob URL and open in new tab
-      const blob = new Blob([response.data], {
-        type: response.headers['content-type'] || 'application/pdf'
-      });
-      const url = window.URL.createObjectURL(blob);
-      const newWindow = window.open(url, '_blank');
-
-      // Clean up the URL after a delay
-      setTimeout(() => {
-        window.URL.revokeObjectURL(url);
-      }, 1000);
-
-      if (!newWindow) {
-        // Fallback: download the file if popup is blocked
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = fileName || 'document.pdf';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-      }
     } catch (error) {
       console.error('Error viewing document:', error);
       alert(`Error viewing document: ${error.response?.data?.error || error.message}`);
