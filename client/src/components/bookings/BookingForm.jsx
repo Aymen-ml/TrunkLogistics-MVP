@@ -294,15 +294,19 @@ const BookingForm = () => {
       }
 
       // Log the price estimate for debugging
-      // Skip distance validation for rental equipment
-      if (selectedTruck?.service_type !== 'rental' && (!priceEstimate || !priceEstimate.distance)) {
+      // Skip distance validation for rental equipment and fixed-price trucks
+      if (selectedTruck?.service_type !== 'rental' && selectedTruck?.pricing_type === 'per_km' && (!priceEstimate || !priceEstimate.distance)) {
         throw new Error('Invalid price estimate. Please recalculate the price.');
       }
 
       let totalPrice = 0;
       if (selectedTruck?.service_type === 'rental') {
         totalPrice = priceEstimate.total_price;
+      } else if (selectedTruck?.pricing_type === 'fixed') {
+        // For fixed-price trucks, use the total_price directly from the estimate
+        totalPrice = priceEstimate.total_price;
       } else {
+        // For per-km pricing, calculate based on distance
         totalPrice = parseFloat(priceEstimate.price_per_km) * priceEstimate.distance;
         if (isNaN(totalPrice)) {
           throw new Error('Invalid price calculation. Please try again.');
@@ -910,24 +914,28 @@ const BookingForm = () => {
                           </>
                         ) : (
                           <>
-                            <div className="flex justify-between">
-                              <span>Distance:</span>
-                              <span>{priceEstimate.distance} km</span>
-                            </div>
-                            <div className="flex justify-between">
-                              <span>Duration:</span>
-                              <span>{Math.round(priceEstimate.duration / 60)} hours</span>
-                            </div>
+                            {selectedTruck?.pricing_type === 'per_km' && priceEstimate.distance && (
+                              <>
+                                <div className="flex justify-between">
+                                  <span>Distance:</span>
+                                  <span>{priceEstimate.distance} km</span>
+                                </div>
+                                <div className="flex justify-between">
+                                  <span>Duration:</span>
+                                  <span>{Math.round(priceEstimate.duration / 60)} hours</span>
+                                </div>
+                              </>
+                            )}
                             <div className="flex justify-between">
                               <span>Rate:</span>
                               <span>
                                 {selectedTruck?.pricing_type === 'per_km' 
-                                  ? `$${selectedTruck.price_per_km}/km`
+                                  ? `${selectedTruck.price_per_km}/km`
                                   : 'Fixed price'
                                 }
                               </span>
                             </div>
-                            {priceEstimate.estimated && (
+                            {priceEstimate.estimated && selectedTruck?.pricing_type === 'per_km' && (
                               <p className="text-xs text-orange-600 mt-2">
                                 * Estimated distance (Google Maps not configured)
                               </p>
