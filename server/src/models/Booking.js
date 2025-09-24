@@ -82,30 +82,79 @@ class Booking {
       purpose_description
     } = bookingData;
 
-    const result = await query(
-      `INSERT INTO bookings (
-        customer_id, truck_id, pickup_address, pickup_city,
-        destination_address, destination_city, pickup_date, pickup_time,
-        cargo_description, cargo_weight, cargo_volume, estimated_distance,
-        total_price, notes, status,
-        service_type, rental_start_datetime, rental_end_datetime, work_address,
-        operator_required, operator_provided, rental_duration_hours, purpose_description
-      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23)
-      RETURNING *`,
-      [
-        customer_id, truck_id, pickup_address, pickup_city,
-        destination_address, destination_city, pickup_date, pickup_time,
-        cargo_description, cargo_weight, cargo_volume, estimated_distance,
-        total_price, notes, status,
-        service_type, rental_start_datetime, rental_end_datetime, work_address,
-        operator_required, operator_provided, rental_duration_hours, purpose_description
-      ]
-    );
+    // Debug logging for booking creation
+    logger.info('Creating booking with data:', {
+      customer_id,
+      truck_id,
+      pickup_address,
+      pickup_city,
+      destination_address,
+      destination_city,
+      pickup_date,
+      pickup_time,
+      cargo_description,
+      cargo_weight: { value: cargo_weight, type: typeof cargo_weight },
+      cargo_volume: { value: cargo_volume, type: typeof cargo_volume },
+      estimated_distance: { value: estimated_distance, type: typeof estimated_distance },
+      total_price: { value: total_price, type: typeof total_price },
+      notes,
+      status,
+      service_type,
+      rental_start_datetime,
+      rental_end_datetime,
+      work_address,
+      operator_required,
+      operator_provided,
+      rental_duration_hours,
+      purpose_description
+    });
 
-    // Log status change
-    await this.logStatusChange(result.rows[0].id, status, null, 'Booking created');
+    try {
+      const result = await query(
+        `INSERT INTO bookings (
+          customer_id, truck_id, pickup_address, pickup_city,
+          destination_address, destination_city, pickup_date, pickup_time,
+          cargo_description, cargo_weight, cargo_volume, estimated_distance,
+          total_price, notes, status,
+          service_type, rental_start_datetime, rental_end_datetime, work_address,
+          operator_required, operator_provided, rental_duration_hours, purpose_description
+        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23)
+        RETURNING *`,
+        [
+          customer_id, truck_id, pickup_address, pickup_city,
+          destination_address, destination_city, pickup_date, pickup_time,
+          cargo_description, cargo_weight, cargo_volume, estimated_distance,
+          total_price, notes, status,
+          service_type, rental_start_datetime, rental_end_datetime, work_address,
+          operator_required, operator_provided, rental_duration_hours, purpose_description
+        ]
+      );
 
-    return result.rows[0];
+      logger.info('Booking created successfully:', { bookingId: result.rows[0].id });
+
+      // Log status change
+      await this.logStatusChange(result.rows[0].id, status, null, 'Booking created');
+
+      return result.rows[0];
+    } catch (error) {
+      logger.error('Error creating booking in database:', {
+        error: error.message,
+        code: error.code,
+        detail: error.detail,
+        constraint: error.constraint,
+        table: error.table,
+        column: error.column,
+        bookingData: {
+          customer_id,
+          truck_id,
+          total_price: { value: total_price, type: typeof total_price },
+          cargo_weight: { value: cargo_weight, type: typeof cargo_weight },
+          service_type,
+          status
+        }
+      });
+      throw error;
+    }
   }
 
   static async findById(id) {

@@ -145,7 +145,10 @@ export const createBooking = async (req, res) => {
         logger.info('Using fixed price for booking', {
           truckId: truck.id,
           licensePlate: truck.license_plate,
-          fixedPrice: totalPrice,
+          rawFixedPrice: truck.fixed_price,
+          rawFixedPriceType: typeof truck.fixed_price,
+          parsedFixedPrice: totalPrice,
+          parsedFixedPriceType: typeof totalPrice,
           pricingType: truck.pricing_type
         });
         
@@ -153,8 +156,12 @@ export const createBooking = async (req, res) => {
         if (!totalPrice || isNaN(totalPrice) || totalPrice <= 0) {
           logger.error('Invalid fixed price for truck', {
             truckId: truck.id,
-            fixedPrice: truck.fixed_price,
-            parsedPrice: totalPrice
+            rawFixedPrice: truck.fixed_price,
+            rawFixedPriceType: typeof truck.fixed_price,
+            parsedPrice: totalPrice,
+            parsedPriceType: typeof totalPrice,
+            isNaN: isNaN(totalPrice),
+            isLessOrEqualZero: totalPrice <= 0
           });
           return res.status(400).json({
             success: false,
