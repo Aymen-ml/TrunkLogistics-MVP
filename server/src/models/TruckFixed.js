@@ -16,10 +16,10 @@ class TruckFixed {
       values.push('active');
       paramCount++;
     } else {
-      // Default visibility for admins/providers
-      whereConditions.push(`t.status IN ($${paramCount}, $${paramCount + 1})`);
-      values.push('active', 'inactive');
-      paramCount += 2;
+      // Default visibility for admins/providers - fix parameter binding
+      whereConditions.push(`t.status = ANY($${paramCount})`);
+      values.push(['active', 'inactive']);
+      paramCount++;
     }
 
     // Service type filter (transport/rental)
@@ -80,11 +80,17 @@ class TruckFixed {
         } else if (filters.pricingType === 'fixed') {
           whereConditions.push(`t.fixed_price <= $${paramCount}`);
         } else {
-          whereConditions.push(`(t.price_per_km <= $${paramCount} OR t.fixed_price <= $${paramCount})`);
+          whereConditions.push(`(t.price_per_km <= $${paramCount} OR t.fixed_price <= $${paramCount + 1})`);
+          values.push(filters.maxPrice); // Add second parameter for fixed_price
+          paramCount += 2; // Two parameters used
+        } else {
+          values.push(filters.maxPrice);
+          paramCount++;
         }
+      } else {
+        values.push(filters.maxPrice);
+        paramCount++;
       }
-      values.push(filters.maxPrice);
-      paramCount++;
     }
 
     // Location filter for rental equipment

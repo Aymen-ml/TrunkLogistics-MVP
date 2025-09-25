@@ -47,17 +47,15 @@ export const createProfile = async (req, res) => {
     if (userRole === 'customer') {
       profile = await CustomerProfile.create({
         userId,
-        companyName,
-        address,
+        streetAddress: address,
         city,
-        country,
         postalCode
       });
     } else if (userRole === 'provider') {
-      if (!companyName || !address || !city || !country) {
+      if (!companyName || !address || !city) {
         return res.status(400).json({
           success: false,
-          error: 'Company name, address, city, and country are required for providers'
+          error: 'Company name, address, and city are required for providers'
         });
       }
 
@@ -165,10 +163,8 @@ export const updateProfile = async (req, res) => {
       }
 
       profile = await CustomerProfile.update(existingProfile.id, {
-        company_name: companyName,
         address,
         city,
-        country,
         postal_code: postalCode
       });
     } else if (userRole === 'provider') {
@@ -185,7 +181,6 @@ export const updateProfile = async (req, res) => {
         business_license: businessLicense,
         address,
         city,
-        country,
         postal_code: postalCode
       });
     } else {

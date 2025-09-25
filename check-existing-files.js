@@ -7,9 +7,14 @@ const checkExistingFiles = async () => {
     
     // Check truck images
     const imagesResult = await query(`
-      SELECT id, license_plate, images 
+      SELECT id, license_plate, 
+             CASE 
+               WHEN images IS NULL OR images::text = '' THEN '[]'::json
+               WHEN images::text = '[]' THEN '[]'::json
+               ELSE images::json
+             END as images
       FROM trucks 
-      WHERE images IS NOT NULL AND images::text != '[]'
+      WHERE images IS NOT NULL AND images::text != '[]' AND images::text != ''
       ORDER BY created_at DESC
       LIMIT 5
     `);
@@ -17,13 +22,19 @@ const checkExistingFiles = async () => {
     console.log(`📸 Found ${imagesResult.rows.length} trucks with images:`);
     imagesResult.rows.forEach(truck => {
       try {
-        const images = typeof truck.images === 'string' ? JSON.parse(truck.images) : (truck.images || []);
+        const images = Array.isArray(truck.images) ? truck.images : [];
         console.log(`  - Truck ${truck.license_plate}: ${images.length} images`);
         images.forEach(img => {
-          console.log(`    * ${img.filename} -> ${img.path}`);
+          if (typeof img === 'string') {
+            console.log(`    * ${img}`);
+          } else if (img && img.filename && img.path) {
+            console.log(`    * ${img.filename} -> ${img.path}`);
+          } else {
+            console.log(`    * ${JSON.stringify(img)}`);
+          }
         });
       } catch (error) {
-        console.log(`  - Truck ${truck.license_plate}: Error parsing images - ${truck.images}`);
+        console.log(`  - Truck ${truck.license_plate}: Error parsing images - ${error.message}`);
       }
     });
     

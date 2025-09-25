@@ -153,7 +153,19 @@ CREATE TABLE IF NOT EXISTS bookings (
 );
 
 -- =====================================================
--- 6. DOCUMENTS TABLE (matching actual Document model)
+-- 6. BOOKING STATUS HISTORY TABLE
+-- =====================================================
+CREATE TABLE IF NOT EXISTS booking_status_history (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    booking_id UUID REFERENCES bookings(id) ON DELETE CASCADE,
+    status VARCHAR(20) NOT NULL CHECK (status IN ('pending_review', 'approved', 'confirmed', 'in_transit', 'active', 'completed', 'cancelled')),
+    changed_by UUID REFERENCES users(id),
+    notes TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- =====================================================
+-- 7. DOCUMENTS TABLE (matching actual Document model)
 -- =====================================================
 CREATE TABLE IF NOT EXISTS documents (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
@@ -182,7 +194,7 @@ CREATE TABLE IF NOT EXISTS documents (
 );
 
 -- =====================================================
--- 7. NOTIFICATIONS TABLE (with booking reference)
+-- 8. NOTIFICATIONS TABLE (with booking reference)
 -- =====================================================
 CREATE TABLE IF NOT EXISTS notifications (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
@@ -196,7 +208,7 @@ CREATE TABLE IF NOT EXISTS notifications (
 );
 
 -- =====================================================
--- 8. PASSWORD RESET TOKENS TABLE
+-- 9. PASSWORD RESET TOKENS TABLE
 -- =====================================================
 CREATE TABLE IF NOT EXISTS password_reset_tokens (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
@@ -208,7 +220,7 @@ CREATE TABLE IF NOT EXISTS password_reset_tokens (
 );
 
 -- =====================================================
--- 9. EMAIL VERIFICATION TOKENS TABLE
+-- 10. EMAIL VERIFICATION TOKENS TABLE
 -- =====================================================
 CREATE TABLE IF NOT EXISTS email_verification_tokens (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
@@ -220,7 +232,7 @@ CREATE TABLE IF NOT EXISTS email_verification_tokens (
 );
 
 -- =====================================================
--- 10. DELETED TRUCKS TABLE (for booking history preservation)
+-- 11. DELETED TRUCKS TABLE (for booking history preservation)
 -- =====================================================
 CREATE TABLE IF NOT EXISTS deleted_trucks (
     id UUID PRIMARY KEY,
@@ -240,7 +252,7 @@ CREATE TABLE IF NOT EXISTS deleted_trucks (
 );
 
 -- =====================================================
--- 11. CREATE ALL NECESSARY INDEXES
+-- 12. CREATE ALL NECESSARY INDEXES
 -- =====================================================
 
 -- Users indexes
@@ -291,8 +303,13 @@ CREATE INDEX IF NOT EXISTS idx_customer_profiles_user_id ON customer_profiles(us
 CREATE INDEX IF NOT EXISTS idx_provider_profiles_user_id ON provider_profiles(user_id);
 CREATE INDEX IF NOT EXISTS idx_provider_profiles_verification_status ON provider_profiles(verification_status);
 
+-- Booking status history indexes
+CREATE INDEX IF NOT EXISTS idx_booking_status_history_booking_id ON booking_status_history(booking_id);
+CREATE INDEX IF NOT EXISTS idx_booking_status_history_status ON booking_status_history(status);
+CREATE INDEX IF NOT EXISTS idx_booking_status_history_changed_by ON booking_status_history(changed_by);
+
 -- =====================================================
--- 12. CREATE UPDATED_AT TRIGGERS
+-- 13. CREATE UPDATED_AT TRIGGERS
 -- =====================================================
 
 -- Create trigger function
@@ -331,7 +348,7 @@ CREATE TRIGGER update_bookings_updated_at
     EXECUTE FUNCTION update_updated_at_column();
 
 -- =====================================================
--- 13. CREATE BOOKING REFERENCE GENERATION
+-- 14. CREATE BOOKING REFERENCE GENERATION
 -- =====================================================
 
 -- Create function to generate booking reference
@@ -367,7 +384,7 @@ CREATE TRIGGER generate_booking_reference_trigger
     EXECUTE FUNCTION generate_booking_reference();
 
 -- =====================================================
--- 14. CREATE MIGRATIONS TRACKING TABLE
+-- 15. CREATE MIGRATIONS TRACKING TABLE
 -- =====================================================
 CREATE TABLE IF NOT EXISTS migrations (
     id SERIAL PRIMARY KEY,
@@ -399,7 +416,7 @@ INSERT INTO migrations (filename) VALUES
 ON CONFLICT (filename) DO NOTHING;
 
 -- =====================================================
--- 15. VERIFICATION QUERIES
+-- 16. VERIFICATION QUERIES
 -- =====================================================
 
 -- Show all created tables
@@ -423,6 +440,8 @@ SELECT 'trucks', COUNT(*) FROM trucks
 UNION ALL
 SELECT 'bookings', COUNT(*) FROM bookings
 UNION ALL
+SELECT 'booking_status_history', COUNT(*) FROM booking_status_history
+UNION ALL
 SELECT 'documents', COUNT(*) FROM documents
 UNION ALL
 SELECT 'notifications', COUNT(*) FROM notifications
@@ -437,7 +456,7 @@ SELECT 'migrations', COUNT(*) FROM migrations
 ORDER BY table_name;
 
 -- =====================================================
--- 16. UPDATE CUSTOMER PROFILES STRUCTURE
+-- 17. UPDATE CUSTOMER PROFILES STRUCTURE
 -- =====================================================
 -- First, create a backup of existing data if needed
 CREATE TABLE IF NOT EXISTS customer_profiles_backup AS SELECT * FROM customer_profiles;
