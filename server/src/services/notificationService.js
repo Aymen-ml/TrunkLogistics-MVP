@@ -187,11 +187,19 @@ class NotificationService {
     });
   }
 
-  async notifyAdminBookingStatusChanged(booking, oldStatus, newStatus, notes, customerUser, providerUser) {
+  async notifyAdminBookingStatusChanged(booking, oldStatus, newStatus, notes, customerUser, providerUser, changedByName = '', changedByRole = '') {
     const customerName = `${customerUser.first_name} ${customerUser.last_name}`.trim() || customerUser.email;
     const providerName = `${providerUser.first_name} ${providerUser.last_name}`.trim() || providerUser.email;
     
-    let message = `Booking #${booking.id?.slice(0, 8)} status changed from "${oldStatus}" to "${newStatus}". Customer: ${customerName}, Provider: ${providerName}`;
+    let message = `Booking #${booking.id?.slice(0, 8)} status changed from "${oldStatus.replace('_', ' ')}" to "${newStatus.replace('_', ' ')}"`;
+    
+    // Add who made the change
+    if (changedByName && changedByRole) {
+      const roleLabel = changedByRole === 'admin' ? 'Admin' : changedByRole === 'provider' ? 'Provider' : 'Customer';
+      message += ` by ${roleLabel} ${changedByName}`;
+    }
+    
+    message += `. Customer: ${customerName}, Provider: ${providerName}`;
     
     if (notes) {
       message += `. Reason: ${notes}`;

@@ -637,19 +637,19 @@ export const updateBookingStatus = async (req, res) => {
         );
       }
       
-      // 3. If admin made the change, also notify admin (for record keeping)
-      if (req.user.role === 'admin') {
-        notifications.push(
-          notificationService.notifyAdminBookingStatusChanged(
-            updatedBooking,
-            booking.status,
-            status,
-            notes,
-            customerUser,
-            providerUser
-          )
-        );
-      }
+      // 3. Always notify admins about any booking status changes (for oversight)
+      notifications.push(
+        notificationService.notifyAdminBookingStatusChanged(
+          updatedBooking,
+          booking.status,
+          status,
+          notes,
+          customerUser,
+          providerUser,
+          changedByName,
+          changedByRole
+        )
+      );
       
       // Send all notifications
       await Promise.all(notifications);
