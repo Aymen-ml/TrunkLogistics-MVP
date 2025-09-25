@@ -111,37 +111,11 @@ const BookingManagement = () => {
   const getQuickActionButtons = (booking) => {
     const commonActions = [];
     
-    // Quick action buttons based on current status
-    switch (booking.status) {
-      case 'pending_review':
-        commonActions.push(
-          { status: 'approved', label: 'Approve', color: 'bg-green-600 hover:bg-green-700', icon: CheckCircle },
-          { status: 'cancelled', label: 'Cancel', color: 'bg-red-600 hover:bg-red-700', icon: XCircle }
-        );
-        break;
-      case 'approved':
-        if (booking.service_type === 'rental') {
-          commonActions.push(
-            { status: 'active', label: 'Start Rental', color: 'bg-purple-600 hover:bg-purple-700', icon: Truck },
-            { status: 'cancelled', label: 'Cancel', color: 'bg-red-600 hover:bg-red-700', icon: XCircle }
-          );
-        } else {
-          commonActions.push(
-            { status: 'in_transit', label: 'Start Transit', color: 'bg-purple-600 hover:bg-purple-700', icon: Truck },
-            { status: 'cancelled', label: 'Cancel', color: 'bg-red-600 hover:bg-red-700', icon: XCircle }
-          );
-        }
-        break;
-      case 'in_transit':
-        commonActions.push(
-          { status: 'completed', label: 'Complete', color: 'bg-green-600 hover:bg-green-700', icon: CheckCircle }
-        );
-        break;
-      case 'active':
-        commonActions.push(
-          { status: 'completed', label: 'Complete', color: 'bg-green-600 hover:bg-green-700', icon: CheckCircle }
-        );
-        break;
+    // Only show cancel button for all booking statuses (except already cancelled and completed)
+    if (booking.status !== 'cancelled' && booking.status !== 'completed') {
+      commonActions.push(
+        { status: 'cancelled', label: 'Cancel', color: 'bg-red-600 hover:bg-red-700', icon: XCircle }
+      );
     }
     
     return commonActions;
