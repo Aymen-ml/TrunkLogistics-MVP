@@ -79,18 +79,14 @@ class TruckFixed {
           whereConditions.push(`t.price_per_km <= $${paramCount}`);
         } else if (filters.pricingType === 'fixed') {
           whereConditions.push(`t.fixed_price <= $${paramCount}`);
-        } else {
-          whereConditions.push(`(t.price_per_km <= $${paramCount} OR t.fixed_price <= $${paramCount + 1})`);
-          values.push(filters.maxPrice); // Add second parameter for fixed_price
-          paramCount += 2; // Two parameters used
-        } else {
           values.push(filters.maxPrice);
           paramCount++;
+        } else {
+          whereConditions.push(`(t.price_per_km <= $${paramCount} OR t.fixed_price <= $${paramCount + 1})`);
+          values.push(filters.maxPrice); // Add first parameter for price_per_km
+          values.push(filters.maxPrice); // Add second parameter for fixed_price
+          paramCount += 2; // Two parameters used
         }
-      } else {
-        values.push(filters.maxPrice);
-        paramCount++;
-      }
     }
 
     // Location filter for rental equipment
