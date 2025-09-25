@@ -73,10 +73,14 @@ class TruckFixed {
         whereConditions.push(`(
           t.monthly_rate IS NOT NULL AND t.monthly_rate <= $${paramCount}
         )`);
+        values.push(filters.maxPrice);
+        paramCount++;
       } else {
         // For transport, use existing logic
         if (filters.pricingType === 'per_km') {
           whereConditions.push(`t.price_per_km <= $${paramCount}`);
+          values.push(filters.maxPrice);
+          paramCount++;
         } else if (filters.pricingType === 'fixed') {
           whereConditions.push(`t.fixed_price <= $${paramCount}`);
           values.push(filters.maxPrice);
@@ -87,6 +91,7 @@ class TruckFixed {
           values.push(filters.maxPrice); // Add second parameter for fixed_price
           paramCount += 2; // Two parameters used
         }
+      }
     }
 
     // Location filter for rental equipment
