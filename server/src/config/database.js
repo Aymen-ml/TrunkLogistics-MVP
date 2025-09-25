@@ -6,21 +6,19 @@ dotenv.config();
 
 const { Pool } = pg;
 
-// Simple database configuration that works
+// IPv4-only database configuration using pooler connection string
+const connectionString = `postgresql://postgres.drqkwioicbcihakxgsoe:${process.env.DB_PASSWORD || 'igeem002'}@aws-1-eu-west-3.pooler.supabase.com:5432/postgres`;
+
 const dbConfig = {
-  host: 'db.drqkwioicbcihakxgsoe.supabase.co',
-  port: 5432,
-  database: 'postgres',
-  user: 'postgres',
-  password: process.env.DB_PASSWORD || 'igeem002',
+  connectionString: connectionString,
   ssl: {
     rejectUnauthorized: false
   },
   // Simple pool settings
-  max: 5,
+  max: 3,
   min: 1,
   idleTimeoutMillis: 30000,
-  connectionTimeoutMillis: 15000
+  connectionTimeoutMillis: 20000
 };
 
 let pool;
