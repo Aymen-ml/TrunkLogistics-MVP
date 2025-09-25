@@ -6,26 +6,33 @@ dotenv.config();
 
 const { Pool } = pg;
 
-// Database configuration with production-ready settings
+// Database configuration with production-ready settings and fallback
+const primaryConnectionString = process.env.DATABASE_URL || 
+  `postgresql://postgres.drqkwioicbcihakxgsoe:${process.env.DB_PASSWORD}@aws-1-eu-west-3.pooler.supabase.com:5432/postgres`;
+
+const fallbackConnectionString = `postgresql://postgres:${process.env.DB_PASSWORD || 'igeem002'}@db.drqkwioicbcihakxgsoe.supabase.co:5432/postgres`;
+
 const dbConfig = {
-  connectionString: process.env.DATABASE_URL || 
-    `postgresql://postgres.drqkwioicbcihakxgsoe:${process.env.DB_PASSWORD}@aws-1-eu-west-3.pooler.supabase.com:5432/postgres`,
+  connectionString: primaryConnectionString,
   ssl: process.env.NODE_ENV === 'production' ? { 
     rejectUnauthorized: false 
   } : false,
-  // Connection pool settings optimized for production
-  max: process.env.NODE_ENV === 'production' ? 20 : 10,
-  min: 2, // Minimum connections to maintain
-  idleTimeoutMillis: 30000,
-  connectionTimeoutMillis: 10000,
-  acquireTimeoutMillis: 10000,
-  createTimeoutMillis: 10000,
-  destroyTimeoutMillis: 5000,
-  reapIntervalMillis: 1000,
-  createRetryIntervalMillis: 200,
+  // Connection pool settings optimized for production with longer timeouts
+  max: process.env.NODE_ENV === 'production' ? 10 : 5, // Reduced max connections
+  min: 1, // Reduced minimum connections
+  idleTimeoutMillis: 60000, // Increased idle timeout
+  connectionTimeoutMillis: 30000, // Increased connection timeout
+  acquireTimeoutMillis: 30000, // Increased acquire timeout
+  createTimeoutMillis: 30000, // Increased create timeout
+  destroyTimeoutMillis: 10000, // Increased destroy timeout
+  reapIntervalMillis: 2000, // Increased reap interval
+  createRetryIntervalMillis: 500, // Increased retry interval
   // Enable keep-alive for long-running connections
   keepAlive: true,
-  keepAliveInitialDelayMillis: 10000
+  keepAliveInitialDelayMillis: 0,
+  // Add query timeout
+  query_timeout: 30000,
+  statement_timeout: 30000
 };
 
 let pool;
@@ -35,17 +42,27 @@ const MAX_RECONNECT_ATTEMPTS = 5;
 const RECONNECT_DELAY = 5000;
 
 // Initialize database connection with retry logic
-const initializeDatabase = async () => {
+const initializeDatabase = async (useFallback = false) => {
   try {
-    pool = new Pool(dbConfig);
+    const connectionConfig = useFallback ? 
+      { ...dbConfig, connectionString: fallbackConnectionString } : 
+      dbConfig;
+
+    if (useFallback) {
+      logger.warn('Using fallback direct database connection');
+    } else {
+      logger.info('🔄 Attempting connection with Supavisor pooler for IPv4 support...');
+    }
+    
+    pool = new Pool(connectionConfig);
     
     // Connection event handlers
     pool.on('connect', (client) => {
       isConnected = true;
       reconnectAttempts = 0;
-      logger.info('New client connected to database', { 
+      logger.info('✅ Database connection established', { 
         processId: client.processID,
-        secretKey: client.secretKey 
+        connectionType: useFallback ? 'direct' : 'pooler'
       });
     });
 
@@ -65,8 +82,13 @@ const initializeDatabase = async () => {
         processId: client?.processID 
       });
       
-      // Attempt to reconnect
-      await handleReconnection();
+      // Try fallback if not already using it
+      if (!useFallback) {
+        logger.warn('Primary connection failed, trying fallback...');
+        await initializeDatabase(true);
+      } else {
+        await handleReconnection();
+      }
     });
 
     // Test initial connection
@@ -75,12 +97,20 @@ const initializeDatabase = async () => {
     logger.info('Database initialized successfully', {
       maxConnections: dbConfig.max,
       minConnections: dbConfig.min,
-      environment: process.env.NODE_ENV
+      environment: process.env.NODE_ENV,
+      connectionType: useFallback ? 'direct' : 'pooler'
     });
     
   } catch (error) {
     logger.error('Failed to initialize database', { error: error.message });
-    await handleReconnection();
+    
+    // Try fallback if not already using it
+    if (!useFallback) {
+      logger.warn('Primary connection failed, trying fallback...');
+      await initializeDatabase(true);
+    } else {
+      await handleReconnection();
+    }
   }
 };
 
