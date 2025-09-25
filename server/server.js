@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import rateLimit from 'express-rate-limit';
 import app from './src/app.js';
 import logger from './src/utils/logger.js';
+import runStartupFixes from './startup.js';
 
 dotenv.config();
 
@@ -33,9 +34,16 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 // Start server with request timeout configuration
-const server = app.listen(PORT, () => {
+const server = app.listen(PORT, async () => {
   logger.info(`Server running on port ${PORT}`);
   console.log(`🚀 Server running on http://localhost:${PORT}`);
+  
+  // Run startup fixes after server starts
+  setTimeout(() => {
+    runStartupFixes().catch(err => {
+      console.log('Startup fixes failed (non-critical):', err.message);
+    });
+  }, 3000);
 });
 
 // Set server timeout for long file uploads (3 minutes)

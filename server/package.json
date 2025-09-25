@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
-    "build": "node fix-deployment-issues.js",
+    "build": "node deploy.js",
     "deploy": "chmod +x render-deploy.sh && ./render-deploy.sh",
     "test": "jest",
     "test:watch": "jest --watch",

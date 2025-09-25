@@ -16,6 +16,7 @@ import documentRoutes from './routes/documents.js';
 import adminRoutes from './routes/admin.js';
 import testRoutes from './routes/test.js';
 import testEmailRoutes from './routes/testEmail.js';
+import healthRoutes from './routes/health.js';
 import errorHandler from './middleware/errorHandler.js';
 import { securityHeaders, corsOptions, sanitizeData } from './middleware/security.js';
 import { generalLimiter } from './middleware/rateLimiter.js';
@@ -23,6 +24,7 @@ import { serveFileWithFallback, ensureUploadDirectories } from './middleware/fil
 import logger from './utils/logger.js';
 import dotenv from 'dotenv';
 import { dirname, join } from 'path';
+import databaseMonitor from './services/databaseMonitor.js';
 
 dotenv.config();
 
@@ -71,14 +73,13 @@ app.use('/api/documents', documentRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/test', testRoutes);
 app.use('/api/email', testEmailRoutes);
+app.use('/api/health', healthRoutes);
 
-// Health check
-app.get('/api/health', (req, res) => {
-  res.json({ 
-    status: 'OK', 
-    timestamp: new Date().toISOString(),
-    environment: process.env.NODE_ENV || 'development'
-  });
+
+
+// Simple health check without database
+app.get('/health', (req, res) => {
+  res.status(200).send('OK');
 });
 
 // 404 handler
