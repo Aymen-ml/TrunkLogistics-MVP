@@ -34,9 +34,14 @@ const pool = new Pool({
   ssl: process.env.NODE_ENV === 'production' ? { 
     rejectUnauthorized: false 
   } : false,
-  max: 20,
+  max: 10, // Reduced for Render free tier
   idleTimeoutMillis: 30000,
-  connectionTimeoutMillis: 10000
+  connectionTimeoutMillis: 20000, // Increased timeout
+  acquireTimeoutMillis: 20000,
+  createTimeoutMillis: 20000,
+  destroyTimeoutMillis: 5000,
+  reapIntervalMillis: 1000,
+  createRetryIntervalMillis: 200
 });
 
 // Test the connection
