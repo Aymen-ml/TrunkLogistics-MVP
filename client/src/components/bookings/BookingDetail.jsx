@@ -58,7 +58,16 @@ const BookingDetail = () => {
     try {
       setUpdating(true);
       const response = await apiClient.put(`/bookings/${id}/status`, { status: newStatus });
-      await fetchBooking(); // Refresh booking data
+      
+      if (response.data.success) {
+        // Update local state immediately for better UX
+        setBooking(prev => ({ ...prev, status: newStatus }));
+        
+        // Also refresh data from server to ensure consistency
+        await fetchBooking();
+      } else {
+        throw new Error(response.data.error || 'Failed to update status');
+      }
     } catch (error) {
       console.error('Error updating booking status:', error);
       console.error('Error details:', error.response?.data);

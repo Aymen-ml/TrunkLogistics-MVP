@@ -297,8 +297,20 @@ const ProviderDashboard = () => {
         notes
       });
       
-      // Refresh dashboard data
-      fetchDashboardData();
+      if (response.data.success) {
+        // Update the specific booking in the local state immediately
+        setDashboardData(prev => ({
+          ...prev,
+          recentBookings: prev.recentBookings.map(booking =>
+            booking.id === bookingId ? { ...booking, status } : booking
+          )
+        }));
+        
+        // Also refresh full dashboard data for consistency
+        fetchDashboardData();
+      } else {
+        throw new Error(response.data.error || 'Failed to update booking');
+      }
     } catch (error) {
       console.error(`Error ${action}ing booking:`, error);
       const errorMessage = error.response?.data?.error || error.message || 'Unknown error';
