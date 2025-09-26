@@ -16,7 +16,7 @@ const TruckForm = () => {
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
   const [formData, setFormData] = useState({
-    serviceType: 'logistics', // Default to logistics
+    serviceType: 'transport', // Default to transport
     truckType: '',
     licensePlate: '',
     capacityWeight: '',
@@ -61,7 +61,7 @@ const TruckForm = () => {
           
           // Update form data with server response
           setFormData({
-            serviceType: truck.service_type || 'logistics',
+            serviceType: truck.service_type || 'transport',
             truckType: truck.truck_type || 'flatbed',
             licensePlate: truck.license_plate || '',
             capacityWeight: truck.capacity_weight !== null ? truck.capacity_weight.toString() : '',
@@ -350,15 +350,13 @@ const TruckForm = () => {
     }
     
     if (!formData.capacityVolume || isNaN(formData.capacityVolume) || parseFloat(formData.capacityVolume) < 0) {
-      newErrors.capacityVolume = formData.serviceType === 'retail'
-        ? 'Operating weight must be a non-negative number'
-        : 'Capacity volume must be a non-negative number';
+      newErrors.capacityVolume = 'Capacity volume must be a non-negative number';
     }
 
     // Validate service-specific required fields
-    if (formData.serviceType === 'logistics') {
+    if (formData.serviceType === 'transport') {
       if (!formData.pricingType) {
-        newErrors.pricingType = 'Pricing type is required for logistics';
+        newErrors.pricingType = 'Pricing type is required for transport';
       }
 
       if (formData.pricingType === 'per_km') {
@@ -370,12 +368,12 @@ const TruckForm = () => {
           newErrors.fixedPrice = 'Fixed price must be a positive number';
         }
       }
-    } else if (formData.serviceType === 'retail') {
+    } else if (formData.serviceType === 'rental') {
       if (!formData.monthlyRate || isNaN(formData.monthlyRate) || parseFloat(formData.monthlyRate) <= 0) {
         newErrors.monthlyRate = 'Monthly rate must be a positive number';
       }
       if (!formData.workLocation?.trim()) {
-        newErrors.workLocation = 'Work location is required for retail equipment';
+        newErrors.workLocation = 'Work location is required for rental equipment';
       }
     }
 
@@ -440,9 +438,9 @@ const TruckForm = () => {
         make: formData.make,
         model: formData.model,
         status: formData.status,
-        // Retail-specific fields
-        monthly_rate: formData.serviceType === 'retail' ? formData.monthlyRate : null,
-        work_location: formData.serviceType === 'retail' ? formData.workLocation : null,
+        // Rental-specific fields
+        monthly_rate: formData.serviceType === 'rental' ? formData.monthlyRate : null,
+        work_location: formData.serviceType === 'rental' ? formData.workLocation : null,
         // Driver information
         driver_name: formData.driverName,
         driver_phone: formData.driverPhone,
@@ -608,23 +606,23 @@ const TruckForm = () => {
                   <input
                     type="radio"
                     name="serviceType"
-                    value="logistics"
-                    checked={formData.serviceType === 'logistics'}
+                    value="transport"
+                    checked={formData.serviceType === 'transport'}
                     onChange={handleChange}
                     className="form-radio h-4 w-4 text-blue-600 transition duration-150 ease-in-out"
                   />
-                  <span className="ml-2 text-sm text-gray-700">Logistics</span>
+                  <span className="ml-2 text-sm text-gray-700">Transport</span>
                 </label>
                 <label className="inline-flex items-center">
                   <input
                     type="radio"
                     name="serviceType"
-                    value="retail"
-                    checked={formData.serviceType === 'retail'}
+                    value="rental"
+                    checked={formData.serviceType === 'rental'}
                     onChange={handleChange}
                     className="form-radio h-4 w-4 text-blue-600 transition duration-150 ease-in-out"
                   />
-                  <span className="ml-2 text-sm text-gray-700">Retail</span>
+                  <span className="ml-2 text-sm text-gray-700">Rental</span>
                 </label>
               </div>
               <p className="mt-1 text-sm text-gray-500">
@@ -669,8 +667,8 @@ const TruckForm = () => {
                     } shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm`}
                     required
                   >
-                    {formData.serviceType === 'logistics' ? (
-                      // Logistics truck types
+                    {formData.serviceType === 'transport' ? (
+                      // Transport truck types
                       <>
                         <option value="flatbed">Flatbed</option>
                         <option value="container">Container</option>
@@ -680,7 +678,7 @@ const TruckForm = () => {
                         <option value="other">Other</option>
                       </>
                     ) : (
-                      // Retail equipment types
+                      // Rental equipment types
                       <>
                         <option value="excavator">Excavator</option>
                         <option value="crane">Crane</option>
@@ -817,7 +815,7 @@ const TruckForm = () => {
               {/* Capacity Volume */}
               <div>
                 <label htmlFor="capacityVolume" className="block text-sm font-medium text-gray-700">
-                  {formData.serviceType === 'retail' ? 'Operating Weight (kg)' : 'Volume (m³)'} *
+                  Volume (m³) *
                 </label>
                 <input
                   type="number"
@@ -837,8 +835,8 @@ const TruckForm = () => {
                 )}
               </div>
 
-              {/* Logistics-specific fields */}
-              {formData.serviceType === 'logistics' && (
+              {/* Transport-specific fields */}
+              {formData.serviceType === 'transport' && (
                 <>
                   {/* Pricing Type */}
                   <div>
@@ -918,8 +916,8 @@ const TruckForm = () => {
                 </>
               )}
 
-              {/* Retail-specific fields */}
-              {formData.serviceType === 'retail' && (
+              {/* Rental-specific fields */}
+              {formData.serviceType === 'rental' && (
                 <>
                   {/* Monthly Rate */}
                   <div>
