@@ -16,6 +16,7 @@ const TruckForm = () => {
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
   const [formData, setFormData] = useState({
+    serviceType: 'logistics', // Default to logistics
     truckType: '',
     licensePlate: '',
     capacityWeight: '',
@@ -27,6 +28,9 @@ const TruckForm = () => {
     year: '',
     make: '',
     model: '',
+    // Retail-specific fields
+    monthlyRate: '',
+    workLocation: '',
     // Driver information
     driverName: '',
     driverPhone: '',
@@ -57,6 +61,7 @@ const TruckForm = () => {
           
           // Update form data with server response
           setFormData({
+            serviceType: truck.service_type || 'logistics',
             truckType: truck.truck_type || 'flatbed',
             licensePlate: truck.license_plate || '',
             capacityWeight: truck.capacity_weight !== null ? truck.capacity_weight.toString() : '',
@@ -68,6 +73,9 @@ const TruckForm = () => {
             year: truck.year !== null ? truck.year.toString() : '',
             make: truck.make || '',
             model: truck.model || '',
+            // Retail-specific fields
+            monthlyRate: truck.monthly_rate !== null ? truck.monthly_rate.toString() : '',
+            workLocation: truck.work_location || '',
             // Driver information
             driverName: truck.driver_name || '',
             driverPhone: truck.driver_phone || '',
@@ -408,6 +416,7 @@ const TruckForm = () => {
       // Add truck data
       // Convert form data to snake_case for API
       const truckData = {
+        service_type: formData.serviceType,
         truck_type: formData.truckType,
         license_plate: formData.licensePlate,
         capacity_weight: formData.capacityWeight,
@@ -419,6 +428,9 @@ const TruckForm = () => {
         make: formData.make,
         model: formData.model,
         status: formData.status,
+        // Retail-specific fields
+        monthly_rate: formData.serviceType === 'retail' ? formData.monthlyRate : null,
+        work_location: formData.serviceType === 'retail' ? formData.workLocation : null,
         // Driver information
         driver_name: formData.driverName,
         driver_phone: formData.driverPhone,
@@ -574,6 +586,40 @@ const TruckForm = () => {
 
         <div className="bg-white shadow-sm rounded-lg">
           <form onSubmit={handleSubmit} className="p-6 space-y-6">
+            {/* Service Type Selection */}
+            <div className="col-span-2">
+              <label className="block text-sm font-medium text-gray-700 mb-3">
+                Service Type *
+              </label>
+              <div className="flex space-x-4">
+                <label className="inline-flex items-center">
+                  <input
+                    type="radio"
+                    name="serviceType"
+                    value="logistics"
+                    checked={formData.serviceType === 'logistics'}
+                    onChange={handleChange}
+                    className="form-radio h-4 w-4 text-blue-600 transition duration-150 ease-in-out"
+                  />
+                  <span className="ml-2 text-sm text-gray-700">Logistics</span>
+                </label>
+                <label className="inline-flex items-center">
+                  <input
+                    type="radio"
+                    name="serviceType"
+                    value="retail"
+                    checked={formData.serviceType === 'retail'}
+                    onChange={handleChange}
+                    className="form-radio h-4 w-4 text-blue-600 transition duration-150 ease-in-out"
+                  />
+                  <span className="ml-2 text-sm text-gray-700">Retail</span>
+                </label>
+              </div>
+              <p className="mt-1 text-sm text-gray-500">
+                Choose whether this vehicle is for logistics or retail services
+              </p>
+            </div>
+
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
               {/* License Plate */}
               <div className="col-span-2">

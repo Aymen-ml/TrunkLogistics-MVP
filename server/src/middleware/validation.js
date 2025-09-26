@@ -263,29 +263,29 @@ export const validateProfileUpdate = [
 export const validateTruckCreate = [
   body('service_type')
     .optional()
-    .isIn(['transport', 'rental'])
-    .withMessage('Service type must be transport or rental'),
+    .isIn(['logistics', 'retail'])
+    .withMessage('Service type must be logistics or retail'),
   body('truck_type')
     .custom((value, { req }) => {
-      const serviceType = req.body.service_type || 'transport';
+      const serviceType = req.body.service_type || 'logistics';
       
-      // Transport service truck types
-      const transportTypes = ['flatbed', 'container', 'refrigerated', 'tanker', 'box', 'other'];
+      // Logistics service truck types
+      const logisticsTypes = ['flatbed', 'container', 'refrigerated', 'tanker', 'box', 'other'];
       
-      // Rental service equipment types
-      const rentalTypes = ['excavator', 'crane', 'mobile_crane', 'tower_crane', 'bulldozer', 'loader', 'forklift', 'reach_truck', 'pallet_jack', 'dump_truck', 'concrete_mixer', 'other'];
+      // Retail service equipment types
+      const retailTypes = ['excavator', 'crane', 'mobile_crane', 'tower_crane', 'bulldozer', 'loader', 'forklift', 'reach_truck', 'pallet_jack', 'dump_truck', 'concrete_mixer', 'other'];
       
-      if (serviceType === 'transport') {
-        if (!transportTypes.includes(value)) {
-          throw new Error(`Invalid truck type for transport service. Must be one of: ${transportTypes.join(', ')}`);
+      if (serviceType === 'logistics') {
+        if (!logisticsTypes.includes(value)) {
+          throw new Error(`Invalid truck type for logistics service. Must be one of: ${logisticsTypes.join(', ')}`);
         }
-      } else if (serviceType === 'rental') {
-        if (!rentalTypes.includes(value)) {
-          throw new Error(`Invalid equipment type for rental service. Must be one of: ${rentalTypes.join(', ')}`);
+      } else if (serviceType === 'retail') {
+        if (!retailTypes.includes(value)) {
+          throw new Error(`Invalid equipment type for retail service. Must be one of: ${retailTypes.join(', ')}`);
         }
       } else {
         // Fallback for unknown service types - accept all types
-        const allTypes = [...transportTypes, ...rentalTypes];
+        const allTypes = [...logisticsTypes, ...retailTypes];
         if (!allTypes.includes(value)) {
           throw new Error('Invalid vehicle/equipment type');
         }
@@ -310,17 +310,17 @@ export const validateTruckCreate = [
   body('pricing_type')
     .optional({ nullable: true })
     .custom((value, { req }) => {
-      // For rental service, pricing_type should not be present/null
-      if (req.body.service_type === 'rental') {
+      // For retail service, pricing_type should not be present/null
+      if (req.body.service_type === 'retail') {
         if (value !== null && value !== undefined && value !== '') {
-          throw new Error('Pricing type should not be set for rental service');
+          throw new Error('Pricing type should not be set for retail service');
         }
         return true;
       }
-      // For transport service, pricing_type is required
-      if (req.body.service_type === 'transport' || !req.body.service_type) {
+      // For logistics service, pricing_type is required
+      if (req.body.service_type === 'logistics' || !req.body.service_type) {
         if (!value || !['per_km', 'fixed'].includes(value)) {
-          throw new Error('Pricing type must be per_km or fixed for transport service');
+          throw new Error('Pricing type must be per_km or fixed for logistics service');
         }
       }
       return true;

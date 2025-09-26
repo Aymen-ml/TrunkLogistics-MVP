@@ -2,7 +2,8 @@ TrunkLogistics MVP - Complete Application Status & Current Issues
 🚀 DEPLOYMENT STATUS (All Systems Currently Live)
 Frontend (Netlify):
 
-✅ Live URL: https://trunklogistics-mvp.netlify.app
+✅ Live URL: https://truck-logistics-mvp.vercel.app/
+
 ✅ Status: Operational
 ✅ Environment: Production with VITE_API_URL pointing to Render backend
 ✅ Framework: React + Vite + TailwindCSS
@@ -71,3 +72,4 @@ Frontend: Netlify (auto-deploy from GitHub)
 Backend: Render (auto-deploy from GitHub)
 Database: Supabase PostgreSQL
 Email: SendGrid SMTP
+Storage: Cloudinary
