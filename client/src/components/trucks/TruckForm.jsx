@@ -657,7 +657,7 @@ const TruckForm = () => {
               {/* Truck Type */}
               <div>
                 <label htmlFor="truckType" className="block text-sm font-medium text-gray-700">
-                  Truck Type *
+                  {formData.serviceType === 'retail' ? 'Equipment Type *' : 'Truck Type *'}
                 </label>
                   <select
                     id="truckType"
@@ -669,12 +669,33 @@ const TruckForm = () => {
                     } shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm`}
                     required
                   >
-                    <option value="flatbed">Flatbed</option>
-                    <option value="container">Container</option>
-                    <option value="refrigerated">Refrigerated</option>
-                    <option value="tanker">Tanker</option>
-                    <option value="box">Box Truck</option>
-                    <option value="other">Other</option>
+                    {formData.serviceType === 'logistics' ? (
+                      // Logistics truck types
+                      <>
+                        <option value="flatbed">Flatbed</option>
+                        <option value="container">Container</option>
+                        <option value="refrigerated">Refrigerated</option>
+                        <option value="tanker">Tanker</option>
+                        <option value="box">Box Truck</option>
+                        <option value="other">Other</option>
+                      </>
+                    ) : (
+                      // Retail equipment types
+                      <>
+                        <option value="excavator">Excavator</option>
+                        <option value="crane">Crane</option>
+                        <option value="mobile_crane">Mobile Crane</option>
+                        <option value="tower_crane">Tower Crane</option>
+                        <option value="bulldozer">Bulldozer</option>
+                        <option value="loader">Loader</option>
+                        <option value="forklift">Forklift</option>
+                        <option value="reach_truck">Reach Truck</option>
+                        <option value="pallet_jack">Pallet Jack</option>
+                        <option value="dump_truck">Dump Truck</option>
+                        <option value="concrete_mixer">Concrete Mixer</option>
+                        <option value="other">Other</option>
+                      </>
+                    )}
                   </select>
                 {errors.truckType && (
                   <p className="mt-1 text-sm text-red-600 font-medium">{errors.truckType}</p>

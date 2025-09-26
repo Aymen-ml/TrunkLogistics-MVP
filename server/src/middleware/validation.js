@@ -360,37 +360,37 @@ export const validateTruckCreate = [
   // Rental equipment fields - only monthly rate is allowed
   body('hourly_rate')
     .custom((value, { req }) => {
-      // For rental service, hourly rate should not be present
-      if (req.body.service_type === 'rental' && value) {
-        throw new Error('Hourly rate is not allowed for rental equipment. Only monthly rates are supported.');
+      // For retail service, hourly rate should not be present
+      if (req.body.service_type === 'retail' && value) {
+        throw new Error('Hourly rate is not allowed for retail equipment. Only monthly rates are supported.');
       }
       return true;
     })
     .optional({ checkFalsy: true }),
   body('daily_rate')
     .custom((value, { req }) => {
-      // For rental service, daily rate should not be present
-      if (req.body.service_type === 'rental' && value) {
-        throw new Error('Daily rate is not allowed for rental equipment. Only monthly rates are supported.');
+      // For retail service, daily rate should not be present
+      if (req.body.service_type === 'retail' && value) {
+        throw new Error('Daily rate is not allowed for retail equipment. Only monthly rates are supported.');
       }
       return true;
     })
     .optional({ checkFalsy: true }),
   body('weekly_rate')
     .custom((value, { req }) => {
-      // For rental service, weekly rate should not be present
-      if (req.body.service_type === 'rental' && value) {
-        throw new Error('Weekly rate is not allowed for rental equipment. Only monthly rates are supported.');
+      // For retail service, weekly rate should not be present
+      if (req.body.service_type === 'retail' && value) {
+        throw new Error('Weekly rate is not allowed for retail equipment. Only monthly rates are supported.');
       }
       return true;
     })
     .optional({ checkFalsy: true }),
   body('monthly_rate')
     .custom((value, { req }) => {
-      // For rental service, monthly rate is required
-      if (req.body.service_type === 'rental') {
+      // For retail service, monthly rate is required
+      if (req.body.service_type === 'retail') {
         if (!value || isNaN(value) || parseFloat(value) <= 0) {
-          throw new Error('Monthly rate is required for rental equipment and must be a positive number');
+          throw new Error('Monthly rate is required for retail equipment and must be a positive number');
         }
       }
       return true;
@@ -455,82 +455,82 @@ export const validateBookingCreate = [
     .withMessage('Invalid truck ID'),
   body('service_type')
     .optional()
-    .isIn(['transport', 'rental'])
-    .withMessage('Service type must be transport or rental'),
+    .isIn(['logistics', 'retail'])
+    .withMessage('Service type must be logistics or retail'),
   
   // Transport-specific validation (conditional) - using custom validation for better control
   body('pickupAddress')
     .custom((value, { req }) => {
-      const serviceType = req.body.service_type || 'transport';
-      if (serviceType === 'transport') {
+      const serviceType = req.body.service_type || 'logistics';
+      if (serviceType === 'logistics') {
         if (!value || value.trim().length === 0) {
-          throw new Error('Pickup address is required for transport');
+          throw new Error('Pickup address is required for logistics');
         }
       }
       return true;
     }),
   body('pickupCity')
     .custom((value, { req }) => {
-      const serviceType = req.body.service_type || 'transport';
-      if (serviceType === 'transport') {
+      const serviceType = req.body.service_type || 'logistics';
+      if (serviceType === 'logistics') {
         if (!value || value.trim().length === 0) {
-          throw new Error('Pickup city is required for transport');
+          throw new Error('Pickup city is required for logistics');
         }
       }
       return true;
     }),
   body('destinationAddress')
     .custom((value, { req }) => {
-      const serviceType = req.body.service_type || 'transport';
-      if (serviceType === 'transport') {
+      const serviceType = req.body.service_type || 'logistics';
+      if (serviceType === 'logistics') {
         if (!value || value.trim().length === 0) {
-          throw new Error('Destination address is required for transport');
+          throw new Error('Destination address is required for logistics');
         }
       }
       return true;
     }),
   body('destinationCity')
     .custom((value, { req }) => {
-      const serviceType = req.body.service_type || 'transport';
-      if (serviceType === 'transport') {
+      const serviceType = req.body.service_type || 'logistics';
+      if (serviceType === 'logistics') {
         if (!value || value.trim().length === 0) {
-          throw new Error('Destination city is required for transport');
+          throw new Error('Destination city is required for logistics');
         }
       }
       return true;
     }),
   body('pickupDate')
     .custom((value, { req }) => {
-      const serviceType = req.body.service_type || 'transport';
-      if (serviceType === 'transport') {
+      const serviceType = req.body.service_type || 'logistics';
+      if (serviceType === 'logistics') {
         if (!value) {
-          throw new Error('Pickup date is required for transport');
+          throw new Error('Pickup date is required for logistics');
         }
         // Validate date format
         const date = new Date(value);
         if (isNaN(date.getTime())) {
-          throw new Error('Valid pickup date is required for transport');
+          throw new Error('Valid pickup date is required for logistics');
         }
       }
       return true;
     }),
   body('cargoDescription')
     .custom((value, { req }) => {
-      const serviceType = req.body.service_type || 'transport';
-      if (serviceType === 'transport') {
+      const serviceType = req.body.service_type || 'logistics';
+      if (serviceType === 'logistics') {
         if (!value || value.trim().length === 0) {
-          throw new Error('Cargo description is required for transport');
+          throw new Error('Cargo description is required for logistics');
         }
       }
       return true;
     }),
   body('cargoWeight')
     .custom((value, { req }) => {
-      const serviceType = req.body.service_type || 'transport';
-      if (serviceType === 'transport') {
+      const serviceType = req.body.service_type || 'logistics';
+      if (serviceType === 'logistics') {
         const weight = parseFloat(value);
         if (!value || isNaN(weight) || weight <= 0) {
-          throw new Error('Cargo weight must be a positive number for transport');
+          throw new Error('Cargo weight must be a positive number for logistics');
         }
       }
       return true;
@@ -550,8 +550,8 @@ export const validateBookingCreate = [
   // Rental-specific validation (conditional)
   body('rental_start_datetime')
     .custom((value, { req }) => {
-      const serviceType = req.body.service_type || 'transport';
-      if (serviceType === 'rental') {
+      const serviceType = req.body.service_type || 'logistics';
+      if (serviceType === 'retail') {
         if (!value) {
           throw new Error('Rental start date and time is required for equipment rental');
         }
@@ -565,8 +565,8 @@ export const validateBookingCreate = [
     }),
   body('rental_end_datetime')
     .custom((value, { req }) => {
-      const serviceType = req.body.service_type || 'transport';
-      if (serviceType === 'rental') {
+      const serviceType = req.body.service_type || 'logistics';
+      if (serviceType === 'retail') {
         if (!value) {
           throw new Error('Rental end date and time is required for equipment rental');
         }
@@ -580,8 +580,8 @@ export const validateBookingCreate = [
     }),
   body('work_address')
     .custom((value, { req }) => {
-      const serviceType = req.body.service_type || 'transport';
-      if (serviceType === 'rental') {
+      const serviceType = req.body.service_type || 'logistics';
+      if (serviceType === 'retail') {
         if (!value || value.trim().length === 0) {
           throw new Error('Work address is required for equipment rental');
         }
@@ -590,8 +590,8 @@ export const validateBookingCreate = [
     }),
   body('purpose_description')
     .custom((value, { req }) => {
-      const serviceType = req.body.service_type || 'transport';
-      if (serviceType === 'rental') {
+      const serviceType = req.body.service_type || 'logistics';
+      if (serviceType === 'retail') {
         if (!value || value.trim().length === 0) {
           throw new Error('Purpose description is required for equipment rental');
         }
@@ -691,16 +691,16 @@ export const validateTruckSearch = [
       // Transport service truck types
       const transportTypes = ['flatbed', 'container', 'refrigerated', 'tanker', 'box', 'other'];
       
-      // Rental service equipment types
-      const rentalTypes = ['excavator', 'crane', 'mobile_crane', 'tower_crane', 'bulldozer', 'loader', 'forklift', 'reach_truck', 'pallet_jack', 'dump_truck', 'concrete_mixer', 'other'];
-      
-      if (serviceType === 'transport') {
+      // Retail service equipment types
+      const retailTypes = ['excavator', 'crane', 'mobile_crane', 'tower_crane', 'bulldozer', 'loader', 'forklift', 'reach_truck', 'pallet_jack', 'dump_truck', 'concrete_mixer', 'other'];
+
+      if (serviceType === 'logistics') {
         if (!transportTypes.includes(value)) {
-          throw new Error('Invalid truck type for transport service');
+          throw new Error('Invalid truck type for logistics service');
         }
-      } else if (serviceType === 'rental') {
-        if (!rentalTypes.includes(value)) {
-          throw new Error('Invalid equipment type for rental service');
+      } else if (serviceType === 'retail') {
+        if (!retailTypes.includes(value)) {
+          throw new Error('Invalid equipment type for retail service');
         }
       } else {
         // Fallback for unknown service types - accept all types
