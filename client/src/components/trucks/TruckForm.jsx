@@ -329,20 +329,6 @@ const TruckForm = () => {
       newErrors.capacityWeight = 'Capacity weight must be at least 0.1';
     }
     
-    if (!['per_km', 'fixed'].includes(formData.pricingType)) {
-      newErrors.pricingType = 'Pricing type must be per_km or fixed';
-    }
-    
-    if (formData.pricingType === 'per_km') {
-      if (!formData.pricePerKm || isNaN(formData.pricePerKm) || parseFloat(formData.pricePerKm) <= 0) {
-        newErrors.pricePerKm = 'Price per km must be a positive number';
-      }
-    } else if (formData.pricingType === 'fixed') {
-      if (!formData.fixedPrice || isNaN(formData.fixedPrice) || parseFloat(formData.fixedPrice) <= 0) {
-        newErrors.fixedPrice = 'Fixed price must be a positive number';
-      }
-    }
-    
     if (!formData.truckType?.trim()) {
       newErrors.truckType = 'Truck type is required';
     }
@@ -364,9 +350,35 @@ const TruckForm = () => {
     }
     
     if (!formData.capacityVolume || isNaN(formData.capacityVolume) || parseFloat(formData.capacityVolume) < 0) {
-      newErrors.capacityVolume = 'Capacity volume must be a non-negative number';
+      newErrors.capacityVolume = formData.serviceType === 'retail'
+        ? 'Operating weight must be a non-negative number'
+        : 'Capacity volume must be a non-negative number';
     }
-    
+
+    // Validate service-specific required fields
+    if (formData.serviceType === 'logistics') {
+      if (!formData.pricingType) {
+        newErrors.pricingType = 'Pricing type is required for logistics';
+      }
+
+      if (formData.pricingType === 'per_km') {
+        if (!formData.pricePerKm || isNaN(formData.pricePerKm) || parseFloat(formData.pricePerKm) <= 0) {
+          newErrors.pricePerKm = 'Price per km must be a positive number';
+        }
+      } else if (formData.pricingType === 'fixed') {
+        if (!formData.fixedPrice || isNaN(formData.fixedPrice) || parseFloat(formData.fixedPrice) <= 0) {
+          newErrors.fixedPrice = 'Fixed price must be a positive number';
+        }
+      }
+    } else if (formData.serviceType === 'retail') {
+      if (!formData.monthlyRate || isNaN(formData.monthlyRate) || parseFloat(formData.monthlyRate) <= 0) {
+        newErrors.monthlyRate = 'Monthly rate must be a positive number';
+      }
+      if (!formData.workLocation?.trim()) {
+        newErrors.workLocation = 'Work location is required for retail equipment';
+      }
+    }
+
     // Validate required inspection document - always required
     // Accept existing documents (with isExisting flag) or new uploads
     console.log('Validation - inspectionDoc:', inspectionDoc);
@@ -784,7 +796,7 @@ const TruckForm = () => {
               {/* Capacity Volume */}
               <div>
                 <label htmlFor="capacityVolume" className="block text-sm font-medium text-gray-700">
-                  Volume (m³) *
+                  {formData.serviceType === 'retail' ? 'Operating Weight (kg)' : 'Volume (m³)'} *
                 </label>
                 <input
                   type="number"
@@ -804,80 +816,135 @@ const TruckForm = () => {
                 )}
               </div>
 
-              {/* Pricing Type */}
-              <div>
-                <label htmlFor="pricingType" className="block text-sm font-medium text-gray-700">
-                  Pricing Type *
-                </label>
-                <select
-                  id="pricingType"
-                  name="pricingType"
-                  value={formData.pricingType}
-                  onChange={handleChange}
-                  className={`mt-1 block w-full rounded-md ${
-                    errors.pricingType ? 'border-red-500 bg-red-50' : 'border-gray-300'
-                  } shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm`}
-                  required
-                >
-                  <option value="per_km">Price per km</option>
-                  <option value="fixed">Fixed price</option>
-                </select>
-              </div>
+              {/* Logistics-specific fields */}
+              {formData.serviceType === 'logistics' && (
+                <>
+                  {/* Pricing Type */}
+                  <div>
+                    <label htmlFor="pricingType" className="block text-sm font-medium text-gray-700">
+                      Pricing Type *
+                    </label>
+                    <select
+                      id="pricingType"
+                      name="pricingType"
+                      value={formData.pricingType}
+                      onChange={handleChange}
+                      className={`mt-1 block w-full rounded-md ${
+                        errors.pricingType ? 'border-red-500 bg-red-50' : 'border-gray-300'
+                      } shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm`}
+                      required
+                    >
+                      <option value="per_km">Price per km</option>
+                      <option value="fixed">Fixed price</option>
+                    </select>
+                  </div>
 
-              {/* Price per km */}
-              {formData.pricingType === 'per_km' && (
-                <div>
-                  <label 
-                    htmlFor="pricePerKm"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Price per km *
-                  </label>
-                  <input
-                    type="number"
-                    id="pricePerKm"
-                    name="pricePerKm"
-                    min="0.01"
-                    step="0.01"
-                    value={formData.pricePerKm || ''}
-                    onChange={handleChange}
-                    className={`mt-1 block w-full rounded-md ${
-                      errors.pricePerKm ? 'border-red-500 bg-red-50' : 'border-gray-300'
-                    } shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm`}
-                    required
-                  />
-                  {errors.pricePerKm && (
-                    <p className="mt-1 text-sm text-red-600 font-medium">{errors.pricePerKm}</p>
+                  {/* Price per km */}
+                  {formData.pricingType === 'per_km' && (
+                    <div>
+                      <label
+                        htmlFor="pricePerKm"
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        Price per km *
+                      </label>
+                      <input
+                        type="number"
+                        id="pricePerKm"
+                        name="pricePerKm"
+                        min="0.01"
+                        step="0.01"
+                        value={formData.pricePerKm || ''}
+                        onChange={handleChange}
+                        className={`mt-1 block w-full rounded-md ${
+                          errors.pricePerKm ? 'border-red-500 bg-red-50' : 'border-gray-300'
+                        } shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm`}
+                        required
+                      />
+                      {errors.pricePerKm && (
+                        <p className="mt-1 text-sm text-red-600 font-medium">{errors.pricePerKm}</p>
+                      )}
+                    </div>
                   )}
-                </div>
+
+                  {/* Fixed price */}
+                  {formData.pricingType === 'fixed' && (
+                    <div>
+                      <label
+                        htmlFor="fixedPrice"
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        Fixed price *
+                      </label>
+                      <input
+                        type="number"
+                        id="fixedPrice"
+                        name="fixedPrice"
+                        min="0.01"
+                        step="0.01"
+                        value={formData.fixedPrice || ''}
+                        onChange={handleChange}
+                        className={`mt-1 block w-full rounded-md ${
+                          errors.fixedPrice ? 'border-red-500 bg-red-50' : 'border-gray-300'
+                        } shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm`}
+                        required
+                      />
+                      {errors.fixedPrice && (
+                        <p className="mt-1 text-sm text-red-600 font-medium">{errors.fixedPrice}</p>
+                      )}
+                    </div>
+                  )}
+                </>
               )}
 
-              {/* Fixed price */}
-              {formData.pricingType === 'fixed' && (
-                <div>
-                  <label 
-                    htmlFor="fixedPrice"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Fixed price *
-                  </label>
-                  <input
-                    type="number"
-                    id="fixedPrice"
-                    name="fixedPrice"
-                    min="0.01"
-                    step="0.01"
-                    value={formData.fixedPrice || ''}
-                    onChange={handleChange}
-                    className={`mt-1 block w-full rounded-md ${
-                      errors.fixedPrice ? 'border-red-500 bg-red-50' : 'border-gray-300'
-                    } shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm`}
-                    required
-                  />
-                  {errors.fixedPrice && (
-                    <p className="mt-1 text-sm text-red-600 font-medium">{errors.fixedPrice}</p>
-                  )}
-                </div>
+              {/* Retail-specific fields */}
+              {formData.serviceType === 'retail' && (
+                <>
+                  {/* Monthly Rate */}
+                  <div>
+                    <label htmlFor="monthlyRate" className="block text-sm font-medium text-gray-700">
+                      Monthly Rate ($) *
+                    </label>
+                    <input
+                      type="number"
+                      id="monthlyRate"
+                      name="monthlyRate"
+                      min="0.01"
+                      step="0.01"
+                      value={formData.monthlyRate || ''}
+                      onChange={handleChange}
+                      className={`mt-1 block w-full rounded-md ${
+                        errors.monthlyRate ? 'border-red-500 bg-red-50' : 'border-gray-300'
+                      } shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm`}
+                      required
+                    />
+                    {errors.monthlyRate && (
+                      <p className="mt-1 text-sm text-red-600 font-medium">{errors.monthlyRate}</p>
+                    )}
+                  </div>
+
+                  {/* Work Location */}
+                  <div>
+                    <label htmlFor="workLocation" className="block text-sm font-medium text-gray-700">
+                      Work Location *
+                    </label>
+                    <input
+                      type="text"
+                      id="workLocation"
+                      name="workLocation"
+                      value={formData.workLocation || ''}
+                      onChange={handleChange}
+                      className={`mt-1 block w-full rounded-md ${
+                        errors.workLocation ? 'border-red-500 bg-red-50' : 'border-gray-300'
+                      } shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm`}
+                      placeholder="e.g., Construction Site, Warehouse, Office"
+                      required
+                    />
+                    {errors.workLocation && (
+                      <p className="mt-1 text-sm text-red-600 font-medium">{errors.workLocation}</p>
+                    )}
+                  </div>
+                </>
               )}
 
             </div>
