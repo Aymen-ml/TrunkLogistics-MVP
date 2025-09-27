@@ -19,8 +19,8 @@ const TruckForm = () => {
     serviceType: 'transport', // Default to transport
     truckType: '',
     licensePlate: '',
-    capacityWeight: '',
-    capacityVolume: '',
+    capacity_weight: '',
+    capacity_volume: '',
     pricingType: '',
     pricePerKm: '',
     fixedPrice: '',
@@ -64,8 +64,8 @@ const TruckForm = () => {
             serviceType: truck.service_type || 'transport',
             truckType: truck.truck_type || 'flatbed',
             licensePlate: truck.license_plate || '',
-            capacityWeight: truck.capacity_weight !== null ? truck.capacity_weight.toString() : '',
-            capacityVolume: truck.capacity_volume !== null ? truck.capacity_volume.toString() : '',
+            capacity_weight: truck.capacity_weight !== null ? truck.capacity_weight.toString() : '',
+            capacity_volume: truck.capacity_volume !== null ? truck.capacity_volume.toString() : '',
             pricingType: truck.pricing_type || 'per_km',
             pricePerKm: truck.price_per_km !== null ? truck.price_per_km.toString() : '',
             fixedPrice: truck.fixed_price !== null ? truck.fixed_price.toString() : '',
@@ -325,8 +325,8 @@ const TruckForm = () => {
       newErrors.licensePlate = 'License plate is required';
     }
     
-    if (!formData.capacityWeight || isNaN(formData.capacityWeight) || parseFloat(formData.capacityWeight) < 0.1) {
-      newErrors.capacityWeight = 'Capacity weight must be at least 0.1';
+    if (!formData.capacity_weight || isNaN(formData.capacity_weight) || parseFloat(formData.capacity_weight) < 0.1) {
+      newErrors.capacity_weight = 'Capacity weight must be at least 0.1';
     }
     
     if (!formData.truckType?.trim()) {
@@ -341,7 +341,7 @@ const TruckForm = () => {
       newErrors.model = 'Model is required';
     }
     
-    if (!formData.year || isNaN(formData.year) || parseInt(formData.year, 10) < 1900 || parseInt(formData.year, 10) > new Date().getFullYear() + 1) {
+    if (!formData.year || isNaN(formData.year) || parseInt(formData.year) < 1900 || parseInt(formData.year) > new Date().getFullYear() + 1) {
       newErrors.year = 'Year must be between 1900 and ' + (new Date().getFullYear() + 1);
     }
     
@@ -349,8 +349,8 @@ const TruckForm = () => {
       newErrors.status = 'Status is required';
     }
     
-    if (!formData.capacityVolume || isNaN(formData.capacityVolume) || parseFloat(formData.capacityVolume) < 0) {
-      newErrors.capacityVolume = 'Capacity volume must be a non-negative number';
+    if (formData.capacity_volume && (isNaN(formData.capacity_volume) || parseFloat(formData.capacity_volume) < 0)) {
+      newErrors.capacity_volume = 'Capacity volume must be a non-negative number';
     }
 
     // Validate service-specific required fields
@@ -429,8 +429,8 @@ const TruckForm = () => {
         service_type: formData.serviceType,
         truck_type: formData.truckType,
         license_plate: formData.licensePlate,
-        capacity_weight: formData.capacityWeight,
-        capacity_volume: formData.capacityVolume,
+        capacity_weight: formData.capacity_weight,
+        capacity_volume: formData.capacity_volume,
         pricing_type: formData.pricingType,
         price_per_km: formData.pricingType === 'per_km' ? formData.pricePerKm : null,
         fixed_price: formData.pricingType === 'fixed' ? formData.fixedPrice : null,
@@ -803,47 +803,46 @@ const TruckForm = () => {
 
               {/* Capacity Weight */}
               <div>
-                <label htmlFor="capacityWeight" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="capacity_weight" className="block text-sm font-medium text-gray-700">
                   Capacity (kg) *
                 </label>
                 <input
                   type="number"
-                  id="capacityWeight"
-                  name="capacityWeight"
+                  id="capacity_weight"
+                  name="capacity_weight"
                   min="0.1"
                   step="0.01"
-                  value={formData.capacityWeight || ''}
+                  value={formData.capacity_weight || ''}
                   onChange={handleChange}
                   className={`mt-1 block w-full rounded-md ${
-                    errors.capacityWeight ? 'border-red-500 bg-red-50' : 'border-gray-300'
+                    errors.capacity_weight ? 'border-red-500 bg-red-50' : 'border-gray-300'
                   } shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm`}
                   required
                 />
-                {errors.capacityWeight && (
-                  <p className="mt-1 text-sm text-red-600 font-medium">{errors.capacityWeight}</p>
+                {errors.capacity_weight && (
+                  <p className="mt-1 text-sm text-red-600 font-medium">{errors.capacity_weight}</p>
                 )}
               </div>
 
               {/* Capacity Volume */}
               <div>
-                <label htmlFor="capacityVolume" className="block text-sm font-medium text-gray-700">
-                  Volume (m³) *
+                <label htmlFor="capacity_volume" className="block text-sm font-medium text-gray-700">
+                  Volume (m³)
                 </label>
                 <input
                   type="number"
-                  id="capacityVolume"
-                  name="capacityVolume"
+                  id="capacity_volume"
+                  name="capacity_volume"
                   min="0"
                   step="0.01"
-                  value={formData.capacityVolume || ''}
+                  value={formData.capacity_volume || ''}
                   onChange={handleChange}
                   className={`mt-1 block w-full rounded-md ${
-                    errors.capacityVolume ? 'border-red-500 bg-red-50' : 'border-gray-300'
+                    errors.capacity_volume ? 'border-red-500 bg-red-50' : 'border-gray-300'
                   } shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm`}
-                  required
                 />
-                {errors.capacityVolume && (
-                  <p className="mt-1 text-sm text-red-600 font-medium">{errors.capacityVolume}</p>
+                {errors.capacity_volume && (
+                  <p className="mt-1 text-sm text-red-600 font-medium">{errors.capacity_volume}</p>
                 )}
               </div>
 
