@@ -28,10 +28,10 @@ const TruckForm = () => {
     year: '',
     make: '',
     model: '',
-    // Retail-specific fields
+    // Rental-specific fields (exact database field names)
     monthlyRate: '',
     workLocation: '',
-    // Driver information
+    // Driver information (exact database field names)
     driverName: '',
     driverPhone: '',
     driverLicenseNumber: ''
@@ -438,7 +438,7 @@ const TruckForm = () => {
         make: formData.make,
         model: formData.model,
         status: formData.status,
-        // Rental-specific fields
+        // Rental-specific fields (exact database field names)
         monthly_rate: formData.serviceType === 'rental' ? formData.monthlyRate : null,
         work_location: formData.serviceType === 'rental' ? formData.workLocation : null,
         // Driver information
