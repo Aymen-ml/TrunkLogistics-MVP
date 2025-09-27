@@ -236,6 +236,16 @@ export const createTruck = async (req, res) => {
     logger.error('Error stack:', error.stack);
     logger.error('Request body:', JSON.stringify(req.body, null, 2));
     logger.error('Request files:', req.files ? Object.keys(req.files) : 'No files');
+    logger.error('Service type:', req.body.service_type);
+    logger.error('Rental-specific fields:', {
+      monthly_rate: req.body.monthly_rate,
+      work_location: req.body.work_location,
+      driver_info: {
+        name: req.body.driver_name,
+        phone: req.body.driver_phone,
+        license: req.body.driver_license_number
+      }
+    });
     
     res.status(500).json({
       success: false,
@@ -243,7 +253,15 @@ export const createTruck = async (req, res) => {
       debug: process.env.NODE_ENV === 'development' ? {
         message: error.message,
         code: error.code,
-        name: error.name
+        name: error.name,
+        details: {
+          service_type: req.body.service_type,
+          missing_fields: !req.body.monthly_rate ? 'monthly_rate' : 
+                         !req.body.work_location ? 'work_location' :
+                         !req.body.driver_name ? 'driver_name' :
+                         !req.body.driver_phone ? 'driver_phone' :
+                         !req.body.driver_license_number ? 'driver_license_number' : 'unknown'
+        }
       } : undefined
     });
   }
