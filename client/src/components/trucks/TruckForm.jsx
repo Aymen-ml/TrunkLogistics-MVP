@@ -470,11 +470,23 @@ const TruckForm = () => {
       
       // Handle inspection document
       if (inspectionDoc) {
+        console.log('Processing inspectionDoc:', inspectionDoc);
+        console.log('inspectionDoc type:', typeof inspectionDoc);
+        console.log('inspectionDoc.isExisting:', inspectionDoc.isExisting);
+        console.log('inspectionDoc.file:', inspectionDoc.file);
+        console.log('inspectionDoc.file_path:', inspectionDoc.file_path);
+        
         if (!inspectionDoc.isExisting && inspectionDoc.file) {
+          console.log('Appending new inspection document file');
           formDataToSend.append('inspectionDoc', inspectionDoc.file);
         } else if (inspectionDoc.isExisting && inspectionDoc.file_path) {
+          console.log('Appending existing inspection document path:', inspectionDoc.file_path);
           formDataToSend.append('existingInspectionDoc', inspectionDoc.file_path);
+        } else {
+          console.error('Invalid inspectionDoc structure:', inspectionDoc);
         }
+      } else {
+        console.log('No inspectionDoc provided');
       }
       
       // Handle registration document
