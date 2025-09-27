@@ -29,8 +29,8 @@ const TruckForm = () => {
     make: '',
     model: '',
     // Rental-specific fields (exact database field names)
-    monthlyRate: '',
-    workLocation: '',
+    monthly_rate: '',
+    work_location: '',
     // Driver information (exact database field names)
     driverName: '',
     driverPhone: '',
@@ -73,9 +73,9 @@ const TruckForm = () => {
             year: truck.year !== null ? truck.year.toString() : '',
             make: truck.make || '',
             model: truck.model || '',
-            // Retail-specific fields
-            monthlyRate: truck.monthly_rate !== null ? truck.monthly_rate.toString() : '',
-            workLocation: truck.work_location || '',
+            // Rental-specific fields
+            monthly_rate: truck.monthly_rate !== null ? truck.monthly_rate.toString() : '',
+            work_location: truck.work_location || '',
             // Driver information
             driverName: truck.driver_name || '',
             driverPhone: truck.driver_phone || '',
@@ -369,11 +369,11 @@ const TruckForm = () => {
         }
       }
     } else if (formData.serviceType === 'rental') {
-      if (!formData.monthlyRate || isNaN(formData.monthlyRate) || parseFloat(formData.monthlyRate) <= 0) {
-        newErrors.monthlyRate = 'Monthly rate must be a positive number';
+      if (!formData.monthly_rate || isNaN(formData.monthly_rate) || parseFloat(formData.monthly_rate) <= 0) {
+        newErrors.monthly_rate = 'Monthly rate must be a positive number';
       }
-      if (!formData.workLocation?.trim()) {
-        newErrors.workLocation = 'Work location is required for rental equipment';
+      if (!formData.work_location?.trim()) {
+        newErrors.work_location = 'Work location is required for rental equipment';
       }
     }
 
@@ -439,8 +439,8 @@ const TruckForm = () => {
         model: formData.model,
         status: formData.status,
         // Rental-specific fields (exact database field names)
-        monthly_rate: formData.serviceType === 'rental' ? formData.monthlyRate : null,
-        work_location: formData.serviceType === 'rental' ? formData.workLocation : null,
+        monthly_rate: formData.serviceType === 'rental' ? formData.monthly_rate : null,
+        work_location: formData.serviceType === 'rental' ? formData.work_location : null,
         // Driver information
         driver_name: formData.driverName,
         driver_phone: formData.driverPhone,
@@ -933,46 +933,46 @@ const TruckForm = () => {
                 <>
                   {/* Monthly Rate */}
                   <div>
-                    <label htmlFor="monthlyRate" className="block text-sm font-medium text-gray-700">
+                    <label htmlFor="monthly_rate" className="block text-sm font-medium text-gray-700">
                       Monthly Rate ($) *
                     </label>
                     <input
                       type="number"
-                      id="monthlyRate"
-                      name="monthlyRate"
+                      id="monthly_rate"
+                      name="monthly_rate"
                       min="0.01"
                       step="0.01"
-                      value={formData.monthlyRate || ''}
+                      value={formData.monthly_rate || ''}
                       onChange={handleChange}
                       className={`mt-1 block w-full rounded-md ${
-                        errors.monthlyRate ? 'border-red-500 bg-red-50' : 'border-gray-300'
+                        errors.monthly_rate ? 'border-red-500 bg-red-50' : 'border-gray-300'
                       } shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm`}
                       required
                     />
-                    {errors.monthlyRate && (
-                      <p className="mt-1 text-sm text-red-600 font-medium">{errors.monthlyRate}</p>
+                    {errors.monthly_rate && (
+                      <p className="mt-1 text-sm text-red-600 font-medium">{errors.monthly_rate}</p>
                     )}
                   </div>
 
                   {/* Work Location */}
                   <div>
-                    <label htmlFor="workLocation" className="block text-sm font-medium text-gray-700">
+                    <label htmlFor="work_location" className="block text-sm font-medium text-gray-700">
                       Work Location *
                     </label>
                     <input
                       type="text"
-                      id="workLocation"
-                      name="workLocation"
-                      value={formData.workLocation || ''}
+                      id="work_location"
+                      name="work_location"
+                      value={formData.work_location || ''}
                       onChange={handleChange}
                       className={`mt-1 block w-full rounded-md ${
-                        errors.workLocation ? 'border-red-500 bg-red-50' : 'border-gray-300'
+                        errors.work_location ? 'border-red-500 bg-red-50' : 'border-gray-300'
                       } shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm`}
                       placeholder="e.g., Construction Site, Warehouse, Office"
                       required
                     />
-                    {errors.workLocation && (
-                      <p className="mt-1 text-sm text-red-600 font-medium">{errors.workLocation}</p>
+                    {errors.work_location && (
+                      <p className="mt-1 text-sm text-red-600 font-medium">{errors.work_location}</p>
                     )}
                   </div>
                 </>
