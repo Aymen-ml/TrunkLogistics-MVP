@@ -285,7 +285,7 @@ export const validateTruckCreate = [
         }
       } else {
         // Fallback for unknown service types - accept all types
-        const allTypes = [...logisticsTypes, ...retailTypes];
+        const allTypes = [...transportTypes, ...rentalTypes];
         if (!allTypes.includes(value)) {
           throw new Error('Invalid vehicle/equipment type');
         }
