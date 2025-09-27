@@ -11,13 +11,16 @@ const { Client } = pg;
 
 async function debugLoginIssue() {
   // Use the same connection approach as the server
-  const connectionString = process.env.DATABASE_URL || 
-    `postgresql://postgres.drqkwioicbcihakxgsoe:${process.env.DB_PASSWORD || 'igeem002'}@aws-1-eu-west-3.pooler.supabase.com:5432/postgres`;
-  
-  const client = new Client({
-    connectionString: connectionString,
+  const config = {
+    host: process.env.DB_HOST || 'aws-1-eu-west-3.pooler.supabase.com',
+    port: process.env.DB_PORT || 5432,
+    database: process.env.DB_NAME || 'postgres',
+    user: process.env.DB_USER || 'postgres.drqkwioicbcihakxgsoe',
+    password: process.env.DB_PASSWORD || 'igeem@002',
     ssl: { rejectUnauthorized: false }
-  });
+  };
+  
+  const client = new Client(config);
 
   try {
     console.log('🔌 Connecting to database...');
