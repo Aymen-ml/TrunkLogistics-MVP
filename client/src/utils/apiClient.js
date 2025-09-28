@@ -43,6 +43,12 @@ const isTokenExpired = (token) => {
 // Request interceptor to add auth token
 apiClient.interceptors.request.use(
   (config) => {
+    console.log('Sending request:', {
+      baseURL: config.baseURL,
+      url: config.url,
+      method: config.method,
+      headers: config.headers,
+    });
     const token = localStorage.getItem('token');
     
     // Check if token is expired before making the request
