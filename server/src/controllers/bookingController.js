@@ -270,30 +270,32 @@ export const createBooking = async (req, res) => {
       purpose_description: purpose_description
     });
 
-    // Send notifications
-    try {
-      // Get customer and provider user details
-      const customerUser = await User.findById(req.user.id);
-      const providerUser = await User.findById(providerProfile.user_id);
-      
-      const customerName = `${customerUser.first_name} ${customerUser.last_name}`.trim() || customerUser.email;
-      
-      // 1. Notify customer about booking creation
-      await notificationService.notifyBookingCreated(customerProfile.user_id, booking);
-      
-      // 2. Notify provider about new booking request
-      if (providerUser) {
-        await notificationService.notifyProviderNewBooking(providerProfile.user_id, booking, customerName);
+    // Send notifications asynchronously (non-blocking)
+    setImmediate(async () => {
+      try {
+        // Get customer and provider user details
+        const customerUser = await User.findById(req.user.id);
+        const providerUser = await User.findById(providerProfile.user_id);
+        
+        const customerName = `${customerUser.first_name} ${customerUser.last_name}`.trim() || customerUser.email;
+        
+        // 1. Notify customer about booking creation
+        await notificationService.notifyBookingCreated(customerProfile.user_id, booking);
+        
+        // 2. Notify provider about new booking request
+        if (providerUser) {
+          await notificationService.notifyProviderNewBooking(providerProfile.user_id, booking, customerName);
+        }
+        
+        // 3. Notify admins about new booking request
+        await notificationService.notifyAdminNewBooking(booking, customerName);
+        
+        logger.info('✅ Booking notifications sent successfully');
+      } catch (notificationError) {
+        logger.error('❌ Failed to send booking notifications:', notificationError);
+        // Don't fail the booking creation if notifications fail
       }
-      
-      // 3. Notify admins about new booking request
-      await notificationService.notifyAdminNewBooking(booking, customerName);
-      
-      logger.info('✅ Booking notifications sent successfully');
-    } catch (notificationError) {
-      logger.error('❌ Failed to send booking notifications:', notificationError);
-      // Don't fail the booking creation if notifications fail
-    }
+    });
 
     res.status(201).json({
       success: true,

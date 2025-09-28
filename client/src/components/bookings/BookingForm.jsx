@@ -244,7 +244,8 @@ const BookingForm = () => {
           truckId,
           pickupCity,
           destinationCity
-        }
+        },
+        timeout: 10000 // 10 second timeout
       });
       
       setPriceEstimate(response.data.data);
@@ -269,7 +270,8 @@ const BookingForm = () => {
           truckId,
           startDatetime,
           endDatetime
-        }
+        },
+        timeout: 10000 // 10 second timeout
       });
       
       setPriceEstimate(response.data.data);

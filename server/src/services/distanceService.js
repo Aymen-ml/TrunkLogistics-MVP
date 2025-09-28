@@ -40,7 +40,10 @@ class DistanceService {
       key: this.googleMapsApiKey
     };
 
-    const response = await axios.get(url, { params });
+    const response = await axios.get(url, { 
+      params,
+      timeout: 5000 // 5 second timeout
+    });
     
     if (response.data.status !== 'OK') {
       throw new Error(`Google Maps API error: ${response.data.status}`);
