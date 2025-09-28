@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { useBookings } from '../../contexts/BookingContext';
+import { useToast } from '../../contexts/ToastContext';
 import EmailVerificationBanner from '../common/EmailVerificationBanner';
 import AdminApprovalBanner from '../common/AdminApprovalBanner';
 import { useNavigate } from 'react-router-dom';
@@ -33,12 +34,19 @@ import { apiClient } from '../../utils/apiClient';
 import { VEHICLE_TYPE_LABELS } from '../../constants/truckTypes';
 
 const BookingActions = ({ booking, onUpdate }) => {
+  const { showSuccess, showError } = useToast();
   const [isUpdating, setIsUpdating] = useState(false);
 
   const handleUpdate = async (status) => {
     setIsUpdating(true);
-    await onUpdate(booking.id, status);
-    setIsUpdating(false);
+    try {
+      await onUpdate(booking.id, status);
+      showSuccess(`Booking ${status === 'approved' ? 'approved' : 'rejected'} successfully!`);
+    } catch (error) {
+      showError(`Failed to update booking: ${error.response?.data?.error || error.message}`);
+    } finally {
+      setIsUpdating(false);
+    }
   };
 
   if (booking.status !== 'pending_review') return null;

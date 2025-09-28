@@ -209,7 +209,7 @@ const api = {
     getById: (id) => apiClient.get(`/bookings/${id}`),
     create: (data) => apiClient.post('/bookings', data),
     update: (id, data) => apiClient.put(`/bookings/${id}`, data),
-    updateStatus: (id, status) => apiClient.patch(`/bookings/${id}/status`, { status }),
+    updateStatus: (id, status, notes) => apiClient.put(`/bookings/${id}/status`, { status, notes }),
     remove: (id) => apiClient.delete(`/bookings/${id}`)
   },
 

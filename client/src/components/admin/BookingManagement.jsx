@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { apiClient } from '../../utils/apiClient';
 import { Package, Clock, CheckCircle, XCircle, Truck, MapPin, Calendar, DollarSign, Settings } from 'lucide-react';
 import { formatCurrency } from '../../utils/formatters';
+import { useToast } from '../../contexts/ToastContext';
 
 const BookingManagement = () => {
+  const { showSuccess, showError } = useToast();
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [updating, setUpdating] = useState({});
@@ -54,14 +56,14 @@ const BookingManagement = () => {
             : booking
         ));
         
-        alert(`Booking status updated to ${newStatus.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase())} successfully!`);
+        showSuccess(`Booking status updated to ${newStatus.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase())} successfully!`);
       } else {
         throw new Error(response.data.error || 'Failed to update status');
       }
     } catch (error) {
       console.error('Error updating booking status:', error);
       const errorMessage = error.response?.data?.error || error.message || 'Error updating booking status';
-      alert(`Failed to update booking status: ${errorMessage}`);
+      showError(`Failed to update booking status: ${errorMessage}`);
     } finally {
       setUpdating(prev => ({ ...prev, [bookingId]: false }));
     }

@@ -21,11 +21,14 @@ import {
 import { apiClient } from '../../utils/apiClient';
 import { useAuth } from '../../contexts/AuthContext';
 import { useBookings } from '../../contexts/BookingContext';
+import { useToast } from '../../contexts/ToastContext';
 import { VEHICLE_TYPE_LABELS } from '../../constants/truckTypes';
 
 const BookingList = () => {
   const { user } = useAuth();
-  const { bookings, loading, deleteBooking } = useBookings();
+  const { bookings, loading, deleteBooking, fetchBookings } = useBookings();
+  const { showSuccess, showError } = useToast();
+  const [deletingBookingId, setDeletingBookingId] = useState(null);
   const [filters, setFilters] = useState({
     status: 'all',
     search: '',
@@ -83,13 +86,20 @@ const BookingList = () => {
   };
 
   const handleDeleteBooking = async (bookingId) => {
-    if (window.confirm('Are you sure you want to delete this booking? This action cannot be undone.')) {
-      try {
-        await deleteBooking(bookingId);
-      } catch (error) {
-        console.error('Error deleting booking:', error);
-        alert(`Failed to delete booking: ${error.response?.data?.error || error.message}`);
-      }
+    if (!window.confirm('Are you sure you want to delete this booking? This action cannot be undone.')) {
+      return;
+    }
+    setDeletingBookingId(bookingId);
+    try {
+      await deleteBooking(bookingId);
+      // Refresh the bookings list after successful deletion
+      await fetchBookings();
+      showSuccess('Booking deleted successfully!');
+    } catch (error) {
+      console.error('Error deleting booking:', error);
+      showError(`Failed to delete booking: ${error.response?.data?.error || error.message}`);
+    } finally {
+      setDeletingBookingId(null);
     }
   };
 
@@ -442,10 +452,20 @@ const BookingList = () => {
                           ) && (
                             <button
                               onClick={() => handleDeleteBooking(booking.id)}
-                              className="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded-md text-red-700 bg-red-100 hover:bg-red-200"
+                              disabled={deletingBookingId === booking.id}
+                              className="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded-md text-red-700 bg-red-100 hover:bg-red-200 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
                             >
-                              <Trash2 className="h-4 w-4 mr-1" />
-                              Delete
+                              {deletingBookingId === booking.id ? (
+                                <>
+                                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-red-700 mr-1"></div>
+                                  Deleting...
+                                </>
+                              ) : (
+                                <>
+                                  <Trash2 className="h-4 w-4 mr-1" />
+                                  Delete
+                                </>
+                              )}
                             </button>
                           )}
                         </div>

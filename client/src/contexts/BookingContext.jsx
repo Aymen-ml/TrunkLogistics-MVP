@@ -32,22 +32,13 @@ export const BookingProvider = ({ children }) => {
   }, [fetchBookings]);
 
   const updateBookingStatus = async (bookingId, status, notes) => {
-    const originalBookings = [...bookings];
-    // Optimistic update
-    setBookings(prev =>
-      prev.map(b => (String(b.id) === String(bookingId) ? { ...b, status } : b))
-    );
-
     try {
       const response = await apiClient.put(`/bookings/${bookingId}/status`, { status, notes });
-      // Replace with data from server for consistency
-      setBookings(prev =>
-        prev.map(b => (String(b.id) === String(bookingId) ? response.data.data.booking : b))
-      );
+      // Refresh bookings from server to ensure consistency
+      await fetchBookings();
       return response.data;
     } catch (err) {
       console.error('Failed to update booking status:', err);
-      setBookings(originalBookings); // Revert on error
       throw err;
     }
   };
@@ -65,15 +56,12 @@ export const BookingProvider = ({ children }) => {
   };
 
   const deleteBooking = async (bookingId) => {
-    const originalBookings = [...bookings];
-    // Optimistic update
-    setBookings(prev => prev.filter(b => b.id !== bookingId));
-
     try {
       await apiClient.delete(`/bookings/${bookingId}`);
+      // Refresh bookings from server to ensure consistency
+      await fetchBookings();
     } catch (err) {
       console.error('Failed to delete booking:', err);
-      setBookings(originalBookings); // Revert on error
       throw err;
     }
   };

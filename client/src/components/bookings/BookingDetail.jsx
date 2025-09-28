@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { useBookings } from '../../contexts/BookingContext';
+import { useToast } from '../../contexts/ToastContext';
 import { 
   ArrowLeft, 
   Calendar, 
@@ -32,6 +33,7 @@ const BookingDetail = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
   const { bookings, loading, updateBookingStatus: contextUpdate, deleteBooking: contextDelete } = useBookings();
+  const { showSuccess, showError } = useToast();
   const [updating, setUpdating] = useState(false);
 
   const booking = React.useMemo(() => bookings.find(b => b.id === id), [bookings, id]);
@@ -43,27 +45,30 @@ const BookingDetail = () => {
     setUpdating(true);
     try {
       await contextUpdate(id, newStatus, `Status updated to ${newStatus}`);
+      // Show success message
+      showSuccess(`Booking status updated to ${newStatus} successfully!`);
     } catch (error) {
       console.error('Error updating booking status:', error);
-      alert(`Failed to update booking status: ${error.response?.data?.error || error.message}. Please try again.`);
+      showError(`Failed to update booking status: ${error.response?.data?.error || error.message}. Please try again.`);
     } finally {
       setUpdating(false);
     }
   };
 
   const handleDeleteBooking = async () => {
-    if (window.confirm('Are you sure you want to delete this booking? This action cannot be undone.')) {
-      setUpdating(true);
-      try {
-        await contextDelete(id);
-        alert('Booking deleted successfully');
-        navigate('/bookings');
-      } catch (error) {
-        console.error('Error deleting booking:', error);
-        alert('Failed to delete booking. Please try again.');
-      } finally {
-        setUpdating(false);
-      }
+    if (!window.confirm('Are you sure you want to delete this booking? This action cannot be undone.')) {
+      return;
+    }
+    setUpdating(true);
+    try {
+      await contextDelete(id);
+      showSuccess('Booking deleted successfully');
+      navigate('/bookings');
+    } catch (error) {
+      console.error('Error deleting booking:', error);
+      showError('Failed to delete booking. Please try again.');
+    } finally {
+      setUpdating(false);
     }
   };
 
@@ -298,20 +303,20 @@ const BookingDetail = () => {
             <div className="mt-4 sm:mt-0 flex flex-wrap gap-2">
               {getAvailableActions().map((action) => {
                 const getButtonClasses = (color) => {
-                  const baseClasses = "inline-flex items-center px-3 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white disabled:opacity-50 disabled:cursor-not-allowed";
+                  const baseClasses = "inline-flex items-center px-3 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200";
                   switch(color) {
                     case 'blue':
-                      return `${baseClasses} bg-blue-600 hover:bg-blue-700`;
+                      return `${baseClasses} bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400`;
                     case 'green':
-                      return `${baseClasses} bg-green-600 hover:bg-green-700`;
+                      return `${baseClasses} bg-green-600 hover:bg-green-700 disabled:bg-green-400`;
                     case 'red':
-                      return `${baseClasses} bg-red-600 hover:bg-red-700`;
+                      return `${baseClasses} bg-red-600 hover:bg-red-700 disabled:bg-red-400`;
                     case 'purple':
-                      return `${baseClasses} bg-purple-600 hover:bg-purple-700`;
+                      return `${baseClasses} bg-purple-600 hover:bg-purple-700 disabled:bg-purple-400`;
                     case 'yellow':
-                      return `${baseClasses} bg-yellow-600 hover:bg-yellow-700`;
+                      return `${baseClasses} bg-yellow-600 hover:bg-yellow-700 disabled:bg-yellow-400`;
                     default:
-                      return `${baseClasses} bg-gray-600 hover:bg-gray-700`;
+                      return `${baseClasses} bg-gray-600 hover:bg-gray-700 disabled:bg-gray-400`;
                   }
                 };
                 
@@ -327,7 +332,7 @@ const BookingDetail = () => {
                     ) : (
                       action.icon && <span className="mr-1">{action.icon}</span>
                     )}
-                    {action.label}
+                    {updating ? 'Updating...' : action.label}
                   </button>
                 );
               })}
