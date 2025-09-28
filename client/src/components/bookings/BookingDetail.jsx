@@ -275,6 +275,9 @@ const BookingDetail = () => {
                 <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
                   {booking.service_type === 'rental' ? 'Equipment Rental' : 'Booking'} #{booking.reference || booking.id.slice(-8)}
                 </h1>
+                <p className="mt-1 text-sm text-gray-500">
+                  Created on {new Date(booking.created_at).toLocaleDateString()} at {new Date(booking.created_at).toLocaleTimeString()}
+                </p>
                 <div className="mt-2 flex items-center flex-wrap gap-2">
                   <div className="flex items-center">
                     {getStatusIcon(booking.status, booking.service_type)}
@@ -575,7 +578,7 @@ const BookingDetail = () => {
               <h3 className="text-lg font-medium text-gray-900 mb-4">
                 {user.role === 'customer' ? 'Provider' : 'Customer'} Contact
               </h3>
-              <div className="space-y-3">
+              <div className="space-y-4">
                 <div className="flex items-center">
                   <User className="h-4 w-4 text-gray-400 mr-3" />
                   <div>
@@ -588,18 +591,24 @@ const BookingDetail = () => {
                   </div>
                 </div>
                 
-                {booking.provider_phone && (
-                  <div className="flex items-center">
-                    <Phone className="h-4 w-4 text-gray-400 mr-3" />
-                    <p className="text-sm text-gray-600">
-                      {user.role === 'customer' ? booking.provider_phone : booking.customer_phone}
-                    </p>
+                {/* Phone Contact */}
+                <div className="bg-gray-50 rounded-lg p-3">
+                  <div className="flex items-center mb-2">
+                    <Phone className="h-4 w-4 text-blue-600 mr-2" />
+                    <span className="text-sm font-medium text-gray-900">Phone</span>
                   </div>
-                )}
+                  <p className="text-sm text-gray-700 ml-6">
+                    {user.role === 'customer' ? (booking.provider_phone || 'Not provided') : (booking.customer_phone || 'Not provided')}
+                  </p>
+                </div>
                 
-                <div className="flex items-center">
-                  <Mail className="h-4 w-4 text-gray-400 mr-3" />
-                  <p className="text-sm text-gray-600">
+                {/* Email Contact */}
+                <div className="bg-gray-50 rounded-lg p-3">
+                  <div className="flex items-center mb-2">
+                    <Mail className="h-4 w-4 text-green-600 mr-2" />
+                    <span className="text-sm font-medium text-gray-900">Email</span>
+                  </div>
+                  <p className="text-sm text-gray-700 ml-6 break-all">
                     {user.role === 'customer' ? booking.provider_email : booking.customer_email}
                   </p>
                 </div>
@@ -623,7 +632,7 @@ const BookingDetail = () => {
                   <div className="ml-3">
                     <p className="font-medium text-gray-900">Booking Created</p>
                     <p className="text-gray-500">
-                      {new Date(booking.created_at).toLocaleDateString()}
+                      {new Date(booking.created_at).toLocaleDateString()} at {new Date(booking.created_at).toLocaleTimeString()}
                     </p>
                   </div>
                 </div>
@@ -634,7 +643,7 @@ const BookingDetail = () => {
                     <div className="ml-3">
                       <p className="font-medium text-gray-900">Status Updated</p>
                       <p className="text-gray-500">
-                        {new Date(booking.updated_at).toLocaleDateString()}
+                        {new Date(booking.updated_at).toLocaleDateString()} at {new Date(booking.updated_at).toLocaleTimeString()}
                       </p>
                     </div>
                   </div>
