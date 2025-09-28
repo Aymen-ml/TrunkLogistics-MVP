@@ -38,7 +38,7 @@ const BookingDetail = () => {
 
   const booking = React.useMemo(() => bookings.find(b => b.id === id), [bookings, id]);
 
-  const handleUpdateStatus = async (newStatus) => {
+  const handleUpdateStatus = React.useCallback(async (newStatus) => {
     if (!window.confirm(`Are you sure you want to ${newStatus} this booking?`)) {
       return;
     }
@@ -53,9 +53,9 @@ const BookingDetail = () => {
     } finally {
       setUpdating(false);
     }
-  };
+  }, [id, contextUpdate, showSuccess, showError]);
 
-  const handleDeleteBooking = async () => {
+  const handleDeleteBooking = React.useCallback(async () => {
     if (!window.confirm('Are you sure you want to delete this booking? This action cannot be undone.')) {
       return;
     }
@@ -70,7 +70,7 @@ const BookingDetail = () => {
     } finally {
       setUpdating(false);
     }
-  };
+  }, [id, contextDelete, showSuccess, showError, navigate]);
 
   const getStatusIcon = (status, serviceType) => {
     switch (status) {
@@ -229,7 +229,7 @@ const BookingDetail = () => {
     }
     
     return actions;
-  }, [booking, user]);
+  }, [booking, user, handleUpdateStatus, handleDeleteBooking]);
 
   if (loading) {
     return (

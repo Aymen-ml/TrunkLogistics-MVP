@@ -23,6 +23,7 @@ export const BookingProvider = ({ children }) => {
     } catch (err) {
       console.error('Failed to fetch bookings:', err);
       setError(err);
+    } finally {
       setLoading(false);
     }
   }, [user]);
@@ -34,7 +35,17 @@ export const BookingProvider = ({ children }) => {
   const updateBookingStatus = async (bookingId, status, notes) => {
     try {
       const response = await apiClient.put(`/bookings/${bookingId}/status`, { status, notes });
-      // Refresh bookings from server to ensure consistency
+      
+      // Immediately update local state for instant UI feedback
+      setBookings(prev => 
+        prev.map(booking => 
+          booking.id === bookingId 
+            ? { ...booking, status, updated_at: new Date().toISOString() }
+            : booking
+        )
+      );
+      
+      // Also refresh from server to ensure consistency
       await fetchBookings();
       return response.data;
     } catch (err) {
@@ -58,7 +69,11 @@ export const BookingProvider = ({ children }) => {
   const deleteBooking = async (bookingId) => {
     try {
       await apiClient.delete(`/bookings/${bookingId}`);
-      // Refresh bookings from server to ensure consistency
+      
+      // Immediately update local state for instant UI feedback
+      setBookings(prev => prev.filter(booking => booking.id !== bookingId));
+      
+      // Also refresh from server to ensure consistency
       await fetchBookings();
     } catch (err) {
       console.error('Failed to delete booking:', err);
