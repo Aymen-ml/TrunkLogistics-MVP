@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
+import { useBookings } from '../../contexts/BookingContext';
 import { 
   ArrowLeft, 
   Edit, 
@@ -31,6 +32,7 @@ const TruckDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { user } = useAuth();
+  const { bookings } = useBookings();
   const [truck, setTruck] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -40,6 +42,12 @@ const TruckDetail = () => {
     fetchTruck();
     fetchTruckStats();
   }, [id]);
+
+  const existingBooking = React.useMemo(() => {
+    if (!user || !truck || !bookings) return null;
+    // Find an active or pending booking for this truck by the current user
+    return bookings.find(b => b.truck_id === truck.id && b.customer_id === user.id && !['cancelled', 'completed'].includes(b.status));
+  }, [bookings, truck, user]);
 
   const fetchTruck = async () => {
     try {
@@ -429,13 +437,23 @@ const TruckDetail = () => {
             {/* Show booking button for customers */}
             {user?.role === 'customer' && truck.status === 'active' && (
               <div className="mt-4 sm:mt-0">
-                <Link
-                  to={`/bookings/new?truck=${truck.id}`}
-                  className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700"
-                >
-                  <Package className="h-4 w-4 mr-2" />
-                  Book This Truck
-                </Link>
+                {existingBooking ? (
+                  <Link
+                    to={`/bookings/${existingBooking.id}`}
+                    className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700"
+                  >
+                    <Eye className="h-4 w-4 mr-2" />
+                    View Your Booking
+                  </Link>
+                ) : (
+                  <Link
+                    to={`/bookings/new?truck=${truck.id}`}
+                    className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700"
+                  >
+                    <Package className="h-4 w-4 mr-2" />
+                    Book This Truck
+                  </Link>
+                )}
               </div>
             )}
           </div>
