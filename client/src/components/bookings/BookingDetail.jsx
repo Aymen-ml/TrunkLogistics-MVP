@@ -578,74 +578,36 @@ const BookingDetail = () => {
               </div>
             </div>
 
-            {/* Company Information */}
-            {(user.role === 'customer' ? booking.provider_company : booking.customer_company) && (
-              <div className="bg-white shadow-sm rounded-lg p-6">
-                <h3 className="text-lg font-medium text-gray-900 mb-4">
-                  {user.role === 'customer' ? 'Provider' : 'Customer'} Company
-                </h3>
-                <div className="flex items-center">
-                  <Building className="h-5 w-5 text-blue-600 mr-3" />
-                  <div>
-                    <p className="text-lg font-semibold text-gray-900">
-                      {user.role === 'customer' ? booking.provider_company : booking.customer_company}
-                    </p>
-                    <p className="text-sm text-gray-500">
-                      {user.role === 'customer' ? 'Transportation Provider' : 'Customer Company'}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            )}
-
             {/* Contact Information */}
             <div className="bg-white shadow-sm rounded-lg p-6">
               <h3 className="text-lg font-medium text-gray-900 mb-4">
                 {user.role === 'customer' ? 'Provider' : 'Customer'} Contact
               </h3>
               <div className="space-y-4">
+                {/* Company Name */}
                 <div className="flex items-center">
-                  <User className="h-4 w-4 text-gray-400 mr-3" />
+                  <Building className="h-5 w-5 text-blue-600 mr-3" />
                   <div>
-                    <p className="text-sm font-medium text-gray-900">
-                      {user.role === 'customer' ? booking.provider_name : booking.customer_name}
+                    <p className="text-sm font-medium text-gray-500 mb-1">Company Name</p>
+                    <p className="text-lg font-semibold text-gray-900">
+                      {user.role === 'customer' 
+                        ? (booking.provider_company || 'Not provided') 
+                        : (booking.customer_company || 'Not provided')
+                      }
                     </p>
-                    <p className="text-sm text-gray-500">
-                      {user.role === 'customer' ? 'Transport Provider' : 'Customer'}
-                    </p>
-                    {/* Company Information */}
-                    {(user.role === 'customer' ? booking.provider_company : booking.customer_company) && (
-                      <div className="flex items-center mt-1">
-                        <Building className="h-3 w-3 text-gray-400 mr-1" />
-                        <p className="text-xs text-blue-600 font-medium">
-                          {user.role === 'customer' ? booking.provider_company : booking.customer_company}
-                        </p>
-                      </div>
-                    )}
                   </div>
                 </div>
                 
-                {/* Contact Details Grid */}
-                <div className="grid grid-cols-1 gap-4">
-                  {/* Phone Contact */}
-                  <div className="bg-gray-50 rounded-lg p-4">
-                    <div className="flex items-center mb-2">
-                      <Phone className="h-4 w-4 text-blue-600 mr-2" />
-                      <span className="text-sm font-medium text-gray-900">Phone Number</span>
-                    </div>
-                    <p className="text-sm text-gray-700 ml-6">
-                      {user.role === 'customer' ? (booking.provider_phone || 'Not provided') : (booking.customer_phone || 'Not provided')}
-                    </p>
-                  </div>
-                  
-                  {/* Email Contact */}
-                  <div className="bg-gray-50 rounded-lg p-4">
-                    <div className="flex items-center mb-2">
-                      <Mail className="h-4 w-4 text-green-600 mr-2" />
-                      <span className="text-sm font-medium text-gray-900">Email Address</span>
-                    </div>
-                    <p className="text-sm text-gray-700 ml-6 break-all">
-                      {user.role === 'customer' ? booking.provider_email : booking.customer_email}
+                {/* Phone Number */}
+                <div className="flex items-center">
+                  <Phone className="h-5 w-5 text-green-600 mr-3" />
+                  <div>
+                    <p className="text-sm font-medium text-gray-500 mb-1">Phone Number</p>
+                    <p className="text-lg font-semibold text-gray-900">
+                      {user.role === 'customer' 
+                        ? (booking.provider_phone || 'Not provided') 
+                        : (booking.customer_phone || 'Not provided')
+                      }
                     </p>
                   </div>
                 </div>
