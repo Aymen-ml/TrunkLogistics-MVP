@@ -19,6 +19,7 @@ export const BookingProvider = ({ children }) => {
     setError(null);
     try {
       const response = await apiClient.get('/bookings');
+      console.log('Fetched bookings:', response.data.data?.bookings);
       setBookings(response.data.data?.bookings || []);
     } catch (err) {
       console.error('Failed to fetch bookings:', err);
@@ -34,8 +35,10 @@ export const BookingProvider = ({ children }) => {
 
   const updateBookingStatus = async (bookingId, status, notes) => {
     try {
+      console.log(`Updating booking ${bookingId} to ${status}`);
       const response = await apiClient.put(`/bookings/${bookingId}/status`, { status, notes });
       await fetchBookings();
+      console.log('Finished updating and fetching.');
       return response.data;
     } catch (err) {
       console.error('Failed to update booking status:', err);

@@ -36,7 +36,12 @@ const BookingDetail = () => {
   const { showSuccess, showError } = useToast();
   const [updating, setUpdating] = useState(false);
 
-  const booking = React.useMemo(() => bookings.find(b => b.id === id), [bookings, id]);
+  const booking = React.useMemo(() => {
+    console.log('useMemo in BookingDetail re-evaluating. Bookings count:', bookings.length);
+    return bookings.find(b => b.id === id);
+  }, [bookings, id]);
+
+  console.log('BookingDetail rendering. Booking object:', booking);
 
   const handleUpdateStatus = React.useCallback(async (newStatus) => {
     if (!window.confirm(`Are you sure you want to ${newStatus} this booking?`)) {
