@@ -64,6 +64,12 @@ const BookingList = () => {
     setFilters(prev => ({ ...prev, [name]: value }));
   };
 
+  const handleSearch = (e) => {
+    e.preventDefault();
+    // Filtering is handled automatically by the useMemo hook based on the filters state.
+    // This function is just here to prevent the default form submission.
+  };
+
   const clearFilters = () => {
     setFilters({
       status: 'all',
