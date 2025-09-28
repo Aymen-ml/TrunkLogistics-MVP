@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate, Link } from 'react-ro
 import { AuthProvider, useAuth } from './contexts/AuthContext'
 import { ToastProvider } from './contexts/ToastContext'
 import { NotificationProvider } from './contexts/NotificationContext'
+import { BookingProvider } from './contexts/BookingContext'
 import ErrorBoundary from './components/common/ErrorBoundary'
 import Navbar from './components/layout/Navbar'
 import ProtectedRoute from './components/common/ProtectedRoute'
