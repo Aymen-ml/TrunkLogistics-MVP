@@ -3,6 +3,7 @@
 import dotenv from 'dotenv';
 import { pool, query } from './src/config/database.js';
 import logger from './src/utils/logger.js';
+import { initializeRenderDatabase } from './src/database/init-render.js';
 
 dotenv.config();
 
@@ -13,13 +14,20 @@ const runStartupFixes = async () => {
     // Wait a bit for database to be ready
     await new Promise(resolve => setTimeout(resolve, 2000));
     
+    // Initialize database schema if needed
+    console.log('1. Initializing database schema...');
+    const dbInitialized = await initializeRenderDatabase();
+    if (!dbInitialized) {
+      console.log('⚠️ Database initialization failed, continuing...');
+    }
+    
     // Test database connection
-    console.log('1. Testing database connection...');
+    console.log('2. Testing database connection...');
     await query('SELECT NOW() as current_time');
     console.log('✅ Database connection successful');
 
     // Fix missing columns (safe operations)
-    console.log('2. Applying safe schema fixes...');
+    console.log('3. Applying safe schema fixes...');
     
     await query(`
       ALTER TABLE customer_profiles 

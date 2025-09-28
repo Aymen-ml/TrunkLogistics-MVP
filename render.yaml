@@ -37,3 +37,4 @@ databases:
     user: postgres
     region: oregon
     plan: free
+    postgresMajorVersion: 15

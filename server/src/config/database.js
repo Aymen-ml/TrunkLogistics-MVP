@@ -6,12 +6,23 @@ dotenv.config();
 
 const { Pool } = pg;
 
-// Direct database configuration (more reliable than pooler)
-const dbConfig = {
-  host: 'db.drqkwioicbcihakxgsoe.supabase.co',
-  port: 5432,
-  database: 'postgres',
-  user: 'postgres',
+// Database configuration that works with both Render and local development
+const dbConfig = process.env.DATABASE_URL ? {
+  connectionString: process.env.DATABASE_URL,
+  ssl: process.env.NODE_ENV === 'production' ? { 
+    rejectUnauthorized: false 
+  } : false,
+  // Simple pool settings
+  max: 5,
+  min: 1,
+  idleTimeoutMillis: 30000,
+  connectionTimeoutMillis: 15000
+} : {
+  // Fallback for local development or when DATABASE_URL is not set
+  host: process.env.DB_HOST || 'db.drqkwioicbcihakxgsoe.supabase.co',
+  port: parseInt(process.env.DB_PORT) || 5432,
+  database: process.env.DB_NAME || 'postgres',
+  user: process.env.DB_USER || 'postgres',
   password: process.env.DB_PASSWORD || 'igeem002',
   ssl: {
     rejectUnauthorized: false
