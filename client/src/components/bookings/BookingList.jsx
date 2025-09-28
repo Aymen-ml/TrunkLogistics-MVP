@@ -371,10 +371,30 @@ const BookingList = () => {
                             <div className="text-sm text-gray-500">
                               {VEHICLE_TYPE_LABELS[booking.truck_type] || booking.truck_type || 'Vehicle'}
                             </div>
-                            {booking.provider_company && (
+                            {/* Show company information based on user role */}
+                            {user.role === 'customer' && booking.provider_company && (
                               <div className="text-xs text-blue-600 font-medium mt-1">
                                 {booking.provider_company}
                               </div>
+                            )}
+                            {user.role === 'provider' && booking.customer_company && (
+                              <div className="text-xs text-green-600 font-medium mt-1">
+                                {booking.customer_company}
+                              </div>
+                            )}
+                            {user.role === 'admin' && (
+                              <>
+                                {booking.provider_company && (
+                                  <div className="text-xs text-blue-600 font-medium mt-1">
+                                    Provider: {booking.provider_company}
+                                  </div>
+                                )}
+                                {booking.customer_company && (
+                                  <div className="text-xs text-green-600 font-medium mt-1">
+                                    Customer: {booking.customer_company}
+                                  </div>
+                                )}
+                              </>
                             )}
                           </div>
                         </div>
