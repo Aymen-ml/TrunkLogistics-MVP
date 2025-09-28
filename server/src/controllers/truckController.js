@@ -151,15 +151,17 @@ export const createTruck = async (req, res) => {
     }
 
     // Prepare truck data - using camelCase to match Truck model expectations
+    const isRental = service_type === 'rental';
+
     const truckData = {
       providerId: providerProfile.id,
       truckType: truck_type,
       licensePlate: license_plate,
       capacityWeight: parseFloat(capacity_weight),
       capacityVolume: parseFloat(capacity_volume || 0),
-      pricePerKm: pricing_type === 'per_km' ? parseFloat(price_per_km || 0) : null,
-      fixedPrice: pricing_type === 'fixed' ? parseFloat(fixed_price || 0) : null,
-      pricingType: pricing_type,
+      pricePerKm: isRental ? null : (pricing_type === 'per_km' ? parseFloat(price_per_km || 0) : null),
+      fixedPrice: isRental ? null : (pricing_type === 'fixed' ? parseFloat(fixed_price || 0) : null),
+      pricingType: isRental ? null : pricing_type,
       year: parseInt(year, 10),
       make,
       model,
@@ -617,13 +619,15 @@ export const updateTruck = async (req, res) => {
       logger.error('Error parsing existing files:', e);
     }
 
+    const isRental = req.body.service_type === 'rental';
+
     const updates = {
       truck_type,
       capacity_weight: capacity_weight ? parseFloat(capacity_weight) : null,
       capacity_volume: capacity_volume ? parseFloat(capacity_volume) : null,
-      price_per_km: pricing_type === 'per_km' && price_per_km ? parseFloat(price_per_km) : null,
-      fixed_price: pricing_type === 'fixed' && fixed_price ? parseFloat(fixed_price) : null,
-      pricing_type,
+      price_per_km: isRental ? null : (pricing_type === 'per_km' && price_per_km ? parseFloat(price_per_km) : null),
+      fixed_price: isRental ? null : (pricing_type === 'fixed' && fixed_price ? parseFloat(fixed_price) : null),
+      pricing_type: isRental ? null : pricing_type,
       status,
       year: year ? parseInt(year, 10) : null,
       make,

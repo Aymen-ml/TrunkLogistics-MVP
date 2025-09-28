@@ -425,22 +425,24 @@ const TruckForm = () => {
       
       // Add truck data
       // Convert form data to snake_case for API
+      const isRental = formData.serviceType === 'rental';
+
       const truckData = {
         service_type: formData.serviceType,
         truck_type: formData.truckType,
         license_plate: formData.licensePlate,
         capacity_weight: formData.capacity_weight,
         capacity_volume: formData.capacity_volume,
-        pricing_type: formData.pricingType,
-        price_per_km: formData.pricingType === 'per_km' ? formData.pricePerKm : null,
-        fixed_price: formData.pricingType === 'fixed' ? formData.fixedPrice : null,
+        pricing_type: isRental ? null : formData.pricingType,
+        price_per_km: !isRental && formData.pricingType === 'per_km' ? formData.pricePerKm : null,
+        fixed_price: !isRental && formData.pricingType === 'fixed' ? formData.fixedPrice : null,
         year: formData.year,
         make: formData.make,
         model: formData.model,
         status: formData.status,
         // Rental-specific fields (exact database field names)
-        monthly_rate: formData.serviceType === 'rental' ? formData.monthly_rate : null,
-        work_location: formData.serviceType === 'rental' ? formData.work_location : null,
+        monthly_rate: isRental ? formData.monthly_rate : null,
+        work_location: isRental ? formData.work_location : null,
         // Driver information
         driver_name: formData.driverName,
         driver_phone: formData.driverPhone,
