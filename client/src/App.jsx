@@ -36,7 +36,8 @@ function App() {
       <ToastProvider>
         <AuthProvider>
           <NotificationProvider>
-            <Router>
+            <BookingProvider>
+              <Router>
               <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
                 <Navbar />
                 <Routes>
@@ -154,8 +155,9 @@ function App() {
                 <Route path="*" element={<Navigate to="/" replace />} />
               </Routes>
             </div>
-          </Router>
-          </NotificationProvider>
+            </Router>
+          </BookingProvider>
+        </NotificationProvider>
         </AuthProvider>
       </ToastProvider>
     </ErrorBoundary>

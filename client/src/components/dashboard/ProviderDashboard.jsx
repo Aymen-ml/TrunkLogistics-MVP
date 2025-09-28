@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
+import { useBookings } from '../../contexts/BookingContext';
 import EmailVerificationBanner from '../common/EmailVerificationBanner';
 import AdminApprovalBanner from '../common/AdminApprovalBanner';
 import { useNavigate } from 'react-router-dom';
@@ -57,7 +58,6 @@ const ProviderDashboard = () => {
   const [revenueData, setRevenueData] = useState([]);
   const [utilizationData, setUtilizationData] = useState([]);
   const [serviceFilter, setServiceFilter] = useState('all'); // all, transport, rental
-  const [recentBookings, setRecentBookings] = useState([]);
   const [trucks, setTrucks] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -67,18 +67,16 @@ const ProviderDashboard = () => {
 
   const fetchDashboardData = async () => {
     try {
-      // Fetch recent bookings, all bookings for stats, recent trucks, all trucks for stats  
-      const [recentBookingsResponse, allBookingsResponse, recentTrucksResponse] = await Promise.all([
-        apiClient.get('/bookings?limit=5'),
+      // Fetch all bookings for stats, recent trucks, all trucks for stats
+      // Recent bookings will come from the context
+      const [allBookingsResponse, recentTrucksResponse] = await Promise.all([
         apiClient.get('/bookings?limit=1000'), // Get all bookings for accurate stats
         apiClient.get('/trucks/my') // Get provider's own trucks
       ]);
 
-      const recentBookings = recentBookingsResponse.data.data?.bookings || [];
       const allBookings = allBookingsResponse.data.data?.bookings || [];
       const allTrucks = recentTrucksResponse.data.data?.trucks || []; // This endpoint returns all provider trucks
 
-      setRecentBookings(recentBookings);
       setTrucks(allTrucks); // Show all provider trucks, not limited to 5
 
       // Calculate stats from all data
@@ -225,7 +223,6 @@ const ProviderDashboard = () => {
     } catch (error) {
       console.error('Error fetching dashboard data:', error);
       // Set empty data on error to prevent crashes
-      setRecentBookings([]);
       setTrucks([]);
       setStats({
         totalTrucks: 0,
@@ -287,29 +284,22 @@ const ProviderDashboard = () => {
     ).join(' ');
   };
 
-  const handleBookingAction = async (bookingId, action) => {
-    try {
-      const status = action === 'accept' ? 'approved' : 'cancelled';
-      const notes = action === 'accept' ? 'Booking approved by provider' : 'Booking rejected by provider';
-      
-      const response = await apiClient.put(`/bookings/${bookingId}/status`, {
-        status,
-        notes
-      });
-      
-      if (response.data.success) {
-        // Optimistically update the UI for immediate feedback
-        setRecentBookings(prevBookings =>
-          prevBookings.map(booking =>
-            booking.id === bookingId ? { ...booking, status } : booking
-          )
-        );
+  const { 
+    bookings: allBookingsFromContext,
+    updateBookingStatus,
+    loading: bookingsLoading 
+  } = useBookings();
 
-        // Refresh the entire dashboard to ensure all stats are up-to-date
-        fetchDashboardData();
-      } else {
-        throw new Error(response.data.error || 'Failed to update booking');
-      }
+  const recentBookings = allBookingsFromContext.slice(0, 5);
+
+  const handleBookingAction = async (bookingId, action) => {
+    const status = action === 'accept' ? 'approved' : 'cancelled';
+    const notes = action === 'accept' ? 'Booking approved by provider' : 'Booking rejected by provider';
+    try {
+      await updateBookingStatus(bookingId, status, notes);
+      // The context handles the state update, so no need to refetch here
+      // but we can refetch the dashboard stats for consistency
+      fetchDashboardData();
     } catch (error) {
       console.error(`Error ${action}ing booking:`, error);
       const errorMessage = error.response?.data?.error || error.message || 'Unknown error';

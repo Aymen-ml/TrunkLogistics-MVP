@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
+import { useBookings } from '../../contexts/BookingContext';
 import { ArrowLeft, Save, Package, MapPin, Calendar, Truck, Settings, Clock } from 'lucide-react';
 import axios from 'axios';
 import { VEHICLE_TYPE_LABELS } from '../../constants/truckTypes';
@@ -8,6 +9,7 @@ import { VEHICLE_TYPE_LABELS } from '../../constants/truckTypes';
 const BookingForm = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
+  const { createBooking } = useBookings();
   const [searchParams] = useSearchParams();
   const preSelectedTruckId = searchParams.get('truck');
 
@@ -347,8 +349,7 @@ const BookingForm = () => {
         };
       }
 
-      const response = await axios.post('/bookings', submitData);
-      const booking = response.data.data?.booking;
+      const booking = await createBooking(submitData);
       if (!booking || !booking.id) {
         throw new Error('Invalid response from server - no booking information received');
       }

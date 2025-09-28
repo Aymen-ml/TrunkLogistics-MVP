@@ -19,91 +19,49 @@ import {
   DollarSign
 } from 'lucide-react';
 import { apiClient } from '../../utils/apiClient';
-import { VEHICLE_TYPE_LABELS } from '../../constants/truckTypes';
 import { useAuth } from '../../contexts/AuthContext';
+import { useBookings } from '../../contexts/BookingContext';
 
 const BookingList = () => {
   const { user } = useAuth();
-  const [bookings, setBookings] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const { bookings, loading, deleteBooking } = useBookings();
   const [filters, setFilters] = useState({
     status: 'all',
     search: '',
     date_from: '',
     date_to: '',
-    service_type: 'all', // all, transport, rental
-    provider: 'all' // all, or specific provider company
+    service_type: 'all',
+    provider: 'all'
   });
 
-  const fetchBookings = React.useCallback(async () => {
-    setLoading(true);
-    try {
-      const response = await apiClient.get('/bookings', {
-        params: {
-          ...filters,
-          ...(filters.status === 'all' && { status: undefined })
-        }
-      });
-      if (!response.data.data?.bookings) {
-        console.error('Invalid response format:', response.data);
-        throw new Error('Invalid response format from server');
-      }
-      
-      setBookings(response.data.data.bookings);
-    } catch (error) {
-      console.error('Error fetching bookings:', error);
-      console.error('Error details:', {
-        message: error.message,
-        response: error.response?.data,
-        status: error.response?.status
-      });
-    } finally {
-      setLoading(false);
-    }
-  }, [filters]);
+  const filteredBookings = React.useMemo(() => {
+    return bookings.filter(booking => {
+      const statusMatch = filters.status === 'all' || booking.status === filters.status;
+      const serviceMatch = filters.service_type === 'all' || booking.service_type === filters.service_type;
+      const providerMatch = filters.provider === 'all' || (booking.provider_company && booking.provider_company === filters.provider);
 
-  useEffect(() => {
-    fetchBookings();
-  }, [fetchBookings]);
+      const searchLower = filters.search.toLowerCase();
+      const searchMatch = filters.search === '' ||
+        (booking.reference && booking.reference.toLowerCase().includes(searchLower)) ||
+        (booking.pickup_city && booking.pickup_city.toLowerCase().includes(searchLower)) ||
+        (booking.destination_city && booking.destination_city.toLowerCase().includes(searchLower)) ||
+        (booking.work_address && booking.work_address.toLowerCase().includes(searchLower));
 
-  const oldFetchBookings = async () => {
-    try {
-      const response = await apiClient.get('/bookings', {
-        params: {
-          ...filters,
-          ...(filters.status === 'all' && { status: undefined })
-        }
-      });
-      if (!response.data.data?.bookings) {
-        console.error('Invalid response format:', response.data);
-        throw new Error('Invalid response format from server');
-      }
-      
-      setBookings(response.data.data.bookings);
-    } catch (error) {
-      console.error('Error fetching bookings:', error);
-      console.error('Error details:', {
-        message: error.message,
-        response: error.response?.data,
-        status: error.response?.status
-      });
-    } finally {
-      setLoading(false);
-    }
-  };
+      const bookingDate = new Date(booking.pickup_date || booking.rental_start_datetime);
+      const fromDate = filters.date_from ? new Date(filters.date_from) : null;
+      const toDate = filters.date_to ? new Date(filters.date_to) : null;
+      if (fromDate) fromDate.setHours(0, 0, 0, 0);
+      if (toDate) toDate.setHours(23, 59, 59, 999);
+
+      const dateMatch = (!fromDate || bookingDate >= fromDate) && (!toDate || bookingDate <= toDate);
+
+      return statusMatch && searchMatch && dateMatch && serviceMatch && providerMatch;
+    });
+  }, [bookings, filters]);
 
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
-    setFilters(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
-
-  const handleSearch = (e) => {
-    e.preventDefault();
-    setLoading(true);
-    fetchBookings();
+    setFilters(prev => ({ ...prev, [name]: value }));
   };
 
   const clearFilters = () => {
@@ -115,26 +73,16 @@ const BookingList = () => {
       service_type: 'all',
       provider: 'all'
     });
-    setLoading(true);
-    fetchBookings();
   };
 
   const handleDeleteBooking = async (bookingId) => {
-    if (!window.confirm('Are you sure you want to delete this booking? This action cannot be undone.')) {
-      return;
-    }
-    
-    try {
-      // Optimistic UI update for faster perceived response
-      setBookings(prevBookings => prevBookings.filter(booking => booking.id !== bookingId));
-      
-      await apiClient.delete(`/bookings/${bookingId}`);
-      // Optionally, you can refetch to ensure consistency, though the optimistic update handles the UI.
-      // fetchBookings();
-    } catch (error) {
-      console.error('Error deleting booking:', error);
-      const errorMessage = error.response?.data?.error || error.message || 'Unknown error';
-      alert(`Failed to delete booking: ${errorMessage}`);
+    if (window.confirm('Are you sure you want to delete this booking? This action cannot be undone.')) {
+      try {
+        await deleteBooking(bookingId);
+      } catch (error) {
+        console.error('Error deleting booking:', error);
+        alert(`Failed to delete booking: ${error.response?.data?.error || error.message}`);
+      }
     }
   };
 
