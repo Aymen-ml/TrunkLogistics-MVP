@@ -298,15 +298,14 @@ const ProviderDashboard = () => {
       });
       
       if (response.data.success) {
-        // Update the specific booking in the local state immediately
-        setDashboardData(prev => ({
-          ...prev,
-          recentBookings: prev.recentBookings.map(booking =>
+        // Optimistically update the UI for immediate feedback
+        setRecentBookings(prevBookings =>
+          prevBookings.map(booking =>
             booking.id === bookingId ? { ...booking, status } : booking
           )
-        }));
-        
-        // Also refresh full dashboard data for consistency
+        );
+
+        // Refresh the entire dashboard to ensure all stats are up-to-date
         fetchDashboardData();
       } else {
         throw new Error(response.data.error || 'Failed to update booking');

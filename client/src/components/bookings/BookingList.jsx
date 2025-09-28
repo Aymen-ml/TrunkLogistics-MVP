@@ -35,11 +35,38 @@ const BookingList = () => {
     provider: 'all' // all, or specific provider company
   });
 
+  const fetchBookings = React.useCallback(async () => {
+    setLoading(true);
+    try {
+      const response = await apiClient.get('/bookings', {
+        params: {
+          ...filters,
+          ...(filters.status === 'all' && { status: undefined })
+        }
+      });
+      if (!response.data.data?.bookings) {
+        console.error('Invalid response format:', response.data);
+        throw new Error('Invalid response format from server');
+      }
+      
+      setBookings(response.data.data.bookings);
+    } catch (error) {
+      console.error('Error fetching bookings:', error);
+      console.error('Error details:', {
+        message: error.message,
+        response: error.response?.data,
+        status: error.response?.status
+      });
+    } finally {
+      setLoading(false);
+    }
+  }, [filters]);
+
   useEffect(() => {
     fetchBookings();
-  }, []);
+  }, [fetchBookings]);
 
-  const fetchBookings = async () => {
+  const oldFetchBookings = async () => {
     try {
       const response = await apiClient.get('/bookings', {
         params: {
@@ -98,9 +125,12 @@ const BookingList = () => {
     }
     
     try {
+      // Optimistic UI update for faster perceived response
+      setBookings(prevBookings => prevBookings.filter(booking => booking.id !== bookingId));
+      
       await apiClient.delete(`/bookings/${bookingId}`);
-      // Refresh the bookings list after deletion
-      fetchBookings();
+      // Optionally, you can refetch to ensure consistency, though the optimistic update handles the UI.
+      // fetchBookings();
     } catch (error) {
       console.error('Error deleting booking:', error);
       const errorMessage = error.response?.data?.error || error.message || 'Unknown error';
