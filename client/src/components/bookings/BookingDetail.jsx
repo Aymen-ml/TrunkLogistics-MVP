@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
+import { useBookings } from '../../contexts/BookingContext';
 import { 
   ArrowLeft, 
   Calendar, 
@@ -30,68 +31,39 @@ const BookingDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { user } = useAuth();
-  const [booking, setBooking] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const { bookings, loading, updateBookingStatus: contextUpdate, deleteBooking: contextDelete } = useBookings();
   const [updating, setUpdating] = useState(false);
 
-  useEffect(() => {
-    fetchBooking();
-  }, [id]);
+  const booking = React.useMemo(() => bookings.find(b => b.id === id), [bookings, id]);
 
-  const fetchBooking = async () => {
-    try {
-      const response = await apiClient.get(`/bookings/${id}`);
-      setBooking(response.data.data.booking);
-    } catch (error) {
-      console.error('Error fetching booking:', error);
-      navigate('/bookings');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const updateBookingStatus = async (newStatus) => {
+  const handleUpdateStatus = async (newStatus) => {
     if (!window.confirm(`Are you sure you want to ${newStatus} this booking?`)) {
       return;
     }
-
+    setUpdating(true);
     try {
-      setUpdating(true);
-      const response = await apiClient.put(`/bookings/${id}/status`, { status: newStatus });
-      
-      if (response.data.success) {
-        // Update local state immediately for better UX
-        setBooking(prev => ({ ...prev, status: newStatus }));
-        
-        // Also refresh data from server to ensure consistency
-        await fetchBooking();
-      } else {
-        throw new Error(response.data.error || 'Failed to update status');
-      }
+      await contextUpdate(id, newStatus, `Status updated to ${newStatus}`);
     } catch (error) {
       console.error('Error updating booking status:', error);
-      console.error('Error details:', error.response?.data);
       alert(`Failed to update booking status: ${error.response?.data?.error || error.message}. Please try again.`);
     } finally {
       setUpdating(false);
     }
   };
 
-  const deleteBooking = async () => {
-    if (!window.confirm('Are you sure you want to delete this booking? This action cannot be undone.')) {
-      return;
-    }
-
-    try {
+  const handleDeleteBooking = async () => {
+    if (window.confirm('Are you sure you want to delete this booking? This action cannot be undone.')) {
       setUpdating(true);
-      await apiClient.delete(`/bookings/${id}`);
-      alert('Booking deleted successfully');
-      navigate('/bookings');
-    } catch (error) {
-      console.error('Error deleting booking:', error);
-      alert('Failed to delete booking. Please try again.');
-    } finally {
-      setUpdating(false);
+      try {
+        await contextDelete(id);
+        alert('Booking deleted successfully');
+        navigate('/bookings');
+      } catch (error) {
+        console.error('Error deleting booking:', error);
+        alert('Failed to delete booking. Please try again.');
+      } finally {
+        setUpdating(false);
+      }
     }
   };
 
@@ -152,7 +124,6 @@ const BookingDetail = () => {
     
     const actions = [];
     if (user.role === 'customer') {
-      // Customers can only edit and cancel bookings in pending_review status
       if (booking.status === 'pending_review') {
         actions.push(
           { 
@@ -167,56 +138,47 @@ const BookingDetail = () => {
             action: 'cancelled', 
             color: 'red',
             icon: <XCircle className="h-4 w-4 mr-1" />,
-            onClick: () => updateBookingStatus('cancelled')
+            onClick: () => handleUpdateStatus('cancelled')
           }
         );
       }
-      // Customers can confirm delivery when in_transit, which will complete the booking
       if (booking.status === 'in_transit') {
         actions.push({
           label: 'Confirm Delivery',
           action: 'completed',
           color: 'green',
           icon: <CheckCircle className="h-4 w-4 mr-1" />,
-          onClick: () => updateBookingStatus('completed')
+          onClick: () => handleUpdateStatus('completed')
         });
       }
-      
-      // Customers can return equipment when active (for rental)
       if (booking.status === 'active' && booking.service_type === 'rental') {
         actions.push({
           label: 'Return Equipment',
           action: 'completed',
           color: 'green',
           icon: <CheckCircle className="h-4 w-4 mr-1" />,
-          onClick: () => updateBookingStatus('completed')
+          onClick: () => handleUpdateStatus('completed')
         });
       }
-      
-      // Customers can delete bookings in pending_review, cancelled, or completed status
       if (['pending_review', 'cancelled', 'completed'].includes(booking.status)) {
         actions.push({
           label: 'Delete Booking',
           action: 'delete',
           color: 'red',
           icon: <Trash2 className="h-4 w-4 mr-1" />,
-          onClick: deleteBooking
+          onClick: handleDeleteBooking
         });
       }
     } else if (user.role === 'provider') {
-      // Always show review/communication actions for providers
       if (!['completed', 'cancelled'].includes(booking.status)) {
         actions.push({
           label: 'Send Message',
           action: 'message',
           color: 'green',
           icon: <MessageSquare className="h-4 w-4 mr-1" />,
-          // You can implement messaging functionality here
           onClick: () => alert('Messaging feature coming soon!')
         });
       }
-      
-      // Status-specific actions
       if (booking.status === 'pending_review') {
         actions.push(
           { 
@@ -224,14 +186,14 @@ const BookingDetail = () => {
             action: 'approved', 
             color: 'blue',
             icon: <CheckCircle className="h-4 w-4 mr-1" />,
-            onClick: () => updateBookingStatus('approved')
+            onClick: () => handleUpdateStatus('approved')
           },
           { 
             label: 'Reject Booking', 
             action: 'cancelled', 
             color: 'red',
             icon: <XCircle className="h-4 w-4 mr-1" />,
-            onClick: () => updateBookingStatus('cancelled')
+            onClick: () => handleUpdateStatus('cancelled')
           }
         );
       } else if (booking.status === 'approved') {
@@ -247,19 +209,16 @@ const BookingDetail = () => {
           action: nextStatus, 
           color: actionColor,
           icon: actionIcon,
-          onClick: () => updateBookingStatus(nextStatus)
+          onClick: () => handleUpdateStatus(nextStatus)
         });
       }
-      // Providers cannot complete trips - only customers can confirm delivery
-      
-      // Providers can delete cancelled or completed bookings
       if (['cancelled', 'completed'].includes(booking.status)) {
         actions.push({
           label: 'Delete Booking',
           action: 'delete',
           color: 'red',
           icon: <Trash2 className="h-4 w-4 mr-1" />,
-          onClick: deleteBooking
+          onClick: handleDeleteBooking
         });
       }
     }
