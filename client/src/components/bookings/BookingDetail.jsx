@@ -119,7 +119,7 @@ const BookingDetail = () => {
     return labels[status] || status;
   };
 
-    const getAvailableActions = () => {
+    const getAvailableActions = React.useMemo(() => {
     if (!booking) return [];
     
     const actions = [];
@@ -224,7 +224,7 @@ const BookingDetail = () => {
     }
     
     return actions;
-  };
+  }, [booking, user]);
 
   if (loading) {
     return (

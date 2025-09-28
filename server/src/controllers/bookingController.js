@@ -91,6 +91,21 @@ export const createBooking = async (req, res) => {
       });
     }
 
+    // Check if truck already has active bookings (for transport trucks)
+    if (service_type === 'transport') {
+      const existingBookings = await Booking.findByTruckId(truckId);
+      const activeBookings = existingBookings.filter(booking => 
+        !['cancelled', 'completed'].includes(booking.status)
+      );
+      
+      if (activeBookings.length > 0) {
+        return res.status(400).json({
+          success: false,
+          error: 'This truck already has an active booking and is not available for new requests'
+        });
+      }
+    }
+
     // Calculate estimated price and distance based on service type
     let distanceInfo;
     let estimatedDistance = null;

@@ -372,9 +372,7 @@ const BookingForm = () => {
       } else {
         setErrors({ general: 'Failed to create booking. Please try again.' });
       }
-      
-      // Log the full error state for debugging
-      } finally {
+    } finally {
       setLoading(false);
     }
   };

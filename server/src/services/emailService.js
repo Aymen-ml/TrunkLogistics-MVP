@@ -9,6 +9,13 @@ class EmailService {
 
   initialize() {
     try {
+      logger.info('Initializing email service...', {
+        emailService: process.env.EMAIL_SERVICE,
+        hasSendGridKey: !!process.env.SENDGRID_API_KEY,
+        hasEmailUser: !!process.env.EMAIL_USER,
+        hasEmailPassword: !!process.env.EMAIL_PASSWORD
+      });
+
       // Configure email transporter based on environment
       if (process.env.EMAIL_SERVICE === 'gmail') {
         this.transporter = nodemailer.createTransport({
@@ -18,7 +25,11 @@ class EmailService {
             pass: process.env.EMAIL_PASSWORD
           }
         });
+        logger.info('Gmail email service configured');
       } else if (process.env.EMAIL_SERVICE === 'sendgrid') {
+        if (!process.env.SENDGRID_API_KEY) {
+          throw new Error('SENDGRID_API_KEY environment variable is required for SendGrid service');
+        }
         this.transporter = nodemailer.createTransport({
           host: 'smtp.sendgrid.net',
           port: 587,
@@ -28,6 +39,7 @@ class EmailService {
             pass: process.env.SENDGRID_API_KEY
           }
         });
+        logger.info('SendGrid email service configured');
       } else {
         // Default SMTP configuration - support both SMTP_ and EMAIL_ prefixes
         this.transporter = nodemailer.createTransport({
@@ -39,11 +51,13 @@ class EmailService {
             pass: process.env.SMTP_PASSWORD || process.env.EMAIL_PASSWORD
           }
         });
+        logger.info('Default SMTP email service configured');
       }
 
       logger.info('Email service initialized successfully');
     } catch (error) {
       logger.error('Failed to initialize email service:', error);
+      this.transporter = null;
     }
   }
 
