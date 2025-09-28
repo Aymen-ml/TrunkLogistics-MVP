@@ -42,6 +42,7 @@ export const BookingProvider = ({ children }) => {
       return response.data;
     } catch (err) {
       console.error('Failed to update booking status:', err);
+      console.error('Full error object:', err.toJSON ? err.toJSON() : err);
       throw err;
     }
   };
