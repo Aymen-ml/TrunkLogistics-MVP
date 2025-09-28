@@ -23,7 +23,6 @@ export const BookingProvider = ({ children }) => {
     } catch (err) {
       console.error('Failed to fetch bookings:', err);
       setError(err);
-    } finally {
       setLoading(false);
     }
   }, [user]);
@@ -35,15 +34,15 @@ export const BookingProvider = ({ children }) => {
   const updateBookingStatus = async (bookingId, status, notes) => {
     const originalBookings = [...bookings];
     // Optimistic update
-    setBookings(prev => 
-      prev.map(b => (b.id === bookingId ? { ...b, status } : b))
+    setBookings(prev =>
+      prev.map(b => (String(b.id) === String(bookingId) ? { ...b, status } : b))
     );
 
     try {
       const response = await apiClient.put(`/bookings/${bookingId}/status`, { status, notes });
       // Replace with data from server for consistency
-      setBookings(prev => 
-        prev.map(b => (b.id === bookingId ? response.data.data.booking : b))
+      setBookings(prev =>
+        prev.map(b => (String(b.id) === String(bookingId) ? response.data.data.booking : b))
       );
       return response.data;
     } catch (err) {
