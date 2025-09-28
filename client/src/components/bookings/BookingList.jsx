@@ -21,6 +21,7 @@ import {
 import { apiClient } from '../../utils/apiClient';
 import { useAuth } from '../../contexts/AuthContext';
 import { useBookings } from '../../contexts/BookingContext';
+import { VEHICLE_TYPE_LABELS } from '../../constants/truckTypes';
 
 const BookingList = () => {
   const { user } = useAuth();
