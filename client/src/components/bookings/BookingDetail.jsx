@@ -49,7 +49,8 @@ const BookingDetail = () => {
     }
     setUpdating(true);
     try {
-      await contextUpdate(id, newStatus, `Status updated to ${newStatus}`);
+      const result = await contextUpdate(id, newStatus, `Status updated to ${newStatus}`);
+      console.log('Status update result:', result);
       // Show success message
       showSuccess(`Booking status updated to ${newStatus} successfully!`);
     } catch (error) {

@@ -37,12 +37,26 @@ export const BookingProvider = ({ children }) => {
     try {
       console.log(`Updating booking ${bookingId} to ${status}`);
       const response = await apiClient.put(`/bookings/${bookingId}/status`, { status, notes });
+      
+      // Optimistically update the local state immediately
+      const updatedBooking = response.data.data?.booking;
+      if (updatedBooking) {
+        setBookings(prevBookings => 
+          prevBookings.map(booking => 
+            booking.id === bookingId ? updatedBooking : booking
+          )
+        );
+      }
+      
+      // Also fetch fresh data from server to ensure consistency
       await fetchBookings();
       console.log('Finished updating and fetching.');
       return response.data;
     } catch (err) {
       console.error('Failed to update booking status:', err);
       console.error('Full error object:', err.toJSON ? err.toJSON() : err);
+      // Revert optimistic update on error by refetching
+      await fetchBookings();
       throw err;
     }
   };
