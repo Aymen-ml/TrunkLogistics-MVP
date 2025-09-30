@@ -556,26 +556,97 @@ const BookingDetail = () => {
             {/* Truck Information */}
             <div className="bg-white shadow-sm rounded-lg overflow-hidden">
               <div className="px-6 py-4 border-b border-gray-200">
-                <h3 className="text-lg font-medium text-gray-900">Truck Information</h3>
+                <h3 className="text-lg font-medium text-gray-900">
+                  {booking.service_type === 'rental' ? 'Equipment' : 'Truck'} Information
+                </h3>
               </div>
               <div className="px-6 py-6">
-                <div className="flex items-center">
-                  <Truck className="h-8 w-8 text-blue-600" />
+                <div className="flex items-center mb-4">
+                  {booking.service_type === 'rental' ? (
+                    <Settings className="h-8 w-8 text-orange-600" />
+                  ) : (
+                    <Truck className="h-8 w-8 text-blue-600" />
+                  )}
                   <div className="ml-4">
-                    <p className="text-lg font-medium text-gray-900">{booking.truck_license_plate || booking.license_plate}</p>
-                    <p className="text-sm text-gray-600">{booking.truck_make} {booking.truck_model}</p>
+                    <p className="text-lg font-medium text-gray-900">
+                      {booking.truck_license_plate || booking.license_plate || 'N/A'}
+                    </p>
+                    <p className="text-sm text-gray-600">
+                      {booking.truck_make && booking.truck_model 
+                        ? `${booking.truck_make} ${booking.truck_model}` 
+                        : 'Make & Model N/A'}
+                    </p>
                   </div>
                 </div>
                 
-                <div className="mt-4 grid grid-cols-2 gap-4 text-sm">
-                  <div className="flex justify-between">
-                    <span className="text-gray-500">Type:</span>
-                    <span className="font-medium">{booking.truck_type}</span>
+                <div className="space-y-3">
+                  {/* Vehicle Type */}
+                  <div className="flex justify-between items-center py-2 border-b border-gray-100">
+                    <span className="text-sm text-gray-500">Type:</span>
+                    <span className="text-sm font-medium text-gray-900">
+                      {booking.truck_type || 'N/A'}
+                    </span>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-500">Capacity:</span>
-                    <span className="font-medium">{booking.truck_capacity?.toLocaleString() || booking.capacity_weight?.toLocaleString()} kg</span>
+                  
+                  {/* Capacity Weight */}
+                  <div className="flex justify-between items-center py-2 border-b border-gray-100">
+                    <span className="text-sm text-gray-500">
+                      {booking.service_type === 'rental' ? 'Operating Weight:' : 'Capacity:'}
+                    </span>
+                    <span className="text-sm font-medium text-gray-900">
+                      {(booking.truck_capacity?.toLocaleString() || booking.capacity_weight?.toLocaleString() || 'N/A')} 
+                      {(booking.truck_capacity || booking.capacity_weight) && ' kg'}
+                    </span>
                   </div>
+                  
+                  {/* Year */}
+                  {(booking.truck_year || booking.year) && (
+                    <div className="flex justify-between items-center py-2 border-b border-gray-100">
+                      <span className="text-sm text-gray-500">Year:</span>
+                      <span className="text-sm font-medium text-gray-900">
+                        {booking.truck_year || booking.year}
+                      </span>
+                    </div>
+                  )}
+                  
+                  {/* Volume Capacity */}
+                  {(booking.capacity_volume) && (
+                    <div className="flex justify-between items-center py-2 border-b border-gray-100">
+                      <span className="text-sm text-gray-500">Volume:</span>
+                      <span className="text-sm font-medium text-gray-900">
+                        {booking.capacity_volume} m³
+                      </span>
+                    </div>
+                  )}
+                  
+                  {/* Pricing Information */}
+                  {booking.pricing_type && (
+                    <div className="flex justify-between items-center py-2 border-b border-gray-100">
+                      <span className="text-sm text-gray-500">Pricing Type:</span>
+                      <span className="text-sm font-medium text-gray-900">
+                        {booking.pricing_type === 'fixed' ? 'Fixed Price' : 'Per Kilometer'}
+                      </span>
+                    </div>
+                  )}
+                  
+                  {/* Price per km or Fixed price */}
+                  {booking.pricing_type === 'per_km' && booking.price_per_km && (
+                    <div className="flex justify-between items-center py-2 border-b border-gray-100">
+                      <span className="text-sm text-gray-500">Rate:</span>
+                      <span className="text-sm font-medium text-gray-900">
+                        ${booking.price_per_km}/km
+                      </span>
+                    </div>
+                  )}
+                  
+                  {booking.pricing_type === 'fixed' && booking.fixed_price && (
+                    <div className="flex justify-between items-center py-2 border-b border-gray-100">
+                      <span className="text-sm text-gray-500">Fixed Rate:</span>
+                      <span className="text-sm font-medium text-gray-900">
+                        ${booking.fixed_price}
+                      </span>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
@@ -609,37 +680,51 @@ const BookingDetail = () => {
               </h3>
               <div className="space-y-4">
                 {/* Company Name */}
-                <div className="flex items-center">
-                  <Building className="h-5 w-5 text-blue-600 mr-3" />
-                  <div>
-                    <p className="text-sm font-medium text-gray-500 mb-1">Company Name</p>
-                    <p className="text-lg font-semibold text-gray-900">
-                      {user.role === 'customer' 
-                        ? (booking.provider_company || 'Not provided') 
-                        : (booking.customer_company || 'Not provided')
-                      }
-                    </p>
+                <div>
+                  <div className="flex items-center mb-2">
+                    <Building className="h-5 w-5 text-blue-600 mr-2" />
+                    <p className="text-sm font-medium text-gray-500">Company</p>
                   </div>
+                  <p className="text-base font-semibold text-gray-900 ml-7">
+                    {user.role === 'customer' 
+                      ? (booking.provider_company || 'Not provided') 
+                      : (booking.customer_company || 'Not provided')
+                    }
+                  </p>
+                </div>
+                
+                {/* Contact Person Name */}
+                <div>
+                  <div className="flex items-center mb-2">
+                    <User className="h-5 w-5 text-purple-600 mr-2" />
+                    <p className="text-sm font-medium text-gray-500">Contact Person</p>
+                  </div>
+                  <p className="text-base font-semibold text-gray-900 ml-7">
+                    {user.role === 'customer' 
+                      ? (booking.provider_name || `${booking.provider_first_name || ''} ${booking.provider_last_name || ''}`.trim() || 'Not provided')
+                      : (booking.customer_name || `${booking.customer_first_name || ''} ${booking.customer_last_name || ''}`.trim() || 'Not provided')
+                    }
+                  </p>
                 </div>
                 
                 {/* Phone Number */}
-                <div className="flex items-center">
-                  <Phone className="h-5 w-5 text-green-600 mr-3" />
-                  <div>
-                    <p className="text-sm font-medium text-gray-500 mb-1">Phone Number</p>
-                    <p className="text-lg font-semibold text-gray-900">
-                      {user.role === 'customer' 
-                        ? (booking.provider_phone || 'Not provided') 
-                        : (booking.customer_phone || 'Not provided')
-                      }
-                    </p>
+                <div>
+                  <div className="flex items-center mb-2">
+                    <Phone className="h-5 w-5 text-green-600 mr-2" />
+                    <p className="text-sm font-medium text-gray-500">Phone Number</p>
                   </div>
+                  <p className="text-base font-semibold text-gray-900 ml-7">
+                    {user.role === 'customer' 
+                      ? (booking.provider_phone || 'Not provided') 
+                      : (booking.customer_phone || 'Not provided')
+                    }
+                  </p>
                 </div>
               </div>
               
               <button 
                 onClick={() => alert('Messaging feature coming soon!')}
-                className="mt-4 w-full inline-flex justify-center items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
+                className="mt-6 w-full inline-flex justify-center items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
               >
                 <MessageSquare className="h-4 w-4 mr-2" />
                 Send Message
