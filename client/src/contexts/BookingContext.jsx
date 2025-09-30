@@ -13,16 +13,20 @@ export const BookingProvider = ({ children }) => {
   const { user } = useAuth();
 
   const fetchBookings = useCallback(async () => {
-    if (!user) return;
+    if (!user) {
+      setLoading(false);
+      return;
+    }
 
     setLoading(true);
     setError(null);
     try {
       const response = await apiClient.get('/bookings');
-      console.log('Fetched bookings:', response.data.data?.bookings);
-      setBookings(response.data.data?.bookings || []);
+      const fetchedBookings = response.data.data?.bookings || [];
+      console.log('✅ Fetched bookings:', fetchedBookings.length);
+      setBookings(fetchedBookings);
     } catch (err) {
-      console.error('Failed to fetch bookings:', err);
+      console.error('❌ Failed to fetch bookings:', err);
       setError(err);
     } finally {
       setLoading(false);
@@ -33,32 +37,44 @@ export const BookingProvider = ({ children }) => {
     fetchBookings();
   }, [fetchBookings]);
 
-  const updateBookingStatus = async (bookingId, status, notes) => {
+  const updateBookingStatus = async (bookingId, status, notes = '') => {
     try {
-      console.log(`Updating booking ${bookingId} to ${status}`);
-      const response = await apiClient.put(`/bookings/${bookingId}/status`, { status, notes });
+      console.log(`🔄 Updating booking ${bookingId} to status: ${status}`);
       
-      // Fetch the complete updated booking with all joined fields
-      const bookingDetailResponse = await apiClient.get(`/bookings/${bookingId}`);
-      const completeUpdatedBooking = bookingDetailResponse.data.data?.booking;
+      // Step 1: Update the status on the server
+      await apiClient.put(`/bookings/${bookingId}/status`, { status, notes });
+      console.log('✅ Status updated on server');
       
-      if (completeUpdatedBooking) {
-        // Update local state with the complete booking data
-        setBookings(prevBookings => 
-          prevBookings.map(booking => 
-            booking.id === bookingId ? completeUpdatedBooking : booking
-          )
-        );
-        console.log('Booking updated in local state:', completeUpdatedBooking);
+      // Step 2: Fetch the complete updated booking with all joined fields
+      const bookingResponse = await apiClient.get(`/bookings/${bookingId}`);
+      const updatedBooking = bookingResponse.data.data?.booking;
+      
+      if (!updatedBooking) {
+        throw new Error('Failed to fetch updated booking');
       }
       
-      console.log('Finished updating booking status.');
-      return response.data;
+      console.log('✅ Fetched complete updated booking:', updatedBooking);
+      
+      // Step 3: Update the local state immediately
+      setBookings(prevBookings => {
+        const newBookings = prevBookings.map(booking => 
+          booking.id === bookingId ? updatedBooking : booking
+        );
+        console.log('✅ Local state updated, new bookings count:', newBookings.length);
+        return newBookings;
+      });
+      
+      console.log('✅ Booking status update complete');
+      return { success: true, booking: updatedBooking };
+      
     } catch (err) {
-      console.error('Failed to update booking status:', err);
-      console.error('Full error object:', err.toJSON ? err.toJSON() : err);
-      // Revert optimistic update on error by refetching
+      console.error('❌ Failed to update booking status:', err);
+      console.error('Error details:', err.response?.data || err.message);
+      
+      // On error, refetch all bookings to ensure consistency
+      console.log('🔄 Refetching all bookings due to error...');
       await fetchBookings();
+      
       throw err;
     }
   };
@@ -67,7 +83,10 @@ export const BookingProvider = ({ children }) => {
     try {
       const response = await apiClient.post('/bookings', bookingData);
       const newBooking = response.data.data.booking;
+      
+      // Add the new booking to the beginning of the list
       setBookings(prev => [newBooking, ...prev]);
+      
       return newBooking;
     } catch (err) {
       console.error('Failed to create booking:', err);
@@ -78,7 +97,10 @@ export const BookingProvider = ({ children }) => {
   const deleteBooking = async (bookingId) => {
     try {
       await apiClient.delete(`/bookings/${bookingId}`);
-      await fetchBookings();
+      
+      // Remove the booking from local state
+      setBookings(prev => prev.filter(b => b.id !== bookingId));
+      
     } catch (err) {
       console.error('Failed to delete booking:', err);
       throw err;

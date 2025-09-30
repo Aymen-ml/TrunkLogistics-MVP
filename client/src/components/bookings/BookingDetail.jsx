@@ -26,51 +26,56 @@ import {
   Weight,
   FileText
 } from 'lucide-react';
-import { apiClient } from '../../utils/apiClient';
 
 const BookingDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { user } = useAuth();
-  const { bookings, loading, updateBookingStatus: contextUpdate, deleteBooking: contextDelete } = useBookings();
+  const { bookings, loading, updateBookingStatus, deleteBooking } = useBookings();
   const { showSuccess, showError } = useToast();
   const [updating, setUpdating] = useState(false);
 
-  const booking = React.useMemo(() => {
-    console.log('useMemo in BookingDetail re-evaluating. Bookings count:', bookings.length);
-    const foundBooking = bookings.find(b => b.id === id);
-    console.log('Found booking:', foundBooking);
-    return foundBooking;
-  }, [bookings, id]);
+  // Find the booking from context
+  const booking = bookings.find(b => b.id === id);
 
-  console.log('BookingDetail rendering. Booking object:', booking);
-  console.log('Current booking status:', booking?.status);
+  // Log for debugging
+  useEffect(() => {
+    console.log('📍 BookingDetail - Current booking:', booking);
+    console.log('📍 BookingDetail - Booking status:', booking?.status);
+    console.log('📍 BookingDetail - Total bookings in context:', bookings.length);
+  }, [booking, bookings]);
 
-  const handleUpdateStatus = React.useCallback(async (newStatus) => {
-    if (!window.confirm(`Are you sure you want to ${newStatus} this booking?`)) {
+  const handleUpdateStatus = async (newStatus) => {
+    const confirmMessage = `Are you sure you want to change the status to ${newStatus.replace('_', ' ')}?`;
+    if (!window.confirm(confirmMessage)) {
       return;
     }
+
     setUpdating(true);
     try {
-      const result = await contextUpdate(id, newStatus, `Status updated to ${newStatus}`);
-      console.log('Status update result:', result);
-      // Show success message
-      showSuccess(`Booking status updated to ${newStatus} successfully!`);
+      console.log(`🔄 Initiating status update to: ${newStatus}`);
+      
+      await updateBookingStatus(id, newStatus, `Status updated to ${newStatus}`);
+      
+      console.log('✅ Status update successful');
+      showSuccess(`Booking status updated to ${newStatus.replace('_', ' ')} successfully!`);
+      
     } catch (error) {
-      console.error('Error updating booking status:', error);
-      showError(`Failed to update booking status: ${error.response?.data?.error || error.message}. Please try again.`);
+      console.error('❌ Error updating booking status:', error);
+      showError(`Failed to update booking status: ${error.response?.data?.error || error.message}`);
     } finally {
       setUpdating(false);
     }
-  }, [id, contextUpdate, showSuccess, showError]);
+  };
 
-  const handleDeleteBooking = React.useCallback(async () => {
+  const handleDeleteBooking = async () => {
     if (!window.confirm('Are you sure you want to delete this booking? This action cannot be undone.')) {
       return;
     }
+
     setUpdating(true);
     try {
-      await contextDelete(id);
+      await deleteBooking(id);
       showSuccess('Booking deleted successfully');
       navigate('/bookings');
     } catch (error) {
@@ -79,7 +84,7 @@ const BookingDetail = () => {
     } finally {
       setUpdating(false);
     }
-  }, [id, contextDelete, showSuccess, showError, navigate]);
+  };
 
   const getStatusIcon = (status, serviceType) => {
     switch (status) {
@@ -133,12 +138,13 @@ const BookingDetail = () => {
     return labels[status] || status;
   };
 
-    const getAvailableActions = React.useMemo(() => {
-    console.log('getAvailableActions recalculating with booking status:', booking?.status);
+  const getAvailableActions = () => {
     if (!booking) return [];
     
     const actions = [];
+    
     if (user.role === 'customer') {
+      // Customer actions
       if (booking.status === 'pending_review') {
         actions.push(
           { 
@@ -157,6 +163,7 @@ const BookingDetail = () => {
           }
         );
       }
+      
       if (booking.status === 'in_transit') {
         actions.push({
           label: 'Confirm Delivery',
@@ -166,6 +173,7 @@ const BookingDetail = () => {
           onClick: () => handleUpdateStatus('completed')
         });
       }
+      
       if (booking.status === 'active' && booking.service_type === 'rental') {
         actions.push({
           label: 'Return Equipment',
@@ -175,6 +183,7 @@ const BookingDetail = () => {
           onClick: () => handleUpdateStatus('completed')
         });
       }
+      
       if (['pending_review', 'cancelled', 'completed'].includes(booking.status)) {
         actions.push({
           label: 'Delete Booking',
@@ -185,6 +194,7 @@ const BookingDetail = () => {
         });
       }
     } else if (user.role === 'provider') {
+      // Provider actions
       if (!['completed', 'cancelled'].includes(booking.status)) {
         actions.push({
           label: 'Send Message',
@@ -194,6 +204,7 @@ const BookingDetail = () => {
           onClick: () => alert('Messaging feature coming soon!')
         });
       }
+      
       if (booking.status === 'pending_review') {
         actions.push(
           { 
@@ -227,6 +238,7 @@ const BookingDetail = () => {
           onClick: () => handleUpdateStatus(nextStatus)
         });
       }
+      
       if (['cancelled', 'completed'].includes(booking.status)) {
         actions.push({
           label: 'Delete Booking',
@@ -239,7 +251,27 @@ const BookingDetail = () => {
     }
     
     return actions;
-  }, [booking, booking?.status, booking?.service_type, user.role, handleUpdateStatus, handleDeleteBooking]);
+  };
+
+  const getButtonClasses = (color) => {
+    const baseClasses = "inline-flex items-center px-3 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200";
+    switch(color) {
+      case 'blue':
+        return `${baseClasses} bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400`;
+      case 'green':
+        return `${baseClasses} bg-green-600 hover:bg-green-700 disabled:bg-green-400`;
+      case 'red':
+        return `${baseClasses} bg-red-600 hover:bg-red-700 disabled:bg-red-400`;
+      case 'purple':
+        return `${baseClasses} bg-purple-600 hover:bg-purple-700 disabled:bg-purple-400`;
+      case 'orange':
+        return `${baseClasses} bg-orange-600 hover:bg-orange-700 disabled:bg-orange-400`;
+      case 'yellow':
+        return `${baseClasses} bg-yellow-600 hover:bg-yellow-700 disabled:bg-yellow-400`;
+      default:
+        return `${baseClasses} bg-gray-600 hover:bg-gray-700 disabled:bg-gray-400`;
+    }
+  };
 
   if (loading) {
     return (
@@ -265,6 +297,8 @@ const BookingDetail = () => {
       </div>
     );
   }
+
+  const availableActions = getAvailableActions();
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -310,42 +344,22 @@ const BookingDetail = () => {
               </div>
             </div>
             
-            <div key={`actions-${booking.status}-${booking.id}`} className="mt-4 sm:mt-0 flex flex-wrap gap-2">
-              {getAvailableActions().map((action) => {
-                const getButtonClasses = (color) => {
-                  const baseClasses = "inline-flex items-center px-3 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200";
-                  switch(color) {
-                    case 'blue':
-                      return `${baseClasses} bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400`;
-                    case 'green':
-                      return `${baseClasses} bg-green-600 hover:bg-green-700 disabled:bg-green-400`;
-                    case 'red':
-                      return `${baseClasses} bg-red-600 hover:bg-red-700 disabled:bg-red-400`;
-                    case 'purple':
-                      return `${baseClasses} bg-purple-600 hover:bg-purple-700 disabled:bg-purple-400`;
-                    case 'yellow':
-                      return `${baseClasses} bg-yellow-600 hover:bg-yellow-700 disabled:bg-yellow-400`;
-                    default:
-                      return `${baseClasses} bg-gray-600 hover:bg-gray-700 disabled:bg-gray-400`;
-                  }
-                };
-                
-                return (
-                  <button
-                    key={action.action}
-                    onClick={action.onClick || (() => action.path && navigate(action.path))}
-                    disabled={updating}
-                    className={getButtonClasses(action.color)}
-                  >
-                    {updating ? (
-                      <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-                    ) : (
-                      action.icon && <span className="mr-1">{action.icon}</span>
-                    )}
-                    {updating ? 'Updating...' : action.label}
-                  </button>
-                );
-              })}
+            <div className="mt-4 sm:mt-0 flex flex-wrap gap-2">
+              {availableActions.map((action, index) => (
+                <button
+                  key={`${action.action}-${index}`}
+                  onClick={action.onClick || (() => action.path && navigate(action.path))}
+                  disabled={updating}
+                  className={getButtonClasses(action.color)}
+                >
+                  {updating ? (
+                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                  ) : (
+                    action.icon && <span className="mr-1">{action.icon}</span>
+                  )}
+                  {updating ? 'Updating...' : action.label}
+                </button>
+              ))}
             </div>
           </div>
         </div>
@@ -500,13 +514,13 @@ const BookingDetail = () => {
                       </div>
                     )}
 
-                    {booking.requires_operator !== undefined && (
+                    {booking.operator_required !== undefined && (
                       <div className="flex items-center">
                         <User className="h-4 w-4 text-gray-400 mr-2" />
                         <div>
                           <p className="text-sm font-medium text-gray-900">Operator Required</p>
                           <p className="text-sm text-gray-600">
-                            {booking.requires_operator ? 'Yes' : 'No'}
+                            {booking.operator_required ? 'Yes' : 'No'}
                           </p>
                         </div>
                       </div>
@@ -548,7 +562,7 @@ const BookingDetail = () => {
                 <div className="flex items-center">
                   <Truck className="h-8 w-8 text-blue-600" />
                   <div className="ml-4">
-                    <p className="text-lg font-medium text-gray-900">{booking.truck_license_plate}</p>
+                    <p className="text-lg font-medium text-gray-900">{booking.truck_license_plate || booking.license_plate}</p>
                     <p className="text-sm text-gray-600">{booking.truck_make} {booking.truck_model}</p>
                   </div>
                 </div>
@@ -560,7 +574,7 @@ const BookingDetail = () => {
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-500">Capacity:</span>
-                    <span className="font-medium">{booking.truck_capacity?.toLocaleString()} kg</span>
+                    <span className="font-medium">{booking.truck_capacity?.toLocaleString() || booking.capacity_weight?.toLocaleString()} kg</span>
                   </div>
                 </div>
               </div>
@@ -646,7 +660,7 @@ const BookingDetail = () => {
                   </div>
                 </div>
                 
-                {booking.status !== 'pending' && (
+                {booking.status !== 'pending_review' && (
                   <div className="flex items-center text-sm">
                     <div className="flex-shrink-0 w-2 h-2 bg-green-600 rounded-full"></div>
                     <div className="ml-3">

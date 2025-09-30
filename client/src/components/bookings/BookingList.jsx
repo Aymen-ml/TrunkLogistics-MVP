@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   Package, 
@@ -12,13 +12,11 @@ import {
   Filter,
   Search,
   Settings,
-  AlertTriangle,
   Plus,
   Eye,
   Trash2,
   DollarSign
 } from 'lucide-react';
-import { apiClient } from '../../utils/apiClient';
 import { useAuth } from '../../contexts/AuthContext';
 import { useBookings } from '../../contexts/BookingContext';
 import { useToast } from '../../contexts/ToastContext';
@@ -38,7 +36,7 @@ const BookingList = () => {
     provider: 'all'
   });
 
-  const filteredBookings = React.useMemo(() => {
+  const filteredBookings = useMemo(() => {
     return bookings.filter(booking => {
       const statusMatch = filters.status === 'all' || booking.status === filters.status;
       const serviceMatch = filters.service_type === 'all' || booking.service_type === filters.service_type;
@@ -70,8 +68,6 @@ const BookingList = () => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    // Filtering is handled automatically by the useMemo hook based on the filters state.
-    // This function is just here to prevent the default form submission.
   };
 
   const clearFilters = () => {
@@ -92,8 +88,6 @@ const BookingList = () => {
     setDeletingBookingId(bookingId);
     try {
       await deleteBooking(bookingId);
-      // Refresh the bookings list after successful deletion
-      await fetchBookings();
       showSuccess('Booking deleted successfully!');
     } catch (error) {
       console.error('Error deleting booking:', error);
@@ -189,7 +183,7 @@ const BookingList = () => {
         </div>
 
         {/* Filters */}
-        <div className="bg-white shadow rounded-lg mb-8">
+        <div className="bg-white shadow-sm rounded-lg mb-8">
           <div className="px-4 py-5 sm:p-6">
             <form onSubmit={handleSearch} className="space-y-4 md:space-y-0 md:grid md:grid-cols-7 md:gap-4 md:items-end">
               <div className="md:col-span-2">
@@ -228,6 +222,7 @@ const BookingList = () => {
                   <option value="pending_review">Pending Review</option>
                   <option value="approved">Approved</option>
                   <option value="in_transit">In Transit</option>
+                  <option value="active">Active</option>
                   <option value="completed">Completed</option>
                   <option value="cancelled">Cancelled</option>
                 </select>
@@ -262,7 +257,6 @@ const BookingList = () => {
                   className="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
                 >
                   <option value="all">All Providers</option>
-                  {/* Provider options will be populated dynamically */}
                   {bookings && [...new Set(bookings.map(b => b.provider_company).filter(Boolean))].map(company => (
                     <option key={company} value={company}>{company}</option>
                   ))}
@@ -344,14 +338,14 @@ const BookingList = () => {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {bookings.length === 0 ? (
+                {filteredBookings.length === 0 ? (
                   <tr>
                     <td colSpan="6" className="px-6 py-4 text-center text-sm text-gray-500">
                       No bookings found
                     </td>
                   </tr>
                 ) : (
-                  bookings.map((booking) => (
+                  filteredBookings.map((booking) => (
                     <tr key={booking.id}>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="flex items-center">
@@ -371,7 +365,6 @@ const BookingList = () => {
                             <div className="text-sm text-gray-500">
                               {VEHICLE_TYPE_LABELS[booking.truck_type] || booking.truck_type || 'Vehicle'}
                             </div>
-                            {/* Show company information based on user role */}
                             {user.role === 'customer' && booking.provider_company && (
                               <div className="text-xs text-blue-600 font-medium mt-1">
                                 {booking.provider_company}
@@ -467,8 +460,8 @@ const BookingList = () => {
                             View Details
                           </Link>
                           {(
-                            (user.role === 'provider' && booking.status === 'cancelled') ||
-                            (user.role === 'customer' && ['pending_review', 'cancelled'].includes(booking.status))
+                            (user.role === 'provider' && ['cancelled', 'completed'].includes(booking.status)) ||
+                            (user.role === 'customer' && ['pending_review', 'cancelled', 'completed'].includes(booking.status))
                           ) && (
                             <button
                               onClick={() => handleDeleteBooking(booking.id)}

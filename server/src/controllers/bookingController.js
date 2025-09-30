@@ -494,18 +494,24 @@ export const updateBookingStatus = async (req, res) => {
     const { id } = req.params;
     const { status, notes } = req.body;
 
+    logger.info(`🔄 Status update request for booking ${id} to ${status} by user ${req.user.id} (${req.user.role})`);
+
     const booking = await Booking.findById(id);
     if (!booking) {
+      logger.warn(`❌ Booking ${id} not found`);
       return res.status(404).json({
         success: false,
         error: 'Booking not found'
       });
     }
 
+    logger.info(`📋 Current booking status: ${booking.status}`);
+
     // Check permissions based on role and booking status
     if (req.user.role === 'provider') {
       const providerProfile = await ProviderProfile.findByUserId(req.user.id);
       if (!providerProfile || booking.provider_id !== providerProfile.id) {
+        logger.warn(`❌ Provider ${req.user.id} not authorized for booking ${id}`);
         return res.status(403).json({
           success: false,
           error: 'You can only update status of bookings assigned to you'
@@ -522,6 +528,7 @@ export const updateBookingStatus = async (req, res) => {
     } else if (req.user.role === 'customer') {
       const customerProfile = await CustomerProfile.findByUserId(req.user.id);
       if (!customerProfile || booking.customer_id !== customerProfile.id) {
+        logger.warn(`❌ Customer ${req.user.id} not authorized for booking ${id}`);
         return res.status(403).json({
           success: false,
           error: 'You can only update status of your own bookings'
@@ -556,11 +563,23 @@ export const updateBookingStatus = async (req, res) => {
       }
     }
 
-    // Update booking status
+    // Update booking status in database
+    logger.info(`💾 Updating booking ${id} status from ${booking.status} to ${status}`);
     await Booking.updateStatus(id, status, req.user.id);
     
     // Fetch the complete updated booking with all joined fields
+    logger.info(`📥 Fetching complete updated booking data for ${id}`);
     const updatedBooking = await Booking.findById(id);
+    
+    if (!updatedBooking) {
+      logger.error(`❌ Failed to fetch updated booking ${id}`);
+      return res.status(500).json({
+        success: false,
+        error: 'Failed to fetch updated booking'
+      });
+    }
+    
+    logger.info(`✅ Successfully fetched updated booking ${id} with status ${updatedBooking.status}`);
 
     // Update truck status based on booking status change
     try {
