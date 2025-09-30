@@ -51,11 +51,13 @@ const updateBookingStatus = async (bookingId, status, notes) => {
 };
 ```
 
-### 2. Enhanced Logging in BookingDetail (`client/src/components/bookings/BookingDetail.jsx`)
+### 2. Fixed Button Rendering in BookingDetail (`client/src/components/bookings/BookingDetail.jsx`)
 
 **Changes Made:**
-- Added logging to track the status update result
-- This helps with debugging and ensures we can see when updates complete
+- **Fixed useMemo dependencies**: Added explicit dependencies `booking?.status` and `booking?.service_type` to ensure the available actions recalculate when these values change
+- **Added unique key to button container**: The button container now has a key that includes the booking status and ID (`key={`actions-${booking.status}-${booking.id}`}`), forcing React to completely re-render the buttons when the status changes
+- **Added debug logging**: Console logs track when actions are recalculated and when status updates complete
+- This ensures buttons update immediately without requiring a page refresh
 
 ## How It Works Now
 

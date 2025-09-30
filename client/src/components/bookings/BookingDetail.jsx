@@ -131,6 +131,7 @@ const BookingDetail = () => {
   };
 
     const getAvailableActions = React.useMemo(() => {
+    console.log('getAvailableActions recalculating with booking status:', booking?.status);
     if (!booking) return [];
     
     const actions = [];
@@ -235,7 +236,7 @@ const BookingDetail = () => {
     }
     
     return actions;
-  }, [booking, user, handleUpdateStatus, handleDeleteBooking]);
+  }, [booking, booking?.status, booking?.service_type, user.role, handleUpdateStatus, handleDeleteBooking]);
 
   if (loading) {
     return (
@@ -306,7 +307,7 @@ const BookingDetail = () => {
               </div>
             </div>
             
-            <div className="mt-4 sm:mt-0 flex flex-wrap gap-2">
+            <div key={`actions-${booking.status}-${booking.id}`} className="mt-4 sm:mt-0 flex flex-wrap gap-2">
               {getAvailableActions().map((action) => {
                 const getButtonClasses = (color) => {
                   const baseClasses = "inline-flex items-center px-3 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200";
