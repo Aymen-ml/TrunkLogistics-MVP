@@ -38,10 +38,13 @@ const BookingDetail = () => {
 
   const booking = React.useMemo(() => {
     console.log('useMemo in BookingDetail re-evaluating. Bookings count:', bookings.length);
-    return bookings.find(b => b.id === id);
+    const foundBooking = bookings.find(b => b.id === id);
+    console.log('Found booking:', foundBooking);
+    return foundBooking;
   }, [bookings, id]);
 
   console.log('BookingDetail rendering. Booking object:', booking);
+  console.log('Current booking status:', booking?.status);
 
   const handleUpdateStatus = React.useCallback(async (newStatus) => {
     if (!window.confirm(`Are you sure you want to ${newStatus} this booking?`)) {

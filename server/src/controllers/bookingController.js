@@ -557,7 +557,10 @@ export const updateBookingStatus = async (req, res) => {
     }
 
     // Update booking status
-    const updatedBooking = await Booking.updateStatus(id, status, req.user.id);
+    await Booking.updateStatus(id, status, req.user.id);
+    
+    // Fetch the complete updated booking with all joined fields
+    const updatedBooking = await Booking.findById(id);
 
     // Update truck status based on booking status change
     try {

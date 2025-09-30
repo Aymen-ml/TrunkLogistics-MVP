@@ -38,19 +38,21 @@ export const BookingProvider = ({ children }) => {
       console.log(`Updating booking ${bookingId} to ${status}`);
       const response = await apiClient.put(`/bookings/${bookingId}/status`, { status, notes });
       
-      // Optimistically update the local state immediately
-      const updatedBooking = response.data.data?.booking;
-      if (updatedBooking) {
+      // Fetch the complete updated booking with all joined fields
+      const bookingDetailResponse = await apiClient.get(`/bookings/${bookingId}`);
+      const completeUpdatedBooking = bookingDetailResponse.data.data?.booking;
+      
+      if (completeUpdatedBooking) {
+        // Update local state with the complete booking data
         setBookings(prevBookings => 
           prevBookings.map(booking => 
-            booking.id === bookingId ? updatedBooking : booking
+            booking.id === bookingId ? completeUpdatedBooking : booking
           )
         );
+        console.log('Booking updated in local state:', completeUpdatedBooking);
       }
       
-      // Also fetch fresh data from server to ensure consistency
-      await fetchBookings();
-      console.log('Finished updating and fetching.');
+      console.log('Finished updating booking status.');
       return response.data;
     } catch (err) {
       console.error('Failed to update booking status:', err);

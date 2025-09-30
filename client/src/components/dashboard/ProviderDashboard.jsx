@@ -40,7 +40,7 @@ const BookingActions = ({ booking, onUpdate }) => {
   const handleUpdate = async (status) => {
     setIsUpdating(true);
     try {
-      await onUpdate(booking.id, status);
+      await onUpdate(booking.id, status, `Status updated to ${status}`);
       showSuccess(`Booking ${status === 'approved' ? 'approved' : 'rejected'} successfully!`);
     } catch (error) {
       showError(`Failed to update booking: ${error.response?.data?.error || error.message}`);
@@ -56,14 +56,14 @@ const BookingActions = ({ booking, onUpdate }) => {
       <button
         onClick={() => handleUpdate('approved')}
         disabled={isUpdating}
-        className="px-2 py-1 text-xs font-medium text-white bg-green-600 rounded-md hover:bg-green-700 disabled:bg-gray-400"
+        className="px-2 py-1 text-xs font-medium text-white bg-green-600 rounded-md hover:bg-green-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
       >
         {isUpdating ? '...' : 'Accept'}
       </button>
       <button
         onClick={() => handleUpdate('cancelled')}
         disabled={isUpdating}
-        className="px-2 py-1 text-xs font-medium text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300 disabled:bg-gray-400"
+        className="px-2 py-1 text-xs font-medium text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300 disabled:bg-gray-400 disabled:cursor-not-allowed"
       >
         {isUpdating ? '...' : 'Reject'}
       </button>
