@@ -155,7 +155,7 @@ function App() {
                 
                 {/* Utility Routes */}
                 <Route path="/unauthorized" element={<UnauthorizedPage />} />
-                <Route path="*" element={<Navigate to="/" replace />} />
+                {/* <Route path="*" element={<Navigate to="/" replace />} /> */}
               </Routes>
             </div>
             </Router>
