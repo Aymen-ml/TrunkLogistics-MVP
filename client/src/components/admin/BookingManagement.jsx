@@ -46,24 +46,32 @@ const BookingManagement = () => {
         payload.notes = notes;
       }
 
-      const response = await apiClient.put(`/bookings/${bookingId}/status`, payload);
+      // Update status on server
+      await apiClient.put(`/bookings/${bookingId}/status`, payload);
       
-      if (response.data.success) {
-        // Update local state
-        setBookings(prev => prev.map(booking => 
-          booking.id === bookingId 
-            ? { ...booking, status: newStatus }
-            : booking
-        ));
-        
-        showSuccess(`Booking status updated to ${newStatus.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase())} successfully!`);
-      } else {
-        throw new Error(response.data.error || 'Failed to update status');
+      // Fetch the complete updated booking with all fields
+      const bookingResponse = await apiClient.get(`/bookings/${bookingId}`);
+      const updatedBooking = bookingResponse.data.data?.booking;
+      
+      if (!updatedBooking) {
+        throw new Error('Failed to fetch updated booking data');
       }
+      
+      // Update local state with complete booking object
+      setBookings(prev => prev.map(booking => 
+        booking.id === bookingId 
+          ? updatedBooking  // Use complete updated booking data
+          : booking
+      ));
+      
+      showSuccess(`Booking status updated to ${newStatus.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase())} successfully!`);
     } catch (error) {
       console.error('Error updating booking status:', error);
       const errorMessage = error.response?.data?.error || error.message || 'Error updating booking status';
       showError(`Failed to update booking status: ${errorMessage}`);
+      
+      // Refetch all bookings on error to ensure consistency
+      fetchBookings();
     } finally {
       setUpdating(prev => ({ ...prev, [bookingId]: false }));
     }

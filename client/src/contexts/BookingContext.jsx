@@ -38,8 +38,21 @@ export const BookingProvider = ({ children }) => {
   }, [fetchBookings]);
 
   const updateBookingStatus = async (bookingId, status, notes = '') => {
+    // Store previous state for rollback on error
+    const previousBookings = [...bookings];
+    
     try {
       console.log(`🔄 Updating booking ${bookingId} to status: ${status}`);
+      
+      // Optimistic UI update - update immediately for better UX
+      setBookings(prevBookings => {
+        return prevBookings.map(booking => 
+          booking.id === bookingId 
+            ? { ...booking, status, updated_at: new Date().toISOString() } 
+            : booking
+        );
+      });
+      console.log('⚡ Optimistic UI update applied');
       
       // Step 1: Update the status on the server
       await apiClient.put(`/bookings/${bookingId}/status`, { status, notes });
@@ -55,12 +68,12 @@ export const BookingProvider = ({ children }) => {
       
       console.log('✅ Fetched complete updated booking:', updatedBooking);
       
-      // Step 3: Update the local state immediately
+      // Step 3: Update the local state with complete server data
       setBookings(prevBookings => {
         const newBookings = prevBookings.map(booking => 
           booking.id === bookingId ? updatedBooking : booking
         );
-        console.log('✅ Local state updated, new bookings count:', newBookings.length);
+        console.log('✅ Local state updated with complete data, bookings count:', newBookings.length);
         return newBookings;
       });
       
@@ -70,6 +83,10 @@ export const BookingProvider = ({ children }) => {
     } catch (err) {
       console.error('❌ Failed to update booking status:', err);
       console.error('Error details:', err.response?.data || err.message);
+      
+      // Rollback optimistic update
+      console.log('⏪ Rolling back optimistic update...');
+      setBookings(previousBookings);
       
       // On error, refetch all bookings to ensure consistency
       console.log('🔄 Refetching all bookings due to error...');

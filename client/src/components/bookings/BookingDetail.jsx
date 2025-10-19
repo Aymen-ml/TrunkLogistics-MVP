@@ -31,12 +31,22 @@ const BookingDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { user } = useAuth();
-  const { bookings, loading, updateBookingStatus, deleteBooking } = useBookings();
+  const { bookings, loading, updateBookingStatus, deleteBooking, fetchBookings } = useBookings();
   const { showSuccess, showError } = useToast();
   const [updating, setUpdating] = useState(false);
+  const [localBooking, setLocalBooking] = useState(null);
 
-  // Find the booking from context
-  const booking = bookings.find(b => b.id === id);
+  // Find and cache the booking locally to ensure UI updates
+  useEffect(() => {
+    const foundBooking = bookings.find(b => b.id === id);
+    if (foundBooking) {
+      setLocalBooking(foundBooking);
+      console.log('📍 BookingDetail - Booking updated:', foundBooking.status);
+    }
+  }, [bookings, id]);
+
+  // Use localBooking for rendering
+  const booking = localBooking;
 
   // Log for debugging
   useEffect(() => {
@@ -55,10 +65,18 @@ const BookingDetail = () => {
     try {
       console.log(`🔄 Initiating status update to: ${newStatus}`);
       
-      await updateBookingStatus(id, newStatus, `Status updated to ${newStatus}`);
+      const result = await updateBookingStatus(id, newStatus, `Status updated to ${newStatus}`);
       
       console.log('✅ Status update successful');
       showSuccess(`Booking status updated to ${newStatus.replace('_', ' ')} successfully!`);
+      
+      // Update local booking immediately with the result
+      if (result?.booking) {
+        setLocalBooking(result.booking);
+      }
+      
+      // Force refresh to ensure consistency across the app
+      await fetchBookings();
       
     } catch (error) {
       console.error('❌ Error updating booking status:', error);
