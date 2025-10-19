@@ -19,6 +19,7 @@ import TruckSearch from './components/trucks/TruckSearch'
 import BookingList from './components/bookings/BookingList'
 import BookingForm from './components/bookings/BookingForm'
 import BookingDetail from './components/bookings/BookingDetail'
+import BookingDetailTest from './components/bookings/BookingDetailTest'
 import EditBooking from './components/bookings/EditBooking'
 import DashboardRouter from './components/dashboard/DashboardRouter'
 import ProviderVerification from './components/admin/ProviderVerification'
@@ -93,6 +94,11 @@ function App() {
                 <Route path="/bookings/:id" element={
                   <ProtectedRoute>
                     <BookingDetail />
+                  </ProtectedRoute>
+                } />
+                <Route path="/bookings/:id/test" element={
+                  <ProtectedRoute>
+                    <BookingDetailTest />
                   </ProtectedRoute>
                 } />
                 <Route path="/bookings/:id/edit" element={
