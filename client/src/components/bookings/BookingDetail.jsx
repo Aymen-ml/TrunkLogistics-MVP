@@ -75,16 +75,13 @@ const BookingDetail = () => {
         console.log('🔄 Local booking updated, new status:', result.booking.status);
       }
       
-      // Small delay to ensure React completes re-rendering before clearing updating state
-      await new Promise(resolve => setTimeout(resolve, 100));
+  // Small delay to ensure React completes re-rendering before clearing updating state
+  await new Promise(resolve => setTimeout(resolve, 50));
       
-      // Clear updating state so new buttons are not disabled
+  // Clear updating state so new buttons are not disabled
       setUpdatingAction(null);
       console.log('✅ Updating action cleared, buttons should be clickable now');
-      
-      // Force refresh to ensure consistency across the app
-      await fetchBookings();
-      
+
       showSuccess(`Booking status updated to ${newStatus.replace('_', ' ')} successfully!`);
       
     } catch (error) {
@@ -380,7 +377,7 @@ const BookingDetail = () => {
                     key={`${booking.status}-${action.action}-${action.label}-${index}`}
                     onClick={action.onClick || (() => action.path && navigate(action.path))}
                     disabled={isThisButtonUpdating}
-                    className={getButtonClasses(action.color)}
+                    className={`${getButtonClasses(action.color)} pointer-events-auto`}
                   >
                     {isThisButtonUpdating ? (
                       <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
