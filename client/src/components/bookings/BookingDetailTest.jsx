@@ -82,13 +82,13 @@ const BookingDetailTest = () => {
 
   // Memoized actions that recalculate when status changes
   const availableActions = useMemo(() => {
-    if (!booking) return [];
+    if (!booking || !user) return [];
     
     console.log('🧪 TEST - Recalculating actions for status:', booking.status);
     
     const actions = [];
 
-    if (user.role === 'provider') {
+    if (user?.role === 'provider') {
       if (booking.status === 'pending_review') {
         actions.push({
           label: 'Approve',
@@ -116,7 +116,7 @@ const BookingDetailTest = () => {
 
     console.log('🧪 TEST - Available actions:', actions.map(a => a.label).join(', '));
     return actions;
-  }, [booking?.status, booking?.service_type, booking?.id, user.role]);
+  }, [booking?.status, booking?.service_type, booking?.id, user?.role]);
 
   const getButtonClass = (color, isUpdating) => {
     const base = "inline-flex items-center px-4 py-2 rounded-md text-sm font-medium transition-colors pointer-events-auto";
@@ -153,6 +153,28 @@ const BookingDetailTest = () => {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+      </div>
+    );
+  }
+
+  if (!user) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <Package className="mx-auto h-12 w-12 text-gray-400" />
+          <h3 className="mt-2 text-sm font-medium text-gray-900">Authentication Required</h3>
+          <p className="mt-1 text-sm text-gray-500">
+            Please log in to view this booking.
+          </p>
+          <div className="mt-6">
+            <button
+              onClick={() => navigate('/login')}
+              className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
+            >
+              Go to Login
+            </button>
+          </div>
+        </div>
       </div>
     );
   }
