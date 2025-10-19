@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { useBookings } from '../../contexts/BookingContext';
-import { useToast } from '../../contexts/ToastContext';
 import EmailVerificationBanner from '../common/EmailVerificationBanner';
 import AdminApprovalBanner from '../common/AdminApprovalBanner';
 import { useNavigate } from 'react-router-dom';
@@ -32,44 +31,6 @@ import {
 } from 'lucide-react';
 import { apiClient } from '../../utils/apiClient';
 import { VEHICLE_TYPE_LABELS } from '../../constants/truckTypes';
-
-const BookingActions = ({ booking, onUpdate }) => {
-  const { showSuccess, showError } = useToast();
-  const [isUpdating, setIsUpdating] = useState(false);
-
-  const handleUpdate = async (status) => {
-    setIsUpdating(true);
-    try {
-      await onUpdate(booking.id, status, `Status updated to ${status}`);
-      showSuccess(`Booking ${status === 'approved' ? 'approved' : 'rejected'} successfully!`);
-    } catch (error) {
-      showError(`Failed to update booking: ${error.response?.data?.error || error.message}`);
-    } finally {
-      setIsUpdating(false);
-    }
-  };
-
-  if (booking.status !== 'pending_review') return null;
-
-  return (
-    <div className="flex items-center space-x-2">
-      <button
-        onClick={() => handleUpdate('approved')}
-        disabled={isUpdating}
-        className="px-2 py-1 text-xs font-medium text-white bg-green-600 rounded-md hover:bg-green-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
-      >
-        {isUpdating ? '...' : 'Accept'}
-      </button>
-      <button
-        onClick={() => handleUpdate('cancelled')}
-        disabled={isUpdating}
-        className="px-2 py-1 text-xs font-medium text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300 disabled:bg-gray-400 disabled:cursor-not-allowed"
-      >
-        {isUpdating ? '...' : 'Reject'}
-      </button>
-    </div>
-  );
-};
 
 const ProviderDashboard = () => {
   const { user } = useAuth();
@@ -331,6 +292,20 @@ const ProviderDashboard = () => {
 
   const recentBookings = allBookingsFromContext.slice(0, 5);
 
+  const handleBookingAction = async (bookingId, action) => {
+    const status = action === 'accept' ? 'approved' : 'cancelled';
+    const notes = action === 'accept' ? 'Booking approved by provider' : 'Booking rejected by provider';
+    try {
+      await updateBookingStatus(bookingId, status, notes);
+      // The context handles the state update, so no need to refetch here
+      // but we can refetch the dashboard stats for consistency
+      fetchDashboardData();
+    } catch (error) {
+      console.error(`Error ${action}ing booking:`, error);
+      const errorMessage = error.response?.data?.error || error.message || 'Unknown error';
+      alert(`Failed to ${action} booking: ${errorMessage}`);
+    }
+  };
 
   if (loading) {
     return (
@@ -766,7 +741,20 @@ const ProviderDashboard = () => {
                       </div>
                       <div className="flex items-center space-x-2">
                         {booking.status === 'pending_review' ? (
-                          <BookingActions booking={booking} onUpdate={updateBookingStatus} />
+                          <>
+                            <button
+                              onClick={() => handleBookingAction(booking.id, 'accept')}
+                              className="inline-flex items-center px-3 py-1 border border-transparent text-xs font-medium rounded-md text-white bg-green-600 hover:bg-green-700"
+                            >
+                              Accept
+                            </button>
+                            <button
+                              onClick={() => handleBookingAction(booking.id, 'reject')}
+                              className="inline-flex items-center px-3 py-1 border border-transparent text-xs font-medium rounded-md text-white bg-red-600 hover:bg-red-700"
+                            >
+                              Reject
+                            </button>
+                          </>
                         ) : (
                           <Link
                             to={`/bookings/${booking.id}`}
@@ -912,15 +900,38 @@ const ProviderDashboard = () => {
                                       truck.daily_rate && `$${truck.daily_rate}/day`,
                                       truck.weekly_rate && `$${truck.weekly_rate}/wk`,
                                       truck.monthly_rate && `$${truck.monthly_rate}/mo`
-                                    ].filter(Boolean).slice(0, 2).join(', ') || 'Rates available'
-                                <div className="flex items-center space-x-2">
-                        <BookingActions booking={booking} onUpdate={updateBookingStatus} />
+                                    ].filter(Boolean).slice(0, 2).join(', ') || 'Rates available'}
+                                  </span>
+                                ) : (
+                                  <span>
+                                    {truck.pricing_type === 'per_km' 
+                                      ? `$${truck.price_per_km}/km`
+                                      : `$${truck.fixed_price}`
+                                    }
+                                  </span>
+                                )}
+                              </div>
+                              {isRental && truck.work_location && (
+                                <div className="flex items-center mt-1 text-sm text-gray-500">
+                                  <MapPin className="h-3 w-3 mr-1" />
+                                  <span>{truck.work_location}</span>
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                          <Link
+                            to={`/trucks/${truck.id}`}
+                            className="text-blue-600 hover:text-blue-500 text-sm font-medium"
+                          >
+                            View
+                          </Link>
+                        </div>
                       </div>
                     );
                   })
                 );
               })()}
-{{ ... }}
+            </div>
           </div>
         </div>
       </div>
