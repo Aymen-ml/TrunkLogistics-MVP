@@ -163,13 +163,13 @@ const BookingDetail = () => {
 
   // Memoize available actions to ensure they recalculate when status or service_type changes
   const availableActions = useMemo(() => {
-    if (!booking) return [];
+    if (!booking || !user) return [];
     
     console.log('🔄 Recalculating available actions for status:', booking.status);
     
     const actions = [];
     
-    if (user.role === 'customer') {
+    if (user?.role === 'customer') {
       // Customer actions
       if (booking.status === 'pending_review') {
         actions.push(
@@ -219,7 +219,7 @@ const BookingDetail = () => {
           onClick: handleDeleteBooking
         });
       }
-    } else if (user.role === 'provider') {
+    } else if (user?.role === 'provider') {
       // Provider actions
       if (!['completed', 'cancelled'].includes(booking.status)) {
         actions.push({
@@ -278,7 +278,7 @@ const BookingDetail = () => {
     
     console.log('✅ Available actions:', actions.map(a => a.label).join(', '));
     return actions;
-  }, [booking?.status, booking?.service_type, booking?.id, user.role]); // Dependencies ensure recalculation
+  }, [booking?.status, booking?.service_type, booking?.id, user?.role]); // Dependencies ensure recalculation
 
   const getButtonClasses = (color) => {
     const baseClasses = "inline-flex items-center px-3 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200";
