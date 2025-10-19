@@ -313,8 +313,15 @@ class Booking {
         'COALESCE(t.license_plate, b.deleted_truck_info->>\'license_plate\', \'Deleted Truck\') as license_plate, ' +
         'COALESCE(t.capacity_weight, (b.deleted_truck_info->>\'capacity_weight\')::decimal) as capacity_weight, ' +
         'COALESCE(t.capacity_volume, (b.deleted_truck_info->>\'capacity_volume\')::decimal) as capacity_volume, ' +
+        'COALESCE(t.make, b.deleted_truck_info->>\'make\') as truck_make, ' +
+        'COALESCE(t.model, b.deleted_truck_info->>\'model\') as truck_model, ' +
+        'COALESCE(t.year, (b.deleted_truck_info->>\'year\')::integer) as truck_year, ' +
         'COALESCE(t.price_per_km, (b.deleted_truck_info->>\'price_per_km\')::decimal) as price_per_km, ' +
         'COALESCE(t.fixed_price, (b.deleted_truck_info->>\'fixed_price\')::decimal) as fixed_price, ' +
+        'COALESCE(t.hourly_rate, (b.deleted_truck_info->>\'hourly_rate\')::decimal) as hourly_rate, ' +
+        'COALESCE(t.daily_rate, (b.deleted_truck_info->>\'daily_rate\')::decimal) as daily_rate, ' +
+        'COALESCE(t.weekly_rate, (b.deleted_truck_info->>\'weekly_rate\')::decimal) as weekly_rate, ' +
+        'COALESCE(t.monthly_rate, (b.deleted_truck_info->>\'monthly_rate\')::decimal) as monthly_rate, ' +
         'COALESCE(t.pricing_type, b.deleted_truck_info->>\'pricing_type\') as pricing_type, ' +
         'CASE WHEN b.truck_id IS NULL THEN true ELSE false END as truck_deleted, ' +
         'COALESCE(pp.company_name, \'Former Provider\') as provider_company, ' +
@@ -390,6 +397,18 @@ class Booking {
       `SELECT b.*, 
               COALESCE(t.truck_type, b.deleted_truck_info->>'truck_type', 'unknown') as truck_type,
               COALESCE(t.license_plate, b.deleted_truck_info->>'license_plate', 'Deleted Truck') as license_plate,
+              COALESCE(t.capacity_weight, (b.deleted_truck_info->>'capacity_weight')::decimal) as capacity_weight,
+              COALESCE(t.capacity_volume, (b.deleted_truck_info->>'capacity_volume')::decimal) as capacity_volume,
+              COALESCE(t.make, b.deleted_truck_info->>'make') as truck_make,
+              COALESCE(t.model, b.deleted_truck_info->>'model') as truck_model,
+              COALESCE(t.year, (b.deleted_truck_info->>'year')::integer) as truck_year,
+              COALESCE(t.price_per_km, (b.deleted_truck_info->>'price_per_km')::decimal) as price_per_km,
+              COALESCE(t.fixed_price, (b.deleted_truck_info->>'fixed_price')::decimal) as fixed_price,
+              COALESCE(t.hourly_rate, (b.deleted_truck_info->>'hourly_rate')::decimal) as hourly_rate,
+              COALESCE(t.daily_rate, (b.deleted_truck_info->>'daily_rate')::decimal) as daily_rate,
+              COALESCE(t.weekly_rate, (b.deleted_truck_info->>'weekly_rate')::decimal) as weekly_rate,
+              COALESCE(t.monthly_rate, (b.deleted_truck_info->>'monthly_rate')::decimal) as monthly_rate,
+              COALESCE(t.pricing_type, b.deleted_truck_info->>'pricing_type') as pricing_type,
               CASE WHEN b.truck_id IS NULL THEN true ELSE false END as truck_deleted,
               cp.company_name as customer_company,
               cu.first_name as customer_first_name, cu.last_name as customer_last_name, cu.phone as customer_phone
