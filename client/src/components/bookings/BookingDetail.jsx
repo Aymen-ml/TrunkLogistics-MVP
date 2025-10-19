@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { useBookings } from '../../contexts/BookingContext';
@@ -156,8 +156,11 @@ const BookingDetail = () => {
     return labels[status] || status;
   };
 
-  const getAvailableActions = () => {
+  // Memoize available actions to ensure they recalculate when status or service_type changes
+  const availableActions = useMemo(() => {
     if (!booking) return [];
+    
+    console.log('🔄 Recalculating available actions for status:', booking.status);
     
     const actions = [];
     
@@ -268,8 +271,9 @@ const BookingDetail = () => {
       }
     }
     
+    console.log('✅ Available actions:', actions.map(a => a.label).join(', '));
     return actions;
-  };
+  }, [booking?.status, booking?.service_type, booking?.id, user.role]); // Dependencies ensure recalculation
 
   const getButtonClasses = (color) => {
     const baseClasses = "inline-flex items-center px-3 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200";
@@ -316,8 +320,6 @@ const BookingDetail = () => {
     );
   }
 
-  const availableActions = getAvailableActions();
-
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
@@ -362,10 +364,10 @@ const BookingDetail = () => {
               </div>
             </div>
             
-            <div className="mt-4 sm:mt-0 flex flex-wrap gap-2">
+            <div className="mt-4 sm:mt-0 flex flex-wrap gap-2" key={`actions-${booking.status}-${booking.id}`}>
               {availableActions.map((action, index) => (
                 <button
-                  key={`${action.action}-${index}`}
+                  key={`${booking.status}-${action.action}-${action.label}-${index}`}
                   onClick={action.onClick || (() => action.path && navigate(action.path))}
                   disabled={updating}
                   className={getButtonClasses(action.color)}
