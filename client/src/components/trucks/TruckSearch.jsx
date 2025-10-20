@@ -38,7 +38,8 @@ const TruckSearch = () => {
     maxPrice: '',
     pricingType: 'all',
     workLocation: '',
-    provider: 'all'
+    provider: 'all',
+    availability: 'all' // all, available, rented
   });
 
   // Initialize filters from URL query params (e.g., ?serviceType=rental)
@@ -74,7 +75,9 @@ const TruckSearch = () => {
         params: {
           ...activeFilters,
           ...(activeFilters.truckType === 'all' && { truckType: undefined }),
-          ...(activeFilters.pricingType === 'all' && { pricingType: undefined })
+          ...(activeFilters.pricingType === 'all' && { pricingType: undefined }),
+          // Don't send availability filter to backend - we'll filter client-side
+          availability: undefined
         }
       });
       setTrucks(response.data.data.trucks || []);
@@ -116,11 +119,22 @@ const TruckSearch = () => {
       maxPrice: '',
       pricingType: 'all',
       workLocation: '',
-      provider: 'all'
+      provider: 'all',
+      availability: 'all'
     });
     setLoading(true);
     fetchTrucks();
   };
+
+  // Filter trucks by availability (client-side)
+  const filteredTrucks = trucks.filter(truck => {
+    if (filters.availability === 'available') {
+      return truck.active_bookings_count === 0;
+    } else if (filters.availability === 'rented') {
+      return truck.active_bookings_count > 0;
+    }
+    return true; // 'all' - show everything
+  });
 
   const getTruckTypeLabel = (type) => {
     if (!type) return 'Unknown';
@@ -218,7 +232,7 @@ const TruckSearch = () => {
             </div>
 
             {/* Filter Options */}
-            <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-${filters.serviceType === 'rental' ? '6' : '5'} gap-4`}>
+            <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-${filters.serviceType === 'rental' ? '6' : '6'} gap-4`}>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   {filters.serviceType === 'rental' ? 'Equipment Type' : 'Truck Type'}
@@ -312,6 +326,22 @@ const TruckSearch = () => {
                 </select>
               </div>
 
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Availability
+                </label>
+                <select
+                  name="availability"
+                  value={filters.availability}
+                  onChange={handleFilterChange}
+                  className="w-full border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                >
+                  <option value="all">All {filters.serviceType === 'rental' ? 'Equipment' : 'Trucks'}</option>
+                  <option value="available">Available Only</option>
+                  <option value="rented">Rented Only</option>
+                </select>
+              </div>
+
               {/* Work Location Filter for Equipment Rental */}
               {filters.serviceType === 'rental' && (
                 <div>
@@ -350,8 +380,29 @@ const TruckSearch = () => {
           </form>
         </div>
 
+        {/* Results Summary */}
+        {trucks.length > 0 && (
+          <div className="mb-4 flex items-center justify-between">
+            <p className="text-sm text-gray-600">
+              Showing <span className="font-semibold">{filteredTrucks.length}</span> of <span className="font-semibold">{trucks.length}</span> {filters.serviceType === 'rental' ? 'equipment' : 'trucks'}
+              {filters.availability !== 'all' && (
+                <span className="ml-1">
+                  ({filters.availability === 'available' ? 'available only' : 'rented only'})
+                </span>
+              )}
+            </p>
+            {filters.availability === 'all' && (
+              <p className="text-sm text-gray-600">
+                <span className="font-semibold text-green-600">{trucks.filter(t => t.active_bookings_count === 0).length} available</span>
+                {' • '}
+                <span className="font-semibold text-red-600">{trucks.filter(t => t.active_bookings_count > 0).length} rented</span>
+              </p>
+            )}
+          </div>
+        )}
+
         {/* Results */}
-        {trucks.length === 0 ? (
+        {filteredTrucks.length === 0 ? (
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8 text-center">
             {filters.serviceType === 'rental' ? (
               <Settings className="mx-auto h-12 w-12 text-gray-400" />
@@ -362,13 +413,23 @@ const TruckSearch = () => {
               No {filters.serviceType === 'rental' ? 'equipment' : 'trucks'} found
             </h3>
             <p className="mt-2 text-gray-500">
-              Try adjusting your search criteria to find available {filters.serviceType === 'rental' ? 'equipment' : 'trucks'}.
+              {trucks.length === 0 
+                ? `Try adjusting your search criteria to find available ${filters.serviceType === 'rental' ? 'equipment' : 'trucks'}.`
+                : `No ${filters.availability === 'available' ? 'available' : filters.availability === 'rented' ? 'rented' : ''} ${filters.serviceType === 'rental' ? 'equipment' : 'trucks'} match your criteria. Try changing the availability filter.`
+              }
             </p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {trucks.map((truck) => (
-              <div key={truck.id} className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
+            {filteredTrucks.map((truck) => {
+              const isRented = truck.active_bookings_count > 0;
+              return (
+              <div key={truck.id} className={`bg-white rounded-lg shadow-sm border overflow-hidden hover:shadow-md transition-shadow ${isRented ? 'border-gray-300 opacity-75' : 'border-gray-200'}`}>
+                {isRented && (
+                  <div className="bg-red-50 border-b border-red-200 px-4 py-2">
+                    <p className="text-xs font-medium text-red-800 text-center">Currently Rented - Not Available</p>
+                  </div>
+                )}
                 <div className="p-6">
                   <div className="flex items-start justify-between">
                     <div className="flex items-center">
@@ -472,16 +533,21 @@ const TruckSearch = () => {
 
                   <div className="mt-6 flex space-x-3">
                     <button
-                      onClick={() => requestBooking(truck.id)}
-                      className="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium py-2 px-4 rounded-md transition-colors flex items-center justify-center"
+                      onClick={() => !isRented && requestBooking(truck.id)}
+                      disabled={isRented}
+                      className={`flex-1 text-sm font-medium py-2 px-4 rounded-md transition-colors flex items-center justify-center ${
+                        isRented 
+                          ? 'bg-gray-300 text-gray-500 cursor-not-allowed' 
+                          : 'bg-blue-600 hover:bg-blue-700 text-white'
+                      }`}
                     >
                       {truck.service_type === 'rental' ? (
                         <>
                           <Clock className="h-4 w-4 mr-2" />
-                          Rent Equipment
+                          {isRented ? 'Currently Rented' : 'Rent Equipment'}
                         </>
                       ) : (
-                        'Request Booking'
+                        isRented ? 'Currently Booked' : 'Request Booking'
                       )}
                     </button>
                     <button 
@@ -493,7 +559,8 @@ const TruckSearch = () => {
                   </div>
                 </div>
               </div>
-            ))}
+            );
+            })}
           </div>
         )}
 
