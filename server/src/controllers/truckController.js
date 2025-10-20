@@ -1,6 +1,7 @@
 import Truck from '../models/Truck.js';
 import TruckFixed from '../models/TruckFixed.js';
 import ProviderProfile from '../models/ProviderProfile.js';
+import Booking from '../models/Booking.js';
 import { validationResult } from 'express-validator';
 import logger from '../utils/logger.js';
 import { processUploadedFiles, deleteUploadedFile, getStorageInfo } from '../utils/hybridUpload.js';
@@ -848,6 +849,125 @@ export const getAllTrucksForAdmin = async (req, res) => {
     res.status(500).json({
       success: false,
       error: 'Server error while fetching trucks for admin'
+    });
+  }
+};
+
+export const checkTruckAvailability = async (req, res) => {
+  try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({
+        success: false,
+        error: 'Validation failed',
+        details: errors.array()
+      });
+    }
+
+    const { id } = req.params;
+    const { rental_start_datetime, rental_end_datetime } = req.query;
+
+    // Get the truck
+    const truck = await Truck.findById(id);
+    if (!truck) {
+      return res.status(404).json({
+        success: false,
+        error: 'Truck not found'
+      });
+    }
+
+    // Check if truck is active
+    if (truck.status !== 'active') {
+      return res.json({
+        success: true,
+        data: {
+          available: false,
+          reason: `Truck is currently ${truck.status}`,
+          status: truck.status
+        }
+      });
+    }
+
+    // Get active bookings for this truck
+    const allBookings = await Booking.findByTruckId(id);
+    const activeBookings = allBookings.filter(booking => 
+      !['cancelled', 'completed'].includes(booking.status)
+    );
+
+    // For transport service type
+    if (!truck.service_type || truck.service_type === 'transport') {
+      if (activeBookings.length > 0) {
+        return res.json({
+          success: true,
+          data: {
+            available: false,
+            reason: 'Truck has an active booking',
+            activeBookings: activeBookings.length,
+            status: truck.status
+          }
+        });
+      }
+      
+      return res.json({
+        success: true,
+        data: {
+          available: true,
+          status: truck.status,
+          activeBookings: 0
+        }
+      });
+    }
+
+    // For rental equipment
+    if (truck.service_type === 'rental') {
+      // If dates provided, check specific time period
+      if (rental_start_datetime && rental_end_datetime) {
+        const isAvailable = await Booking.checkEquipmentAvailability(
+          id,
+          rental_start_datetime,
+          rental_end_datetime
+        );
+
+        return res.json({
+          success: true,
+          data: {
+            available: isAvailable,
+            reason: isAvailable ? null : 'Equipment is already booked for this time period',
+            status: truck.status,
+            activeBookings: activeBookings.length,
+            rental_start_datetime,
+            rental_end_datetime
+          }
+        });
+      }
+
+      // If no dates provided, just return general availability
+      return res.json({
+        success: true,
+        data: {
+          available: activeBookings.length === 0,
+          reason: activeBookings.length > 0 ? 'Equipment has active bookings' : null,
+          status: truck.status,
+          activeBookings: activeBookings.length
+        }
+      });
+    }
+
+    // Fallback
+    return res.json({
+      success: true,
+      data: {
+        available: activeBookings.length === 0,
+        activeBookings: activeBookings.length,
+        status: truck.status
+      }
+    });
+
+  } catch (error) {
+    logger.error('Check truck availability error:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Server error while checking truck availability'
     });
   }
 };

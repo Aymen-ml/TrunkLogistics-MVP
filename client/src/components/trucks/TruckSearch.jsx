@@ -391,6 +391,18 @@ const TruckSearch = () => {
                               Logistics
                             </span>
                           )}
+                          {/* Availability Badge */}
+                          {truck.active_bookings_count !== undefined && (
+                            truck.active_bookings_count === 0 ? (
+                              <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                Available
+                              </span>
+                            ) : (
+                              <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                                Rented
+                              </span>
+                            )
+                          )}
                         </div>
                         <div className="flex items-center space-x-2">
                           <p className="text-sm text-blue-600 font-medium">

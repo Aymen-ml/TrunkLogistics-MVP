@@ -145,7 +145,14 @@ class TruckFixed {
         'COUNT(d.id) as total_documents',
         'COUNT(CASE WHEN d.verification_status = \'approved\' THEN 1 END) as approved_documents',
         'COUNT(CASE WHEN d.verification_status = \'pending\' THEN 1 END) as pending_documents',
-        'COUNT(CASE WHEN d.verification_status = \'rejected\' THEN 1 END) as rejected_documents'
+        'COUNT(CASE WHEN d.verification_status = \'rejected\' THEN 1 END) as rejected_documents',
+        `COALESCE(
+          (SELECT COUNT(*) 
+           FROM bookings b 
+           WHERE b.truck_id = t.id 
+           AND b.status NOT IN ('cancelled', 'completed')), 
+          0
+        ) as active_bookings_count`
       ];
       
       queryText = `
@@ -179,7 +186,14 @@ class TruckFixed {
           WHEN COUNT(d.id) = 0 THEN false
           WHEN COUNT(d.id) = COUNT(CASE WHEN d.verification_status = 'approved' THEN 1 END) THEN true
           ELSE false
-        END as documents_verified`
+        END as documents_verified`,
+        `COALESCE(
+          (SELECT COUNT(*) 
+           FROM bookings b 
+           WHERE b.truck_id = t.id 
+           AND b.status NOT IN ('cancelled', 'completed')), 
+          0
+        ) as active_bookings_count`
       ];
       
       queryText = `

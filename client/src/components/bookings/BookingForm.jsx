@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { useBookings } from '../../contexts/BookingContext';
-import { ArrowLeft, Save, Package, MapPin, Calendar, Truck, Settings, Clock } from 'lucide-react';
+import { ArrowLeft, Save, Package, MapPin, Calendar, Truck, Settings, Clock, CheckCircle, AlertCircle } from 'lucide-react';
 import axios from 'axios';
 import { VEHICLE_TYPE_LABELS } from '../../constants/truckTypes';
 
@@ -19,6 +19,8 @@ const BookingForm = () => {
   const [priceEstimate, setPriceEstimate] = useState(null);
   const [loadingPrice, setLoadingPrice] = useState(false);
   const [errors, setErrors] = useState({});
+  const [availability, setAvailability] = useState(null);
+  const [checkingAvailability, setCheckingAvailability] = useState(false);
   const [formData, setFormData] = useState({
     truck_id: preSelectedTruckId || '',
     service_type: 'transport', // Will be set based on selected truck
@@ -84,6 +86,9 @@ const BookingForm = () => {
           service_type: truck.service_type || 'transport',
           [name]: value
         }));
+        
+        // Check availability when truck is selected
+        checkTruckAvailability(value);
       }
     }
     
@@ -121,6 +126,8 @@ const BookingForm = () => {
       const updatedFormData = { ...formData, [name]: value };
       if (updatedFormData.truck_id && updatedFormData.rental_start_datetime && updatedFormData.rental_end_datetime) {
         calculateRentalPrice(updatedFormData.truck_id, updatedFormData.rental_start_datetime, updatedFormData.rental_end_datetime);
+        // Also check availability for the selected date range
+        checkTruckAvailability(updatedFormData.truck_id, updatedFormData.rental_start_datetime, updatedFormData.rental_end_datetime);
       }
     }
   };
@@ -205,6 +212,11 @@ const BookingForm = () => {
       newErrors.truck_id = `This truck is currently ${selectedTruck.status} and is not available for new bookings`;
     }
 
+    // Check availability status
+    if (availability && !availability.available) {
+      newErrors.truck_id = availability.reason || 'This truck is not available for booking';
+    }
+
     // Check if cargo weight exceeds truck capacity
     if (selectedTruck && formData.cargo_weight && selectedTruck.capacity_weight) {
       const cargoWeight = parseFloat(formData.cargo_weight);
@@ -280,6 +292,32 @@ const BookingForm = () => {
       setPriceEstimate(null);
     } finally {
       setLoadingPrice(false);
+    }
+  };
+
+  const checkTruckAvailability = async (truckId, startDatetime = null, endDatetime = null) => {
+    if (!truckId) {
+      setAvailability(null);
+      return;
+    }
+
+    try {
+      setCheckingAvailability(true);
+      const params = {};
+      
+      // For rental equipment, include date range if provided
+      if (startDatetime && endDatetime) {
+        params.rental_start_datetime = startDatetime;
+        params.rental_end_datetime = endDatetime;
+      }
+
+      const response = await axios.get(`/trucks/${truckId}/availability`, { params });
+      setAvailability(response.data.data);
+    } catch (error) {
+      console.error('Error checking truck availability:', error);
+      setAvailability(null);
+    } finally {
+      setCheckingAvailability(false);
     }
   };
 
@@ -363,14 +401,28 @@ const BookingForm = () => {
       
       if (error.message === 'Price estimate is required. Please wait for price calculation.') {
         setErrors({ general: error.message });
-      } else if (error.response?.data?.error) {
-        setErrors({ general: error.response.data.error });
-      } else if (error.response?.data?.details) {
-        const fieldErrors = {};
-        error.response.data.details.forEach(detail => {
-          fieldErrors[detail.path] = detail.msg;
-        });
-        setErrors(fieldErrors);
+      } else if (error.response?.data) {
+        const errorData = error.response.data;
+        
+        // Check if it's an unavailability error
+        if (errorData.unavailable) {
+          setErrors({ 
+            truck_id: errorData.message || errorData.error,
+            general: errorData.message || errorData.error
+          });
+        } else if (errorData.error) {
+          // Display the enhanced error message if available
+          const errorMessage = errorData.message || errorData.error;
+          setErrors({ general: errorMessage });
+        } else if (errorData.details) {
+          const fieldErrors = {};
+          errorData.details.forEach(detail => {
+            fieldErrors[detail.path] = detail.msg;
+          });
+          setErrors(fieldErrors);
+        } else {
+          setErrors({ general: 'Failed to create booking. Please try again.' });
+        }
       } else {
         setErrors({ general: 'Failed to create booking. Please try again.' });
       }
@@ -443,6 +495,31 @@ const BookingForm = () => {
                         </option>
                       ))}
                     </select>
+                    
+                    {/* Availability Status Indicator */}
+                    {selectedTruck && (
+                      <div className="mt-2">
+                        {checkingAvailability ? (
+                          <div className="flex items-center text-sm text-gray-600">
+                            <Clock className="h-4 w-4 mr-2 animate-spin" />
+                            Checking availability...
+                          </div>
+                        ) : availability ? (
+                          availability.available ? (
+                            <div className="flex items-center text-sm text-green-600">
+                              <CheckCircle className="h-4 w-4 mr-2" />
+                              This {selectedTruck.service_type === 'rental' ? 'equipment' : 'truck'} is available
+                            </div>
+                          ) : (
+                            <div className="flex items-center text-sm text-red-600">
+                              <AlertCircle className="h-4 w-4 mr-2" />
+                              {availability.reason}
+                            </div>
+                          )
+                        ) : null}
+                      </div>
+                    )}
+                    
                     {errors.truck_id && (
                       <p className="mt-1 text-sm text-red-600">{errors.truck_id}</p>
                     )}

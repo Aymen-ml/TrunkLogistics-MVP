@@ -87,7 +87,8 @@ export const createBooking = async (req, res) => {
     if (truck.status !== 'active') {
       return res.status(400).json({
         success: false,
-        error: `This truck is currently ${truck.status} and is not available for new bookings`
+        error: `Unable to book this ${truck.service_type === 'rental' ? 'equipment' : 'truck'}`,
+        message: `This ${truck.service_type === 'rental' ? 'equipment' : 'truck'} is currently marked as "${truck.status}" and is not accepting new bookings. Please choose another option or contact support for assistance.`
       });
     }
 
@@ -101,7 +102,9 @@ export const createBooking = async (req, res) => {
       if (activeBookings.length > 0) {
         return res.status(400).json({
           success: false,
-          error: 'This truck already has an active booking and is not available for new requests'
+          error: 'Truck is currently unavailable',
+          message: 'This truck already has an active booking and cannot accept new requests at this time. Please select a different truck or try again later.',
+          unavailable: true
         });
       }
     }
@@ -134,7 +137,11 @@ export const createBooking = async (req, res) => {
           if (!isAvailable) {
             return res.status(400).json({
               success: false,
-              error: 'Equipment is not available for the selected time period'
+              error: 'Equipment is not available for the selected dates',
+              message: 'This equipment is already booked during your requested time period. Please select different dates or choose another piece of equipment.',
+              unavailable: true,
+              rental_start_datetime,
+              rental_end_datetime
             });
           }
         } catch (error) {
