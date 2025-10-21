@@ -5,7 +5,7 @@ import { Shield, Award, Clock, TrendingUp, Users, CheckCircle } from 'lucide-rea
  * Trust Badge Component
  * Displays professional indicators for B2B platform
  */
-const TrustBadges = () => {
+export const TrustBadges = () => {
   const badges = [
     {
       icon: Shield,
@@ -142,5 +142,3 @@ export const VerificationBadge = ({ verified, type = 'provider' }) => {
     </div>
   );
 };
-
-export default TrustBadges;
