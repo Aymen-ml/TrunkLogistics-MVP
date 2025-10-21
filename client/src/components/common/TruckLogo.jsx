@@ -1,11 +1,4 @@
 import React from 'react';
-
-/**
- * TruckLogistics Logo Component
- * Professional B2B logo showing connection between companies
- * Colors: Navy Blue (#1E3A8A) and Orange (#F97316)
- */
-import React from 'react';
 import { Truck } from 'lucide-react';
 
 const TruckLogo = ({ className = "h-12 w-12", showFull = false }) => {
