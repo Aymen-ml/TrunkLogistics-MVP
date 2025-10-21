@@ -11,6 +11,7 @@ router.get('/email', (req, res) => {
   try {
     const config = {
       hasTransporter: !!emailService.transporter,
+      hasResend: !!emailService.resend,
       configuration: {
         EMAIL_SERVICE: process.env.EMAIL_SERVICE || 'default SMTP',
         EMAIL_HOST: process.env.EMAIL_HOST || 'not set',
@@ -18,11 +19,12 @@ router.get('/email', (req, res) => {
         EMAIL_SECURE: process.env.EMAIL_SECURE || 'not set',
         hasEMAIL_USER: !!process.env.EMAIL_USER,
         hasEMAIL_PASSWORD: !!process.env.EMAIL_PASSWORD,
+        hasRESEND_API_KEY: !!process.env.RESEND_API_KEY,
         hasEMAIL_FROM: !!process.env.EMAIL_FROM,
         EMAIL_FROM: process.env.EMAIL_FROM || 'not set',
         CLIENT_URL: process.env.CLIENT_URL || 'not set'
       },
-      status: emailService.transporter ? 'configured' : 'NOT CONFIGURED'
+      status: (emailService.resend || emailService.transporter) ? 'configured' : 'NOT CONFIGURED'
     };
 
     res.json({
@@ -52,14 +54,16 @@ router.post('/test-email', async (req, res) => {
       });
     }
 
-    if (!emailService.transporter) {
+    if (!emailService.transporter && !emailService.resend) {
       return res.status(500).json({
         success: false,
         error: 'Email service not configured',
         details: {
+          hasRESEND_API_KEY: !!process.env.RESEND_API_KEY,
           hasEMAIL_USER: !!process.env.EMAIL_USER,
           hasEMAIL_PASSWORD: !!process.env.EMAIL_PASSWORD,
-          EMAIL_HOST: process.env.EMAIL_HOST || 'not set'
+          EMAIL_HOST: process.env.EMAIL_HOST || 'not set',
+          EMAIL_SERVICE: process.env.EMAIL_SERVICE || 'not set'
         }
       });
     }
@@ -95,7 +99,9 @@ router.post('/test-email', async (req, res) => {
       error: error.message,
       code: error.code,
       details: {
+        hasResend: !!emailService.resend,
         hasTransporter: !!emailService.transporter,
+        hasRESEND_API_KEY: !!process.env.RESEND_API_KEY,
         hasEMAIL_USER: !!process.env.EMAIL_USER,
         hasEMAIL_PASSWORD: !!process.env.EMAIL_PASSWORD
       }
