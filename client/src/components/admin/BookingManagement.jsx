@@ -111,24 +111,17 @@ const BookingManagement = () => {
   };
 
   const getStatusOptions = (currentStatus, serviceType) => {
-    // Service-specific status sets
-    const transportStatuses = ['pending_review', 'approved', 'in_transit', 'completed', 'cancelled'];
-    const rentalStatuses = ['pending_review', 'approved', 'active', 'completed', 'cancelled'];
+    // Service-specific status sets (cancelled removed from admin options as per requirements)
+    const transportStatuses = ['pending_review', 'approved', 'in_transit', 'completed'];
+    const rentalStatuses = ['pending_review', 'approved', 'active', 'completed'];
     const allStatuses = serviceType === 'rental' ? rentalStatuses : transportStatuses;
     return allStatuses.filter(status => status !== currentStatus);
   };
 
   const getQuickActionButtons = (booking) => {
-    const commonActions = [];
-    
-    // Only show cancel button for all booking statuses (except already cancelled and completed)
-    if (booking.status !== 'cancelled' && booking.status !== 'completed') {
-      commonActions.push(
-        { status: 'cancelled', label: 'Cancel', color: 'bg-red-600 hover:bg-red-700', icon: XCircle }
-      );
-    }
-    
-    return commonActions;
+    // Admin should not have cancel button - removed as per requirements
+    // Admin can use the status dropdown to change to any status
+    return [];
   };
 
   const filteredBookings = bookings.filter(booking => {
