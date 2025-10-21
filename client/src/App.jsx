@@ -204,7 +204,7 @@ const LandingPage = () => {
               <div className="mt-3 rounded-md shadow sm:mt-0 sm:ml-3">
                 <Link
                   to="/login"
-                  className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-blue-700 bg-white hover:bg-gray-50 md:py-4 md:text-lg md:px-10"
+                  className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-primary-600 bg-white hover:bg-gray-50 transition-colors md:py-4 md:text-lg md:px-10"
                 >
                   Sign In
                 </Link>
@@ -217,7 +217,7 @@ const LandingPage = () => {
         <div className="mt-20">
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
             <div className="text-center">
-              <div className="flex items-center justify-center h-12 w-12 rounded-md bg-blue-500 text-white mx-auto">
+              <div className="flex items-center justify-center h-12 w-12 rounded-md bg-primary-600 text-white mx-auto">
                 <Truck className="h-6 w-6" />
               </div>
               <h3 className="mt-6 text-lg font-medium text-gray-900">Fleet Management</h3>
@@ -227,7 +227,7 @@ const LandingPage = () => {
             </div>
 
             <div className="text-center">
-              <div className="flex items-center justify-center h-12 w-12 rounded-md bg-blue-500 text-white mx-auto">
+              <div className="flex items-center justify-center h-12 w-12 rounded-md bg-primary-600 text-white mx-auto">
                 <Shield className="h-6 w-6" />
               </div>
               <h3 className="mt-6 text-lg font-medium text-gray-900">Secure Transactions</h3>
@@ -237,7 +237,7 @@ const LandingPage = () => {
             </div>
 
             <div className="text-center">
-              <div className="flex items-center justify-center h-12 w-12 rounded-md bg-blue-500 text-white mx-auto">
+              <div className="flex items-center justify-center h-12 w-12 rounded-md bg-accent-500 text-white mx-auto">
                 <Clock className="h-6 w-6" />
               </div>
               <h3 className="mt-6 text-lg font-medium text-gray-900">Real-time Tracking</h3>

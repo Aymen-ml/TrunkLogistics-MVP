@@ -29,7 +29,7 @@ const VerificationPending = () => {
                     <h3 className="text-sm font-medium text-blue-800 dark:text-blue-200">
                       What happens next?
                     </h3>
-                    <div className="mt-2 text-sm text-blue-700">
+                    <div className="mt-2 text-sm text-primary-700">
                       <ul className="list-disc pl-5 space-y-1">
                         <li>Check your email inbox (and spam folder)</li>
                         <li>Click the verification link in the email</li>

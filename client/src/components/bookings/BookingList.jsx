@@ -454,7 +454,7 @@ const BookingList = () => {
                         <div className="flex justify-end items-center space-x-2">
                           <Link
                             to={`/bookings/${booking.id}`}
-                            className="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded-md text-blue-700 bg-blue-100 dark:bg-blue-900 hover:bg-blue-200"
+                            className="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded-md text-primary-700 bg-primary-100 dark:bg-primary-900 hover:bg-primary-200 transition-colors"
                           >
                             <Eye className="h-4 w-4 mr-1" />
                             View Details

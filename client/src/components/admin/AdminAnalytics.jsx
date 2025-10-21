@@ -87,7 +87,7 @@ const AdminAnalytics = () => {
             <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Analytics</h1>
             <p className="text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Trends, funnels, and breakdowns across bookings and revenue.</p>
           </div>
-          <Link to="/admin/bookings" className="text-sm text-primary-600 hover:text-blue-700">Back to Bookings</Link>
+          <Link to="/admin/bookings" className="text-sm text-primary-600 hover:text-accent-600 transition-colors">Back to Bookings</Link>
         </div>
 
         {/* Filters */}

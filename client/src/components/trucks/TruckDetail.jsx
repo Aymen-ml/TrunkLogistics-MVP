@@ -292,7 +292,7 @@ const TruckDetail = () => {
                   <h3 className="text-sm font-medium text-blue-800 dark:text-blue-200">
                     Provider Access Restriction
                   </h3>
-                  <div className="mt-2 text-sm text-blue-700">
+                  <div className="mt-2 text-sm text-primary-700">
                     <p>You can only view details of trucks that you own.</p>
                     <p className="mt-1">This truck belongs to another provider.</p>
                   </div>

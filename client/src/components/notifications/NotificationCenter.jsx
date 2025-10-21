@@ -185,7 +185,7 @@ const NotificationCenter = () => {
                 </button>
                 <button
                   onClick={contextMarkAllAsRead}
-                  className="text-sm text-primary-600 hover:text-blue-700 font-medium"
+                  className="text-sm text-primary-600 hover:text-accent-600 transition-colors font-medium"
                 >
                   Mark all read
                 </button>
@@ -298,7 +298,7 @@ const NotificationCenter = () => {
                       loadMore();
                     }}
                     disabled={loading}
-                    className="px-4 py-2 text-sm text-primary-600 hover:text-blue-700 font-medium disabled:opacity-50 hover:bg-blue-50 rounded-md transition-colors"
+                    className="px-4 py-2 text-sm text-primary-600 hover:text-accent-600 transition-colors font-medium disabled:opacity-50 hover:bg-accent-50 rounded-md transition-colors"
                   >
                     {loading ? 'Loading...' : 'Load more notifications'}
                   </button>
