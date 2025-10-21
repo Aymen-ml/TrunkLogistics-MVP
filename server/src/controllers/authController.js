@@ -994,26 +994,27 @@ export const forgotPassword = async (req, res) => {
     const resetUrl = `${clientUrl}/reset-password/${resetToken.token}`;
     
     try {
+      logger.info(`Attempting to send password reset email to: ${email}`);
       const emailResult = await emailService.sendPasswordResetEmail(
         user.email,
         user.first_name || "User",
         resetUrl,
       );
 
-      if (!emailResult) {
-        logger.error(`Failed to send password reset email to: ${email}`);
-        return res.status(500).json({
-          success: false,
-          error: "Failed to send reset email. Please try again later.",
-        });
-      }
-
-      logger.info(`Password reset email sent to: ${email}`);
+      logger.info(`Password reset email sent successfully to: ${email}`, { 
+        messageId: emailResult?.messageId 
+      });
     } catch (emailError) {
-      logger.error(`Email service error for password reset:`, emailError);
+      logger.error(`Email service error for password reset:`, {
+        email: email,
+        error: emailError.message,
+        code: emailError.code,
+        stack: emailError.stack
+      });
       return res.status(500).json({
         success: false,
         error: "Email service temporarily unavailable. Please try again later.",
+        details: process.env.NODE_ENV === "development" ? emailError.message : undefined
       });
     }
 

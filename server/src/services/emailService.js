@@ -13,7 +13,11 @@ class EmailService {
         emailService: process.env.EMAIL_SERVICE,
         hasSendGridKey: !!process.env.SENDGRID_API_KEY,
         hasEmailUser: !!process.env.EMAIL_USER,
-        hasEmailPassword: !!process.env.EMAIL_PASSWORD
+        hasEmailPassword: !!process.env.EMAIL_PASSWORD,
+        hasEmailHost: !!process.env.EMAIL_HOST,
+        emailHost: process.env.EMAIL_HOST,
+        emailPort: process.env.EMAIL_PORT,
+        emailSecure: process.env.EMAIL_SECURE
       });
 
       // Configure email transporter based on environment
@@ -42,7 +46,7 @@ class EmailService {
         logger.info('SendGrid email service configured');
       } else {
         // Default SMTP configuration - support both SMTP_ and EMAIL_ prefixes
-        this.transporter = nodemailer.createTransport({
+        const smtpConfig = {
           host: process.env.SMTP_HOST || process.env.EMAIL_HOST || 'localhost',
           port: parseInt(process.env.SMTP_PORT || process.env.EMAIL_PORT || '587'),
           secure: (process.env.SMTP_SECURE || process.env.EMAIL_SECURE) === 'true',
@@ -50,7 +54,25 @@ class EmailService {
             user: process.env.SMTP_USER || process.env.EMAIL_USER,
             pass: process.env.SMTP_PASSWORD || process.env.EMAIL_PASSWORD
           }
+        };
+        
+        logger.info('Configuring SMTP with:', {
+          host: smtpConfig.host,
+          port: smtpConfig.port,
+          secure: smtpConfig.secure,
+          hasUser: !!smtpConfig.auth.user,
+          hasPassword: !!smtpConfig.auth.pass
         });
+        
+        if (!smtpConfig.auth.user || !smtpConfig.auth.pass) {
+          logger.error('SMTP authentication credentials missing!', {
+            hasUser: !!smtpConfig.auth.user,
+            hasPassword: !!smtpConfig.auth.pass
+          });
+          throw new Error('EMAIL_USER and EMAIL_PASSWORD are required for SMTP');
+        }
+        
+        this.transporter = nodemailer.createTransport(smtpConfig);
         logger.info('Default SMTP email service configured');
       }
 
@@ -63,8 +85,13 @@ class EmailService {
 
   async sendEmail(to, subject, htmlContent, textContent = null) {
     if (!this.transporter) {
-      logger.warn('Email service not configured, skipping email send');
-      return false;
+      const errorMsg = 'Email service not configured - transporter is null';
+      logger.error(errorMsg, {
+        hasEmailUser: !!process.env.EMAIL_USER,
+        hasEmailPassword: !!process.env.EMAIL_PASSWORD,
+        hasEmailHost: !!process.env.EMAIL_HOST
+      });
+      throw new Error(errorMsg);
     }
 
     try {
@@ -76,12 +103,20 @@ class EmailService {
         text: textContent || this.stripHtml(htmlContent)
       };
 
+      logger.info(`Attempting to send email to ${to}: ${subject}`);
       const result = await this.transporter.sendMail(mailOptions);
-      logger.info(`Email sent successfully to ${to}: ${subject}`);
+      logger.info(`Email sent successfully to ${to}: ${subject}`, { 
+        messageId: result.messageId 
+      });
       return result;
     } catch (error) {
-      logger.error(`Failed to send email to ${to}:`, error);
-      return false;
+      logger.error(`Failed to send email to ${to}:`, {
+        error: error.message,
+        code: error.code,
+        command: error.command,
+        response: error.response
+      });
+      throw error; // Throw instead of returning false
     }
   }
 
