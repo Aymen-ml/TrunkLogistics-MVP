@@ -28,7 +28,9 @@ import {
   TrendingDown,
   Award,
   FileText,
-  Bell
+  Bell,
+  Zap,
+  ArrowRight
 } from 'lucide-react';
 import { apiClient } from '../../utils/apiClient';
 import { VEHICLE_TYPE_LABELS } from '../../constants/truckTypes';
@@ -375,197 +377,140 @@ const ProviderDashboard = () => {
           </div>
         </div>
 
-        {/* Enhanced Stats Cards */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-6 sm:mb-8">
+        {/* Enhanced Stats Cards with Gradients */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-6 sm:mb-8">
           {/* Total Fleet */}
-          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg">
-            <div className="p-4 lg:p-6">
-              <div className="flex items-center">
-                <div className="flex-shrink-0">
-                  <Package className="h-6 w-6 lg:h-8 lg:w-8 text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500" />
+          <div className="bg-gradient-to-br from-primary-500 to-primary-600 overflow-hidden shadow-lg rounded-lg transform transition-all hover:scale-105">
+            <div className="p-6 text-white">
+              <div className="flex items-center justify-between mb-4">
+                <div className="p-3 bg-white bg-opacity-20 rounded-lg">
+                  <Package className="h-8 w-8" />
                 </div>
-                <div className="ml-3 lg:ml-4 w-0 flex-1">
-                  <dl>
-                    <dt className="text-xs lg:text-sm font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 truncate">
-                      Total Fleet
-                    </dt>
-                    <dd className="text-xl lg:text-2xl font-semibold text-gray-900 dark:text-gray-100">
-                      {stats.totalTrucks + stats.totalEquipment}
-                    </dd>
-                    <dd className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
-                      {stats.activeTrucks + stats.activeEquipment} active
-                    </dd>
-                  </dl>
-                </div>
+                <TrendingUp className="h-5 w-5 opacity-60" />
               </div>
-            </div>
-          </div>
-
-          {/* Logistics Fleet */}
-          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg">
-            <div className="p-4 lg:p-6">
-              <div className="flex items-center">
-                <div className="flex-shrink-0">
-                  <Truck className="h-6 w-6 lg:h-8 lg:w-8 text-primary-600" />
-                </div>
-                <div className="ml-3 lg:ml-4 w-0 flex-1">
-                  <dl>
-                    <dt className="text-xs lg:text-sm font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 truncate">
-                      Logistics
-                    </dt>
-                    <dd className="text-xl lg:text-2xl font-semibold text-gray-900 dark:text-gray-100">
-                      {stats.totalTrucks}
-                    </dd>
-                    <dd className="text-xs text-green-600">
-                      {stats.activeTrucks} active
-                    </dd>
-                  </dl>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Rental Equipment */}
-          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg">
-            <div className="p-4 lg:p-6">
-              <div className="flex items-center">
-                <div className="flex-shrink-0">
-                  <Settings className="h-6 w-6 lg:h-8 lg:w-8 text-orange-600" />
-                </div>
-                <div className="ml-3 lg:ml-4 w-0 flex-1">
-                  <dl>
-                    <dt className="text-xs lg:text-sm font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 truncate">
-                      Rental
-                    </dt>
-                    <dd className="text-xl lg:text-2xl font-semibold text-gray-900 dark:text-gray-100">
-                      {stats.totalEquipment}
-                    </dd>
-                    <dd className="text-xs text-green-600">
-                      {stats.activeEquipment} active
-                    </dd>
-                  </dl>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Fleet Utilization */}
-          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg">
-            <div className="p-4 lg:p-6">
-              <div className="flex items-center">
-                <div className="flex-shrink-0">
-                  <Activity className="h-6 w-6 lg:h-8 lg:w-8 text-purple-600" />
-                </div>
-                <div className="ml-3 lg:ml-4 w-0 flex-1">
-                  <dl>
-                    <dt className="text-xs lg:text-sm font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 truncate">
-                      Utilization
-                    </dt>
-                    <dd className="text-xl lg:text-2xl font-semibold text-gray-900 dark:text-gray-100">
-                      {stats.fleetUtilization}%
-                    </dd>
-                    <dd className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
-                      {stats.activeBookings}/{stats.totalTrucks + stats.totalEquipment} vehicles
-                    </dd>
-                  </dl>
-                </div>
+              <dt className="text-sm font-medium opacity-90 mb-1">
+                Total Fleet
+              </dt>
+              <dd className="text-3xl font-bold">
+                {stats.totalTrucks + stats.totalEquipment}
+              </dd>
+              <div className="mt-2 text-xs opacity-75">
+                {stats.activeTrucks + stats.activeEquipment} active vehicles
               </div>
             </div>
           </div>
 
           {/* Total Revenue */}
-          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg">
-            <div className="p-4 lg:p-6">
-              <div className="flex items-center">
-                <div className="flex-shrink-0">
-                  <DollarSign className="h-6 w-6 lg:h-8 lg:w-8 text-green-600" />
+          <div className="bg-gradient-to-br from-green-500 to-emerald-600 overflow-hidden shadow-lg rounded-lg transform transition-all hover:scale-105">
+            <div className="p-6 text-white">
+              <div className="flex items-center justify-between mb-4">
+                <div className="p-3 bg-white bg-opacity-20 rounded-lg">
+                  <DollarSign className="h-8 w-8" />
                 </div>
-                <div className="ml-3 lg:ml-4 w-0 flex-1">
-                  <dl>
-                    <dt className="text-xs lg:text-sm font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 truncate">
-                      Total Revenue
-                    </dt>
-                    <dd className="text-xl lg:text-2xl font-semibold text-gray-900 dark:text-gray-100">
-                      {formatCurrency(stats.totalRevenue)}
-                    </dd>
-                    <dd className="text-xs text-primary-600">
-                      {formatCurrency(stats.monthlyRevenue)} this month
-                    </dd>
-                  </dl>
-                </div>
+                <TrendingUp className="h-5 w-5 opacity-60" />
+              </div>
+              <dt className="text-sm font-medium opacity-90 mb-1">
+                Total Revenue
+              </dt>
+              <dd className="text-3xl font-bold">
+                {formatCurrency(stats.totalRevenue)}
+              </dd>
+              <div className="mt-2 text-xs opacity-75">
+                {formatCurrency(stats.monthlyRevenue)} this month
               </div>
             </div>
           </div>
 
-          {/* Average Booking Value */}
-          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg">
-            <div className="p-4 lg:p-6">
-              <div className="flex items-center">
-                <div className="flex-shrink-0">
-                  <Target className="h-6 w-6 lg:h-8 lg:w-8 text-indigo-600" />
+          {/* Fleet Utilization */}
+          <div className="bg-gradient-to-br from-purple-500 to-indigo-600 overflow-hidden shadow-lg rounded-lg transform transition-all hover:scale-105">
+            <div className="p-6 text-white">
+              <div className="flex items-center justify-between mb-4">
+                <div className="p-3 bg-white bg-opacity-20 rounded-lg">
+                  <Activity className="h-8 w-8" />
                 </div>
-                <div className="ml-3 lg:ml-4 w-0 flex-1">
-                  <dl>
-                    <dt className="text-xs lg:text-sm font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 truncate">
-                      Avg Booking
-                    </dt>
-                    <dd className="text-xl lg:text-2xl font-semibold text-gray-900 dark:text-gray-100">
-                      {formatCurrency(stats.avgBookingValue)}
-                    </dd>
-                    <dd className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
-                      {stats.completedBookings} completed
-                    </dd>
-                  </dl>
-                </div>
+                <Zap className="h-5 w-5 opacity-60" />
+              </div>
+              <dt className="text-sm font-medium opacity-90 mb-1">
+                Utilization Rate
+              </dt>
+              <dd className="text-3xl font-bold">
+                {stats.fleetUtilization}%
+              </dd>
+              <div className="mt-2 text-xs opacity-75">
+                {stats.activeBookings}/{stats.totalTrucks + stats.totalEquipment} in use
               </div>
             </div>
           </div>
 
-          {/* Pending Bookings */}
-          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg">
-            <div className="p-4 lg:p-6">
-              <div className="flex items-center">
-                <div className="flex-shrink-0">
-                  <Clock className="h-6 w-6 lg:h-8 lg:w-8 text-yellow-600" />
+          {/* Pending Reviews */}
+          <div className="bg-gradient-to-br from-orange-500 to-accent-600 overflow-hidden shadow-lg rounded-lg transform transition-all hover:scale-105">
+            <div className="p-6 text-white">
+              <div className="flex items-center justify-between mb-4">
+                <div className="p-3 bg-white bg-opacity-20 rounded-lg">
+                  <Clock className="h-8 w-8" />
                 </div>
-                <div className="ml-3 lg:ml-4 w-0 flex-1">
-                  <dl>
-                    <dt className="text-xs lg:text-sm font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 truncate">
-                      Pending
-                    </dt>
-                    <dd className="text-xl lg:text-2xl font-semibold text-gray-900 dark:text-gray-100">
-                      {stats.pendingBookings}
-                    </dd>
-                    <dd className="text-xs text-yellow-600">
-                      Need review
-                    </dd>
-                  </dl>
-                </div>
+                <Bell className="h-5 w-5 opacity-60" />
+              </div>
+              <dt className="text-sm font-medium opacity-90 mb-1">
+                Pending Reviews
+              </dt>
+              <dd className="text-3xl font-bold">
+                {stats.pendingBookings}
+              </dd>
+              <div className="mt-2 text-xs opacity-75">
+                Awaiting your action
               </div>
             </div>
           </div>
+        </div>
 
-          {/* Customer Rating */}
-          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg">
-            <div className="p-4 lg:p-6">
-              <div className="flex items-center">
-                <div className="flex-shrink-0">
-                  <Star className="h-6 w-6 lg:h-8 lg:w-8 text-yellow-500" />
-                </div>
-                <div className="ml-3 lg:ml-4 w-0 flex-1">
-                  <dl>
-                    <dt className="text-xs lg:text-sm font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 truncate">
-                      Rating
-                    </dt>
-                    <dd className="text-xl lg:text-2xl font-semibold text-gray-900 dark:text-gray-100">
-                      {stats.customerRating}
-                    </dd>
-                    <dd className="text-xs text-yellow-500">
-                      ★★★★☆
-                    </dd>
-                  </dl>
-                </div>
-              </div>
+        {/* Service Breakdown - Secondary Stats */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 border border-gray-200 dark:border-gray-700">
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400">Transportation</h3>
+              <Truck className="h-5 w-5 text-primary-600" />
+            </div>
+            <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">{stats.totalTrucks}</p>
+            <p className="text-xs text-green-600 mt-1">{stats.activeTrucks} active</p>
+            <div className="mt-3 pt-3 border-t border-gray-200 dark:border-gray-700">
+              <p className="text-xs text-gray-500 dark:text-gray-400">Revenue: {formatCurrency(stats.transportRevenue)}</p>
+            </div>
+          </div>
+
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 border border-gray-200 dark:border-gray-700">
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400">Equipment Rental</h3>
+              <Settings className="h-5 w-5 text-orange-600" />
+            </div>
+            <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">{stats.totalEquipment}</p>
+            <p className="text-xs text-green-600 mt-1">{stats.activeEquipment} active</p>
+            <div className="mt-3 pt-3 border-t border-gray-200 dark:border-gray-700">
+              <p className="text-xs text-gray-500 dark:text-gray-400">Revenue: {formatCurrency(stats.rentalRevenue)}</p>
+            </div>
+          </div>
+
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 border border-gray-200 dark:border-gray-700">
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400">Avg Booking Value</h3>
+              <Target className="h-5 w-5 text-indigo-600" />
+            </div>
+            <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">{formatCurrency(stats.avgBookingValue)}</p>
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{stats.completedBookings} completed</p>
+            <div className="mt-3 pt-3 border-t border-gray-200 dark:border-gray-700">
+              <p className="text-xs text-gray-500 dark:text-gray-400">Total: {stats.totalBookings} bookings</p>
+            </div>
+          </div>
+
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 border border-gray-200 dark:border-gray-700">
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400">Customer Rating</h3>
+              <Star className="h-5 w-5 text-yellow-500" />
+            </div>
+            <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">{stats.customerRating}/5.0</p>
+            <p className="text-xs text-yellow-500 mt-1">★★★★☆</p>
+            <div className="mt-3 pt-3 border-t border-gray-200 dark:border-gray-700">
+              <p className="text-xs text-gray-500 dark:text-gray-400">Based on reviews</p>
             </div>
           </div>
         </div>

@@ -18,7 +18,11 @@ import {
   Settings,
   DollarSign,
   Calendar,
-  Bell
+  Bell,
+  ArrowRight,
+  Activity,
+  Target,
+  Zap
 } from 'lucide-react';
 import { apiClient } from '../../utils/apiClient';
 import { formatCurrency } from '../../utils/currency';
@@ -222,200 +226,225 @@ const CustomerDashboard = () => {
         </div>
 
         {/* Stats Cards */}
-        <div className="grid grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-6 mb-6 sm:mb-8">
-          <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg">
-            <div className="p-4 sm:p-6">
-              <div className="flex items-center">
-                <div className="flex-shrink-0">
-                  <Truck className="h-6 w-6 sm:h-8 sm:w-8 text-primary-600" />
+                {/* Stats Cards - Enhanced with gradients */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-6 sm:mb-8">
+          {/* Total Bookings */}
+          <div className="bg-gradient-to-br from-primary-500 to-primary-600 overflow-hidden shadow-lg rounded-lg transform transition-all hover:scale-105">
+            <div className="p-6 text-white">
+              <div className="flex items-center justify-between mb-4">
+                <div className="p-3 bg-white bg-opacity-20 rounded-lg">
+                  <Package className="h-8 w-8" />
                 </div>
-                <div className="ml-3 sm:ml-4 w-0 flex-1">
-                  <dl>
-                    <dt className="text-xs sm:text-sm font-medium text-gray-500 dark:text-gray-400 truncate">
-                      Transport
-                    </dt>
-                    <dd className="text-lg sm:text-2xl font-semibold text-gray-900 dark:text-gray-100">
-                      {stats.transportBookings}
-                    </dd>
-                    <dd className="text-xs text-gray-500 dark:text-gray-400">
-                      bookings
-                    </dd>
-                  </dl>
-                </div>
+                <TrendingUp className="h-5 w-5 opacity-60" />
+              </div>
+              <dt className="text-sm font-medium opacity-90 mb-1">
+                Total Bookings
+              </dt>
+              <dd className="text-3xl font-bold">
+                {stats.totalBookings}
+              </dd>
+              <div className="mt-2 text-xs opacity-75">
+                {stats.activeBookings} active now
               </div>
             </div>
           </div>
 
-          <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg">
-            <div className="p-4 sm:p-6">
-              <div className="flex items-center">
-                <div className="flex-shrink-0">
-                  <Settings className="h-6 w-6 sm:h-8 sm:w-8 text-orange-600" />
+          {/* Active Bookings */}
+          <div className="bg-gradient-to-br from-green-500 to-emerald-600 overflow-hidden shadow-lg rounded-lg transform transition-all hover:scale-105">
+            <div className="p-6 text-white">
+              <div className="flex items-center justify-between mb-4">
+                <div className="p-3 bg-white bg-opacity-20 rounded-lg">
+                  <Activity className="h-8 w-8" />
                 </div>
-                <div className="ml-3 sm:ml-4 w-0 flex-1">
-                  <dl>
-                    <dt className="text-xs sm:text-sm font-medium text-gray-500 dark:text-gray-400 truncate">
-                      Rental
-                    </dt>
-                    <dd className="text-lg sm:text-2xl font-semibold text-gray-900 dark:text-gray-100">
-                      {stats.rentalBookings}
-                    </dd>
-                    <dd className="text-xs text-gray-500 dark:text-gray-400">
-                      bookings
-                    </dd>
-                  </dl>
-                </div>
+                <Zap className="h-5 w-5 opacity-60" />
+              </div>
+              <dt className="text-sm font-medium opacity-90 mb-1">
+                Active Bookings
+              </dt>
+              <dd className="text-3xl font-bold">
+                {stats.activeBookings}
+              </dd>
+              <div className="mt-2 text-xs opacity-75">
+                In progress
               </div>
             </div>
           </div>
 
-          <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg">
-            <div className="p-4 sm:p-6">
-              <div className="flex items-center">
-                <div className="flex-shrink-0">
-                  <CheckCircle className="h-6 w-6 sm:h-8 sm:w-8 text-green-600" />
+          {/* Completed Bookings */}
+          <div className="bg-gradient-to-br from-purple-500 to-indigo-600 overflow-hidden shadow-lg rounded-lg transform transition-all hover:scale-105">
+            <div className="p-6 text-white">
+              <div className="flex items-center justify-between mb-4">
+                <div className="p-3 bg-white bg-opacity-20 rounded-lg">
+                  <CheckCircle className="h-8 w-8" />
                 </div>
-                <div className="ml-3 sm:ml-4 w-0 flex-1">
-                  <dl>
-                    <dt className="text-xs sm:text-sm font-medium text-gray-500 dark:text-gray-400 truncate">
-                      Active
-                    </dt>
-                    <dd className="text-lg sm:text-2xl font-semibold text-gray-900 dark:text-gray-100">
-                      {stats.activeBookings}
-                    </dd>
-                    <dd className="text-xs text-gray-500 dark:text-gray-400">
-                      in progress
-                    </dd>
-                  </dl>
-                </div>
+                <Target className="h-5 w-5 opacity-60" />
+              </div>
+              <dt className="text-sm font-medium opacity-90 mb-1">
+                Completed
+              </dt>
+              <dd className="text-3xl font-bold">
+                {stats.completedBookings}
+              </dd>
+              <div className="mt-2 text-xs opacity-75">
+                {stats.totalBookings > 0 ? Math.round((stats.completedBookings / stats.totalBookings) * 100) : 0}% completion rate
               </div>
             </div>
           </div>
 
-          <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg">
-            <div className="p-4 sm:p-6">
-              <div className="flex items-center">
-                <div className="flex-shrink-0">
-                  <DollarSign className="h-6 w-6 sm:h-8 sm:w-8 text-green-600" />
+          {/* Total Spent */}
+          <div className="bg-gradient-to-br from-orange-500 to-accent-600 overflow-hidden shadow-lg rounded-lg transform transition-all hover:scale-105">
+            <div className="p-6 text-white">
+              <div className="flex items-center justify-between mb-4">
+                <div className="p-3 bg-white bg-opacity-20 rounded-lg">
+                  <DollarSign className="h-8 w-8" />
                 </div>
-                <div className="ml-3 sm:ml-4 w-0 flex-1">
-                  <dl>
-                    <dt className="text-xs sm:text-sm font-medium text-gray-500 dark:text-gray-400 truncate">
-                      Total Spent
-                    </dt>
-                    <dd className="text-lg sm:text-2xl font-semibold text-gray-900 dark:text-gray-100">
-                      {formatCurrency(stats.totalSpent)}
-                    </dd>
-                    <dd className="text-xs text-gray-500 dark:text-gray-400">
-                      {stats.completedBookings} completed
-                    </dd>
-                  </dl>
-                </div>
+                <TrendingUp className="h-5 w-5 opacity-60" />
+              </div>
+              <dt className="text-sm font-medium opacity-90 mb-1">
+                Total Spent
+              </dt>
+              <dd className="text-3xl font-bold">
+                {formatCurrency(stats.totalSpent)}
+              </dd>
+              <div className="mt-2 text-xs opacity-75">
+                On completed bookings
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Service Type Stats */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 border border-gray-200 dark:border-gray-700">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
+              <Truck className="h-5 w-5 text-primary-600" />
+              Transportation Services
+            </h3>
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <span className="text-sm text-gray-600 dark:text-gray-400">Total Bookings</span>
+                <span className="text-2xl font-bold text-primary-600">{stats.transportBookings}</span>
+              </div>
+              <div className="h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                <div 
+                  className="h-full bg-gradient-to-r from-primary-500 to-primary-600 transition-all duration-500"
+                  style={{ width: `${stats.totalBookings > 0 ? (stats.transportBookings / stats.totalBookings) * 100 : 0}%` }}
+                />
+              </div>
+              <div className="text-xs text-gray-500 dark:text-gray-400">
+                {stats.totalBookings > 0 ? Math.round((stats.transportBookings / stats.totalBookings) * 100) : 0}% of total bookings
               </div>
             </div>
           </div>
 
-          <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg">
-            <div className="p-4 sm:p-6">
-              <div className="flex items-center">
-                <div className="flex-shrink-0">
-                  <Bell className="h-6 w-6 sm:h-8 sm:w-8 text-orange-600" />
-                </div>
-                <div className="ml-3 sm:ml-4 w-0 flex-1">
-                  <dl>
-                    <dt className="text-xs sm:text-sm font-medium text-gray-500 dark:text-gray-400 truncate">
-                      Upcoming
-                    </dt>
-                    <dd className="text-lg sm:text-2xl font-semibold text-gray-900 dark:text-gray-100">
-                      {stats.upcomingBookings}
-                    </dd>
-                    <dd className="text-xs text-gray-500 dark:text-gray-400">
-                      Next 3 days
-                    </dd>
-                  </dl>
-                </div>
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 border border-gray-200 dark:border-gray-700">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
+              <Settings className="h-5 w-5 text-orange-600" />
+              Equipment Rental
+            </h3>
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <span className="text-sm text-gray-600 dark:text-gray-400">Total Bookings</span>
+                <span className="text-2xl font-bold text-orange-600">{stats.rentalBookings}</span>
+              </div>
+              <div className="h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                <div 
+                  className="h-full bg-gradient-to-r from-orange-500 to-accent-600 transition-all duration-500"
+                  style={{ width: `${stats.totalBookings > 0 ? (stats.rentalBookings / stats.totalBookings) * 100 : 0}%` }}
+                />
+              </div>
+              <div className="text-xs text-gray-500 dark:text-gray-400">
+                {stats.totalBookings > 0 ? Math.round((stats.rentalBookings / stats.totalBookings) * 100) : 0}% of total bookings
               </div>
             </div>
           </div>
         </div>
 
         {/* Recent Bookings */}
-        <div className="bg-white dark:bg-gray-800 shadow-sm rounded-lg">
-          <div className="px-4 sm:px-6 py-4 border-b border-gray-200 dark:border-gray-700">
-            <div className="flex items-center justify-between">
-              <h3 className="text-base sm:text-lg font-medium text-gray-900 dark:text-gray-100">Recent Bookings</h3>
-              <Link
-                to="/bookings"
-                className="text-xs sm:text-sm text-accent-500 hover:text-accent-600 font-medium transition-colors"
+        <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg">
+          <div className="p-4 sm:p-6">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-gray-100">Recent Bookings</h2>
+              <Link 
+                to="/bookings" 
+                className="text-sm font-medium text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 flex items-center gap-1"
               >
-                View all
+                View All
+                <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
-          </div>
-          <div className="divide-y divide-gray-200 dark:divide-gray-700">
+
             {recentBookings.length === 0 ? (
-              <div className="px-4 sm:px-6 py-6 sm:py-8 text-center">
-                <Package className="mx-auto h-10 w-10 sm:h-12 sm:w-12 text-gray-400 dark:text-gray-500" />
+              <div className="text-center py-8 sm:py-12">
+                <Package className="mx-auto h-10 w-10 sm:h-12 sm:w-12 text-gray-400" />
                 <h3 className="mt-2 text-sm font-medium text-gray-900 dark:text-gray-100">No bookings yet</h3>
-                <p className="mt-1 text-xs sm:text-sm text-gray-500 dark:text-gray-400">
-                  Start by finding trucks for your shipments.
-                </p>
-                <div className="mt-4 sm:mt-6">
+                <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">Get started by creating your first booking.</p>
+                <div className="mt-6">
                   <Link
-                    to="/find-trucks"
-                    className="inline-flex items-center px-3 sm:px-4 py-2 border border-transparent shadow-sm text-xs sm:text-sm font-medium rounded-md text-white bg-accent-500 hover:bg-accent-600 transition-colors"
+                    to="/new-booking"
+                    className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
                   >
-                    <Plus className="-ml-1 mr-2 h-4 w-4 sm:h-5 sm:w-5" />
-                    Find Trucks
+                    <Plus className="h-5 w-5 mr-2" />
+                    New Booking
                   </Link>
                 </div>
               </div>
             ) : (
-              recentBookings.map((booking) => (
-                <Link key={booking.id} to={`/bookings/${booking.id}`} className="block hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-                  <div className="px-4 sm:px-6 py-4">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-3 sm:space-x-4 min-w-0 flex-1">
-                        <div className="flex-shrink-0">
-                          <div className="h-8 w-8 sm:h-10 sm:w-10 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center">
-                            <Package className="h-4 w-4 sm:h-5 sm:w-5 text-gray-600 dark:text-gray-400" />
-                          </div>
-                        </div>
-                        <div className="min-w-0 flex-1">
-                          <p className="text-xs sm:text-sm font-medium text-gray-900 dark:text-gray-100 truncate">
-                            {booking.service_type === 'rental' 
-                              ? (booking.work_address || 'Equipment Rental')
-                              : `${booking.pickup_city} → ${booking.destination_city}`
-                            }
-                          </p>
-                          <div className="flex items-center space-x-2 text-xs sm:text-sm text-gray-500 dark:text-gray-400">
-                            <span>{formatDate(booking.pickup_date || booking.rental_start_datetime)}</span>
-                            {booking.truck_license_plate && (
-                              <>
-                                <span>•</span>
-                                <span>{booking.truck_license_plate}</span>
-                              </>
-                            )}
-                            {booking.total_price && (
-                              <>
-                                <span>•</span>
-                                <span>{formatCurrency(booking.total_price)}</span>
-                              </>
-                            )}
-                          </div>
-                        </div>
-                      </div>
-                      <div className="flex items-center ml-2">
-                        <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${
-                          getStatusColor(booking.status)
-                        }`}>
-                          {formatStatus(booking.status)}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </Link>
-              ))
+              <div className="overflow-x-auto -mx-4 sm:mx-0">
+                <div className="inline-block min-w-full align-middle">
+                  <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                    <thead>
+                      <tr className="bg-gray-50 dark:bg-gray-900/50">
+                        <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                          Service Type
+                        </th>
+                        <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                          Status
+                        </th>
+                        <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                          Date
+                        </th>
+                        <th className="px-4 sm:px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                          Price
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                      {recentBookings.map((booking) => (
+                        <tr key={booking.id} className="hover:bg-gray-50 dark:hover:bg-gray-700/50">
+                          <td className="px-4 sm:px-6 py-4 whitespace-nowrap">
+                            <div className="flex items-center">
+                              <div className="flex-shrink-0">
+                                {booking.service_type === 'transport' ? (
+                                  <Truck className="h-5 w-5 sm:h-6 sm:w-6 text-primary-600" />
+                                ) : (
+                                  <Settings className="h-5 w-5 sm:h-6 sm:w-6 text-orange-600" />
+                                )}
+                              </div>
+                              <div className="ml-3 sm:ml-4">
+                                <div className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                                  {booking.service_type === 'transport' ? 'Transportation' : 'Equipment Rental'}
+                                </div>
+                              </div>
+                            </div>
+                          </td>
+                          <td className="px-4 sm:px-6 py-4 whitespace-nowrap">
+                            <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(booking.status)}`}>
+                              {formatStatus(booking.status)}
+                            </span>
+                          </td>
+                          <td className="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
+                            {formatDate(booking.service_type === 'transport' ? booking.pickup_date : booking.rental_start_date)}
+                          </td>
+                          <td className="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-right font-medium text-gray-900 dark:text-gray-100">
+                            {formatCurrency(booking.total_price)}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
             )}
           </div>
         </div>
