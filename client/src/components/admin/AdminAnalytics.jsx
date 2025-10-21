@@ -27,33 +27,50 @@ const AdminAnalytics = () => {
         apiClient.get('/admin/users').catch(() => ({ data: { users: [] } }))
       ]);
 
-      const allBookings = bookingsResponse.data.data?.bookings || [];
-      const allTrucks = trucksResponse.data.data || [];
-      const allUsers = usersResponse.data.users || [];
+      const allBookings = Array.isArray(bookingsResponse.data.data?.bookings) 
+        ? bookingsResponse.data.data.bookings 
+        : [];
+      const allTrucks = Array.isArray(trucksResponse.data.data) 
+        ? trucksResponse.data.data 
+        : [];
+      const allUsers = Array.isArray(usersResponse.data.users) 
+        ? usersResponse.data.users 
+        : [];
       
       setBookings(allBookings);
       setTrucks(allTrucks);
       setUsers(allUsers);
     } catch (error) {
       console.error('Failed to fetch analytics data', error);
+      // Set empty arrays on error
+      setBookings([]);
+      setTrucks([]);
+      setUsers([]);
     } finally {
       setLoading(false);
     }
   };
 
   const filtered = useMemo(() => {
-    if (!dateRange.from || !dateRange.to) return bookings;
+    // Ensure bookings is always an array
+    const safeBookings = Array.isArray(bookings) ? bookings : [];
+    
+    if (!dateRange.from || !dateRange.to) return safeBookings;
     const fromTs = new Date(dateRange.from).getTime();
     const toTs = new Date(dateRange.to).getTime();
-    return bookings.filter(b => {
+    return safeBookings.filter(b => {
       const ts = new Date(b.created_at || b.updated_at || Date.now()).getTime();
       return ts >= fromTs && ts <= toTs;
     });
   }, [bookings, dateRange]);
 
   const kpis = useMemo(() => {
-    const total = filtered.length;
-    const byStatus = (s) => filtered.filter(b => b.status === s).length;
+    // Ensure we always have arrays
+    const safeFiltered = Array.isArray(filtered) ? filtered : [];
+    const safeBookings = Array.isArray(bookings) ? bookings : [];
+    
+    const total = safeFiltered.length;
+    const byStatus = (s) => safeFiltered.filter(b => b.status === s).length;
     const pending = byStatus('pending');
     const approved = byStatus('approved');
     const active = byStatus('active');
@@ -62,10 +79,10 @@ const AdminAnalytics = () => {
     const cancelled = byStatus('cancelled');
 
     const completionRate = total ? Math.round((completed / total) * 100) : 0;
-    const approvalRate = total ? Math.round((approved / filtered.filter(b => b.status !== 'cancelled').length) * 100) : 0;
+    const approvalRate = total ? Math.round((approved / safeFiltered.filter(b => b.status !== 'cancelled').length) * 100) : 0;
     const cancellationRate = total ? Math.round((cancelled / total) * 100) : 0;
 
-    const totalRevenue = filtered
+    const totalRevenue = safeFiltered
       .filter(b => b.status === 'completed')
       .reduce((sum, b) => sum + (parseFloat(b.total_price) || 0), 0);
     
@@ -76,12 +93,12 @@ const AdminAnalytics = () => {
     const thirtyDaysAgo = new Date(today.getTime() - 30 * 24 * 60 * 60 * 1000);
     const sixtyDaysAgo = new Date(today.getTime() - 60 * 24 * 60 * 60 * 1000);
     
-    const currentPeriod = bookings.filter(b => {
+    const currentPeriod = safeBookings.filter(b => {
       const date = new Date(b.created_at);
       return date >= thirtyDaysAgo && date <= today;
     }).length;
     
-    const previousPeriod = bookings.filter(b => {
+    const previousPeriod = safeBookings.filter(b => {
       const date = new Date(b.created_at);
       return date >= sixtyDaysAgo && date < thirtyDaysAgo;
     }).length;
@@ -98,19 +115,26 @@ const AdminAnalytics = () => {
   }, [filtered, bookings]);
 
   const platformStats = useMemo(() => {
-    const providers = users.filter(u => u.role === 'provider').length;
-    const customers = users.filter(u => u.role === 'customer').length;
-    const totalUsers = users.length;
-    const activeTrucks = trucks.filter(t => t.availability_status === 'available').length;
-    const totalTrucks = trucks.length;
+    // Ensure we always have arrays
+    const safeUsers = Array.isArray(users) ? users : [];
+    const safeTrucks = Array.isArray(trucks) ? trucks : [];
+    
+    const providers = safeUsers.filter(u => u.role === 'provider').length;
+    const customers = safeUsers.filter(u => u.role === 'customer').length;
+    const totalUsers = safeUsers.length;
+    const activeTrucks = safeTrucks.filter(t => t.availability_status === 'available').length;
+    const totalTrucks = safeTrucks.length;
     const utilizationRate = totalTrucks > 0 ? Math.round(((totalTrucks - activeTrucks) / totalTrucks) * 100) : 0;
 
     return { providers, customers, totalUsers, activeTrucks, totalTrucks, utilizationRate };
   }, [users, trucks]);
 
   const byService = useMemo(() => {
-    const transport = filtered.filter(b => b.service_type === 'transport');
-    const rental = filtered.filter(b => b.service_type === 'rental');
+    // Ensure we always have arrays
+    const safeFiltered = Array.isArray(filtered) ? filtered : [];
+    
+    const transport = safeFiltered.filter(b => b.service_type === 'transport');
+    const rental = safeFiltered.filter(b => b.service_type === 'rental');
     return {
       transport: {
         count: transport.length,
