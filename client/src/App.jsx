@@ -32,6 +32,7 @@ import { Truck, ArrowRight, Shield, Clock } from 'lucide-react'
 import TrucksAdmin from './components/admin/TrucksAdmin'
 import Profile from './components/profile/Profile'
 import Settings from './components/settings/Settings'
+import EmailTest from './components/admin/EmailTest'
 
 function App() {
   return (
@@ -154,8 +155,13 @@ function App() {
                     <TrucksAdmin />
                   </ProtectedRoute>
                 } />
+                <Route path="/admin/email-test" element={
+                  <ProtectedRoute allowedRoles={['admin']}>
+                    <EmailTest />
+                  </ProtectedRoute>
+                } />
                 
-                {/* Utility Routes */}
+                {/* 404 Route */}
                 <Route path="/unauthorized" element={<UnauthorizedPage />} />
                 {/* <Route path="*" element={<Navigate to="/" replace />} /> */}
               </Routes>
