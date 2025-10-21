@@ -43,6 +43,7 @@
     "nodemailer": "^6.10.1",
     "pg": "^8.11.3",
     "rate-limit-redis": "^4.2.0",
+    "resend": "^6.2.1",
     "uuid": "^11.1.0",
     "validator": "^13.11.0",
     "winston": "^3.11.0",

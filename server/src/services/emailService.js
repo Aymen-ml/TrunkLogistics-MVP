@@ -1,9 +1,11 @@
 import nodemailer from 'nodemailer';
+import { Resend } from 'resend';
 import logger from '../utils/logger.js';
 
 class EmailService {
   constructor() {
     this.transporter = null;
+    this.resend = null;
     this.initialize();
   }
 
@@ -18,12 +20,14 @@ class EmailService {
       console.log('EMAIL_SECURE:', process.env.EMAIL_SECURE || 'NOT SET');
       console.log('EMAIL_USER:', process.env.EMAIL_USER ? '***SET***' : 'NOT SET');
       console.log('EMAIL_PASSWORD:', process.env.EMAIL_PASSWORD ? '***SET***' : 'NOT SET');
+      console.log('RESEND_API_KEY:', process.env.RESEND_API_KEY ? '***SET***' : 'NOT SET');
       console.log('EMAIL_FROM:', process.env.EMAIL_FROM || 'NOT SET');
       console.log('========================================');
       
       logger.info('Initializing email service...', {
         emailService: process.env.EMAIL_SERVICE,
         hasSendGridKey: !!process.env.SENDGRID_API_KEY,
+        hasResendKey: !!process.env.RESEND_API_KEY,
         hasEmailUser: !!process.env.EMAIL_USER,
         hasEmailPassword: !!process.env.EMAIL_PASSWORD,
         hasEmailHost: !!process.env.EMAIL_HOST,
@@ -32,8 +36,15 @@ class EmailService {
         emailSecure: process.env.EMAIL_SECURE
       });
 
-      // Configure email transporter based on environment
-      if (process.env.EMAIL_SERVICE === 'gmail') {
+      // Configure email service based on environment
+      if (process.env.EMAIL_SERVICE === 'resend') {
+        if (!process.env.RESEND_API_KEY) {
+          throw new Error('RESEND_API_KEY environment variable is required for Resend service');
+        }
+        this.resend = new Resend(process.env.RESEND_API_KEY);
+        console.log('✅ Resend email service configured');
+        logger.info('Resend email service configured');
+      } else if (process.env.EMAIL_SERVICE === 'gmail') {
         this.transporter = nodemailer.createTransport({
           service: 'gmail',
           auth: {
@@ -105,6 +116,35 @@ class EmailService {
   }
 
   async sendEmail(to, subject, htmlContent, textContent = null) {
+    // Use Resend if configured
+    if (this.resend) {
+      try {
+        logger.info(`Attempting to send email via Resend to ${to}: ${subject}`);
+        console.log(`📧 Sending email via Resend to: ${to}`);
+        
+        const result = await this.resend.emails.send({
+          from: `${process.env.EMAIL_FROM_NAME || 'TrunkLogistics'} <${process.env.EMAIL_FROM || 'onboarding@resend.dev'}>`,
+          to: to,
+          subject: subject,
+          html: htmlContent,
+        });
+
+        logger.info(`Email sent successfully via Resend to ${to}`, { 
+          id: result.id 
+        });
+        console.log(`✅ Email sent successfully via Resend. ID: ${result.id}`);
+        return result;
+      } catch (error) {
+        logger.error(`Failed to send email via Resend to ${to}:`, {
+          error: error.message,
+          name: error.name
+        });
+        console.log(`❌ Resend error: ${error.message}`);
+        throw error;
+      }
+    }
+    
+    // Use SMTP transporter
     if (!this.transporter) {
       const errorMsg = 'Email service not configured - transporter is null';
       logger.error(errorMsg, {
