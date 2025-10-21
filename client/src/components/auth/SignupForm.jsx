@@ -12,7 +12,8 @@ import {
   MapPin, 
   CreditCard,
   ChevronRight,
-  Loader
+  Loader,
+  Truck
 } from 'lucide-react';
 
 const SignupForm = () => {
