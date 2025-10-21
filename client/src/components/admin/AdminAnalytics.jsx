@@ -1,12 +1,19 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { apiClient } from '../../utils/apiClient';
-import { LineChart, BarChart3, TrendingUp, TrendingDown, PieChart, Filter, Calendar, Users, Package, CheckCircle, XCircle, Clock } from 'lucide-react';
+import { 
+  LineChart, BarChart3, TrendingUp, TrendingDown, PieChart, Filter, Calendar, 
+  Users, Package, CheckCircle, XCircle, Clock, DollarSign, Truck, 
+  ArrowUpRight, ArrowDownRight, Activity, Target, Zap
+} from 'lucide-react';
 
 const AdminAnalytics = () => {
   const [bookings, setBookings] = useState([]);
+  const [trucks, setTrucks] = useState([]);
+  const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [dateRange, setDateRange] = useState({ preset: '30d', from: '', to: '' });
+  const [activeTab, setActiveTab] = useState('overview');
 
   useEffect(() => {
     fetchData();
@@ -14,12 +21,19 @@ const AdminAnalytics = () => {
 
   const fetchData = async () => {
     try {
-      const [bookingsResponse] = await Promise.all([
-        apiClient.get('/bookings')
+      const [bookingsResponse, trucksResponse, usersResponse] = await Promise.all([
+        apiClient.get('/bookings'),
+        apiClient.get('/trucks').catch(() => ({ data: { data: [] } })),
+        apiClient.get('/admin/users').catch(() => ({ data: { users: [] } }))
       ]);
 
       const allBookings = bookingsResponse.data.data?.bookings || [];
+      const allTrucks = trucksResponse.data.data || [];
+      const allUsers = usersResponse.data.users || [];
+      
       setBookings(allBookings);
+      setTrucks(allTrucks);
+      setUsers(allUsers);
     } catch (error) {
       console.error('Failed to fetch analytics data', error);
     } finally {
@@ -40,6 +54,7 @@ const AdminAnalytics = () => {
   const kpis = useMemo(() => {
     const total = filtered.length;
     const byStatus = (s) => filtered.filter(b => b.status === s).length;
+    const pending = byStatus('pending');
     const approved = byStatus('approved');
     const active = byStatus('active');
     const inTransit = byStatus('in_transit');
@@ -48,13 +63,50 @@ const AdminAnalytics = () => {
 
     const completionRate = total ? Math.round((completed / total) * 100) : 0;
     const approvalRate = total ? Math.round((approved / filtered.filter(b => b.status !== 'cancelled').length) * 100) : 0;
+    const cancellationRate = total ? Math.round((cancelled / total) * 100) : 0;
 
     const totalRevenue = filtered
       .filter(b => b.status === 'completed')
       .reduce((sum, b) => sum + (parseFloat(b.total_price) || 0), 0);
+    
+    const avgBookingValue = completed > 0 ? totalRevenue / completed : 0;
+    
+    // Calculate growth (comparing to previous period)
+    const today = new Date();
+    const thirtyDaysAgo = new Date(today.getTime() - 30 * 24 * 60 * 60 * 1000);
+    const sixtyDaysAgo = new Date(today.getTime() - 60 * 24 * 60 * 60 * 1000);
+    
+    const currentPeriod = bookings.filter(b => {
+      const date = new Date(b.created_at);
+      return date >= thirtyDaysAgo && date <= today;
+    }).length;
+    
+    const previousPeriod = bookings.filter(b => {
+      const date = new Date(b.created_at);
+      return date >= sixtyDaysAgo && date < thirtyDaysAgo;
+    }).length;
+    
+    const growthRate = previousPeriod > 0 
+      ? Math.round(((currentPeriod - previousPeriod) / previousPeriod) * 100) 
+      : 0;
 
-    return { total, approved, active, inTransit, completed, cancelled, completionRate, approvalRate, totalRevenue };
-  }, [filtered]);
+    return { 
+      total, pending, approved, active, inTransit, completed, cancelled, 
+      completionRate, approvalRate, cancellationRate, totalRevenue, 
+      avgBookingValue, growthRate, currentPeriod, previousPeriod
+    };
+  }, [filtered, bookings]);
+
+  const platformStats = useMemo(() => {
+    const providers = users.filter(u => u.role === 'provider').length;
+    const customers = users.filter(u => u.role === 'customer').length;
+    const totalUsers = users.length;
+    const activeTrucks = trucks.filter(t => t.availability_status === 'available').length;
+    const totalTrucks = trucks.length;
+    const utilizationRate = totalTrucks > 0 ? Math.round(((totalTrucks - activeTrucks) / totalTrucks) * 100) : 0;
+
+    return { providers, customers, totalUsers, activeTrucks, totalTrucks, utilizationRate };
+  }, [users, trucks]);
 
   const byService = useMemo(() => {
     const transport = filtered.filter(b => b.service_type === 'transport');
@@ -73,146 +125,413 @@ const AdminAnalytics = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto mb-4"></div>
+          <p className="text-gray-600 dark:text-gray-400">Loading analytics...</p>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        <div className="flex items-center justify-between mb-6">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+        {/* Header */}
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 sm:mb-8">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Analytics</h1>
-            <p className="text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Trends, funnels, and breakdowns across bookings and revenue.</p>
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100 flex items-center gap-2">
+              <Activity className="h-8 w-8 text-primary-600" />
+              Analytics Dashboard
+            </h1>
+            <p className="mt-1 text-sm sm:text-base text-gray-600 dark:text-gray-400">
+              Real-time insights into your business performance
+            </p>
           </div>
-          <Link to="/admin/bookings" className="text-sm text-primary-600 hover:text-accent-600 transition-colors">Back to Bookings</Link>
+          <Link 
+            to="/admin/bookings" 
+            className="mt-3 sm:mt-0 text-sm text-primary-600 hover:text-accent-600 transition-colors font-medium"
+          >
+            ← Back to Bookings
+          </Link>
+        </div>
+
+        {/* Tabs */}
+        <div className="mb-6 border-b border-gray-200 dark:border-gray-700">
+          <nav className="-mb-px flex space-x-4 sm:space-x-8 overflow-x-auto">
+            {['overview', 'bookings', 'revenue'].map(tab => (
+              <button
+                key={tab}
+                onClick={() => setActiveTab(tab)}
+                className={`whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm transition-colors ${
+                  activeTab === tab
+                    ? 'border-primary-600 text-primary-600'
+                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300'
+                }`}
+              >
+                {tab.charAt(0).toUpperCase() + tab.slice(1)}
+              </button>
+            ))}
+          </nav>
         </div>
 
         {/* Filters */}
-        <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 shadow rounded-lg p-4 mb-6">
+        <div className="bg-white dark:bg-gray-800 shadow-sm rounded-lg p-4 mb-6">
           <div className="flex flex-wrap items-end gap-3">
-            <div>
-              <label className="block text-xs font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 mb-1">Preset</label>
+            <div className="flex-1 min-w-[120px]">
+              <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">
+                <Calendar className="h-3 w-3 inline mr-1" />
+                Time Period
+              </label>
               <select
-                className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm"
+                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded-md text-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                 value={dateRange.preset}
                 onChange={(e) => setDateRange(prev => ({ ...prev, preset: e.target.value }))}
               >
                 <option value="7d">Last 7 days</option>
                 <option value="30d">Last 30 days</option>
                 <option value="90d">Last 90 days</option>
+                <option value="custom">Custom Range</option>
               </select>
             </div>
-            <div>
-              <label className="block text-xs font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 mb-1">From</label>
-              <input type="date" className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm" value={dateRange.from} onChange={(e) => setDateRange(prev => ({ ...prev, from: e.target.value }))} />
-            </div>
-            <div>
-              <label className="block text-xs font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 mb-1">To</label>
-              <input type="date" className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm" value={dateRange.to} onChange={(e) => setDateRange(prev => ({ ...prev, to: e.target.value }))} />
-            </div>
-            <button className="inline-flex items-center px-3 py-2 rounded-md text-sm bg-accent-500 text-white">
-              <Filter className="h-4 w-4 mr-2" /> Apply
-            </button>
+            {dateRange.preset === 'custom' && (
+              <>
+                <div className="flex-1 min-w-[120px]">
+                  <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">From</label>
+                  <input 
+                    type="date" 
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded-md text-sm focus:ring-2 focus:ring-primary-500"
+                    value={dateRange.from} 
+                    onChange={(e) => setDateRange(prev => ({ ...prev, from: e.target.value }))} 
+                  />
+                </div>
+                <div className="flex-1 min-w-[120px]">
+                  <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">To</label>
+                  <input 
+                    type="date" 
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded-md text-sm focus:ring-2 focus:ring-primary-500"
+                    value={dateRange.to} 
+                    onChange={(e) => setDateRange(prev => ({ ...prev, to: e.target.value }))} 
+                  />
+                </div>
+              </>
+            )}
           </div>
         </div>
 
-        {/* KPIs */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-          <Kpi title="Total Bookings" value={kpis.total} icon={Package} color="text-blue-500" />
-          <Kpi title="Approval Rate" value={`${kpis.approvalRate}%`} icon={CheckCircle} color="text-green-500" />
-          <Kpi title="Completion Rate" value={`${kpis.completionRate}%`} icon={TrendingUp} color="text-indigo-500" />
-          <Kpi title="Revenue" value={kpis.totalRevenue.toLocaleString('en-US', { style: 'currency', currency: 'USD' })} icon={PieChart} color="text-purple-500" />
-        </div>
+        {/* Overview Tab */}
+        {activeTab === 'overview' && (
+          <>
+            {/* Top KPIs */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-6">
+              <MetricCard 
+                title="Total Revenue" 
+                value={kpis.totalRevenue.toLocaleString('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0 })} 
+                icon={DollarSign} 
+                trend={kpis.growthRate}
+                color="bg-gradient-to-br from-green-500 to-emerald-600"
+              />
+              <MetricCard 
+                title="Total Bookings" 
+                value={kpis.total} 
+                icon={Package} 
+                subtitle={`${kpis.currentPeriod} this month`}
+                color="bg-gradient-to-br from-blue-500 to-primary-600"
+              />
+              <MetricCard 
+                title="Completion Rate" 
+                value={`${kpis.completionRate}%`} 
+                icon={Target} 
+                subtitle={`${kpis.completed} completed`}
+                color="bg-gradient-to-br from-purple-500 to-indigo-600"
+              />
+              <MetricCard 
+                title="Active Users" 
+                value={platformStats.totalUsers} 
+                icon={Users} 
+                subtitle={`${platformStats.providers} providers`}
+                color="bg-gradient-to-br from-orange-500 to-accent-600"
+              />
+            </div>
 
-        {/* Trends */}
-        <Section title="Bookings Trend" icon={LineChart}>
-          <Placeholder height="200px">Line chart of bookings per day</Placeholder>
-        </Section>
-
-        {/* Funnel */}
-        <Section title="Funnel" icon={BarChart3}>
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-            <FunnelStep label="Pending Review" value={kpis.total - (kpis.approved + kpis.inTransit + kpis.active + kpis.completed + kpis.cancelled)} icon={Clock} />
-            <FunnelStep label="Approved" value={kpis.approved} icon={CheckCircle} />
-            <FunnelStep label="In Transit" value={kpis.inTransit} icon={TrendingUp} />
-            <FunnelStep label="Active (Rental)" value={kpis.active} icon={Users} />
-            <FunnelStep label="Completed" value={kpis.completed} icon={CheckCircle} />
-          </div>
-        </Section>
-
-        {/* Breakdown */}
-        <Section title="Service Breakdown" icon={PieChart}>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 rounded-lg border p-4">
-              <h4 className="text-sm font-semibold text-gray-800 mb-2">Counts</h4>
-              <div className="flex items-center justify-between text-sm">
-                <span>Transport</span>
-                <span className="font-medium">{byService.transport.count}</span>
+            {/* Platform Overview */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+              {/* Platform Stats */}
+              <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
+                  <Zap className="h-5 w-5 text-accent-500" />
+                  Platform Statistics
+                </h3>
+                <div className="space-y-4">
+                  <StatRow label="Total Providers" value={platformStats.providers} icon={Truck} color="text-blue-600" />
+                  <StatRow label="Total Customers" value={platformStats.customers} icon={Users} color="text-green-600" />
+                  <StatRow label="Active Trucks" value={`${platformStats.activeTrucks} / ${platformStats.totalTrucks}`} icon={Truck} color="text-orange-600" />
+                  <StatRow label="Fleet Utilization" value={`${platformStats.utilizationRate}%`} icon={Activity} color="text-purple-600" />
+                </div>
               </div>
-              <div className="flex items-center justify-between text-sm">
-                <span>Rental</span>
-                <span className="font-medium">{byService.rental.count}</span>
+
+              {/* Quick Stats */}
+              <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
+                  <BarChart3 className="h-5 w-5 text-primary-600" />
+                  Performance Metrics
+                </h3>
+                <div className="space-y-4">
+                  <StatRow 
+                    label="Avg. Booking Value" 
+                    value={kpis.avgBookingValue.toLocaleString('en-US', { style: 'currency', currency: 'USD' })} 
+                    icon={DollarSign} 
+                    color="text-green-600" 
+                  />
+                  <StatRow label="Approval Rate" value={`${kpis.approvalRate}%`} icon={CheckCircle} color="text-blue-600" />
+                  <StatRow label="Cancellation Rate" value={`${kpis.cancellationRate}%`} icon={XCircle} color="text-red-600" />
+                  <StatRow 
+                    label="Growth (30d)" 
+                    value={`${kpis.growthRate > 0 ? '+' : ''}${kpis.growthRate}%`} 
+                    icon={kpis.growthRate >= 0 ? TrendingUp : TrendingDown} 
+                    color={kpis.growthRate >= 0 ? 'text-green-600' : 'text-red-600'} 
+                  />
+                </div>
               </div>
             </div>
-            <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 rounded-lg border p-4">
-              <h4 className="text-sm font-semibold text-gray-800 mb-2">Revenue</h4>
-              <div className="flex items-center justify-between text-sm">
-                <span>Transport</span>
-                <span className="font-medium">{byService.transport.revenue.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</span>
-              </div>
-              <div className="flex items-center justify-between text-sm">
-                <span>Rental</span>
-                <span className="font-medium">{byService.rental.revenue.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</span>
+          </>
+        )}
+
+        {/* Bookings Tab */}
+        {activeTab === 'bookings' && (
+          <>
+            {/* Status Breakdown */}
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 mb-6">
+              <StatusCard label="Pending" value={kpis.pending} icon={Clock} color="bg-yellow-500" />
+              <StatusCard label="Approved" value={kpis.approved} icon={CheckCircle} color="bg-blue-500" />
+              <StatusCard label="In Transit" value={kpis.inTransit} icon={TrendingUp} color="bg-indigo-500" />
+              <StatusCard label="Active" value={kpis.active} icon={Activity} color="bg-purple-500" />
+              <StatusCard label="Completed" value={kpis.completed} icon={CheckCircle} color="bg-green-500" />
+              <StatusCard label="Cancelled" value={kpis.cancelled} icon={XCircle} color="bg-red-500" />
+            </div>
+
+            {/* Service Type Breakdown */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+              <ServiceCard 
+                title="Transportation" 
+                count={byService.transport.count} 
+                revenue={byService.transport.revenue} 
+                percentage={kpis.total > 0 ? Math.round((byService.transport.count / kpis.total) * 100) : 0}
+                color="from-blue-500 to-primary-600"
+              />
+              <ServiceCard 
+                title="Rental" 
+                count={byService.rental.count} 
+                revenue={byService.rental.revenue} 
+                percentage={kpis.total > 0 ? Math.round((byService.rental.count / kpis.total) * 100) : 0}
+                color="from-orange-500 to-accent-600"
+              />
+            </div>
+
+            {/* Conversion Funnel */}
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-6 flex items-center gap-2">
+                <BarChart3 className="h-5 w-5 text-primary-600" />
+                Booking Conversion Funnel
+              </h3>
+              <div className="space-y-3">
+                <FunnelBar label="Total Requests" value={kpis.total} max={kpis.total} percentage={100} />
+                <FunnelBar label="Approved" value={kpis.approved} max={kpis.total} percentage={kpis.total > 0 ? Math.round((kpis.approved / kpis.total) * 100) : 0} />
+                <FunnelBar label="In Progress" value={kpis.inTransit + kpis.active} max={kpis.total} percentage={kpis.total > 0 ? Math.round(((kpis.inTransit + kpis.active) / kpis.total) * 100) : 0} />
+                <FunnelBar label="Completed" value={kpis.completed} max={kpis.total} percentage={kpis.completionRate} />
               </div>
             </div>
-          </div>
-        </Section>
+          </>
+        )}
+
+        {/* Revenue Tab */}
+        {activeTab === 'revenue' && (
+          <>
+            {/* Revenue KPIs */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-6">
+              <RevenueCard 
+                title="Total Revenue" 
+                value={kpis.totalRevenue} 
+                icon={DollarSign} 
+                color="text-green-600"
+              />
+              <RevenueCard 
+                title="Transport Revenue" 
+                value={byService.transport.revenue} 
+                icon={Truck} 
+                color="text-blue-600"
+                percentage={kpis.totalRevenue > 0 ? Math.round((byService.transport.revenue / kpis.totalRevenue) * 100) : 0}
+              />
+              <RevenueCard 
+                title="Rental Revenue" 
+                value={byService.rental.revenue} 
+                icon={Package} 
+                color="text-orange-600"
+                percentage={kpis.totalRevenue > 0 ? Math.round((byService.rental.revenue / kpis.totalRevenue) * 100) : 0}
+              />
+            </div>
+
+            {/* Revenue Breakdown */}
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-6">Revenue Analysis</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">By Service Type</h4>
+                  <div className="space-y-3">
+                    <RevenueBar 
+                      label="Transportation" 
+                      value={byService.transport.revenue} 
+                      max={kpis.totalRevenue} 
+                      color="bg-blue-500"
+                    />
+                    <RevenueBar 
+                      label="Rental" 
+                      value={byService.rental.revenue} 
+                      max={kpis.totalRevenue} 
+                      color="bg-orange-500"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Key Metrics</h4>
+                  <div className="space-y-3">
+                    <div className="flex justify-between items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                      <span className="text-sm text-gray-600 dark:text-gray-400">Average Booking Value</span>
+                      <span className="font-semibold text-gray-900 dark:text-gray-100">
+                        {kpis.avgBookingValue.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
+                      </span>
+                    </div>
+                    <div className="flex justify-between items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                      <span className="text-sm text-gray-600 dark:text-gray-400">Completed Bookings</span>
+                      <span className="font-semibold text-gray-900 dark:text-gray-100">{kpis.completed}</span>
+                    </div>
+                    <div className="flex justify-between items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                      <span className="text-sm text-gray-600 dark:text-gray-400">Revenue per Booking</span>
+                      <span className="font-semibold text-gray-900 dark:text-gray-100">
+                        {kpis.avgBookingValue.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </>
+        )}
 
       </div>
     </div>
   );
 };
 
-const Kpi = ({ title, value, icon: Icon, color }) => (
-  <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 rounded-lg border p-4">
-    <div className="flex items-center">
-      <Icon className={`h-6 w-6 ${color}`} />
-      <div className="ml-3">
-        <div className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">{title}</div>
-        <div className="text-lg font-semibold text-gray-900 dark:text-gray-100">{value}</div>
+// Improved Component Definitions
+const MetricCard = ({ title, value, icon: Icon, trend, subtitle, color }) => (
+  <div className={`${color} text-white rounded-lg shadow-lg p-6 transform transition-all hover:scale-105`}>
+    <div className="flex items-center justify-between mb-2">
+      <Icon className="h-8 w-8 opacity-80" />
+      {trend !== undefined && (
+        <div className="flex items-center text-sm font-medium">
+          {trend >= 0 ? <ArrowUpRight className="h-4 w-4" /> : <ArrowDownRight className="h-4 w-4" />}
+          <span>{Math.abs(trend)}%</span>
+        </div>
+      )}
+    </div>
+    <div className="text-3xl font-bold mb-1">{value}</div>
+    <div className="text-sm opacity-90">{subtitle || title}</div>
+  </div>
+);
+
+const StatRow = ({ label, value, icon: Icon, color }) => (
+  <div className="flex items-center justify-between py-2 border-b border-gray-100 dark:border-gray-700 last:border-0">
+    <div className="flex items-center gap-2">
+      <Icon className={`h-4 w-4 ${color}`} />
+      <span className="text-sm text-gray-600 dark:text-gray-400">{label}</span>
+    </div>
+    <span className="text-sm font-semibold text-gray-900 dark:text-gray-100">{value}</span>
+  </div>
+);
+
+const StatusCard = ({ label, value, icon: Icon, color }) => (
+  <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 border-l-4" style={{ borderColor: color }}>
+    <div className="flex items-center gap-2 mb-2">
+      <Icon className={`h-4 w-4 ${color.replace('bg-', 'text-')}`} />
+      <span className="text-xs text-gray-600 dark:text-gray-400">{label}</span>
+    </div>
+    <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">{value}</div>
+  </div>
+);
+
+const ServiceCard = ({ title, count, revenue, percentage, color }) => (
+  <div className={`bg-gradient-to-br ${color} text-white rounded-lg shadow-lg p-6`}>
+    <h3 className="text-lg font-semibold mb-4">{title}</h3>
+    <div className="space-y-3">
+      <div>
+        <div className="text-sm opacity-90">Bookings</div>
+        <div className="text-3xl font-bold">{count}</div>
+      </div>
+      <div>
+        <div className="text-sm opacity-90">Revenue</div>
+        <div className="text-2xl font-bold">
+          {revenue.toLocaleString('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0 })}
+        </div>
+      </div>
+      <div className="pt-2 border-t border-white border-opacity-20">
+        <div className="text-sm opacity-90">{percentage}% of total bookings</div>
       </div>
     </div>
   </div>
 );
 
-const Section = ({ title, icon: Icon, children }) => (
-  <div className="mb-6">
-    <div className="flex items-center mb-3">
-      <Icon className="h-5 w-5 text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500" />
-      <h3 className="ml-2 text-sm font-semibold text-gray-700 dark:text-gray-200">{title}</h3>
+const FunnelBar = ({ label, value, max, percentage }) => (
+  <div>
+    <div className="flex items-center justify-between text-sm mb-1">
+      <span className="text-gray-700 dark:text-gray-300">{label}</span>
+      <span className="font-semibold text-gray-900 dark:text-gray-100">{value} ({percentage}%)</span>
     </div>
-    {children}
+    <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+      <div 
+        className="h-full bg-gradient-to-r from-primary-500 to-accent-500 flex items-center justify-end px-3 text-white text-xs font-medium transition-all duration-500"
+        style={{ width: `${percentage}%` }}
+      >
+        {percentage > 10 && `${percentage}%`}
+      </div>
+    </div>
   </div>
 );
 
-const Placeholder = ({ children, height = '160px' }) => (
-  <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 rounded-lg border border-dashed text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 text-sm flex items-center justify-center" style={{ height }}>
-    {children}
+const RevenueCard = ({ title, value, icon: Icon, color, percentage }) => (
+  <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
+    <div className="flex items-center justify-between mb-3">
+      <Icon className={`h-6 w-6 ${color}`} />
+      {percentage !== undefined && (
+        <span className="text-xs font-medium text-gray-500 dark:text-gray-400">{percentage}%</span>
+      )}
+    </div>
+    <div className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-1">
+      {value.toLocaleString('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0 })}
+    </div>
+    <div className="text-sm text-gray-600 dark:text-gray-400">{title}</div>
   </div>
 );
 
-const FunnelStep = ({ label, value, icon: Icon }) => (
-  <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 rounded-lg border p-4 text-center">
-    <div className="flex items-center justify-center mb-2">
-      <Icon className="h-4 w-4 text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500" />
+const RevenueBar = ({ label, value, max, color }) => {
+  const percentage = max > 0 ? Math.round((value / max) * 100) : 0;
+  return (
+    <div>
+      <div className="flex items-center justify-between text-sm mb-1">
+        <span className="text-gray-700 dark:text-gray-300">{label}</span>
+        <span className="font-semibold text-gray-900 dark:text-gray-100">
+          {value.toLocaleString('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0 })}
+        </span>
+      </div>
+      <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+        <div 
+          className={`h-full ${color} transition-all duration-500`}
+          style={{ width: `${percentage}%` }}
+        />
+      </div>
     </div>
-    <div className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">{label}</div>
-    <div className="text-base font-semibold text-gray-900 dark:text-gray-100">{value}</div>
-  </div>
-);
+  );
+};
 
 export default AdminAnalytics;
 
