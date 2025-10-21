@@ -44,6 +44,9 @@ export const AuthProvider = ({ children }) => {
           
           // Verify token is still valid
           await axios.get('/auth/profile');
+          
+          // Load user's theme preference
+          await loadUserTheme();
         } catch (error) {
           console.error('Token validation failed:', error);
           logout();
@@ -55,6 +58,26 @@ export const AuthProvider = ({ children }) => {
     initializeAuth();
   }, []);
 
+  // Load user's theme preference from backend
+  const loadUserTheme = async () => {
+    try {
+      const response = await axios.get('/users/preferences');
+      const theme = response.data.data.theme || 'light';
+      
+      // Apply theme
+      document.documentElement.classList.toggle('dark', theme === 'dark');
+      localStorage.setItem('theme', theme);
+      
+      return theme;
+    } catch (error) {
+      console.error('Failed to load user theme:', error);
+      // Fallback to light theme
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+      return 'light';
+    }
+  };
+
   const login = async (email, password) => {
     try {
       const response = await axios.post('/auth/login', { email, password });
@@ -65,6 +88,9 @@ export const AuthProvider = ({ children }) => {
       
       localStorage.setItem('token', newToken);
       localStorage.setItem('user', JSON.stringify(userData));
+      
+      // Load user's theme preference after successful login
+      setTimeout(() => loadUserTheme(), 100);
       
       return { success: true, user: userData };
     } catch (error) {
@@ -113,6 +139,10 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     delete axios.defaults.headers.common['Authorization'];
+    
+    // Reset theme to light mode on logout
+    document.documentElement.classList.remove('dark');
+    localStorage.setItem('theme', 'light');
   };
 
   const updateUser = (updatedUser) => {

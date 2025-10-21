@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Sun, Moon, Save, Bell, BellOff, Check, AlertCircle } from 'lucide-react';
 import { useToast } from '../../contexts/ToastContext';
+import apiClient from '../../utils/apiClient';
 
 const Settings = () => {
   const { showSuccess, showError } = useToast();
@@ -31,7 +32,10 @@ const Settings = () => {
   const handleSaveSettings = async () => {
     setSaving(true);
     try {
-      // Persist preferences to localStorage
+      // Save theme to backend (user-specific)
+      await apiClient.put('/users/preferences/theme', { theme });
+      
+      // Persist preferences to localStorage (as backup)
       localStorage.setItem('theme', theme);
       localStorage.setItem('notificationsEnabled', JSON.stringify(notifications));
       

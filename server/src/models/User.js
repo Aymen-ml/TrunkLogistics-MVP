@@ -26,7 +26,7 @@ class User {
 
   static async findById(id) {
     const result = await query(
-      'SELECT id, email, role, first_name, last_name, phone, is_active, email_verified, created_at FROM users WHERE id = $1',
+      'SELECT id, email, role, first_name, last_name, phone, is_active, email_verified, theme_preference, created_at FROM users WHERE id = $1',
       [id]
     );
     
@@ -121,6 +121,24 @@ class User {
     );
     
     return result.rows;
+  }
+
+  static async updateThemePreference(userId, theme) {
+    const result = await query(
+      'UPDATE users SET theme_preference = $1 WHERE id = $2 RETURNING id, theme_preference',
+      [theme, userId]
+    );
+    
+    return result.rows[0];
+  }
+
+  static async getThemePreference(userId) {
+    const result = await query(
+      'SELECT theme_preference FROM users WHERE id = $1',
+      [userId]
+    );
+    
+    return result.rows[0]?.theme_preference || 'light';
   }
 }
 

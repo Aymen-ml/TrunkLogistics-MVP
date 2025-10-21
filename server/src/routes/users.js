@@ -7,7 +7,9 @@ import {
   toggleUserStatus, 
   verifyProvider,
   getProviderDetails,
-  deleteUser
+  deleteUser,
+  updateThemePreference,
+  getUserPreferences
 } from '../controllers/userController.js';
 import { authenticate, requireAdmin } from '../middleware/auth.js';
 import { 
@@ -30,6 +32,12 @@ router.get('/profile', authenticate, getProfile);
 
 // PUT /api/users/profile - Update user profile
 router.put('/profile', authenticate, validateProfileCreate, updateProfile);
+
+// GET /api/users/preferences - Get user preferences (theme, etc.)
+router.get('/preferences', authenticate, getUserPreferences);
+
+// PUT /api/users/preferences/theme - Update theme preference
+router.put('/preferences/theme', authenticate, updateThemePreference);
 
 // PUT /api/users/:id/status - Toggle user active status (admin only)
 router.put('/:id/status', authenticate, requireAdmin, validateUUID, validateUserStatusToggle, toggleUserStatus);

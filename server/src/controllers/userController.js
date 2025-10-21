@@ -417,3 +417,73 @@ export const verifyProvider = async (req, res) => {
     });
   }
 };
+
+// Update user theme preference
+export const updateThemePreference = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const { theme } = req.body;
+
+    // Validate theme value
+    if (!theme || !['light', 'dark'].includes(theme)) {
+      return res.status(400).json({
+        success: false,
+        error: 'Invalid theme. Must be "light" or "dark"'
+      });
+    }
+
+    // Update theme preference
+    const updated = await User.updateThemePreference(userId, theme);
+    
+    if (!updated) {
+      return res.status(404).json({
+        success: false,
+        error: 'User not found'
+      });
+    }
+
+    logger.info(`Theme preference updated for user ${req.user.email}: ${theme}`);
+
+    res.json({
+      success: true,
+      data: { theme },
+      message: 'Theme preference updated successfully'
+    });
+  } catch (error) {
+    logger.error('Update theme preference error:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Server error while updating theme preference'
+    });
+  }
+};
+
+// Get user preferences (including theme)
+export const getUserPreferences = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        error: 'User not found'
+      });
+    }
+
+    res.json({
+      success: true,
+      data: {
+        theme: user.theme_preference || 'light',
+        email: user.email,
+        role: user.role
+      }
+    });
+  } catch (error) {
+    logger.error('Get user preferences error:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Server error while fetching preferences'
+    });
+  }
+};
