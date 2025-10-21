@@ -74,17 +74,17 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary-50 via-white to-accent-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
+    <div className="min-h-screen bg-gradient-to-br from-primary-50 via-white to-accent-50 flex items-center justify-center py-8 sm:py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md w-full space-y-6 sm:space-y-8">
         <div>
           <div className="flex justify-center">
             <div className="flex flex-col items-center space-y-2">
               <TruckLogo className="h-16 w-16" />
-              <span className="text-3xl font-bold text-primary-600">TruckLogistics</span>
-              <span className="text-sm text-gray-600">Connecting Providers & Businesses</span>
+              <span className="text-2xl sm:text-3xl font-bold text-primary-600">TruckLogistics</span>
+              <span className="text-xs sm:text-sm text-gray-600">Connecting Providers & Businesses</span>
             </div>
           </div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900 dark:text-gray-100">
+          <h2 className="mt-4 sm:mt-6 text-center text-2xl sm:text-3xl font-extrabold text-gray-900 dark:text-gray-100">
             Sign in to your account
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600 dark:text-gray-400">

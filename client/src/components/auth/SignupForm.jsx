@@ -163,22 +163,22 @@ const SignupForm = () => {
   };
 
   return (
-    <div className="max-w-xl mx-auto p-8">
-      <div className="text-center mb-8">
+    <div className="max-w-xl mx-auto p-4 sm:p-6 md:p-8">
+      <div className="text-center mb-6 sm:mb-8">
         <div className="flex justify-center mb-4">
           <TruckLogo className="h-16 w-16" />
         </div>
-        <h1 className="text-3xl font-bold text-primary-600">Create Your Account</h1>
-        <p className="mt-2 text-gray-600">Join TruckLogistics and start connecting with logistics providers</p>
+        <h1 className="text-2xl sm:text-3xl font-bold text-primary-600">Create Your Account</h1>
+        <p className="mt-2 text-sm sm:text-base text-gray-600">Join TruckLogistics and start connecting with logistics providers</p>
       </div>
 
       {/* Progress Steps */}
-      <div className="mb-8">
+      <div className="mb-6 sm:mb-8">
         <div className="flex items-center justify-between">
           {[1, 2, 3].map((step) => (
             <div key={step} className="flex items-center">
               <div className={`
-                w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium transition-colors
+                w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-sm font-medium transition-colors
                 ${currentStep >= step 
                   ? 'bg-accent-500 text-white' 
                   : 'bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400'}
@@ -186,7 +186,7 @@ const SignupForm = () => {
                 {step}
               </div>
               {step < 3 && (
-                <div className={`w-24 h-1 transition-colors ${
+                <div className={`w-16 sm:w-24 h-1 transition-colors ${
                   currentStep > step ? 'bg-accent-500' : 'bg-gray-200 dark:bg-gray-700'
                 }`} />
               )}
@@ -194,35 +194,35 @@ const SignupForm = () => {
           ))}
         </div>
         <div className="flex justify-between mt-2">
-          <span className="text-xs text-gray-600 dark:text-gray-400">Account Type</span>
-          <span className="text-xs text-gray-600 dark:text-gray-400">Personal Info</span>
-          <span className="text-xs text-gray-600 dark:text-gray-400">Business Details</span>
+          <span className="text-[10px] sm:text-xs text-gray-600 dark:text-gray-400">Account Type</span>
+          <span className="text-[10px] sm:text-xs text-gray-600 dark:text-gray-400">Personal Info</span>
+          <span className="text-[10px] sm:text-xs text-gray-600 dark:text-gray-400">Business Details</span>
         </div>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Step 1: Account Type */}
         {currentStep === 1 && (
-          <div className="mb-8">
+          <div className="mb-6 sm:mb-8">
             <label className="block text-sm font-medium text-gray-700 mb-3">I want to:</label>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               <button
                 type="button"
                 onClick={() => {
                   setFormData(prev => ({ ...prev, role: 'customer' }));
                   setCurrentStep(2);
                 }}
-                className={`p-6 border-2 rounded-xl text-center transition-all duration-200 ${
+                className={`p-4 sm:p-6 border-2 rounded-xl text-center transition-all duration-200 ${
                   formData.role === 'customer'
                     ? 'border-blue-500 bg-blue-50 shadow-md'
                     : 'border-gray-200 hover:border-gray-300 hover:shadow-md'
                 }`}
               >
-                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-100 text-primary-600 mb-3">
-                  <User className="h-6 w-6" />
+                <div className="inline-flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-blue-100 text-primary-600 mb-2 sm:mb-3">
+                  <User className="h-5 w-5 sm:h-6 sm:w-6" />
                 </div>
-                <div className="font-semibold text-lg mb-1">Rent Trucks</div>
-                <div className="text-sm text-gray-600">Sign up as a Customer</div>
+                <div className="font-semibold text-base sm:text-lg mb-1">Rent Trucks</div>
+                <div className="text-xs sm:text-sm text-gray-600">Sign up as a Customer</div>
               </button>
 
               <button
@@ -231,17 +231,17 @@ const SignupForm = () => {
                   setFormData(prev => ({ ...prev, role: 'provider' }));
                   setCurrentStep(2);
                 }}
-                className={`p-6 border-2 rounded-xl text-center transition-all duration-200 ${
+                className={`p-4 sm:p-6 border-2 rounded-xl text-center transition-all duration-200 ${
                   formData.role === 'provider'
                     ? 'border-blue-500 bg-blue-50 shadow-md'
                     : 'border-gray-200 hover:border-gray-300 hover:shadow-md'
                 }`}
               >
-                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-100 text-primary-600 mb-3">
-                  <Truck className="h-6 w-6" />
+                <div className="inline-flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-blue-100 text-primary-600 mb-2 sm:mb-3">
+                  <Truck className="h-5 w-5 sm:h-6 sm:w-6" />
                 </div>
-                <div className="font-semibold text-lg mb-1">Provide Trucks</div>
-                <div className="text-sm text-gray-600">Sign up as a Provider</div>
+                <div className="font-semibold text-base sm:text-lg mb-1">Provide Trucks</div>
+                <div className="text-xs sm:text-sm text-gray-600">Sign up as a Provider</div>
               </button>
             </div>
           </div>
