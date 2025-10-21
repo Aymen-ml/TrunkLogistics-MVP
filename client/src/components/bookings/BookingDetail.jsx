@@ -169,7 +169,39 @@ const BookingDetail = () => {
     
     const actions = [];
     
-    if (user?.role === 'customer') {
+    if (user?.role === 'admin') {
+      // Admin actions - can change to any status except current one
+      const allStatuses = [
+        { status: 'pending_review', label: 'Pending Review', color: 'yellow', icon: <Clock className="h-4 w-4 mr-1" /> },
+        { status: 'approved', label: 'Approved', color: 'blue', icon: <CheckCircle className="h-4 w-4 mr-1" /> },
+        { status: 'in_transit', label: 'In Transit', color: 'purple', icon: <Truck className="h-4 w-4 mr-1" /> },
+        { status: 'active', label: booking.service_type === 'rental' ? 'Active (Rental)' : 'Active', color: 'orange', icon: <Settings className="h-4 w-4 mr-1" /> },
+        { status: 'completed', label: 'Completed', color: 'green', icon: <CheckCircle className="h-4 w-4 mr-1" /> }
+      ];
+      
+      // Add status change buttons for all statuses except current one
+      allStatuses.forEach(statusOption => {
+        if (statusOption.status !== booking.status) {
+          actions.push({
+            label: `Set to ${statusOption.label}`,
+            action: statusOption.status,
+            color: statusOption.color,
+            icon: statusOption.icon,
+            onClick: () => handleUpdateStatus(statusOption.status)
+          });
+        }
+      });
+      
+      // Add delete button
+      actions.push({
+        label: 'Delete Booking',
+        action: 'delete',
+        color: 'red',
+        icon: <Trash2 className="h-4 w-4 mr-1" />,
+        onClick: handleDeleteBooking
+      });
+      
+    } else if (user?.role === 'customer') {
       // Customer actions
       if (booking.status === 'pending_review') {
         actions.push(
