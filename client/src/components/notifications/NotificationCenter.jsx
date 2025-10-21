@@ -74,18 +74,58 @@ const NotificationCenter = () => {
   };
 
   const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    const now = new Date();
-    const diffInHours = (now - date) / (1000 * 60 * 60);
+    if (!dateString) return 'Unknown';
+    
+    try {
+      const date = new Date(dateString);
+      const now = new Date();
+      
+      // Check if date is valid
+      if (isNaN(date.getTime())) {
+        console.error('Invalid date:', dateString);
+        return 'Invalid date';
+      }
+      
+      const diffInMilliseconds = now - date;
+      const diffInMinutes = diffInMilliseconds / (1000 * 60);
+      const diffInHours = diffInMinutes / 60;
+      const diffInDays = diffInHours / 24;
 
-    if (diffInHours < 1) {
-      return 'Just now';
-    } else if (diffInHours < 24) {
-      return `${Math.floor(diffInHours)}h ago`;
-    } else if (diffInHours < 168) {
-      return `${Math.floor(diffInHours / 24)}d ago`;
-    } else {
-      return date.toLocaleDateString();
+      // Less than 1 minute
+      if (diffInMinutes < 1) {
+        return 'Just now';
+      }
+      // Less than 1 hour
+      else if (diffInMinutes < 60) {
+        const mins = Math.floor(diffInMinutes);
+        return `${mins} ${mins === 1 ? 'minute' : 'minutes'} ago`;
+      }
+      // Less than 24 hours
+      else if (diffInHours < 24) {
+        const hours = Math.floor(diffInHours);
+        return `${hours} ${hours === 1 ? 'hour' : 'hours'} ago`;
+      }
+      // Less than 7 days
+      else if (diffInDays < 7) {
+        const days = Math.floor(diffInDays);
+        return `${days} ${days === 1 ? 'day' : 'days'} ago`;
+      }
+      // Less than 30 days
+      else if (diffInDays < 30) {
+        const weeks = Math.floor(diffInDays / 7);
+        return `${weeks} ${weeks === 1 ? 'week' : 'weeks'} ago`;
+      }
+      // Show full date
+      else {
+        return date.toLocaleDateString('en-US', { 
+          month: 'short', 
+          day: 'numeric', 
+          year: date.getFullYear() !== now.getFullYear() ? 'numeric' : undefined 
+        });
+      }
+    } catch (error) {
+      console.error('Error formatting date:', error);
+      return 'Unknown';
     }
   };
 
@@ -103,9 +143,9 @@ const NotificationCenter = () => {
   return (
     <div className="fixed inset-0 z-50 overflow-hidden">
       <div className="absolute inset-0 bg-black bg-opacity-50" onClick={closeNotificationCenter} />
-      <div className="absolute right-0 top-0 h-full w-full max-w-md bg-white shadow-xl">
+      <div className="absolute right-0 top-0 h-full w-full max-w-md bg-white shadow-xl flex flex-col">
         {/* Header */}
-        <div className="flex items-center justify-between p-4 border-b border-gray-200">
+        <div className="flex items-center justify-between p-4 border-b border-gray-200 flex-shrink-0">
           <div className="flex items-center space-x-2">
             <Bell className="h-5 w-5 text-gray-600" />
             <h2 className="text-lg font-semibold text-gray-900">Notifications</h2>
@@ -120,7 +160,7 @@ const NotificationCenter = () => {
 
         {/* Controls */}
         {notificationsEnabled && (
-          <div className="p-4 border-b border-gray-200 bg-gray-50">
+          <div className="p-4 border-b border-gray-200 bg-gray-50 flex-shrink-0">
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center space-x-2">
                 <Filter className="h-4 w-4 text-gray-500" />
@@ -139,6 +179,7 @@ const NotificationCenter = () => {
                   onClick={() => loadNotifications(1)}
                   disabled={loading}
                   className="p-1 rounded-full hover:bg-gray-200 disabled:opacity-50"
+                  title="Refresh notifications"
                 >
                   <RefreshCw className={`h-4 w-4 text-gray-500 ${loading ? 'animate-spin' : ''}`} />
                 </button>
@@ -154,7 +195,7 @@ const NotificationCenter = () => {
         )}
 
         {/* Notifications List */}
-        <div className="flex-1 overflow-y-auto">
+        <div className="flex-1 overflow-y-auto" style={{ minHeight: 0 }}>
           {!notificationsEnabled ? (
             // Notifications Disabled State
             <div className="flex flex-col items-center justify-center p-8 text-center h-full">
@@ -194,40 +235,53 @@ const NotificationCenter = () => {
                   }`}
                 >
                   <div className="flex items-start space-x-3">
-                    <div className="flex-shrink-0 text-lg">
+                    <div className="flex-shrink-0 text-xl mt-1">
                       {getNotificationIcon(notification.type)}
                     </div>
                     <div className="flex-1 min-w-0">
-                      <div className="flex items-start justify-between">
-                        <div className="flex-1">
-                          <p className={`text-sm font-medium ${
+                      <div className="flex items-start justify-between gap-3">
+                        <div className="flex-1 min-w-0">
+                          <p className={`text-base font-semibold mb-1 ${
                             !notification.is_read ? 'text-gray-900' : 'text-gray-700'
                           }`}>
                             {notification.title}
                           </p>
-                          <p className="text-sm text-gray-600 mt-1">
+                          <p className="text-sm text-gray-600 mb-2 leading-relaxed">
                             {notification.message}
                           </p>
-                          <p className="text-xs text-gray-400 mt-2">
-                            {formatDate(notification.created_at)}
-                          </p>
+                          <div className="flex items-center gap-2">
+                            <p className="text-xs text-gray-500 font-medium">
+                              {formatDate(notification.created_at)}
+                            </p>
+                            {!notification.is_read && (
+                              <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                                New
+                              </span>
+                            )}
+                          </div>
                         </div>
-                        <div className="flex items-center space-x-1 ml-2">
+                        <div className="flex flex-col items-center gap-1 flex-shrink-0">
                           {!notification.is_read && (
                             <button
-                              onClick={() => contextMarkAsRead(notification.id)}
-                              className="p-1 rounded-full hover:bg-gray-200"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                contextMarkAsRead(notification.id);
+                              }}
+                              className="p-2 rounded-full hover:bg-blue-100 transition-colors"
                               title="Mark as read"
                             >
-                              <Check className="h-3 w-3 text-gray-500" />
+                              <Check className="h-4 w-4 text-blue-600" />
                             </button>
                           )}
                           <button
-                            onClick={() => contextDeleteNotification(notification.id)}
-                            className="p-1 rounded-full hover:bg-gray-200"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              contextDeleteNotification(notification.id);
+                            }}
+                            className="p-2 rounded-full hover:bg-red-100 transition-colors"
                             title="Delete"
                           >
-                            <Trash2 className="h-3 w-3 text-gray-500" />
+                            <Trash2 className="h-4 w-4 text-red-600" />
                           </button>
                         </div>
                       </div>
@@ -237,13 +291,16 @@ const NotificationCenter = () => {
               ))}
               
               {hasMore && (
-                <div className="p-4 text-center">
+                <div className="p-4 text-center border-t border-gray-200">
                   <button
-                    onClick={loadMore}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      loadMore();
+                    }}
                     disabled={loading}
-                    className="text-sm text-blue-600 hover:text-blue-700 font-medium disabled:opacity-50"
+                    className="px-4 py-2 text-sm text-blue-600 hover:text-blue-700 font-medium disabled:opacity-50 hover:bg-blue-50 rounded-md transition-colors"
                   >
-                    {loading ? 'Loading...' : 'Load more'}
+                    {loading ? 'Loading...' : 'Load more notifications'}
                   </button>
                 </div>
               )}
