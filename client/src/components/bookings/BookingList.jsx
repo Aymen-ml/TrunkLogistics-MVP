@@ -15,7 +15,10 @@ import {
   Plus,
   Eye,
   Trash2,
-  DollarSign
+  DollarSign,
+  TrendingUp,
+  Activity,
+  X
 } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useBookings } from '../../contexts/BookingContext';
@@ -151,22 +154,56 @@ const BookingList = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
       </div>
     );
   }
 
+  // Calculate stats from filtered bookings
+  const stats = useMemo(() => {
+    const total = filteredBookings.length;
+    const active = filteredBookings.filter(b => 
+      b.status === 'in_transit' || b.status === 'active' || b.status === 'approved'
+    ).length;
+    const completed = filteredBookings.filter(b => b.status === 'completed').length;
+    const totalRevenue = filteredBookings
+      .filter(b => b.status === 'completed')
+      .reduce((sum, b) => sum + (parseFloat(b.total_price) || 0), 0);
+    
+    return { total, active, completed, totalRevenue };
+  }, [filteredBookings]);
+
+  const formatCurrency = (amount) => {
+    const numAmount = Number(amount);
+    if (!amount || amount === 0 || isNaN(numAmount)) return '$0';
+    if (numAmount % 1 === 0) {
+      return `$${numAmount.toLocaleString()}`;
+    } else {
+      return `$${numAmount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`;
+    }
+  };
+
+  const activeFiltersCount = Object.entries(filters).filter(([key, value]) => {
+    if (key === 'status' || key === 'service_type' || key === 'provider') return value !== 'all';
+    if (key === 'search') return value !== '';
+    if (key === 'date_from' || key === 'date_to') return value !== '';
+    return false;
+  }).length;
+
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900 py-8">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="mb-8">
+        <div className="mb-6">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between">
             <div className="flex-1 min-w-0">
               <h2 className="text-2xl font-bold leading-7 text-gray-900 dark:text-gray-100 sm:text-3xl">
                 Bookings
               </h2>
+              <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                Manage and track all your bookings
+              </p>
             </div>
             {user.role === 'customer' && (
               <div className="mt-4 md:mt-0 md:ml-4">
@@ -182,171 +219,223 @@ const BookingList = () => {
           </div>
         </div>
 
+        {/* Quick Stats */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 border border-gray-200 dark:border-gray-700">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Total Bookings</p>
+                <p className="text-2xl font-bold text-gray-900 dark:text-gray-100 mt-1">{stats.total}</p>
+              </div>
+              <div className="p-3 bg-primary-100 dark:bg-primary-900/20 rounded-lg">
+                <Package className="h-6 w-6 text-primary-600" />
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 border border-gray-200 dark:border-gray-700">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Active</p>
+                <p className="text-2xl font-bold text-gray-900 dark:text-gray-100 mt-1">{stats.active}</p>
+              </div>
+              <div className="p-3 bg-green-100 dark:bg-green-900/20 rounded-lg">
+                <Activity className="h-6 w-6 text-green-600" />
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 border border-gray-200 dark:border-gray-700">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Completed</p>
+                <p className="text-2xl font-bold text-gray-900 dark:text-gray-100 mt-1">{stats.completed}</p>
+              </div>
+              <div className="p-3 bg-purple-100 dark:bg-purple-900/20 rounded-lg">
+                <CheckCircle className="h-6 w-6 text-purple-600" />
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 border border-gray-200 dark:border-gray-700">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Total Revenue</p>
+                <p className="text-2xl font-bold text-gray-900 dark:text-gray-100 mt-1">{formatCurrency(stats.totalRevenue)}</p>
+              </div>
+              <div className="p-3 bg-orange-100 dark:bg-orange-900/20 rounded-lg">
+                <DollarSign className="h-6 w-6 text-orange-600" />
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* Filters */}
-        <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 shadow-sm rounded-lg mb-8">
-          <div className="px-4 py-5 sm:p-6">
-            <form onSubmit={handleSearch} className="space-y-4 md:space-y-0 md:grid md:grid-cols-7 md:gap-4 md:items-end">
-              <div className="md:col-span-2">
-                <label htmlFor="search" className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">
-                  Search
-                </label>
-                <div className="relative rounded-md shadow-sm">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <Search className="h-5 w-5 text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500" />
-                  </div>
-                  <input
-                    type="text"
-                    name="search"
-                    id="search"
-                    value={filters.search}
-                    onChange={handleFilterChange}
-                    className="focus:ring-accent-500 focus:border-blue-500 block w-full pl-10 sm:text-sm border-gray-300 dark:border-gray-600 rounded-md"
-                    placeholder="Search bookings..."
-                    autoComplete="off"
-                  />
-                </div>
+        <div className="bg-white dark:bg-gray-800 shadow-sm rounded-lg mb-6">
+          <div className="px-4 py-4 border-b border-gray-200 dark:border-gray-700">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Filter className="h-5 w-5 text-gray-400" />
+                <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">Filters</h3>
+                {activeFiltersCount > 0 && (
+                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 dark:bg-primary-900/20 text-primary-800 dark:text-primary-400">
+                    {activeFiltersCount} active
+                  </span>
+                )}
               </div>
-
-              <div>
-                <label htmlFor="status" className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">
-                  Status
-                </label>
-                <select
-                  id="status"
-                  name="status"
-                  value={filters.status}
-                  onChange={handleFilterChange}
-                  className="block w-full pl-3 pr-10 py-2 text-base border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-accent-500 focus:border-blue-500 sm:text-sm rounded-md"
-                >
-                  <option value="all">All Status</option>
-                  <option value="pending_review">Pending Review</option>
-                  <option value="approved">Approved</option>
-                  <option value="in_transit">In Transit</option>
-                  <option value="active">Active</option>
-                  <option value="completed">Completed</option>
-                  <option value="cancelled">Cancelled</option>
-                </select>
-              </div>
-              
-              <div>
-                <label htmlFor="service_type" className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">
-                  Service
-                </label>
-                <select
-                  id="service_type"
-                  name="service_type"
-                  value={filters.service_type}
-                  onChange={handleFilterChange}
-                  className="block w-full pl-3 pr-10 py-2 text-base border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-accent-500 focus:border-blue-500 sm:text-sm rounded-md"
-                >
-                  <option value="all">All Services</option>
-                  <option value="transport">Transportation</option>
-                  <option value="rental">Equipment Rental</option>
-                </select>
-              </div>
-
-              <div>
-                <label htmlFor="provider" className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">
-                  Provider
-                </label>
-                <select
-                  id="provider"
-                  name="provider"
-                  value={filters.provider}
-                  onChange={handleFilterChange}
-                  className="block w-full pl-3 pr-10 py-2 text-base border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-accent-500 focus:border-blue-500 sm:text-sm rounded-md"
-                >
-                  <option value="all">All Providers</option>
-                  {bookings && [...new Set(bookings.map(b => b.provider_company).filter(Boolean))].map(company => (
-                    <option key={company} value={company}>{company}</option>
-                  ))}
-                </select>
-              </div>
-
-              <div>
-                <label htmlFor="date_from" className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">
-                  From Date
-                </label>
-                <input
-                  type="date"
-                  name="date_from"
-                  id="date_from"
-                  value={filters.date_from}
-                  onChange={handleFilterChange}
-                  className="block w-full pl-3 pr-10 py-2 text-base border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-accent-500 focus:border-blue-500 sm:text-sm rounded-md"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="date_to" className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">
-                  To Date
-                </label>
-                <input
-                  type="date"
-                  name="date_to"
-                  id="date_to"
-                  value={filters.date_to}
-                  onChange={handleFilterChange}
-                  className="block w-full pl-3 pr-10 py-2 text-base border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-accent-500 focus:border-blue-500 sm:text-sm rounded-md"
-                />
-              </div>
-
-              <div className="flex flex-col space-y-2 md:flex-row md:space-y-0 md:space-x-2">
-                <button
-                  type="submit"
-                  className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-accent-500 hover:bg-accent-600 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-500"
-                >
-                  <Filter className="h-4 w-4 mr-2" />
-                  Filter
-                </button>
+              {activeFiltersCount > 0 && (
                 <button
                   type="button"
                   onClick={clearFilters}
-                  className="inline-flex items-center justify-center px-4 py-2 border border-gray-300 dark:border-gray-600 text-sm font-medium rounded-md text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 hover:bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-500"
+                  className="inline-flex items-center gap-1 text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200"
                 >
-                  Clear
+                  <X className="h-4 w-4" />
+                  Clear all
                 </button>
+              )}
+            </div>
+          </div>
+          <div className="px-4 py-5 sm:p-6">
+            <form onSubmit={handleSearch} className="space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div className="lg:col-span-2">
+                  <label htmlFor="search" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    Search
+                  </label>
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                      <Search className="h-5 w-5 text-gray-400" />
+                    </div>
+                    <input
+                      type="text"
+                      name="search"
+                      id="search"
+                      value={filters.search}
+                      onChange={handleFilterChange}
+                      className="block w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-gray-100 sm:text-sm"
+                      placeholder="Search by reference, location..."
+                      autoComplete="off"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label htmlFor="status" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    Status
+                  </label>
+                  <select
+                    id="status"
+                    name="status"
+                    value={filters.status}
+                    onChange={handleFilterChange}
+                    className="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-gray-100 sm:text-sm"
+                  >
+                    <option value="all">All Status</option>
+                    <option value="pending_review">Pending Review</option>
+                    <option value="approved">Approved</option>
+                    <option value="in_transit">In Transit</option>
+                    <option value="active">Active</option>
+                    <option value="completed">Completed</option>
+                    <option value="cancelled">Cancelled</option>
+                  </select>
+                </div>
+                
+                <div>
+                  <label htmlFor="service_type" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    Service Type
+                  </label>
+                  <select
+                    id="service_type"
+                    name="service_type"
+                    value={filters.service_type}
+                    onChange={handleFilterChange}
+                    className="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-gray-100 sm:text-sm"
+                  >
+                    <option value="all">All Services</option>
+                    <option value="transport">Transportation</option>
+                    <option value="rental">Equipment Rental</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                  <label htmlFor="date_from" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    From Date
+                  </label>
+                  <input
+                    type="date"
+                    id="date_from"
+                    name="date_from"
+                    value={filters.date_from}
+                    onChange={handleFilterChange}
+                    className="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-gray-100 sm:text-sm"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="date_to" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    To Date
+                  </label>
+                  <input
+                    type="date"
+                    id="date_to"
+                    name="date_to"
+                    value={filters.date_to}
+                    onChange={handleFilterChange}
+                    className="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-gray-100 sm:text-sm"
+                  />
+                </div>
               </div>
             </form>
           </div>
         </div>
 
         {/* Bookings List */}
-        <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 shadow rounded-lg">
+        <div className="bg-white dark:bg-gray-800 shadow-sm rounded-lg overflow-hidden">
+          <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+            <div className="flex items-center justify-between">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+                All Bookings ({filteredBookings.length})
+              </h3>
+            </div>
+          </div>
           <div className="overflow-x-auto">
             <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-              <thead className="bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900">
+              <thead className="bg-gray-50 dark:bg-gray-900/50">
                 <tr>
-                  <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 uppercase tracking-wider">
+                  <th scope="col" className="px-6 py-4 text-left text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
                     Booking Details
                   </th>
-                  <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 uppercase tracking-wider">
+                  <th scope="col" className="px-6 py-4 text-left text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
                     Location
                   </th>
-                  <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 uppercase tracking-wider">
+                  <th scope="col" className="px-6 py-4 text-left text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
                     Schedule
                   </th>
-                  <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 uppercase tracking-wider">
+                  <th scope="col" className="px-6 py-4 text-left text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
                     Status
                   </th>
-                  <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 uppercase tracking-wider">
+                  <th scope="col" className="px-6 py-4 text-left text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
                     Price
                   </th>
-                  <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 uppercase tracking-wider">
+                  <th scope="col" className="px-6 py-4 text-right text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
                     Actions
                   </th>
                 </tr>
               </thead>
-              <tbody className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+              <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
                 {filteredBookings.length === 0 ? (
                   <tr>
-                    <td colSpan="6" className="px-6 py-4 text-center text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
-                      No bookings found
+                    <td colSpan="6" className="px-6 py-12 text-center">
+                      <Package className="mx-auto h-12 w-12 text-gray-400 dark:text-gray-500 mb-3" />
+                      <p className="text-sm font-medium text-gray-900 dark:text-gray-100">No bookings found</p>
+                      <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Try adjusting your filters</p>
                     </td>
                   </tr>
                 ) : (
                   filteredBookings.map((booking) => (
-                    <tr key={booking.id}>
+                    <tr key={booking.id} className="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors">
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="flex items-center">
                           <div className={`flex-shrink-0 h-10 w-10 flex items-center justify-center rounded-lg ${

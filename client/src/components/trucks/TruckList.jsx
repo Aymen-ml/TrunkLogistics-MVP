@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { 
@@ -13,7 +13,11 @@ import {
   CheckCircle,
   Clock,
   Settings,
-  MapPin
+  MapPin,
+  Activity,
+  Package,
+  DollarSign,
+  X
 } from 'lucide-react';
 import { formatCurrency, formatPriceWithUnit } from '../../utils/currency';
 import axios from 'axios';
@@ -116,37 +120,65 @@ const TruckList = () => {
     return types[type] || type;
   };
 
-  const filteredTrucks = trucks.filter(truck => {
-    const matchesSearch = truck.license_plate.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         truck.make?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         truck.model?.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesStatus = statusFilter === 'all' || truck.status === statusFilter;
-    const matchesType = typeFilter === 'all' || truck.truck_type === typeFilter;
-    const matchesService = serviceFilter === 'all' || 
-                          (serviceFilter === 'transport' && (!truck.service_type || truck.service_type === 'transport')) ||
-                          (serviceFilter === 'rental' && truck.service_type === 'rental');
+  const filteredTrucks = useMemo(() => {
+    return trucks.filter(truck => {
+      const matchesSearch = truck.license_plate.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                           truck.make?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                           truck.model?.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesStatus = statusFilter === 'all' || truck.status === statusFilter;
+      const matchesType = typeFilter === 'all' || truck.truck_type === typeFilter;
+      const matchesService = serviceFilter === 'all' || 
+                            (serviceFilter === 'transport' && (!truck.service_type || truck.service_type === 'transport')) ||
+                            (serviceFilter === 'rental' && truck.service_type === 'rental');
+      
+      return matchesSearch && matchesStatus && matchesType && matchesService;
+    });
+  }, [trucks, searchTerm, statusFilter, typeFilter, serviceFilter]);
+
+  // Calculate stats from filtered trucks
+  const stats = useMemo(() => {
+    const total = filteredTrucks.length;
+    const active = filteredTrucks.filter(t => t.status === 'active').length;
+    const rented = filteredTrucks.filter(t => t.status === 'rented').length;
+    const maintenance = filteredTrucks.filter(t => t.status === 'maintenance').length;
+    const transport = filteredTrucks.filter(t => !t.service_type || t.service_type === 'transport').length;
+    const rental = filteredTrucks.filter(t => t.service_type === 'rental').length;
     
-    return matchesSearch && matchesStatus && matchesType && matchesService;
-  });
+    return { total, active, rented, maintenance, transport, rental };
+  }, [filteredTrucks]);
+
+  const activeFiltersCount = [
+    searchTerm !== '',
+    statusFilter !== 'all',
+    typeFilter !== 'all',
+    serviceFilter !== 'all'
+  ].filter(Boolean).length;
+
+  const clearFilters = () => {
+    setSearchTerm('');
+    setStatusFilter('all');
+    setTypeFilter('all');
+    setServiceFilter('all');
+  };
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
         {/* Header */}
-        <div className="mb-6 sm:mb-8">
+        <div className="mb-6">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
             <div>
               <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100">My Fleet</h1>
-              <p className="mt-2 text-sm sm:text-base text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
-                Manage your trucks and rental equipment.
+              <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
+                Manage your trucks and rental equipment
               </p>
             </div>
             <div className="mt-4 sm:mt-0">
@@ -161,88 +193,170 @@ const TruckList = () => {
           </div>
         </div>
 
-        {/* Filters */}
-        <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 p-4 sm:p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 mb-6">
-          <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
-                Search
-              </label>
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500" />
-                <input
-                  type="text"
-                  placeholder="License plate, make, model..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-10 w-full border-gray-300 dark:border-gray-600 rounded-md focus:ring-accent-500 focus:border-blue-500"
-                  autoComplete="off"
-                />
+        {/* Quick Stats */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 border border-gray-200 dark:border-gray-700">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Total Fleet</p>
+                <p className="text-2xl font-bold text-gray-900 dark:text-gray-100 mt-1">{stats.total}</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                  {stats.transport} transport • {stats.rental} rental
+                </p>
+              </div>
+              <div className="p-3 bg-primary-100 dark:bg-primary-900/20 rounded-lg">
+                <Package className="h-6 w-6 text-primary-600" />
               </div>
             </div>
-            
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
-                Status
-              </label>
-              <select
-                value={statusFilter}
-                onChange={(e) => setStatusFilter(e.target.value)}
-                className="w-full border-gray-300 dark:border-gray-600 rounded-md focus:ring-accent-500 focus:border-blue-500"
-              >
-                <option value="all">All Status</option>
-                <option value="active">Active</option>
-                <option value="inactive">Inactive</option>
-                <option value="rented">Rented</option>
-                <option value="maintenance">Maintenance</option>
-              </select>
-            </div>
+          </div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
-                Service
-              </label>
-              <select
-                value={serviceFilter}
-                onChange={(e) => setServiceFilter(e.target.value)}
-                className="w-full border-gray-300 dark:border-gray-600 rounded-md focus:ring-accent-500 focus:border-blue-500"
-              >
-                <option value="all">All Services</option>
-                <option value="transport">Transportation</option>
-                <option value="rental">Equipment Rental</option>
-              </select>
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 border border-gray-200 dark:border-gray-700">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Active</p>
+                <p className="text-2xl font-bold text-gray-900 dark:text-gray-100 mt-1">{stats.active}</p>
+                <p className="text-xs text-green-600 mt-1">Ready to use</p>
+              </div>
+              <div className="p-3 bg-green-100 dark:bg-green-900/20 rounded-lg">
+                <CheckCircle className="h-6 w-6 text-green-600" />
+              </div>
             </div>
-            
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
-                Type
-              </label>
-              <select
-                value={typeFilter}
-                onChange={(e) => setTypeFilter(e.target.value)}
-                className="w-full border-gray-300 dark:border-gray-600 rounded-md focus:ring-accent-500 focus:border-blue-500"
-              >
-                <option value="all">All Types</option>
-                <option value="flatbed">Flatbed</option>
-                <option value="container">Container</option>
-                <option value="refrigerated">Refrigerated</option>
-                <option value="tanker">Tanker</option>
-                <option value="box">Box Truck</option>
-                <option value="other">Other</option>
-              </select>
+          </div>
+
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 border border-gray-200 dark:border-gray-700">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">In Use</p>
+                <p className="text-2xl font-bold text-gray-900 dark:text-gray-100 mt-1">{stats.rented}</p>
+                <p className="text-xs text-blue-600 mt-1">Currently rented</p>
+              </div>
+              <div className="p-3 bg-blue-100 dark:bg-blue-900/20 rounded-lg">
+                <Activity className="h-6 w-6 text-blue-600" />
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 border border-gray-200 dark:border-gray-700">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Maintenance</p>
+                <p className="text-2xl font-bold text-gray-900 dark:text-gray-100 mt-1">{stats.maintenance}</p>
+                <p className="text-xs text-red-600 mt-1">Under repair</p>
+              </div>
+              <div className="p-3 bg-red-100 dark:bg-red-900/20 rounded-lg">
+                <AlertCircle className="h-6 w-6 text-red-600" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Filters */}
+        <div className="bg-white dark:bg-gray-800 shadow-sm rounded-lg mb-6">
+          <div className="px-4 py-4 border-b border-gray-200 dark:border-gray-700">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Filter className="h-5 w-5 text-gray-400" />
+                <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">Filters</h3>
+                {activeFiltersCount > 0 && (
+                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 dark:bg-primary-900/20 text-primary-800 dark:text-primary-400">
+                    {activeFiltersCount} active
+                  </span>
+                )}
+              </div>
+              {activeFiltersCount > 0 && (
+                <button
+                  type="button"
+                  onClick={clearFilters}
+                  className="inline-flex items-center gap-1 text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200"
+                >
+                  <X className="h-4 w-4" />
+                  Clear all
+                </button>
+              )}
+            </div>
+          </div>
+          <div className="p-6">
+            <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Search
+                </label>
+                <div className="relative">
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                  <input
+                    type="text"
+                    placeholder="License plate, make, model..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="pl-10 w-full border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-gray-100 px-3 py-2 sm:text-sm"
+                    autoComplete="off"
+                  />
+                </div>
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Status
+                </label>
+                <select
+                  value={statusFilter}
+                  onChange={(e) => setStatusFilter(e.target.value)}
+                  className="w-full border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-gray-100 px-3 py-2 sm:text-sm"
+                >
+                  <option value="all">All Status</option>
+                  <option value="active">Active</option>
+                  <option value="inactive">Inactive</option>
+                  <option value="rented">Rented</option>
+                  <option value="maintenance">Maintenance</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Service Type
+                </label>
+                <select
+                  value={serviceFilter}
+                  onChange={(e) => setServiceFilter(e.target.value)}
+                  className="w-full border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-gray-100 px-3 py-2 sm:text-sm"
+                >
+                  <option value="all">All Services</option>
+                  <option value="transport">Transportation</option>
+                  <option value="rental">Equipment Rental</option>
+                </select>
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Vehicle Type
+                </label>
+                <select
+                  value={typeFilter}
+                  onChange={(e) => setTypeFilter(e.target.value)}
+                  className="w-full border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-gray-100 px-3 py-2 sm:text-sm"
+                >
+                  <option value="all">All Types</option>
+                  <option value="flatbed">Flatbed</option>
+                  <option value="container">Container</option>
+                  <option value="refrigerated">Refrigerated</option>
+                  <option value="tanker">Tanker</option>
+                  <option value="box">Box Truck</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
             </div>
           </div>
         </div>
 
         {/* Trucks Grid */}
         {filteredTrucks.length === 0 ? (
-          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-8 text-center">
-            <Truck className="mx-auto h-12 w-12 text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500" />
-            <h3 className="mt-4 text-lg font-medium text-gray-900 dark:text-gray-100">No trucks found</h3>
-            <p className="mt-2 text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-12 text-center">
+            <Truck className="mx-auto h-16 w-16 text-gray-400 dark:text-gray-500" />
+            <h3 className="mt-4 text-lg font-semibold text-gray-900 dark:text-gray-100">No vehicles found</h3>
+            <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
               {trucks.length === 0 
-                ? "Get started by adding your first truck to the fleet."
-                : "Try adjusting your search or filter criteria."
+                ? "Get started by adding your first vehicle to the fleet"
+                : "Try adjusting your search or filter criteria"
               }
             </p>
             {trucks.length === 0 && (
@@ -252,7 +366,7 @@ const TruckList = () => {
                   className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-accent-500 hover:bg-accent-600 transition-colors"
                 >
                   <Plus className="h-4 w-4 mr-2" />
-                  Add Your First Truck
+                  Add Your First Vehicle
                 </Link>
               </div>
             )}
