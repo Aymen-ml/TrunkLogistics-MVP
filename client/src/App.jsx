@@ -185,7 +185,7 @@ const LandingPage = () => {
         <div className="text-center">
           <div className="inline-flex items-center px-4 py-2 rounded-full bg-accent-100 text-accent-700 text-sm font-medium mb-4">
             <Shield className="h-4 w-4 mr-2" />
-            Trusted by 500+ Businesses Nationwide
+            Trusted Logistics Platform
           </div>
           <h1 className="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
             <span className="block">Connect, Transport,</span>
@@ -217,28 +217,8 @@ const LandingPage = () => {
           </div>
         </div>
 
-        {/* Stats Section */}
-        <div className="mt-16 grid grid-cols-2 gap-4 sm:grid-cols-4 sm:gap-8">
-          <div className="text-center">
-            <div className="text-3xl sm:text-4xl font-bold text-primary-600">500+</div>
-            <div className="mt-2 text-sm sm:text-base text-gray-600">Active Providers</div>
-          </div>
-          <div className="text-center">
-            <div className="text-3xl sm:text-4xl font-bold text-primary-600">2,500+</div>
-            <div className="mt-2 text-sm sm:text-base text-gray-600">Deliveries Completed</div>
-          </div>
-          <div className="text-center">
-            <div className="text-3xl sm:text-4xl font-bold text-accent-500">98%</div>
-            <div className="mt-2 text-sm sm:text-base text-gray-600">Satisfaction Rate</div>
-          </div>
-          <div className="text-center">
-            <div className="text-3xl sm:text-4xl font-bold text-accent-500">&lt;2hrs</div>
-            <div className="mt-2 text-sm sm:text-base text-gray-600">Avg Response Time</div>
-          </div>
-        </div>
-
         {/* Features */}
-        <div className="mt-24">
+        <div className="mt-20">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
               Everything You Need for Logistics Success
@@ -287,14 +267,14 @@ const LandingPage = () => {
               Ready to Transform Your Logistics?
             </h2>
             <p className="mt-4 text-lg text-primary-100">
-              Join hundreds of businesses already streamlining their operations
+              Start managing your logistics operations today
             </p>
             <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 to="/register"
                 className="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-primary-700 bg-white hover:bg-gray-50 transition-colors"
               >
-                Start Free Trial
+                Get Started
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
               <Link
