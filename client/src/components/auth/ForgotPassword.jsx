@@ -68,7 +68,7 @@ const ForgotPassword = () => {
             <div className="flex justify-center">
               <div className="flex items-center space-x-2">
                 <Truck className="h-10 w-10 text-blue-600" />
-                <span className="text-2xl font-bold text-gray-900 dark:text-gray-100">TrunkLogistics</span>
+                <span className="text-2xl font-bold text-gray-900 dark:text-gray-100">TruckLogistics</span>
               </div>
             </div>
           </div>
@@ -125,7 +125,7 @@ const ForgotPassword = () => {
           <div className="flex justify-center">
             <div className="flex items-center space-x-2">
               <Truck className="h-10 w-10 text-blue-600" />
-              <span className="text-2xl font-bold text-gray-900 dark:text-gray-100">TrunkLogistics</span>
+              <span className="text-2xl font-bold text-gray-900 dark:text-gray-100">TruckLogistics</span>
             </div>
           </div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900 dark:text-gray-100">

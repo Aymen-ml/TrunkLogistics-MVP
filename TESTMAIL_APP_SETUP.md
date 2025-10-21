@@ -41,7 +41,7 @@ EMAIL_PASSWORD=your-api-key
 
 # From address (can be anything with testmail.app)
 EMAIL_FROM=noreply@testmail.app
-EMAIL_FROM_NAME=TrunkLogistics
+EMAIL_FROM_NAME=TruckLogistics
 
 # Client URL
 CLIENT_URL=https://truck-logistics-mvp.vercel.app
@@ -57,7 +57,7 @@ EMAIL_USER=korichiaymen27@gmail.com
 EMAIL_PASSWORD=your-app-password
 
 EMAIL_FROM=korichiaymen27@gmail.com
-EMAIL_FROM_NAME=TrunkLogistics
+EMAIL_FROM_NAME=TruckLogistics
 CLIENT_URL=https://truck-logistics-mvp.vercel.app
 ```
 
@@ -140,7 +140,7 @@ EMAIL_PASSWORD=your-testmail-api-key
 
 # Email details
 EMAIL_FROM=noreply@testmail.app
-EMAIL_FROM_NAME=TrunkLogistics
+EMAIL_FROM_NAME=TruckLogistics
 
 # App URLs
 CLIENT_URL=https://truck-logistics-mvp.vercel.app
@@ -159,7 +159,7 @@ EMAIL_PASSWORD=your-testmail-api-key
 
 # Email details
 EMAIL_FROM=noreply@testmail.app
-EMAIL_FROM_NAME=TrunkLogistics
+EMAIL_FROM_NAME=TruckLogistics
 
 # App URLs
 CLIENT_URL=http://localhost:5173
@@ -306,7 +306,7 @@ EMAIL_USER=yournamespace@testmail.app
 EMAIL_PASSWORD=your-api-key-from-testmail-dashboard
 
 EMAIL_FROM=noreply@testmail.app
-EMAIL_FROM_NAME=TrunkLogistics
+EMAIL_FROM_NAME=TruckLogistics
 
 CLIENT_URL=https://truck-logistics-mvp.vercel.app
 NODE_ENV=production

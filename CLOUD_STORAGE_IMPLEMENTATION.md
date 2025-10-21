@@ -23,12 +23,12 @@ npm install aws-sdk multer-s3
 AWS_ACCESS_KEY_ID=your_access_key_id
 AWS_SECRET_ACCESS_KEY=your_secret_access_key
 AWS_REGION=us-east-1
-AWS_S3_BUCKET=trunklogistics-files
+AWS_S3_BUCKET=trucklogistics-files
 ```
 
 ### File Structure in S3
 ```
-trunklogistics-files/
+trucklogistics-files/
 ├── trucks/
 │   ├── images/
 │   │   ├── 550e8400-e29b-41d4-a716-446655440000.jpg

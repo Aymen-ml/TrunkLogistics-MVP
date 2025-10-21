@@ -124,7 +124,7 @@ async function runMigrations() {
     }
 
     console.log(`🎉 Migration complete! Executed ${executedCount} new migrations.`);
-    console.log('🚀 Your Supabase database is ready for TrunkLogistics!');
+    console.log('🚀 Your Supabase database is ready for TruckLogistics!');
     
   } catch (error) {
     console.error('❌ Migration failed:', error.message);

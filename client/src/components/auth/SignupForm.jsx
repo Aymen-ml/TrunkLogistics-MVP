@@ -166,7 +166,7 @@ const SignupForm = () => {
     <div className="max-w-xl mx-auto p-8">
       <div className="text-center mb-8">
         <h1 className="text-3xl font-bold text-gray-900">Create Your Account</h1>
-        <p className="mt-2 text-gray-600">Join TrunkLogistics and start managing your logistics needs</p>
+        <p className="mt-2 text-gray-600">Join TruckLogistics and start managing your logistics needs</p>
       </div>
 
       {/* Progress Steps */}

@@ -76,24 +76,24 @@ class EmailVerification {
 
   static async sendVerificationEmail(user, token) {
     try {
-      const verificationUrl = `${process.env.CLIENT_URL || 'https://trunklogistics-mvp.netlify.app'}/verify-email/${token}`;
+      const verificationUrl = `${process.env.CLIENT_URL || 'https://trucklogistics-mvp.netlify.app'}/verify-email/${token}`;
 
-      const subject = 'Verify Your Email Address - TrunkLogistics';
+      const subject = 'Verify Your Email Address - TruckLogistics';
       
       const html = `
         <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #ffffff;">
           <div style="text-align: center; margin-bottom: 30px; border-bottom: 2px solid #e5e7eb; padding-bottom: 20px;">
-            <h1 style="color: #1f2937; margin: 0; font-size: 24px;">TrunkLogistics</h1>
+            <h1 style="color: #1f2937; margin: 0; font-size: 24px;">TruckLogistics</h1>
             <p style="color: #6b7280; margin: 5px 0 0 0; font-size: 14px;">Logistics Management Platform</p>
           </div>
           
           <div style="margin-bottom: 30px;">
-            <h2 style="color: #1f2937; margin-top: 0; font-size: 20px;">Welcome to TrunkLogistics!</h2>
+            <h2 style="color: #1f2937; margin-top: 0; font-size: 20px;">Welcome to TruckLogistics!</h2>
             
             <p style="margin-bottom: 20px; color: #374151; line-height: 1.6;">Hello ${user.first_name || 'there'},</p>
             
             <p style="margin-bottom: 20px; color: #374151; line-height: 1.6;">
-              Thank you for registering with TrunkLogistics! We're excited to have you join our logistics management platform.
+              Thank you for registering with TruckLogistics! We're excited to have you join our logistics management platform.
             </p>
             
             <p style="margin-bottom: 30px; color: #374151; line-height: 1.6;">
@@ -132,9 +132,9 @@ class EmailVerification {
           </div>
           
           <div style="text-align: center; color: #6b7280; font-size: 12px; border-top: 1px solid #e5e7eb; padding-top: 20px;">
-            <p style="margin: 0 0 5px 0;">If you did not create an account with TrunkLogistics, please ignore this email.</p>
-            <p style="margin: 0 0 5px 0;">© 2025 TrunkLogistics. All rights reserved.</p>
-            <p style="margin: 0;">Need help? Contact us at support@trunklogistics.com</p>
+            <p style="margin: 0 0 5px 0;">If you did not create an account with TruckLogistics, please ignore this email.</p>
+            <p style="margin: 0 0 5px 0;">© 2025 TruckLogistics. All rights reserved.</p>
+            <p style="margin: 0;">Need help? Contact us at support@trucklogistics.com</p>
           </div>
         </div>
       `;

@@ -21,10 +21,10 @@ documents table:
 ### Cloudinary (File Storage Only)
 ```
 Cloudinary Cloud:
-├── trunklogistics/trucks/images/
+├── trucklogistics/trucks/images/
 │   ├── truck_123_abc.jpg ← Physical files
 │   └── truck_456_def.png
-└── trunklogistics/trucks/documents/
+└── trucklogistics/trucks/documents/
     ├── doc_789_ghi.pdf ← Physical files
     └── doc_012_jkl.pdf
 ```

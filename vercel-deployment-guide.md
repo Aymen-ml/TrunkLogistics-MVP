@@ -1,4 +1,4 @@
-# Vercel Deployment Guide for TrunkLogistics Frontend
+# Vercel Deployment Guide for TruckLogistics Frontend
 
 ## Why Vercel?
 - **100GB bandwidth/month** (vs Netlify's 100GB)
@@ -9,7 +9,7 @@
 - Custom domains included
 
 ## Prerequisites
-- GitHub account with your TrunkLogistics repository
+- GitHub account with your TruckLogistics repository
 - Vercel account (free)
 
 ## Step 1: Prepare Your Repository
@@ -32,7 +32,7 @@
 
 2. **Import Project**
    - Click "New Project"
-   - Select your TrunkLogistics repository
+   - Select your TruckLogistics repository
    - Choose the `client` folder as root directory
 
 3. **Configure Build Settings**
@@ -44,7 +44,7 @@
 4. **Environment Variables**
    Add these environment variables:
    ```
-   VITE_API_URL=https://trunklogistics-api.onrender.com
+   VITE_API_URL=https://trucklogistics-api.onrender.com
    ```
 
 5. **Deploy**
@@ -96,7 +96,7 @@ const allowedOrigins = [
   process.env.FRONTEND_URL,
   'https://your-vercel-domain.vercel.app',  // Add your new Vercel domain
   'https://trucklogistics.netlify.app',     // Keep old domain if needed
-  'https://trunklogistics-mvp.netlify.app'  // Keep old domain if needed
+  'https://trucklogistics-mvp.netlify.app'  // Keep old domain if needed
 ];
 ```
 

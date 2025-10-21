@@ -17,7 +17,7 @@ import logger from './src/utils/logger.js';
  */
 
 async function testPasswordReset(userEmail) {
-  console.log('\n🔐 TrunkLogistics Password Reset Tool\n');
+  console.log('\n🔐 TruckLogistics Password Reset Tool\n');
   console.log('=====================================\n');
 
   try {
@@ -65,7 +65,7 @@ async function testPasswordReset(userEmail) {
     // Step 5: Test email service
     console.log('\n5️⃣  Testing email service...');
     console.log(`   Email Service: ${process.env.EMAIL_SERVICE || 'SMTP'}`);
-    console.log(`   From: ${process.env.EMAIL_FROM_NAME || 'TrunkLogistics'} <${process.env.EMAIL_FROM || 'noreply@trunklogistics.com'}>`);
+    console.log(`   From: ${process.env.EMAIL_FROM_NAME || 'TruckLogistics'} <${process.env.EMAIL_FROM || 'noreply@trucklogistics.com'}>`);
     console.log(`   To: ${user.email}`);
     
     if (!emailService.transporter) {

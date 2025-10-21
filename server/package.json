@@ -1,7 +1,7 @@
 {
   "name": "trunk-logistics-server",
   "version": "1.0.0",
-  "description": "TrunkLogistics Backend API",
+  "description": "TruckLogistics Backend API",
   "main": "server.js",
   "type": "module",
   "scripts": {
@@ -20,7 +20,7 @@
     "express",
     "postgresql"
   ],
-  "author": "TrunkLogistics Team",
+  "author": "TruckLogistics Team",
   "license": "MIT",
   "dependencies": {
     "axios": "^1.11.0",

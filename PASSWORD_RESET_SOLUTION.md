@@ -26,7 +26,7 @@ You're using:
 
 3. **Fill in the form**:
    ```
-   From Name: TrunkLogistics
+   From Name: TruckLogistics
    From Email: korichiaymen27@gmail.com
    Reply To: korichiaymen27@gmail.com
    Address: (any address)
@@ -75,7 +75,7 @@ Already set correctly in Render ✅:
 EMAIL_SERVICE=sendgrid
 SENDGRID_API_KEY=SG.xxx...
 EMAIL_FROM=korichiaymen27@gmail.com
-EMAIL_FROM_NAME=TrunkLogistics
+EMAIL_FROM_NAME=TruckLogistics
 CLIENT_URL=https://truck-logistics-mvp.vercel.app
 ```
 

@@ -23,7 +23,7 @@ const seedData = async () => {
       INSERT INTO users (email, password_hash, role, first_name, last_name, phone, is_active, email_verified)
       VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
       RETURNING id
-    `, ['admin@trunklogistics.com', adminPassword, 'admin', 'Admin', 'User', '+1234567890', true, true]);
+    `, ['admin@trucklogistics.com', adminPassword, 'admin', 'Admin', 'User', '+1234567890', true, true]);
     
     const adminId = adminResult.rows[0].id;
 

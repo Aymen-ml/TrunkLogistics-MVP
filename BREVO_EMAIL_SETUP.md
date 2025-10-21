@@ -16,7 +16,7 @@
 3. **Fill in**:
    - Email: `korichiaymen27@gmail.com`
    - Password: Create a strong password
-   - Company: `TrunkLogistics`
+   - Company: `TruckLogistics`
 4. **Verify** your email (check Gmail)
 
 ### Step 2: Get SMTP Credentials
@@ -36,7 +36,7 @@ After email verification:
 
 5. **Create SMTP Key**:
    - Click "Create a new SMTP key"
-   - Name it: `TrunkLogistics-Production`
+   - Name it: `TruckLogistics-Production`
    - Copy the key immediately (you won't see it again!)
 
 ### Step 3: Configure Sender Email
@@ -64,7 +64,7 @@ EMAIL_SECURE=false
 EMAIL_USER=korichiaymen27@gmail.com
 EMAIL_PASSWORD=your-brevo-smtp-key-here
 EMAIL_FROM=korichiaymen27@gmail.com
-EMAIL_FROM_NAME=TrunkLogistics
+EMAIL_FROM_NAME=TruckLogistics
 CLIENT_URL=https://truck-logistics-mvp.vercel.app
 ```
 

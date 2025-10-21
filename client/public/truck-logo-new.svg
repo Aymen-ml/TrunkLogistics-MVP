@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- Background circle -->
+  <circle cx="100" cy="100" r="95" fill="#1E3A8A" opacity="0.1"/>
+  
+  <!-- Connection nodes and lines -->
+  <!-- Left node (Company/Client) -->
+  <circle cx="50" cy="100" r="20" fill="#1E3A8A" opacity="0.2"/>
+  <rect x="38" y="93" width="24" height="14" rx="2" fill="#1E3A8A"/>
+  <rect x="40" y="88" width="20" height="5" rx="1" fill="#1E3A8A" opacity="0.7"/>
+  <rect x="40" y="95" width="20" height="3" fill="white" opacity="0.3"/>
+  <rect x="40" y="100" width="20" height="3" fill="white" opacity="0.3"/>
+  
+  <!-- Right node (Logistics Company) -->
+  <circle cx="150" cy="100" r="20" fill="#1E3A8A" opacity="0.2"/>
+  <rect x="138" y="93" width="24" height="14" rx="2" fill="#1E3A8A"/>
+  <rect x="140" y="88" width="20" height="5" rx="1" fill="#1E3A8A" opacity="0.7"/>
+  <rect x="140" y="95" width="20" height="3" fill="white" opacity="0.3"/>
+  <rect x="140" y="100" width="20" height="3" fill="white" opacity="0.3"/>
+  
+  <!-- Connection line -->
+  <line x1="70" y1="100" x2="130" y2="100" stroke="#F97316" stroke-width="4" stroke-dasharray="8,4"/>
+  
+  <!-- Arrow heads on connection line -->
+  <polygon points="130,96 138,100 130,104" fill="#F97316"/>
+  <polygon points="70,96 62,100 70,104" fill="#F97316"/>
+  
+  <!-- Central truck icon (connecting element) -->
+  <g transform="translate(100, 100)">
+    <!-- Truck body -->
+    <rect x="-20" y="-12" width="28" height="16" rx="2" fill="#F97316"/>
+    <rect x="-22" y="-14" width="10" height="18" rx="1" fill="#F97316"/>
+    
+    <!-- Truck cab windows -->
+    <rect x="-20" y="-11" width="4" height="6" rx="0.5" fill="white" opacity="0.9"/>
+    
+    <!-- Truck wheels -->
+    <circle cx="-17" cy="6" r="3.5" fill="#1E3A8A"/>
+    <circle cx="-17" cy="6" r="2" fill="#E5E7EB"/>
+    <circle cx="-3" cy="6" r="3.5" fill="#1E3A8A"/>
+    <circle cx="-3" cy="6" r="2" fill="#E5E7EB"/>
+    
+    <!-- Cargo area details -->
+    <rect x="-14" y="-10" width="2" height="14" fill="white" opacity="0.2"/>
+    <rect x="-8" y="-10" width="2" height="14" fill="white" opacity="0.2"/>
+  </g>
+  
+  <!-- Motion lines (speed/efficiency indicator) -->
+  <line x1="85" y1="85" x2="70" y2="85" stroke="#F97316" stroke-width="2" opacity="0.4"/>
+  <line x1="85" y1="90" x2="73" y2="90" stroke="#F97316" stroke-width="2" opacity="0.3"/>
+  <line x1="85" y1="110" x2="73" y2="110" stroke="#F97316" stroke-width="2" opacity="0.3"/>
+  <line x1="85" y1="115" x2="70" y2="115" stroke="#F97316" stroke-width="2" opacity="0.4"/>
+</svg>

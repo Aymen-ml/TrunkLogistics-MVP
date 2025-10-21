@@ -3,14 +3,14 @@
 # SendGrid Sender Verification Checker
 # This script helps verify your SendGrid configuration
 
-echo "🔐 TrunkLogistics - SendGrid Configuration Checker"
+echo "🔐 TruckLogistics - SendGrid Configuration Checker"
 echo "=================================================="
 echo ""
 
 # Expected configuration
 EXPECTED_EMAIL_SERVICE="sendgrid"
 EXPECTED_EMAIL_FROM="korichiaymen27@gmail.com"
-EXPECTED_EMAIL_FROM_NAME="TrunkLogistics"
+EXPECTED_EMAIL_FROM_NAME="TruckLogistics"
 EXPECTED_CLIENT_URL="https://truck-logistics-mvp.vercel.app"
 
 echo "📋 Expected Production Configuration:"

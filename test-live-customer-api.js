@@ -6,7 +6,7 @@ async function testLiveCustomerApi() {
   console.log('🔍 Testing Live Customer API Access\n');
   
   try {
-    const API_BASE_URL = 'https://trunklogistics-api.onrender.com/api';
+    const API_BASE_URL = 'https://trucklogistics-api.onrender.com/api';
     
     // Test 1: Try to register a new customer
     console.log('1. Testing customer registration...\n');

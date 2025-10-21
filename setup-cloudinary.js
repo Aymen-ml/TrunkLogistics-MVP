@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
 /**
- * Cloudinary Setup Script for TrunkLogistics
+ * Cloudinary Setup Script for TruckLogistics
  * 
- * This script helps you set up Cloudinary cloud storage for your TrunkLogistics application.
+ * This script helps you set up Cloudinary cloud storage for your TruckLogistics application.
  * It will guide you through the configuration process and test the connection.
  */
 
@@ -25,7 +25,7 @@ const question = (prompt) => {
   });
 };
 
-console.log(chalk.blue.bold('\n🚀 TrunkLogistics Cloudinary Setup\n'));
+console.log(chalk.blue.bold('\n🚀 TruckLogistics Cloudinary Setup\n'));
 
 const setupCloudinary = async () => {
   try {
@@ -82,8 +82,8 @@ const setupCloudinary = async () => {
     
     // Create folder structure (folders are created automatically when first file is uploaded)
     console.log('Folders will be created automatically:');
-    console.log('- trunklogistics/trucks/images/');
-    console.log('- trunklogistics/trucks/documents/\n');
+    console.log('- trucklogistics/trucks/images/');
+    console.log('- trucklogistics/trucks/documents/\n');
 
     console.log(chalk.yellow('⚙️ Step 5: Environment Variables'));
     console.log('Add these to your Render environment variables:');

@@ -70,7 +70,7 @@ router.post('/test-email', async (req, res) => {
 
     const testHtml = `
       <div style="font-family: Arial, sans-serif; padding: 20px;">
-        <h2>Test Email from TrunkLogistics</h2>
+        <h2>Test Email from TruckLogistics</h2>
         <p>This is a test email to verify SMTP configuration.</p>
         <p><strong>Time:</strong> ${new Date().toISOString()}</p>
         <p><strong>Configuration:</strong></p>
@@ -85,7 +85,7 @@ router.post('/test-email', async (req, res) => {
 
     await emailService.sendEmail(
       email,
-      'Test Email - TrunkLogistics',
+      'Test Email - TruckLogistics',
       testHtml
     );
 

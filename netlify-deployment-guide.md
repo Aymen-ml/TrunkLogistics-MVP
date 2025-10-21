@@ -10,7 +10,7 @@
 ### 2. Connect Repository
 - Click "Add new site" → "Import an existing project"
 - Choose GitHub (or your git provider)
-- Select your repository: `TrunkLogistics-MVP`
+- Select your repository: `TruckLogistics-MVP`
 
 ### 3. Build Settings
 ```
@@ -22,7 +22,7 @@ Publish directory: dist
 ### 4. Environment Variables
 Go to Site settings → Environment variables → Add:
 ```
-VITE_API_URL = https://trunklogistics-api.onrender.com
+VITE_API_URL = https://trucklogistics-api.onrender.com
 ```
 
 ### 5. Deploy

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import NotificationBell from '../notifications/NotificationBell';
+import TruckLogo from '../common/TruckLogo';
 import { 
   Truck, 
   Menu, 
@@ -44,21 +45,24 @@ const Navbar = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
             <div className="flex items-center">
-              <Link to="/" className="flex items-center space-x-2">
-                <Truck className="h-8 w-8 text-blue-600" />
-                <span className="text-xl font-bold text-gray-900">TrunkLogistics</span>
+              <Link to="/" className="flex items-center space-x-3">
+                <TruckLogo className="h-10 w-10" />
+                <div className="flex flex-col">
+                  <span className="text-xl font-bold text-primary-600">TruckLogistics</span>
+                  <span className="text-xs text-gray-500 hidden sm:block">Connecting Providers & Businesses</span>
+                </div>
               </Link>
             </div>
             <div className="flex items-center space-x-4">
               <Link
                 to="/login"
-                className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium"
+                className="text-gray-700 hover:text-primary-600 px-3 py-2 rounded-md text-sm font-medium"
               >
                 Sign In
               </Link>
               <Link
                 to="/register"
-                className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium"
+                className="bg-accent-500 hover:bg-accent-600 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors"
               >
                 Get Started
               </Link>
@@ -75,9 +79,12 @@ const Navbar = () => {
         <div className="flex justify-between h-16">
           {/* Logo and brand */}
           <div className="flex items-center">
-            <Link to="/dashboard" className="flex items-center space-x-2">
-              <Truck className="h-8 w-8 text-blue-600" />
-              <span className="text-xl font-bold text-gray-900 dark:text-gray-100">TrunkLogistics</span>
+            <Link to="/dashboard" className="flex items-center space-x-3">
+              <TruckLogo className="h-10 w-10" />
+              <div className="flex flex-col">
+                <span className="text-xl font-bold text-primary-600 dark:text-primary-400">TruckLogistics</span>
+                <span className="text-xs text-gray-500 dark:text-gray-400 hidden lg:block">Connecting Providers & Businesses</span>
+              </div>
             </Link>
           </div>
 

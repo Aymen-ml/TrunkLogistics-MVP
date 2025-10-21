@@ -4,7 +4,7 @@ const testCloudinaryFix = async () => {
   try {
     console.log('🔍 Testing Cloudinary Fix After Deployment...\n');
     
-    const apiUrl = 'https://trunklogistics-api.onrender.com';
+    const apiUrl = 'https://trucklogistics-api.onrender.com';
     
     console.log('1. Testing storage status endpoint (requires auth)...');
     try {
@@ -33,8 +33,8 @@ const testCloudinaryFix = async () => {
     console.log('4. Verify files are accessible after upload');
     
     console.log('\n4. Expected file URL format:');
-    console.log('❌ Before: https://trunklogistics-api.onrender.com/tmp/file.jpg');
-    console.log('✅ After:  https://res.cloudinary.com/your-cloud/image/upload/v123/trunklogistics/trucks/images/file.jpg');
+    console.log('❌ Before: https://trucklogistics-api.onrender.com/tmp/file.jpg');
+    console.log('✅ After:  https://res.cloudinary.com/your-cloud/image/upload/v123/trucklogistics/trucks/images/file.jpg');
     
     console.log('\n5. If still having issues:');
     console.log('- Check Render logs for "Using Cloudinary storage" messages');

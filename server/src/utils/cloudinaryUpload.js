@@ -16,7 +16,7 @@ cloudinary.config({
 const imageStorage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
-    folder: 'trunklogistics/trucks/images',
+    folder: 'trucklogistics/trucks/images',
     allowed_formats: ['jpg', 'jpeg', 'png', 'gif', 'webp'],
     transformation: [
       { width: 1200, height: 800, crop: 'limit', quality: 'auto' },
@@ -35,7 +35,7 @@ const imageStorage = new CloudinaryStorage({
 const documentStorage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
-    folder: 'trunklogistics/trucks/documents',
+    folder: 'trucklogistics/trucks/documents',
     allowed_formats: ['pdf', 'doc', 'docx', 'jpg', 'jpeg', 'png'],
     resource_type: 'auto', // Handles both images and raw files
     public_id: (req, file) => {
@@ -98,11 +98,11 @@ export const uploadTruckFilesCloud = multer({
     cloudinary: cloudinary,
     params: (req, file) => {
       // Determine folder based on field name
-      let folder = 'trunklogistics/trucks/temp';
+      let folder = 'trucklogistics/trucks/temp';
       let transformation = [];
       
       if (file.fieldname === 'images') {
-        folder = 'trunklogistics/trucks/images';
+        folder = 'trucklogistics/trucks/images';
         transformation = [
           { width: 1200, height: 800, crop: 'limit', quality: 'auto' },
           { fetch_format: 'auto' }
@@ -111,7 +111,7 @@ export const uploadTruckFilesCloud = multer({
         'inspectionDoc', 'registrationDoc', 'licenseDoc', 
         'businessLicenseDoc', 'additionalDocs'
       ].includes(file.fieldname)) {
-        folder = 'trunklogistics/trucks/documents';
+        folder = 'trucklogistics/trucks/documents';
       }
       
       return {

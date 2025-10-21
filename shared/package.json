@@ -2,6 +2,6 @@
   "name": "trunk-logistics-shared",
   "version": "1.0.0",
   "type": "module",
-  "description": "Shared constants and utilities for TrunkLogistics"
+  "description": "Shared constants and utilities for TruckLogistics"
 }
 

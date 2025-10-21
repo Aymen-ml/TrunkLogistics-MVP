@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: trunklogistics-api
+    name: trucklogistics-api
     env: node
     region: oregon
     plan: free
@@ -14,7 +14,7 @@ services:
         value: 10000
       - key: DATABASE_URL
         fromDatabase:
-          name: trunklogistics-db
+          name: trucklogistics-db
           property: connectionString
       - key: JWT_SECRET
         generateValue: true
@@ -32,8 +32,8 @@ services:
         value: https://truck-logistics-mvp.vercel.app
 
 databases:
-  - name: trunklogistics-db
-    databaseName: trunklogistics
+  - name: trucklogistics-db
+    databaseName: trucklogistics
     user: postgres
     region: oregon
     plan: free

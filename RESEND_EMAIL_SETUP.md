@@ -23,7 +23,7 @@
 1. After login, you'll see the dashboard
 2. Click **"API Keys"** in sidebar
 3. Click **"Create API Key"**
-4. Name: `TrunkLogistics`
+4. Name: `TruckLogistics`
 5. **Copy the API key** (starts with `re_`)
    - ⚠️ Save it immediately, you won't see it again!
 
@@ -45,7 +45,7 @@ EMAIL_PASSWORD (delete)
 EMAIL_SERVICE=resend
 RESEND_API_KEY=re_your_api_key_here
 EMAIL_FROM=onboarding@resend.dev
-EMAIL_FROM_NAME=TrunkLogistics
+EMAIL_FROM_NAME=TruckLogistics
 CLIENT_URL=https://truck-logistics-mvp.vercel.app
 ```
 
@@ -75,13 +75,13 @@ Render will automatically redeploy when you save environment variables.
 - ✅ No setup complexity
 
 ### Emails Will Come From:
-- **From:** TrunkLogistics <onboarding@resend.dev>
+- **From:** TruckLogistics <onboarding@resend.dev>
 - **Reply-to:** You can set your own email
 - **Look:** Professional and trusted
 
 ### Later: Add Your Own Domain (Optional)
 
-When you're ready for custom emails like `noreply@trunklogistics.com`:
+When you're ready for custom emails like `noreply@trucklogistics.com`:
 
 1. Add domain in Resend dashboard
 2. Add DNS records (SPF, DKIM)
@@ -163,7 +163,7 @@ CLIENT_URL=https://truck-logistics-mvp.vercel.app
 EMAIL_SERVICE=resend
 RESEND_API_KEY=re_abc123xyz789...
 EMAIL_FROM=onboarding@resend.dev
-EMAIL_FROM_NAME=TrunkLogistics
+EMAIL_FROM_NAME=TruckLogistics
 
 # Cloudinary (keep existing)
 CLOUDINARY_CLOUD_NAME=...

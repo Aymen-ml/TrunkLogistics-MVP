@@ -1,4 +1,4 @@
-# 🚀 TrunkLogistics Deployment Configuration
+# 🚀 TruckLogistics Deployment Configuration
 
 ## 📊 **Your Deployment Details**
 
@@ -26,9 +26,9 @@ node deploy-migrations.js "postgresql://postgres:[YOUR-PASSWORD]@db.drqkwioicbci
 ### **2. Deploy Backend to Render**
 1. Go to [render.com](https://render.com)
 2. Create new **Web Service**
-3. Connect GitHub repository: `TrunkLogistics-MVP`
+3. Connect GitHub repository: `TruckLogistics-MVP`
 4. Configure:
-   - **Name**: `trunklogistics-api`
+   - **Name**: `trucklogistics-api`
    - **Root Directory**: `server`
    - **Build Command**: `npm install`
    - **Start Command**: `npm start`
@@ -54,7 +54,7 @@ node deploy-migrations.js "postgresql://postgres:[YOUR-PASSWORD]@db.drqkwioicbci
 
 ### **3. Deploy Frontend to Netlify**
 1. Go to [netlify.com](https://netlify.com)
-2. **Import from Git** → Select `TrunkLogistics-MVP`
+2. **Import from Git** → Select `TruckLogistics-MVP`
 3. Build settings (auto-detected from `netlify.toml`):
    - **Base directory**: `client`
    - **Build command**: `npm run build`
@@ -63,7 +63,7 @@ node deploy-migrations.js "postgresql://postgres:[YOUR-PASSWORD]@db.drqkwioicbci
 4. **Environment Variables**:
    ```
    VITE_API_URL=https://[YOUR-RENDER-SERVICE].onrender.com/api
-   VITE_APP_NAME=TrunkLogistics
+   VITE_APP_NAME=TruckLogistics
    VITE_APP_VERSION=1.0.0
    ```
 

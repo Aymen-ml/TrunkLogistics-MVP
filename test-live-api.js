@@ -7,7 +7,7 @@
 import fetch from 'node-fetch';
 
 async function testAPI() {
-  const baseURL = 'https://trunklogistics-api.onrender.com';
+  const baseURL = 'https://trucklogistics-api.onrender.com';
   
   try {
     console.log('🔍 Testing API Health...');

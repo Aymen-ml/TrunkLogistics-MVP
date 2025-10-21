@@ -123,7 +123,7 @@ class EmailService {
         console.log(`📧 Sending email via Resend to: ${to}`);
         
         const result = await this.resend.emails.send({
-          from: `${process.env.EMAIL_FROM_NAME || 'TrunkLogistics'} <${process.env.EMAIL_FROM || 'onboarding@resend.dev'}>`,
+          from: `${process.env.EMAIL_FROM_NAME || 'TruckLogistics'} <${process.env.EMAIL_FROM || 'onboarding@resend.dev'}>`,
           to: to,
           subject: subject,
           html: htmlContent,
@@ -157,7 +157,7 @@ class EmailService {
 
     try {
       const mailOptions = {
-        from: `${process.env.EMAIL_FROM_NAME || 'TrunkLogistics'} <${process.env.EMAIL_FROM || 'noreply@trunklogistics.com'}>`,
+        from: `${process.env.EMAIL_FROM_NAME || 'TruckLogistics'} <${process.env.EMAIL_FROM || 'noreply@trucklogistics.com'}>`,
         to,
         subject,
         html: htmlContent,
@@ -187,7 +187,7 @@ class EmailService {
 
   // Booking notification templates
   async sendBookingCreatedEmail(userEmail, userName, booking) {
-    const subject = 'Booking Request Created - TrunkLogistics';
+    const subject = 'Booking Request Created - TruckLogistics';
     const html = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
         <h2 style="color: #2563eb;">Booking Request Created</h2>
@@ -204,7 +204,7 @@ class EmailService {
         </div>
         
         <p>We will notify you once an admin reviews your request.</p>
-        <p>Best regards,<br>TrunkLogistics Team</p>
+        <p>Best regards,<br>TruckLogistics Team</p>
       </div>
     `;
 
@@ -212,7 +212,7 @@ class EmailService {
   }
 
   async sendBookingStatusUpdateEmail(userEmail, userName, booking, oldStatus, newStatus) {
-    const subject = `Booking ${newStatus.charAt(0).toUpperCase() + newStatus.slice(1)} - TrunkLogistics`;
+    const subject = `Booking ${newStatus.charAt(0).toUpperCase() + newStatus.slice(1)} - TruckLogistics`;
     const html = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
         <h2 style="color: #2563eb;">Booking Status Update</h2>
@@ -228,7 +228,7 @@ class EmailService {
         
         ${this.getStatusMessage(newStatus)}
         
-        <p>Best regards,<br>TrunkLogistics Team</p>
+        <p>Best regards,<br>TruckLogistics Team</p>
       </div>
     `;
 
@@ -240,7 +240,7 @@ class EmailService {
       approved: '<p style="color: #059669;">Great news! Your booking has been approved. The provider will confirm shortly.</p>',
       confirmed: '<p style="color: #059669;">Your booking is confirmed! The truck is assigned and ready for pickup.</p>',
       in_transit: '<p style="color: #2563eb;">Your cargo is now in transit. You can track the progress with your provider.</p>',
-      completed: '<p style="color: #059669;">Your booking has been completed successfully. Thank you for using TrunkLogistics!</p>',
+      completed: '<p style="color: #059669;">Your booking has been completed successfully. Thank you for using TruckLogistics!</p>',
       cancelled: '<p style="color: #dc2626;">Your booking has been cancelled. If you have questions, please contact support.</p>'
     };
     
@@ -248,7 +248,7 @@ class EmailService {
   }
 
   async sendBookingConfirmationEmail(userEmail, userName, booking) {
-    const subject = `Booking Confirmed - TrunkLogistics`;
+    const subject = `Booking Confirmed - TruckLogistics`;
     const content = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
         <h2 style="color: #2563eb;">Booking Confirmed</h2>
@@ -263,7 +263,7 @@ class EmailService {
           <p><strong>Status:</strong> ${booking.status}</p>
         </div>
         
-        <p>Thank you for using TrunkLogistics!</p>
+        <p>Thank you for using TruckLogistics!</p>
       </div>
     `;
     
@@ -272,7 +272,7 @@ class EmailService {
 
   // Provider verification templates
   async sendProviderVerificationEmail(userEmail, userName, status) {
-    const subject = `Provider Account ${status.charAt(0).toUpperCase() + status.slice(1)} - TrunkLogistics`;
+    const subject = `Provider Account ${status.charAt(0).toUpperCase() + status.slice(1)} - TruckLogistics`;
     const statusColor = status === 'approved' ? '#059669' : '#dc2626';
     
     const html = `
@@ -301,7 +301,7 @@ class EmailService {
           `
         }
         
-        <p>Best regards,<br>TrunkLogistics Team</p>
+        <p>Best regards,<br>TruckLogistics Team</p>
       </div>
     `;
 
@@ -310,12 +310,12 @@ class EmailService {
 
   // Welcome email template
   async sendWelcomeEmail(userEmail, userName, userRole) {
-    const subject = 'Welcome to TrunkLogistics!';
+    const subject = 'Welcome to TruckLogistics!';
     const html = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-        <h2 style="color: #2563eb;">Welcome to TrunkLogistics!</h2>
+        <h2 style="color: #2563eb;">Welcome to TruckLogistics!</h2>
         <p>Dear ${userName},</p>
-        <p>Welcome to TrunkLogistics! Your account has been successfully created as a <strong>${userRole}</strong>.</p>
+        <p>Welcome to TruckLogistics! Your account has been successfully created as a <strong>${userRole}</strong>.</p>
         
         <div style="background-color: #f3f4f6; padding: 20px; border-radius: 8px; margin: 20px 0;">
           <h3 style="margin-top: 0;">Next Steps</h3>
@@ -346,7 +346,7 @@ class EmailService {
         </div>
         
         <p>If you have any questions, don't hesitate to contact our support team.</p>
-        <p>Best regards,<br>TrunkLogistics Team</p>
+        <p>Best regards,<br>TruckLogistics Team</p>
       </div>
     `;
 
@@ -354,22 +354,22 @@ class EmailService {
   }
 
   async sendPasswordResetEmail(userEmail, userName, resetUrl) {
-    const subject = 'Password Reset Request - TrunkLogistics';
+    const subject = 'Password Reset Request - TruckLogistics';
     
     const html = `
       <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #ffffff;">
-        <div style="text-align: center; margin-bottom: 30px; border-bottom: 2px solid #e5e7eb; padding-bottom: 20px;">
-          <h1 style="color: #1f2937; margin: 0; font-size: 24px;">TrunkLogistics</h1>
-          <p style="color: #6b7280; margin: 5px 0 0 0; font-size: 14px;">Logistics Management Platform</p>
+        <div style="text-align: center; margin-bottom: 30px; border-bottom: 3px solid #1E3A8A; padding-bottom: 20px; background: linear-gradient(135deg, #EFF6FF 0%, #FFF7ED 100%); padding: 20px; border-radius: 8px 8px 0 0;">
+          <h1 style="color: #1E3A8A; margin: 0; font-size: 28px; font-weight: 700;">TruckLogistics</h1>
+          <p style="color: #6B7280; margin: 8px 0 0 0; font-size: 13px; font-weight: 500;">Connecting Providers & Businesses</p>
         </div>
         
-        <div style="margin-bottom: 30px;">
-          <h2 style="color: #1f2937; margin-top: 0; font-size: 20px;">Password Reset Request</h2>
+        <div style="margin-bottom: 30px; padding: 0 10px;">
+          <h2 style="color: #1E3A8A; margin-top: 0; font-size: 22px; font-weight: 600;">Password Reset Request</h2>
           
           <p style="margin-bottom: 20px; color: #374151; line-height: 1.6;">Dear ${userName},</p>
           
           <p style="margin-bottom: 20px; color: #374151; line-height: 1.6;">
-            You have requested to reset your password for your TrunkLogistics account. 
+            You have requested to reset your password for your TruckLogistics account. 
             This is a security-protected action to ensure your account remains safe.
           </p>
           
@@ -377,42 +377,43 @@ class EmailService {
             Please click the secure link below to create a new password. This link will expire in 60 minutes for your security.
           </p>
           
-          <div style="text-align: center; margin: 30px 0;">
+          <div style="text-align: center; margin: 35px 0;">
             <a href="${resetUrl}" style="
               display: inline-block;
-              background-color: #059669;
+              background: linear-gradient(135deg, #F97316 0%, #EA580C 100%);
               color: white;
-              padding: 14px 32px;
+              padding: 16px 40px;
               text-decoration: none;
-              border-radius: 8px;
-              font-weight: 600;
+              border-radius: 10px;
+              font-weight: 700;
               font-size: 16px;
               letter-spacing: 0.5px;
-              box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+              box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+              transition: all 0.3s ease;
             ">Reset Password Securely</a>
           </div>
           
-          <div style="background-color: #f9fafb; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #6b7280;">
+          <div style="background-color: #F9FAFB; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #1E3A8A;">
             <p style="margin: 0; color: #374151; font-size: 14px; line-height: 1.5;">
               <strong>Alternative method:</strong> If the button above doesn't work, copy and paste this secure link into your browser:
             </p>
-            <p style="margin: 10px 0 0 0; color: #2563eb; font-size: 13px; word-break: break-all; font-family: monospace;">
+            <p style="margin: 10px 0 0 0; color: #1E3A8A; font-size: 13px; word-break: break-all; font-family: monospace;">
               ${resetUrl}
             </p>
           </div>
         </div>
         
-        <div style="background-color: #fef3c7; border: 1px solid #f59e0b; border-radius: 8px; padding: 15px; margin-bottom: 30px;">
-          <p style="margin: 0; color: #92400e; font-size: 14px; line-height: 1.5;">
+        <div style="background-color: #FFF7ED; border: 2px solid #F97316; border-radius: 8px; padding: 15px; margin-bottom: 30px;">
+          <p style="margin: 0; color: #9A3412; font-size: 14px; line-height: 1.5;">
             <strong>⚠️ Security Notice:</strong> If you did not request this password reset, please ignore this email. 
             Your account remains secure and no changes will be made.
           </p>
         </div>
         
-        <div style="text-align: center; color: #6b7280; font-size: 12px; border-top: 1px solid #e5e7eb; padding-top: 20px;">
-          <p style="margin: 0 0 5px 0;">This is an automated security email from TrunkLogistics</p>
-          <p style="margin: 0 0 5px 0;">© 2025 TrunkLogistics. All rights reserved.</p>
-          <p style="margin: 0;">Need help? Contact us at support@trunklogistics.com</p>
+        <div style="text-align: center; color: #6B7280; font-size: 12px; border-top: 1px solid #E5E7EB; padding-top: 20px;">
+          <p style="margin: 0 0 5px 0;">This is an automated security email from TruckLogistics</p>
+          <p style="margin: 0 0 5px 0; font-weight: 600;">© 2025 TruckLogistics. All rights reserved.</p>
+          <p style="margin: 5px 0 0 0; color: #1E3A8A;">Need help? Contact us at support@trucklogistics.com</p>
         </div>
       </div>
     `;

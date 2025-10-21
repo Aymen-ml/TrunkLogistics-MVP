@@ -1,4 +1,4 @@
-# API Testing Guide - TrunkLogistics
+# API Testing Guide - TruckLogistics
 
 ## Prerequisites
 
@@ -10,7 +10,7 @@
    # Update .env with your database credentials
    DB_HOST=localhost
    DB_PORT=5432
-   DB_NAME=trunklogistics
+   DB_NAME=trucklogistics
    DB_USER=your_username
    DB_PASSWORD=your_password
    JWT_SECRET=your_jwt_secret_here
@@ -317,7 +317,7 @@ All API responses follow this format:
 3. Create test sequences for the complete workflow
 
 ### Using Insomnia
-1. Create a workspace for TrunkLogistics
+1. Create a workspace for TruckLogistics
 2. Set up base URL and authentication
 3. Test the complete booking flow
 

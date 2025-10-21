@@ -47,11 +47,11 @@ async function testRegistrationFlow() {
     
     // Step 5: Send verification email
     console.log('\n5. Sending verification email...');
-    const verificationUrl = `${process.env.CLIENT_URL || 'https://trunklogistics-mvp.netlify.app'}/verify-email/${verificationToken}`;
+    const verificationUrl = `${process.env.CLIENT_URL || 'https://trucklogistics-mvp.netlify.app'}/verify-email/${verificationToken}`;
     
     const emailResult = await emailService.sendEmail(
       user.email,
-      'Test: Verify Your Email Address - TrunkLogistics',
+      'Test: Verify Your Email Address - TruckLogistics',
       `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
           <h2>Email Verification Test</h2>

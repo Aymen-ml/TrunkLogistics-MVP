@@ -1,7 +1,7 @@
 {
   "name": "trunk-logistics",
   "version": "1.0.0",
-  "description": "TrunkLogistics - MVP platform connecting customers with logistics providers",
+  "description": "TruckLogistics - MVP platform connecting customers with logistics providers",
   "main": "index.js",
   "type": "module",
   "scripts": {
@@ -21,7 +21,7 @@
     "booking",
     "transportation"
   ],
-  "author": "TrunkLogistics Team",
+  "author": "TruckLogistics Team",
   "license": "MIT",
   "devDependencies": {
     "concurrently": "^8.2.2"

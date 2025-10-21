@@ -1,4 +1,4 @@
-# 🚀 TrunkLogistics Deployment Guide
+# 🚀 TruckLogistics Deployment Guide
 
 ## 📋 **Deployment Readiness Checklist**
 
@@ -67,7 +67,7 @@ git commit -m "Production cleanup"
 # Database (Production)
 DB_HOST=your-production-db-host
 DB_PORT=5432
-DB_NAME=trunklogistics_prod
+DB_NAME=trucklogistics_prod
 DB_USER=your-db-user
 DB_PASSWORD=your-secure-db-password
 
@@ -97,7 +97,7 @@ MAX_FILE_SIZE=5242880
 VITE_API_URL=https://your-backend-domain.com/api
 
 # App Configuration
-VITE_APP_NAME=TrunkLogistics
+VITE_APP_NAME=TruckLogistics
 VITE_APP_VERSION=1.0.0
 ```
 
@@ -175,7 +175,7 @@ VITE_APP_VERSION=1.0.0
      db:
        image: postgres:15
        environment:
-         POSTGRES_DB: trunklogistics
+         POSTGRES_DB: trucklogistics
          POSTGRES_USER: postgres
          POSTGRES_PASSWORD: your-password
        volumes:
@@ -353,6 +353,6 @@ node cleanup-for-production.js
 
 ---
 
-**🎉 Your TrunkLogistics application is ready for production deployment!**
+**🎉 Your TruckLogistics application is ready for production deployment!**
 
 *Last updated: September 2025*

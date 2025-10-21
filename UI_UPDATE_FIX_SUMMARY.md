@@ -8,7 +8,7 @@ When customers and providers clicked buttons to update booking states (Accept, R
 
 ## Overview
 
-This document summarizes the fixes applied to improve UI updates when booking status changes are made in the TrunkLogistics MVP application.## Root Cause
+This document summarizes the fixes applied to improve UI updates when booking status changes are made in the TruckLogistics MVP application.## Root Cause
 
 The issue was in the `BookingContext.jsx` file. When a booking status was updated:
 

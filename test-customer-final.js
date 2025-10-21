@@ -1,6 +1,6 @@
 import fetch from 'node-fetch';
 
-const API_BASE = 'https://trunklogistics-api.onrender.com';
+const API_BASE = 'https://trucklogistics-api.onrender.com';
 
 async function testCustomerFinal() {
   try {

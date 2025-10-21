@@ -11,7 +11,7 @@ You can use testmail.app's SMTP server to **test your production deployment** wi
 1. Go to: https://testmail.app/
 2. Sign up for free account
 3. Get your credentials:
-   - **Namespace**: e.g., `trunklogistics`
+   - **Namespace**: e.g., `trucklogistics`
    - **API Key**: Found in dashboard
    - **SMTP Server**: `smtp.testmail.app`
    - **SMTP Port**: `587`
@@ -29,12 +29,12 @@ Go to your Render dashboard and update these variables:
 EMAIL_HOST=smtp.testmail.app
 EMAIL_PORT=587
 EMAIL_SECURE=false
-EMAIL_USER=trunklogistics@testmail.app
+EMAIL_USER=trucklogistics@testmail.app
 EMAIL_PASSWORD=your-testmail-api-key
 
 # Email from address (can be anything)
-EMAIL_FROM=noreply@trunklogistics.com
-EMAIL_FROM_NAME=TrunkLogistics
+EMAIL_FROM=noreply@trucklogistics.com
+EMAIL_FROM_NAME=TruckLogistics
 
 # Your frontend URL
 CLIENT_URL=https://truck-logistics-mvp.vercel.app
@@ -54,16 +54,16 @@ After updating environment variables, restart your Render service to apply chang
 1. Go to: https://truck-logistics-mvp.vercel.app/register
 2. Sign up with testmail.app email:
    ```
-   Email: customer1.trunklogistics@inbox.testmail.app
+   Email: customer1.trucklogistics@inbox.testmail.app
    Password: TestPass123!
    ```
 
 #### Test Password Reset
 
 1. Go to: https://truck-logistics-mvp.vercel.app/forgot-password
-2. Enter: `customer1.trunklogistics@inbox.testmail.app`
+2. Enter: `customer1.trucklogistics@inbox.testmail.app`
 3. Click "Send Reset Link"
-4. Go to: https://testmail.app/inbox/trunklogistics
+4. Go to: https://testmail.app/inbox/trucklogistics
 5. You'll see the password reset email immediately!
 6. Click the reset link
 7. Set new password
@@ -82,9 +82,9 @@ Backend (Render)
     ↓
 Testmail.app SMTP Server
     ↓
-    Delivers to customer1.trunklogistics@inbox.testmail.app
+    Delivers to customer1.trucklogistics@inbox.testmail.app
     ↓
-View at: testmail.app/inbox/trunklogistics
+View at: testmail.app/inbox/trucklogistics
 ```
 
 ## Complete Environment Variables for Testing
@@ -103,12 +103,12 @@ JWT_EXPIRES_IN=7d
 EMAIL_HOST=smtp.testmail.app
 EMAIL_PORT=587
 EMAIL_SECURE=false
-EMAIL_USER=trunklogistics@testmail.app
+EMAIL_USER=trucklogistics@testmail.app
 EMAIL_PASSWORD=tm_xxxxxxxxxxxxxxxxxx
 
 # Email Details
-EMAIL_FROM=noreply@trunklogistics.com
-EMAIL_FROM_NAME=TrunkLogistics
+EMAIL_FROM=noreply@trucklogistics.com
+EMAIL_FROM_NAME=TruckLogistics
 
 # URLs
 CLIENT_URL=https://truck-logistics-mvp.vercel.app
@@ -131,18 +131,18 @@ Testmail.app email addresses follow this pattern:
 <anything>.<your-namespace>@inbox.testmail.app
 
 Examples:
-- customer1.trunklogistics@inbox.testmail.app
-- admin.trunklogistics@inbox.testmail.app
-- test.trunklogistics@inbox.testmail.app
-- provider.trunklogistics@inbox.testmail.app
+- customer1.trucklogistics@inbox.testmail.app
+- admin.trucklogistics@inbox.testmail.app
+- test.trucklogistics@inbox.testmail.app
+- provider.trucklogistics@inbox.testmail.app
 ```
 
-All emails sent to addresses ending with `.trunklogistics@inbox.testmail.app` will appear in your inbox at `https://testmail.app/inbox/trunklogistics`
+All emails sent to addresses ending with `.trucklogistics@inbox.testmail.app` will appear in your inbox at `https://testmail.app/inbox/trucklogistics`
 
 ## Testing Checklist
 
 - [ ] Testmail.app account created
-- [ ] Namespace obtained (e.g., `trunklogistics`)
+- [ ] Namespace obtained (e.g., `trucklogistics`)
 - [ ] API key copied
 - [ ] Render environment variables updated with testmail.app SMTP
 - [ ] Render service restarted
@@ -176,7 +176,7 @@ this.transporter = nodemailer.createTransport({
   port: parseInt(process.env.EMAIL_PORT || '587'),  // 587
   secure: process.env.EMAIL_SECURE === 'true',      // false
   auth: {
-    user: process.env.EMAIL_USER,      // trunklogistics@testmail.app
+    user: process.env.EMAIL_USER,      // trucklogistics@testmail.app
     pass: process.env.EMAIL_PASSWORD   // your API key
   }
 });
@@ -192,7 +192,7 @@ If emails aren't sending, check Render logs for:
 
 ```bash
 # Look for email sending confirmation
-Email sent successfully to customer1.trunklogistics@inbox.testmail.app
+Email sent successfully to customer1.trucklogistics@inbox.testmail.app
 
 # Or error messages
 Error sending email: ...
@@ -220,7 +220,7 @@ const transporter = nodemailer.createTransport({
   port: 587,
   secure: false,
   auth: {
-    user: 'trunklogistics@testmail.app',
+    user: 'trucklogistics@testmail.app',
     pass: 'your-api-key'
   }
 });
@@ -291,10 +291,10 @@ Testmail.app also provides API to check emails programmatically:
 
 ```bash
 # Get all emails in inbox
-curl "https://api.testmail.app/api/json?apikey=YOUR_API_KEY&namespace=trunklogistics"
+curl "https://api.testmail.app/api/json?apikey=YOUR_API_KEY&namespace=trucklogistics"
 
 # Get emails for specific tag (email prefix)
-curl "https://api.testmail.app/api/json?apikey=YOUR_API_KEY&namespace=trunklogistics&tag=customer1"
+curl "https://api.testmail.app/api/json?apikey=YOUR_API_KEY&namespace=trucklogistics&tag=customer1"
 ```
 
 ## Summary

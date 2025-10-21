@@ -1,11 +1,11 @@
 # UI Update Testing Report - Booking Status Changes
 
 ## Overview
-Testing the UI update functionality when clicking booking status change buttons in the deployed TrunkLogistics MVP application.
+Testing the UI update functionality when clicking booking status change buttons in the deployed TruckLogistics MVP application.
 
 ## Deployment Information
 - **Frontend**: https://truck-logistics-mvp.vercel.app/
-- **Backend**: https://trunklogistics-api.onrender.com
+- **Backend**: https://trucklogistics-api.onrender.com
 - **Database**: Supabase PostgreSQL
 
 ## Code Analysis Summary

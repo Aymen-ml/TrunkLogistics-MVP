@@ -58,7 +58,7 @@ EMAIL_PASSWORD=your-brevo-smtp-key
 
 # Email details
 EMAIL_FROM=korichiaymen27@gmail.com
-EMAIL_FROM_NAME=TrunkLogistics
+EMAIL_FROM_NAME=TruckLogistics
 
 # App URLs
 CLIENT_URL=https://truck-logistics-mvp.vercel.app
@@ -98,7 +98,7 @@ EMAIL_SERVICE=gmail
 EMAIL_USER=korichiaymen27@gmail.com
 EMAIL_PASSWORD=your-16-char-app-password
 EMAIL_FROM=korichiaymen27@gmail.com
-EMAIL_FROM_NAME=TrunkLogistics
+EMAIL_FROM_NAME=TruckLogistics
 CLIENT_URL=https://truck-logistics-mvp.vercel.app
 ```
 
@@ -142,7 +142,7 @@ EMAIL_SECURE=false
 EMAIL_USER=korichiaymen27@gmail.com
 EMAIL_PASSWORD=your-elastic-email-api-key
 EMAIL_FROM=korichiaymen27@gmail.com
-EMAIL_FROM_NAME=TrunkLogistics
+EMAIL_FROM_NAME=TruckLogistics
 CLIENT_URL=https://truck-logistics-mvp.vercel.app
 ```
 
@@ -175,7 +175,7 @@ EMAIL_SECURE=false
 EMAIL_USER=MS_xxxxxx
 EMAIL_PASSWORD=your-mailersend-password
 EMAIL_FROM=korichiaymen27@gmail.com
-EMAIL_FROM_NAME=TrunkLogistics
+EMAIL_FROM_NAME=TruckLogistics
 CLIENT_URL=https://truck-logistics-mvp.vercel.app
 ```
 
@@ -255,7 +255,7 @@ EMAIL_SECURE=false
 EMAIL_USER=korichiaymen27@gmail.com
 EMAIL_PASSWORD=your-brevo-smtp-key-here
 EMAIL_FROM=korichiaymen27@gmail.com
-EMAIL_FROM_NAME=TrunkLogistics
+EMAIL_FROM_NAME=TruckLogistics
 CLIENT_URL=https://truck-logistics-mvp.vercel.app
 
 # 5. Restart Render service

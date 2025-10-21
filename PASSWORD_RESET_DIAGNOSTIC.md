@@ -32,11 +32,11 @@ EMAIL_USER=your-smtp-user
 EMAIL_PASSWORD=your-smtp-password
 
 # Email From Details
-EMAIL_FROM=noreply@trunklogistics.com
-EMAIL_FROM_NAME=TrunkLogistics
+EMAIL_FROM=noreply@trucklogistics.com
+EMAIL_FROM_NAME=TruckLogistics
 
 # Client URL for reset links
-CLIENT_URL=https://trunklogistics.netlify.app
+CLIENT_URL=https://trucklogistics.netlify.app
 ```
 
 ### Step 2: Verify Database Table
@@ -72,7 +72,7 @@ const testEmail = async () => {
     const result = await emailService.sendPasswordResetEmail(
       'test@example.com',
       'Test User',
-      'https://trunklogistics.netlify.app/reset-password/test-token'
+      'https://trucklogistics.netlify.app/reset-password/test-token'
     );
     console.log('Email sent successfully:', result);
   } catch (error) {
@@ -152,7 +152,7 @@ await PasswordReset.cleanupExpiredTokens();
 Update environment variable:
 ```env
 # On Render/production
-CLIENT_URL=https://trunklogistics.netlify.app
+CLIENT_URL=https://trucklogistics.netlify.app
 
 # On local development
 CLIENT_URL=http://localhost:5173
@@ -169,7 +169,7 @@ CLIENT_URL=http://localhost:5173
 Check frontend API configuration:
 ```javascript
 // In client/src/utils/apiClient.js or similar
-const API_URL = import.meta.env.VITE_API_URL || 'https://trunklogistics-api.onrender.com/api';
+const API_URL = import.meta.env.VITE_API_URL || 'https://trucklogistics-api.onrender.com/api';
 ```
 
 ## Testing the Full Flow
@@ -178,7 +178,7 @@ const API_URL = import.meta.env.VITE_API_URL || 'https://trunklogistics-api.onre
 
 1. **Request Password Reset:**
 ```bash
-curl -X POST https://trunklogistics-api.onrender.com/api/auth/forgot-password \
+curl -X POST https://trucklogistics-api.onrender.com/api/auth/forgot-password \
   -H "Content-Type: application/json" \
   -d '{"email":"your-test-email@example.com"}'
 ```
@@ -206,7 +206,7 @@ LIMIT 1;
 
 4. **Reset Password:**
 ```bash
-curl -X POST https://trunklogistics-api.onrender.com/api/auth/reset-password/[TOKEN] \
+curl -X POST https://trucklogistics-api.onrender.com/api/auth/reset-password/[TOKEN] \
   -H "Content-Type: application/json" \
   -d '{"password":"NewPassword123!"}'
 ```
@@ -303,11 +303,11 @@ EMAIL_USER=...  # if using Gmail or custom SMTP
 EMAIL_PASSWORD=...  # if using Gmail or custom SMTP
 
 # Email Details
-EMAIL_FROM=noreply@trunklogistics.com
-EMAIL_FROM_NAME=TrunkLogistics
+EMAIL_FROM=noreply@trucklogistics.com
+EMAIL_FROM_NAME=TruckLogistics
 
 # URLs
-CLIENT_URL=https://trunklogistics.netlify.app
+CLIENT_URL=https://trucklogistics.netlify.app
 NODE_ENV=production
 ```
 

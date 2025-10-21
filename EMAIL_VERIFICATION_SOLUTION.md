@@ -82,7 +82,7 @@ Periodically test the complete flow:
 
 ### Email Template
 Professional HTML template with:
-- TrunkLogistics branding
+- TruckLogistics branding
 - Clear call-to-action button
 - Alternative text link
 - Expiration notice (24 hours)

@@ -1,4 +1,4 @@
-# TrunkLogistics API Documentation
+# TruckLogistics API Documentation
 
 ## Base URL
 ```

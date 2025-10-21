@@ -2,7 +2,7 @@
 
 import axios from 'axios';
 
-const API_BASE_URL = 'https://trunklogistics-api.onrender.com/api';
+const API_BASE_URL = 'https://trucklogistics-api.onrender.com/api';
 
 // Admin credentials to get truck IDs
 const ADMIN_CREDENTIALS = {

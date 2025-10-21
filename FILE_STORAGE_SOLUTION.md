@@ -2,7 +2,7 @@
 
 ## Problem Analysis
 
-The TrunkLogistics application is experiencing file serving issues where:
+The TruckLogistics application is experiencing file serving issues where:
 
 1. **Images return 404**: Truck images show "file not found" when accessed directly
 2. **Documents fail to download**: Document download/view returns 404 errors
@@ -72,7 +72,7 @@ npm install @google-cloud/storage multer-gcs
    AWS_ACCESS_KEY_ID=your_access_key
    AWS_SECRET_ACCESS_KEY=your_secret_key
    AWS_REGION=us-east-1
-   AWS_S3_BUCKET=trunklogistics-files
+   AWS_S3_BUCKET=trucklogistics-files
    
    # Or Cloudinary
    CLOUDINARY_CLOUD_NAME=your_cloud_name

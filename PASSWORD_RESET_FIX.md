@@ -20,7 +20,7 @@ EMAIL_SECURE=false
 EMAIL_USER=korichiaymen27@gmail.com
 EMAIL_PASSWORD=your-elastic-email-api-key
 EMAIL_FROM=korichiaymen27@gmail.com
-EMAIL_FROM_NAME=TrunkLogistics
+EMAIL_FROM_NAME=TruckLogistics
 ```
 
 ### On Local (Development) - Updated
@@ -35,7 +35,7 @@ If you haven't already:
 3. **Navigate to**: Settings → SMTP/API
 4. **Find existing API key** or **Create new**:
    - Click "Create Additional API Key"
-   - Name: `TrunkLogistics-Local`
+   - Name: `TruckLogistics-Local`
    - Permissions: Check "SMTP"
    - Click "Create"
    - **Copy the API Key** immediately!

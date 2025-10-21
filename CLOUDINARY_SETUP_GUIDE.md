@@ -1,4 +1,4 @@
-# Cloudinary Setup Guide for TrunkLogistics
+# Cloudinary Setup Guide for TruckLogistics
 
 ## Why Cloudinary?
 
@@ -39,7 +39,7 @@ CLOUDINARY_API_SECRET=your_api_secret_here
 Your files will be organized in Cloudinary like this:
 
 ```
-trunklogistics/ (your cloud name)
+trucklogistics/ (your cloud name)
 ├── trucks/
 │   ├── images/
 │   │   ├── truck_image_1695123456789_abc123.jpg
@@ -95,12 +95,12 @@ trunklogistics/ (your cloud name)
 
 Instead of:
 ```
-❌ https://trunklogistics-api.onrender.com/uploads/trucks/images/file.jpg
+❌ https://trucklogistics-api.onrender.com/uploads/trucks/images/file.jpg
 ```
 
 You'll get:
 ```
-✅ https://res.cloudinary.com/your-cloud/image/upload/v1695123456/trunklogistics/trucks/images/truck_image_abc123.jpg
+✅ https://res.cloudinary.com/your-cloud/image/upload/v1695123456/trucklogistics/trucks/images/truck_image_abc123.jpg
 ```
 
 ## Migration Strategy

@@ -4,10 +4,10 @@ const testCloudinaryURLFix = async () => {
   try {
     console.log('🔍 Testing Cloudinary URL Fix...\n');
     
-    const apiUrl = 'https://trunklogistics-api.onrender.com';
+    const apiUrl = 'https://trucklogistics-api.onrender.com';
     
     // Test the problematic URL pattern that was failing before
-    const problematicUrl = `${apiUrl}/https://res.cloudinary.com/dgpwqggxb/image/upload/v1758533467/trunklogistics/trucks/images/images_1758533466587_guucvzsc9tc.jpg`;
+    const problematicUrl = `${apiUrl}/https://res.cloudinary.com/dgpwqggxb/image/upload/v1758533467/trucklogistics/trucks/images/images_1758533466587_guucvzsc9tc.jpg`;
     
     console.log('1. Testing the problematic URL pattern...');
     console.log(`URL: ${problematicUrl}`);

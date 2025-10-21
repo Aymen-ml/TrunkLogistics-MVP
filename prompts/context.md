@@ -1,4 +1,4 @@
-# TrunkLogistics — MVP Feature Description
+# TruckLogistics — MVP Feature Description
 
 ## 🎯 Goal
 Build the first version of a web platform that connects customers (shippers) with logistics providers (truck owners/companies).  
@@ -258,7 +258,7 @@ CREATE INDEX idx_notifications_user_unread ON notifications(user_id, is_read);
 ## 8. Optimal Folder Structure
 
 ```
-TrunkLogistics/
+TruckLogistics/
 ├── client/                          # React frontend
 │   ├── public/
 │   │   ├── index.html

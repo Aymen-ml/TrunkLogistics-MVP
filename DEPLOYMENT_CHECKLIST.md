@@ -52,15 +52,15 @@ git push origin main
 ### 1. Test Database Connection (5 minutes)
 ```bash
 # Test immediately after deployment
-curl https://trunklogistics-api.onrender.com/api/health
+curl https://trucklogistics-api.onrender.com/api/health
 
 # Wait 2 minutes, test again
 sleep 120
-curl https://trunklogistics-api.onrender.com/api/health
+curl https://trucklogistics-api.onrender.com/api/health
 
 # Wait 3 more minutes, test again
 sleep 180
-curl https://trunklogistics-api.onrender.com/api/health
+curl https://trucklogistics-api.onrender.com/api/health
 ```
 
 ### 2. Test Login (Critical)

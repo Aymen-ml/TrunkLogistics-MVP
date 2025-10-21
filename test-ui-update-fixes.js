@@ -16,7 +16,7 @@
 
 import axios from 'axios';
 
-const API_URL = 'https://trunklogistics-api.onrender.com/api';
+const API_URL = 'https://trucklogistics-api.onrender.com/api';
 
 // Test credentials (from prompt.txt)
 const ADMIN_CREDENTIALS = {

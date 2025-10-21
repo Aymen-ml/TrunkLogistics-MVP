@@ -9,7 +9,7 @@
 ### Quick Start
 ```bash
 # Clone and setup
-cd TrunkLogistics
+cd TruckLogistics
 ./scripts/setup.sh
 
 # Start development servers

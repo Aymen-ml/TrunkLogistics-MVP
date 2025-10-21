@@ -7,7 +7,7 @@ Based on your Render environment variables:
 ```env
 EMAIL_SERVICE=sendgrid
 SENDGRID_API_KEY=SG.xxx... (you have this)
-EMAIL_FROM_NAME=TrunkLogistics
+EMAIL_FROM_NAME=TruckLogistics
 EMAIL_FROM=korichiaymen27@gmail.com
 CLIENT_URL=https://truck-logistics-mvp.vercel.app/
 ```
@@ -38,7 +38,7 @@ SendGrid requires sender verification for security and anti-spam compliance. Wit
 
 3. **Fill in the form**:
    ```
-   From Name: TrunkLogistics
+   From Name: TruckLogistics
    From Email: korichiaymen27@gmail.com
    Reply To: korichiaymen27@gmail.com
    Address: (your address)
@@ -104,7 +104,7 @@ Instead of using Gmail, you can set up a custom domain:
 
 ### Option A: Verify Your Own Domain (if you have one)
 
-If you own a domain (e.g., trunklogistics.com):
+If you own a domain (e.g., trucklogistics.com):
 
 1. **Go to SendGrid**:
    ```
@@ -178,7 +178,7 @@ https://dashboard.render.com/
 **Success logs:**
 ```
 POST /api/auth/forgot-password 200
-Email sent successfully to user@example.com: Password Reset Request - TrunkLogistics
+Email sent successfully to user@example.com: Password Reset Request - TruckLogistics
 Password reset email sent to: user@example.com
 ```
 
@@ -202,7 +202,7 @@ SENDGRID_API_KEY=SG.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 # Sender Info (MUST be verified in SendGrid)
 EMAIL_FROM=korichiaymen27@gmail.com
-EMAIL_FROM_NAME=TrunkLogistics
+EMAIL_FROM_NAME=TruckLogistics
 
 # Frontend URL (NO trailing slash recommended)
 CLIENT_URL=https://truck-logistics-mvp.vercel.app

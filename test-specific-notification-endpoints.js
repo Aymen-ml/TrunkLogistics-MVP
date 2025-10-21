@@ -2,7 +2,7 @@
 
 import axios from 'axios';
 
-const API_BASE_URL = 'https://trunklogistics-api.onrender.com/api';
+const API_BASE_URL = 'https://trucklogistics-api.onrender.com/api';
 
 const TEST_CREDENTIALS = {
   email: 'korichiaymen27@gmail.com',

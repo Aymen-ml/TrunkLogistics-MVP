@@ -8,7 +8,7 @@
 ## 🚀 Deployment Details
 
 ### Repository
-- **GitHub:** `Aymen-ml/TrunkLogistics-MVP`
+- **GitHub:** `Aymen-ml/TruckLogistics-MVP`
 - **Branch:** `main`
 - **Commit Hash:** `3809879`
 
@@ -186,7 +186,7 @@ Previous stable commit: `9571807`
 
 ### Contact
 - Developer: GitHub @Aymen-ml
-- Repository: https://github.com/Aymen-ml/TrunkLogistics-MVP
+- Repository: https://github.com/Aymen-ml/TruckLogistics-MVP
 
 ---
 

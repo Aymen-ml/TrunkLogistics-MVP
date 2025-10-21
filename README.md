@@ -1,4 +1,4 @@
-# TrunkLogistics - MVP Platform
+# TruckLogistics - MVP Platform
 
 A web platform connecting customers (shippers) with logistics providers (truck owners/companies).
 
@@ -12,7 +12,7 @@ A web platform connecting customers (shippers) with logistics providers (truck o
 
 1. **Clone and install dependencies:**
 ```bash
-cd TrunkLogistics
+cd TruckLogistics
 npm run install:all
 ```
 
@@ -46,7 +46,7 @@ This will start:
 ## 📁 Project Structure
 
 ```
-TrunkLogistics/
+TruckLogistics/
 ├── client/          # React frontend (Vite + TailwindCSS)
 ├── server/          # Node.js backend (Express + PostgreSQL)
 ├── shared/          # Shared constants and utilities

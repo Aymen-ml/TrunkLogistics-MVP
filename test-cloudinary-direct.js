@@ -10,7 +10,7 @@ import chalk from 'chalk';
 async function testCloudinaryDirect() {
   console.log(chalk.blue('🔍 Testing Direct Cloudinary Access\n'));
 
-  const cloudinaryUrl = 'https://res.cloudinary.com/dgpwqggxb/image/upload/v1758535491/trunklogistics/trucks/documents/inspectionDoc_1758535491181_kiu2z7u00n.pdf';
+  const cloudinaryUrl = 'https://res.cloudinary.com/dgpwqggxb/image/upload/v1758535491/trucklogistics/trucks/documents/inspectionDoc_1758535491181_kiu2z7u00n.pdf';
   
   try {
     console.log(chalk.yellow('Testing direct Cloudinary URL access...'));

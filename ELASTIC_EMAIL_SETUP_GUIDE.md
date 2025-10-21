@@ -13,7 +13,7 @@ Elastic Email provides 100 emails per day for free with no credit card required.
 3. **Fill in**:
    - Email: `korichiaymen27@gmail.com` (or your preferred email)
    - Password: Create a strong password
-   - Company name: `TrunkLogistics`
+   - Company name: `TruckLogistics`
 4. **Sign up** - No credit card required! ✅
 5. **Verify your email**: Check Gmail for verification email from Elastic Email
 
@@ -39,7 +39,7 @@ After logging in:
    - **Username**: Your email address (e.g., `korichiaymen27@gmail.com`)
 3. **Create API Key** (used as SMTP password):
    - Click "Create Additional API Key"
-   - Name: `TrunkLogistics-Production`
+   - Name: `TruckLogistics-Production`
    - Select permissions: Check "SMTP"
    - Click "Create"
    - **Copy the API Key** - You won't see it again! ⚠️
@@ -63,7 +63,7 @@ Go to your Render dashboard:
    EMAIL_PASSWORD=your-elastic-email-api-key-here
    
    EMAIL_FROM=korichiaymen27@gmail.com
-   EMAIL_FROM_NAME=TrunkLogistics
+   EMAIL_FROM_NAME=TruckLogistics
    
    CLIENT_URL=https://truck-logistics-mvp.vercel.app
    NODE_ENV=production
@@ -115,7 +115,7 @@ EMAIL_PASSWORD=your-elastic-email-api-key
 
 # Email Details
 EMAIL_FROM=korichiaymen27@gmail.com
-EMAIL_FROM_NAME=TrunkLogistics
+EMAIL_FROM_NAME=TruckLogistics
 
 # App URLs
 CLIENT_URL=https://truck-logistics-mvp.vercel.app
@@ -302,9 +302,9 @@ View detailed statistics:
 ### Create Separate API Keys:
 
 ```
-Development:   TrunkLogistics-Dev
-Staging:       TrunkLogistics-Staging
-Production:    TrunkLogistics-Production
+Development:   TruckLogistics-Dev
+Staging:       TruckLogistics-Staging
+Production:    TruckLogistics-Production
 ```
 
 This way, you can revoke one without affecting others.
@@ -347,7 +347,7 @@ Test Elastic Email before deploying:
    EMAIL_USER=korichiaymen27@gmail.com
    EMAIL_PASSWORD=your-elastic-api-key
    EMAIL_FROM=korichiaymen27@gmail.com
-   EMAIL_FROM_NAME=TrunkLogistics
+   EMAIL_FROM_NAME=TruckLogistics
    CLIENT_URL=http://localhost:5173
    ```
 
@@ -387,7 +387,7 @@ EMAIL_SECURE=false
 EMAIL_USER=korichiaymen27@gmail.com
 EMAIL_PASSWORD=[Your API Key]
 EMAIL_FROM=korichiaymen27@gmail.com
-EMAIL_FROM_NAME=TrunkLogistics
+EMAIL_FROM_NAME=TruckLogistics
 CLIENT_URL=https://truck-logistics-mvp.vercel.app
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 

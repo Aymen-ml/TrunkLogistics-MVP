@@ -33,7 +33,7 @@ router.get('/', (req, res) => {
   res.json({
     success: true,
     status: 'healthy',
-    service: 'TrunkLogistics API',
+    service: 'TruckLogistics API',
     version: process.env.npm_package_version || '1.0.0',
     environment: process.env.NODE_ENV || 'development',
     timestamp: new Date().toISOString(),

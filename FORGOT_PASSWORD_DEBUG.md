@@ -17,7 +17,7 @@ EMAIL_PASSWORD=your-elastic-email-api-key
 
 # Email Sender Info
 EMAIL_FROM=korichiaymen27@gmail.com
-EMAIL_FROM_NAME=TrunkLogistics
+EMAIL_FROM_NAME=TruckLogistics
 
 # Frontend URL (for reset links)
 CLIENT_URL=https://truck-logistics-mvp.vercel.app

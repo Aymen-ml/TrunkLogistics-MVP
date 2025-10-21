@@ -11,7 +11,7 @@ const EmailTest = () => {
 
   const checkConfig = async () => {
     try {
-      const response = await fetch('https://trunklogistics-api.onrender.com/api/diagnostics/email');
+      const response = await fetch('https://trucklogistics-api.onrender.com/api/diagnostics/email');
       const data = await response.json();
       setConfigInfo(data.emailService);
     } catch (error) {
@@ -29,7 +29,7 @@ const EmailTest = () => {
     setResult(null);
 
     try {
-      const response = await fetch('https://trunklogistics-api.onrender.com/api/diagnostics/test-email', {
+      const response = await fetch('https://trucklogistics-api.onrender.com/api/diagnostics/test-email', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
