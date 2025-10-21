@@ -231,7 +231,7 @@ const AdminDashboard = () => {
             >
               <div className="flex items-center">
                 <div className="flex-shrink-0">
-                  <Users className="h-8 w-8 text-blue-600 group-hover:text-blue-700" />
+                  <Users className="h-8 w-8 text-primary-600 group-hover:text-accent-500 transition-colors" />
                 </div>
                 <div className="ml-4">
                   <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">Manage Users</h3>
@@ -356,7 +356,7 @@ const AdminDashboard = () => {
             <div className="p-4 lg:p-6">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
-                  <Truck className="h-6 w-6 lg:h-8 lg:w-8 text-blue-600" />
+                  <Truck className="h-6 w-6 lg:h-8 lg:w-8 text-primary-600" />
                 </div>
                 <div className="ml-3 lg:ml-4 w-0 flex-1">
                   <dl>
@@ -412,7 +412,7 @@ const AdminDashboard = () => {
                     <dd className="text-xl lg:text-2xl font-semibold text-gray-900 dark:text-gray-100">
                       {formatCurrency(stats.totalRevenue)}
                     </dd>
-                    <dd className="text-xs text-blue-600">
+                    <dd className="text-xs text-primary-600">
                       {formatCurrency(stats.monthlyRevenue)} this month
                     </dd>
                   </dl>
@@ -448,7 +448,7 @@ const AdminDashboard = () => {
             <div className="p-4 lg:p-6">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
-                  <Truck className="h-6 w-6 lg:h-8 lg:w-8 text-blue-600" />
+                  <Truck className="h-6 w-6 lg:h-8 lg:w-8 text-primary-600" />
                 </div>
                 <div className="ml-3 lg:ml-4 w-0 flex-1">
                   <dl>
@@ -499,7 +499,7 @@ const AdminDashboard = () => {
                 <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">Recent Activity</h3>
                 <Link
                   to="/admin/activity"
-                  className="text-sm text-blue-600 hover:text-blue-500 font-medium"
+                  className="text-sm text-accent-500 hover:text-accent-600 transition-colors font-medium"
                 >
                   View all
                 </Link>

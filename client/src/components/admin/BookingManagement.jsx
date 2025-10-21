@@ -153,7 +153,7 @@ const BookingManagement = () => {
         {/* Header */}
         <div className="mb-8">
           <div className="flex items-center">
-            <Package className="h-8 w-8 text-blue-600 mr-3" />
+            <Package className="h-8 w-8 text-primary-600 mr-3" />
             <div>
               <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">Booking Management</h1>
               <p className="mt-2 text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
@@ -405,7 +405,7 @@ const BookingManagement = () => {
                             }
                           }}
                           disabled={updating[booking.id]}
-                          className={`inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white ${action.color} focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50`}
+                          className={`inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white ${action.color} focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-500 disabled:opacity-50`}
                         >
                           {updating[booking.id] ? (
                             <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
@@ -422,7 +422,7 @@ const BookingManagement = () => {
                       value={booking.status}
                       onChange={(e) => handleStatusChange(booking.id, e.target.value)}
                       disabled={updating[booking.id]}
-                      className="block w-40 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm disabled:opacity-50"
+                      className="block w-40 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-accent-500 focus:border-blue-500 sm:text-sm disabled:opacity-50"
                     >
                       <option value={booking.status}>
                         {booking.status.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase())}

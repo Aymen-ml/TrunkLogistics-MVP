@@ -343,7 +343,7 @@ const ProviderDashboard = () => {
             >
               <div className="flex items-center">
                 <div className="flex-shrink-0">
-                  <Truck className="h-6 w-6 sm:h-8 sm:w-8 text-blue-600 group-hover:text-blue-700" />
+                  <Truck className="h-6 w-6 sm:h-8 sm:w-8 text-primary-600 group-hover:text-accent-500 transition-colors" />
                 </div>
                 <div className="ml-3 sm:ml-4">
                   <h3 className="text-base sm:text-lg font-medium text-gray-900 dark:text-gray-100">Manage Fleet</h3>
@@ -400,7 +400,7 @@ const ProviderDashboard = () => {
             <div className="p-4 lg:p-6">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
-                  <Truck className="h-6 w-6 lg:h-8 lg:w-8 text-blue-600" />
+                  <Truck className="h-6 w-6 lg:h-8 lg:w-8 text-primary-600" />
                 </div>
                 <div className="ml-3 lg:ml-4 w-0 flex-1">
                   <dl>
@@ -482,7 +482,7 @@ const ProviderDashboard = () => {
                     <dd className="text-xl lg:text-2xl font-semibold text-gray-900 dark:text-gray-100">
                       {formatCurrency(stats.totalRevenue)}
                     </dd>
-                    <dd className="text-xs text-blue-600">
+                    <dd className="text-xs text-primary-600">
                       {formatCurrency(stats.monthlyRevenue)} this month
                     </dd>
                   </dl>
@@ -696,7 +696,7 @@ const ProviderDashboard = () => {
                 <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">Recent Bookings</h3>
                 <Link
                   to="/bookings"
-                  className="text-sm text-blue-600 hover:text-blue-500 font-medium"
+                  className="text-sm text-accent-500 hover:text-accent-600 transition-colors font-medium"
                 >
                   View all
                 </Link>
@@ -758,7 +758,7 @@ const ProviderDashboard = () => {
                         ) : (
                           <Link
                             to={`/bookings/${booking.id}`}
-                            className="text-blue-600 hover:text-blue-500 text-sm font-medium"
+                            className="text-accent-500 hover:text-accent-600 transition-colors text-sm font-medium"
                           >
                             View
                           </Link>
@@ -812,7 +812,7 @@ const ProviderDashboard = () => {
                 </div>
                 <Link
                   to="/trucks"
-                  className="text-sm text-blue-600 hover:text-blue-500 font-medium"
+                  className="text-sm text-accent-500 hover:text-accent-600 transition-colors font-medium"
                 >
                   View all
                 </Link>
@@ -843,7 +843,7 @@ const ProviderDashboard = () => {
                     <div className="mt-6">
                       <Link
                         to="/trucks/new"
-                        className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
+                        className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-accent-500 hover:bg-accent-600 transition-colors"
                       >
                         <Plus className="h-4 w-4 mr-2" />
                         Add {serviceFilter === 'rental' ? 'Equipment' : 'Truck'}
@@ -864,7 +864,7 @@ const ProviderDashboard = () => {
                                 {isRental ? (
                                   <Settings className="h-5 w-5 text-orange-600" />
                                 ) : (
-                                  <Truck className="h-5 w-5 text-blue-600" />
+                                  <Truck className="h-5 w-5 text-primary-600" />
                                 )}
                               </div>
                             </div>
@@ -921,7 +921,7 @@ const ProviderDashboard = () => {
                           </div>
                           <Link
                             to={`/trucks/${truck.id}`}
-                            className="text-blue-600 hover:text-blue-500 text-sm font-medium"
+                            className="text-accent-500 hover:text-accent-600 transition-colors text-sm font-medium"
                           >
                             View
                           </Link>

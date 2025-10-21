@@ -346,7 +346,7 @@ const TruckDetail = () => {
           
           <Link
             to={user?.role === 'customer' ? '/find-trucks' : '/trucks'}
-            className="mt-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
+            className="mt-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-accent-500 hover:bg-accent-600 transition-colors"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back to {user?.role === 'customer' ? 'Search' : 'Trucks'}
@@ -383,7 +383,7 @@ const TruckDetail = () => {
               {truck.service_type === 'rental' ? (
                 <Settings className="h-8 w-8 text-orange-600 mr-3" />
               ) : (
-                <Truck className="h-8 w-8 text-blue-600 mr-3" />
+                <Truck className="h-8 w-8 text-primary-600 mr-3" />
               )}
               <div>
                 <div className="flex items-center space-x-3">
@@ -448,7 +448,7 @@ const TruckDetail = () => {
                 ) : (
                   <Link
                     to={`/bookings/new?truck=${truck.id}`}
-                    className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700"
+                    className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-accent-500 hover:bg-accent-600 transition-colors"
                   >
                     <Package className="h-4 w-4 mr-2" />
                     Book This Truck
@@ -635,7 +635,7 @@ const TruckDetail = () => {
                         Phone:
                       </span>
                       <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
-                        <a href={`tel:${truck.phone}`} className="text-blue-600 hover:text-blue-800 dark:text-blue-200">
+                        <a href={`tel:${truck.phone}`} className="text-primary-600 hover:text-blue-800 dark:text-blue-200">
                           {truck.phone}
                         </a>
                       </span>
@@ -674,7 +674,7 @@ const TruckDetail = () => {
                         Business Phone:
                       </span>
                       <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
-                        <a href={`tel:${truck.provider_business_phone}`} className="text-blue-600 hover:text-blue-800 dark:text-blue-200">
+                        <a href={`tel:${truck.provider_business_phone}`} className="text-primary-600 hover:text-blue-800 dark:text-blue-200">
                           {truck.provider_business_phone}
                         </a>
                       </span>
@@ -711,7 +711,7 @@ const TruckDetail = () => {
                         Phone:
                       </span>
                       <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
-                        <a href={`tel:${truck.driver_phone}`} className="text-blue-600 hover:text-blue-800 dark:text-blue-200">
+                        <a href={`tel:${truck.driver_phone}`} className="text-primary-600 hover:text-blue-800 dark:text-blue-200">
                           {truck.driver_phone}
                         </a>
                       </span>
@@ -725,7 +725,7 @@ const TruckDetail = () => {
                         Email:
                       </span>
                       <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
-                        <a href={`mailto:${truck.driver_email}`} className="text-blue-600 hover:text-blue-800 dark:text-blue-200">
+                        <a href={`mailto:${truck.driver_email}`} className="text-primary-600 hover:text-blue-800 dark:text-blue-200">
                           {truck.driver_email}
                         </a>
                       </span>
@@ -971,7 +971,7 @@ const TruckDetail = () => {
                                 alert(`Error viewing document: ${error.response?.data?.error || error.message}`);
                               }
                             }}
-                            className="inline-flex items-center px-3 py-2 border border-gray-300 dark:border-gray-600 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 hover:bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                            className="inline-flex items-center px-3 py-2 border border-gray-300 dark:border-gray-600 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 hover:bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-500"
                           >
                             <Eye className="h-4 w-4 mr-1" />
                             View
@@ -991,7 +991,7 @@ const TruckDetail = () => {
           <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
             <div className="flex items-center">
               <div className="flex-shrink-0">
-                <Package className="h-8 w-8 text-blue-600" />
+                <Package className="h-8 w-8 text-primary-600" />
               </div>
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Completed Bookings</p>

@@ -87,7 +87,7 @@ const AdminAnalytics = () => {
             <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Analytics</h1>
             <p className="text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Trends, funnels, and breakdowns across bookings and revenue.</p>
           </div>
-          <Link to="/admin/bookings" className="text-sm text-blue-600 hover:text-blue-700">Back to Bookings</Link>
+          <Link to="/admin/bookings" className="text-sm text-primary-600 hover:text-blue-700">Back to Bookings</Link>
         </div>
 
         {/* Filters */}
@@ -113,7 +113,7 @@ const AdminAnalytics = () => {
               <label className="block text-xs font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 mb-1">To</label>
               <input type="date" className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm" value={dateRange.to} onChange={(e) => setDateRange(prev => ({ ...prev, to: e.target.value }))} />
             </div>
-            <button className="inline-flex items-center px-3 py-2 rounded-md text-sm bg-blue-600 text-white">
+            <button className="inline-flex items-center px-3 py-2 rounded-md text-sm bg-accent-500 text-white">
               <Filter className="h-4 w-4 mr-2" /> Apply
             </button>
           </div>

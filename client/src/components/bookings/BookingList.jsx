@@ -172,7 +172,7 @@ const BookingList = () => {
               <div className="mt-4 md:mt-0 md:ml-4">
                 <Link
                   to="/bookings/new"
-                  className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700"
+                  className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-accent-500 hover:bg-accent-600 transition-colors"
                 >
                   <Plus className="h-4 w-4 mr-2" />
                   New Booking
@@ -200,7 +200,7 @@ const BookingList = () => {
                     id="search"
                     value={filters.search}
                     onChange={handleFilterChange}
-                    className="focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 sm:text-sm border-gray-300 dark:border-gray-600 rounded-md"
+                    className="focus:ring-accent-500 focus:border-blue-500 block w-full pl-10 sm:text-sm border-gray-300 dark:border-gray-600 rounded-md"
                     placeholder="Search bookings..."
                     autoComplete="off"
                   />
@@ -216,7 +216,7 @@ const BookingList = () => {
                   name="status"
                   value={filters.status}
                   onChange={handleFilterChange}
-                  className="block w-full pl-3 pr-10 py-2 text-base border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                  className="block w-full pl-3 pr-10 py-2 text-base border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-accent-500 focus:border-blue-500 sm:text-sm rounded-md"
                 >
                   <option value="all">All Status</option>
                   <option value="pending_review">Pending Review</option>
@@ -237,7 +237,7 @@ const BookingList = () => {
                   name="service_type"
                   value={filters.service_type}
                   onChange={handleFilterChange}
-                  className="block w-full pl-3 pr-10 py-2 text-base border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                  className="block w-full pl-3 pr-10 py-2 text-base border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-accent-500 focus:border-blue-500 sm:text-sm rounded-md"
                 >
                   <option value="all">All Services</option>
                   <option value="transport">Transportation</option>
@@ -254,7 +254,7 @@ const BookingList = () => {
                   name="provider"
                   value={filters.provider}
                   onChange={handleFilterChange}
-                  className="block w-full pl-3 pr-10 py-2 text-base border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                  className="block w-full pl-3 pr-10 py-2 text-base border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-accent-500 focus:border-blue-500 sm:text-sm rounded-md"
                 >
                   <option value="all">All Providers</option>
                   {bookings && [...new Set(bookings.map(b => b.provider_company).filter(Boolean))].map(company => (
@@ -273,7 +273,7 @@ const BookingList = () => {
                   id="date_from"
                   value={filters.date_from}
                   onChange={handleFilterChange}
-                  className="block w-full pl-3 pr-10 py-2 text-base border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                  className="block w-full pl-3 pr-10 py-2 text-base border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-accent-500 focus:border-blue-500 sm:text-sm rounded-md"
                 />
               </div>
 
@@ -287,14 +287,14 @@ const BookingList = () => {
                   id="date_to"
                   value={filters.date_to}
                   onChange={handleFilterChange}
-                  className="block w-full pl-3 pr-10 py-2 text-base border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                  className="block w-full pl-3 pr-10 py-2 text-base border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-accent-500 focus:border-blue-500 sm:text-sm rounded-md"
                 />
               </div>
 
               <div className="flex flex-col space-y-2 md:flex-row md:space-y-0 md:space-x-2">
                 <button
                   type="submit"
-                  className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                  className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-accent-500 hover:bg-accent-600 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-500"
                 >
                   <Filter className="h-4 w-4 mr-2" />
                   Filter
@@ -302,7 +302,7 @@ const BookingList = () => {
                 <button
                   type="button"
                   onClick={clearFilters}
-                  className="inline-flex items-center justify-center px-4 py-2 border border-gray-300 dark:border-gray-600 text-sm font-medium rounded-md text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 hover:bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                  className="inline-flex items-center justify-center px-4 py-2 border border-gray-300 dark:border-gray-600 text-sm font-medium rounded-md text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 hover:bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-500"
                 >
                   Clear
                 </button>
@@ -366,7 +366,7 @@ const BookingList = () => {
                               {VEHICLE_TYPE_LABELS[booking.truck_type] || booking.truck_type || 'Vehicle'}
                             </div>
                             {user.role === 'customer' && booking.provider_company && (
-                              <div className="text-xs text-blue-600 font-medium mt-1">
+                              <div className="text-xs text-primary-600 font-medium mt-1">
                                 {booking.provider_company}
                               </div>
                             )}
@@ -378,7 +378,7 @@ const BookingList = () => {
                             {user.role === 'admin' && (
                               <>
                                 {booking.provider_company && (
-                                  <div className="text-xs text-blue-600 font-medium mt-1">
+                                  <div className="text-xs text-primary-600 font-medium mt-1">
                                     Provider: {booking.provider_company}
                                   </div>
                                 )}

@@ -81,7 +81,7 @@ const Settings = () => {
           <div className="bg-white shadow rounded-lg overflow-hidden">
             <div className="px-6 py-4 border-b border-gray-200 bg-gray-50">
               <h2 className="text-lg font-semibold text-gray-900 flex items-center">
-                {theme === 'dark' ? <Moon className="h-5 w-5 mr-2 text-blue-600" /> : <Sun className="h-5 w-5 mr-2 text-yellow-500" />}
+                {theme === 'dark' ? <Moon className="h-5 w-5 mr-2 text-primary-600" /> : <Sun className="h-5 w-5 mr-2 text-yellow-500" />}
                 Theme
               </h2>
               <p className="text-sm text-gray-500 mt-1">Choose your preferred color scheme</p>
@@ -96,13 +96,13 @@ const Settings = () => {
                       : 'border-gray-300 bg-white hover:border-gray-400 hover:shadow'
                   }`}
                 >
-                  <Sun className={`h-8 w-8 mb-2 ${theme === 'light' ? 'text-blue-600' : 'text-gray-400'}`} />
+                  <Sun className={`h-8 w-8 mb-2 ${theme === 'light' ? 'text-accent-500' : 'text-gray-400'}`} />
                   <span className={`text-sm font-medium ${theme === 'light' ? 'text-blue-900' : 'text-gray-700'}`}>
                     Light Mode
                   </span>
                   {theme === 'light' && (
                     <div className="absolute top-2 right-2">
-                      <Check className="h-5 w-5 text-blue-600" />
+                      <Check className="h-5 w-5 text-primary-600" />
                     </div>
                   )}
                 </button>
@@ -115,13 +115,13 @@ const Settings = () => {
                       : 'border-gray-300 bg-white hover:border-gray-400 hover:shadow'
                   }`}
                 >
-                  <Moon className={`h-8 w-8 mb-2 ${theme === 'dark' ? 'text-blue-600' : 'text-gray-400'}`} />
+                  <Moon className={`h-8 w-8 mb-2 ${theme === 'dark' ? 'text-accent-500' : 'text-gray-400'}`} />
                   <span className={`text-sm font-medium ${theme === 'dark' ? 'text-blue-900' : 'text-gray-700'}`}>
                     Dark Mode
                   </span>
                   {theme === 'dark' && (
                     <div className="absolute top-2 right-2">
-                      <Check className="h-5 w-5 text-blue-600" />
+                      <Check className="h-5 w-5 text-primary-600" />
                     </div>
                   )}
                 </button>
@@ -136,7 +136,7 @@ const Settings = () => {
           <div className="bg-white shadow rounded-lg overflow-hidden">
             <div className="px-6 py-4 border-b border-gray-200 bg-gray-50">
               <h2 className="text-lg font-semibold text-gray-900 flex items-center">
-                {notifications ? <Bell className="h-5 w-5 mr-2 text-blue-600" /> : <BellOff className="h-5 w-5 mr-2 text-gray-400" />}
+                {notifications ? <Bell className="h-5 w-5 mr-2 text-primary-600" /> : <BellOff className="h-5 w-5 mr-2 text-gray-400" />}
                 Notifications
               </h2>
               <p className="text-sm text-gray-500 mt-1">Manage your notification preferences</p>
@@ -145,7 +145,7 @@ const Settings = () => {
               <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
                 <div className="flex items-start">
                   {notifications ? (
-                    <Bell className="h-5 w-5 text-blue-600 mt-0.5 mr-3" />
+                    <Bell className="h-5 w-5 text-primary-600 mt-0.5 mr-3" />
                   ) : (
                     <BellOff className="h-5 w-5 text-gray-400 mt-0.5 mr-3" />
                   )}
@@ -165,8 +165,8 @@ const Settings = () => {
                     role="switch"
                     aria-checked={notifications}
                     onClick={() => setNotifications(!notifications)}
-                    className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
-                      notifications ? 'bg-blue-600' : 'bg-gray-200'
+                    className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-accent-500 focus:ring-offset-2 ${
+                      notifications ? 'bg-accent-500' : 'bg-gray-200'
                     }`}
                   >
                     <span
@@ -206,7 +206,7 @@ const Settings = () => {
               className={`inline-flex items-center px-6 py-2.5 rounded-md text-white font-medium transition-colors ${
                 saving || !hasUnsavedChanges
                   ? 'bg-gray-400 cursor-not-allowed'
-                  : 'bg-blue-600 hover:bg-blue-700 shadow-sm hover:shadow'
+                  : 'bg-accent-500 hover:bg-accent-600 transition-colors shadow-sm hover:shadow'
               }`}
             >
               {saving ? (

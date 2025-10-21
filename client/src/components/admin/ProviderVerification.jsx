@@ -117,7 +117,7 @@ const ProviderVerification = () => {
         {/* Header */}
         <div className="mb-8">
           <div className="flex items-center">
-            <Building className="h-8 w-8 text-blue-600 mr-3" />
+            <Building className="h-8 w-8 text-primary-600 mr-3" />
             <div>
               <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">Provider Verification</h1>
               <p className="mt-2 text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
@@ -240,7 +240,7 @@ const ProviderVerification = () => {
                     <div className="flex items-center space-x-2">
                       <button
                         onClick={() => handleViewDetails(provider)}
-                        className="inline-flex items-center px-3 py-2 border border-gray-300 dark:border-gray-600 text-sm leading-4 font-medium rounded-md text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 hover:bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                        className="inline-flex items-center px-3 py-2 border border-gray-300 dark:border-gray-600 text-sm leading-4 font-medium rounded-md text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 hover:bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-500"
                       >
                         <Eye className="h-4 w-4 mr-2" />
                         View Details

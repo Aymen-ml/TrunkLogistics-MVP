@@ -316,7 +316,7 @@ const BookingDetail = () => {
     const baseClasses = "inline-flex items-center px-3 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200";
     switch(color) {
       case 'blue':
-        return `${baseClasses} bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400`;
+        return `${baseClasses} bg-accent-500 hover:bg-accent-600 transition-colors disabled:bg-blue-400`;
       case 'green':
         return `${baseClasses} bg-green-600 hover:bg-green-700 disabled:bg-green-400`;
       case 'red':
@@ -348,7 +348,7 @@ const BookingDetail = () => {
           <p className="mt-2 text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">The booking you're looking for doesn't exist.</p>
           <button
             onClick={() => navigate('/bookings')}
-            className="mt-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
+            className="mt-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-accent-500 hover:bg-accent-600 transition-colors"
           >
             Back to Bookings
           </button>
@@ -375,7 +375,7 @@ const BookingDetail = () => {
               {booking.service_type === 'rental' ? (
                 <Settings className="h-8 w-8 text-orange-500 mr-3" />
               ) : (
-                <Package className="h-8 w-8 text-blue-600 mr-3" />
+                <Package className="h-8 w-8 text-primary-600 mr-3" />
               )}
               <div>
                 <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100">
@@ -625,7 +625,7 @@ const BookingDetail = () => {
                   {booking.service_type === 'rental' ? (
                     <Settings className="h-8 w-8 text-orange-600" />
                   ) : (
-                    <Truck className="h-8 w-8 text-blue-600" />
+                    <Truck className="h-8 w-8 text-primary-600" />
                   )}
                   <div className="ml-4">
                     <p className="text-lg font-medium text-gray-900 dark:text-gray-100">
@@ -742,7 +742,7 @@ const BookingDetail = () => {
                 {/* Company Name */}
                 <div>
                   <div className="flex items-center mb-2">
-                    <Building className="h-5 w-5 text-blue-600 mr-2" />
+                    <Building className="h-5 w-5 text-primary-600 mr-2" />
                     <p className="text-sm font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Company</p>
                   </div>
                   <p className="text-base font-semibold text-gray-900 dark:text-gray-100 ml-7">

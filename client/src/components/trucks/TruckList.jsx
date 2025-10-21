@@ -152,7 +152,7 @@ const TruckList = () => {
             <div className="mt-4 sm:mt-0">
               <Link
                 to="/trucks/new"
-                className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
+                className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-accent-500 hover:bg-accent-600 transition-colors"
               >
                 <Plus className="h-4 w-4 mr-2" />
                 Add Vehicle
@@ -175,7 +175,7 @@ const TruckList = () => {
                   placeholder="License plate, make, model..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-10 w-full border-gray-300 dark:border-gray-600 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                  className="pl-10 w-full border-gray-300 dark:border-gray-600 rounded-md focus:ring-accent-500 focus:border-blue-500"
                   autoComplete="off"
                 />
               </div>
@@ -188,7 +188,7 @@ const TruckList = () => {
               <select
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
-                className="w-full border-gray-300 dark:border-gray-600 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                className="w-full border-gray-300 dark:border-gray-600 rounded-md focus:ring-accent-500 focus:border-blue-500"
               >
                 <option value="all">All Status</option>
                 <option value="active">Active</option>
@@ -205,7 +205,7 @@ const TruckList = () => {
               <select
                 value={serviceFilter}
                 onChange={(e) => setServiceFilter(e.target.value)}
-                className="w-full border-gray-300 dark:border-gray-600 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                className="w-full border-gray-300 dark:border-gray-600 rounded-md focus:ring-accent-500 focus:border-blue-500"
               >
                 <option value="all">All Services</option>
                 <option value="transport">Transportation</option>
@@ -220,7 +220,7 @@ const TruckList = () => {
               <select
                 value={typeFilter}
                 onChange={(e) => setTypeFilter(e.target.value)}
-                className="w-full border-gray-300 dark:border-gray-600 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                className="w-full border-gray-300 dark:border-gray-600 rounded-md focus:ring-accent-500 focus:border-blue-500"
               >
                 <option value="all">All Types</option>
                 <option value="flatbed">Flatbed</option>
@@ -249,7 +249,7 @@ const TruckList = () => {
               <div className="mt-6">
                 <Link
                   to="/trucks/new"
-                  className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
+                  className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-accent-500 hover:bg-accent-600 transition-colors"
                 >
                   <Plus className="h-4 w-4 mr-2" />
                   Add Your First Truck
@@ -269,7 +269,7 @@ const TruckList = () => {
                         {isRental ? (
                           <Settings className="h-8 w-8 text-orange-600" />
                         ) : (
-                          <Truck className="h-8 w-8 text-blue-600" />
+                          <Truck className="h-8 w-8 text-primary-600" />
                         )}
                         <div className="ml-3">
                           <div className="flex items-center space-x-2">
@@ -352,14 +352,14 @@ const TruckList = () => {
                         <div className="flex items-center space-x-2">
                           <Link
                             to={`/trucks/${truck.id}`}
-                            className="p-2 text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:text-blue-600 rounded-full hover:bg-gray-100 dark:bg-gray-700"
+                            className="p-2 text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:text-primary-600 rounded-full hover:bg-gray-100 dark:bg-gray-700"
                             title="View details"
                           >
                             <Eye className="h-4 w-4" />
                           </Link>
                           <Link
                             to={`/trucks/${truck.id}/edit`}
-                            className="p-2 text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:text-blue-600 rounded-full hover:bg-gray-100 dark:bg-gray-700"
+                            className="p-2 text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:text-primary-600 rounded-full hover:bg-gray-100 dark:bg-gray-700"
                             title={`Edit ${isRental ? 'equipment' : 'truck'}`}
                           >
                             <Edit className="h-4 w-4" />

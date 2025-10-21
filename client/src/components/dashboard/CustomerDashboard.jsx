@@ -174,7 +174,7 @@ const CustomerDashboard = () => {
             >
               <div className="flex items-center">
                 <div className="flex-shrink-0">
-                  <Truck className="h-6 w-6 sm:h-8 sm:w-8 text-blue-600 group-hover:text-blue-700" />
+                  <Truck className="h-6 w-6 sm:h-8 sm:w-8 text-primary-600 group-hover:text-accent-500 transition-colors" />
                 </div>
                 <div className="ml-3 sm:ml-4">
                   <h3 className="text-base sm:text-lg font-medium text-gray-900 dark:text-gray-100">Find Trucks</h3>
@@ -221,7 +221,7 @@ const CustomerDashboard = () => {
             <div className="p-4 sm:p-6">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
-                  <Truck className="h-6 w-6 sm:h-8 sm:w-8 text-blue-600" />
+                  <Truck className="h-6 w-6 sm:h-8 sm:w-8 text-primary-600" />
                 </div>
                 <div className="ml-3 sm:ml-4 w-0 flex-1">
                   <dl>
@@ -340,7 +340,7 @@ const CustomerDashboard = () => {
               <h3 className="text-base sm:text-lg font-medium text-gray-900 dark:text-gray-100">Recent Bookings</h3>
               <Link
                 to="/bookings"
-                className="text-xs sm:text-sm text-blue-600 hover:text-blue-500 font-medium"
+                className="text-xs sm:text-sm text-accent-500 hover:text-accent-600 font-medium transition-colors"
               >
                 View all
               </Link>
@@ -357,7 +357,7 @@ const CustomerDashboard = () => {
                 <div className="mt-4 sm:mt-6">
                   <Link
                     to="/find-trucks"
-                    className="inline-flex items-center px-3 sm:px-4 py-2 border border-transparent shadow-sm text-xs sm:text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
+                    className="inline-flex items-center px-3 sm:px-4 py-2 border border-transparent shadow-sm text-xs sm:text-sm font-medium rounded-md text-white bg-accent-500 hover:bg-accent-600 transition-colors"
                   >
                     <Plus className="-ml-1 mr-2 h-4 w-4 sm:h-5 sm:w-5" />
                     Find Trucks

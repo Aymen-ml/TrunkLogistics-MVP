@@ -128,7 +128,7 @@ const UserManagement = () => {
         {/* Header */}
         <div className="mb-8">
           <div className="flex items-center">
-            <Users className="h-8 w-8 text-blue-600 mr-3" />
+            <Users className="h-8 w-8 text-primary-600 mr-3" />
             <div>
               <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">User Management</h1>
               <p className="mt-2 text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">

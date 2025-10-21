@@ -216,7 +216,7 @@ const ImageUpload = ({
             <div className="flex text-sm text-gray-600 dark:text-gray-400 dark:text-gray-500">
               <label
                 htmlFor={`image-upload-${label.replace(/\s+/g, '-').toLowerCase()}`}
-                className="relative cursor-pointer bg-white dark:bg-gray-800 rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none"
+                className="relative cursor-pointer bg-white dark:bg-gray-800 rounded-md font-medium text-accent-500 hover:text-accent-600 transition-colors focus-within:outline-none"
               >
                 <span>Upload images</span>
                 <input

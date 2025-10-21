@@ -143,7 +143,7 @@ const ResetPassword = () => {
           <div>
             <div className="flex justify-center">
               <div className="flex items-center space-x-2">
-                <Truck className="h-10 w-10 text-blue-600" />
+                <Truck className="h-10 w-10 text-primary-600" />
                 <span className="text-2xl font-bold text-gray-900 dark:text-gray-100">TruckLogistics</span>
               </div>
             </div>
@@ -167,14 +167,14 @@ const ResetPassword = () => {
               <div className="space-y-3">
                 <Link
                   to="/forgot-password"
-                  className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                  className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-accent-500 hover:bg-accent-600 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-500"
                 >
                   Request New Reset Link
                 </Link>
                 
                 <Link
                   to="/login"
-                  className="w-full flex justify-center py-2 px-4 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 hover:bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                  className="w-full flex justify-center py-2 px-4 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 hover:bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-500"
                 >
                   Back to Login
                 </Link>
@@ -193,7 +193,7 @@ const ResetPassword = () => {
           <div>
             <div className="flex justify-center">
               <div className="flex items-center space-x-2">
-                <Truck className="h-10 w-10 text-blue-600" />
+                <Truck className="h-10 w-10 text-primary-600" />
                 <span className="text-2xl font-bold text-gray-900 dark:text-gray-100">TruckLogistics</span>
               </div>
             </div>
@@ -219,7 +219,7 @@ const ResetPassword = () => {
               
               <Link
                 to="/login"
-                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-accent-500 hover:bg-accent-600 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-500"
               >
                 Go to Login Now
               </Link>
@@ -236,7 +236,7 @@ const ResetPassword = () => {
         <div>
           <div className="flex justify-center">
             <div className="flex items-center space-x-2">
-              <Truck className="h-10 w-10 text-blue-600" />
+              <Truck className="h-10 w-10 text-primary-600" />
               <span className="text-2xl font-bold text-gray-900 dark:text-gray-100">TruckLogistics</span>
             </div>
           </div>
@@ -275,7 +275,7 @@ const ResetPassword = () => {
                   type={showPassword ? 'text' : 'password'}
                   autoComplete="new-password"
                   required
-                  className="appearance-none relative block w-full pl-10 pr-10 py-2 border border-gray-300 dark:border-gray-600 placeholder-gray-500 text-gray-900 dark:text-gray-100 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                  className="appearance-none relative block w-full pl-10 pr-10 py-2 border border-gray-300 dark:border-gray-600 placeholder-gray-500 text-gray-900 dark:text-gray-100 rounded-md focus:outline-none focus:ring-accent-500 focus:border-blue-500 focus:z-10 sm:text-sm"
                   placeholder="Enter new password"
                   value={formData.password}
                   onChange={handleChange}
@@ -311,7 +311,7 @@ const ResetPassword = () => {
                   type={showConfirmPassword ? 'text' : 'password'}
                   autoComplete="new-password"
                   required
-                  className="appearance-none relative block w-full pl-10 pr-10 py-2 border border-gray-300 dark:border-gray-600 placeholder-gray-500 text-gray-900 dark:text-gray-100 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                  className="appearance-none relative block w-full pl-10 pr-10 py-2 border border-gray-300 dark:border-gray-600 placeholder-gray-500 text-gray-900 dark:text-gray-100 rounded-md focus:outline-none focus:ring-accent-500 focus:border-blue-500 focus:z-10 sm:text-sm"
                   placeholder="Confirm new password"
                   value={formData.confirmPassword}
                   onChange={handleChange}
@@ -335,7 +335,7 @@ const ResetPassword = () => {
             <button
               type="submit"
               disabled={loading}
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-accent-500 hover:bg-accent-600 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-500 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? (
                 <Loader className="h-5 w-5 animate-spin" />
@@ -346,7 +346,7 @@ const ResetPassword = () => {
             
             <Link
               to="/login"
-              className="w-full flex justify-center py-2 px-4 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 hover:bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+              className="w-full flex justify-center py-2 px-4 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 hover:bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-500"
             >
               Back to Login
             </Link>

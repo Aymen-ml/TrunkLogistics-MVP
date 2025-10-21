@@ -127,7 +127,7 @@ const Login = () => {
                   required
                   className={`appearance-none relative block w-full pl-10 pr-3 py-2 border ${
                     errors.email ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'
-                  } placeholder-gray-500 text-gray-900 dark:text-gray-100 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm`}
+                  } placeholder-gray-500 text-gray-900 dark:text-gray-100 rounded-md focus:outline-none focus:ring-accent-500 focus:border-blue-500 focus:z-10 sm:text-sm`}
                   placeholder="Enter your email"
                   value={formData.email}
                   onChange={handleChange}
@@ -154,7 +154,7 @@ const Login = () => {
                   required
                   className={`appearance-none relative block w-full pl-10 pr-3 py-2 border ${
                     errors.password ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'
-                  } placeholder-gray-500 text-gray-900 dark:text-gray-100 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm`}
+                  } placeholder-gray-500 text-gray-900 dark:text-gray-100 rounded-md focus:outline-none focus:ring-accent-500 focus:border-blue-500 focus:z-10 sm:text-sm`}
                   placeholder="Enter your password"
                   value={formData.password}
                   onChange={handleChange}

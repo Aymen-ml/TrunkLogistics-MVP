@@ -308,7 +308,7 @@ const EditBooking = () => {
                   name="pickup_address"
                   value={formData.pickup_address}
                   onChange={handleChange}
-                  className={`block w-full rounded-md shadow-sm ${errors.pickup_address ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'} focus:border-blue-500 focus:ring-blue-500`}
+                  className={`block w-full rounded-md shadow-sm ${errors.pickup_address ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'} focus:border-blue-500 focus:ring-accent-500`}
                   placeholder="123 Main St"
                 />
                 {errors.pickup_address && (
@@ -327,7 +327,7 @@ const EditBooking = () => {
                     name="pickup_city"
                     value={formData.pickup_city}
                     onChange={handleChange}
-                    className={`block w-full rounded-md shadow-sm ${errors.pickup_city ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'} focus:border-blue-500 focus:ring-blue-500`}
+                    className={`block w-full rounded-md shadow-sm ${errors.pickup_city ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'} focus:border-blue-500 focus:ring-accent-500`}
                     placeholder="New York"
                   />
                   {errors.pickup_city && (
@@ -345,7 +345,7 @@ const EditBooking = () => {
                     name="destination_city"
                     value={formData.destination_city}
                     onChange={handleChange}
-                    className={`block w-full rounded-md shadow-sm ${errors.destination_city ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'} focus:border-blue-500 focus:ring-blue-500`}
+                    className={`block w-full rounded-md shadow-sm ${errors.destination_city ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'} focus:border-blue-500 focus:ring-accent-500`}
                     placeholder="Los Angeles"
                   />
                   {errors.destination_city && (
@@ -364,7 +364,7 @@ const EditBooking = () => {
                   name="destination_address"
                   value={formData.destination_address}
                   onChange={handleChange}
-                  className={`block w-full rounded-md shadow-sm ${errors.destination_address ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'} focus:border-blue-500 focus:ring-blue-500`}
+                  className={`block w-full rounded-md shadow-sm ${errors.destination_address ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'} focus:border-blue-500 focus:ring-accent-500`}
                   placeholder="456 Destination St"
                 />
                 {errors.destination_address && (
@@ -384,7 +384,7 @@ const EditBooking = () => {
                     value={formData.pickup_date}
                     onChange={handleChange}
                     min={new Date().toISOString().split('T')[0]}
-                    className={`block w-full rounded-md shadow-sm ${errors.pickup_date ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'} focus:border-blue-500 focus:ring-blue-500`}
+                    className={`block w-full rounded-md shadow-sm ${errors.pickup_date ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'} focus:border-blue-500 focus:ring-accent-500`}
                   />
                   {errors.pickup_date && (
                     <p className="mt-1 text-sm text-red-600">{errors.pickup_date}</p>
@@ -401,7 +401,7 @@ const EditBooking = () => {
                     name="pickup_time"
                     value={formData.pickup_time}
                     onChange={handleChange}
-                    className="block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    className="block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-blue-500 focus:ring-accent-500"
                   />
                 </div>
               </div>
@@ -424,7 +424,7 @@ const EditBooking = () => {
                   rows={3}
                   value={formData.cargo_description}
                   onChange={handleChange}
-                  className={`block w-full rounded-md shadow-sm ${errors.cargo_description ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'} focus:border-blue-500 focus:ring-blue-500`}
+                  className={`block w-full rounded-md shadow-sm ${errors.cargo_description ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'} focus:border-blue-500 focus:ring-accent-500`}
                   placeholder="Describe the cargo (e.g., Furniture, Electronics, etc.)"
                 />
                 {errors.cargo_description && (
@@ -445,7 +445,7 @@ const EditBooking = () => {
                     step="0.1"
                     value={formData.cargo_weight}
                     onChange={handleChange}
-                    className={`block w-full rounded-md shadow-sm ${errors.cargo_weight ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'} focus:border-blue-500 focus:ring-blue-500`}
+                    className={`block w-full rounded-md shadow-sm ${errors.cargo_weight ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'} focus:border-blue-500 focus:ring-accent-500`}
                     placeholder="e.g., 100"
                   />
                   {errors.cargo_weight && (
@@ -465,7 +465,7 @@ const EditBooking = () => {
                     step="0.1"
                     value={formData.cargo_volume}
                     onChange={handleChange}
-                    className="block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    className="block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-blue-500 focus:ring-accent-500"
                     placeholder="e.g., 1.5"
                   />
                 </div>
@@ -481,7 +481,7 @@ const EditBooking = () => {
                   rows={2}
                   value={formData.notes}
                   onChange={handleChange}
-                  className="block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  className="block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-blue-500 focus:ring-accent-500"
                   placeholder="Any special instructions or requirements..."
                 />
               </div>
@@ -492,14 +492,14 @@ const EditBooking = () => {
             <button
               type="button"
               onClick={() => navigate(-1)}
-              className="inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 shadow-sm text-sm font-medium rounded-md text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 hover:bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+              className="inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 shadow-sm text-sm font-medium rounded-md text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 hover:bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-500"
               disabled={saving}
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
+              className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-accent-500 hover:bg-accent-600 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-500 disabled:opacity-50"
               disabled={saving}
             >
               {saving ? (

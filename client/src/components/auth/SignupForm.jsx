@@ -1,10 +1,9 @@
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { useToast } from '../../contexts/ToastContext';
+import TruckLogo from '../common/TruckLogo';
 import { 
-  Truck, 
   User, 
   Building2, 
   Mail, 
@@ -165,8 +164,11 @@ const SignupForm = () => {
   return (
     <div className="max-w-xl mx-auto p-8">
       <div className="text-center mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">Create Your Account</h1>
-        <p className="mt-2 text-gray-600">Join TruckLogistics and start managing your logistics needs</p>
+        <div className="flex justify-center mb-4">
+          <TruckLogo className="h-16 w-16" />
+        </div>
+        <h1 className="text-3xl font-bold text-primary-600">Create Your Account</h1>
+        <p className="mt-2 text-gray-600">Join TruckLogistics and start connecting with logistics providers</p>
       </div>
 
       {/* Progress Steps */}
@@ -175,25 +177,25 @@ const SignupForm = () => {
           {[1, 2, 3].map((step) => (
             <div key={step} className="flex items-center">
               <div className={`
-                w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium
+                w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium transition-colors
                 ${currentStep >= step 
-                  ? 'bg-blue-600 text-white' 
-                  : 'bg-gray-200 text-gray-600'}
+                  ? 'bg-accent-500 text-white' 
+                  : 'bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400'}
               `}>
                 {step}
               </div>
               {step < 3 && (
-                <div className={`w-24 h-1 ${
-                  currentStep > step ? 'bg-blue-600' : 'bg-gray-200'
+                <div className={`w-24 h-1 transition-colors ${
+                  currentStep > step ? 'bg-accent-500' : 'bg-gray-200 dark:bg-gray-700'
                 }`} />
               )}
             </div>
           ))}
         </div>
         <div className="flex justify-between mt-2">
-          <span className="text-xs text-gray-600">Account Type</span>
-          <span className="text-xs text-gray-600">Personal Info</span>
-          <span className="text-xs text-gray-600">Business Details</span>
+          <span className="text-xs text-gray-600 dark:text-gray-400">Account Type</span>
+          <span className="text-xs text-gray-600 dark:text-gray-400">Personal Info</span>
+          <span className="text-xs text-gray-600 dark:text-gray-400">Business Details</span>
         </div>
       </div>
 
@@ -215,7 +217,7 @@ const SignupForm = () => {
                     : 'border-gray-200 hover:border-gray-300 hover:shadow-md'
                 }`}
               >
-                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-100 text-blue-600 mb-3">
+                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-100 text-primary-600 mb-3">
                   <User className="h-6 w-6" />
                 </div>
                 <div className="font-semibold text-lg mb-1">Rent Trucks</div>
@@ -234,7 +236,7 @@ const SignupForm = () => {
                     : 'border-gray-200 hover:border-gray-300 hover:shadow-md'
                 }`}
               >
-                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-100 text-blue-600 mb-3">
+                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-100 text-primary-600 mb-3">
                   <Truck className="h-6 w-6" />
                 </div>
                 <div className="font-semibold text-lg mb-1">Provide Trucks</div>
@@ -261,7 +263,7 @@ const SignupForm = () => {
                     value={formData.firstName}
                     onChange={handleInputChange}
                     required
-                    className={`w-full pl-10 pr-3 py-2 border ${errors.firstName ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200`}
+                    className={`w-full pl-10 pr-3 py-2 border ${errors.firstName ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all duration-200`}
                     placeholder="John"
                   />
                   {errors.firstName && (
@@ -282,7 +284,7 @@ const SignupForm = () => {
                     value={formData.lastName}
                     onChange={handleInputChange}
                     required
-                    className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                    className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all duration-200"
                     placeholder="Doe"
                   />
                 </div>
@@ -301,7 +303,7 @@ const SignupForm = () => {
                   value={formData.email}
                   onChange={handleInputChange}
                   required
-                  className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                  className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all duration-200"
                   placeholder="you@example.com"
                 />
               </div>
@@ -320,7 +322,7 @@ const SignupForm = () => {
                   onChange={handleInputChange}
                   required
                   minLength={6}
-                  className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                  className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all duration-200"
                   placeholder="••••••••"
                 />
                 <p className="mt-1 text-xs text-gray-500">Must be at least 6 characters</p>
@@ -339,7 +341,7 @@ const SignupForm = () => {
                   value={formData.confirmPassword}
                   onChange={handleInputChange}
                   required
-                  className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                  className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all duration-200"
                   placeholder="••••••••"
                 />
               </div>
@@ -357,7 +359,7 @@ const SignupForm = () => {
                   value={formData.phone}
                   onChange={handleInputChange}
                   required
-                  className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                  className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all duration-200"
                   placeholder="(123) 456-7890"
                 />
               </div>
@@ -377,7 +379,7 @@ const SignupForm = () => {
                   }
                   setCurrentStep(3);
                 }}
-                className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-accent-500 hover:bg-accent-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-500 transition-colors"
               >
                 Next Step
                 <ChevronRight className="ml-2 h-4 w-4" />
@@ -407,7 +409,7 @@ const SignupForm = () => {
                       value={formData.companyName}
                       onChange={handleInputChange}
                       required
-                      className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                      className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all duration-200"
                       placeholder="Enter your company name"
                     />
                   </div>
@@ -425,7 +427,7 @@ const SignupForm = () => {
                       value={formData.businessPhone}
                       onChange={handleInputChange}
                       required
-                      className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                      className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all duration-200"
                       placeholder="Enter business phone"
                     />
                   </div>
@@ -443,7 +445,7 @@ const SignupForm = () => {
                       value={formData.streetAddress}
                       onChange={handleInputChange}
                       required
-                      className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                      className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all duration-200"
                       placeholder="Enter street address"
                     />
                     {errors.streetAddress && (
@@ -462,7 +464,7 @@ const SignupForm = () => {
                         value={formData.city}
                         onChange={handleInputChange}
                         required
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all duration-200"
                         placeholder="City"
                       />
                     </div>
@@ -474,7 +476,7 @@ const SignupForm = () => {
                         value={formData.stateProvince}
                         onChange={handleInputChange}
                         required
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all duration-200"
                         placeholder="State/Province"
                       />
                     </div>
@@ -489,7 +491,7 @@ const SignupForm = () => {
                         value={formData.postalCode}
                         onChange={handleInputChange}
                         required
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all duration-200"
                         placeholder="Enter postal code"
                       />
                     </div>
@@ -511,7 +513,7 @@ const SignupForm = () => {
                       value={formData.companyName}
                       onChange={handleInputChange}
                       required
-                      className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                      className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all duration-200"
                       placeholder="Enter your company name"
                     />
                   </div>
@@ -529,7 +531,7 @@ const SignupForm = () => {
                       value={formData.streetAddress}
                       onChange={handleInputChange}
                       required
-                      className={`w-full pl-10 pr-3 py-2 border ${errors.streetAddress ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200`}
+                      className={`w-full pl-10 pr-3 py-2 border ${errors.streetAddress ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all duration-200`}
                       placeholder="Enter your street address"
                     />
                     {errors.streetAddress && (
@@ -548,7 +550,7 @@ const SignupForm = () => {
                         value={formData.city}
                         onChange={handleInputChange}
                         required
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all duration-200"
                         placeholder="City"
                       />
                     </div>
@@ -560,7 +562,7 @@ const SignupForm = () => {
                         value={formData.stateProvince}
                         onChange={handleInputChange}
                         required
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all duration-200"
                         placeholder="State/Province"
                       />
                     </div>
@@ -575,7 +577,7 @@ const SignupForm = () => {
                         value={formData.postalCode}
                         onChange={handleInputChange}
                         required
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all duration-200"
                         placeholder="Enter postal code"
                       />
                     </div>
@@ -589,14 +591,14 @@ const SignupForm = () => {
               <button
                 type="button"
                 onClick={() => setCurrentStep(2)}
-                className="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                className="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-500"
               >
                 Back
               </button>
               <button
                 type="submit"
                 disabled={loading}
-                className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-accent-500 hover:bg-accent-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
                 {loading ? (
                   <>
@@ -614,7 +616,7 @@ const SignupForm = () => {
 
       <div className="mt-6 text-center text-sm text-gray-600">
         Already have an account?{' '}
-        <Link to="/login" className="font-medium text-blue-600 hover:text-blue-500">
+        <Link to="/login" className="font-medium text-accent-500 hover:text-accent-600 transition-colors">
           Sign in instead
         </Link>
       </div>

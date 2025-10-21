@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- Modern Abstract Network Logo -->
+  <!-- Background circle -->
+  <circle cx="100" cy="100" r="90" fill="#EFF6FF" opacity="0.3"/>
+  
+  <!-- Network nodes -->
+  <circle cx="60" cy="100" r="12" fill="#1E3A8A"/>
+  <circle cx="140" cy="100" r="12" fill="#1E3A8A"/>
+  <circle cx="100" cy="70" r="10" fill="#F97316" opacity="0.6"/>
+  <circle cx="100" cy="130" r="10" fill="#F97316" opacity="0.6"/>
+  
+  <!-- Connection lines -->
+  <line x1="72" y1="100" x2="128" y2="100" stroke="#F97316" stroke-width="4"/>
+  <line x1="67" y1="93" x2="100" y2="75" stroke="#1E3A8A" stroke-width="2.5" opacity="0.7"/>
+  <line x1="133" y1="93" x2="100" y2="75" stroke="#1E3A8A" stroke-width="2.5" opacity="0.7"/>
+  <line x1="67" y1="107" x2="100" y2="125" stroke="#1E3A8A" stroke-width="2.5" opacity="0.7"/>
+  <line x1="133" y1="107" x2="100" y2="125" stroke="#1E3A8A" stroke-width="2.5" opacity="0.7"/>
+  
+  <!-- Central hub (stylized T for Truck) -->
+  <g transform="translate(100, 100)">
+    <!-- Modern T shape -->
+    <rect x="-4" y="-25" width="8" height="30" rx="2" fill="#1E3A8A"/>
+    <rect x="-18" y="-25" width="36" height="8" rx="2" fill="#1E3A8A"/>
+    <circle cx="0" cy="10" r="6" fill="#F97316"/>
+  </g>
+</svg>

@@ -67,7 +67,7 @@ const TrucksAdmin = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8 flex items-center justify-between">
           <div className="flex items-center">
-            <Truck className="h-8 w-8 text-blue-600 mr-3" />
+            <Truck className="h-8 w-8 text-primary-600 mr-3" />
             <div>
               <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">Trucks</h1>
               <p className="mt-2 text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">View and filter all trucks</p>
@@ -85,7 +85,7 @@ const TrucksAdmin = () => {
             <div className="flex flex-wrap gap-3 items-end">
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">Service Type</label>
-                <select value={filters.serviceType} onChange={e => setFilters(f => ({ ...f, serviceType: e.target.value }))} className="block w-48 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                <select value={filters.serviceType} onChange={e => setFilters(f => ({ ...f, serviceType: e.target.value }))} className="block w-48 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-accent-500 focus:border-blue-500">
                   <option value="all">All</option>
                   <option value="transport">Transport</option>
                   <option value="rental">Rental</option>
@@ -93,7 +93,7 @@ const TrucksAdmin = () => {
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">Provider</label>
-                <select value={filters.provider || 'all'} onChange={e => setFilters(f => ({ ...f, provider: e.target.value }))} className="block w-56 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                <select value={filters.provider || 'all'} onChange={e => setFilters(f => ({ ...f, provider: e.target.value }))} className="block w-56 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-accent-500 focus:border-blue-500">
                   <option value="all">All Providers</option>
                   {providers.map(p => (
                     <option key={p.id} value={p.company_name || `${p.first_name} ${p.last_name}`}>
@@ -104,7 +104,7 @@ const TrucksAdmin = () => {
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">Status</label>
-                <select value={filters.status} onChange={e => setFilters(f => ({ ...f, status: e.target.value }))} className="block w-48 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                <select value={filters.status} onChange={e => setFilters(f => ({ ...f, status: e.target.value }))} className="block w-48 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-accent-500 focus:border-blue-500">
                   <option value="all">All</option>
                   <option value="active">Active</option>
                   <option value="rented">Rented</option>
@@ -114,7 +114,7 @@ const TrucksAdmin = () => {
               </div>
               <div className="flex-1 min-w-[220px]">
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">Search</label>
-                <input value={filters.search} onChange={e => setFilters(f => ({ ...f, search: e.target.value }))} placeholder="License plate, provider, make/model" className="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-blue-500 focus:border-blue-500" />
+                <input value={filters.search} onChange={e => setFilters(f => ({ ...f, search: e.target.value }))} placeholder="License plate, provider, make/model" className="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-accent-500 focus:border-blue-500" />
               </div>
             </div>
           </div>

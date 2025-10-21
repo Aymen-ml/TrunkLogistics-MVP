@@ -252,7 +252,7 @@ const DocumentVerification = () => {
         <div className="mb-8">
           <div className="flex items-center justify-between">
             <div className="flex items-center">
-              <FileText className="h-8 w-8 text-blue-600 mr-3" />
+              <FileText className="h-8 w-8 text-primary-600 mr-3" />
               <div>
                 <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">Document Verification</h1>
                 <p className="mt-2 text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
@@ -400,7 +400,7 @@ const DocumentVerification = () => {
                       value={filters.search}
                       onChange={(e) => handleFilterChange('search', e.target.value)}
                       placeholder="Search by file name, license plate, provider..."
-                      className="block w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                      className="block w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-accent-500 focus:border-blue-500"
                     />
                   </div>
                 </div>
@@ -413,7 +413,7 @@ const DocumentVerification = () => {
                   <select
                     value={filters.status}
                     onChange={(e) => handleFilterChange('status', e.target.value)}
-                    className="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                    className="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-accent-500 focus:border-blue-500"
                   >
                     <option value="all">All Statuses</option>
                     <option value="pending">Pending</option>
@@ -430,7 +430,7 @@ const DocumentVerification = () => {
                   <select
                     value={filters.serviceType}
                     onChange={(e) => handleFilterChange('serviceType', e.target.value)}
-                    className="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                    className="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-accent-500 focus:border-blue-500"
                   >
                     <option value="all">All Services</option>
                     <option value="transport">Transportation</option>
@@ -446,7 +446,7 @@ const DocumentVerification = () => {
                   <select
                     value={filters.documentType}
                     onChange={(e) => handleFilterChange('documentType', e.target.value)}
-                    className="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                    className="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-accent-500 focus:border-blue-500"
                   >
                     <option value="all">All Types</option>
                     {filterOptions.documentTypes.map(type => (
@@ -465,7 +465,7 @@ const DocumentVerification = () => {
                   <select
                     value={filters.providerId}
                     onChange={(e) => handleFilterChange('providerId', e.target.value)}
-                    className="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                    className="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-accent-500 focus:border-blue-500"
                   >
                     <option value="">All Providers</option>
                     {filterOptions.providers.map(provider => (
@@ -484,7 +484,7 @@ const DocumentVerification = () => {
                   <select
                     value={filters.truckId}
                     onChange={(e) => handleFilterChange('truckId', e.target.value)}
-                    className="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                    className="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-accent-500 focus:border-blue-500"
                   >
                     <option value="">All Trucks</option>
                     {filterOptions.trucks.map(truck => (

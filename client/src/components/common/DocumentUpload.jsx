@@ -273,7 +273,7 @@ const DocumentUpload = ({
           }`}>
             <label
               htmlFor={`${docType.id}-upload`}
-              className="cursor-pointer text-sm text-blue-600 hover:text-blue-500"
+              className="cursor-pointer text-sm text-accent-500 hover:text-accent-600 transition-colors"
             >
               Choose file
               <input
@@ -328,7 +328,7 @@ const DocumentUpload = ({
             <FileText className="h-8 w-8 text-gray-400 dark:text-gray-500 mx-auto mb-2" />
             <label
               htmlFor="additional-upload"
-              className={`cursor-pointer text-sm text-blue-600 hover:text-blue-500 ${
+              className={`cursor-pointer text-sm text-accent-500 hover:text-accent-600 transition-colors ${
                 normalizedAdditionalDocs.length >= maxAdditionalDocs ? 'pointer-events-none' : ''
               }`}
             >

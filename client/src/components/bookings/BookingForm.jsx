@@ -449,7 +449,7 @@ const BookingForm = () => {
           </button>
           
           <div className="flex items-center">
-            <Package className="h-8 w-8 text-blue-600 mr-3" />
+            <Package className="h-8 w-8 text-primary-600 mr-3" />
             <div>
               <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100">
                 Create Booking
@@ -483,7 +483,7 @@ const BookingForm = () => {
                       name="truck_id"
                       value={formData.truck_id}
                       onChange={handleChange}
-                      className={`w-full border rounded-md focus:ring-blue-500 focus:border-blue-500 ${
+                      className={`w-full border rounded-md focus:ring-accent-500 focus:border-blue-500 ${
                         errors.truck_id ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'
                       }`}
                     >
@@ -542,7 +542,7 @@ const BookingForm = () => {
                         name="pickup_address"
                         value={formData.pickup_address}
                         onChange={handleChange}
-                        className={`w-full border rounded-md focus:ring-blue-500 focus:border-blue-500 ${
+                        className={`w-full border rounded-md focus:ring-accent-500 focus:border-blue-500 ${
                           errors.pickup_address ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'
                         }`}
                         placeholder="123 Warehouse Street"
@@ -561,7 +561,7 @@ const BookingForm = () => {
                         name="pickup_city"
                         value={formData.pickup_city}
                         onChange={handleChange}
-                        className={`w-full border rounded-md focus:ring-blue-500 focus:border-blue-500 ${
+                        className={`w-full border rounded-md focus:ring-accent-500 focus:border-blue-500 ${
                           errors.pickup_city ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'
                         }`}
                         placeholder="New York"
@@ -581,7 +581,7 @@ const BookingForm = () => {
                         value={formData.pickup_date}
                         onChange={handleChange}
                         min={new Date().toISOString().split('T')[0]}
-                        className={`w-full border rounded-md focus:ring-blue-500 focus:border-blue-500 ${
+                        className={`w-full border rounded-md focus:ring-accent-500 focus:border-blue-500 ${
                           errors.pickup_date ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'
                         }`}
                       />
@@ -599,7 +599,7 @@ const BookingForm = () => {
                         name="pickup_time"
                         value={formData.pickup_time}
                         onChange={handleChange}
-                        className="w-full border-gray-300 dark:border-gray-600 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                        className="w-full border-gray-300 dark:border-gray-600 rounded-md focus:ring-accent-500 focus:border-blue-500"
                       />
                     </div>
                   </div>
@@ -618,7 +618,7 @@ const BookingForm = () => {
                         name="destination_address"
                         value={formData.destination_address}
                         onChange={handleChange}
-                        className={`w-full border rounded-md focus:ring-blue-500 focus:border-blue-500 ${
+                        className={`w-full border rounded-md focus:ring-accent-500 focus:border-blue-500 ${
                           errors.destination_address ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'
                         }`}
                         placeholder="456 Factory Avenue"
@@ -637,7 +637,7 @@ const BookingForm = () => {
                         name="destination_city"
                         value={formData.destination_city}
                         onChange={handleChange}
-                        className={`w-full border rounded-md focus:ring-blue-500 focus:border-blue-500 ${
+                        className={`w-full border rounded-md focus:ring-accent-500 focus:border-blue-500 ${
                           errors.destination_city ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'
                         }`}
                         placeholder="Philadelphia"
@@ -662,7 +662,7 @@ const BookingForm = () => {
                             value={formData.cargo_description}
                             onChange={handleChange}
                             rows={3}
-                            className={`w-full border rounded-md focus:ring-blue-500 focus:border-blue-500 ${
+                            className={`w-full border rounded-md focus:ring-accent-500 focus:border-blue-500 ${
                               errors.cargo_description ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'
                             }`}
                             placeholder="Describe what you're shipping..."
@@ -684,7 +684,7 @@ const BookingForm = () => {
                               onChange={handleChange}
                               min="0"
                               step="0.01"
-                              className={`w-full border rounded-md focus:ring-blue-500 focus:border-blue-500 ${
+                              className={`w-full border rounded-md focus:ring-accent-500 focus:border-blue-500 ${
                                 errors.cargo_weight ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'
                               }`}
                               placeholder="1000"
@@ -705,7 +705,7 @@ const BookingForm = () => {
                               onChange={handleChange}
                               min="0"
                               step="0.01"
-                              className="w-full border-gray-300 dark:border-gray-600 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                              className="w-full border-gray-300 dark:border-gray-600 rounded-md focus:ring-accent-500 focus:border-blue-500"
                               placeholder="10"
                             />
                           </div>
@@ -732,7 +732,7 @@ const BookingForm = () => {
                             value={formData.rental_start_datetime}
                             onChange={handleChange}
                             min={new Date().toISOString().slice(0, 16)}
-                            className={`w-full border rounded-md focus:ring-blue-500 focus:border-blue-500 ${
+                            className={`w-full border rounded-md focus:ring-accent-500 focus:border-blue-500 ${
                               errors.rental_start_datetime ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'
                             }`}
                           />
@@ -751,7 +751,7 @@ const BookingForm = () => {
                             value={formData.rental_end_datetime}
                             onChange={handleChange}
                             min={formData.rental_start_datetime || new Date().toISOString().slice(0, 16)}
-                            className={`w-full border rounded-md focus:ring-blue-500 focus:border-blue-500 ${
+                            className={`w-full border rounded-md focus:ring-accent-500 focus:border-blue-500 ${
                               errors.rental_end_datetime ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'
                             }`}
                           />
@@ -775,7 +775,7 @@ const BookingForm = () => {
                             value={formData.work_address}
                             onChange={handleChange}
                             rows={2}
-                            className={`w-full border rounded-md focus:ring-blue-500 focus:border-blue-500 ${
+                            className={`w-full border rounded-md focus:ring-accent-500 focus:border-blue-500 ${
                               errors.work_address ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'
                             }`}
                             placeholder="Complete address where equipment will be used..."
@@ -800,7 +800,7 @@ const BookingForm = () => {
                             value={formData.purpose_description}
                             onChange={handleChange}
                             rows={3}
-                            className={`w-full border rounded-md focus:ring-blue-500 focus:border-blue-500 ${
+                            className={`w-full border rounded-md focus:ring-accent-500 focus:border-blue-500 ${
                               errors.purpose_description ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'
                             }`}
                             placeholder="Describe what the equipment will be used for..."
@@ -817,7 +817,7 @@ const BookingForm = () => {
                               name="operator_required"
                               checked={formData.operator_required}
                               onChange={(e) => setFormData(prev => ({...prev, operator_required: e.target.checked}))}
-                              className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 dark:border-gray-600 rounded"
+                              className="h-4 w-4 text-primary-600 focus:ring-accent-500 border-gray-300 dark:border-gray-600 rounded"
                             />
                             <span className="ml-2 text-sm text-gray-700 dark:text-gray-200">
                               I need an operator for this equipment
@@ -841,7 +841,7 @@ const BookingForm = () => {
                       value={formData.notes}
                       onChange={handleChange}
                       rows={3}
-                      className="w-full border-gray-300 dark:border-gray-600 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                      className="w-full border-gray-300 dark:border-gray-600 rounded-md focus:ring-accent-500 focus:border-blue-500"
                       placeholder="Any special instructions or requirements..."
                     />
                   </div>
@@ -859,7 +859,7 @@ const BookingForm = () => {
                   <button
                     type="submit"
                     disabled={loading}
-                    className="w-full sm:w-auto inline-flex justify-center items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full sm:w-auto inline-flex justify-center items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-accent-500 hover:bg-accent-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {loading ? (
                       <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
@@ -884,9 +884,9 @@ const BookingForm = () => {
                 <div className="space-y-4">
                   <div className="flex items-center p-3 bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900 rounded-lg">
                     {selectedTruck.service_type === 'rental' ? (
-                      <Settings className="h-8 w-8 text-blue-600" />
+                      <Settings className="h-8 w-8 text-primary-600" />
                     ) : (
-                      <Truck className="h-8 w-8 text-blue-600" />
+                      <Truck className="h-8 w-8 text-primary-600" />
                     )}
                     <div className="ml-3">
                       <p className="font-medium text-gray-900 dark:text-gray-100">{selectedTruck.license_plate}</p>

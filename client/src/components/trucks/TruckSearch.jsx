@@ -192,7 +192,7 @@ const TruckSearch = () => {
                     value="transport"
                     checked={filters.serviceType === 'transport'}
                     onChange={handleFilterChange}
-                    className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 dark:border-gray-600"
+                    className="h-4 w-4 text-primary-600 focus:ring-accent-500 border-gray-300 dark:border-gray-600"
                   />
                   <span className="ml-2 text-sm text-gray-700 dark:text-gray-200">Transportation</span>
                 </label>
@@ -203,7 +203,7 @@ const TruckSearch = () => {
                     value="rental"
                     checked={filters.serviceType === 'rental'}
                     onChange={handleFilterChange}
-                    className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 dark:border-gray-600"
+                    className="h-4 w-4 text-primary-600 focus:ring-accent-500 border-gray-300 dark:border-gray-600"
                   />
                   <span className="ml-2 text-sm text-gray-700 dark:text-gray-200">Equipment Rental</span>
                 </label>
@@ -225,7 +225,7 @@ const TruckSearch = () => {
                   value={filters.search}
                   onChange={handleFilterChange}
                   placeholder={`Search by license plate, make, model${filters.serviceType === 'rental' ? ', or work location' : ''}...`}
-                  className="focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 sm:text-sm border-gray-300 dark:border-gray-600 rounded-md"
+                  className="focus:ring-accent-500 focus:border-blue-500 block w-full pl-10 sm:text-sm border-gray-300 dark:border-gray-600 rounded-md"
                   autoComplete="off"
                 />
               </div>
@@ -241,7 +241,7 @@ const TruckSearch = () => {
                   name="truckType"
                   value={filters.truckType}
                   onChange={handleFilterChange}
-                  className="w-full border-gray-300 dark:border-gray-600 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full border-gray-300 dark:border-gray-600 rounded-md focus:ring-accent-500 focus:border-blue-500"
                 >
                   <option value="all">All Types</option>
                   {Object.keys(getVehicleTypesByService(filters.serviceType)).map(type => {
@@ -265,7 +265,7 @@ const TruckSearch = () => {
                   value={filters.minCapacity}
                   onChange={handleFilterChange}
                   placeholder="Minimum weight capacity"
-                  className="w-full border-gray-300 dark:border-gray-600 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full border-gray-300 dark:border-gray-600 rounded-md focus:ring-accent-500 focus:border-blue-500"
                   autoComplete="off"
                 />
               </div>
@@ -280,7 +280,7 @@ const TruckSearch = () => {
                   value={filters.maxPrice}
                   onChange={handleFilterChange}
                   placeholder="Maximum price"
-                  className="w-full border-gray-300 dark:border-gray-600 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full border-gray-300 dark:border-gray-600 rounded-md focus:ring-accent-500 focus:border-blue-500"
                   autoComplete="off"
                 />
               </div>
@@ -293,7 +293,7 @@ const TruckSearch = () => {
                   name="pricingType"
                   value={filters.pricingType}
                   onChange={handleFilterChange}
-                  className="w-full border-gray-300 dark:border-gray-600 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full border-gray-300 dark:border-gray-600 rounded-md focus:ring-accent-500 focus:border-blue-500"
                 >
                   <option value="all">All Pricing</option>
                   {filters.serviceType === 'rental' ? (
@@ -317,7 +317,7 @@ const TruckSearch = () => {
                   name="provider"
                   value={filters.provider}
                   onChange={handleFilterChange}
-                  className="w-full border-gray-300 dark:border-gray-600 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full border-gray-300 dark:border-gray-600 rounded-md focus:ring-accent-500 focus:border-blue-500"
                 >
                   <option value="all">All Providers</option>
                   {trucks && [...new Set(trucks.map(t => t.company_name).filter(Boolean))].map(company => (
@@ -334,7 +334,7 @@ const TruckSearch = () => {
                   name="availability"
                   value={filters.availability}
                   onChange={handleFilterChange}
-                  className="w-full border-gray-300 dark:border-gray-600 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full border-gray-300 dark:border-gray-600 rounded-md focus:ring-accent-500 focus:border-blue-500"
                 >
                   <option value="all">All {filters.serviceType === 'rental' ? 'Equipment' : 'Trucks'}</option>
                   <option value="available">Available Only</option>
@@ -354,7 +354,7 @@ const TruckSearch = () => {
                     value={filters.workLocation}
                     onChange={handleFilterChange}
                     placeholder="Location or area"
-                    className="w-full border-gray-300 dark:border-gray-600 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                    className="w-full border-gray-300 dark:border-gray-600 rounded-md focus:ring-accent-500 focus:border-blue-500"
                     autoComplete="off"
                   />
                 </div>
@@ -371,7 +371,7 @@ const TruckSearch = () => {
               </button>
               <button
                 type="submit"
-                className="w-full sm:w-auto inline-flex justify-center items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700"
+                className="w-full sm:w-auto inline-flex justify-center items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-accent-500 hover:bg-accent-600 transition-colors"
               >
                 <Search className="h-4 w-4 mr-2" />
                 Search {filters.serviceType === 'rental' ? 'Equipment' : 'Trucks'}
@@ -436,7 +436,7 @@ const TruckSearch = () => {
                       {truck.service_type === 'rental' ? (
                         <Settings className="h-8 w-8 text-orange-600" />
                       ) : (
-                        <Truck className="h-8 w-8 text-blue-600" />
+                        <Truck className="h-8 w-8 text-primary-600" />
                       )}
                       <div className="ml-3">
                         <div className="flex items-center space-x-2">
@@ -466,7 +466,7 @@ const TruckSearch = () => {
                           )}
                         </div>
                         <div className="flex items-center space-x-2">
-                          <p className="text-sm text-blue-600 font-medium">
+                          <p className="text-sm text-primary-600 font-medium">
                             {truck.company_name || truck.provider_name}
                           </p>
                           {truck.provider_verified && (
@@ -538,7 +538,7 @@ const TruckSearch = () => {
                       className={`flex-1 text-sm font-medium py-2 px-4 rounded-md transition-colors flex items-center justify-center ${
                         isRented 
                           ? 'bg-gray-300 text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 cursor-not-allowed' 
-                          : 'bg-blue-600 hover:bg-blue-700 text-white'
+                          : 'bg-accent-500 hover:bg-accent-600 transition-colors text-white'
                       }`}
                     >
                       {truck.service_type === 'rental' ? (

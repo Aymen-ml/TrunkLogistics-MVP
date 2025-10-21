@@ -67,7 +67,7 @@ const ForgotPassword = () => {
           <div>
             <div className="flex justify-center">
               <div className="flex items-center space-x-2">
-                <Truck className="h-10 w-10 text-blue-600" />
+                <Truck className="h-10 w-10 text-primary-600" />
                 <span className="text-2xl font-bold text-gray-900 dark:text-gray-100">TruckLogistics</span>
               </div>
             </div>
@@ -95,7 +95,7 @@ const ForgotPassword = () => {
               <div className="space-y-3">
                 <Link
                   to="/login"
-                  className="w-full flex justify-center items-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                  className="w-full flex justify-center items-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-accent-500 hover:bg-accent-600 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-500"
                 >
                   <ArrowLeft className="h-4 w-4 mr-2" />
                   Back to Login
@@ -106,7 +106,7 @@ const ForgotPassword = () => {
                     setSuccess(false);
                     setEmail('');
                   }}
-                  className="w-full flex justify-center py-2 px-4 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 hover:bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                  className="w-full flex justify-center py-2 px-4 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 hover:bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-500"
                 >
                   Send Another Email
                 </button>
@@ -124,7 +124,7 @@ const ForgotPassword = () => {
         <div>
           <div className="flex justify-center">
             <div className="flex items-center space-x-2">
-              <Truck className="h-10 w-10 text-blue-600" />
+              <Truck className="h-10 w-10 text-primary-600" />
               <span className="text-2xl font-bold text-gray-900 dark:text-gray-100">TruckLogistics</span>
             </div>
           </div>
@@ -164,7 +164,7 @@ const ForgotPassword = () => {
                 required
                 className={`appearance-none relative block w-full pl-10 pr-3 py-2 border ${
                   error ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'
-                } placeholder-gray-500 text-gray-900 dark:text-gray-100 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm`}
+                } placeholder-gray-500 text-gray-900 dark:text-gray-100 rounded-md focus:outline-none focus:ring-accent-500 focus:border-blue-500 focus:z-10 sm:text-sm`}
                 placeholder="Enter your email address"
                 value={email}
                 onChange={handleEmailChange}
@@ -176,7 +176,7 @@ const ForgotPassword = () => {
             <button
               type="submit"
               disabled={loading}
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-accent-500 hover:bg-accent-600 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-500 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? (
                 <Loader className="h-5 w-5 animate-spin" />
@@ -187,7 +187,7 @@ const ForgotPassword = () => {
             
             <Link
               to="/login"
-              className="w-full flex justify-center items-center py-2 px-4 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 hover:bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+              className="w-full flex justify-center items-center py-2 px-4 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 hover:bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-500"
             >
               <ArrowLeft className="h-4 w-4 mr-2" />
               Back to Login

@@ -94,37 +94,37 @@ const Navbar = () => {
               <>
                 <Link
                   to="/dashboard"
-                  className="text-gray-700 dark:text-gray-200 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium"
+                  className="text-gray-700 dark:text-gray-200 hover:text-accent-500 transition-colors px-3 py-2 rounded-md text-sm font-medium"
                 >
                   Dashboard
                 </Link>
                 <Link
                   to="/admin/providers"
-                  className="text-gray-700 dark:text-gray-200 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium"
+                  className="text-gray-700 dark:text-gray-200 hover:text-accent-500 transition-colors px-3 py-2 rounded-md text-sm font-medium"
                 >
                   Providers
                 </Link>
                 <Link
                   to="/admin/users"
-                  className="text-gray-700 dark:text-gray-200 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium"
+                  className="text-gray-700 dark:text-gray-200 hover:text-accent-500 transition-colors px-3 py-2 rounded-md text-sm font-medium"
                 >
                   Users
                 </Link>
                 <Link
                   to="/admin/documents"
-                  className="text-gray-700 dark:text-gray-200 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium"
+                  className="text-gray-700 dark:text-gray-200 hover:text-accent-500 transition-colors px-3 py-2 rounded-md text-sm font-medium"
                 >
                   Documents
                 </Link>
                 <Link
                   to="/admin/bookings"
-                  className="text-gray-700 dark:text-gray-200 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium"
+                  className="text-gray-700 dark:text-gray-200 hover:text-accent-500 transition-colors px-3 py-2 rounded-md text-sm font-medium"
                 >
                   Bookings
                 </Link>
                 <Link
                   to="/admin/trucks"
-                  className="text-gray-700 dark:text-gray-200 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium"
+                  className="text-gray-700 dark:text-gray-200 hover:text-accent-500 transition-colors px-3 py-2 rounded-md text-sm font-medium"
                 >
                   Trucks
                 </Link>
@@ -135,19 +135,19 @@ const Navbar = () => {
               <>
                 <Link
                   to="/dashboard"
-                  className="text-gray-700 dark:text-gray-200 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium"
+                  className="text-gray-700 dark:text-gray-200 hover:text-accent-500 transition-colors px-3 py-2 rounded-md text-sm font-medium"
                 >
                   Dashboard
                 </Link>
                 <Link
                   to="/bookings"
-                  className="text-gray-700 dark:text-gray-200 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium"
+                  className="text-gray-700 dark:text-gray-200 hover:text-accent-500 transition-colors px-3 py-2 rounded-md text-sm font-medium"
                 >
                   My Bookings
                 </Link>
                 <Link
                   to="/find-trucks"
-                  className="text-gray-700 dark:text-gray-200 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium"
+                  className="text-gray-700 dark:text-gray-200 hover:text-accent-500 transition-colors px-3 py-2 rounded-md text-sm font-medium"
                 >
                   Find Trucks
                 </Link>
@@ -158,19 +158,19 @@ const Navbar = () => {
               <>
                 <Link
                   to="/dashboard"
-                  className="text-gray-700 dark:text-gray-200 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium"
+                  className="text-gray-700 dark:text-gray-200 hover:text-accent-500 transition-colors px-3 py-2 rounded-md text-sm font-medium"
                 >
                   Dashboard
                 </Link>
                 <Link
                   to="/trucks"
-                  className="text-gray-700 dark:text-gray-200 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium"
+                  className="text-gray-700 dark:text-gray-200 hover:text-accent-500 transition-colors px-3 py-2 rounded-md text-sm font-medium"
                 >
                   My Trucks
                 </Link>
                 <Link
                   to="/bookings"
-                  className="text-gray-700 dark:text-gray-200 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium"
+                  className="text-gray-700 dark:text-gray-200 hover:text-accent-500 transition-colors px-3 py-2 rounded-md text-sm font-medium"
                 >
                   Bookings
                 </Link>
@@ -184,10 +184,10 @@ const Navbar = () => {
             <div className="relative">
               <button
                 onClick={() => setIsProfileOpen(!isProfileOpen)}
-                className="flex items-center space-x-3 text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                className="flex items-center space-x-3 text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-500"
               >
                 <div className="flex items-center space-x-2">
-                  <div className="h-8 w-8 rounded-full bg-blue-600 flex items-center justify-center">
+                  <div className="h-8 w-8 rounded-full bg-primary-600 flex items-center justify-center">
                     <span className="text-white text-sm font-medium">
                       {user?.firstName?.[0]}{user?.lastName?.[0]}
                     </span>
@@ -242,7 +242,7 @@ const Navbar = () => {
             <NotificationBell />
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500 p-2"
+              className="text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-accent-500 p-2"
             >
               {isMenuOpen ? (
                 <X className="h-6 w-6" />
@@ -259,7 +259,7 @@ const Navbar = () => {
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 border-t">
               {/* User info */}
               <div className="flex items-center px-3 py-2">
-                <div className="h-10 w-10 rounded-full bg-blue-600 flex items-center justify-center">
+                <div className="h-10 w-10 rounded-full bg-primary-600 flex items-center justify-center">
                   <span className="text-white font-medium">
                     {user?.firstName?.[0]}{user?.lastName?.[0]}
                   </span>
@@ -277,7 +277,7 @@ const Navbar = () => {
               {/* Mobile navigation links */}
               <Link
                 to="/dashboard"
-                className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50"
+                className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-accent-500 transition-colors hover:bg-gray-50"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Dashboard
@@ -287,42 +287,42 @@ const Navbar = () => {
                 <>
                   <Link
                     to="/admin/users"
-                    className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50"
+                    className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-accent-500 transition-colors hover:bg-gray-50"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     Users
                   </Link>
                   <Link
                     to="/admin/providers"
-                    className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50"
+                    className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-accent-500 transition-colors hover:bg-gray-50"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     Providers
                   </Link>
                   <Link
                     to="/admin/documents"
-                    className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50"
+                    className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-accent-500 transition-colors hover:bg-gray-50"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     Documents
                   </Link>
                   <Link
                     to="/admin/bookings"
-                    className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50"
+                    className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-accent-500 transition-colors hover:bg-gray-50"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     Bookings
                   </Link>
                   <Link
                     to="/admin/trucks"
-                    className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50"
+                    className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-accent-500 transition-colors hover:bg-gray-50"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     Trucks
                   </Link>
                   <Link
                     to="/admin/analytics"
-                    className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50"
+                    className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-accent-500 transition-colors hover:bg-gray-50"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     Analytics
@@ -334,14 +334,14 @@ const Navbar = () => {
                 <>
                   <Link
                     to="/bookings"
-                    className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50"
+                    className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-accent-500 transition-colors hover:bg-gray-50"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     My Bookings
                   </Link>
                   <Link
                     to="/find-trucks"
-                    className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50"
+                    className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-accent-500 transition-colors hover:bg-gray-50"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     Find Trucks
@@ -353,14 +353,14 @@ const Navbar = () => {
                 <>
                   <Link
                     to="/trucks"
-                    className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50"
+                    className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-accent-500 transition-colors hover:bg-gray-50"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     My Trucks
                   </Link>
                   <Link
                     to="/bookings"
-                    className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50"
+                    className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-accent-500 transition-colors hover:bg-gray-50"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     Bookings
@@ -370,7 +370,7 @@ const Navbar = () => {
 
               <Link
                 to="/profile"
-                className="block px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-200 hover:text-blue-600 hover:bg-gray-50 dark:hover:bg-gray-700"
+                className="block px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-200 hover:text-accent-500 transition-colors hover:bg-gray-50 dark:hover:bg-gray-700"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Profile
@@ -378,7 +378,7 @@ const Navbar = () => {
 
               <Link
                 to="/settings"
-                className="block px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-200 hover:text-blue-600 hover:bg-gray-50 dark:hover:bg-gray-700"
+                className="block px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-200 hover:text-accent-500 transition-colors hover:bg-gray-50 dark:hover:bg-gray-700"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Settings
@@ -386,7 +386,7 @@ const Navbar = () => {
 
               <button
                 onClick={handleLogout}
-                className="block w-full text-left px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50"
+                className="block w-full text-left px-3 py-2 text-base font-medium text-gray-700 hover:text-accent-500 transition-colors hover:bg-gray-50"
               >
                 Sign out
               </button>

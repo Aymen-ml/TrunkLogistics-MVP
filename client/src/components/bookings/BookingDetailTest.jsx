@@ -123,7 +123,7 @@ const BookingDetailTest = () => {
     const disabled = "opacity-50 cursor-not-allowed";
     
     const colors = {
-      blue: 'bg-blue-600 hover:bg-blue-700 text-white',
+      blue: 'bg-accent-500 hover:bg-accent-600 transition-colors text-white',
       red: 'bg-red-600 hover:bg-red-700 text-white',
       purple: 'bg-purple-600 hover:bg-purple-700 text-white',
       green: 'bg-green-600 hover:bg-green-700 text-white'
@@ -169,7 +169,7 @@ const BookingDetailTest = () => {
           <div className="mt-6">
             <button
               onClick={() => navigate('/login')}
-              className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
+              className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-accent-500 hover:bg-accent-600 transition-colors"
             >
               Go to Login
             </button>
@@ -186,7 +186,7 @@ const BookingDetailTest = () => {
           <h2 className="text-2xl font-bold text-gray-900">Booking not found</h2>
           <button
             onClick={() => navigate('/bookings')}
-            className="mt-4 inline-flex items-center px-4 py-2 rounded-md text-white bg-blue-600 hover:bg-blue-700"
+            className="mt-4 inline-flex items-center px-4 py-2 rounded-md text-white bg-accent-500 hover:bg-accent-600 transition-colors"
           >
             Back to Bookings
           </button>
@@ -230,7 +230,7 @@ const BookingDetailTest = () => {
               {booking.service_type === 'rental' ? (
                 <Settings className="h-8 w-8 text-orange-500 mr-3" />
               ) : (
-                <Package className="h-8 w-8 text-blue-600 mr-3" />
+                <Package className="h-8 w-8 text-primary-600 mr-3" />
               )}
               <div>
                 <h1 className="text-2xl font-bold text-gray-900">

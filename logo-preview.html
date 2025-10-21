@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TruckLogistics - New Logo Options</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #EFF6FF 0%, #FFF7ED 100%);
+            padding: 40px 20px;
+        }
+        .container { max-width: 1400px; margin: 0 auto; }
+        h1 { text-align: center; color: #1E3A8A; margin-bottom: 10px; font-size: 2.5rem; }
+        .subtitle { text-align: center; color: #6B7280; margin-bottom: 40px; font-size: 1.1rem; }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        .logo-card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        .logo-card:hover { transform: translateY(-5px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+        .logo-display {
+            background: #F9FAFB;
+            border-radius: 12px;
+            padding: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            min-height: 220px;
+        }
+        .logo-display img { max-width: 180px; max-height: 180px; }
+        .logo-info h3 { color: #1E3A8A; margin-bottom: 10px; font-size: 1.3rem; }
+        .logo-info p { color: #6B7280; line-height: 1.6; margin-bottom: 15px; }
+        .best-for {
+            background: #FFF7ED;
+            border-left: 3px solid #F97316;
+            padding: 12px 15px;
+            border-radius: 6px;
+        }
+        .best-for strong { color: #F97316; }
+        .recommended {
+            border: 3px solid #F97316;
+            position: relative;
+        }
+        .recommended::before {
+            content: "⭐ RECOMMENDED";
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #F97316;
+            color: white;
+            padding: 5px 20px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>TruckLogistics - Logo Options</h1>
+        <p class="subtitle">6 modern designs without building icons - Navy Blue + Orange</p>
+
+        <div class="grid">
+            <div class="logo-card">
+                <div class="logo-display">
+                    <img src="client/public/logo-v1-modern.svg" alt="Modern Network">
+                </div>
+                <div class="logo-info">
+                    <h3>V1: Modern Network</h3>
+                    <p>Abstract network with stylized "T". Shows connection hub.</p>
+                    <div class="best-for"><strong>Best for:</strong> Tech-focused, modern SaaS</div>
+                </div>
+            </div>
+
+            <div class="logo-card recommended">
+                <div class="logo-display">
+                    <img src="client/public/logo-v2-route.svg" alt="Route Path">
+                </div>
+                <div class="logo-info">
+                    <h3>V2: Journey Route ⭐</h3>
+                    <p>Curved path with truck in motion. Dynamic and energetic.</p>
+                    <div class="best-for"><strong>Best for:</strong> Emphasizes movement & delivery</div>
+                </div>
+            </div>
+
+            <div class="logo-card">
+                <div class="logo-display">
+                    <img src="client/public/logo-v3-minimal-truck.svg" alt="Minimal Truck">
+                </div>
+                <div class="logo-info">
+                    <h3>V3: Minimal Truck Badge</h3>
+                    <p>Clean circular badge. Professional and scalable.</p>
+                    <div class="best-for"><strong>Best for:</strong> Traditional B2B, maximum clarity</div>
+                </div>
+            </div>
+
+            <div class="logo-card">
+                <div class="logo-display">
+                    <img src="client/public/logo-v4-hexagon.svg" alt="Hexagon">
+                </div>
+                <div class="logo-info">
+                    <h3>V4: Hexagon Badge</h3>
+                    <p>Shield-style hexagon. Premium and trustworthy.</p>
+                    <div class="best-for"><strong>Best for:</strong> Security & trust emphasis</div>
+                </div>
+            </div>
+
+            <div class="logo-card">
+                <div class="logo-display">
+                    <img src="client/public/logo-v5-abstract.svg" alt="Abstract T">
+                </div>
+                <div class="logo-info">
+                    <h3>V5: Abstract Letter T</h3>
+                    <p>Bold stylized "T" with motion. Memorable and strong.</p>
+                    <div class="best-for"><strong>Best for:</strong> Strong brand identity</div>
+                </div>
+            </div>
+
+            <div class="logo-card">
+                <div class="logo-display">
+                    <img src="client/public/logo-v6-circular.svg" alt="Network Hub">
+                </div>
+                <div class="logo-info">
+                    <h3>V6: Network Hub</h3>
+                    <p>Top-view truck with network nodes. Marketplace feel.</p>
+                    <div class="best-for"><strong>Best for:</strong> Platform/marketplace emphasis</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

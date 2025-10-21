@@ -174,7 +174,7 @@ const Profile = () => {
                       name="firstName" 
                       value={form.firstName} 
                       onChange={handleChange} 
-                      className="w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200" 
+                      className="w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all duration-200" 
                       placeholder="Enter your first name"
                     />
                   </div>
@@ -190,7 +190,7 @@ const Profile = () => {
                       name="lastName" 
                       value={form.lastName} 
                       onChange={handleChange} 
-                      className="w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200" 
+                      className="w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all duration-200" 
                       placeholder="Enter your last name"
                     />
                   </div>
@@ -209,7 +209,7 @@ const Profile = () => {
                     type="tel"
                     value={form.phone} 
                     onChange={handleChange} 
-                    className="w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200" 
+                    className="w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all duration-200" 
                     placeholder="(123) 456-7890"
                   />
                 </div>
@@ -219,7 +219,7 @@ const Profile = () => {
                 <button 
                   type="submit" 
                   disabled={saving} 
-                  className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-lg shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
+                  className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-lg shadow-sm text-white bg-accent-500 hover:bg-accent-600 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
                 >
                   {saving ? (
                     <>
@@ -257,7 +257,7 @@ const Profile = () => {
                     <input 
                       type="password" 
                       placeholder="Enter current password" 
-                      className="w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200" 
+                      className="w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all duration-200" 
                       value={pwd.currentPassword} 
                       onChange={(e) => setPwd(p => ({ ...p, currentPassword: e.target.value }))} 
                     />
@@ -272,7 +272,7 @@ const Profile = () => {
                     <input 
                       type="password" 
                       placeholder="Enter new password" 
-                      className="w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200" 
+                      className="w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all duration-200" 
                       value={pwd.newPassword} 
                       onChange={(e) => setPwd(p => ({ ...p, newPassword: e.target.value }))} 
                     />
@@ -287,7 +287,7 @@ const Profile = () => {
                     <input 
                       type="password" 
                       placeholder="Confirm new password" 
-                      className="w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200" 
+                      className="w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all duration-200" 
                       value={pwd.confirm} 
                       onChange={(e) => setPwd(p => ({ ...p, confirm: e.target.value }))} 
                     />
@@ -298,7 +298,7 @@ const Profile = () => {
                 <button 
                   type="submit" 
                   disabled={pwdSaving} 
-                  className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-lg shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
+                  className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-lg shadow-sm text-white bg-accent-500 hover:bg-accent-600 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
                 >
                   {pwdSaving ? (
                     <>
@@ -389,7 +389,7 @@ const LocationEditor = () => {
               name="companyName" 
               value={form.companyName} 
               onChange={handleChange} 
-              className="w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200" 
+              className="w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all duration-200" 
               placeholder="Enter company name"
             />
           </div>
@@ -406,7 +406,7 @@ const LocationEditor = () => {
             name="address" 
             value={form.address} 
             onChange={handleChange} 
-            className="w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200" 
+            className="w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all duration-200" 
             placeholder="Enter street address"
           />
         </div>
@@ -419,7 +419,7 @@ const LocationEditor = () => {
             name="city" 
             value={form.city} 
             onChange={handleChange} 
-            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200" 
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all duration-200" 
             placeholder="Enter city"
           />
         </div>
@@ -429,7 +429,7 @@ const LocationEditor = () => {
             name="country" 
             value={form.country} 
             onChange={handleChange} 
-            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200" 
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all duration-200" 
             placeholder="Enter country"
           />
         </div>
@@ -441,7 +441,7 @@ const LocationEditor = () => {
           name="postalCode" 
           value={form.postalCode} 
           onChange={handleChange} 
-          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200" 
+          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all duration-200" 
           placeholder="Enter postal code"
         />
       </div>
@@ -450,7 +450,7 @@ const LocationEditor = () => {
         <button 
           type="submit" 
           disabled={saving}
-          className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-lg shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
+          className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-lg shadow-sm text-white bg-accent-500 hover:bg-accent-600 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
         >
           {saving ? (
             <>
