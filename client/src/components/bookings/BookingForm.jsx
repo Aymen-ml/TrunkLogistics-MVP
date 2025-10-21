@@ -436,13 +436,13 @@ const BookingForm = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
         {/* Header */}
         <div className="mb-6 sm:mb-8">
           <button
             onClick={() => navigate('/find-trucks')}
-            className="inline-flex items-center text-sm text-gray-500 hover:text-gray-700 mb-4"
+            className="inline-flex items-center text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:text-gray-700 dark:text-gray-200 mb-4"
           >
             <ArrowLeft className="h-4 w-4 mr-1" />
             Back to Truck Search
@@ -451,10 +451,10 @@ const BookingForm = () => {
           <div className="flex items-center">
             <Package className="h-8 w-8 text-blue-600 mr-3" />
             <div>
-              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
+              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100">
                 Create Booking
               </h1>
-              <p className="mt-2 text-sm sm:text-base text-gray-600">
+              <p className="mt-2 text-sm sm:text-base text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
                 Book a truck for your shipment
               </p>
             </div>
@@ -464,7 +464,7 @@ const BookingForm = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Main Form */}
           <div className="lg:col-span-2">
-            <div className="bg-white shadow-sm rounded-lg">
+            <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 shadow-sm rounded-lg">
               <form onSubmit={handleSubmit} className="p-6 space-y-6">
                 {errors.general && (
                   <div className="bg-red-50 border border-red-200 rounded-md p-4">
@@ -474,9 +474,9 @@ const BookingForm = () => {
 
                 {/* Truck Selection */}
                 <div>
-                  <h3 className="text-lg font-medium text-gray-900 mb-4">Select Truck</h3>
+                  <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4">Select Truck</h3>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
                       Available Trucks *
                     </label>
                     <select
@@ -484,7 +484,7 @@ const BookingForm = () => {
                       value={formData.truck_id}
                       onChange={handleChange}
                       className={`w-full border rounded-md focus:ring-blue-500 focus:border-blue-500 ${
-                        errors.truck_id ? 'border-red-300' : 'border-gray-300'
+                        errors.truck_id ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'
                       }`}
                     >
                       <option value="">Select a truck...</option>
@@ -500,7 +500,7 @@ const BookingForm = () => {
                     {selectedTruck && (
                       <div className="mt-2">
                         {checkingAvailability ? (
-                          <div className="flex items-center text-sm text-gray-600">
+                          <div className="flex items-center text-sm text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
                             <Clock className="h-4 w-4 mr-2 animate-spin" />
                             Checking availability...
                           </div>
@@ -531,10 +531,10 @@ const BookingForm = () => {
                   <>
                     {/* Pickup Information */}
                     <div>
-                      <h3 className="text-lg font-medium text-gray-900 mb-4">Pickup Information</h3>
+                      <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4">Pickup Information</h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div className="sm:col-span-2">
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
                         Pickup Address *
                       </label>
                       <input
@@ -543,7 +543,7 @@ const BookingForm = () => {
                         value={formData.pickup_address}
                         onChange={handleChange}
                         className={`w-full border rounded-md focus:ring-blue-500 focus:border-blue-500 ${
-                          errors.pickup_address ? 'border-red-300' : 'border-gray-300'
+                          errors.pickup_address ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'
                         }`}
                         placeholder="123 Warehouse Street"
                       />
@@ -553,7 +553,7 @@ const BookingForm = () => {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
                         Pickup City *
                       </label>
                       <input
@@ -562,7 +562,7 @@ const BookingForm = () => {
                         value={formData.pickup_city}
                         onChange={handleChange}
                         className={`w-full border rounded-md focus:ring-blue-500 focus:border-blue-500 ${
-                          errors.pickup_city ? 'border-red-300' : 'border-gray-300'
+                          errors.pickup_city ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'
                         }`}
                         placeholder="New York"
                       />
@@ -572,7 +572,7 @@ const BookingForm = () => {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
                         Pickup Date *
                       </label>
                       <input
@@ -582,7 +582,7 @@ const BookingForm = () => {
                         onChange={handleChange}
                         min={new Date().toISOString().split('T')[0]}
                         className={`w-full border rounded-md focus:ring-blue-500 focus:border-blue-500 ${
-                          errors.pickup_date ? 'border-red-300' : 'border-gray-300'
+                          errors.pickup_date ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'
                         }`}
                       />
                       {errors.pickup_date && (
@@ -591,7 +591,7 @@ const BookingForm = () => {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
                         Pickup Time
                       </label>
                       <input
@@ -599,7 +599,7 @@ const BookingForm = () => {
                         name="pickup_time"
                         value={formData.pickup_time}
                         onChange={handleChange}
-                        className="w-full border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                        className="w-full border-gray-300 dark:border-gray-600 rounded-md focus:ring-blue-500 focus:border-blue-500"
                       />
                     </div>
                   </div>
@@ -607,10 +607,10 @@ const BookingForm = () => {
 
                 {/* Destination Information */}
                 <div>
-                  <h3 className="text-lg font-medium text-gray-900 mb-4">Destination Information</h3>
+                  <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4">Destination Information</h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div className="sm:col-span-2">
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
                         Destination Address *
                       </label>
                       <input
@@ -619,7 +619,7 @@ const BookingForm = () => {
                         value={formData.destination_address}
                         onChange={handleChange}
                         className={`w-full border rounded-md focus:ring-blue-500 focus:border-blue-500 ${
-                          errors.destination_address ? 'border-red-300' : 'border-gray-300'
+                          errors.destination_address ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'
                         }`}
                         placeholder="456 Factory Avenue"
                       />
@@ -629,7 +629,7 @@ const BookingForm = () => {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
                         Destination City *
                       </label>
                       <input
@@ -638,7 +638,7 @@ const BookingForm = () => {
                         value={formData.destination_city}
                         onChange={handleChange}
                         className={`w-full border rounded-md focus:ring-blue-500 focus:border-blue-500 ${
-                          errors.destination_city ? 'border-red-300' : 'border-gray-300'
+                          errors.destination_city ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'
                         }`}
                         placeholder="Philadelphia"
                       />
@@ -651,10 +651,10 @@ const BookingForm = () => {
 
                     {/* Cargo Information */}
                     <div>
-                      <h3 className="text-lg font-medium text-gray-900 mb-4">Cargo Information</h3>
+                      <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4">Cargo Information</h3>
                       <div className="space-y-4">
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">
+                          <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
                             Cargo Description *
                           </label>
                           <textarea
@@ -663,7 +663,7 @@ const BookingForm = () => {
                             onChange={handleChange}
                             rows={3}
                             className={`w-full border rounded-md focus:ring-blue-500 focus:border-blue-500 ${
-                              errors.cargo_description ? 'border-red-300' : 'border-gray-300'
+                              errors.cargo_description ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'
                             }`}
                             placeholder="Describe what you're shipping..."
                           />
@@ -674,7 +674,7 @@ const BookingForm = () => {
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                           <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-2">
+                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
                               Weight (kg) *
                             </label>
                             <input
@@ -685,7 +685,7 @@ const BookingForm = () => {
                               min="0"
                               step="0.01"
                               className={`w-full border rounded-md focus:ring-blue-500 focus:border-blue-500 ${
-                                errors.cargo_weight ? 'border-red-300' : 'border-gray-300'
+                                errors.cargo_weight ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'
                               }`}
                               placeholder="1000"
                             />
@@ -695,7 +695,7 @@ const BookingForm = () => {
                           </div>
 
                           <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-2">
+                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
                               Volume (m³)
                             </label>
                             <input
@@ -705,7 +705,7 @@ const BookingForm = () => {
                               onChange={handleChange}
                               min="0"
                               step="0.01"
-                              className="w-full border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                              className="w-full border-gray-300 dark:border-gray-600 rounded-md focus:ring-blue-500 focus:border-blue-500"
                               placeholder="10"
                             />
                           </div>
@@ -720,10 +720,10 @@ const BookingForm = () => {
                   <>
                     {/* Rental Period */}
                     <div>
-                      <h3 className="text-lg font-medium text-gray-900 mb-4">Rental Period</h3>
+                      <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4">Rental Period</h3>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">
+                          <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
                             Start Date & Time *
                           </label>
                           <input
@@ -733,7 +733,7 @@ const BookingForm = () => {
                             onChange={handleChange}
                             min={new Date().toISOString().slice(0, 16)}
                             className={`w-full border rounded-md focus:ring-blue-500 focus:border-blue-500 ${
-                              errors.rental_start_datetime ? 'border-red-300' : 'border-gray-300'
+                              errors.rental_start_datetime ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'
                             }`}
                           />
                           {errors.rental_start_datetime && (
@@ -742,7 +742,7 @@ const BookingForm = () => {
                         </div>
                         
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">
+                          <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
                             End Date & Time *
                           </label>
                           <input
@@ -752,7 +752,7 @@ const BookingForm = () => {
                             onChange={handleChange}
                             min={formData.rental_start_datetime || new Date().toISOString().slice(0, 16)}
                             className={`w-full border rounded-md focus:ring-blue-500 focus:border-blue-500 ${
-                              errors.rental_end_datetime ? 'border-red-300' : 'border-gray-300'
+                              errors.rental_end_datetime ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'
                             }`}
                           />
                           {errors.rental_end_datetime && (
@@ -764,10 +764,10 @@ const BookingForm = () => {
                     
                     {/* Work Location */}
                     <div>
-                      <h3 className="text-lg font-medium text-gray-900 mb-4">Work Location</h3>
+                      <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4">Work Location</h3>
                       <div className="space-y-4">
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">
+                          <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
                             Work Address *
                           </label>
                           <textarea
@@ -776,7 +776,7 @@ const BookingForm = () => {
                             onChange={handleChange}
                             rows={2}
                             className={`w-full border rounded-md focus:ring-blue-500 focus:border-blue-500 ${
-                              errors.work_address ? 'border-red-300' : 'border-gray-300'
+                              errors.work_address ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'
                             }`}
                             placeholder="Complete address where equipment will be used..."
                           />
@@ -789,10 +789,10 @@ const BookingForm = () => {
                     
                     {/* Purpose and Details */}
                     <div>
-                      <h3 className="text-lg font-medium text-gray-900 mb-4">Rental Details</h3>
+                      <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4">Rental Details</h3>
                       <div className="space-y-4">
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">
+                          <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
                             Purpose Description *
                           </label>
                           <textarea
@@ -801,7 +801,7 @@ const BookingForm = () => {
                             onChange={handleChange}
                             rows={3}
                             className={`w-full border rounded-md focus:ring-blue-500 focus:border-blue-500 ${
-                              errors.purpose_description ? 'border-red-300' : 'border-gray-300'
+                              errors.purpose_description ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'
                             }`}
                             placeholder="Describe what the equipment will be used for..."
                           />
@@ -817,9 +817,9 @@ const BookingForm = () => {
                               name="operator_required"
                               checked={formData.operator_required}
                               onChange={(e) => setFormData(prev => ({...prev, operator_required: e.target.checked}))}
-                              className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                              className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 dark:border-gray-600 rounded"
                             />
-                            <span className="ml-2 text-sm text-gray-700">
+                            <span className="ml-2 text-sm text-gray-700 dark:text-gray-200">
                               I need an operator for this equipment
                             </span>
                           </label>
@@ -831,9 +831,9 @@ const BookingForm = () => {
                 
                 {/* Common Notes Section */}
                 <div>
-                  <h3 className="text-lg font-medium text-gray-900 mb-4">Additional Information</h3>
+                  <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4">Additional Information</h3>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
                       Additional Notes
                     </label>
                     <textarea
@@ -841,18 +841,18 @@ const BookingForm = () => {
                       value={formData.notes}
                       onChange={handleChange}
                       rows={3}
-                      className="w-full border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                      className="w-full border-gray-300 dark:border-gray-600 rounded-md focus:ring-blue-500 focus:border-blue-500"
                       placeholder="Any special instructions or requirements..."
                     />
                   </div>
                 </div>
 
                 {/* Form Actions */}
-                <div className="flex flex-col sm:flex-row sm:justify-end space-y-3 sm:space-y-0 sm:space-x-3 pt-6 border-t border-gray-200">
+                <div className="flex flex-col sm:flex-row sm:justify-end space-y-3 sm:space-y-0 sm:space-x-3 pt-6 border-t border-gray-200 dark:border-gray-700">
                   <button
                     type="button"
                     onClick={() => navigate('/find-trucks')}
-                    className="w-full sm:w-auto px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
+                    className="w-full sm:w-auto px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 hover:bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900"
                   >
                     Cancel
                   </button>
@@ -875,24 +875,24 @@ const BookingForm = () => {
 
           {/* Sidebar - Booking Summary */}
           <div className="lg:col-span-1">
-            <div className="bg-white shadow-sm rounded-lg p-6 sticky top-8">
-              <h3 className="text-lg font-medium text-gray-900 mb-4">
+            <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 shadow-sm rounded-lg p-6 sticky top-8">
+              <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4">
                 {selectedTruck?.service_type === 'rental' ? 'Rental Summary' : 'Booking Summary'}
               </h3>
               
               {selectedTruck ? (
                 <div className="space-y-4">
-                  <div className="flex items-center p-3 bg-gray-50 rounded-lg">
+                  <div className="flex items-center p-3 bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900 rounded-lg">
                     {selectedTruck.service_type === 'rental' ? (
                       <Settings className="h-8 w-8 text-blue-600" />
                     ) : (
                       <Truck className="h-8 w-8 text-blue-600" />
                     )}
                     <div className="ml-3">
-                      <p className="font-medium text-gray-900">{selectedTruck.license_plate}</p>
-                      <p className="text-sm text-gray-500">{getTruckTypeLabel(selectedTruck.truck_type)}</p>
+                      <p className="font-medium text-gray-900 dark:text-gray-100">{selectedTruck.license_plate}</p>
+                      <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">{getTruckTypeLabel(selectedTruck.truck_type)}</p>
                       {selectedTruck.service_type === 'rental' && (
-                        <span className="inline-block px-2 py-1 text-xs font-medium bg-green-100 text-green-800 rounded-full mt-1">
+                        <span className="inline-block px-2 py-1 text-xs font-medium bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 rounded-full mt-1">
                           Equipment Rental
                         </span>
                       )}
@@ -901,15 +901,15 @@ const BookingForm = () => {
 
                   <div className="space-y-2 text-sm">
                     <div className="flex justify-between">
-                      <span className="text-gray-500">Capacity:</span>
+                      <span className="text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Capacity:</span>
                       <span className="font-medium">{selectedTruck.capacity_weight?.toLocaleString()} kg</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-gray-500">Provider:</span>
+                      <span className="text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Provider:</span>
                       <span className="font-medium">{selectedTruck.provider_name}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-gray-500">Pricing:</span>
+                      <span className="text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Pricing:</span>
                       <span className="font-medium">
                         {selectedTruck.service_type === 'rental' ? (
                           <div className="text-right text-xs">
@@ -929,13 +929,13 @@ const BookingForm = () => {
 
                   {/* Price Estimate Section - Hide for fixed-price trucks */}
                   {selectedTruck?.pricing_type !== 'fixed' && (
-                    <div className="pt-4 border-t border-gray-200">
+                    <div className="pt-4 border-t border-gray-200 dark:border-gray-700">
                       <div className="flex justify-between items-center">
-                        <span className="font-medium text-gray-900">Price Estimate:</span>
+                        <span className="font-medium text-gray-900 dark:text-gray-100">Price Estimate:</span>
                         {loadingPrice ? (
                           <div className="flex items-center">
                             <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600 mr-2"></div>
-                            <span className="text-sm text-gray-500">Calculating...</span>
+                            <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Calculating...</span>
                           </div>
                         ) : priceEstimate ? (
                           <span className="font-bold text-green-600">
@@ -943,21 +943,21 @@ const BookingForm = () => {
                           </span>
                         ) : selectedTruck?.service_type === 'rental' ? (
                           formData.rental_start_datetime && formData.rental_end_datetime ? (
-                            <span className="text-sm text-gray-500">Select equipment to see price</span>
+                            <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Select equipment to see price</span>
                           ) : (
-                            <span className="text-sm text-gray-500">Enter rental dates to calculate</span>
+                            <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Enter rental dates to calculate</span>
                           )
                         ) : (
                           formData.pickup_city && formData.destination_city ? (
-                            <span className="text-sm text-gray-500">Select truck to see price</span>
+                            <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Select truck to see price</span>
                           ) : (
-                            <span className="text-sm text-gray-500">Enter cities to calculate</span>
+                            <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Enter cities to calculate</span>
                           )
                         )}
                       </div>
                       
                       {priceEstimate && (
-                        <div className="mt-3 space-y-2 text-xs text-gray-600">
+                        <div className="mt-3 space-y-2 text-xs text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
                           {selectedTruck?.service_type === 'rental' ? (
                             <>
                               <div className="flex justify-between">
@@ -1030,8 +1030,8 @@ const BookingForm = () => {
                 </div>
               ) : (
                 <div className="text-center py-8">
-                  <Truck className="mx-auto h-12 w-12 text-gray-400" />
-                  <p className="mt-2 text-sm text-gray-500">
+                  <Truck className="mx-auto h-12 w-12 text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500" />
+                  <p className="mt-2 text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
                     Select a truck to see booking details
                   </p>
                 </div>

@@ -79,10 +79,10 @@ const BookingManagement = () => {
 
   const getStatusBadge = (status, serviceType) => {
     const statusConfig = {
-      approved: { color: 'bg-blue-100 text-blue-800', icon: CheckCircle },
-      in_transit: { color: 'bg-purple-100 text-purple-800', icon: Truck },
-      completed: { color: 'bg-green-100 text-green-800', icon: CheckCircle },
-      cancelled: { color: 'bg-red-100 text-red-800', icon: XCircle },
+      approved: { color: 'bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200', icon: CheckCircle },
+      in_transit: { color: 'bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200', icon: Truck },
+      completed: { color: 'bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200', icon: CheckCircle },
+      cancelled: { color: 'bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200', icon: XCircle },
       pending_review: { color: 'bg-orange-100 text-orange-800', icon: Clock },
       active: { color: 'bg-indigo-100 text-indigo-800', icon: serviceType === 'rental' ? Settings : Truck }
     };
@@ -102,8 +102,8 @@ const BookingManagement = () => {
     return (
       <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
         serviceType === 'rental' 
-          ? 'bg-purple-100 text-purple-800' 
-          : 'bg-blue-100 text-blue-800'
+          ? 'bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200' 
+          : 'bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200'
       }`}>
         {serviceType === 'rental' ? 'Rental' : 'Transport'}
       </span>
@@ -141,22 +141,22 @@ const BookingManagement = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900 flex items-center justify-center">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
         <div className="mb-8">
           <div className="flex items-center">
             <Package className="h-8 w-8 text-blue-600 mr-3" />
             <div>
-              <h1 className="text-3xl font-bold text-gray-900">Booking Management</h1>
-              <p className="mt-2 text-gray-600">
+              <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">Booking Management</h1>
+              <p className="mt-2 text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
                 Monitor and manage all platform bookings
               </p>
             </div>
@@ -165,16 +165,16 @@ const BookingManagement = () => {
 
         {/* Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4 mb-8">
-          <div className="bg-white overflow-hidden shadow rounded-lg">
+          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 overflow-hidden shadow rounded-lg">
             <div className="p-4">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
-                  <Package className="h-6 w-6 text-gray-400" />
+                  <Package className="h-6 w-6 text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500" />
                 </div>
                 <div className="ml-3 w-0 flex-1">
                   <dl>
-                    <dt className="text-xs font-medium text-gray-500 truncate">Total</dt>
-                    <dd className="text-lg font-medium text-gray-900">{stats.total}</dd>
+                    <dt className="text-xs font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 truncate">Total</dt>
+                    <dd className="text-lg font-medium text-gray-900 dark:text-gray-100">{stats.total}</dd>
                   </dl>
                 </div>
               </div>
@@ -183,7 +183,7 @@ const BookingManagement = () => {
 
           {/* Pending removed (not used) */}
 
-          <div className="bg-white overflow-hidden shadow rounded-lg">
+          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 overflow-hidden shadow rounded-lg">
             <div className="p-4">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
@@ -191,15 +191,15 @@ const BookingManagement = () => {
                 </div>
                 <div className="ml-3 w-0 flex-1">
                   <dl>
-                    <dt className="text-xs font-medium text-gray-500 truncate">Approved</dt>
-                    <dd className="text-lg font-medium text-gray-900">{stats.approved}</dd>
+                    <dt className="text-xs font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 truncate">Approved</dt>
+                    <dd className="text-lg font-medium text-gray-900 dark:text-gray-100">{stats.approved}</dd>
                   </dl>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="bg-white overflow-hidden shadow rounded-lg">
+          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 overflow-hidden shadow rounded-lg">
             <div className="p-4">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
@@ -207,14 +207,14 @@ const BookingManagement = () => {
                 </div>
                 <div className="ml-3 w-0 flex-1">
                   <dl>
-                    <dt className="text-xs font-medium text-gray-500 truncate">In Transit (Logistics)</dt>
-                    <dd className="text-lg font-medium text-gray-900">{stats.in_transit}</dd>
+                    <dt className="text-xs font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 truncate">In Transit (Logistics)</dt>
+                    <dd className="text-lg font-medium text-gray-900 dark:text-gray-100">{stats.in_transit}</dd>
                   </dl>
                 </div>
               </div>
             </div>
           </div>
-          <div className="bg-white overflow-hidden shadow rounded-lg">
+          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 overflow-hidden shadow rounded-lg">
             <div className="p-4">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
@@ -222,15 +222,15 @@ const BookingManagement = () => {
                 </div>
                 <div className="ml-3 w-0 flex-1">
                   <dl>
-                    <dt className="text-xs font-medium text-gray-500 truncate">Active (Rental)</dt>
-                    <dd className="text-lg font-medium text-gray-900">{stats.active}</dd>
+                    <dt className="text-xs font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 truncate">Active (Rental)</dt>
+                    <dd className="text-lg font-medium text-gray-900 dark:text-gray-100">{stats.active}</dd>
                   </dl>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="bg-white overflow-hidden shadow rounded-lg">
+          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 overflow-hidden shadow rounded-lg">
             <div className="p-4">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
@@ -238,15 +238,15 @@ const BookingManagement = () => {
                 </div>
                 <div className="ml-3 w-0 flex-1">
                   <dl>
-                    <dt className="text-xs font-medium text-gray-500 truncate">Completed</dt>
-                    <dd className="text-lg font-medium text-gray-900">{stats.completed}</dd>
+                    <dt className="text-xs font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 truncate">Completed</dt>
+                    <dd className="text-lg font-medium text-gray-900 dark:text-gray-100">{stats.completed}</dd>
                   </dl>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="bg-white overflow-hidden shadow rounded-lg">
+          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 overflow-hidden shadow rounded-lg">
             <div className="p-4">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
@@ -254,15 +254,15 @@ const BookingManagement = () => {
                 </div>
                 <div className="ml-3 w-0 flex-1">
                   <dl>
-                    <dt className="text-xs font-medium text-gray-500 truncate">Cancelled</dt>
-                    <dd className="text-lg font-medium text-gray-900">{stats.cancelled}</dd>
+                    <dt className="text-xs font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 truncate">Cancelled</dt>
+                    <dd className="text-lg font-medium text-gray-900 dark:text-gray-100">{stats.cancelled}</dd>
                   </dl>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="bg-white overflow-hidden shadow rounded-lg">
+          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 overflow-hidden shadow rounded-lg">
             <div className="p-4">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
@@ -270,8 +270,8 @@ const BookingManagement = () => {
                 </div>
                 <div className="ml-3 w-0 flex-1">
                   <dl>
-                    <dt className="text-xs font-medium text-gray-500 truncate">Review</dt>
-                    <dd className="text-lg font-medium text-gray-900">{stats.pending_review}</dd>
+                    <dt className="text-xs font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 truncate">Review</dt>
+                    <dd className="text-lg font-medium text-gray-900 dark:text-gray-100">{stats.pending_review}</dd>
                   </dl>
                 </div>
               </div>
@@ -280,8 +280,8 @@ const BookingManagement = () => {
         </div>
 
         {/* Filters */}
-        <div className="bg-white shadow rounded-lg mb-6">
-          <div className="px-4 py-3 border-b border-gray-200">
+        <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 shadow rounded-lg mb-6">
+          <div className="px-4 py-3 border-b border-gray-200 dark:border-gray-700">
             <div className="flex flex-wrap gap-2">
               {[
                 { key: 'all', label: 'All Bookings' },
@@ -297,8 +297,8 @@ const BookingManagement = () => {
                   onClick={() => setFilter(key)}
                   className={`px-3 py-1 rounded-md text-sm font-medium ${
                     filter === key
-                      ? 'bg-blue-100 text-blue-700'
-                      : 'text-gray-500 hover:text-gray-700'
+                      ? 'bg-blue-100 dark:bg-blue-900 text-blue-700'
+                      : 'text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:text-gray-700 dark:text-gray-200'
                   }`}
                 >
                   {label}
@@ -309,27 +309,27 @@ const BookingManagement = () => {
         </div>
 
         {/* Bookings Table */}
-        <div className="bg-white shadow overflow-hidden sm:rounded-md">
-          <div className="px-4 py-5 sm:px-6 border-b border-gray-200">
-            <h3 className="text-lg leading-6 font-medium text-gray-900">
+        <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 shadow overflow-hidden sm:rounded-md">
+          <div className="px-4 py-5 sm:px-6 border-b border-gray-200 dark:border-gray-700">
+            <h3 className="text-lg leading-6 font-medium text-gray-900 dark:text-gray-100">
               Bookings ({filteredBookings.length})
             </h3>
-            <p className="mt-1 max-w-2xl text-sm text-gray-500">
+            <p className="mt-1 max-w-2xl text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
               Manage booking statuses and monitor platform activity
             </p>
           </div>
           
-          <ul className="divide-y divide-gray-200">
+          <ul className="divide-y divide-gray-200 dark:divide-gray-700">
             {filteredBookings.map((booking) => (
               <li key={booking.id} className="px-4 py-6 sm:px-6">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center">
                     <div className="flex-shrink-0">
-                      <Package className="h-10 w-10 text-gray-400" />
+                      <Package className="h-10 w-10 text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500" />
                     </div>
                     <div className="ml-4">
                       <div className="flex items-center space-x-2 mb-2">
-                        <p className="text-sm font-medium text-gray-900">
+                        <p className="text-sm font-medium text-gray-900 dark:text-gray-100">
                           {booking.booking_reference || `Booking #${booking.id.slice(0, 8)}`}
                         </p>
                         {getStatusBadge(booking.status, booking.service_type)}
@@ -338,19 +338,19 @@ const BookingManagement = () => {
                       
                       <div className="space-y-1">
                         {booking.service_type === 'rental' ? (
-                          <div className="flex items-center text-sm text-gray-500">
+                          <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
                             <MapPin className="h-4 w-4 mr-1" />
                             {booking.work_address || 'Work location not specified'}
                           </div>
                         ) : (
-                          <div className="flex items-center text-sm text-gray-500">
+                          <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
                             <MapPin className="h-4 w-4 mr-1" />
                             {booking.pickup_city} → {booking.destination_city}
                           </div>
                         )}
                         
                         <div className="flex items-center space-x-4">
-                          <div className="flex items-center text-sm text-gray-500">
+                          <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
                             <Calendar className="h-4 w-4 mr-1" />
                             {booking.service_type === 'rental' 
                               ? new Date(booking.rental_start_datetime).toLocaleDateString()
@@ -358,13 +358,13 @@ const BookingManagement = () => {
                             }
                           </div>
                           
-                          <div className="flex items-center text-sm text-gray-500">
+                          <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
                             <DollarSign className="h-4 w-4 mr-1" />
                             {formatCurrency(booking.total_price)}
                           </div>
                           
                           {booking.truck_license_plate && (
-                            <div className="flex items-center text-sm text-gray-500">
+                            <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
                               <Truck className="h-4 w-4 mr-1" />
                               {booking.truck_license_plate}
                             </div>
@@ -372,13 +372,13 @@ const BookingManagement = () => {
                         </div>
                         
                         {booking.customer_company && (
-                          <p className="text-sm text-gray-500">
+                          <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
                             Customer: {booking.customer_company}
                           </p>
                         )}
                         
                         {booking.provider_company && (
-                          <p className="text-sm text-gray-500">
+                          <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
                             Provider: {booking.provider_company}
                           </p>
                         )}
@@ -422,7 +422,7 @@ const BookingManagement = () => {
                       value={booking.status}
                       onChange={(e) => handleStatusChange(booking.id, e.target.value)}
                       disabled={updating[booking.id]}
-                      className="block w-40 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm disabled:opacity-50"
+                      className="block w-40 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm disabled:opacity-50"
                     >
                       <option value={booking.status}>
                         {booking.status.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase())}

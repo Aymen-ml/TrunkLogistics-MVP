@@ -30,14 +30,14 @@ const Toast = ({ type = 'info', message, onClose, duration = 5000 }) => {
 
     switch (type) {
       case 'success':
-        return `${baseStyles} bg-green-50 border-green-200 text-green-800`;
+        return `${baseStyles} bg-green-50 border-green-200 text-green-800 dark:text-green-200`;
       case 'error':
-        return `${baseStyles} bg-red-50 border-red-200 text-red-800`;
+        return `${baseStyles} bg-red-50 border-red-200 text-red-800 dark:text-red-200`;
       case 'warning':
-        return `${baseStyles} bg-yellow-50 border-yellow-200 text-yellow-800`;
+        return `${baseStyles} bg-yellow-50 border-yellow-200 text-yellow-800 dark:text-yellow-200`;
       case 'info':
       default:
-        return `${baseStyles} bg-blue-50 border-blue-200 text-blue-800`;
+        return `${baseStyles} bg-blue-50 border-blue-200 text-blue-800 dark:text-blue-200`;
     }
   };
 
@@ -65,7 +65,7 @@ const Toast = ({ type = 'info', message, onClose, duration = 5000 }) => {
       </div>
       <button
         onClick={handleClose}
-        className="ml-3 flex-shrink-0 text-gray-400 hover:text-gray-600 transition-colors"
+        className="ml-3 flex-shrink-0 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:text-gray-400 dark:text-gray-500 transition-colors"
       >
         <X className="h-4 w-4" />
       </button>

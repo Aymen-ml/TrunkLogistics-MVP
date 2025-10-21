@@ -73,30 +73,30 @@ const AdminAnalytics = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900 flex items-center justify-center">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <div className="flex items-center justify-between mb-6">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Analytics</h1>
-            <p className="text-gray-600">Trends, funnels, and breakdowns across bookings and revenue.</p>
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Analytics</h1>
+            <p className="text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Trends, funnels, and breakdowns across bookings and revenue.</p>
           </div>
           <Link to="/admin/bookings" className="text-sm text-blue-600 hover:text-blue-700">Back to Bookings</Link>
         </div>
 
         {/* Filters */}
-        <div className="bg-white shadow rounded-lg p-4 mb-6">
+        <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 shadow rounded-lg p-4 mb-6">
           <div className="flex flex-wrap items-end gap-3">
             <div>
-              <label className="block text-xs font-medium text-gray-500 mb-1">Preset</label>
+              <label className="block text-xs font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 mb-1">Preset</label>
               <select
-                className="px-3 py-2 border border-gray-300 rounded-md text-sm"
+                className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm"
                 value={dateRange.preset}
                 onChange={(e) => setDateRange(prev => ({ ...prev, preset: e.target.value }))}
               >
@@ -106,12 +106,12 @@ const AdminAnalytics = () => {
               </select>
             </div>
             <div>
-              <label className="block text-xs font-medium text-gray-500 mb-1">From</label>
-              <input type="date" className="px-3 py-2 border border-gray-300 rounded-md text-sm" value={dateRange.from} onChange={(e) => setDateRange(prev => ({ ...prev, from: e.target.value }))} />
+              <label className="block text-xs font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 mb-1">From</label>
+              <input type="date" className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm" value={dateRange.from} onChange={(e) => setDateRange(prev => ({ ...prev, from: e.target.value }))} />
             </div>
             <div>
-              <label className="block text-xs font-medium text-gray-500 mb-1">To</label>
-              <input type="date" className="px-3 py-2 border border-gray-300 rounded-md text-sm" value={dateRange.to} onChange={(e) => setDateRange(prev => ({ ...prev, to: e.target.value }))} />
+              <label className="block text-xs font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 mb-1">To</label>
+              <input type="date" className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm" value={dateRange.to} onChange={(e) => setDateRange(prev => ({ ...prev, to: e.target.value }))} />
             </div>
             <button className="inline-flex items-center px-3 py-2 rounded-md text-sm bg-blue-600 text-white">
               <Filter className="h-4 w-4 mr-2" /> Apply
@@ -146,7 +146,7 @@ const AdminAnalytics = () => {
         {/* Breakdown */}
         <Section title="Service Breakdown" icon={PieChart}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="bg-white rounded-lg border p-4">
+            <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 rounded-lg border p-4">
               <h4 className="text-sm font-semibold text-gray-800 mb-2">Counts</h4>
               <div className="flex items-center justify-between text-sm">
                 <span>Transport</span>
@@ -157,7 +157,7 @@ const AdminAnalytics = () => {
                 <span className="font-medium">{byService.rental.count}</span>
               </div>
             </div>
-            <div className="bg-white rounded-lg border p-4">
+            <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 rounded-lg border p-4">
               <h4 className="text-sm font-semibold text-gray-800 mb-2">Revenue</h4>
               <div className="flex items-center justify-between text-sm">
                 <span>Transport</span>
@@ -177,12 +177,12 @@ const AdminAnalytics = () => {
 };
 
 const Kpi = ({ title, value, icon: Icon, color }) => (
-  <div className="bg-white rounded-lg border p-4">
+  <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 rounded-lg border p-4">
     <div className="flex items-center">
       <Icon className={`h-6 w-6 ${color}`} />
       <div className="ml-3">
-        <div className="text-xs text-gray-500">{title}</div>
-        <div className="text-lg font-semibold text-gray-900">{value}</div>
+        <div className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">{title}</div>
+        <div className="text-lg font-semibold text-gray-900 dark:text-gray-100">{value}</div>
       </div>
     </div>
   </div>
@@ -191,26 +191,26 @@ const Kpi = ({ title, value, icon: Icon, color }) => (
 const Section = ({ title, icon: Icon, children }) => (
   <div className="mb-6">
     <div className="flex items-center mb-3">
-      <Icon className="h-5 w-5 text-gray-500" />
-      <h3 className="ml-2 text-sm font-semibold text-gray-700">{title}</h3>
+      <Icon className="h-5 w-5 text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500" />
+      <h3 className="ml-2 text-sm font-semibold text-gray-700 dark:text-gray-200">{title}</h3>
     </div>
     {children}
   </div>
 );
 
 const Placeholder = ({ children, height = '160px' }) => (
-  <div className="bg-white rounded-lg border border-dashed text-gray-400 text-sm flex items-center justify-center" style={{ height }}>
+  <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 rounded-lg border border-dashed text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 text-sm flex items-center justify-center" style={{ height }}>
     {children}
   </div>
 );
 
 const FunnelStep = ({ label, value, icon: Icon }) => (
-  <div className="bg-white rounded-lg border p-4 text-center">
+  <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 rounded-lg border p-4 text-center">
     <div className="flex items-center justify-center mb-2">
-      <Icon className="h-4 w-4 text-gray-500" />
+      <Icon className="h-4 w-4 text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500" />
     </div>
-    <div className="text-xs text-gray-500">{label}</div>
-    <div className="text-base font-semibold text-gray-900">{value}</div>
+    <div className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">{label}</div>
+    <div className="text-base font-semibold text-gray-900 dark:text-gray-100">{value}</div>
   </div>
 );
 

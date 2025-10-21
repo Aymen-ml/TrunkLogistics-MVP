@@ -126,26 +126,26 @@ const BookingDetail = () => {
       case 'cancelled':
         return <XCircle className="h-5 w-5 text-red-500" />;
       default:
-        return <AlertCircle className="h-5 w-5 text-gray-500" />;
+        return <AlertCircle className="h-5 w-5 text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500" />;
     }
   };
 
   const getStatusColor = (status) => {
     switch (status) {
       case 'pending_review':
-        return 'bg-yellow-100 text-yellow-800';
+        return 'bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200';
       case 'approved':
-        return 'bg-blue-100 text-blue-800';
+        return 'bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200';
       case 'in_transit':
-        return 'bg-purple-100 text-purple-800';
+        return 'bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200';
       case 'active':
         return 'bg-orange-100 text-orange-800';
       case 'completed':
-        return 'bg-green-100 text-green-800';
+        return 'bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200';
       case 'cancelled':
-        return 'bg-red-100 text-red-800';
+        return 'bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200';
       default:
-        return 'bg-gray-100 text-gray-800';
+        return 'bg-gray-100 dark:bg-gray-700 text-gray-800';
     }
   };
 
@@ -334,7 +334,7 @@ const BookingDetail = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900 flex items-center justify-center">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
       </div>
     );
@@ -342,10 +342,10 @@ const BookingDetail = () => {
 
   if (!booking) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900 flex items-center justify-center">
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-gray-900">Booking not found</h2>
-          <p className="mt-2 text-gray-600">The booking you're looking for doesn't exist.</p>
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Booking not found</h2>
+          <p className="mt-2 text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">The booking you're looking for doesn't exist.</p>
           <button
             onClick={() => navigate('/bookings')}
             className="mt-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
@@ -358,13 +358,13 @@ const BookingDetail = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
         {/* Header */}
         <div className="mb-6 sm:mb-8">
           <button
             onClick={() => navigate('/bookings')}
-            className="inline-flex items-center text-sm text-gray-500 hover:text-gray-700 mb-4"
+            className="inline-flex items-center text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:text-gray-700 dark:text-gray-200 mb-4"
           >
             <ArrowLeft className="h-4 w-4 mr-1" />
             Back to Bookings
@@ -378,10 +378,10 @@ const BookingDetail = () => {
                 <Package className="h-8 w-8 text-blue-600 mr-3" />
               )}
               <div>
-                <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
+                <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100">
                   {booking.service_type === 'rental' ? 'Equipment Rental' : 'Booking'} #{booking.reference || booking.id.slice(-8)}
                 </h1>
-                <p className="mt-1 text-sm text-gray-500">
+                <p className="mt-1 text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
                   Created on {new Date(booking.created_at).toLocaleDateString()} at {new Date(booking.created_at).toLocaleTimeString()}
                 </p>
                 <div className="mt-2 flex items-center flex-wrap gap-2">
@@ -428,35 +428,35 @@ const BookingDetail = () => {
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-6">
             {/* Route Information */}
-            <div className="bg-white shadow-sm rounded-lg overflow-hidden">
-              <div className="px-6 py-4 border-b border-gray-200">
-                <h3 className="text-lg font-medium text-gray-900">Route Information</h3>
+            <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 shadow-sm rounded-lg overflow-hidden">
+              <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+                <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">Route Information</h3>
               </div>
               <div className="px-6 py-6">
                 <div className="space-y-4">
                   <div className="flex items-start">
                     <MapPin className="h-5 w-5 text-green-500 mt-0.5" />
                     <div className="ml-3">
-                      <p className="text-sm font-medium text-gray-900">Pickup Location</p>
-                      <p className="text-sm text-gray-600">{booking.pickup_address}</p>
-                      <p className="text-sm text-gray-600">{booking.pickup_city}</p>
+                      <p className="text-sm font-medium text-gray-900 dark:text-gray-100">Pickup Location</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">{booking.pickup_address}</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">{booking.pickup_city}</p>
                     </div>
                   </div>
                   
                   <div className="flex items-start">
                     <MapPin className="h-5 w-5 text-red-500 mt-0.5" />
                     <div className="ml-3">
-                      <p className="text-sm font-medium text-gray-900">Destination</p>
-                      <p className="text-sm text-gray-600">{booking.destination_address}</p>
-                      <p className="text-sm text-gray-600">{booking.destination_city}</p>
+                      <p className="text-sm font-medium text-gray-900 dark:text-gray-100">Destination</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">{booking.destination_address}</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">{booking.destination_city}</p>
                     </div>
                   </div>
 
                   <div className="flex items-start">
                     <Calendar className="h-5 w-5 text-blue-500 mt-0.5" />
                     <div className="ml-3">
-                      <p className="text-sm font-medium text-gray-900">Pickup Date & Time</p>
-                      <p className="text-sm text-gray-600">
+                      <p className="text-sm font-medium text-gray-900 dark:text-gray-100">Pickup Date & Time</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
                         {new Date(booking.pickup_date).toLocaleDateString()}
                         {booking.pickup_time && ` at ${booking.pickup_time}`}
                       </p>
@@ -465,7 +465,7 @@ const BookingDetail = () => {
 
                   {booking.estimated_distance && (
                     <div className="flex justify-between text-sm">
-                      <span className="text-gray-500">Estimated Distance:</span>
+                      <span className="text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Estimated Distance:</span>
                       <span className="font-medium">{booking.estimated_distance} km</span>
                     </div>
                   )}
@@ -475,32 +475,32 @@ const BookingDetail = () => {
 
             {/* Cargo Information - Only for transport bookings */}
             {booking.service_type !== 'rental' && (
-              <div className="bg-white shadow-sm rounded-lg overflow-hidden">
-                <div className="px-6 py-4 border-b border-gray-200">
-                  <h3 className="text-lg font-medium text-gray-900">Cargo Information</h3>
+              <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 shadow-sm rounded-lg overflow-hidden">
+                <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+                  <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">Cargo Information</h3>
                 </div>
                 <div className="px-6 py-6">
                   <div className="space-y-4">
                     <div>
-                      <p className="text-sm font-medium text-gray-900">Description</p>
-                      <p className="text-sm text-gray-600 mt-1">{booking.cargo_description}</p>
+                      <p className="text-sm font-medium text-gray-900 dark:text-gray-100">Description</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 mt-1">{booking.cargo_description}</p>
                     </div>
                     
                     <div className="grid grid-cols-2 gap-4">
                       <div className="flex items-center">
-                        <Weight className="h-4 w-4 text-gray-400 mr-2" />
+                        <Weight className="h-4 w-4 text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 mr-2" />
                         <div>
-                          <p className="text-sm font-medium text-gray-900">Weight</p>
-                          <p className="text-sm text-gray-600">{booking.cargo_weight?.toLocaleString()} kg</p>
+                          <p className="text-sm font-medium text-gray-900 dark:text-gray-100">Weight</p>
+                          <p className="text-sm text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">{booking.cargo_weight?.toLocaleString()} kg</p>
                         </div>
                       </div>
                       
                       {booking.cargo_volume && (
                         <div className="flex items-center">
-                          <Package className="h-4 w-4 text-gray-400 mr-2" />
+                          <Package className="h-4 w-4 text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 mr-2" />
                           <div>
-                            <p className="text-sm font-medium text-gray-900">Volume</p>
-                            <p className="text-sm text-gray-600">{booking.cargo_volume} m³</p>
+                            <p className="text-sm font-medium text-gray-900 dark:text-gray-100">Volume</p>
+                            <p className="text-sm text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">{booking.cargo_volume} m³</p>
                           </div>
                         </div>
                       )}
@@ -508,8 +508,8 @@ const BookingDetail = () => {
 
                     {booking.notes && (
                       <div>
-                        <p className="text-sm font-medium text-gray-900">Additional Notes</p>
-                        <p className="text-sm text-gray-600 mt-1">{booking.notes}</p>
+                        <p className="text-sm font-medium text-gray-900 dark:text-gray-100">Additional Notes</p>
+                        <p className="text-sm text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 mt-1">{booking.notes}</p>
                       </div>
                     )}
                   </div>
@@ -519,11 +519,11 @@ const BookingDetail = () => {
 
             {/* Rental Equipment Information */}
             {booking.service_type === 'rental' && (
-              <div className="bg-white shadow-sm rounded-lg overflow-hidden">
-                <div className="px-6 py-4 border-b border-gray-200">
+              <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 shadow-sm rounded-lg overflow-hidden">
+                <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
                   <div className="flex items-center">
                     <Settings className="h-5 w-5 text-orange-500 mr-2" />
-                    <h3 className="text-lg font-medium text-gray-900">Rental Equipment Details</h3>
+                    <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">Rental Equipment Details</h3>
                   </div>
                 </div>
                 <div className="px-6 py-6">
@@ -533,8 +533,8 @@ const BookingDetail = () => {
                         <div className="flex items-start">
                           <Calendar className="h-4 w-4 text-green-500 mt-0.5 mr-2" />
                           <div>
-                            <p className="text-sm font-medium text-gray-900">Rental Start</p>
-                            <p className="text-sm text-gray-600">
+                            <p className="text-sm font-medium text-gray-900 dark:text-gray-100">Rental Start</p>
+                            <p className="text-sm text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
                               {new Date(booking.rental_start_datetime).toLocaleString()}
                             </p>
                           </div>
@@ -545,8 +545,8 @@ const BookingDetail = () => {
                         <div className="flex items-start">
                           <Calendar className="h-4 w-4 text-red-500 mt-0.5 mr-2" />
                           <div>
-                            <p className="text-sm font-medium text-gray-900">Rental End</p>
-                            <p className="text-sm text-gray-600">
+                            <p className="text-sm font-medium text-gray-900 dark:text-gray-100">Rental End</p>
+                            <p className="text-sm text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
                               {new Date(booking.rental_end_datetime).toLocaleString()}
                             </p>
                           </div>
@@ -558,8 +558,8 @@ const BookingDetail = () => {
                       <div className="flex items-start">
                         <MapPin className="h-4 w-4 text-purple-500 mt-0.5 mr-2" />
                         <div>
-                          <p className="text-sm font-medium text-gray-900">Work Location</p>
-                          <p className="text-sm text-gray-600">{booking.work_address}</p>
+                          <p className="text-sm font-medium text-gray-900 dark:text-gray-100">Work Location</p>
+                          <p className="text-sm text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">{booking.work_address}</p>
                         </div>
                       </div>
                     )}
@@ -568,18 +568,18 @@ const BookingDetail = () => {
                       <div className="flex items-start">
                         <FileText className="h-4 w-4 text-blue-500 mt-0.5 mr-2" />
                         <div>
-                          <p className="text-sm font-medium text-gray-900">Purpose</p>
-                          <p className="text-sm text-gray-600">{booking.purpose_description}</p>
+                          <p className="text-sm font-medium text-gray-900 dark:text-gray-100">Purpose</p>
+                          <p className="text-sm text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">{booking.purpose_description}</p>
                         </div>
                       </div>
                     )}
 
                     {booking.operator_required !== undefined && (
                       <div className="flex items-center">
-                        <User className="h-4 w-4 text-gray-400 mr-2" />
+                        <User className="h-4 w-4 text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 mr-2" />
                         <div>
-                          <p className="text-sm font-medium text-gray-900">Operator Required</p>
-                          <p className="text-sm text-gray-600">
+                          <p className="text-sm font-medium text-gray-900 dark:text-gray-100">Operator Required</p>
+                          <p className="text-sm text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
                             {booking.operator_required ? 'Yes' : 'No'}
                           </p>
                         </div>
@@ -587,9 +587,9 @@ const BookingDetail = () => {
                     )}
 
                     {booking.rental_start_datetime && booking.rental_end_datetime && (
-                      <div className="mt-4 pt-4 border-t border-gray-200">
+                      <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
                         <div className="flex justify-between text-sm">
-                          <span className="text-gray-500">Rental Duration:</span>
+                          <span className="text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Rental Duration:</span>
                           <span className="font-medium">
                             {Math.ceil(
                               (new Date(booking.rental_end_datetime) - new Date(booking.rental_start_datetime)) / (1000 * 60 * 60 * 24)
@@ -601,10 +601,10 @@ const BookingDetail = () => {
 
                     {booking.notes && (
                       <div className="flex items-start">
-                        <MessageSquare className="h-4 w-4 text-gray-400 mt-0.5 mr-2" />
+                        <MessageSquare className="h-4 w-4 text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 mt-0.5 mr-2" />
                         <div>
-                          <p className="text-sm font-medium text-gray-900">Additional Notes</p>
-                          <p className="text-sm text-gray-600">{booking.notes}</p>
+                          <p className="text-sm font-medium text-gray-900 dark:text-gray-100">Additional Notes</p>
+                          <p className="text-sm text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">{booking.notes}</p>
                         </div>
                       </div>
                     )}
@@ -614,9 +614,9 @@ const BookingDetail = () => {
             )}
 
             {/* Truck Information */}
-            <div className="bg-white shadow-sm rounded-lg overflow-hidden">
-              <div className="px-6 py-4 border-b border-gray-200">
-                <h3 className="text-lg font-medium text-gray-900">
+            <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 shadow-sm rounded-lg overflow-hidden">
+              <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+                <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">
                   {booking.service_type === 'rental' ? 'Equipment' : 'Truck'} Information
                 </h3>
               </div>
@@ -628,10 +628,10 @@ const BookingDetail = () => {
                     <Truck className="h-8 w-8 text-blue-600" />
                   )}
                   <div className="ml-4">
-                    <p className="text-lg font-medium text-gray-900">
+                    <p className="text-lg font-medium text-gray-900 dark:text-gray-100">
                       {booking.truck_license_plate || booking.license_plate || 'N/A'}
                     </p>
-                    <p className="text-sm text-gray-600">
+                    <p className="text-sm text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
                       {booking.truck_make && booking.truck_model 
                         ? `${booking.truck_make} ${booking.truck_model}` 
                         : 'Make & Model N/A'}
@@ -642,18 +642,18 @@ const BookingDetail = () => {
                 <div className="space-y-3">
                   {/* Vehicle Type */}
                   <div className="flex justify-between items-center py-2 border-b border-gray-100">
-                    <span className="text-sm text-gray-500">Type:</span>
-                    <span className="text-sm font-medium text-gray-900">
+                    <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Type:</span>
+                    <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                       {booking.truck_type || 'N/A'}
                     </span>
                   </div>
                   
                   {/* Capacity Weight */}
                   <div className="flex justify-between items-center py-2 border-b border-gray-100">
-                    <span className="text-sm text-gray-500">
+                    <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
                       {booking.service_type === 'rental' ? 'Operating Weight:' : 'Capacity:'}
                     </span>
-                    <span className="text-sm font-medium text-gray-900">
+                    <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                       {(booking.truck_capacity?.toLocaleString() || booking.capacity_weight?.toLocaleString() || 'N/A')} 
                       {(booking.truck_capacity || booking.capacity_weight) && ' kg'}
                     </span>
@@ -662,8 +662,8 @@ const BookingDetail = () => {
                   {/* Year */}
                   {(booking.truck_year || booking.year) && (
                     <div className="flex justify-between items-center py-2 border-b border-gray-100">
-                      <span className="text-sm text-gray-500">Year:</span>
-                      <span className="text-sm font-medium text-gray-900">
+                      <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Year:</span>
+                      <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                         {booking.truck_year || booking.year}
                       </span>
                     </div>
@@ -672,8 +672,8 @@ const BookingDetail = () => {
                   {/* Volume Capacity */}
                   {(booking.capacity_volume) && (
                     <div className="flex justify-between items-center py-2 border-b border-gray-100">
-                      <span className="text-sm text-gray-500">Volume:</span>
-                      <span className="text-sm font-medium text-gray-900">
+                      <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Volume:</span>
+                      <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                         {booking.capacity_volume} m³
                       </span>
                     </div>
@@ -682,8 +682,8 @@ const BookingDetail = () => {
                   {/* Pricing Information */}
                   {booking.pricing_type && (
                     <div className="flex justify-between items-center py-2 border-b border-gray-100">
-                      <span className="text-sm text-gray-500">Pricing Type:</span>
-                      <span className="text-sm font-medium text-gray-900">
+                      <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Pricing Type:</span>
+                      <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                         {booking.pricing_type === 'fixed' ? 'Fixed Price' : 'Per Kilometer'}
                       </span>
                     </div>
@@ -692,8 +692,8 @@ const BookingDetail = () => {
                   {/* Price per km or Fixed price */}
                   {booking.pricing_type === 'per_km' && booking.price_per_km && (
                     <div className="flex justify-between items-center py-2 border-b border-gray-100">
-                      <span className="text-sm text-gray-500">Rate:</span>
-                      <span className="text-sm font-medium text-gray-900">
+                      <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Rate:</span>
+                      <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                         ${booking.price_per_km}/km
                       </span>
                     </div>
@@ -701,8 +701,8 @@ const BookingDetail = () => {
                   
                   {booking.pricing_type === 'fixed' && booking.fixed_price && (
                     <div className="flex justify-between items-center py-2 border-b border-gray-100">
-                      <span className="text-sm text-gray-500">Fixed Rate:</span>
-                      <span className="text-sm font-medium text-gray-900">
+                      <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Fixed Rate:</span>
+                      <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                         ${booking.fixed_price}
                       </span>
                     </div>
@@ -715,16 +715,16 @@ const BookingDetail = () => {
           {/* Sidebar */}
           <div className="lg:col-span-1 space-y-6">
             {/* Pricing */}
-            <div className="bg-white shadow-sm rounded-lg p-6">
-              <h3 className="text-lg font-medium text-gray-900 mb-4">Pricing</h3>
+            <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 shadow-sm rounded-lg p-6">
+              <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4">Pricing</h3>
               <div className="space-y-3">
                 <div className="flex justify-between text-sm">
-                  <span className="text-gray-500">Base Price:</span>
+                  <span className="text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Base Price:</span>
                   <span className="font-medium">${booking.total_price?.toLocaleString()}</span>
                 </div>
-                <div className="pt-3 border-t border-gray-200">
+                <div className="pt-3 border-t border-gray-200 dark:border-gray-700">
                   <div className="flex justify-between">
-                    <span className="text-lg font-medium text-gray-900">Total:</span>
+                    <span className="text-lg font-medium text-gray-900 dark:text-gray-100">Total:</span>
                     <span className="text-lg font-bold text-green-600">
                       ${booking.total_price?.toLocaleString()}
                     </span>
@@ -734,8 +734,8 @@ const BookingDetail = () => {
             </div>
 
             {/* Contact Information */}
-            <div className="bg-white shadow-sm rounded-lg p-6">
-              <h3 className="text-lg font-medium text-gray-900 mb-4">
+            <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 shadow-sm rounded-lg p-6">
+              <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4">
                 {user.role === 'customer' ? 'Provider' : 'Customer'} Contact
               </h3>
               <div className="space-y-4">
@@ -743,9 +743,9 @@ const BookingDetail = () => {
                 <div>
                   <div className="flex items-center mb-2">
                     <Building className="h-5 w-5 text-blue-600 mr-2" />
-                    <p className="text-sm font-medium text-gray-500">Company</p>
+                    <p className="text-sm font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Company</p>
                   </div>
-                  <p className="text-base font-semibold text-gray-900 ml-7">
+                  <p className="text-base font-semibold text-gray-900 dark:text-gray-100 ml-7">
                     {user.role === 'customer' 
                       ? (booking.provider_company || 'Not provided') 
                       : (booking.customer_company || 'Not provided')
@@ -757,9 +757,9 @@ const BookingDetail = () => {
                 <div>
                   <div className="flex items-center mb-2">
                     <User className="h-5 w-5 text-purple-600 mr-2" />
-                    <p className="text-sm font-medium text-gray-500">Contact Person</p>
+                    <p className="text-sm font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Contact Person</p>
                   </div>
-                  <p className="text-base font-semibold text-gray-900 ml-7">
+                  <p className="text-base font-semibold text-gray-900 dark:text-gray-100 ml-7">
                     {user.role === 'customer' 
                       ? (booking.provider_name || `${booking.provider_first_name || ''} ${booking.provider_last_name || ''}`.trim() || 'Not provided')
                       : (booking.customer_name || `${booking.customer_first_name || ''} ${booking.customer_last_name || ''}`.trim() || 'Not provided')
@@ -771,9 +771,9 @@ const BookingDetail = () => {
                 <div>
                   <div className="flex items-center mb-2">
                     <Phone className="h-5 w-5 text-green-600 mr-2" />
-                    <p className="text-sm font-medium text-gray-500">Phone Number</p>
+                    <p className="text-sm font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Phone Number</p>
                   </div>
-                  <p className="text-base font-semibold text-gray-900 ml-7">
+                  <p className="text-base font-semibold text-gray-900 dark:text-gray-100 ml-7">
                     {user.role === 'customer' 
                       ? (booking.provider_phone || 'Not provided') 
                       : (booking.customer_phone || 'Not provided')
@@ -784,7 +784,7 @@ const BookingDetail = () => {
               
               <button 
                 onClick={() => alert('Messaging feature coming soon!')}
-                className="mt-6 w-full inline-flex justify-center items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
+                className="mt-6 w-full inline-flex justify-center items-center px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 hover:bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900"
               >
                 <MessageSquare className="h-4 w-4 mr-2" />
                 Send Message
@@ -792,14 +792,14 @@ const BookingDetail = () => {
             </div>
 
             {/* Timeline */}
-            <div className="bg-white shadow-sm rounded-lg p-6">
-              <h3 className="text-lg font-medium text-gray-900 mb-4">Timeline</h3>
+            <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 shadow-sm rounded-lg p-6">
+              <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4">Timeline</h3>
               <div className="space-y-3">
                 <div className="flex items-center text-sm">
                   <div className="flex-shrink-0 w-2 h-2 bg-blue-600 rounded-full"></div>
                   <div className="ml-3">
-                    <p className="font-medium text-gray-900">Booking Created</p>
-                    <p className="text-gray-500">
+                    <p className="font-medium text-gray-900 dark:text-gray-100">Booking Created</p>
+                    <p className="text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
                       {new Date(booking.created_at).toLocaleDateString()} at {new Date(booking.created_at).toLocaleTimeString()}
                     </p>
                   </div>
@@ -809,8 +809,8 @@ const BookingDetail = () => {
                   <div className="flex items-center text-sm">
                     <div className="flex-shrink-0 w-2 h-2 bg-green-600 rounded-full"></div>
                     <div className="ml-3">
-                      <p className="font-medium text-gray-900">Status Updated</p>
-                      <p className="text-gray-500">
+                      <p className="font-medium text-gray-900 dark:text-gray-100">Status Updated</p>
+                      <p className="text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
                         {new Date(booking.updated_at).toLocaleDateString()} at {new Date(booking.updated_at).toLocaleTimeString()}
                       </p>
                     </div>

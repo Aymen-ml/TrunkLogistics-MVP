@@ -241,27 +241,27 @@ const DocumentUpload = ({
     return (
       <div className="border rounded-lg p-4">
         <div className="flex items-center space-x-2 mb-2">
-          <Icon className="h-5 w-5 text-gray-600" />
-          <label className="text-sm font-medium text-gray-700">
+          <Icon className="h-5 w-5 text-gray-600 dark:text-gray-400 dark:text-gray-500" />
+          <label className="text-sm font-medium text-gray-700 dark:text-gray-200">
             {docType.name}
             {docType.required && <span className="text-red-500 ml-1">*</span>}
           </label>
         </div>
-        <p className="text-xs text-gray-500 mb-3">{docType.description}</p>
+        <p className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 mb-3">{docType.description}</p>
         
         {hasFile ? (
           <div className="flex items-center justify-between p-3 bg-green-50 border border-green-200 rounded-md">
             <div className="flex items-center space-x-3">
               <span className="text-lg">{getFileIcon(docType.value)}</span>
               <div>
-                <p className="text-sm font-medium text-gray-900">{docType.value.name}</p>
-                <p className="text-xs text-gray-500">{formatFileSize(docType.value.size)}</p>
+                <p className="text-sm font-medium text-gray-900 dark:text-gray-100">{docType.value.name}</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500">{formatFileSize(docType.value.size)}</p>
               </div>
             </div>
             <button
               type="button"
               onClick={() => removeDocument(docType.value, docType.onChange)}
-              className="inline-flex items-center p-1 text-red-600 hover:text-red-800"
+              className="inline-flex items-center p-1 text-red-600 hover:text-red-800 dark:text-red-200"
               title="Remove document"
             >
               <X className="h-4 w-4" />
@@ -269,7 +269,7 @@ const DocumentUpload = ({
           </div>
         ) : (
           <div className={`border-2 border-dashed rounded-md p-4 text-center ${
-            docType.required ? 'border-red-300 bg-red-50' : 'border-gray-300'
+            docType.required ? 'border-red-300 bg-red-50' : 'border-gray-300 dark:border-gray-600'
           }`}>
             <label
               htmlFor={`${docType.id}-upload`}
@@ -285,7 +285,7 @@ const DocumentUpload = ({
                 onChange={(e) => handleFileSelect(e, docType.onChange)}
               />
             </label>
-            <p className="text-xs text-gray-500 mt-1">PDF, Word, or image</p>
+            <p className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 mt-1">PDF, Word, or image</p>
             {docType.required && (
               <p className="text-xs text-red-500 mt-1">Required</p>
             )}
@@ -300,7 +300,7 @@ const DocumentUpload = ({
   return (
     <div className={`space-y-6 ${className}`}>
       <div>
-        <h3 className="text-lg font-medium text-gray-900 mb-4">Document Upload</h3>
+        <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4">Document Upload</h3>
         
         {/* Specific Document Types */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
@@ -312,20 +312,20 @@ const DocumentUpload = ({
         {/* Additional Documents Section */}
         <div className="border-t pt-6">
           <div className="flex items-center space-x-2 mb-4">
-            <Plus className="h-5 w-5 text-gray-600" />
-            <label className="text-sm font-medium text-gray-700">
+            <Plus className="h-5 w-5 text-gray-600 dark:text-gray-400 dark:text-gray-500" />
+            <label className="text-sm font-medium text-gray-700 dark:text-gray-200">
               Additional Documents (Optional)
             </label>
           </div>
-          <p className="text-xs text-gray-500 mb-3">
+          <p className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 mb-3">
             Upload any additional documents up to {maxAdditionalDocs} files
           </p>
 
           {/* Additional Upload Area */}
-          <div className={`border-2 border-dashed border-gray-300 rounded-md p-4 text-center mb-4 ${
+          <div className={`border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-md p-4 text-center mb-4 ${
             normalizedAdditionalDocs.length >= maxAdditionalDocs ? 'opacity-50 pointer-events-none' : ''
           }`}>
-            <FileText className="h-8 w-8 text-gray-400 mx-auto mb-2" />
+            <FileText className="h-8 w-8 text-gray-400 dark:text-gray-500 mx-auto mb-2" />
             <label
               htmlFor="additional-upload"
               className={`cursor-pointer text-sm text-blue-600 hover:text-blue-500 ${
@@ -343,7 +343,7 @@ const DocumentUpload = ({
                 disabled={normalizedAdditionalDocs.length >= maxAdditionalDocs}
               />
             </label>
-            <p className="text-xs text-gray-500 mt-1">
+            <p className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 mt-1">
               {normalizedAdditionalDocs.length}/{maxAdditionalDocs} documents
             </p>
           </div>
@@ -352,18 +352,18 @@ const DocumentUpload = ({
           {normalizedAdditionalDocs.length > 0 && (
             <div className="space-y-2">
               {normalizedAdditionalDocs.map((doc, index) => (
-                <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-md">
+                <div key={index} className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-900 rounded-md">
                   <div className="flex items-center space-x-3">
                     <span className="text-lg">{getFileIcon(doc)}</span>
                     <div>
-                      <p className="text-sm font-medium text-gray-900">{doc.name}</p>
-                      <p className="text-xs text-gray-500">{formatFileSize(doc.size)}</p>
+                      <p className="text-sm font-medium text-gray-900 dark:text-gray-100">{doc.name}</p>
+                      <p className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500">{formatFileSize(doc.size)}</p>
                     </div>
                   </div>
                   <button
                     type="button"
                     onClick={() => removeAdditionalDocument(index)}
-                    className="inline-flex items-center p-1 text-red-600 hover:text-red-800"
+                    className="inline-flex items-center p-1 text-red-600 hover:text-red-800 dark:text-red-200"
                     title="Remove document"
                   >
                     <X className="h-4 w-4" />

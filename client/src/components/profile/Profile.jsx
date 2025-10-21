@@ -91,54 +91,54 @@ const Profile = () => {
   if (!user) return null;
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 py-8 flex items-center justify-center">
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 py-8 flex items-center justify-center">
         <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-600"></div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 py-8">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">Your Profile</h1>
-          <p className="mt-2 text-gray-600">View and update your account information.</p>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">Your Profile</h1>
+          <p className="mt-2 text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">View and update your account information.</p>
         </div>
 
         <div className="space-y-8">
           {/* Account Overview Section */}
-          <div className="bg-white shadow-sm rounded-xl border border-gray-200 p-6">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">Account Overview</h2>
+          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 shadow-sm rounded-xl border border-gray-200 dark:border-gray-700 p-6">
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Account Overview</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              <div className="bg-gray-50 rounded-lg p-4">
-                <div className="text-xs font-medium text-gray-500 uppercase tracking-wide">Role</div>
-                <div className="mt-2 inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+              <div className="bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 rounded-lg p-4">
+                <div className="text-xs font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 uppercase tracking-wide">Role</div>
+                <div className="mt-2 inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200">
                   {meta.role}
                 </div>
               </div>
-              <div className="bg-gray-50 rounded-lg p-4">
-                <div className="text-xs font-medium text-gray-500 uppercase tracking-wide">Email Verified</div>
+              <div className="bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 rounded-lg p-4">
+                <div className="text-xs font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 uppercase tracking-wide">Email Verified</div>
                 <div className="mt-2 text-sm font-medium text-gray-800">
                   <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
-                    meta.emailVerified ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+                    meta.emailVerified ? 'bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200' : 'bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200'
                   }`}>
                     {meta.emailVerified ? 'Verified' : 'Not Verified'}
                   </span>
                 </div>
               </div>
-              <div className="bg-gray-50 rounded-lg p-4">
-                <div className="text-xs font-medium text-gray-500 uppercase tracking-wide">Account Status</div>
+              <div className="bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 rounded-lg p-4">
+                <div className="text-xs font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 uppercase tracking-wide">Account Status</div>
                 <div className="mt-2 text-sm font-medium text-gray-800">
                   <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
-                    meta.isActive ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+                    meta.isActive ? 'bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200' : 'bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200'
                   }`}>
                     {meta.isActive ? 'Active' : 'Inactive'}
                   </span>
                 </div>
               </div>
               {meta.createdAt && (
-                <div className="bg-gray-50 rounded-lg p-4">
-                  <div className="text-xs font-medium text-gray-500 uppercase tracking-wide">Member Since</div>
+                <div className="bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 rounded-lg p-4">
+                  <div className="text-xs font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 uppercase tracking-wide">Member Since</div>
                   <div className="mt-2 text-sm font-medium text-gray-800">{new Date(meta.createdAt).toLocaleDateString()}</div>
                 </div>
               )}
@@ -146,51 +146,51 @@ const Profile = () => {
           </div>
 
           {/* Personal Information Section */}
-          <div className="bg-white shadow-sm rounded-xl border border-gray-200 p-6">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">Personal Information</h2>
+          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 shadow-sm rounded-xl border border-gray-200 dark:border-gray-700 p-6">
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Personal Information</h2>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">Email Address</label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <Mail className="h-5 w-5 text-gray-400" />
+                    <Mail className="h-5 w-5 text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500" />
                   </div>
-                  <div className="pl-10 pr-3 py-2 bg-gray-50 border border-gray-300 rounded-lg text-sm text-gray-600 w-full">
+                  <div className="pl-10 pr-3 py-2 bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-lg text-sm text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 w-full">
                     {meta.email}
                   </div>
                 </div>
-                <p className="mt-1 text-xs text-gray-500">Email address cannot be changed from this form</p>
+                <p className="mt-1 text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Email address cannot be changed from this form</p>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-2">First Name</label>
+                  <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">First Name</label>
                   <div className="relative">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                      <User className="h-5 w-5 text-gray-400" />
+                      <User className="h-5 w-5 text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500" />
                     </div>
                     <input 
                       id="firstName" 
                       name="firstName" 
                       value={form.firstName} 
                       onChange={handleChange} 
-                      className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200" 
+                      className="w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200" 
                       placeholder="Enter your first name"
                     />
                   </div>
                 </div>
                 <div>
-                  <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
+                  <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">Last Name</label>
                   <div className="relative">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                      <User className="h-5 w-5 text-gray-400" />
+                      <User className="h-5 w-5 text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500" />
                     </div>
                     <input 
                       id="lastName" 
                       name="lastName" 
                       value={form.lastName} 
                       onChange={handleChange} 
-                      className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200" 
+                      className="w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200" 
                       placeholder="Enter your last name"
                     />
                   </div>
@@ -198,10 +198,10 @@ const Profile = () => {
               </div>
 
               <div>
-                <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
+                <label htmlFor="phone" className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">Phone Number</label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <Phone className="h-5 w-5 text-gray-400" />
+                    <Phone className="h-5 w-5 text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500" />
                   </div>
                   <input 
                     id="phone" 
@@ -209,7 +209,7 @@ const Profile = () => {
                     type="tel"
                     value={form.phone} 
                     onChange={handleChange} 
-                    className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200" 
+                    className="w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200" 
                     placeholder="(123) 456-7890"
                   />
                 </div>
@@ -238,56 +238,56 @@ const Profile = () => {
           </div>
 
           {/* Location Information Section */}
-          <div className="bg-white shadow-sm rounded-xl border border-gray-200 p-6">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">Location Information</h2>
+          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 shadow-sm rounded-xl border border-gray-200 dark:border-gray-700 p-6">
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Location Information</h2>
             <LocationEditor />
           </div>
 
           {/* Security Section */}
-          <div className="bg-white shadow-sm rounded-xl border border-gray-200 p-6">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">Security</h2>
+          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 shadow-sm rounded-xl border border-gray-200 dark:border-gray-700 p-6">
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Security</h2>
             <form onSubmit={updatePwd} className="space-y-4">
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Current Password</label>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">Current Password</label>
                   <div className="relative">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                      <Lock className="h-5 w-5 text-gray-400" />
+                      <Lock className="h-5 w-5 text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500" />
                     </div>
                     <input 
                       type="password" 
                       placeholder="Enter current password" 
-                      className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200" 
+                      className="w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200" 
                       value={pwd.currentPassword} 
                       onChange={(e) => setPwd(p => ({ ...p, currentPassword: e.target.value }))} 
                     />
                   </div>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">New Password</label>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">New Password</label>
                   <div className="relative">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                      <Lock className="h-5 w-5 text-gray-400" />
+                      <Lock className="h-5 w-5 text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500" />
                     </div>
                     <input 
                       type="password" 
                       placeholder="Enter new password" 
-                      className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200" 
+                      className="w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200" 
                       value={pwd.newPassword} 
                       onChange={(e) => setPwd(p => ({ ...p, newPassword: e.target.value }))} 
                     />
                   </div>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Confirm New Password</label>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">Confirm New Password</label>
                   <div className="relative">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                      <Lock className="h-5 w-5 text-gray-400" />
+                      <Lock className="h-5 w-5 text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500" />
                     </div>
                     <input 
                       type="password" 
                       placeholder="Confirm new password" 
-                      className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200" 
+                      className="w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200" 
                       value={pwd.confirm} 
                       onChange={(e) => setPwd(p => ({ ...p, confirm: e.target.value }))} 
                     />
@@ -380,16 +380,16 @@ const LocationEditor = () => {
     <form onSubmit={save} className="space-y-6">
       {role === 'provider' && (
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Company Name</label>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">Company Name</label>
           <div className="relative">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <Building2 className="h-5 w-5 text-gray-400" />
+              <Building2 className="h-5 w-5 text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500" />
             </div>
             <input 
               name="companyName" 
               value={form.companyName} 
               onChange={handleChange} 
-              className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200" 
+              className="w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200" 
               placeholder="Enter company name"
             />
           </div>
@@ -397,16 +397,16 @@ const LocationEditor = () => {
       )}
       
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">Street Address</label>
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">Street Address</label>
         <div className="relative">
           <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <MapPin className="h-5 w-5 text-gray-400" />
+            <MapPin className="h-5 w-5 text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500" />
           </div>
           <input 
             name="address" 
             value={form.address} 
             onChange={handleChange} 
-            className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200" 
+            className="w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200" 
             placeholder="Enter street address"
           />
         </div>
@@ -414,34 +414,34 @@ const LocationEditor = () => {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">City</label>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">City</label>
           <input 
             name="city" 
             value={form.city} 
             onChange={handleChange} 
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200" 
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200" 
             placeholder="Enter city"
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Country</label>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">Country</label>
           <input 
             name="country" 
             value={form.country} 
             onChange={handleChange} 
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200" 
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200" 
             placeholder="Enter country"
           />
         </div>
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">Postal Code</label>
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">Postal Code</label>
         <input 
           name="postalCode" 
           value={form.postalCode} 
           onChange={handleChange} 
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200" 
+          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200" 
           placeholder="Enter postal code"
         />
       </div>

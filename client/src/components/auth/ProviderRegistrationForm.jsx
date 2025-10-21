@@ -113,7 +113,7 @@ const ProviderRegistrationForm = () => {
       
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Business Information */}
-        <section className="bg-white p-6 rounded-lg shadow">
+        <section className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
           <h2 className="text-xl font-semibold mb-4">Business Information</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -205,7 +205,7 @@ const ProviderRegistrationForm = () => {
         </section>
 
         {/* Contact Information */}
-        <section className="bg-white p-6 rounded-lg shadow">
+        <section className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
           <h2 className="text-xl font-semibold mb-4">Contact Information</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -248,7 +248,7 @@ const ProviderRegistrationForm = () => {
         </section>
 
         {/* Address Information */}
-        <section className="bg-white p-6 rounded-lg shadow">
+        <section className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
           <h2 className="text-xl font-semibold mb-4">Address Information</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -305,7 +305,7 @@ const ProviderRegistrationForm = () => {
         </section>
 
         {/* Document Upload */}
-        <section className="bg-white p-6 rounded-lg shadow">
+        <section className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
           <h2 className="text-xl font-semibold mb-4">Required Documents</h2>
           
           <div className="space-y-4">
@@ -342,7 +342,7 @@ const ProviderRegistrationForm = () => {
           <button
             type="button"
             onClick={() => navigate(-1)}
-            className="px-6 py-2 text-gray-600 border rounded hover:bg-gray-100"
+            className="px-6 py-2 text-gray-600 dark:text-gray-400 dark:text-gray-500 border rounded hover:bg-gray-100 dark:bg-gray-700"
           >
             Cancel
           </button>

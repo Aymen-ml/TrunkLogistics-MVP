@@ -18,7 +18,7 @@ const NotificationBell = () => {
     <>
       <button
         onClick={toggleNotificationCenter}
-        className="relative p-2 text-gray-600 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-full"
+        className="relative p-2 text-gray-600 dark:text-gray-400 dark:text-gray-500 hover:text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-full"
       >
         <Bell className="h-6 w-6" />
         {unreadCount > 0 && (

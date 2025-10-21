@@ -138,7 +138,7 @@ const DocumentVerification = () => {
   const getFileIcon = (mimeType) => {
     if (mimeType?.includes('pdf')) return <FileType className="h-5 w-5 text-red-500" />;
     if (mimeType?.includes('image')) return <FileImage className="h-5 w-5 text-blue-500" />;
-    return <File className="h-5 w-5 text-gray-500" />;
+    return <File className="h-5 w-5 text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500" />;
   };
 
   const getServiceTypeIcon = (serviceType) => {
@@ -149,9 +149,9 @@ const DocumentVerification = () => {
 
   const getStatusBadge = (status) => {
     const statusConfig = {
-      pending: { color: 'bg-yellow-100 text-yellow-800', icon: Clock, label: 'Pending' },
-      approved: { color: 'bg-green-100 text-green-800', icon: Check, label: 'Approved' },
-      rejected: { color: 'bg-red-100 text-red-800', icon: X, label: 'Rejected' }
+      pending: { color: 'bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200', icon: Clock, label: 'Pending' },
+      approved: { color: 'bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200', icon: Check, label: 'Approved' },
+      rejected: { color: 'bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200', icon: X, label: 'Rejected' }
     };
 
     const config = statusConfig[status] || statusConfig.pending;
@@ -239,14 +239,14 @@ const DocumentVerification = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900 flex items-center justify-center">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
         <div className="mb-8">
@@ -254,8 +254,8 @@ const DocumentVerification = () => {
             <div className="flex items-center">
               <FileText className="h-8 w-8 text-blue-600 mr-3" />
               <div>
-                <h1 className="text-3xl font-bold text-gray-900">Document Verification</h1>
-                <p className="mt-2 text-gray-600">
+                <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">Document Verification</h1>
+                <p className="mt-2 text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
                   Review and verify uploaded truck documents
                 </p>
               </div>
@@ -263,14 +263,14 @@ const DocumentVerification = () => {
             <div className="flex items-center space-x-3">
               <button
                 onClick={() => fetchDocuments()}
-                className="inline-flex items-center px-3 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
+                className="inline-flex items-center px-3 py-2 border border-gray-300 dark:border-gray-600 text-sm font-medium rounded-md text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 hover:bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900"
               >
                 <RefreshCw className="h-4 w-4 mr-2" />
                 Refresh
               </button>
               <button
                 onClick={() => setShowFilters(!showFilters)}
-                className="inline-flex items-center px-3 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
+                className="inline-flex items-center px-3 py-2 border border-gray-300 dark:border-gray-600 text-sm font-medium rounded-md text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 hover:bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900"
               >
                 <Filter className="h-4 w-4 mr-2" />
                 {showFilters ? 'Hide Filters' : 'Show Filters'}
@@ -281,23 +281,23 @@ const DocumentVerification = () => {
 
         {/* Enhanced Stats */}
         <div className="grid grid-cols-2 md:grid-cols-6 gap-4 mb-8">
-          <div className="bg-white overflow-hidden shadow rounded-lg">
+          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 overflow-hidden shadow rounded-lg">
             <div className="p-4">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
-                  <FileText className="h-6 w-6 text-gray-400" />
+                  <FileText className="h-6 w-6 text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500" />
                 </div>
                 <div className="ml-3 w-0 flex-1">
                   <dl>
-                    <dt className="text-xs font-medium text-gray-500 truncate">Total Documents</dt>
-                    <dd className="text-lg font-medium text-gray-900">{stats.total_documents}</dd>
+                    <dt className="text-xs font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 truncate">Total Documents</dt>
+                    <dd className="text-lg font-medium text-gray-900 dark:text-gray-100">{stats.total_documents}</dd>
                   </dl>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="bg-white overflow-hidden shadow rounded-lg">
+          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 overflow-hidden shadow rounded-lg">
             <div className="p-4">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
@@ -305,15 +305,15 @@ const DocumentVerification = () => {
                 </div>
                 <div className="ml-3 w-0 flex-1">
                   <dl>
-                    <dt className="text-xs font-medium text-gray-500 truncate">Pending</dt>
-                    <dd className="text-lg font-medium text-gray-900">{stats.pending_documents}</dd>
+                    <dt className="text-xs font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 truncate">Pending</dt>
+                    <dd className="text-lg font-medium text-gray-900 dark:text-gray-100">{stats.pending_documents}</dd>
                   </dl>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="bg-white overflow-hidden shadow rounded-lg">
+          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 overflow-hidden shadow rounded-lg">
             <div className="p-4">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
@@ -321,15 +321,15 @@ const DocumentVerification = () => {
                 </div>
                 <div className="ml-3 w-0 flex-1">
                   <dl>
-                    <dt className="text-xs font-medium text-gray-500 truncate">Approved</dt>
-                    <dd className="text-lg font-medium text-gray-900">{stats.approved_documents}</dd>
+                    <dt className="text-xs font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 truncate">Approved</dt>
+                    <dd className="text-lg font-medium text-gray-900 dark:text-gray-100">{stats.approved_documents}</dd>
                   </dl>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="bg-white overflow-hidden shadow rounded-lg">
+          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 overflow-hidden shadow rounded-lg">
             <div className="p-4">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
@@ -337,15 +337,15 @@ const DocumentVerification = () => {
                 </div>
                 <div className="ml-3 w-0 flex-1">
                   <dl>
-                    <dt className="text-xs font-medium text-gray-500 truncate">Rejected</dt>
-                    <dd className="text-lg font-medium text-gray-900">{stats.rejected_documents}</dd>
+                    <dt className="text-xs font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 truncate">Rejected</dt>
+                    <dd className="text-lg font-medium text-gray-900 dark:text-gray-100">{stats.rejected_documents}</dd>
                   </dl>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="bg-white overflow-hidden shadow rounded-lg">
+          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 overflow-hidden shadow rounded-lg">
             <div className="p-4">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
@@ -353,15 +353,15 @@ const DocumentVerification = () => {
                 </div>
                 <div className="ml-3 w-0 flex-1">
                   <dl>
-                    <dt className="text-xs font-medium text-gray-500 truncate">Trucks</dt>
-                    <dd className="text-lg font-medium text-gray-900">{stats.trucks_with_documents}</dd>
+                    <dt className="text-xs font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 truncate">Trucks</dt>
+                    <dd className="text-lg font-medium text-gray-900 dark:text-gray-100">{stats.trucks_with_documents}</dd>
                   </dl>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="bg-white overflow-hidden shadow rounded-lg">
+          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 overflow-hidden shadow rounded-lg">
             <div className="p-4">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
@@ -369,8 +369,8 @@ const DocumentVerification = () => {
                 </div>
                 <div className="ml-3 w-0 flex-1">
                   <dl>
-                    <dt className="text-xs font-medium text-gray-500 truncate">Providers</dt>
-                    <dd className="text-lg font-medium text-gray-900">{stats.providers_with_documents}</dd>
+                    <dt className="text-xs font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 truncate">Providers</dt>
+                    <dd className="text-lg font-medium text-gray-900 dark:text-gray-100">{stats.providers_with_documents}</dd>
                   </dl>
                 </div>
               </div>
@@ -380,40 +380,40 @@ const DocumentVerification = () => {
 
         {/* Advanced Filters */}
         {showFilters && (
-          <div className="bg-white shadow rounded-lg mb-6">
-            <div className="px-4 py-3 border-b border-gray-200">
-              <h3 className="text-lg font-medium text-gray-900">Advanced Filters</h3>
+          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 shadow rounded-lg mb-6">
+            <div className="px-4 py-3 border-b border-gray-200 dark:border-gray-700">
+              <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">Advanced Filters</h3>
             </div>
             <div className="p-4">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {/* Search */}
                 <div className="lg:col-span-3">
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
                     Search
                   </label>
                   <div className="relative">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                      <Search className="h-5 w-5 text-gray-400" />
+                      <Search className="h-5 w-5 text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500" />
                     </div>
                     <input
                       type="text"
                       value={filters.search}
                       onChange={(e) => handleFilterChange('search', e.target.value)}
                       placeholder="Search by file name, license plate, provider..."
-                      className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                      className="block w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-blue-500 focus:border-blue-500"
                     />
                   </div>
                 </div>
 
                 {/* Status Filter */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
                     Status
                   </label>
                   <select
                     value={filters.status}
                     onChange={(e) => handleFilterChange('status', e.target.value)}
-                    className="block w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                    className="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-blue-500 focus:border-blue-500"
                   >
                     <option value="all">All Statuses</option>
                     <option value="pending">Pending</option>
@@ -424,13 +424,13 @@ const DocumentVerification = () => {
 
                 {/* Service Type Filter */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
                     Service Type
                   </label>
                   <select
                     value={filters.serviceType}
                     onChange={(e) => handleFilterChange('serviceType', e.target.value)}
-                    className="block w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                    className="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-blue-500 focus:border-blue-500"
                   >
                     <option value="all">All Services</option>
                     <option value="transport">Transportation</option>
@@ -440,13 +440,13 @@ const DocumentVerification = () => {
 
                 {/* Document Type Filter */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
                     Document Type
                   </label>
                   <select
                     value={filters.documentType}
                     onChange={(e) => handleFilterChange('documentType', e.target.value)}
-                    className="block w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                    className="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-blue-500 focus:border-blue-500"
                   >
                     <option value="all">All Types</option>
                     {filterOptions.documentTypes.map(type => (
@@ -459,13 +459,13 @@ const DocumentVerification = () => {
 
                 {/* Provider Filter */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
                     Provider
                   </label>
                   <select
                     value={filters.providerId}
                     onChange={(e) => handleFilterChange('providerId', e.target.value)}
-                    className="block w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                    className="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-blue-500 focus:border-blue-500"
                   >
                     <option value="">All Providers</option>
                     {filterOptions.providers.map(provider => (
@@ -478,13 +478,13 @@ const DocumentVerification = () => {
 
                 {/* Truck Filter */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
                     Truck
                   </label>
                   <select
                     value={filters.truckId}
                     onChange={(e) => handleFilterChange('truckId', e.target.value)}
-                    className="block w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                    className="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-blue-500 focus:border-blue-500"
                   >
                     <option value="">All Trucks</option>
                     {filterOptions.trucks.map(truck => (
@@ -499,7 +499,7 @@ const DocumentVerification = () => {
               <div className="mt-4 flex justify-end">
                 <button
                   onClick={clearFilters}
-                  className="px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
+                  className="px-4 py-2 border border-gray-300 dark:border-gray-600 text-sm font-medium rounded-md text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 hover:bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900"
                 >
                   Clear Filters
                 </button>
@@ -509,69 +509,69 @@ const DocumentVerification = () => {
         )}
 
         {/* Documents Table */}
-        <div className="bg-white shadow overflow-hidden sm:rounded-md">
-          <div className="px-4 py-5 sm:px-6 border-b border-gray-200">
-            <h3 className="text-lg leading-6 font-medium text-gray-900">
+        <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 shadow overflow-hidden sm:rounded-md">
+          <div className="px-4 py-5 sm:px-6 border-b border-gray-200 dark:border-gray-700">
+            <h3 className="text-lg leading-6 font-medium text-gray-900 dark:text-gray-100">
               Documents ({documents.length})
             </h3>
-            <p className="mt-1 max-w-2xl text-sm text-gray-500">
+            <p className="mt-1 max-w-2xl text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
               Review and verify uploaded truck documents
             </p>
           </div>
           
           {documents.length === 0 ? (
             <div className="text-center py-12">
-              <AlertCircle className="mx-auto h-12 w-12 text-gray-400" />
-              <h3 className="mt-2 text-sm font-medium text-gray-900">No documents found</h3>
-              <p className="mt-1 text-sm text-gray-500">
+              <AlertCircle className="mx-auto h-12 w-12 text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500" />
+              <h3 className="mt-2 text-sm font-medium text-gray-900 dark:text-gray-100">No documents found</h3>
+              <p className="mt-1 text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
                 No documents match the current filters.
               </p>
             </div>
           ) : (
             <div className="overflow-x-auto">
-              <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-50">
+              <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                <thead className="bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900">
                   <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 uppercase tracking-wider">
                       Document
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 uppercase tracking-wider">
                       Truck & Provider
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 uppercase tracking-wider">
                       Type & Service
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 uppercase tracking-wider">
                       Status
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 uppercase tracking-wider">
                       Uploaded
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 uppercase tracking-wider">
                       Actions
                     </th>
                   </tr>
                 </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
+                <tbody className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
                   {documents.map((document) => (
-                    <tr key={document.id} className="hover:bg-gray-50">
+                    <tr key={document.id} className="hover:bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900">
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="flex items-center">
                           <div className="flex-shrink-0">
                             {getFileIcon(document.mime_type)}
                           </div>
                           <div className="ml-4">
-                            <div className="text-sm font-medium text-gray-900">
+                            <div className="text-sm font-medium text-gray-900 dark:text-gray-100">
                               {document.file_name || 'Unnamed Document'}
                             </div>
-                            <div className="text-sm text-gray-500">
+                            <div className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
                               {document.file_size ? `${(document.file_size / 1024).toFixed(1)} KB` : 'Unknown size'}
                             </div>
                           </div>
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm text-gray-900">
+                        <div className="text-sm text-gray-900 dark:text-gray-100">
                           {document.license_plate && (
                             <div className="flex items-center">
                               <Truck className="h-4 w-4 text-blue-500 mr-1" />
@@ -579,12 +579,12 @@ const DocumentVerification = () => {
                             </div>
                           )}
                           {document.truck_type && (
-                            <div className="text-xs text-gray-500">
+                            <div className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
                               {document.truck_type} • {document.make} {document.model} {document.year}
                             </div>
                           )}
                         </div>
-                        <div className="text-sm text-gray-500">
+                        <div className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
                           {document.provider_company && (
                             <div className="flex items-center">
                               <Building className="h-4 w-4 text-purple-500 mr-1" />
@@ -592,17 +592,17 @@ const DocumentVerification = () => {
                             </div>
                           )}
                           {document.provider_first_name && document.provider_last_name && (
-                            <div className="text-xs text-gray-500">
+                            <div className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
                               {document.provider_first_name} {document.provider_last_name}
                             </div>
                           )}
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm text-gray-900">
+                        <div className="text-sm text-gray-900 dark:text-gray-100">
                           {getDocumentTypeLabel(document.document_type)}
                         </div>
-                        <div className="text-sm text-gray-500">
+                        <div className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
                           <div className="flex items-center">
                             {getServiceTypeIcon(document.service_type)}
                             <span className="ml-1">
@@ -614,19 +614,19 @@ const DocumentVerification = () => {
                       <td className="px-6 py-4 whitespace-nowrap">
                         {getStatusBadge(document.verification_status)}
                         {document.verified_at && (
-                          <div className="text-xs text-gray-500 mt-1">
+                          <div className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 mt-1">
                             {new Date(document.verified_at).toLocaleDateString()}
                           </div>
                         )}
                         {document.verified_by_first_name && (
-                          <div className="text-xs text-gray-500">
+                          <div className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
                             by {document.verified_by_first_name} {document.verified_by_last_name}
                           </div>
                         )}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
                         {new Date(document.uploaded_at).toLocaleDateString()}
-                        <div className="text-xs text-gray-400">
+                        <div className="text-xs text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
                           {new Date(document.uploaded_at).toLocaleTimeString()}
                         </div>
                       </td>
@@ -635,7 +635,7 @@ const DocumentVerification = () => {
                           {/* View Document Button */}
                           <button
                             onClick={() => handleViewDocument(document.id, document.file_name)}
-                            className="inline-flex items-center px-2 py-1 border border-gray-300 text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50"
+                            className="inline-flex items-center px-2 py-1 border border-gray-300 dark:border-gray-600 text-xs font-medium rounded text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 hover:bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900"
                             title="View Document"
                           >
                             <Eye className="h-3 w-3 mr-1" />

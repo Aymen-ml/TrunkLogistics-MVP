@@ -68,26 +68,26 @@ const ForgotPassword = () => {
             <div className="flex justify-center">
               <div className="flex items-center space-x-2">
                 <Truck className="h-10 w-10 text-blue-600" />
-                <span className="text-2xl font-bold text-gray-900">TrunkLogistics</span>
+                <span className="text-2xl font-bold text-gray-900 dark:text-gray-100">TrunkLogistics</span>
               </div>
             </div>
           </div>
 
-          <div className="bg-white shadow-lg rounded-lg p-8">
+          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 shadow-lg rounded-lg p-8">
             <div className="text-center">
-              <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100 mb-4">
+              <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100 dark:bg-green-900 mb-4">
                 <CheckCircle className="h-6 w-6 text-green-600" />
               </div>
               
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">
                 Check Your Email
               </h2>
               
-              <p className="text-gray-600 mb-6">
+              <p className="text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 mb-6">
                 We've sent a password reset link to <strong>{email}</strong>
               </p>
               
-              <p className="text-sm text-gray-500 mb-6">
+              <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 mb-6">
                 If you don't see the email in your inbox, please check your spam folder. 
                 The reset link will expire in 1 hour for security reasons.
               </p>
@@ -106,7 +106,7 @@ const ForgotPassword = () => {
                     setSuccess(false);
                     setEmail('');
                   }}
-                  className="w-full flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                  className="w-full flex justify-center py-2 px-4 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 hover:bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                 >
                   Send Another Email
                 </button>
@@ -125,13 +125,13 @@ const ForgotPassword = () => {
           <div className="flex justify-center">
             <div className="flex items-center space-x-2">
               <Truck className="h-10 w-10 text-blue-600" />
-              <span className="text-2xl font-bold text-gray-900">TrunkLogistics</span>
+              <span className="text-2xl font-bold text-gray-900 dark:text-gray-100">TrunkLogistics</span>
             </div>
           </div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900 dark:text-gray-100">
             Forgot your password?
           </h2>
-          <p className="mt-2 text-center text-sm text-gray-600">
+          <p className="mt-2 text-center text-sm text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
             Enter your email address and we'll send you a link to reset your password.
           </p>
         </div>
@@ -142,19 +142,19 @@ const ForgotPassword = () => {
               <div className="flex">
                 <AlertCircle className="h-5 w-5 text-red-400" />
                 <div className="ml-3">
-                  <p className="text-sm text-red-800">{error}</p>
+                  <p className="text-sm text-red-800 dark:text-red-200">{error}</p>
                 </div>
               </div>
             </div>
           )}
           
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-200">
               Email address
             </label>
             <div className="mt-1 relative">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <Mail className="h-5 w-5 text-gray-400" />
+                <Mail className="h-5 w-5 text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500" />
               </div>
               <input
                 id="email"
@@ -163,8 +163,8 @@ const ForgotPassword = () => {
                 autoComplete="email"
                 required
                 className={`appearance-none relative block w-full pl-10 pr-3 py-2 border ${
-                  error ? 'border-red-300' : 'border-gray-300'
-                } placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm`}
+                  error ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'
+                } placeholder-gray-500 text-gray-900 dark:text-gray-100 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm`}
                 placeholder="Enter your email address"
                 value={email}
                 onChange={handleEmailChange}
@@ -187,7 +187,7 @@ const ForgotPassword = () => {
             
             <Link
               to="/login"
-              className="w-full flex justify-center items-center py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+              className="w-full flex justify-center items-center py-2 px-4 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 hover:bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
             >
               <ArrowLeft className="h-4 w-4 mr-2" />
               Back to Login

@@ -60,17 +60,17 @@ const EmailVerification = () => {
   }, [location, navigate]);
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+        <div className="bg-white dark:bg-gray-800 py-8 px-4 shadow sm:rounded-lg sm:px-10">
           <div className="text-center">
             {status === 'verifying' && (
               <>
                 <Loader className="mx-auto h-12 w-12 text-blue-600 animate-spin" />
-                <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
+                <h2 className="mt-6 text-3xl font-extrabold text-gray-900 dark:text-gray-100">
                   Verifying Your Email
                 </h2>
-                <p className="mt-2 text-sm text-gray-600">
+                <p className="mt-2 text-sm text-gray-600 dark:text-gray-400 dark:text-gray-500">
                   Please wait while we verify your email address...
                 </p>
               </>
@@ -79,10 +79,10 @@ const EmailVerification = () => {
             {status === 'success' && (
               <>
                 <CheckCircle className="mx-auto h-12 w-12 text-green-600" />
-                <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
+                <h2 className="mt-6 text-3xl font-extrabold text-gray-900 dark:text-gray-100">
                   Email Verified!
                 </h2>
-                <p className="mt-2 text-sm text-gray-600">
+                <p className="mt-2 text-sm text-gray-600 dark:text-gray-400 dark:text-gray-500">
                   {message}
                 </p>
                 <p className="mt-2 text-sm text-blue-600">
@@ -94,10 +94,10 @@ const EmailVerification = () => {
             {status === 'error' && (
               <>
                 <XCircle className="mx-auto h-12 w-12 text-red-600" />
-                <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
+                <h2 className="mt-6 text-3xl font-extrabold text-gray-900 dark:text-gray-100">
                   Verification Failed
                 </h2>
-                <p className="mt-2 text-sm text-gray-600">
+                <p className="mt-2 text-sm text-gray-600 dark:text-gray-400 dark:text-gray-500">
                   {message}
                 </p>
                 <button

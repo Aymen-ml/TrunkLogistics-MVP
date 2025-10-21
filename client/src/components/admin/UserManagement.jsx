@@ -65,9 +65,9 @@ const UserManagement = () => {
 
   const getRoleBadge = (role) => {
     const roleConfig = {
-      admin: { color: 'bg-purple-100 text-purple-800', icon: Shield },
-      provider: { color: 'bg-blue-100 text-blue-800', icon: UserCheck },
-      customer: { color: 'bg-green-100 text-green-800', icon: Users }
+      admin: { color: 'bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200', icon: Shield },
+      provider: { color: 'bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200', icon: UserCheck },
+      customer: { color: 'bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200', icon: Users }
     };
 
     const config = roleConfig[role] || roleConfig.customer;
@@ -85,8 +85,8 @@ const UserManagement = () => {
     return (
       <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
         isActive 
-          ? 'bg-green-100 text-green-800' 
-          : 'bg-red-100 text-red-800'
+          ? 'bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200' 
+          : 'bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200'
       }`}>
         {isActive ? (
           <UserCheck className="w-3 h-3 mr-1" />
@@ -116,22 +116,22 @@ const UserManagement = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900 flex items-center justify-center">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
         <div className="mb-8">
           <div className="flex items-center">
             <Users className="h-8 w-8 text-blue-600 mr-3" />
             <div>
-              <h1 className="text-3xl font-bold text-gray-900">User Management</h1>
-              <p className="mt-2 text-gray-600">
+              <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">User Management</h1>
+              <p className="mt-2 text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
                 Manage user accounts and permissions
               </p>
             </div>
@@ -140,23 +140,23 @@ const UserManagement = () => {
 
         {/* Stats */}
         <div className="grid grid-cols-2 md:grid-cols-6 gap-4 mb-8">
-          <div className="bg-white overflow-hidden shadow rounded-lg">
+          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 overflow-hidden shadow rounded-lg">
             <div className="p-4">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
-                  <Users className="h-6 w-6 text-gray-400" />
+                  <Users className="h-6 w-6 text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500" />
                 </div>
                 <div className="ml-3 w-0 flex-1">
                   <dl>
-                    <dt className="text-xs font-medium text-gray-500 truncate">Total</dt>
-                    <dd className="text-lg font-medium text-gray-900">{stats.total}</dd>
+                    <dt className="text-xs font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 truncate">Total</dt>
+                    <dd className="text-lg font-medium text-gray-900 dark:text-gray-100">{stats.total}</dd>
                   </dl>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="bg-white overflow-hidden shadow rounded-lg">
+          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 overflow-hidden shadow rounded-lg">
             <div className="p-4">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
@@ -164,15 +164,15 @@ const UserManagement = () => {
                 </div>
                 <div className="ml-3 w-0 flex-1">
                   <dl>
-                    <dt className="text-xs font-medium text-gray-500 truncate">Active</dt>
-                    <dd className="text-lg font-medium text-gray-900">{stats.active}</dd>
+                    <dt className="text-xs font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 truncate">Active</dt>
+                    <dd className="text-lg font-medium text-gray-900 dark:text-gray-100">{stats.active}</dd>
                   </dl>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="bg-white overflow-hidden shadow rounded-lg">
+          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 overflow-hidden shadow rounded-lg">
             <div className="p-4">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
@@ -180,15 +180,15 @@ const UserManagement = () => {
                 </div>
                 <div className="ml-3 w-0 flex-1">
                   <dl>
-                    <dt className="text-xs font-medium text-gray-500 truncate">Inactive</dt>
-                    <dd className="text-lg font-medium text-gray-900">{stats.inactive}</dd>
+                    <dt className="text-xs font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 truncate">Inactive</dt>
+                    <dd className="text-lg font-medium text-gray-900 dark:text-gray-100">{stats.inactive}</dd>
                   </dl>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="bg-white overflow-hidden shadow rounded-lg">
+          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 overflow-hidden shadow rounded-lg">
             <div className="p-4">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
@@ -196,15 +196,15 @@ const UserManagement = () => {
                 </div>
                 <div className="ml-3 w-0 flex-1">
                   <dl>
-                    <dt className="text-xs font-medium text-gray-500 truncate">Admins</dt>
-                    <dd className="text-lg font-medium text-gray-900">{stats.admins}</dd>
+                    <dt className="text-xs font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 truncate">Admins</dt>
+                    <dd className="text-lg font-medium text-gray-900 dark:text-gray-100">{stats.admins}</dd>
                   </dl>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="bg-white overflow-hidden shadow rounded-lg">
+          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 overflow-hidden shadow rounded-lg">
             <div className="p-4">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
@@ -212,15 +212,15 @@ const UserManagement = () => {
                 </div>
                 <div className="ml-3 w-0 flex-1">
                   <dl>
-                    <dt className="text-xs font-medium text-gray-500 truncate">Providers</dt>
-                    <dd className="text-lg font-medium text-gray-900">{stats.providers}</dd>
+                    <dt className="text-xs font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 truncate">Providers</dt>
+                    <dd className="text-lg font-medium text-gray-900 dark:text-gray-100">{stats.providers}</dd>
                   </dl>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="bg-white overflow-hidden shadow rounded-lg">
+          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 overflow-hidden shadow rounded-lg">
             <div className="p-4">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
@@ -228,8 +228,8 @@ const UserManagement = () => {
                 </div>
                 <div className="ml-3 w-0 flex-1">
                   <dl>
-                    <dt className="text-xs font-medium text-gray-500 truncate">Customers</dt>
-                    <dd className="text-lg font-medium text-gray-900">{stats.customers}</dd>
+                    <dt className="text-xs font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 truncate">Customers</dt>
+                    <dd className="text-lg font-medium text-gray-900 dark:text-gray-100">{stats.customers}</dd>
                   </dl>
                 </div>
               </div>
@@ -238,8 +238,8 @@ const UserManagement = () => {
         </div>
 
         {/* Filters */}
-        <div className="bg-white shadow rounded-lg mb-6">
-          <div className="px-4 py-3 border-b border-gray-200">
+        <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 shadow rounded-lg mb-6">
+          <div className="px-4 py-3 border-b border-gray-200 dark:border-gray-700">
             <div className="flex flex-wrap gap-2">
               {[
                 { key: 'all', label: 'All Users' },
@@ -254,8 +254,8 @@ const UserManagement = () => {
                   onClick={() => setFilter(key)}
                   className={`px-3 py-1 rounded-md text-sm font-medium ${
                     filter === key
-                      ? 'bg-blue-100 text-blue-700'
-                      : 'text-gray-500 hover:text-gray-700'
+                      ? 'bg-blue-100 dark:bg-blue-900 text-blue-700'
+                      : 'text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:text-gray-700 dark:text-gray-200'
                   }`}
                 >
                   {label}
@@ -266,46 +266,46 @@ const UserManagement = () => {
         </div>
 
         {/* Users Table */}
-        <div className="bg-white shadow overflow-hidden sm:rounded-md">
-          <div className="px-4 py-5 sm:px-6 border-b border-gray-200">
-            <h3 className="text-lg leading-6 font-medium text-gray-900">
+        <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 shadow overflow-hidden sm:rounded-md">
+          <div className="px-4 py-5 sm:px-6 border-b border-gray-200 dark:border-gray-700">
+            <h3 className="text-lg leading-6 font-medium text-gray-900 dark:text-gray-100">
               Users ({filteredUsers.length})
             </h3>
-            <p className="mt-1 max-w-2xl text-sm text-gray-500">
+            <p className="mt-1 max-w-2xl text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
               Manage user accounts and their status
             </p>
           </div>
           
-          <ul className="divide-y divide-gray-200">
+          <ul className="divide-y divide-gray-200 dark:divide-gray-700">
             {filteredUsers.map((user) => (
               <li key={user.id} className="px-4 py-6 sm:px-6">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center">
                     <div className="flex-shrink-0">
                       <div className="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center">
-                        <Users className="h-5 w-5 text-gray-500" />
+                        <Users className="h-5 w-5 text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500" />
                       </div>
                     </div>
                     <div className="ml-4">
                       <div className="flex items-center space-x-2">
-                        <p className="text-sm font-medium text-gray-900">
+                        <p className="text-sm font-medium text-gray-900 dark:text-gray-100">
                           {user.first_name} {user.last_name}
                         </p>
                         {getRoleBadge(user.role)}
                         {getStatusBadge(user.is_active)}
                       </div>
                       <div className="flex items-center space-x-4 mt-1">
-                        <div className="flex items-center text-sm text-gray-500">
+                        <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
                           <Mail className="h-4 w-4 mr-1" />
                           {user.email}
                         </div>
                         {user.phone && (
-                          <div className="flex items-center text-sm text-gray-500">
+                          <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
                             <Phone className="h-4 w-4 mr-1" />
                             {user.phone}
                           </div>
                         )}
-                        <div className="flex items-center text-sm text-gray-500">
+                        <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
                           <Calendar className="h-4 w-4 mr-1" />
                           {new Date(user.created_at).toLocaleDateString()}
                         </div>

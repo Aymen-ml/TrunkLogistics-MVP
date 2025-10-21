@@ -85,22 +85,22 @@ const TruckList = () => {
       case 'maintenance':
         return <AlertCircle className="h-4 w-4 text-red-500" />;
       default:
-        return <Clock className="h-4 w-4 text-gray-500" />;
+        return <Clock className="h-4 w-4 text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500" />;
     }
   };
 
   const getStatusColor = (status) => {
     switch (status) {
       case 'active':
-        return 'bg-green-100 text-green-800';
+        return 'bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200';
       case 'inactive':
-        return 'bg-yellow-100 text-yellow-800';
+        return 'bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200';
       case 'rented':
-        return 'bg-blue-100 text-blue-800';
+        return 'bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200';
       case 'maintenance':
-        return 'bg-red-100 text-red-800';
+        return 'bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200';
       default:
-        return 'bg-gray-100 text-gray-800';
+        return 'bg-gray-100 dark:bg-gray-700 text-gray-800';
     }
   };
 
@@ -131,21 +131,21 @@ const TruckList = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900 flex items-center justify-center">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
         {/* Header */}
         <div className="mb-6 sm:mb-8">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">My Fleet</h1>
-              <p className="mt-2 text-sm sm:text-base text-gray-600">
+              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100">My Fleet</h1>
+              <p className="mt-2 text-sm sm:text-base text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
                 Manage your trucks and rental equipment.
               </p>
             </div>
@@ -162,33 +162,33 @@ const TruckList = () => {
         </div>
 
         {/* Filters */}
-        <div className="bg-white p-4 sm:p-6 rounded-lg shadow-sm border border-gray-200 mb-6">
+        <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 p-4 sm:p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 mb-6">
           <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
                 Search
               </label>
               <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500" />
                 <input
                   type="text"
                   placeholder="License plate, make, model..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-10 w-full border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                  className="pl-10 w-full border-gray-300 dark:border-gray-600 rounded-md focus:ring-blue-500 focus:border-blue-500"
                   autoComplete="off"
                 />
               </div>
             </div>
             
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
                 Status
               </label>
               <select
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
-                className="w-full border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                className="w-full border-gray-300 dark:border-gray-600 rounded-md focus:ring-blue-500 focus:border-blue-500"
               >
                 <option value="all">All Status</option>
                 <option value="active">Active</option>
@@ -199,13 +199,13 @@ const TruckList = () => {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
                 Service
               </label>
               <select
                 value={serviceFilter}
                 onChange={(e) => setServiceFilter(e.target.value)}
-                className="w-full border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                className="w-full border-gray-300 dark:border-gray-600 rounded-md focus:ring-blue-500 focus:border-blue-500"
               >
                 <option value="all">All Services</option>
                 <option value="transport">Transportation</option>
@@ -214,13 +214,13 @@ const TruckList = () => {
             </div>
             
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
                 Type
               </label>
               <select
                 value={typeFilter}
                 onChange={(e) => setTypeFilter(e.target.value)}
-                className="w-full border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                className="w-full border-gray-300 dark:border-gray-600 rounded-md focus:ring-blue-500 focus:border-blue-500"
               >
                 <option value="all">All Types</option>
                 <option value="flatbed">Flatbed</option>
@@ -236,10 +236,10 @@ const TruckList = () => {
 
         {/* Trucks Grid */}
         {filteredTrucks.length === 0 ? (
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8 text-center">
-            <Truck className="mx-auto h-12 w-12 text-gray-400" />
-            <h3 className="mt-4 text-lg font-medium text-gray-900">No trucks found</h3>
-            <p className="mt-2 text-gray-500">
+          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-8 text-center">
+            <Truck className="mx-auto h-12 w-12 text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500" />
+            <h3 className="mt-4 text-lg font-medium text-gray-900 dark:text-gray-100">No trucks found</h3>
+            <p className="mt-2 text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
               {trucks.length === 0 
                 ? "Get started by adding your first truck to the fleet."
                 : "Try adjusting your search or filter criteria."
@@ -262,7 +262,7 @@ const TruckList = () => {
             {filteredTrucks.map((truck) => {
               const isRental = truck.service_type === 'rental';
               return (
-                <div key={truck.id} className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                <div key={truck.id} className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
                   <div className="p-6">
                     <div className="flex items-start justify-between">
                       <div className="flex items-center">
@@ -273,7 +273,7 @@ const TruckList = () => {
                         )}
                         <div className="ml-3">
                           <div className="flex items-center space-x-2">
-                            <h3 className="text-lg font-medium text-gray-900">
+                            <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">
                               {truck.license_plate}
                             </h3>
                             {isRental ? (
@@ -281,12 +281,12 @@ const TruckList = () => {
                                 Rental
                               </span>
                             ) : (
-                              <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                              <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200">
                                 Logistics
                               </span>
                             )}
                           </div>
-                          <p className="text-sm text-gray-500">
+                          <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
                             {truck.make} {truck.model} {truck.year}
                           </p>
                         </div>
@@ -298,18 +298,18 @@ const TruckList = () => {
 
                     <div className="mt-4 space-y-2">
                       <div className="flex justify-between text-sm">
-                        <span className="text-gray-500">Type:</span>
+                        <span className="text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Type:</span>
                         <span className="font-medium">{getTruckTypeLabel(truck.truck_type)}</span>
                       </div>
                       <div className="flex justify-between text-sm">
-                        <span className="text-gray-500">{isRental ? 'Weight:' : 'Capacity:'}</span>
+                        <span className="text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">{isRental ? 'Weight:' : 'Capacity:'}</span>
                         <span className="font-medium">{truck.capacity_weight?.toLocaleString()} kg</span>
                       </div>
                       
                       {/* Show rental rates or transport pricing */}
                       {isRental ? (
                         <div className="flex justify-between text-sm">
-                          <span className="text-gray-500">Rates:</span>
+                          <span className="text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Rates:</span>
                           <span className="font-medium">
                             {[
                               truck.hourly_rate && `$${truck.hourly_rate}/hr`,
@@ -321,7 +321,7 @@ const TruckList = () => {
                         </div>
                       ) : (
                         <div className="flex justify-between text-sm">
-                          <span className="text-gray-500">Pricing:</span>
+                          <span className="text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Pricing:</span>
                           <span className="font-medium">
                             {truck.pricing_type === 'per_km' 
                               ? `$${truck.price_per_km}/km`
@@ -334,7 +334,7 @@ const TruckList = () => {
                       {/* Show work location for rental equipment */}
                       {isRental && truck.work_location && (
                         <div className="flex items-start justify-between text-sm">
-                          <span className="text-gray-500 flex items-center">
+                          <span className="text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 flex items-center">
                             <MapPin className="h-3 w-3 mr-1" />
                             Location:
                           </span>
@@ -352,21 +352,21 @@ const TruckList = () => {
                         <div className="flex items-center space-x-2">
                           <Link
                             to={`/trucks/${truck.id}`}
-                            className="p-2 text-gray-400 hover:text-blue-600 rounded-full hover:bg-gray-100"
+                            className="p-2 text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:text-blue-600 rounded-full hover:bg-gray-100 dark:bg-gray-700"
                             title="View details"
                           >
                             <Eye className="h-4 w-4" />
                           </Link>
                           <Link
                             to={`/trucks/${truck.id}/edit`}
-                            className="p-2 text-gray-400 hover:text-blue-600 rounded-full hover:bg-gray-100"
+                            className="p-2 text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:text-blue-600 rounded-full hover:bg-gray-100 dark:bg-gray-700"
                             title={`Edit ${isRental ? 'equipment' : 'truck'}`}
                           >
                             <Edit className="h-4 w-4" />
                           </Link>
                           <button
                             onClick={() => deleteTruck(truck.id)}
-                            className="p-2 text-gray-400 hover:text-red-600 rounded-full hover:bg-gray-100"
+                            className="p-2 text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:text-red-600 rounded-full hover:bg-gray-100 dark:bg-gray-700"
                             title={`Delete ${isRental ? 'equipment' : 'truck'}`}
                           >
                             <Trash2 className="h-4 w-4" />

@@ -32,7 +32,7 @@ const EmailVerificationBanner = () => {
           <Mail className="h-5 w-5 text-yellow-400" />
         </div>
         <div className="ml-3 flex-1">
-          <h3 className="text-sm font-medium text-yellow-800">
+          <h3 className="text-sm font-medium text-yellow-800 dark:text-yellow-200">
             Email Verification Required
           </h3>
           <div className="mt-2 text-sm text-yellow-700">
@@ -46,7 +46,7 @@ const EmailVerificationBanner = () => {
               <button
                 onClick={handleResendEmail}
                 disabled={isResending}
-                className="inline-flex items-center text-sm font-medium text-yellow-800 hover:text-yellow-600 disabled:opacity-50"
+                className="inline-flex items-center text-sm font-medium text-yellow-800 dark:text-yellow-200 hover:text-yellow-600 disabled:opacity-50"
               >
                 {isResending ? (
                   <>
@@ -67,7 +67,7 @@ const EmailVerificationBanner = () => {
           <div className="-mx-1.5 -my-1.5">
             <button
               onClick={() => setIsDismissed(true)}
-              className="inline-flex rounded-md bg-yellow-50 p-1.5 text-yellow-500 hover:bg-yellow-100 focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:ring-offset-2 focus:ring-offset-yellow-50"
+              className="inline-flex rounded-md bg-yellow-50 p-1.5 text-yellow-500 hover:bg-yellow-100 dark:bg-yellow-900 focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:ring-offset-2 focus:ring-offset-yellow-50"
             >
               <span className="sr-only">Dismiss</span>
               <X className="h-5 w-5" />

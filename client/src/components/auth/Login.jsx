@@ -79,13 +79,13 @@ const Login = () => {
           <div className="flex justify-center">
             <div className="flex items-center space-x-2">
               <Truck className="h-10 w-10 text-blue-600" />
-              <span className="text-2xl font-bold text-gray-900">TrunkLogistics</span>
+              <span className="text-2xl font-bold text-gray-900 dark:text-gray-100">TrunkLogistics</span>
             </div>
           </div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900 dark:text-gray-100">
             Sign in to your account
           </h2>
-          <p className="mt-2 text-center text-sm text-gray-600">
+          <p className="mt-2 text-center text-sm text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
             Or{' '}
             <Link
               to="/register"
@@ -102,7 +102,7 @@ const Login = () => {
               <div className="flex">
                 <AlertCircle className="h-5 w-5 text-red-400" />
                 <div className="ml-3">
-                  <p className="text-sm text-red-800">{errors.general}</p>
+                  <p className="text-sm text-red-800 dark:text-red-200">{errors.general}</p>
                 </div>
               </div>
             </div>
@@ -110,12 +110,12 @@ const Login = () => {
           
           <div className="space-y-4">
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-200">
                 Email address
               </label>
               <div className="mt-1 relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Mail className="h-5 w-5 text-gray-400" />
+                  <Mail className="h-5 w-5 text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500" />
                 </div>
                 <input
                   id="email"
@@ -124,8 +124,8 @@ const Login = () => {
                   autoComplete="email"
                   required
                   className={`appearance-none relative block w-full pl-10 pr-3 py-2 border ${
-                    errors.email ? 'border-red-300' : 'border-gray-300'
-                  } placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm`}
+                    errors.email ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'
+                  } placeholder-gray-500 text-gray-900 dark:text-gray-100 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm`}
                   placeholder="Enter your email"
                   value={formData.email}
                   onChange={handleChange}
@@ -137,12 +137,12 @@ const Login = () => {
             </div>
             
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-200">
                 Password
               </label>
               <div className="mt-1 relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Lock className="h-5 w-5 text-gray-400" />
+                  <Lock className="h-5 w-5 text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500" />
                 </div>
                 <input
                   id="password"
@@ -151,8 +151,8 @@ const Login = () => {
                   autoComplete="current-password"
                   required
                   className={`appearance-none relative block w-full pl-10 pr-3 py-2 border ${
-                    errors.password ? 'border-red-300' : 'border-gray-300'
-                  } placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm`}
+                    errors.password ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'
+                  } placeholder-gray-500 text-gray-900 dark:text-gray-100 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm`}
                   placeholder="Enter your password"
                   value={formData.password}
                   onChange={handleChange}

@@ -202,22 +202,22 @@ const TruckDetail = () => {
       case 'maintenance':
         return <AlertCircle className="h-5 w-5 text-red-500" />;
       default:
-        return <Clock className="h-5 w-5 text-gray-500" />;
+        return <Clock className="h-5 w-5 text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500" />;
     }
   };
 
   const getStatusColor = (status) => {
     switch (status) {
       case 'active':
-        return 'bg-green-100 text-green-800';
+        return 'bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200';
       case 'inactive':
-        return 'bg-yellow-100 text-yellow-800';
+        return 'bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200';
       case 'rented':
-        return 'bg-blue-100 text-blue-800';
+        return 'bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200';
       case 'maintenance':
-        return 'bg-red-100 text-red-800';
+        return 'bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200';
       default:
-        return 'bg-gray-100 text-gray-800';
+        return 'bg-gray-100 dark:bg-gray-700 text-gray-800';
     }
   };
 
@@ -235,7 +235,7 @@ const TruckDetail = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900 flex items-center justify-center">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
       </div>
     );
@@ -243,13 +243,13 @@ const TruckDetail = () => {
 
   if (!truck) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900 flex items-center justify-center">
         <div className="text-center max-w-md">
           <AlertCircle className="h-12 w-12 text-red-500 mx-auto mb-4" />
-          <h2 className="text-2xl font-bold text-gray-900">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
             {error?.isAuthError ? 'Access Denied' : error ? 'Error Loading Truck' : 'Truck not found'}
           </h2>
-          <p className="mt-2 text-gray-600">
+          <p className="mt-2 text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
             {error ? error.message : "The truck you're looking for doesn't exist."}
           </p>
           
@@ -261,7 +261,7 @@ const TruckDetail = () => {
                   <Mail className="h-5 w-5 text-yellow-400" />
                 </div>
                 <div className="ml-3">
-                  <h3 className="text-sm font-medium text-yellow-800">
+                  <h3 className="text-sm font-medium text-yellow-800 dark:text-yellow-200">
                     Email Verification Required
                   </h3>
                   <div className="mt-2 text-sm text-yellow-700">
@@ -271,7 +271,7 @@ const TruckDetail = () => {
                   <div className="mt-3">
                     <Link
                       to="/profile"
-                      className="text-sm font-medium text-yellow-800 underline hover:text-yellow-900"
+                      className="text-sm font-medium text-yellow-800 dark:text-yellow-200 underline hover:text-yellow-900"
                     >
                       Go to Profile to Verify Email →
                     </Link>
@@ -289,7 +289,7 @@ const TruckDetail = () => {
                   <User className="h-5 w-5 text-blue-400" />
                 </div>
                 <div className="ml-3">
-                  <h3 className="text-sm font-medium text-blue-800">
+                  <h3 className="text-sm font-medium text-blue-800 dark:text-blue-200">
                     Provider Access Restriction
                   </h3>
                   <div className="mt-2 text-sm text-blue-700">
@@ -330,14 +330,14 @@ const TruckDetail = () => {
           )}
 
           {error && error.status && !error.isAuthError && (
-            <p className="mt-1 text-sm text-gray-500">
+            <p className="mt-1 text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
               Error {error.status}: {error.details?.error || 'Unknown error'}
             </p>
           )}
           
           {error && !error.isAuthError && (
-            <div className="mt-4 p-3 bg-gray-100 rounded-md text-left">
-              <p className="text-xs text-gray-600">Debug Info:</p>
+            <div className="mt-4 p-3 bg-gray-100 dark:bg-gray-700 rounded-md text-left">
+              <p className="text-xs text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Debug Info:</p>
               <p className="text-xs text-gray-800">Truck ID: {id}</p>
               <p className="text-xs text-gray-800">User Role: {user?.role}</p>
               <p className="text-xs text-gray-800">Status: {error.status}</p>
@@ -357,7 +357,7 @@ const TruckDetail = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
         {/* Header */}
         <div className="mb-6 sm:mb-8">
@@ -372,7 +372,7 @@ const TruckDetail = () => {
                 navigate('/trucks');
               }
             }}
-            className="inline-flex items-center text-sm text-gray-500 hover:text-gray-700 mb-4"
+            className="inline-flex items-center text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:text-gray-700 dark:text-gray-200 mb-4"
           >
             <ArrowLeft className="h-4 w-4 mr-1" />
             Back to {user?.role === 'customer' ? 'Search' : user?.role === 'admin' ? 'Admin Trucks' : 'Trucks'}
@@ -387,14 +387,14 @@ const TruckDetail = () => {
               )}
               <div>
                 <div className="flex items-center space-x-3">
-                  <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
+                  <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100">
                     {truck.license_plate}
                   </h1>
                   <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(truck.status)}`}>
                     {truck.status.charAt(0).toUpperCase() + truck.status.slice(1)}
                   </span>
                 </div>
-                <p className="mt-2 text-sm sm:text-base text-gray-600">
+                <p className="mt-2 text-sm sm:text-base text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
                   {truck.make} {truck.model} {truck.year}
                 </p>
                 {truck.status !== 'active' && user?.role === 'customer' && (
@@ -419,7 +419,7 @@ const TruckDetail = () => {
               <div className="mt-4 sm:mt-0 flex items-center space-x-3">
                 <Link
                   to={`/trucks/${truck.id}/edit`}
-                  className="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
+                  className="inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 hover:bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900"
                 >
                   <Edit className="h-4 w-4 mr-2" />
                   Edit
@@ -460,10 +460,10 @@ const TruckDetail = () => {
         </div>
 
         {/* Truck Details */}
-        <div className="bg-white shadow-sm rounded-lg overflow-hidden">
-          <div className="px-6 py-4 border-b border-gray-200">
+        <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 shadow-sm rounded-lg overflow-hidden">
+          <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
             <div className="flex items-center justify-between">
-              <h3 className="text-lg font-medium text-gray-900">Truck Information</h3>
+              <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">Truck Information</h3>
               <div className="flex items-center">
                 {getStatusIcon(truck.status)}
                 <span className={`ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(truck.status)}`}>
@@ -477,29 +477,29 @@ const TruckDetail = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Basic Information */}
               <div className="space-y-4">
-                <h4 className="text-sm font-medium text-gray-900 uppercase tracking-wide">
+                <h4 className="text-sm font-medium text-gray-900 dark:text-gray-100 uppercase tracking-wide">
                   Basic Information
                 </h4>
                 
                 <div className="space-y-3">
                   <div className="flex justify-between">
-                    <span className="text-sm text-gray-500">Truck Type:</span>
-                    <span className="text-sm font-medium text-gray-900">
+                    <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Truck Type:</span>
+                    <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                       {getTruckTypeLabel(truck.truck_type)}
                     </span>
                   </div>
                   
                   <div className="flex justify-between">
-                    <span className="text-sm text-gray-500">License Plate:</span>
-                    <span className="text-sm font-medium text-gray-900">
+                    <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">License Plate:</span>
+                    <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                       {truck.license_plate}
                     </span>
                   </div>
                   
                   {truck.year && (
                     <div className="flex justify-between">
-                      <span className="text-sm text-gray-500">Year:</span>
-                      <span className="text-sm font-medium text-gray-900">
+                      <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Year:</span>
+                      <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                         {truck.year}
                       </span>
                     </div>
@@ -507,8 +507,8 @@ const TruckDetail = () => {
                   
                   {truck.make && (
                     <div className="flex justify-between">
-                      <span className="text-sm text-gray-500">Make:</span>
-                      <span className="text-sm font-medium text-gray-900">
+                      <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Make:</span>
+                      <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                         {truck.make}
                       </span>
                     </div>
@@ -516,8 +516,8 @@ const TruckDetail = () => {
                   
                   {truck.model && (
                     <div className="flex justify-between">
-                      <span className="text-sm text-gray-500">Model:</span>
-                      <span className="text-sm font-medium text-gray-900">
+                      <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Model:</span>
+                      <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                         {truck.model}
                       </span>
                     </div>
@@ -527,24 +527,24 @@ const TruckDetail = () => {
 
               {/* Capacity & Pricing */}
               <div className="space-y-4">
-                <h4 className="text-sm font-medium text-gray-900 uppercase tracking-wide">
+                <h4 className="text-sm font-medium text-gray-900 dark:text-gray-100 uppercase tracking-wide">
                   {truck.service_type === 'rental' ? 'Capacity & Rental Rates' : 'Capacity & Pricing'}
                 </h4>
                 
                 <div className="space-y-3">
                   <div className="flex justify-between">
-                    <span className="text-sm text-gray-500">
+                    <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
                       {truck.service_type === 'rental' ? 'Operating Weight:' : 'Weight Capacity:'}
                     </span>
-                    <span className="text-sm font-medium text-gray-900">
+                    <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                       {truck.capacity_weight?.toLocaleString()} kg
                     </span>
                   </div>
                   
                   {truck.capacity_volume && (
                     <div className="flex justify-between">
-                      <span className="text-sm text-gray-500">Volume Capacity:</span>
-                      <span className="text-sm font-medium text-gray-900">
+                      <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Volume Capacity:</span>
+                      <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                         {truck.capacity_volume} m³
                       </span>
                     </div>
@@ -552,8 +552,8 @@ const TruckDetail = () => {
                   
                   {truck.work_location && truck.service_type === 'rental' && (
                     <div className="flex justify-between">
-                      <span className="text-sm text-gray-500">Work Location:</span>
-                      <span className="text-sm font-medium text-gray-900">
+                      <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Work Location:</span>
+                      <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                         {truck.work_location}
                       </span>
                     </div>
@@ -564,7 +564,7 @@ const TruckDetail = () => {
                     <>
                       {truck.monthly_rate && (
                         <div className="flex justify-between">
-                          <span className="text-sm text-gray-500">Monthly Rate:</span>
+                          <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Monthly Rate:</span>
                           <span className="text-sm font-medium text-green-600">
                             {formatCurrency(truck.monthly_rate)}/month
                           </span>
@@ -575,15 +575,15 @@ const TruckDetail = () => {
                     /* Traditional Transport Pricing */
                     <>
                       <div className="flex justify-between">
-                        <span className="text-sm text-gray-500">Pricing Type:</span>
-                        <span className="text-sm font-medium text-gray-900">
+                        <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Pricing Type:</span>
+                        <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                           {truck.pricing_type === 'per_km' ? 'Per Kilometer' : 'Fixed Price'}
                         </span>
                       </div>
                       
                       <div className="flex justify-between">
-                        <span className="text-sm text-gray-500">Price:</span>
-                        <span className="text-sm font-medium text-gray-900">
+                        <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Price:</span>
+                        <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                           {truck.pricing_type === 'per_km' 
                             ? formatPriceWithUnit(truck.price_per_km)
                             : formatCurrency(truck.fixed_price)
@@ -598,19 +598,19 @@ const TruckDetail = () => {
 
             {/* Provider Information - Show to customers */}
             {user?.role === 'customer' && (truck.company_name || truck.first_name || truck.last_name || truck.phone) && (
-              <div className="mt-8 pt-6 border-t border-gray-200">
-                <h4 className="text-sm font-medium text-gray-900 uppercase tracking-wide mb-4">
+              <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
+                <h4 className="text-sm font-medium text-gray-900 dark:text-gray-100 uppercase tracking-wide mb-4">
                   Provider Information
                 </h4>
                 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {truck.company_name && (
                     <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-500 flex items-center">
+                      <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 flex items-center">
                         <Building2 className="h-4 w-4 mr-1" />
                         Company:
                       </span>
-                      <span className="text-sm font-medium text-gray-900">
+                      <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                         {truck.company_name}
                       </span>
                     </div>
@@ -618,11 +618,11 @@ const TruckDetail = () => {
                   
                   {(truck.first_name || truck.last_name) && (
                     <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-500 flex items-center">
+                      <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 flex items-center">
                         <User className="h-4 w-4 mr-1" />
                         Contact:
                       </span>
-                      <span className="text-sm font-medium text-gray-900">
+                      <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                         {[truck.first_name, truck.last_name].filter(Boolean).join(' ')}
                       </span>
                     </div>
@@ -630,12 +630,12 @@ const TruckDetail = () => {
                   
                   {truck.phone && (
                     <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-500 flex items-center">
+                      <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 flex items-center">
                         <Phone className="h-4 w-4 mr-1" />
                         Phone:
                       </span>
-                      <span className="text-sm font-medium text-gray-900">
-                        <a href={`tel:${truck.phone}`} className="text-blue-600 hover:text-blue-800">
+                      <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                        <a href={`tel:${truck.phone}`} className="text-blue-600 hover:text-blue-800 dark:text-blue-200">
                           {truck.phone}
                         </a>
                       </span>
@@ -645,11 +645,11 @@ const TruckDetail = () => {
                   {/* Provider Location Information */}
                   {(truck.provider_city || truck.provider_state || truck.provider_country) && (
                     <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-500 flex items-center">
+                      <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 flex items-center">
                         <MapPin className="h-4 w-4 mr-1" />
                         Location:
                       </span>
-                      <span className="text-sm font-medium text-gray-900">
+                      <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                         {[truck.provider_city, truck.provider_state, truck.provider_country].filter(Boolean).join(', ')}
                       </span>
                     </div>
@@ -657,11 +657,11 @@ const TruckDetail = () => {
                   
                   {truck.street_address && (
                     <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-500 flex items-center">
+                      <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 flex items-center">
                         <MapPin className="h-4 w-4 mr-1" />
                         Address:
                       </span>
-                      <span className="text-sm font-medium text-gray-900">
+                      <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                         {truck.street_address}
                       </span>
                     </div>
@@ -669,12 +669,12 @@ const TruckDetail = () => {
                   
                   {truck.provider_business_phone && (
                     <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-500 flex items-center">
+                      <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 flex items-center">
                         <Phone className="h-4 w-4 mr-1" />
                         Business Phone:
                       </span>
-                      <span className="text-sm font-medium text-gray-900">
-                        <a href={`tel:${truck.provider_business_phone}`} className="text-blue-600 hover:text-blue-800">
+                      <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                        <a href={`tel:${truck.provider_business_phone}`} className="text-blue-600 hover:text-blue-800 dark:text-blue-200">
                           {truck.provider_business_phone}
                         </a>
                       </span>
@@ -686,19 +686,19 @@ const TruckDetail = () => {
 
             {/* Driver Information */}
             {(truck.driver_name || truck.driver_phone || truck.driver_email || truck.driver_license_number) && (
-              <div className="mt-8 pt-6 border-t border-gray-200">
-                <h4 className="text-sm font-medium text-gray-900 uppercase tracking-wide mb-4">
+              <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
+                <h4 className="text-sm font-medium text-gray-900 dark:text-gray-100 uppercase tracking-wide mb-4">
                   Driver Information
                 </h4>
                 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {truck.driver_name && (
                     <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-500 flex items-center">
+                      <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 flex items-center">
                         <User className="h-4 w-4 mr-1" />
                         Name:
                       </span>
-                      <span className="text-sm font-medium text-gray-900">
+                      <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                         {truck.driver_name}
                       </span>
                     </div>
@@ -706,12 +706,12 @@ const TruckDetail = () => {
                   
                   {truck.driver_phone && (
                     <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-500 flex items-center">
+                      <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 flex items-center">
                         <Phone className="h-4 w-4 mr-1" />
                         Phone:
                       </span>
-                      <span className="text-sm font-medium text-gray-900">
-                        <a href={`tel:${truck.driver_phone}`} className="text-blue-600 hover:text-blue-800">
+                      <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                        <a href={`tel:${truck.driver_phone}`} className="text-blue-600 hover:text-blue-800 dark:text-blue-200">
                           {truck.driver_phone}
                         </a>
                       </span>
@@ -720,12 +720,12 @@ const TruckDetail = () => {
                   
                   {truck.driver_email && (
                     <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-500 flex items-center">
+                      <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 flex items-center">
                         <Mail className="h-4 w-4 mr-1" />
                         Email:
                       </span>
-                      <span className="text-sm font-medium text-gray-900">
-                        <a href={`mailto:${truck.driver_email}`} className="text-blue-600 hover:text-blue-800">
+                      <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                        <a href={`mailto:${truck.driver_email}`} className="text-blue-600 hover:text-blue-800 dark:text-blue-200">
                           {truck.driver_email}
                         </a>
                       </span>
@@ -734,11 +734,11 @@ const TruckDetail = () => {
                   
                   {truck.driver_license_number && (
                     <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-500 flex items-center">
+                      <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 flex items-center">
                         <CreditCard className="h-4 w-4 mr-1" />
                         License #:
                       </span>
-                      <span className="text-sm font-medium text-gray-900">
+                      <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                         {truck.driver_license_number}
                       </span>
                     </div>
@@ -748,22 +748,22 @@ const TruckDetail = () => {
             )}
 
             {/* Timestamps */}
-            <div className="mt-8 pt-6 border-t border-gray-200">
-              <h4 className="text-sm font-medium text-gray-900 uppercase tracking-wide mb-4">
+            <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
+              <h4 className="text-sm font-medium text-gray-900 dark:text-gray-100 uppercase tracking-wide mb-4">
                 Timestamps
               </h4>
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="flex justify-between">
-                  <span className="text-sm text-gray-500">Created:</span>
-                  <span className="text-sm font-medium text-gray-900">
+                  <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Created:</span>
+                  <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                     {new Date(truck.created_at).toLocaleDateString()}
                   </span>
                 </div>
                 
                 <div className="flex justify-between">
-                  <span className="text-sm text-gray-500">Last Updated:</span>
-                  <span className="text-sm font-medium text-gray-900">
+                  <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Last Updated:</span>
+                  <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                     {new Date(truck.updated_at).toLocaleDateString()}
                   </span>
                 </div>
@@ -774,12 +774,12 @@ const TruckDetail = () => {
 
         {/* Images Section */}
         {truck.images && truck.images.length > 0 && (
-          <div className="mt-8 bg-white shadow-sm rounded-lg overflow-hidden">
-            <div className="px-6 py-4 border-b border-gray-200">
+          <div className="mt-8 bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 shadow-sm rounded-lg overflow-hidden">
+            <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
               <div className="flex items-center">
                 <Image className="h-5 w-5 text-blue-500 mr-2" />
-                <h3 className="text-lg font-medium text-gray-900">Truck Images</h3>
-                <span className="ml-2 inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">Truck Images</h3>
+                <span className="ml-2 inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200">
                   {truck.images.length}
                 </span>
               </div>
@@ -804,7 +804,7 @@ const TruckDetail = () => {
                   
                   return (
                     <div key={index} className="relative group">
-                      <div className="aspect-square rounded-lg overflow-hidden bg-gray-100">
+                      <div className="aspect-square rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-700">
                         <img
                           src={imageUrl}
                           alt={`Truck image ${index + 1}`}
@@ -827,10 +827,10 @@ const TruckDetail = () => {
                           onClick={() => {
                             window.open(imageUrl, '_blank', 'noopener,noreferrer');
                           }}
-                          className="opacity-0 group-hover:opacity-100 bg-white bg-opacity-90 hover:bg-opacity-100 rounded-full p-2 transition-all duration-200"
+                          className="opacity-0 group-hover:opacity-100 bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 bg-opacity-90 hover:bg-opacity-100 rounded-full p-2 transition-all duration-200"
                           title="View full size"
                         >
-                          <Eye className="h-4 w-4 text-gray-700" />
+                          <Eye className="h-4 w-4 text-gray-700 dark:text-gray-200" />
                         </button>
                       </div>
                     </div>
@@ -843,12 +843,12 @@ const TruckDetail = () => {
 
         {/* Documents Section */}
         {truck.documents && truck.documents.length > 0 && (
-          <div className="mt-8 bg-white shadow-sm rounded-lg overflow-hidden">
-            <div className="px-6 py-4 border-b border-gray-200">
+          <div className="mt-8 bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 shadow-sm rounded-lg overflow-hidden">
+            <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
               <div className="flex items-center">
                 <FileText className="h-5 w-5 text-green-500 mr-2" />
-                <h3 className="text-lg font-medium text-gray-900">Documents</h3>
-                <span className="ml-2 inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">Documents</h3>
+                <span className="ml-2 inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200">
                   {truck.documents.length}
                 </span>
               </div>
@@ -892,34 +892,34 @@ const TruckDetail = () => {
                   
                   const getVerificationStatusColor = (status) => {
                     switch (status) {
-                      case 'approved': return 'bg-green-100 text-green-800';
-                      case 'rejected': return 'bg-red-100 text-red-800';
-                      case 'pending': return 'bg-yellow-100 text-yellow-800';
-                      default: return 'bg-gray-100 text-gray-800';
+                      case 'approved': return 'bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200';
+                      case 'rejected': return 'bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200';
+                      case 'pending': return 'bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200';
+                      default: return 'bg-gray-100 dark:bg-gray-700 text-gray-800';
                     }
                   };
 
                   return (
-                    <div key={index} className="border border-gray-200 rounded-lg p-4">
+                    <div key={index} className="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center flex-1 min-w-0">
                           <div className="flex-shrink-0">
-                            <FileText className="h-10 w-10 text-gray-400" />
+                            <FileText className="h-10 w-10 text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500" />
                           </div>
                           <div className="ml-4 flex-1 min-w-0">
                             <div className="flex items-center space-x-2">
-                              <p className="text-sm font-medium text-gray-900 truncate">
+                              <p className="text-sm font-medium text-gray-900 dark:text-gray-100 truncate">
                                 {getDocumentTitle(doc.file_name, doc.document_type)}
                               </p>
                               <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${getVerificationStatusColor(doc.verification_status)}`}>
                                 {doc.verification_status}
                               </span>
                             </div>
-                            <p className="text-sm text-gray-500">
+                            <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
                               {doc.document_type.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase())}
                               {doc.file_size && ` • ${(doc.file_size / 1024).toFixed(1)} KB`}
                             </p>
-                            <p className="text-xs text-gray-400">
+                            <p className="text-xs text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
                               Uploaded: {new Date(doc.uploaded_at).toLocaleDateString()}
                             </p>
                           </div>
@@ -971,7 +971,7 @@ const TruckDetail = () => {
                                 alert(`Error viewing document: ${error.response?.data?.error || error.message}`);
                               }
                             }}
-                            className="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                            className="inline-flex items-center px-3 py-2 border border-gray-300 dark:border-gray-600 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 hover:bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                           >
                             <Eye className="h-4 w-4 mr-1" />
                             View
@@ -988,38 +988,38 @@ const TruckDetail = () => {
 
         {/* Stats Cards */}
         <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-6">
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
             <div className="flex items-center">
               <div className="flex-shrink-0">
                 <Package className="h-8 w-8 text-blue-600" />
               </div>
               <div className="ml-4">
-                <p className="text-sm font-medium text-gray-500">Completed Bookings</p>
-                <p className="text-2xl font-semibold text-gray-900">{truckStats.completedBookings}</p>
+                <p className="text-sm font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Completed Bookings</p>
+                <p className="text-2xl font-semibold text-gray-900 dark:text-gray-100">{truckStats.completedBookings}</p>
               </div>
             </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
             <div className="flex items-center">
               <div className="flex-shrink-0">
                 <DollarSign className="h-8 w-8 text-green-600" />
               </div>
               <div className="ml-4">
-                <p className="text-sm font-medium text-gray-500">Total Revenue</p>
-                <p className="text-2xl font-semibold text-gray-900">{formatCurrency(truckStats.totalRevenue)}</p>
+                <p className="text-sm font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Total Revenue</p>
+                <p className="text-2xl font-semibold text-gray-900 dark:text-gray-100">{formatCurrency(truckStats.totalRevenue)}</p>
               </div>
             </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
             <div className="flex items-center">
               <div className="flex-shrink-0">
                 <Calendar className="h-8 w-8 text-purple-600" />
               </div>
               <div className="ml-4">
-                <p className="text-sm font-medium text-gray-500">Days Active</p>
-                <p className="text-2xl font-semibold text-gray-900">
+                <p className="text-sm font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Days Active</p>
+                <p className="text-2xl font-semibold text-gray-900 dark:text-gray-100">
                   {Math.floor((new Date() - new Date(truck.created_at)) / (1000 * 60 * 60 * 24))}
                 </p>
               </div>

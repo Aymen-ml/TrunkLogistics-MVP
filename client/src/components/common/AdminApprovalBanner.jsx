@@ -18,7 +18,7 @@ const AdminApprovalBanner = () => {
         </div>
         <div className="ml-3">
           <div className="flex items-center">
-            <h3 className="text-sm font-medium text-yellow-800">
+            <h3 className="text-sm font-medium text-yellow-800 dark:text-yellow-200">
               Account Pending Admin Approval
             </h3>
             <Shield className="h-4 w-4 text-yellow-600 ml-2" />

@@ -233,26 +233,26 @@ const EditBooking = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900 flex items-center justify-center">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900 py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
         <div className="mb-8">
           <button
             onClick={() => navigate(-1)}
-            className="inline-flex items-center text-sm text-gray-500 hover:text-gray-700 mb-4"
+            className="inline-flex items-center text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:text-gray-700 dark:text-gray-200 mb-4"
           >
             <ArrowLeft className="h-4 w-4 mr-1" />
             Back to Booking
           </button>
           
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">Edit Booking</h1>
-          <p className="text-gray-600">Update your booking details below.</p>
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">Edit Booking</h1>
+          <p className="text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Update your booking details below.</p>
         </div>
         
         {errors.form && (
@@ -273,17 +273,17 @@ const EditBooking = () => {
         <form onSubmit={handleSubmit} className="space-y-8">
           {/* Truck Information */}
           {truck && (
-            <div className="bg-white shadow-sm rounded-lg overflow-hidden">
-              <div className="px-6 py-4 border-b border-gray-200">
-                <h3 className="text-lg font-medium text-gray-900">Truck Information</h3>
+            <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 shadow-sm rounded-lg overflow-hidden">
+              <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+                <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">Truck Information</h3>
               </div>
               <div className="px-6 py-4">
                 <div className="flex items-center">
                   <Truck className="h-5 w-5 text-blue-500 mr-3" />
                   <div>
                     <h4 className="font-medium">{truck.truck_type}</h4>
-                    <p className="text-sm text-gray-500">License: {truck.license_plate}</p>
-                    <p className="text-sm text-gray-500">
+                    <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">License: {truck.license_plate}</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
                       Capacity: {truck.capacity_weight} kg, {truck.capacity_volume} m³
                     </p>
                   </div>
@@ -293,13 +293,13 @@ const EditBooking = () => {
           )}
           
           {/* Route Information */}
-          <div className="bg-white shadow-sm rounded-lg overflow-hidden">
-            <div className="px-6 py-4 border-b border-gray-200">
-              <h3 className="text-lg font-medium text-gray-900">Route Information</h3>
+          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 shadow-sm rounded-lg overflow-hidden">
+            <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+              <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">Route Information</h3>
             </div>
             <div className="px-6 py-6 space-y-6">
               <div>
-                <label htmlFor="pickup_address" className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="pickup_address" className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">
                   Pickup Address <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -308,7 +308,7 @@ const EditBooking = () => {
                   name="pickup_address"
                   value={formData.pickup_address}
                   onChange={handleChange}
-                  className={`block w-full rounded-md shadow-sm ${errors.pickup_address ? 'border-red-300' : 'border-gray-300'} focus:border-blue-500 focus:ring-blue-500`}
+                  className={`block w-full rounded-md shadow-sm ${errors.pickup_address ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'} focus:border-blue-500 focus:ring-blue-500`}
                   placeholder="123 Main St"
                 />
                 {errors.pickup_address && (
@@ -318,7 +318,7 @@ const EditBooking = () => {
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label htmlFor="pickup_city" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label htmlFor="pickup_city" className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">
                     Pickup City <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -327,7 +327,7 @@ const EditBooking = () => {
                     name="pickup_city"
                     value={formData.pickup_city}
                     onChange={handleChange}
-                    className={`block w-full rounded-md shadow-sm ${errors.pickup_city ? 'border-red-300' : 'border-gray-300'} focus:border-blue-500 focus:ring-blue-500`}
+                    className={`block w-full rounded-md shadow-sm ${errors.pickup_city ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'} focus:border-blue-500 focus:ring-blue-500`}
                     placeholder="New York"
                   />
                   {errors.pickup_city && (
@@ -336,7 +336,7 @@ const EditBooking = () => {
                 </div>
                 
                 <div>
-                  <label htmlFor="destination_city" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label htmlFor="destination_city" className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">
                     Destination City <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -345,7 +345,7 @@ const EditBooking = () => {
                     name="destination_city"
                     value={formData.destination_city}
                     onChange={handleChange}
-                    className={`block w-full rounded-md shadow-sm ${errors.destination_city ? 'border-red-300' : 'border-gray-300'} focus:border-blue-500 focus:ring-blue-500`}
+                    className={`block w-full rounded-md shadow-sm ${errors.destination_city ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'} focus:border-blue-500 focus:ring-blue-500`}
                     placeholder="Los Angeles"
                   />
                   {errors.destination_city && (
@@ -355,7 +355,7 @@ const EditBooking = () => {
               </div>
               
               <div>
-                <label htmlFor="destination_address" className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="destination_address" className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">
                   Destination Address <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -364,7 +364,7 @@ const EditBooking = () => {
                   name="destination_address"
                   value={formData.destination_address}
                   onChange={handleChange}
-                  className={`block w-full rounded-md shadow-sm ${errors.destination_address ? 'border-red-300' : 'border-gray-300'} focus:border-blue-500 focus:ring-blue-500`}
+                  className={`block w-full rounded-md shadow-sm ${errors.destination_address ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'} focus:border-blue-500 focus:ring-blue-500`}
                   placeholder="456 Destination St"
                 />
                 {errors.destination_address && (
@@ -374,7 +374,7 @@ const EditBooking = () => {
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label htmlFor="pickup_date" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label htmlFor="pickup_date" className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">
                     Pickup Date <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -384,7 +384,7 @@ const EditBooking = () => {
                     value={formData.pickup_date}
                     onChange={handleChange}
                     min={new Date().toISOString().split('T')[0]}
-                    className={`block w-full rounded-md shadow-sm ${errors.pickup_date ? 'border-red-300' : 'border-gray-300'} focus:border-blue-500 focus:ring-blue-500`}
+                    className={`block w-full rounded-md shadow-sm ${errors.pickup_date ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'} focus:border-blue-500 focus:ring-blue-500`}
                   />
                   {errors.pickup_date && (
                     <p className="mt-1 text-sm text-red-600">{errors.pickup_date}</p>
@@ -392,7 +392,7 @@ const EditBooking = () => {
                 </div>
                 
                 <div>
-                  <label htmlFor="pickup_time" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label htmlFor="pickup_time" className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">
                     Pickup Time
                   </label>
                   <input
@@ -401,7 +401,7 @@ const EditBooking = () => {
                     name="pickup_time"
                     value={formData.pickup_time}
                     onChange={handleChange}
-                    className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    className="block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                   />
                 </div>
               </div>
@@ -409,13 +409,13 @@ const EditBooking = () => {
           </div>
           
           {/* Cargo Information */}
-          <div className="bg-white shadow-sm rounded-lg overflow-hidden">
-            <div className="px-6 py-4 border-b border-gray-200">
-              <h3 className="text-lg font-medium text-gray-900">Cargo Information</h3>
+          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 shadow-sm rounded-lg overflow-hidden">
+            <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+              <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">Cargo Information</h3>
             </div>
             <div className="px-6 py-6 space-y-6">
               <div>
-                <label htmlFor="cargo_description" className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="cargo_description" className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">
                   Cargo Description <span className="text-red-500">*</span>
                 </label>
                 <textarea
@@ -424,7 +424,7 @@ const EditBooking = () => {
                   rows={3}
                   value={formData.cargo_description}
                   onChange={handleChange}
-                  className={`block w-full rounded-md shadow-sm ${errors.cargo_description ? 'border-red-300' : 'border-gray-300'} focus:border-blue-500 focus:ring-blue-500`}
+                  className={`block w-full rounded-md shadow-sm ${errors.cargo_description ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'} focus:border-blue-500 focus:ring-blue-500`}
                   placeholder="Describe the cargo (e.g., Furniture, Electronics, etc.)"
                 />
                 {errors.cargo_description && (
@@ -434,7 +434,7 @@ const EditBooking = () => {
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label htmlFor="cargo_weight" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label htmlFor="cargo_weight" className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">
                     Cargo Weight (kg) <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -445,7 +445,7 @@ const EditBooking = () => {
                     step="0.1"
                     value={formData.cargo_weight}
                     onChange={handleChange}
-                    className={`block w-full rounded-md shadow-sm ${errors.cargo_weight ? 'border-red-300' : 'border-gray-300'} focus:border-blue-500 focus:ring-blue-500`}
+                    className={`block w-full rounded-md shadow-sm ${errors.cargo_weight ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'} focus:border-blue-500 focus:ring-blue-500`}
                     placeholder="e.g., 100"
                   />
                   {errors.cargo_weight && (
@@ -454,7 +454,7 @@ const EditBooking = () => {
                 </div>
                 
                 <div>
-                  <label htmlFor="cargo_volume" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label htmlFor="cargo_volume" className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">
                     Cargo Volume (m³)
                   </label>
                   <input
@@ -465,14 +465,14 @@ const EditBooking = () => {
                     step="0.1"
                     value={formData.cargo_volume}
                     onChange={handleChange}
-                    className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    className="block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                     placeholder="e.g., 1.5"
                   />
                 </div>
               </div>
               
               <div>
-                <label htmlFor="notes" className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="notes" className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">
                   Additional Notes
                 </label>
                 <textarea
@@ -481,7 +481,7 @@ const EditBooking = () => {
                   rows={2}
                   value={formData.notes}
                   onChange={handleChange}
-                  className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  className="block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                   placeholder="Any special instructions or requirements..."
                 />
               </div>
@@ -492,7 +492,7 @@ const EditBooking = () => {
             <button
               type="button"
               onClick={() => navigate(-1)}
-              className="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+              className="inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 shadow-sm text-sm font-medium rounded-md text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 hover:bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
               disabled={saving}
             >
               Cancel

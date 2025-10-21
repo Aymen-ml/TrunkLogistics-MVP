@@ -143,31 +143,31 @@ const NotificationCenter = () => {
   return (
     <div className="fixed inset-0 z-50 overflow-hidden">
       <div className="absolute inset-0 bg-black bg-opacity-50" onClick={closeNotificationCenter} />
-      <div className="absolute right-0 top-0 h-full w-full max-w-md bg-white shadow-xl flex flex-col">
+      <div className="absolute right-0 top-0 h-full w-full max-w-md bg-white dark:bg-gray-800 shadow-xl flex flex-col">
         {/* Header */}
-        <div className="flex items-center justify-between p-4 border-b border-gray-200 flex-shrink-0">
+        <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700 flex-shrink-0">
           <div className="flex items-center space-x-2">
-            <Bell className="h-5 w-5 text-gray-600" />
-            <h2 className="text-lg font-semibold text-gray-900">Notifications</h2>
+            <Bell className="h-5 w-5 text-gray-600 dark:text-gray-400 dark:text-gray-500" />
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Notifications</h2>
           </div>
           <button
             onClick={closeNotificationCenter}
-            className="p-1 rounded-full hover:bg-gray-100"
+            className="p-1 rounded-full hover:bg-gray-100 dark:bg-gray-700"
           >
-            <X className="h-5 w-5 text-gray-500" />
+            <X className="h-5 w-5 text-gray-500 dark:text-gray-400 dark:text-gray-500" />
           </button>
         </div>
 
         {/* Controls */}
         {notificationsEnabled && (
-          <div className="p-4 border-b border-gray-200 bg-gray-50 flex-shrink-0">
+          <div className="p-4 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 flex-shrink-0">
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center space-x-2">
-                <Filter className="h-4 w-4 text-gray-500" />
+                <Filter className="h-4 w-4 text-gray-500 dark:text-gray-400 dark:text-gray-500" />
                 <select
                   value={filter}
                   onChange={(e) => setFilter(e.target.value)}
-                  className="text-sm border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                  className="text-sm border-gray-300 dark:border-gray-600 rounded-md focus:ring-blue-500 focus:border-blue-500"
                 >
                   <option value="all">All</option>
                   <option value="unread">Unread</option>
@@ -181,7 +181,7 @@ const NotificationCenter = () => {
                   className="p-1 rounded-full hover:bg-gray-200 disabled:opacity-50"
                   title="Refresh notifications"
                 >
-                  <RefreshCw className={`h-4 w-4 text-gray-500 ${loading ? 'animate-spin' : ''}`} />
+                  <RefreshCw className={`h-4 w-4 text-gray-500 dark:text-gray-400 dark:text-gray-500 ${loading ? 'animate-spin' : ''}`} />
                 </button>
                 <button
                   onClick={contextMarkAllAsRead}
@@ -199,11 +199,11 @@ const NotificationCenter = () => {
           {!notificationsEnabled ? (
             // Notifications Disabled State
             <div className="flex flex-col items-center justify-center p-8 text-center h-full">
-              <div className="bg-gray-100 rounded-full p-6 mb-4">
-                <BellOff className="h-12 w-12 text-gray-400" />
+              <div className="bg-gray-100 dark:bg-gray-700 rounded-full p-6 mb-4">
+                <BellOff className="h-12 w-12 text-gray-400 dark:text-gray-500" />
               </div>
-              <h3 className="text-lg font-medium text-gray-900 mb-2">Notifications Disabled</h3>
-              <p className="text-sm text-gray-500 mb-4 max-w-xs">
+              <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-2">Notifications Disabled</h3>
+              <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 mb-4 max-w-xs">
                 You have disabled notifications in your settings. Enable them to receive updates about bookings and messages.
               </p>
               <a
@@ -215,22 +215,22 @@ const NotificationCenter = () => {
             </div>
           ) : loading && notifications.length === 0 ? (
             <div className="flex items-center justify-center p-8">
-              <RefreshCw className="h-6 w-6 animate-spin text-gray-400" />
+              <RefreshCw className="h-6 w-6 animate-spin text-gray-400 dark:text-gray-500" />
             </div>
           ) : displayNotifications.length === 0 ? (
             <div className="flex flex-col items-center justify-center p-8 text-center">
               <Bell className="h-12 w-12 text-gray-300 mb-4" />
-              <h3 className="text-lg font-medium text-gray-900 mb-2">No notifications</h3>
-              <p className="text-sm text-gray-500">
+              <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-2">No notifications</h3>
+              <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500">
                 {filter === 'unread' ? 'No unread notifications' : 'You\'re all caught up!'}
               </p>
             </div>
           ) : (
-            <div className="divide-y divide-gray-200">
+            <div className="divide-y divide-gray-200 dark:divide-gray-700">
               {displayNotifications.map((notification) => (
                 <div
                   key={notification.id}
-                  className={`p-4 hover:bg-gray-50 transition-colors ${
+                  className={`p-4 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors ${
                     !notification.is_read ? 'bg-blue-50 border-l-4 border-l-blue-500' : ''
                   }`}
                 >
@@ -242,19 +242,19 @@ const NotificationCenter = () => {
                       <div className="flex items-start justify-between gap-3">
                         <div className="flex-1 min-w-0">
                           <p className={`text-base font-semibold mb-1 ${
-                            !notification.is_read ? 'text-gray-900' : 'text-gray-700'
+                            !notification.is_read ? 'text-gray-900 dark:text-gray-100' : 'text-gray-700 dark:text-gray-200'
                           }`}>
                             {notification.title}
                           </p>
-                          <p className="text-sm text-gray-600 mb-2 leading-relaxed">
+                          <p className="text-sm text-gray-600 dark:text-gray-400 dark:text-gray-500 mb-2 leading-relaxed">
                             {notification.message}
                           </p>
                           <div className="flex items-center gap-2">
-                            <p className="text-xs text-gray-500 font-medium">
+                            <p className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 font-medium">
                               {formatDate(notification.created_at)}
                             </p>
                             {!notification.is_read && (
-                              <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                              <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200">
                                 New
                               </span>
                             )}
@@ -267,7 +267,7 @@ const NotificationCenter = () => {
                                 e.stopPropagation();
                                 contextMarkAsRead(notification.id);
                               }}
-                              className="p-2 rounded-full hover:bg-blue-100 transition-colors"
+                              className="p-2 rounded-full hover:bg-blue-100 dark:bg-blue-900 transition-colors"
                               title="Mark as read"
                             >
                               <Check className="h-4 w-4 text-blue-600" />
@@ -278,7 +278,7 @@ const NotificationCenter = () => {
                               e.stopPropagation();
                               contextDeleteNotification(notification.id);
                             }}
-                            className="p-2 rounded-full hover:bg-red-100 transition-colors"
+                            className="p-2 rounded-full hover:bg-red-100 dark:bg-red-900 transition-colors"
                             title="Delete"
                           >
                             <Trash2 className="h-4 w-4 text-red-600" />
@@ -291,7 +291,7 @@ const NotificationCenter = () => {
               ))}
               
               {hasMore && (
-                <div className="p-4 text-center border-t border-gray-200">
+                <div className="p-4 text-center border-t border-gray-200 dark:border-gray-700">
                   <button
                     onClick={(e) => {
                       e.stopPropagation();

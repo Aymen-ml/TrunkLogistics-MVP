@@ -175,16 +175,16 @@ const ImageUpload = ({
   return (
     <div className={`space-y-4 ${className}`}>
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
           {label} {required && <span className="text-red-500">*</span>}
         </label>
         
         {/* Photography Guidelines */}
         <div className="mb-4 p-4 bg-blue-50 rounded-lg border border-blue-200">
           <h4 className="text-sm font-medium text-blue-900 mb-2">📸 Photography Guidelines</h4>
-          <div className="text-xs text-blue-800 space-y-1">
+          <div className="text-xs text-blue-800 dark:text-blue-200 space-y-1">
             <div className="mb-2 p-2 bg-red-50 border border-red-200 rounded">
-              <p className="text-red-800 font-medium">⚠️ REQUIRED: At least one image must clearly show the license plate (matricule)</p>
+              <p className="text-red-800 dark:text-red-200 font-medium">⚠️ REQUIRED: At least one image must clearly show the license plate (matricule)</p>
             </div>
             <p><strong>Recommended shots:</strong></p>
             <ul className="list-disc ml-4 space-y-0.5">
@@ -202,7 +202,7 @@ const ImageUpload = ({
           className={`border-2 border-dashed rounded-lg p-6 text-center transition-colors ${
             dragActive 
               ? 'border-blue-500 bg-blue-50' 
-              : 'border-gray-300 hover:border-gray-400'
+              : 'border-gray-300 dark:border-gray-600 hover:border-gray-400'
           }`}
           onDragEnter={handleDrag}
           onDragLeave={handleDrag}
@@ -210,13 +210,13 @@ const ImageUpload = ({
           onDrop={handleDrop}
         >
           <div className="space-y-2">
-            <div className="mx-auto h-12 w-12 text-gray-400">
+            <div className="mx-auto h-12 w-12 text-gray-400 dark:text-gray-500">
               {processedImages.length > 0 ? <ImageIcon /> : <Upload />}
             </div>
-            <div className="flex text-sm text-gray-600">
+            <div className="flex text-sm text-gray-600 dark:text-gray-400 dark:text-gray-500">
               <label
                 htmlFor={`image-upload-${label.replace(/\s+/g, '-').toLowerCase()}`}
-                className="relative cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none"
+                className="relative cursor-pointer bg-white dark:bg-gray-800 rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none"
               >
                 <span>Upload images</span>
                 <input
@@ -231,10 +231,10 @@ const ImageUpload = ({
               </label>
               <p className="pl-1">or drag and drop</p>
             </div>
-            <p className="text-xs text-gray-500">
+            <p className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500">
               PNG, JPG, GIF up to {Math.round(maxSize / (1024 * 1024))}MB
             </p>
-            <p className="text-xs text-gray-500">
+            <p className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500">
               {processedImages.length}/{maxImages} images
             </p>
           </div>
@@ -245,7 +245,7 @@ const ImageUpload = ({
       <div className="flex flex-wrap gap-4">
         {processedImages.map((image, index) => (
           <div key={index} className="relative">
-            <div className="w-24 h-24 rounded-lg overflow-hidden border border-gray-200">
+            <div className="w-24 h-24 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700">
               <img 
                 src={image.preview}
                 alt={image.name || `Upload preview ${index + 1}`}

@@ -172,24 +172,24 @@ const AdminDashboard = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900 flex items-center justify-center">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
         {/* Email Verification Banner */}
         <EmailVerificationBanner />
         
         {/* Header */}
         <div className="mb-6 sm:mb-8">
-          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100">
             Admin Dashboard
           </h1>
-          <p className="mt-2 text-sm sm:text-base text-gray-600">
+          <p className="mt-2 text-sm sm:text-base text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
             Monitor platform activity and manage system operations.
           </p>
         </div>
@@ -200,7 +200,7 @@ const AdminDashboard = () => {
             <div className="flex">
               <AlertTriangle className="h-5 w-5 text-yellow-400" />
               <div className="ml-3">
-                <h3 className="text-sm font-medium text-yellow-800">
+                <h3 className="text-sm font-medium text-yellow-800 dark:text-yellow-200">
                   Pending Actions Required
                 </h3>
                 <div className="mt-2 text-sm text-yellow-700">
@@ -211,7 +211,7 @@ const AdminDashboard = () => {
                     <Link
                       key={index}
                       to={item.link}
-                      className="inline-flex items-center px-3 py-1.5 rounded-md text-sm font-medium bg-yellow-100 text-yellow-800 hover:bg-yellow-200"
+                      className="inline-flex items-center px-3 py-1.5 rounded-md text-sm font-medium bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 hover:bg-yellow-200"
                     >
                       {item.count} {item.title}
                     </Link>
@@ -227,75 +227,75 @@ const AdminDashboard = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <Link
               to="/admin/users"
-              className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow group"
+              className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow group"
             >
               <div className="flex items-center">
                 <div className="flex-shrink-0">
                   <Users className="h-8 w-8 text-blue-600 group-hover:text-blue-700" />
                 </div>
                 <div className="ml-4">
-                  <h3 className="text-lg font-medium text-gray-900">Manage Users</h3>
-                  <p className="text-sm text-gray-500">View and manage all users</p>
+                  <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">Manage Users</h3>
+                  <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">View and manage all users</p>
                 </div>
               </div>
             </Link>
 
             <Link
               to="/admin/analytics"
-              className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow group"
+              className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow group"
             >
               <div className="flex items-center">
                 <div className="flex-shrink-0">
                   <TrendingUp className="h-8 w-8 text-indigo-600 group-hover:text-indigo-700" />
                 </div>
                 <div className="ml-4">
-                  <h3 className="text-lg font-medium text-gray-900">Analytics</h3>
-                  <p className="text-sm text-gray-500">Trends, funnels, breakdowns</p>
+                  <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">Analytics</h3>
+                  <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Trends, funnels, breakdowns</p>
                 </div>
               </div>
             </Link>
 
             <Link
               to="/admin/bookings"
-              className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow group"
+              className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow group"
             >
               <div className="flex items-center">
                 <div className="flex-shrink-0">
                   <Package className="h-8 w-8 text-green-600 group-hover:text-green-700" />
                 </div>
                 <div className="ml-4">
-                  <h3 className="text-lg font-medium text-gray-900">Bookings</h3>
-                  <p className="text-sm text-gray-500">Review and approve bookings</p>
+                  <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">Bookings</h3>
+                  <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Review and approve bookings</p>
                 </div>
               </div>
             </Link>
 
             <Link
               to="/admin/documents"
-              className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow group"
+              className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow group"
             >
               <div className="flex items-center">
                 <div className="flex-shrink-0">
                   <FileText className="h-8 w-8 text-purple-600 group-hover:text-purple-700" />
                 </div>
                 <div className="ml-4">
-                  <h3 className="text-lg font-medium text-gray-900">Document Verification</h3>
-                  <p className="text-sm text-gray-500">Review and verify documents</p>
+                  <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">Document Verification</h3>
+                  <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Review and verify documents</p>
                 </div>
               </div>
             </Link>
 
             <Link
               to="/admin/providers"
-              className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow group"
+              className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow group"
             >
               <div className="flex items-center">
                 <div className="flex-shrink-0">
                   <Building className="h-8 w-8 text-orange-600 group-hover:text-orange-700" />
                 </div>
                 <div className="ml-4">
-                  <h3 className="text-lg font-medium text-gray-900">Provider Verification</h3>
-                  <p className="text-sm text-gray-500">Review and verify providers</p>
+                  <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">Provider Verification</h3>
+                  <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Review and verify providers</p>
                 </div>
               </div>
             </Link>
@@ -304,7 +304,7 @@ const AdminDashboard = () => {
 
         {/* Stats Cards */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-6 sm:mb-8">
-          <div className="bg-white overflow-hidden shadow-sm rounded-lg">
+          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg">
             <div className="p-4 lg:p-6">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
@@ -312,13 +312,13 @@ const AdminDashboard = () => {
                 </div>
                 <div className="ml-3 lg:ml-4 w-0 flex-1">
                   <dl>
-                    <dt className="text-xs lg:text-sm font-medium text-gray-500 truncate">
+                    <dt className="text-xs lg:text-sm font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 truncate">
                       Total Users
                     </dt>
-                    <dd className="text-xl lg:text-2xl font-semibold text-gray-900">
+                    <dd className="text-xl lg:text-2xl font-semibold text-gray-900 dark:text-gray-100">
                       {stats.totalUsers}
                     </dd>
-                    <dd className="text-xs text-gray-500">
+                    <dd className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
                       {stats.totalCustomers} customers, {stats.totalProviders} providers
                     </dd>
                   </dl>
@@ -327,7 +327,7 @@ const AdminDashboard = () => {
             </div>
           </div>
 
-          <div className="bg-white overflow-hidden shadow-sm rounded-lg">
+          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg">
             <div className="p-4 lg:p-6">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
@@ -335,10 +335,10 @@ const AdminDashboard = () => {
                 </div>
                 <div className="ml-3 lg:ml-4 w-0 flex-1">
                   <dl>
-                    <dt className="text-xs lg:text-sm font-medium text-gray-500 truncate">
+                    <dt className="text-xs lg:text-sm font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 truncate">
                       Total Bookings
                     </dt>
-                    <dd className="text-xl lg:text-2xl font-semibold text-gray-900">
+                    <dd className="text-xl lg:text-2xl font-semibold text-gray-900 dark:text-gray-100">
                       {stats.totalBookings}
                     </dd>
                     {stats.pendingBookings > 0 && (
@@ -352,7 +352,7 @@ const AdminDashboard = () => {
             </div>
           </div>
 
-          <div className="bg-white overflow-hidden shadow-sm rounded-lg">
+          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg">
             <div className="p-4 lg:p-6">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
@@ -360,13 +360,13 @@ const AdminDashboard = () => {
                 </div>
                 <div className="ml-3 lg:ml-4 w-0 flex-1">
                   <dl>
-                    <dt className="text-xs lg:text-sm font-medium text-gray-500 truncate">
+                    <dt className="text-xs lg:text-sm font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 truncate">
                       Transport
                     </dt>
-                    <dd className="text-xl lg:text-2xl font-semibold text-gray-900">
+                    <dd className="text-xl lg:text-2xl font-semibold text-gray-900 dark:text-gray-100">
                       {stats.transportBookings}
                     </dd>
-                    <dd className="text-xs text-gray-500">
+                    <dd className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
                       bookings
                     </dd>
                   </dl>
@@ -375,7 +375,7 @@ const AdminDashboard = () => {
             </div>
           </div>
 
-          <div className="bg-white overflow-hidden shadow-sm rounded-lg">
+          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg">
             <div className="p-4 lg:p-6">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
@@ -383,13 +383,13 @@ const AdminDashboard = () => {
                 </div>
                 <div className="ml-3 lg:ml-4 w-0 flex-1">
                   <dl>
-                    <dt className="text-xs lg:text-sm font-medium text-gray-500 truncate">
+                    <dt className="text-xs lg:text-sm font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 truncate">
                       Rental
                     </dt>
-                    <dd className="text-xl lg:text-2xl font-semibold text-gray-900">
+                    <dd className="text-xl lg:text-2xl font-semibold text-gray-900 dark:text-gray-100">
                       {stats.rentalBookings}
                     </dd>
-                    <dd className="text-xs text-gray-500">
+                    <dd className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
                       bookings
                     </dd>
                   </dl>
@@ -398,7 +398,7 @@ const AdminDashboard = () => {
             </div>
           </div>
 
-          <div className="bg-white overflow-hidden shadow-sm rounded-lg">
+          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg">
             <div className="p-4 lg:p-6">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
@@ -406,10 +406,10 @@ const AdminDashboard = () => {
                 </div>
                 <div className="ml-3 lg:ml-4 w-0 flex-1">
                   <dl>
-                    <dt className="text-xs lg:text-sm font-medium text-gray-500 truncate">
+                    <dt className="text-xs lg:text-sm font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 truncate">
                       Total Revenue
                     </dt>
-                    <dd className="text-xl lg:text-2xl font-semibold text-gray-900">
+                    <dd className="text-xl lg:text-2xl font-semibold text-gray-900 dark:text-gray-100">
                       {formatCurrency(stats.totalRevenue)}
                     </dd>
                     <dd className="text-xs text-blue-600">
@@ -421,7 +421,7 @@ const AdminDashboard = () => {
             </div>
           </div>
 
-          <div className="bg-white overflow-hidden shadow-sm rounded-lg">
+          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg">
             <div className="p-4 lg:p-6">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
@@ -429,10 +429,10 @@ const AdminDashboard = () => {
                 </div>
                 <div className="ml-3 lg:ml-4 w-0 flex-1">
                   <dl>
-                    <dt className="text-xs lg:text-sm font-medium text-gray-500 truncate">
+                    <dt className="text-xs lg:text-sm font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 truncate">
                       Fleet Size
                     </dt>
-                    <dd className="text-xl lg:text-2xl font-semibold text-gray-900">
+                    <dd className="text-xl lg:text-2xl font-semibold text-gray-900 dark:text-gray-100">
                       {stats.totalTrucks}
                     </dd>
                     <dd className="text-xs text-green-600">
@@ -444,7 +444,7 @@ const AdminDashboard = () => {
             </div>
           </div>
 
-          <div className="bg-white overflow-hidden shadow-sm rounded-lg">
+          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg">
             <div className="p-4 lg:p-6">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
@@ -452,13 +452,13 @@ const AdminDashboard = () => {
                 </div>
                 <div className="ml-3 lg:ml-4 w-0 flex-1">
                   <dl>
-                    <dt className="text-xs lg:text-sm font-medium text-gray-500 truncate">
+                    <dt className="text-xs lg:text-sm font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 truncate">
                       Logistics Trucks
                     </dt>
-                    <dd className="text-xl lg:text-2xl font-semibold text-gray-900">
+                    <dd className="text-xl lg:text-2xl font-semibold text-gray-900 dark:text-gray-100">
                       {stats.logisticsTrucks}
                     </dd>
-                    <dd className="text-xs text-gray-500">
+                    <dd className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
                       transport vehicles
                     </dd>
                   </dl>
@@ -467,7 +467,7 @@ const AdminDashboard = () => {
             </div>
           </div>
 
-          <div className="bg-white overflow-hidden shadow-sm rounded-lg">
+          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg">
             <div className="p-4 lg:p-6">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
@@ -475,13 +475,13 @@ const AdminDashboard = () => {
                 </div>
                 <div className="ml-3 lg:ml-4 w-0 flex-1">
                   <dl>
-                    <dt className="text-xs lg:text-sm font-medium text-gray-500 truncate">
+                    <dt className="text-xs lg:text-sm font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 truncate">
                       Rental Equipment
                     </dt>
-                    <dd className="text-xl lg:text-2xl font-semibold text-gray-900">
+                    <dd className="text-xl lg:text-2xl font-semibold text-gray-900 dark:text-gray-100">
                       {stats.rentalTrucks}
                     </dd>
-                    <dd className="text-xs text-gray-500">
+                    <dd className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
                       construction equipment
                     </dd>
                   </dl>
@@ -493,10 +493,10 @@ const AdminDashboard = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Recent Activity */}
-          <div className="bg-white shadow-sm rounded-lg">
-            <div className="px-6 py-4 border-b border-gray-200">
+          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 shadow-sm rounded-lg">
+            <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
               <div className="flex items-center justify-between">
-                <h3 className="text-lg font-medium text-gray-900">Recent Activity</h3>
+                <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">Recent Activity</h3>
                 <Link
                   to="/admin/activity"
                   className="text-sm text-blue-600 hover:text-blue-500 font-medium"
@@ -505,12 +505,12 @@ const AdminDashboard = () => {
                 </Link>
               </div>
             </div>
-            <div className="divide-y divide-gray-200">
+            <div className="divide-y divide-gray-200 dark:divide-gray-700">
               {recentActivity.length === 0 ? (
                 <div className="px-6 py-8 text-center">
-                  <Activity className="mx-auto h-12 w-12 text-gray-400" />
-                  <h3 className="mt-2 text-sm font-medium text-gray-900">No recent activity</h3>
-                  <p className="mt-1 text-sm text-gray-500">
+                  <Activity className="mx-auto h-12 w-12 text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500" />
+                  <h3 className="mt-2 text-sm font-medium text-gray-900 dark:text-gray-100">No recent activity</h3>
+                  <p className="mt-1 text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
                     System activity will appear here.
                   </p>
                 </div>
@@ -520,21 +520,21 @@ const AdminDashboard = () => {
                     <div key={booking.id} className="px-6 py-4">
                       <div className="flex items-start space-x-4">
                         <div className="flex-shrink-0">
-                          <div className="h-8 w-8 rounded-full bg-gray-100 flex items-center justify-center">
-                            <Package className="h-4 w-4 text-gray-600" />
+                          <div className="h-8 w-8 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center">
+                            <Package className="h-4 w-4 text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500" />
                           </div>
                         </div>
                         <div className="min-w-0 flex-1">
-                          <p className="text-sm font-medium text-gray-900">
+                          <p className="text-sm font-medium text-gray-900 dark:text-gray-100">
                             {booking.service_type === 'rental' ? 'Equipment Rental' : 'Transport'} #{booking.id.slice(-8)}
                           </p>
-                          <p className="text-sm text-gray-500 mt-1">
+                          <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 mt-1">
                             {booking.service_type === 'rental' 
                               ? (booking.work_address || 'Equipment rental')
                               : `${booking.pickup_city} → ${booking.destination_city}`
                             }
                           </p>
-                          <p className="text-xs text-gray-400 mt-1">
+                          <p className="text-xs text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 mt-1">
                             {formatDate(booking.created_at)} • {booking.status.replace('_', ' ')}
                           </p>
                         </div>
@@ -547,16 +547,16 @@ const AdminDashboard = () => {
           </div>
 
           {/* Pending Items */}
-          <div className="bg-white shadow-sm rounded-lg">
-            <div className="px-6 py-4 border-b border-gray-200">
-              <h3 className="text-lg font-medium text-gray-900">Pending Actions</h3>
+          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 shadow-sm rounded-lg">
+            <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+              <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">Pending Actions</h3>
             </div>
-            <div className="divide-y divide-gray-200">
+            <div className="divide-y divide-gray-200 dark:divide-gray-700">
               {pendingItems.length === 0 ? (
                 <div className="px-6 py-8 text-center">
                   <CheckCircle className="mx-auto h-12 w-12 text-green-400" />
-                  <h3 className="mt-2 text-sm font-medium text-gray-900">All caught up!</h3>
-                  <p className="mt-1 text-sm text-gray-500">
+                  <h3 className="mt-2 text-sm font-medium text-gray-900 dark:text-gray-100">All caught up!</h3>
+                  <p className="mt-1 text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
                     No pending actions require your attention.
                   </p>
                 </div>
@@ -565,25 +565,25 @@ const AdminDashboard = () => {
                   <div key={index} className="px-6 py-4">
                     <Link
                       to={item.link}
-                      className="flex items-center justify-between hover:bg-gray-50 -mx-6 px-6 py-2 rounded-lg transition-colors"
+                      className="flex items-center justify-between hover:bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900 -mx-6 px-6 py-2 rounded-lg transition-colors"
                     >
                       <div className="flex items-center space-x-4">
                         <div className="flex-shrink-0">
-                          <div className="h-8 w-8 rounded-full bg-yellow-100 flex items-center justify-center">
+                          <div className="h-8 w-8 rounded-full bg-yellow-100 dark:bg-yellow-900 flex items-center justify-center">
                             <Clock className="h-4 w-4 text-yellow-600" />
                           </div>
                         </div>
                         <div className="min-w-0 flex-1">
-                          <p className="text-sm font-medium text-gray-900">
+                          <p className="text-sm font-medium text-gray-900 dark:text-gray-100">
                             {item.title}
                           </p>
-                          <p className="text-sm text-gray-500">
+                          <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
                             {item.description}
                           </p>
                         </div>
                       </div>
                       <div className="flex items-center">
-                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200">
                           {item.count}
                         </span>
                       </div>

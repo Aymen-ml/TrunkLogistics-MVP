@@ -4,15 +4,15 @@ import { Mail, ArrowRight, RefreshCw } from 'lucide-react';
 
 const VerificationPending = () => {
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+        <div className="bg-white dark:bg-gray-800 py-8 px-4 shadow sm:rounded-lg sm:px-10">
           <div className="text-center">
-            <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-blue-100">
+            <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 dark:bg-blue-900">
               <Mail className="h-6 w-6 text-blue-600" />
             </div>
-            <h2 className="mt-6 text-3xl font-extrabold text-gray-900">Check Your Email</h2>
-            <p className="mt-2 text-sm text-gray-600">
+            <h2 className="mt-6 text-3xl font-extrabold text-gray-900 dark:text-gray-100">Check Your Email</h2>
+            <p className="mt-2 text-sm text-gray-600 dark:text-gray-400 dark:text-gray-500">
               We've sent a verification link to your email address.
               Please click the link to verify your account.
             </p>
@@ -26,7 +26,7 @@ const VerificationPending = () => {
                     <RefreshCw className="h-5 w-5 text-blue-400" />
                   </div>
                   <div className="ml-3">
-                    <h3 className="text-sm font-medium text-blue-800">
+                    <h3 className="text-sm font-medium text-blue-800 dark:text-blue-200">
                       What happens next?
                     </h3>
                     <div className="mt-2 text-sm text-blue-700">
@@ -41,7 +41,7 @@ const VerificationPending = () => {
               </div>
 
               <div className="text-sm text-center">
-                <p className="text-gray-600">
+                <p className="text-gray-600 dark:text-gray-400 dark:text-gray-500">
                   Didn't receive the email? Check your spam folder or
                 </p>
                 <button 
