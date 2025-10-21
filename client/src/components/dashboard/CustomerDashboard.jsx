@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import usePageTitle from '../../hooks/usePageTitle';
 import EmailVerificationBanner from '../common/EmailVerificationBanner';
+import { TrustBadges } from '../common/TrustBadges';
 import { 
   Package, 
   Truck, 
@@ -148,6 +149,11 @@ const CustomerDashboard = () => {
           <p className="mt-2 text-sm sm:text-base text-gray-600 dark:text-gray-400">
             Manage your bookings and find the perfect trucks for your shipments.
           </p>
+        </div>
+
+        {/* Trust Badges */}
+        <div className="mb-6 sm:mb-8">
+          <TrustBadges />
         </div>
 
         {/* Quick Actions */}

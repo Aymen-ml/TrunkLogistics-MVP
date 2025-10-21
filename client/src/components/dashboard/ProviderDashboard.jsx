@@ -4,6 +4,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import { useBookings } from '../../contexts/BookingContext';
 import EmailVerificationBanner from '../common/EmailVerificationBanner';
 import AdminApprovalBanner from '../common/AdminApprovalBanner';
+import { VerificationBadge } from '../common/TrustBadges';
 import { useNavigate } from 'react-router-dom';
 import { 
   Truck, 
@@ -326,12 +327,17 @@ const ProviderDashboard = () => {
         
         {/* Header */}
         <div className="mb-6 sm:mb-8">
-          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100">
-            Provider Dashboard
-          </h1>
-          <p className="mt-2 text-sm sm:text-base text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
-            Manage your fleet, bookings, and grow your logistics business.
-          </p>
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100">
+                Provider Dashboard
+              </h1>
+              <p className="mt-2 text-sm sm:text-base text-gray-600 dark:text-gray-400">
+                Manage your fleet, bookings, and grow your logistics business.
+              </p>
+            </div>
+            <VerificationBadge isVerified={user?.admin_approved || false} />
+          </div>
         </div>
 
         {/* Quick Actions */}
