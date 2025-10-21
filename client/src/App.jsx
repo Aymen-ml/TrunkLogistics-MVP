@@ -9,6 +9,7 @@ import Navbar from './components/layout/Navbar'
 import ProtectedRoute from './components/common/ProtectedRoute'
 import PageTitleManager from './components/common/PageTitleManager'
 import Login from './components/auth/Login'
+import Register from './components/auth/Register'
 import SignupForm from './components/auth/SignupForm'
 import EmailVerification from './components/auth/EmailVerification'
 import ForgotPassword from './components/auth/ForgotPassword'
@@ -49,7 +50,7 @@ function App() {
                 {/* Public Routes */}
                 <Route path="/" element={<LandingPage />} />
                 <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<SignupForm />} />
+                <Route path="/register" element={<Register />} />
                 <Route path="/verify-email/:token" element={<EmailVerification />} />
                 <Route path="/forgot-password" element={<ForgotPassword />} />
                 <Route path="/reset-password/:token" element={<ResetPassword />} />
