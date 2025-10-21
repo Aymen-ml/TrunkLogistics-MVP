@@ -18,6 +18,10 @@ export const NotificationProvider = ({ children }) => {
   const [unreadCount, setUnreadCount] = useState(0);
   const [loading, setLoading] = useState(false);
   const [isNotificationCenterOpen, setIsNotificationCenterOpen] = useState(false);
+  const [notificationsEnabled, setNotificationsEnabled] = useState(() => {
+    const stored = localStorage.getItem('notificationsEnabled');
+    return stored === null || JSON.parse(stored) === true;
+  });
 
   // Fetch unread count
   const fetchUnreadCount = useCallback(async () => {
@@ -145,9 +149,36 @@ export const NotificationProvider = ({ children }) => {
     setIsNotificationCenterOpen(false);
   }, []);
 
+  // Listen for localStorage changes (for notification settings)
+  useEffect(() => {
+    const handleStorageChange = (e) => {
+      if (e.key === 'notificationsEnabled') {
+        const newValue = e.newValue === null || JSON.parse(e.newValue) === true;
+        setNotificationsEnabled(newValue);
+      }
+    };
+
+    // Listen for storage events from other tabs
+    window.addEventListener('storage', handleStorageChange);
+
+    // Also check on mount and create custom event for same-tab changes
+    const checkNotificationSettings = () => {
+      const stored = localStorage.getItem('notificationsEnabled');
+      const enabled = stored === null || JSON.parse(stored) === true;
+      setNotificationsEnabled(enabled);
+    };
+
+    window.addEventListener('notificationSettingsChanged', checkNotificationSettings);
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+      window.removeEventListener('notificationSettingsChanged', checkNotificationSettings);
+    };
+  }, []);
+
   // Initialize and set up polling
   useEffect(() => {
-    if (isAuthenticated && user) {
+    if (isAuthenticated && user && notificationsEnabled) {
       fetchUnreadCount();
       fetchNotifications();
       
@@ -155,11 +186,11 @@ export const NotificationProvider = ({ children }) => {
       const interval = setInterval(fetchUnreadCount, 30000);
       return () => clearInterval(interval);
     } else {
-      // Clear state when user logs out
+      // Clear state when user logs out or notifications disabled
       setNotifications([]);
       setUnreadCount(0);
     }
-  }, [isAuthenticated, user, fetchUnreadCount, fetchNotifications]);
+  }, [isAuthenticated, user, notificationsEnabled, fetchUnreadCount, fetchNotifications]);
 
   const value = {
     // State
@@ -167,6 +198,7 @@ export const NotificationProvider = ({ children }) => {
     unreadCount,
     loading,
     isNotificationCenterOpen,
+    notificationsEnabled,
     
     // Actions
     fetchNotifications,
@@ -180,7 +212,8 @@ export const NotificationProvider = ({ children }) => {
     
     // Setters for external use
     setNotifications,
-    setUnreadCount
+    setUnreadCount,
+    setNotificationsEnabled
   };
 
   return (

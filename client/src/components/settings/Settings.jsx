@@ -38,10 +38,16 @@ const Settings = () => {
       // Ensure theme is applied immediately
       document.documentElement.classList.toggle('dark', theme === 'dark');
       
+      // Dispatch custom event to notify NotificationContext of the change
+      window.dispatchEvent(new Event('notificationSettingsChanged'));
+      
       // Small delay for better UX
       await new Promise(resolve => setTimeout(resolve, 500));
       
-      showSuccess('Settings saved successfully!');
+      showSuccess(notifications 
+        ? 'Settings saved! Notifications enabled.' 
+        : 'Settings saved! Notifications disabled.'
+      );
       setHasUnsavedChanges(false);
     } catch (error) {
       console.error('Error saving settings:', error);
