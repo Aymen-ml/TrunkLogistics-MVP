@@ -9,6 +9,18 @@ class EmailService {
 
   initialize() {
     try {
+      console.log('========================================');
+      console.log('INITIALIZING EMAIL SERVICE');
+      console.log('========================================');
+      console.log('EMAIL_SERVICE:', process.env.EMAIL_SERVICE || 'not set (using default SMTP)');
+      console.log('EMAIL_HOST:', process.env.EMAIL_HOST || 'NOT SET');
+      console.log('EMAIL_PORT:', process.env.EMAIL_PORT || 'NOT SET');
+      console.log('EMAIL_SECURE:', process.env.EMAIL_SECURE || 'NOT SET');
+      console.log('EMAIL_USER:', process.env.EMAIL_USER ? '***SET***' : 'NOT SET');
+      console.log('EMAIL_PASSWORD:', process.env.EMAIL_PASSWORD ? '***SET***' : 'NOT SET');
+      console.log('EMAIL_FROM:', process.env.EMAIL_FROM || 'NOT SET');
+      console.log('========================================');
+      
       logger.info('Initializing email service...', {
         emailService: process.env.EMAIL_SERVICE,
         hasSendGridKey: !!process.env.SENDGRID_API_KEY,
@@ -65,6 +77,9 @@ class EmailService {
         });
         
         if (!smtpConfig.auth.user || !smtpConfig.auth.pass) {
+          console.log('❌ ERROR: SMTP credentials missing!');
+          console.log('EMAIL_USER exists:', !!smtpConfig.auth.user);
+          console.log('EMAIL_PASSWORD exists:', !!smtpConfig.auth.pass);
           logger.error('SMTP authentication credentials missing!', {
             hasUser: !!smtpConfig.auth.user,
             hasPassword: !!smtpConfig.auth.pass
@@ -73,11 +88,17 @@ class EmailService {
         }
         
         this.transporter = nodemailer.createTransport(smtpConfig);
+        console.log('✅ SMTP transporter created successfully');
         logger.info('Default SMTP email service configured');
       }
 
+      console.log('✅ Email service initialized successfully');
+      console.log('========================================');
       logger.info('Email service initialized successfully');
     } catch (error) {
+      console.log('❌ FAILED TO INITIALIZE EMAIL SERVICE');
+      console.log('Error:', error.message);
+      console.log('========================================');
       logger.error('Failed to initialize email service:', error);
       this.transporter = null;
     }

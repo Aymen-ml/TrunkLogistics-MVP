@@ -17,6 +17,7 @@ import adminRoutes from './routes/admin.js';
 import testRoutes from './routes/test.js';
 import testEmailRoutes from './routes/testEmail.js';
 import healthRoutes from './routes/health.js';
+import diagnosticsRoutes from './routes/diagnostics.js';
 import errorHandler from './middleware/errorHandler.js';
 import { securityHeaders, corsOptions, sanitizeData } from './middleware/security.js';
 import { generalLimiter } from './middleware/rateLimiter.js';
@@ -74,6 +75,7 @@ app.use('/api/admin', adminRoutes);
 app.use('/api/test', testRoutes);
 app.use('/api/email', testEmailRoutes);
 app.use('/api/health', healthRoutes);
+app.use('/api/diagnostics', diagnosticsRoutes);
 
 
 
