@@ -2,10 +2,14 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { apiClient } from '../../utils/apiClient';
 import { 
-  LineChart, BarChart3, TrendingUp, TrendingDown, PieChart, Filter, Calendar, 
+  LineChart as LineChartIcon, BarChart3, TrendingUp, TrendingDown, PieChart as PieChartIcon, Filter, Calendar, 
   Users, Package, CheckCircle, XCircle, Clock, DollarSign, Truck, 
   ArrowUpRight, ArrowDownRight, Activity, Target, Zap
 } from 'lucide-react';
+import {
+  LineChart, Line, BarChart, Bar, PieChart, Pie, AreaChart, Area,
+  XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Cell
+} from 'recharts';
 
 const AdminAnalytics = () => {
   const [bookings, setBookings] = useState([]);
@@ -145,6 +149,75 @@ const AdminAnalytics = () => {
         revenue: rental.filter(b => b.status === 'completed').reduce((s, b) => s + (parseFloat(b.total_price) || 0), 0)
       }
     };
+  }, [filtered]);
+
+  // Chart Data
+  const bookingsTrendData = useMemo(() => {
+    const safeFiltered = Array.isArray(filtered) ? filtered : [];
+    const last30Days = [];
+    const today = new Date();
+    
+    for (let i = 29; i >= 0; i--) {
+      const date = new Date(today);
+      date.setDate(date.getDate() - i);
+      const dateStr = date.toISOString().split('T')[0];
+      
+      const count = safeFiltered.filter(b => {
+        const bookingDate = new Date(b.created_at).toISOString().split('T')[0];
+        return bookingDate === dateStr;
+      }).length;
+      
+      last30Days.push({
+        date: date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
+        bookings: count
+      });
+    }
+    
+    return last30Days;
+  }, [filtered]);
+
+  const statusPieData = useMemo(() => {
+    return [
+      { name: 'Completed', value: kpis.completed, color: '#10B981' },
+      { name: 'In Transit', value: kpis.inTransit, color: '#6366F1' },
+      { name: 'Active', value: kpis.active, color: '#8B5CF6' },
+      { name: 'Approved', value: kpis.approved, color: '#3B82F6' },
+      { name: 'Pending', value: kpis.pending, color: '#F59E0B' },
+      { name: 'Cancelled', value: kpis.cancelled, color: '#EF4444' }
+    ].filter(item => item.value > 0);
+  }, [kpis]);
+
+  const revenueByServiceData = useMemo(() => {
+    return [
+      { name: 'Transportation', revenue: byService.transport.revenue, bookings: byService.transport.count },
+      { name: 'Rental', revenue: byService.rental.revenue, bookings: byService.rental.count }
+    ];
+  }, [byService]);
+
+  const dailyRevenueData = useMemo(() => {
+    const safeFiltered = Array.isArray(filtered) ? filtered : [];
+    const last30Days = [];
+    const today = new Date();
+    
+    for (let i = 29; i >= 0; i--) {
+      const date = new Date(today);
+      date.setDate(date.getDate() - i);
+      const dateStr = date.toISOString().split('T')[0];
+      
+      const dayRevenue = safeFiltered
+        .filter(b => {
+          const bookingDate = new Date(b.created_at).toISOString().split('T')[0];
+          return bookingDate === dateStr && b.status === 'completed';
+        })
+        .reduce((sum, b) => sum + (parseFloat(b.total_price) || 0), 0);
+      
+      last30Days.push({
+        date: date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
+        revenue: Math.round(dayRevenue)
+      });
+    }
+    
+    return last30Days;
   }, [filtered]);
 
   if (loading) {
@@ -318,6 +391,76 @@ const AdminAnalytics = () => {
                 </div>
               </div>
             </div>
+
+            {/* Charts Row */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+              {/* Bookings Trend Chart */}
+              <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
+                  <LineChartIcon className="h-5 w-5 text-primary-600" />
+                  Bookings Trend (Last 30 Days)
+                </h3>
+                <ResponsiveContainer width="100%" height={300}>
+                  <AreaChart data={bookingsTrendData}>
+                    <defs>
+                      <linearGradient id="colorBookings" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor="#1E3A8A" stopOpacity={0.8}/>
+                        <stop offset="95%" stopColor="#1E3A8A" stopOpacity={0.1}/>
+                      </linearGradient>
+                    </defs>
+                    <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                    <XAxis 
+                      dataKey="date" 
+                      tick={{ fontSize: 12 }} 
+                      stroke="#6b7280"
+                    />
+                    <YAxis tick={{ fontSize: 12 }} stroke="#6b7280" />
+                    <Tooltip 
+                      contentStyle={{ 
+                        backgroundColor: '#fff', 
+                        border: '1px solid #e5e7eb',
+                        borderRadius: '8px'
+                      }}
+                    />
+                    <Area 
+                      type="monotone" 
+                      dataKey="bookings" 
+                      stroke="#1E3A8A" 
+                      fillOpacity={1} 
+                      fill="url(#colorBookings)" 
+                      strokeWidth={2}
+                    />
+                  </AreaChart>
+                </ResponsiveContainer>
+              </div>
+
+              {/* Status Distribution Pie Chart */}
+              <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
+                  <PieChartIcon className="h-5 w-5 text-accent-500" />
+                  Bookings by Status
+                </h3>
+                <ResponsiveContainer width="100%" height={300}>
+                  <PieChart>
+                    <Pie
+                      data={statusPieData}
+                      cx="50%"
+                      cy="50%"
+                      labelLine={false}
+                      label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+                      outerRadius={80}
+                      fill="#8884d8"
+                      dataKey="value"
+                    >
+                      {statusPieData.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={entry.color} />
+                      ))}
+                    </Pie>
+                    <Tooltip />
+                  </PieChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
           </>
         )}
 
@@ -350,6 +493,32 @@ const AdminAnalytics = () => {
                 percentage={kpis.total > 0 ? Math.round((byService.rental.count / kpis.total) * 100) : 0}
                 color="from-orange-500 to-accent-600"
               />
+            </div>
+
+            {/* Service Comparison Bar Chart */}
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 mb-6">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-6 flex items-center gap-2">
+                <BarChart3 className="h-5 w-5 text-primary-600" />
+                Service Type Comparison
+              </h3>
+              <ResponsiveContainer width="100%" height={300}>
+                <BarChart data={revenueByServiceData}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                  <XAxis dataKey="name" tick={{ fontSize: 12 }} stroke="#6b7280" />
+                  <YAxis yAxisId="left" tick={{ fontSize: 12 }} stroke="#6b7280" />
+                  <YAxis yAxisId="right" orientation="right" tick={{ fontSize: 12 }} stroke="#6b7280" />
+                  <Tooltip 
+                    contentStyle={{ 
+                      backgroundColor: '#fff', 
+                      border: '1px solid #e5e7eb',
+                      borderRadius: '8px'
+                    }}
+                  />
+                  <Legend />
+                  <Bar yAxisId="left" dataKey="bookings" fill="#3B82F6" name="Bookings" radius={[8, 8, 0, 0]} />
+                  <Bar yAxisId="right" dataKey="revenue" fill="#F97316" name="Revenue ($)" radius={[8, 8, 0, 0]} />
+                </BarChart>
+              </ResponsiveContainer>
             </div>
 
             {/* Conversion Funnel */}
@@ -393,6 +562,45 @@ const AdminAnalytics = () => {
                 color="text-orange-600"
                 percentage={kpis.totalRevenue > 0 ? Math.round((byService.rental.revenue / kpis.totalRevenue) * 100) : 0}
               />
+            </div>
+
+            {/* Revenue Trend Chart */}
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 mb-6">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-6 flex items-center gap-2">
+                <LineChartIcon className="h-5 w-5 text-green-600" />
+                Revenue Trend (Last 30 Days)
+              </h3>
+              <ResponsiveContainer width="100%" height={300}>
+                <LineChart data={dailyRevenueData}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                  <XAxis 
+                    dataKey="date" 
+                    tick={{ fontSize: 12 }} 
+                    stroke="#6b7280"
+                  />
+                  <YAxis 
+                    tick={{ fontSize: 12 }} 
+                    stroke="#6b7280"
+                    tickFormatter={(value) => `$${value}`}
+                  />
+                  <Tooltip 
+                    contentStyle={{ 
+                      backgroundColor: '#fff', 
+                      border: '1px solid #e5e7eb',
+                      borderRadius: '8px'
+                    }}
+                    formatter={(value) => [`$${value}`, 'Revenue']}
+                  />
+                  <Line 
+                    type="monotone" 
+                    dataKey="revenue" 
+                    stroke="#10B981" 
+                    strokeWidth={3}
+                    dot={{ fill: '#10B981', r: 4 }}
+                    activeDot={{ r: 6 }}
+                  />
+                </LineChart>
+              </ResponsiveContainer>
             </div>
 
             {/* Revenue Breakdown */}
