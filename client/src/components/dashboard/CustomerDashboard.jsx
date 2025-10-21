@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
+import usePageTitle from '../../hooks/usePageTitle';
 import EmailVerificationBanner from '../common/EmailVerificationBanner';
 import { 
   Package, 
@@ -22,6 +23,7 @@ import { apiClient } from '../../utils/apiClient';
 import { formatCurrency } from '../../utils/currency';
 
 const CustomerDashboard = () => {
+  usePageTitle('Customer Dashboard');
   const { user } = useAuth();
   const [stats, setStats] = useState({
     totalBookings: 0,

@@ -7,6 +7,7 @@ import { BookingProvider } from './contexts/BookingContext'
 import ErrorBoundary from './components/common/ErrorBoundary'
 import Navbar from './components/layout/Navbar'
 import ProtectedRoute from './components/common/ProtectedRoute'
+import PageTitleManager from './components/common/PageTitleManager'
 import Login from './components/auth/Login'
 import SignupForm from './components/auth/SignupForm'
 import EmailVerification from './components/auth/EmailVerification'
@@ -40,6 +41,7 @@ function App() {
           <NotificationProvider>
             <BookingProvider>
               <Router>
+              <PageTitleManager />
               <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
                 <Navbar />
                 <Routes>
