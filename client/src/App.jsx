@@ -179,16 +179,20 @@ const LandingPage = () => {
   const { user } = useAuth();
   
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+    <div className="min-h-screen bg-gradient-to-br from-primary-50 via-white to-accent-50">
       {/* Hero Section */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="text-center">
+          <div className="inline-flex items-center px-4 py-2 rounded-full bg-accent-100 text-accent-700 text-sm font-medium mb-4">
+            <Shield className="h-4 w-4 mr-2" />
+            Trusted by 500+ Businesses Nationwide
+          </div>
           <h1 className="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
-            <span className="block">Streamline Your</span>
-            <span className="block text-primary-600">Logistics Operations</span>
+            <span className="block">Connect, Transport,</span>
+            <span className="block text-primary-600">Grow Your Business</span>
           </h1>
-          <p className="mt-3 max-w-md mx-auto text-base text-gray-500 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
-            Connect shippers with reliable truck providers. Manage bookings, track shipments, and grow your logistics business with our comprehensive platform.
+          <p className="mt-3 max-w-md mx-auto text-base text-gray-600 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
+            TruckLogistics connects businesses with verified truck providers. Streamline bookings, track shipments in real-time, and scale your logistics operations with confidence.
           </p>
           <div className="mt-5 max-w-md mx-auto sm:flex sm:justify-center md:mt-8">
             <div className="rounded-md shadow">
@@ -213,37 +217,92 @@ const LandingPage = () => {
           </div>
         </div>
 
+        {/* Stats Section */}
+        <div className="mt-16 grid grid-cols-2 gap-4 sm:grid-cols-4 sm:gap-8">
+          <div className="text-center">
+            <div className="text-3xl sm:text-4xl font-bold text-primary-600">500+</div>
+            <div className="mt-2 text-sm sm:text-base text-gray-600">Active Providers</div>
+          </div>
+          <div className="text-center">
+            <div className="text-3xl sm:text-4xl font-bold text-primary-600">2,500+</div>
+            <div className="mt-2 text-sm sm:text-base text-gray-600">Deliveries Completed</div>
+          </div>
+          <div className="text-center">
+            <div className="text-3xl sm:text-4xl font-bold text-accent-500">98%</div>
+            <div className="mt-2 text-sm sm:text-base text-gray-600">Satisfaction Rate</div>
+          </div>
+          <div className="text-center">
+            <div className="text-3xl sm:text-4xl font-bold text-accent-500">&lt;2hrs</div>
+            <div className="mt-2 text-sm sm:text-base text-gray-600">Avg Response Time</div>
+          </div>
+        </div>
+
         {/* Features */}
-        <div className="mt-20">
+        <div className="mt-24">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+              Everything You Need for Logistics Success
+            </h2>
+            <p className="mt-4 text-lg text-gray-600">
+              Powerful features designed for modern businesses
+            </p>
+          </div>
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            <div className="text-center">
-              <div className="flex items-center justify-center h-12 w-12 rounded-md bg-primary-600 text-white mx-auto">
-                <Truck className="h-6 w-6" />
+            <div className="text-center bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow border border-gray-100">
+              <div className="flex items-center justify-center h-14 w-14 rounded-lg bg-primary-600 text-white mx-auto">
+                <Truck className="h-7 w-7" />
               </div>
-              <h3 className="mt-6 text-lg font-medium text-gray-900">Fleet Management</h3>
-              <p className="mt-2 text-base text-gray-500">
-                Manage your truck fleet, drivers, and availability in one centralized platform.
+              <h3 className="mt-6 text-lg font-semibold text-gray-900">Smart Fleet Management</h3>
+              <p className="mt-3 text-base text-gray-600">
+                Monitor availability, manage drivers, and optimize your fleet utilization with intelligent scheduling.
               </p>
             </div>
 
-            <div className="text-center">
-              <div className="flex items-center justify-center h-12 w-12 rounded-md bg-primary-600 text-white mx-auto">
-                <Shield className="h-6 w-6" />
+            <div className="text-center bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow border border-gray-100">
+              <div className="flex items-center justify-center h-14 w-14 rounded-lg bg-primary-600 text-white mx-auto">
+                <Shield className="h-7 w-7" />
               </div>
-              <h3 className="mt-6 text-lg font-medium text-gray-900">Secure Transactions</h3>
-              <p className="mt-2 text-base text-gray-500">
-                Safe and secure booking process with document verification and admin oversight.
+              <h3 className="mt-6 text-lg font-semibold text-gray-900">Verified & Secure</h3>
+              <p className="mt-3 text-base text-gray-600">
+                All providers undergo background checks and document verification for your peace of mind.
               </p>
             </div>
 
-            <div className="text-center">
-              <div className="flex items-center justify-center h-12 w-12 rounded-md bg-accent-500 text-white mx-auto">
-                <Clock className="h-6 w-6" />
+            <div className="text-center bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow border border-gray-100">
+              <div className="flex items-center justify-center h-14 w-14 rounded-lg bg-accent-500 text-white mx-auto">
+                <Clock className="h-7 w-7" />
               </div>
-              <h3 className="mt-6 text-lg font-medium text-gray-900">Real-time Tracking</h3>
-              <p className="mt-2 text-base text-gray-500">
-                Track your shipments in real-time with status updates and notifications.
+              <h3 className="mt-6 text-lg font-semibold text-gray-900">Real-Time Tracking</h3>
+              <p className="mt-3 text-base text-gray-600">
+                Track every shipment with live updates, instant notifications, and complete transparency.
               </p>
+            </div>
+          </div>
+        </div>
+
+        {/* CTA Section */}
+        <div className="mt-24 bg-gradient-to-r from-primary-600 to-primary-700 rounded-2xl shadow-xl overflow-hidden">
+          <div className="px-6 py-12 sm:px-12 sm:py-16 text-center">
+            <h2 className="text-3xl font-extrabold text-white sm:text-4xl">
+              Ready to Transform Your Logistics?
+            </h2>
+            <p className="mt-4 text-lg text-primary-100">
+              Join hundreds of businesses already streamlining their operations
+            </p>
+            <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+              <Link
+                to="/register"
+                className="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-primary-700 bg-white hover:bg-gray-50 transition-colors"
+              >
+                Start Free Trial
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Link>
+              <Link
+                to="/login"
+                className="inline-flex items-center justify-center px-8 py-3 border-2 border-white text-base font-medium rounded-md text-white hover:bg-primary-500 transition-colors"
+              >
+                Sign In
+              </Link>
             </div>
           </div>
         </div>
