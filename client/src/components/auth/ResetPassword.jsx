@@ -85,7 +85,7 @@ const ResetPassword = () => {
 
     try {
       // Hardcode the API URL to ensure it works
-      const API_URL = 'https://trucklogistics-api.onrender.com/api';
+      const API_URL = 'https://trunklogistics-api.onrender.com/api';
       const fullUrl = `${API_URL}/auth/reset-password/${token}`;
       
       console.log('🔄 Making request to:', fullUrl);
