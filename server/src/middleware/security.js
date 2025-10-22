@@ -39,6 +39,10 @@ export const corsOptions = {
       'http://127.0.0.1:5173',
       'http://127.0.0.1:5174',
       process.env.FRONTEND_URL,
+      process.env.CLIENT_URL,
+      process.env.APP_URL,
+      'https://trucklogistics.me',
+      'https://www.trucklogistics.me',
       'https://trucklogistics.netlify.app',
       'https://trucklogistics-mvp.netlify.app',
       'https://truck-logistics-mvp.vercel.app'
