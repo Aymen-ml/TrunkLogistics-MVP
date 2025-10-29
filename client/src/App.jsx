@@ -34,6 +34,10 @@ import TrucksAdmin from './components/admin/TrucksAdmin'
 import Profile from './components/profile/Profile'
 import Settings from './components/settings/Settings'
 import EmailTest from './components/admin/EmailTest'
+import LandingPage from './components/landing/LandingPage'
+import AboutUs from './components/legal/AboutUs'
+import PrivacyPolicy from './components/legal/PrivacyPolicy'
+import TermsOfUse from './components/legal/TermsOfUse'
 
 function App() {
   return (
@@ -44,16 +48,23 @@ function App() {
             <BookingProvider>
               <Router>
               <PageTitleManager />
-              <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-                <Navbar />
-                <Routes>
+              <Routes>
                 {/* Public Routes */}
                 <Route path="/" element={<LandingPage />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="/verify-email/:token" element={<EmailVerification />} />
-                <Route path="/forgot-password" element={<ForgotPassword />} />
-                <Route path="/reset-password/:token" element={<ResetPassword />} />
+                <Route path="/about" element={<AboutUs />} />
+                <Route path="/privacy" element={<PrivacyPolicy />} />
+                <Route path="/terms" element={<TermsOfUse />} />
+                
+                {/* All other routes with Navbar */}
+                <Route path="/*" element={
+                  <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+                    <Navbar />
+                    <Routes>
+                      <Route path="/login" element={<Login />} />
+                      <Route path="/register" element={<Register />} />
+                      <Route path="/verify-email/:token" element={<EmailVerification />} />
+                      <Route path="/forgot-password" element={<ForgotPassword />} />
+                      <Route path="/reset-password/:token" element={<ResetPassword />} />
                 
                 {/* Dashboard Routes */}
                 <Route path="/dashboard/*" element={
@@ -165,130 +176,16 @@ function App() {
                 {/* 404 Route */}
                 <Route path="/unauthorized" element={<UnauthorizedPage />} />
                 {/* <Route path="*" element={<Navigate to="/" replace />} /> */}
+                    </Routes>
+                  </div>
+                } />
               </Routes>
-            </div>
             </Router>
           </BookingProvider>
         </NotificationProvider>
         </AuthProvider>
       </ToastProvider>
     </ErrorBoundary>
-  );
-}
-
-const LandingPage = () => {
-  const { user } = useAuth();
-  
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-primary-50 via-white to-accent-50">
-      {/* Hero Section */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="text-center">
-          <div className="inline-flex items-center px-4 py-2 rounded-full bg-accent-100 text-accent-700 text-sm font-medium mb-4">
-            <Shield className="h-4 w-4 mr-2" />
-            Trusted Logistics Platform
-          </div>
-          <h1 className="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
-            <span className="block">Connect, Transport,</span>
-            <span className="block text-primary-600">Grow Your Business</span>
-          </h1>
-          <p className="mt-3 max-w-md mx-auto text-base text-gray-600 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
-            TruckLogistics connects businesses with verified truck providers. Streamline bookings, track shipments in real-time, and scale your logistics operations with confidence.
-          </p>
-          <div className="mt-5 max-w-md mx-auto sm:flex sm:justify-center md:mt-8">
-            <div className="rounded-md shadow">
-              <Link
-                to={user ? "/dashboard" : "/register"}
-                className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-accent-500 hover:bg-accent-600 transition-colors md:py-4 md:text-lg md:px-10"
-              >
-                {user ? 'Go to Dashboard' : 'Get Started'}
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Link>
-            </div>
-            {!user && (
-              <div className="mt-3 rounded-md shadow sm:mt-0 sm:ml-3">
-                <Link
-                  to="/login"
-                  className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-primary-600 bg-white hover:bg-gray-50 transition-colors md:py-4 md:text-lg md:px-10"
-                >
-                  Sign In
-                </Link>
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* Features */}
-        <div className="mt-20">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
-              Everything You Need for Logistics Success
-            </h2>
-            <p className="mt-4 text-lg text-gray-600">
-              Powerful features designed for modern businesses
-            </p>
-          </div>
-          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            <div className="text-center bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow border border-gray-100">
-              <div className="flex items-center justify-center h-14 w-14 rounded-lg bg-primary-600 text-white mx-auto">
-                <Truck className="h-7 w-7" />
-              </div>
-              <h3 className="mt-6 text-lg font-semibold text-gray-900">Smart Fleet Management</h3>
-              <p className="mt-3 text-base text-gray-600">
-                Monitor availability, manage drivers, and optimize your fleet utilization with intelligent scheduling.
-              </p>
-            </div>
-
-            <div className="text-center bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow border border-gray-100">
-              <div className="flex items-center justify-center h-14 w-14 rounded-lg bg-primary-600 text-white mx-auto">
-                <Shield className="h-7 w-7" />
-              </div>
-              <h3 className="mt-6 text-lg font-semibold text-gray-900">Verified & Secure</h3>
-              <p className="mt-3 text-base text-gray-600">
-                All providers undergo background checks and document verification for your peace of mind.
-              </p>
-            </div>
-
-            <div className="text-center bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow border border-gray-100">
-              <div className="flex items-center justify-center h-14 w-14 rounded-lg bg-accent-500 text-white mx-auto">
-                <Clock className="h-7 w-7" />
-              </div>
-              <h3 className="mt-6 text-lg font-semibold text-gray-900">Real-Time Tracking</h3>
-              <p className="mt-3 text-base text-gray-600">
-                Track every shipment with live updates, instant notifications, and complete transparency.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* CTA Section */}
-        <div className="mt-24 bg-gradient-to-r from-primary-600 to-primary-700 rounded-2xl shadow-xl overflow-hidden">
-          <div className="px-6 py-12 sm:px-12 sm:py-16 text-center">
-            <h2 className="text-3xl font-extrabold text-white sm:text-4xl">
-              Ready to Transform Your Logistics?
-            </h2>
-            <p className="mt-4 text-lg text-primary-100">
-              Start managing your logistics operations today
-            </p>
-            <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                to="/register"
-                className="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-primary-700 bg-white hover:bg-gray-50 transition-colors"
-              >
-                Get Started
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Link>
-              <Link
-                to="/login"
-                className="inline-flex items-center justify-center px-8 py-3 border-2 border-white text-base font-medium rounded-md text-white hover:bg-primary-500 transition-colors"
-              >
-                Sign In
-              </Link>
-            </div>
-          </div>
-        </div>
-      </main>
-    </div>
   );
 }
 
