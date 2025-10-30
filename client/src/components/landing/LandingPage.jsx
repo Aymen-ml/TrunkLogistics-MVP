@@ -527,27 +527,27 @@ const LandingPage = () => {
                 <Package className="h-12 w-12 text-blue-600" />
               </div>
               <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                Book Transport
+                {t('partners.customer.title')}
               </h3>
               <div className="space-y-4 mb-8">
                 <div className="flex items-start">
                   <CheckCircle className="h-5 w-5 text-orange-600 dark:text-orange-400 mr-3 mt-0.5 flex-shrink-0" />
-                  <p className="text-gray-600 dark:text-gray-300">Access verified truck providers instantly</p>
+                  <p className="text-gray-600 dark:text-gray-300">{t('partners.customer.benefit1')}</p>
                 </div>
                 <div className="flex items-start">
                   <CheckCircle className="h-5 w-5 text-orange-600 dark:text-orange-400 mr-3 mt-0.5 flex-shrink-0" />
-                  <p className="text-gray-600 dark:text-gray-300">Track shipments in real-time</p>
+                  <p className="text-gray-600 dark:text-gray-300">{t('partners.customer.benefit2')}</p>
                 </div>
                 <div className="flex items-start">
                   <CheckCircle className="h-5 w-5 text-orange-600 dark:text-orange-400 mr-3 mt-0.5 flex-shrink-0" />
-                  <p className="text-gray-600 dark:text-gray-300">Transparent pricing and billing</p>
+                  <p className="text-gray-600 dark:text-gray-300">{t('partners.customer.benefit3')}</p>
                 </div>
               </div>
               <Link
                 to="/register"
                 className="block text-center px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all"
               >
-                Book Now
+                {t('partners.customer.cta')}
               </Link>
             </div>
 
@@ -557,27 +557,27 @@ const LandingPage = () => {
                 <Truck className="h-12 w-12 text-orange-600" />
               </div>
               <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                Become a Provider
+                {t('partners.provider.title')}
               </h3>
               <div className="space-y-4 mb-8">
                 <div className="flex items-start">
                   <CheckCircle className="h-5 w-5 text-blue-600 dark:text-blue-400 mr-3 mt-0.5 flex-shrink-0" />
-                  <p className="text-gray-600 dark:text-gray-300">Grow your business with new customers</p>
+                  <p className="text-gray-600 dark:text-gray-300">{t('partners.provider.benefit1')}</p>
                 </div>
                 <div className="flex items-start">
                   <CheckCircle className="h-5 w-5 text-blue-600 dark:text-blue-400 mr-3 mt-0.5 flex-shrink-0" />
-                  <p className="text-gray-600 dark:text-gray-300">Manage your fleet efficiently</p>
+                  <p className="text-gray-600 dark:text-gray-300">{t('partners.provider.benefit2')}</p>
                 </div>
                 <div className="flex items-start">
                   <CheckCircle className="h-5 w-5 text-blue-600 dark:text-blue-400 mr-3 mt-0.5 flex-shrink-0" />
-                  <p className="text-gray-600 dark:text-gray-300">Access performance analytics</p>
+                  <p className="text-gray-600 dark:text-gray-300">{t('partners.provider.benefit3')}</p>
                 </div>
               </div>
               <Link
                 to="/register?role=provider"
                 className="block text-center px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all"
               >
-                Become a Provider
+                {t('partners.provider.cta')}
               </Link>
             </div>
           </div>

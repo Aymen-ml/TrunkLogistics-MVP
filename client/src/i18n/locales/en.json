@@ -95,7 +95,21 @@
   },
   "partners": {
     "title": "Trusted Partners",
-    "subtitle": "Working with leading organizations across Algeria"
+    "subtitle": "Working with leading organizations across Algeria",
+    "customer": {
+      "title": "Book Transport",
+      "benefit1": "Access verified truck providers instantly",
+      "benefit2": "Track shipments in real-time",
+      "benefit3": "Transparent pricing and billing",
+      "cta": "Book Now"
+    },
+    "provider": {
+      "title": "Become a Provider",
+      "benefit1": "Grow your business with new customers",
+      "benefit2": "Manage your fleet efficiently",
+      "benefit3": "Access performance analytics",
+      "cta": "Become a Provider"
+    }
   },
   "footer": {
     "tagline": "Moving ahead together across Algeria",

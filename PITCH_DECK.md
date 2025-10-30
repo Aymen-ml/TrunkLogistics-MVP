@@ -9,56 +9,59 @@
 
 ## 1) The Problem
 
-**Dispatch is broken in the field:**
+**Oilfield logistics in South Algeria is stuck in the dark ages:**
 
-- **Fragmented coordination:** Phone chains → delays, lost messages, zero audit trail
-- **Opaque status:** Shippers don't know where trucks are; late updates cause missed deadlines
-- **Non-standard pricing:** Ad-hoc quotes → disputes, budget overruns, no benchmarks
-- **Compliance nightmare:** Insurance/permits/registration scattered across emails/PDFs; expiries missed
-- **Manual processes:** Heavy paperwork and disconnected systems slow operations
-- **Trust gap:** No quick way to verify provider reliability, safety records, or incident history
+- **Fragmented coordination:** Phone chains between Hassi Messaoud sites → delays, lost messages, zero audit trail
+- **Opaque status:** Operations managers don't know where fuel tankers or equipment trucks are; late updates cause production delays
+- **Non-standard pricing:** Ad-hoc quotes for every water/fuel run → disputes, budget overruns, no benchmarks
+- **Compliance nightmare:** HSE requires insurance/permits/hazmat certs, but they're scattered across emails/PDFs; expiries missed → site shutdowns
+- **Manual processes:** Oilfield contractors waste hours on paperwork while trucks wait at gates
+- **Trust gap:** No quick way to verify provider reliability, safety records, or incident history in remote desert operations
 
-**Impact:**
-- Average 45+ min wasted per dispatch (calls, rework, confirmations)
-- 15–20% of trips delayed due to miscommunication or doc issues
-- Compliance audits require manual document searches across emails and files
+**Impact on oil & gas operations:**
+- Average 45+ min wasted per dispatch (critical when downtime costs $10K-50K/day)
+- 15–20% of trips delayed → rig delays, equipment sitting idle, production targets missed
+- HSE compliance audits require manual document searches → failed audits, operational penalties
+- No visibility on fuel/water deliveries → emergency situations, production shutdowns
 
-*Source: Initial field interviews, Hassi Messaoud logistics teams (Oct 2025)*
+*Source: Field interviews with Hassi Messaoud logistics coordinators, oilfield contractors (Oct 2025)*
 
 ---
 
 ## 2) Our Solution
 
-**A lightweight marketplace + TMS purpose-built for the field:**
+**A lightweight marketplace + TMS purpose-built for South Algeria oilfield operations:**
 
-- **Match loads instantly:** Verified providers respond in minutes, not hours
-- **Standard workflow:** Request → Offers → Confirm → Dispatch → ePOD → Archive
-- **Compliance by default:** Document vault with expiry alerts, performance scoring, incident log
-- **Real-time visibility:** Web platform with email notifications and status updates
+- **Match loads instantly:** Find verified tanker/flatbed providers in Hassi Messaoud region in minutes, not hours
+- **Oilfield workflow:** Fuel/water request → Instant offers → Confirm → Track → ePOD → HSE-ready archive
+- **Compliance by default:** Document vault tracks insurance, hazmat certs, permits with automated expiry alerts—always HSE audit-ready
+- **Real-time visibility:** Operations teams see trip status updates via web platform and email notifications
 
-**The promise:**
-- **3× faster dispatch** (target: <10 min avg vs. 45+ min baseline)
-- **Single source of truth** for pricing, status, and documents
-- **95%+ compliance rate** (always-current docs, automated expiry alerts)
-- **Zero lost trips** due to miscommunication or missing paperwork
+**The promise for oil & gas operators:**
+- **3× faster dispatch** (target: <10 min avg vs. 45+ min baseline) → minimize rig downtime
+- **Single source of truth** for pricing, status, and documents → eliminate phone tag and lost paperwork
+- **95%+ HSE compliance rate** (always-current docs, automated expiry alerts) → pass audits, avoid shutdowns
+- **Zero lost trips** due to miscommunication → maintain production schedules
 
-*Think: "Uber for trucks" meets field-grade compliance—no ERP required.*
+*Think: Digital dispatch for desert oilfields—no heavy ERP required, built for field teams.*
 
 ---
 
 ## 3) Market Opportunity — Oil & Gas, South Algeria
 
-**Beachhead: Hassi Messaoud and surrounding oilfield basins**
+**Beachhead: Hassi Messaoud—Algeria's largest oilfield complex**
 
-- **Geography:** Hassi Messaoud, In Salah, In Amenas + 200 km radius
-- **Job mix:**
-  - Fuel/water tankers (daily ops, high frequency)
-  - Equipment moves: flatbeds, low-boys (drilling rigs, heavy machinery)
-  - Supplies and materials (site-to-site logistics)
-- **Characteristics:**
-  - High-frequency short/medium lanes (50–300 km)
-  - Strict safety/compliance: insurance, permits, driver certs mandatory
-  - 24/7 operations; time-sensitive (downtime = $10K–50K/day for operators)
+- **Geography:** Hassi Messaoud (Sonatrach, Schlumberger, Halliburton sites), In Salah, In Amenas + 200 km radius
+- **Job mix (oilfield-specific):**
+  - **Fuel/water tankers:** Daily deliveries to drilling sites, production facilities (highest frequency, critical ops)
+  - **Equipment moves:** Flatbeds, low-boys for drilling rigs, wellheads, heavy machinery (time-sensitive, high-value)
+  - **Supplies & materials:** Cement, pipes, chemicals, spare parts (site-to-site, camp-to-field logistics)
+  - **Personnel transport support:** Coordination with crew change logistics (not transport itself, but supply chain sync)
+- **Oilfield characteristics:**
+  - High-frequency short/medium desert routes (50–300 km between sites)
+  - Strict HSE/safety compliance: insurance, hazmat permits, driver certifications mandatory for Sonatrach/international operators
+  - 24/7 operations; extreme time-sensitivity (downtime = $10K–50K/day for drilling contractors)
+  - Remote desert conditions demand reliable digital tracking and documentation
 
 **Market sizing (conservative estimates):**
 
@@ -73,10 +76,12 @@
 - Phase 3: Mining and infrastructure projects
 - Long-term: North Africa regional play (Tunisia, Libya border zones)
 
-**Why oil & gas first?**
-- Urgent compliance needs → willingness to pay
-- Concentrated geography → network effects kick in faster
-- Repeat business (same lanes, same providers) → stickiness
+**Why South Algeria oil & gas first?**
+- **Urgent compliance needs:** Sonatrach, international operators (Schlumberger, Halliburton, Baker Hughes) require strict HSE documentation → willingness to pay for compliance automation
+- **Concentrated geography:** 80% of providers operate within Hassi Messaoud 200km radius → network effects kick in faster, easier to onboard critical mass
+- **Repeat high-frequency business:** Same fuel/water routes daily, same equipment moves weekly → predictable volume, high stickiness
+- **High value per trip:** Oilfield logistics commands premium freight rates (10K–350K+ DZD per trip: fuel/water tankers, equipment moves) vs general freight → strong unit economics on our 7% take rate
+- **Time sensitivity creates urgency:** Production delays cost $10K-50K/day → operators will adopt tools that prevent downtime
 
 ---
 
@@ -141,17 +146,34 @@
 
 **7% of freight charge per completed trip** (pilot flexibility: 5–10%)
 
-- **Min fee:** 1,000 DZD per trip (protects small loads)
-- **Optional cap:** 90,000 DZD for very large hauls (negotiate case-by-case)
-- **Rationale:** Aligns our revenue with delivered value; simple, transparent
+- **Min fee:** 1,000 DZD per trip (protects very small loads)
+- **Optional cap:** 90,000 DZD for exceptionally large, negotiated hauls
+- **Rationale:** Aligns our revenue with delivered value; simple and transparent for shippers and providers
 
-**Example trips:**
+**Example trips (oilfield-specific):**
 
-| Trip Type | Freight (DZD) | Take Rate @7% | Min Applied? | Net Revenue |
-|-----------|--------------|---------------|--------------|-------------|
-| Fuel tanker (Hassi M. → Site A) | 180,000 | 12,600 | ✓ | **12,600** |
-| Equipment move (Low-boy, B→C) | 350,000 | 24,500 | ✓ | **24,500** |
-| Small local haul | 10,000 | 700 | Min→1,000 | **1,000** |
+| Trip Type | Typical Freight (DZD) | Take Rate @7% | Net Revenue |
+|-----------|-----------------------:|-------------:|-------------:|
+| Fuel/water tanker (regional, Hassi M.) | 180,000 | 12,600 | **12,600** |
+| Heavy equipment move (low-boy, rig parts) | 350,000 | 24,500 | **24,500** |
+| Small local service run | 10,000 | 700 (min→1,000 applied) | **1,000** |
+
+These examples reflect typical oilfield trip economics in Hassi Messaoud and nearby basins. The take-rate keeps pricing simple for shippers while delivering strong unit economics for TruckLogistics.
+
+### 6.2 Provider Subscriptions & Services
+
+- **Provider subscription:** 500–2,000 DZD/month for enhanced listing, priority matching, and faster payments
+- **Onboarding fee (one-time):** Optional paid verification and document scanning for large fleets
+- **Premium analytics for shippers:** Monthly subscription for dashboards, SLA reports, and route insights
+- **Managed services (Phase 2):** Payments facilitation, insurance facilitation (fee-based)
+
+### 6.3 Unit Economics (oilfield focus)
+
+- **Variable cost per trip:** ~300–600 DZD (driver payout + fuel pass-throughs + email notifications/processing)
+- **Contribution per trip (example):** Fuel tanker net revenue ~12,600 DZD → contribution margin after variable costs ≈ 12,000+ DZD
+- **LTV / CAC:** With repeat daily/weekly trips, LTV is high relative to modest onboarding CAC (more detailed model in Appendix B)
+
+Note: Communications are email-based in the MVP (1–2% of revenue), keeping variable costs low relative to SMS/WhatsApp models.
 
 ---
 
@@ -272,20 +294,20 @@
 
 ## 7) Go-to-Market — Field-First, Wedge Strategy
 
-### **Phase 1: Pilot (Months 0–3) — Prove It Works**
+### **Phase 1: Pilot (Months 0–3) — Prove It Works in Hassi Messaoud**
 
-**Goal:** 2–3 shippers, 50–100 trucks, 150–300 trips in Hassi Messaoud
+**Goal:** 2–3 oilfield shippers (service contractors, drilling operators), 50–100 verified trucks, 150–300 trips in Hassi Messaoud oilfield region
 
-**Provider acquisition:**
-- Depot partnerships: co-locate onboarding days at major truck depots
-- Field workshops: doc verification + photography + training (3–5 providers/day)
-- Referral bounties: 1,500–3,000 DZD per verified provider brought in by existing users
-- Direct outreach: leverage existing logistics networks for awareness
+**Provider acquisition (tanker & flatbed focus):**
+- **Depot partnerships:** Co-locate onboarding days at major Hassi Messaoud truck depots and fuel/water tanker staging areas
+- **Field workshops:** HSE doc verification + photography + platform training (target: 3–5 providers/day, prioritize tankers & flatbeds)
+- **Referral bounties:** 1,500–3,000 DZD per verified provider brought in by existing users (focus on oilfield-certified drivers)
+- **Direct outreach:** Tap into existing logistics networks at Sonatrach contractor meetings and oilfield service company hubs
 
-**Shipper acquisition:**
-- Direct BD: oilfield operators, service companies (focus: compliance pain, time-to-dispatch)
-- Case studies: quantify time saved, compliance improvement, cost transparency
-- Free pilot period: waive take-rate for first 30–50 trips to prove ROI
+**Shipper acquisition (oilfield operators & contractors):**
+- **Direct BD:** Target oilfield operators, drilling contractors, and service companies (pitch: eliminate HSE compliance headaches, cut dispatch time, reduce rig downtime)
+- **Case studies:** Quantify time saved (45 min → 10 min dispatch), compliance improvement (95%+ doc validity), cost transparency (standardized pricing vs ad-hoc)
+- **Free pilot period:** Waive take-rate for first 30–50 trips to prove ROI and build trust with major operators
 - Safety/compliance angle: "Audit-ready in 1 click" messaging
 
 **Success metrics:**
@@ -296,17 +318,17 @@
 
 ---
 
-### **Phase 2: Expand (Months 3–6) — Scale the Wedge**
+### **Phase 2: Expand (Months 3–6) — Scale Across South Algeria Oilfields**
 
-**Expand lanes:**
-- Add In Salah, In Amenas corridors
-- Cover top 10 lanes (80% of volume)
+**Expand lanes (oilfield corridors):**
+- Add **In Salah** and **In Amenas** oilfield routes (capture multi-site operators like Schlumberger, BP Algeria)
+- Cover top 10 oilfield lanes representing 80% of regional volume (fuel/water deliveries, equipment shuttles)
 
-**Product milestones:**
-- Enhanced notification system
-- Rate cards module (benchmarking)
-- Mobile-responsive improvements
-- Advanced analytics dashboard
+**Product milestones (oilfield-relevant features):**
+- **Enhanced notification system:** Real-time trip alerts via email (pickup confirmed, en route, delivered)
+- **Rate cards module:** Benchmarking tool for shippers to compare historical pricing on common oilfield routes
+- **Mobile-responsive improvements:** Better mobile web experience for field managers tracking from sites
+- **Advanced analytics dashboard:** SLA reports, on-time %, provider performance metrics (HSE audit-ready)
 
 **Growth tactics:**
 - Provider: Pro tier upsell (analytics, priority)
@@ -366,44 +388,43 @@
 
 ---
 
-### **Phase 1: Pilot Ready (Months 0–3)**
-- [ ] Document vault with expiry alerts (30/15/7 days)
-- [ ] Provider scoring (acceptance rate, on-time %, doc validity)
-- [ ] Incident log (disputes, safety issues)
-- [ ] Enhanced email notifications
-- [ ] Admin dashboard (exceptions, compliance monitoring)
-- [ ] Basic analytics (trip volume, avg dispatch time)
+### **Phase 1: Oilfield Pilot Ready (Months 0–3)**
+- [ ] **Document vault with HSE compliance alerts:** Auto-track insurance, hazmat certs, permits; alert 30/15/7 days before expiry
+- [ ] **Provider scoring system:** Track acceptance rate, on-time %, doc validity—critical for oilfield shipper trust
+- [ ] **Incident log:** Record disputes, safety issues, failed deliveries (HSE audit trail)
+- [ ] **Enhanced email notifications:** Lifecycle alerts (booking confirmed, pickup done, en route, delivered, ePOD uploaded)
+- [ ] **Admin/ops dashboard:** Monitor exceptions, compliance status, trip delays in real-time
+- [ ] **Basic analytics:** Trip volume, avg dispatch time, provider utilization (oilfield KPIs)
 
 ---
 
-### **Phase 2: Scale Features (Months 3–6)**
-- [ ] Enhanced notification system (push notifications)
-- [ ] Mobile app development (iOS/Android)
-- [ ] Rate cards module (benchmark pricing per lane)
-- [ ] Simple tendering (multi-provider RFQ)
-- [ ] Analytics v1 (lane performance, cost/km, on-time trends)
-- [ ] Provider Pro tier (priority listings, advanced analytics)
+### **Phase 2: Oilfield Scale Features (Months 3–6)**
+- [ ] **Enhanced notification system:** Push notifications for mobile web users (critical updates for field managers)
+- [ ] **Mobile app (iOS/Android):** Native app for field ops teams managing trips from remote sites
+- [ ] **Rate cards module:** Benchmark pricing per oilfield lane (Hassi M. → Site A, etc.) for shipper budgeting
+- [ ] **Simple tendering (RFQ):** Multi-provider bids for large recurring routes (e.g., weekly fuel contracts)
+- [ ] **Advanced analytics dashboard:** Lane performance, cost/km, on-time trends, HSE compliance scores
+- [ ] **Provider Pro tier:** Priority listings, advanced trip analytics, faster payments for top-rated oilfield truckers
 
 ---
 
-### **Phase 3: Enterprise + Payments (Months 6–12)**
-- [ ] Managed payments/escrow (partner integration)
-- [ ] GPS/telematics integration (live tracking)
-- [ ] Mobile apps (iOS/Android native, React Native)
-- [ ] Enterprise SSO (SAML, Azure AD)
-- [ ] Private marketplace instances (white-label option)
-- [ ] SLA management (custom metrics, reporting packs)
-- [ ] Insurance facilitation (partner referrals)
-- [ ] Advanced analytics (utilization, dwell, cost benchmarks)
+### **Phase 3: Enterprise Oilfield Features (Months 6–12)**
+- [ ] **Managed payments/escrow:** Partner with Algerian fintech for secure, automated payments to providers (reduce cash handling)
+- [ ] **GPS/telematics integration:** Live truck tracking for high-value equipment moves and fuel deliveries (critical for oilfield visibility)
+- [ ] **Enterprise SSO (SAML, Azure AD):** Integration with Schlumberger, Sonatrach, BP corporate identity systems
+- [ ] **Private marketplace instances:** White-label option for major operators managing their own captive fleets
+- [ ] **SLA management:** Custom metrics (e.g., <2hr response for emergency fuel runs), automated reporting packs for HSE audits
+- [ ] **Insurance facilitation:** Partner referrals for oilfield-grade cargo/liability insurance
+- [ ] **Advanced analytics:** Fleet utilization, dwell time at loading points, cost benchmarks per oilfield corridor
 
 ---
 
-### **Beyond Year 1**
-- Multi-country expansion (Tunisia, Libya border zones)
-- Predictive analytics (demand forecasting, dynamic pricing)
-- Carbon tracking (emissions per km, sustainability reports)
-- Driver app (native iOS/Android for ePOD, route optimization)
-- Blockchain for document provenance (optional, if demanded)
+### **Beyond Year 1 (Oilfield Expansion + Regional Scale)**
+- **Multi-country oilfield expansion:** Tunisia border zones, Libya cross-border logistics (if stabilized)
+- **Predictive analytics:** Demand forecasting for seasonal drilling activity, dynamic pricing for peak/off-peak oilfield runs
+- **Carbon tracking:** Emissions per km, sustainability reports (international operators increasingly require ESG metrics)
+- **Driver app (native):** iOS/Android app for drivers with offline ePOD capture, optimized route suggestions
+- **Blockchain for document provenance:** Optional immutable audit trail for HSE compliance (if major operators demand it)
 
 ---
 
@@ -443,27 +464,27 @@
 
 ### **Hiring Roadmap (Next 12 Months)**
 
-**Immediate (Mo 0–3):**
-- Field ops coordinator (Hassi Messaoud-based)
-- Customer success associate (pilot support)
+**Immediate (Mo 0–3 — Pilot Execution):**
+- **Field ops coordinator (Hassi Messaoud-based):** On-ground provider onboarding, shipper relationship management, HSE doc verification
+- **Customer success associate:** Pilot support, training for oilfield users (shipper ops teams, provider fleet managers)
 
-**Phase 2 (Mo 3–6):**
-- Front-end engineer (UI/UX specialist)
-- Mobile developer (React Native, iOS/Android)
+**Phase 2 (Mo 3–6 — Scale Infrastructure):**
+- **Front-end engineer (UI/UX specialist):** Mobile-responsive improvements, oilfield dashboard enhancements
+- **Mobile developer (React Native):** Native iOS/Android app for field managers and drivers
 
-**Phase 3 (Mo 6–12):**
-- Account Executive (enterprise sales)
-- DevOps engineer (scaling, uptime SLAs)
-- Product designer (UX research, field usability)
+**Phase 3 (Mo 6–12 — Enterprise Growth):**
+- **Account Executive (enterprise sales):** Target Sonatrach, major international operators (Schlumberger, Halliburton, BP)
+- **DevOps engineer:** Scaling infrastructure, 99.9% uptime SLAs for oilfield operations
+- **Product designer:** UX research in field (depot visits, ride-alongs), optimize for rugged environments
 
 ---
 
 ### **Why We're the Right Team**
 
 ✅ **Domain expertise:** Lived the problem; understand field realities (compliance, trust, operations)  
-✅ **Execution speed:** MVP shipped in 8 weeks; ready to pilot in <30 days  
-✅ **Local advantage:** On-the-ground network, regulatory know-how, field operations expertise  
-✅ **Scalable mindset:** Built for Algeria; designed to expand (Tunisia, Libya, West Africa)
+✅ **Execution speed:** MVP shipped in 8 weeks; oilfield pilot-ready in <30 days  
+✅ **Oilfield advantage:** Hassi Messaoud field relationships, HSE/regulatory know-how, desert operations expertise  
+✅ **Scalable mindset:** Built for South Algeria oil & gas; designed to expand (In Salah, In Amenas → national industrial corridors → North Africa)
 
 ---
 
@@ -478,20 +499,20 @@
 
 ---
 
-### **Early Validation (Pre-Launch)**
+### **Early Validation (Pre-Launch — Oilfield Focus)**
 
 **Waitlist/Expressions of Interest:**
-- [ ] [N] shippers (oil & gas operators, service companies)
-- [ ] [N] providers representing [N] trucks
-- [ ] [N] letters of intent (LOIs) for pilot participation
+- [ ] [N] oilfield shippers (drilling contractors, service companies, equipment suppliers in Hassi Messaoud)
+- [ ] [N] tanker/flatbed providers representing [N] trucks (oilfield-certified)
+- [ ] [N] letters of intent (LOIs) for pilot participation from Sonatrach contractors or international operators
 
-**Field research:**
-- Conducted [N] interviews with dispatchers, fleet managers, and compliance leads in Hassi Messaoud
-- Key pain points validated: 45+ min avg dispatch time, 15–20% trips delayed, compliance doc chaos
+**Field research (Hassi Messaoud oilfield):**
+- Conducted [N] interviews with logistics coordinators, fleet managers, and HSE/compliance leads at oilfield sites
+- Key pain points validated: 45+ min avg dispatch time, 15–20% trips delayed, HSE compliance doc chaos, no visibility on fuel/water deliveries
 
-**Pilot commitments:**
-- [ ] [Company Name]: [X trips/week] starting [Month/Year], lanes [A→B, C→D]
-- [ ] [Company Name]: [Y trips/month] starting [Month/Year]
+**Pilot commitments (oilfield operators):**
+- [ ] [Oilfield Contractor Name]: [X fuel/water trips/week] starting [Month/Year], lanes [Hassi M. depot → Site A/B/C]
+- [ ] [Service Company Name]: [Y equipment moves/month] starting [Month/Year], heavy machinery shuttles
 
 ---
 
@@ -552,23 +573,23 @@
 
 ### **Milestones (By End of Runway)**
 
-**Month 6:**
-- ✅ Pilot complete: 2–3 shippers, 50–100 providers, 150–300 trips
-- ✅ <15 min avg dispatch time, ≥90% on-time delivery, ≥95% doc validity
-- ✅ Enhanced notifications and analytics
-- ✅ Mobile-responsive platform optimized
+**Month 6 (Oilfield Pilot Success):**
+- ✅ Pilot complete: 2–3 oilfield shippers (service contractors), 50–100 tanker/flatbed providers, 150–300 trips in Hassi Messaoud
+- ✅ <15 min avg dispatch time, ≥90% on-time delivery, ≥95% HSE doc validity
+- ✅ Enhanced email notifications and oilfield analytics dashboard live
+- ✅ Mobile-responsive platform optimized for field managers
 
-**Month 12:**
-- ✅ 12–18 active shippers, 150–220 providers
-- ✅ 900–1,300 monthly trips (≈ $158K–226K annual run rate)
-- ✅ Rate cards module, mobile app launched
-- ✅ 1–2 enterprise pilots (custom SLAs)
+**Month 12 (Regional Scale):**
+- ✅ 12–18 active oilfield shippers (drilling contractors, Sonatrach subcontractors), 150–220 providers across Hassi M., In Salah, In Amenas
+- ✅ 900–1,300 monthly trips (≈ $158K–226K annual run rate at 7% take-rate)
+- ✅ Rate cards module (oilfield route benchmarking), mobile app (iOS/Android) launched
+- ✅ 1–2 enterprise pilots with major operators (Schlumberger, Halliburton, or similar—custom SLAs)
 
-**Month 18:**
-- ✅ 30–40 shippers, 400–550 providers
+**Month 18 (Enterprise Ready):**
+- ✅ 30–40 oilfield shippers, 400–550 providers (dominant in South Algeria oilfield logistics)
 - ✅ 2,500–3,500 monthly trips (≈ $461K–637K annual run rate)
-- ✅ Payments facilitation live, GPS integrations
-- ✅ Break-even or Series A-ready (unit economics proven, clear path to $2M+ ARR)
+- ✅ Payments facilitation live, GPS/telematics integrations for real-time tracking
+- ✅ Break-even or Series A-ready (unit economics proven, clear path to $2M+ ARR from oilfield beachhead)
 
 ---
 
@@ -576,13 +597,13 @@
 
 **Intros:**
 - Oilfield operators (service companies, drilling contractors in Hassi Messaoud/In Salah)
-- Depot partners (truck yards, fleet managers)
-- Enterprise buyers (logistics/procurement leads at major oil & gas companies)
+- **Oilfield depot partners:** Truck yards, tanker depots, fleet managers in Hassi Messaoud
+- **Enterprise buyers:** Logistics/procurement leads at Sonatrach, Schlumberger, Halliburton, Baker Hughes, BP Algeria
 
 **Expertise:**
-- Regulatory/compliance advisors (Algerian transport law, insurance requirements)
-- Enterprise SaaS sales playbook (pilot-to-contract conversion)
-- Fintech partners (payments/escrow, when ready to scale)
+- **Regulatory/compliance advisors:** Algerian transport law, HSE requirements, oilfield safety standards
+- **Enterprise SaaS sales playbook:** Pilot-to-contract conversion, navigating procurement cycles at major operators
+- **Fintech partners:** Algerian payment processors, escrow providers (when ready to scale managed payments)
 
 **Credibility:**
 - Investor/advisor endorsement for warm intros to pilot prospects
@@ -614,25 +635,29 @@
 
 ---
 
-## 12) Why Now — Perfect Storm of Opportunity
+## 12) Why Now — Perfect Storm for Oilfield Logistics Disruption
 
-**Macro tailwinds:**
+**Oilfield-specific tailwinds:**
 
-1. **Digitization acceleration post-2020**  
-   - Oil & gas sector renewed focus on efficiency, cost control, transparency
-   - Remote operations normalized; digital workflows now expected, not exotic
+1. **Algeria oil & gas expansion**  
+   - Sonatrach investing $50B+ in production expansion (2024-2028)
+   - International operators (Schlumberger, Halliburton, BP, Eni) increasing South Algeria presence
+   - More rigs, more wells → exponential growth in fuel/water/equipment logistics demand
 
-2. **Mobile + connectivity penetration**  
-   - Internet coverage expanding in South Algeria
-   - Smartphone adoption among field teams increasing → enabling digital transformation
+2. **Digitization mandate from operators**  
+   - Major oil & gas companies requiring digital audit trails from contractors (HSE compliance)
+   - Manual WhatsApp/phone coordination no longer acceptable for international operators
+   - Trend toward integrated supply chain visibility (we enable this for logistics leg)
 
-3. **Compliance pressure intensifying**  
-   - Safety audits stricter; insurance requirements tighter
-   - Manual doc tracking no longer acceptable (liability, downtime risks)
+3. **HSE compliance pressure intensifying**  
+   - Sonatrach and international operators enforcing stricter safety audits
+   - Insurance requirements tighter; expired permits = site shutdowns, contract penalties
+   - Manual doc tracking creates liability risks, operational delays
 
-4. **Gap in localized solutions**  
-   - Heavy global TMS tools (SAP, Oracle) too expensive/slow for SME providers
-   - No French-native, field-grade logistics OS for Algeria
+4. **Gap in oilfield-grade local solutions**  
+   - Heavy global TMS tools (SAP, Oracle) too expensive/slow for local SME trucking providers
+   - No French-native, field-grade logistics platform built for Algeria's oilfield operations
+   - Existing freight marketplaces (Egypt's Trella, Kenya's Lori) haven't entered Algeria
 
 **Competitive timing:**
 
@@ -640,14 +665,14 @@
 - **Network effects favor first-mover:** Once we lock 80%+ of Hassi Messaoud providers → defensible moat
 - **Regulatory window:** Payments/fintech landscape evolving; early mover can shape partnerships before commoditization
 
-**Why we'll win:**
+**Why we'll win in South Algeria oilfields:**
 
-✅ **Local expertise:** Built by operators who lived the problem  
-✅ **Speed to market:** MVP live; ready to pilot in <30 days  
-✅ **Wedge validated:** Oil & gas urgency (compliance, time-sensitive) = willingness to pay  
-✅ **Execution bias:** Ship fast, learn fast, iterate in the field (not PowerPoint)
+✅ **Oilfield expertise:** Built by team who understands Hassi Messaoud operations, HSE compliance, Sonatrach ecosystem  
+✅ **Speed to market:** MVP live; oilfield pilot-ready in <30 days with HSE doc vault built-in  
+✅ **Wedge validated:** Oil & gas urgency (compliance mandates, rig downtime = $10K-50K/day) = willingness to pay premium  
+✅ **Execution bias:** Ship fast, learn fast, iterate in the field with oilfield users (not PowerPoint)
 
-*This is the moment to move.*
+*The oilfield expansion is happening now. This is the moment to move.*
 
 ---
 
@@ -662,9 +687,9 @@
 ✅ **Timing perfect:** Digitization wave + compliance pressure + no local incumbent
 
 **We're raising $150K–250K to:**
-- Run pilot (2–3 shippers, 50–100 providers, 150–300 trips in Hassi Messaoud)
-- Ship mobile app, advanced analytics, payment integrations
-- Hit $158K–226K ARR by Month 12; break-even or Series A-ready by Month 18
+- Run oilfield pilot: 2–3 shippers (service contractors/operators), 50–100 tanker/flatbed providers, 150–300 trips in Hassi Messaoud
+- Ship mobile app for field managers, advanced oilfield analytics, payment integrations
+- Hit $158K–226K ARR by Month 12 (oilfield beachhead); break-even or Series A-ready by Month 18
 
 **What we need from you:**
 - Capital to execute 12–18 mo runway

@@ -95,7 +95,21 @@
   },
   "partners": {
     "title": "Partenaires de Confiance",
-    "subtitle": "Travaillant avec les principales organisations à travers l'Algérie"
+    "subtitle": "Travaillant avec les principales organisations à travers l'Algérie",
+    "customer": {
+      "title": "Réserver un Transport",
+      "benefit1": "Accédez instantanément aux transporteurs vérifiés",
+      "benefit2": "Suivez les expéditions en temps réel",
+      "benefit3": "Tarification et facturation transparentes",
+      "cta": "Réserver Maintenant"
+    },
+    "provider": {
+      "title": "Devenir Transporteur",
+      "benefit1": "Développez votre entreprise avec de nouveaux clients",
+      "benefit2": "Gérez votre flotte efficacement",
+      "benefit3": "Accédez aux analyses de performance",
+      "cta": "Devenir Transporteur"
+    }
   },
   "footer": {
     "tagline": "Avançons ensemble à travers l'Algérie",
