@@ -1,5 +1,6 @@
 import React from 'react'
 import { BrowserRouter as Router, Routes, Route, Navigate, Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { AuthProvider, useAuth } from './contexts/AuthContext'
 import { ToastProvider } from './contexts/ToastContext'
 import { NotificationProvider } from './contexts/NotificationContext'
@@ -39,16 +40,15 @@ import AboutUs from './components/legal/AboutUs'
 import PrivacyPolicy from './components/legal/PrivacyPolicy'
 import TermsOfUse from './components/legal/TermsOfUse'
 
-function App() {
+// Wrapper component to force re-render on language change
+function AppContent() {
+  const { i18n } = useTranslation();
+  
+  // This will cause re-render when language changes
   return (
-    <ErrorBoundary>
-      <ToastProvider>
-        <AuthProvider>
-          <NotificationProvider>
-            <BookingProvider>
-              <Router>
-              <PageTitleManager />
-              <Routes>
+    <div key={i18n.language}>
+      <PageTitleManager />
+      <Routes>
                 {/* Public Routes */}
                 <Route path="/" element={<LandingPage />} />
                 <Route path="/about" element={<AboutUs />} />
@@ -180,9 +180,22 @@ function App() {
                   </div>
                 } />
               </Routes>
-            </Router>
-          </BookingProvider>
-        </NotificationProvider>
+            </div>
+          );
+        }
+
+function App() {
+  return (
+    <ErrorBoundary>
+      <ToastProvider>
+        <AuthProvider>
+          <NotificationProvider>
+            <BookingProvider>
+              <Router>
+                <AppContent />
+              </Router>
+            </BookingProvider>
+          </NotificationProvider>
         </AuthProvider>
       </ToastProvider>
     </ErrorBoundary>
