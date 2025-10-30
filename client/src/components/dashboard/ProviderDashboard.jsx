@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../contexts/AuthContext';
 import { useBookings } from '../../contexts/BookingContext';
 import EmailVerificationBanner from '../common/EmailVerificationBanner';
@@ -36,6 +37,7 @@ import { apiClient } from '../../utils/apiClient';
 import { VEHICLE_TYPE_LABELS } from '../../constants/truckTypes';
 
 const ProviderDashboard = () => {
+  const { t } = useTranslation();
   const { user } = useAuth();
   const [stats, setStats] = useState({
     totalTrucks: 0,
@@ -644,12 +646,12 @@ const ProviderDashboard = () => {
           <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 shadow-sm rounded-lg">
             <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
               <div className="flex items-center justify-between">
-                <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">Recent Bookings</h3>
+                <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">{t('dashboard.recentBookings')}</h3>
                 <Link
                   to="/bookings"
                   className="text-sm text-accent-500 hover:text-accent-600 transition-colors font-medium"
                 >
-                  View all
+                  {t('dashboard.viewAll')}
                 </Link>
               </div>
             </div>
@@ -727,7 +729,7 @@ const ProviderDashboard = () => {
             <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-4">
-                  <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">My Fleet</h3>
+                  <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">{t('dashboard.myFleet')}</h3>
                   <div className="flex items-center space-x-1">
                     <button
                       onClick={() => setServiceFilter('all')}

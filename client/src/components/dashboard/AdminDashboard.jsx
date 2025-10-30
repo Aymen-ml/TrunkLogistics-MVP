@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../contexts/AuthContext';
 import EmailVerificationBanner from '../common/EmailVerificationBanner';
 import { StatsBadges } from '../common/TrustBadges';
@@ -24,6 +25,7 @@ import { apiClient } from '../../utils/apiClient';
 import { formatCurrency } from '../../utils/currency';
 
 const AdminDashboard = () => {
+  const { t } = useTranslation();
   const { user } = useAuth();
   const [stats, setStats] = useState({
     totalUsers: 0,
@@ -259,7 +261,7 @@ const AdminDashboard = () => {
                   <TrendingUp className="h-8 w-8 text-indigo-600 group-hover:text-indigo-700" />
                 </div>
                 <div className="ml-4">
-                  <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">Analytics</h3>
+                  <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">{t('dashboard.analytics')}</h3>
                   <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Trends, funnels, breakdowns</p>
                 </div>
               </div>
@@ -459,12 +461,12 @@ const AdminDashboard = () => {
           <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 shadow-sm rounded-lg">
             <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
               <div className="flex items-center justify-between">
-                <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">Recent Activity</h3>
+                <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">{t('dashboard.recentActivity')}</h3>
                 <Link
                   to="/admin/activity"
                   className="text-sm text-accent-500 hover:text-accent-600 transition-colors font-medium"
                 >
-                  View all
+                  {t('dashboard.viewAll')}
                 </Link>
               </div>
             </div>
@@ -472,7 +474,7 @@ const AdminDashboard = () => {
               {recentActivity.length === 0 ? (
                 <div className="px-6 py-8 text-center">
                   <Activity className="mx-auto h-12 w-12 text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500" />
-                  <h3 className="mt-2 text-sm font-medium text-gray-900 dark:text-gray-100">No recent activity</h3>
+                  <h3 className="mt-2 text-sm font-medium text-gray-900 dark:text-gray-100">{t('dashboard.noRecentActivity')}</h3>
                   <p className="mt-1 text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
                     System activity will appear here.
                   </p>

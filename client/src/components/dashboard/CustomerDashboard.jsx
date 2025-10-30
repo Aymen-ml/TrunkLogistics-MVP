@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../contexts/AuthContext';
 import usePageTitle from '../../hooks/usePageTitle';
 import EmailVerificationBanner from '../common/EmailVerificationBanner';
@@ -28,6 +29,7 @@ import { apiClient } from '../../utils/apiClient';
 import { formatCurrency } from '../../utils/currency';
 
 const CustomerDashboard = () => {
+  const { t } = useTranslation();
   usePageTitle('Customer Dashboard');
   const { user } = useAuth();
   const [stats, setStats] = useState({
@@ -217,7 +219,7 @@ const CustomerDashboard = () => {
                   <Package className="h-6 w-6 sm:h-8 sm:w-8 text-purple-600 group-hover:text-purple-700" />
                 </div>
                 <div className="ml-3 sm:ml-4">
-                  <h3 className="text-base sm:text-lg font-medium text-gray-900 dark:text-gray-100">My Bookings</h3>
+                  <h3 className="text-base sm:text-lg font-medium text-gray-900 dark:text-gray-100">{t('dashboard.myBookings')}</h3>
                   <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">View all bookings</p>
                 </div>
               </div>
@@ -364,12 +366,12 @@ const CustomerDashboard = () => {
         <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg">
           <div className="p-4 sm:p-6">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-gray-100">Recent Bookings</h2>
+              <h2 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-gray-100">{t('dashboard.recentBookings')}</h2>
               <Link 
                 to="/bookings" 
                 className="text-sm font-medium text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 flex items-center gap-1"
               >
-                View All
+                {t('dashboard.viewAll')}
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </div>

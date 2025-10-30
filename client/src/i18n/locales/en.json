@@ -302,5 +302,18 @@
         "apply": "Apply"
       }
     }
+  },
+  "dashboard": {
+    "quickActions": "Quick Actions",
+    "recentActivity": "Recent Activity",
+    "recentBookings": "Recent Bookings",
+    "myBookings": "My Bookings",
+    "myFleet": "My Fleet",
+    "pendingItems": "Pending Items",
+    "analytics": "Analytics",
+    "noRecentActivity": "No recent activity",
+    "noBookings": "No bookings yet",
+    "viewAnalytics": "View analytics",
+    "viewAll": "View All"
   }
 }

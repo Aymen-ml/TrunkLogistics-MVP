@@ -302,5 +302,18 @@
         "apply": "Appliquer"
       }
     }
+  },
+  "dashboard": {
+    "quickActions": "Actions Rapides",
+    "recentActivity": "Activité Récente",
+    "recentBookings": "Réservations Récentes",
+    "myBookings": "Mes Réservations",
+    "myFleet": "Ma Flotte",
+    "pendingItems": "Éléments en Attente",
+    "analytics": "Analyses",
+    "noRecentActivity": "Aucune activité récente",
+    "noBookings": "Aucune réservation pour le moment",
+    "viewAnalytics": "Voir les analyses",
+    "viewAll": "Tout Voir"
   }
 }
