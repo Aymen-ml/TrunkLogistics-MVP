@@ -1,0 +1,126 @@
+{
+  "nav": {
+    "services": "Services",
+    "values": "Values",
+    "partners": "Partners",
+    "contact": "Contact",
+    "about": "About Us",
+    "signin": "Sign In",
+    "getStarted": "Get Started",
+    "dashboard": "Dashboard"
+  },
+  "hero": {
+    "badge": "Trusted Logistics Platform for Algeria",
+    "headline1": "Connect.",
+    "headline2": "Transport.",
+    "headline3": "Grow Together.",
+    "subheadline": "The complete logistics platform connecting businesses with verified truck providers across South Algeria",
+    "ctaDashboard": "Go to Dashboard",
+    "ctaGetStarted": "Get Started",
+    "ctaSignIn": "Sign In",
+    "trustVerified": "Verified Providers",
+    "trustTracking": "Real-Time Tracking",
+    "trustPricing": "Transparent Pricing",
+    "heroAlt": "Oil tanker truck transporting petroleum through the Algerian Sahara desert at sunset"
+  },
+  "services": {
+    "title": "All Your Needs in One App",
+    "tabs": {
+      "transport": "TruckLogistics Transport",
+      "fleet": "TruckLogistics Fleet",
+      "analytics": "TruckLogistics Analytics"
+    },
+    "transport": {
+      "quick": {
+        "title": "Quick & Easy",
+        "description": "Get verified truck providers to your location within minutes, anytime and anywhere."
+      },
+      "secure": {
+        "title": "Secure",
+        "description": "Our providers are verified with complete document checks, so you can book with peace of mind."
+      },
+      "price": {
+        "title": "The Right Price",
+        "description": "Rates are transparent and displayed in advance. No hidden fees, no surprises!"
+      }
+    },
+    "fleet": {
+      "boss": {
+        "title": "Be Your Own Boss",
+        "description": "Manage your fleet and bookings whenever you want from the comfort of your dashboard."
+      },
+      "grow": {
+        "title": "Grow Your Business",
+        "description": "Earn more with every booking and expand your customer base across the region."
+      },
+      "easy": {
+        "title": "Easy To Use",
+        "description": "The TruckLogistics dashboard is all you need to manage bookings and track performance."
+      }
+    },
+    "analytics": {
+      "insights": {
+        "title": "Real-Time Insights",
+        "description": "Monitor your operations with live dashboards showing bookings, revenue, and performance."
+      },
+      "tracking": {
+        "title": "Performance Tracking",
+        "description": "Track key metrics, identify trends, and optimize your logistics operations."
+      },
+      "decisions": {
+        "title": "Data-Driven Decisions",
+        "description": "Make informed decisions with comprehensive analytics and reporting tools."
+      }
+    }
+  },
+  "values": {
+    "title": "Our Values",
+    "subtitle": "The principles that drive us forward",
+    "ambition": {
+      "title": "Ambition",
+      "description": "Our team's boundless ambition propels us to innovate, grow, and reach new horizons in logistics excellence."
+    },
+    "transparency": {
+      "title": "Transparency & Trust",
+      "description": "Open communication and complete transparency are the cornerstones of our platform, fostering trust between all parties."
+    },
+    "quality": {
+      "title": "Quality",
+      "description": "We are dedicated to delivering services of unparalleled quality, setting the standard for logistics excellence."
+    },
+    "performance": {
+      "title": "Performance",
+      "description": "We ensure optimal performance in every aspect, pushing the boundaries of what's possible in logistics."
+    }
+  },
+  "partners": {
+    "title": "Trusted Partners",
+    "subtitle": "Working with leading organizations across Algeria"
+  },
+  "footer": {
+    "tagline": "Moving ahead together across Algeria",
+    "services": {
+      "title": "Our Services",
+      "transport": "Transport Services",
+      "fleet": "Fleet Management",
+      "analytics": "Analytics Dashboard",
+      "provider": "Become a Provider"
+    },
+    "company": {
+      "title": "Company",
+      "about": "About Us",
+      "values": "Our Values",
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Use"
+    },
+    "contact": {
+      "title": "Contact Us",
+      "email": "support@trucklogistics.me",
+      "phone": "+213 779 11 65 22",
+      "location": "Algiers, Algeria",
+      "help": "Help Center"
+    },
+    "copyright": "© 2025 TruckLogistics. All rights reserved.",
+    "cookiePolicy": "Cookie Policy"
+  }
+}

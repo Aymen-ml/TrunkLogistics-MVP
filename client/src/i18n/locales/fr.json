@@ -1,0 +1,126 @@
+{
+  "nav": {
+    "services": "Services",
+    "values": "Valeurs",
+    "partners": "Partenaires",
+    "contact": "Contact",
+    "about": "À Propos",
+    "signin": "Se Connecter",
+    "getStarted": "Commencer",
+    "dashboard": "Tableau de Bord"
+  },
+  "hero": {
+    "badge": "Plateforme Logistique de Confiance pour l'Algérie",
+    "headline1": "Connecter.",
+    "headline2": "Transporter.",
+    "headline3": "Grandir Ensemble.",
+    "subheadline": "La plateforme logistique complète reliant les entreprises aux transporteurs vérifiés dans le sud de l'Algérie",
+    "ctaDashboard": "Accéder au Tableau de Bord",
+    "ctaGetStarted": "Commencer",
+    "ctaSignIn": "Se Connecter",
+    "trustVerified": "Transporteurs Vérifiés",
+    "trustTracking": "Suivi en Temps Réel",
+    "trustPricing": "Tarification Transparente",
+    "heroAlt": "Camion-citerne transportant du pétrole à travers le désert du Sahara algérien au coucher du soleil"
+  },
+  "services": {
+    "title": "Tous Vos Besoins dans Une Seule Application",
+    "tabs": {
+      "transport": "TruckLogistics Transport",
+      "fleet": "TruckLogistics Flotte",
+      "analytics": "TruckLogistics Analytique"
+    },
+    "transport": {
+      "quick": {
+        "title": "Rapide et Facile",
+        "description": "Obtenez des transporteurs vérifiés à votre emplacement en quelques minutes, à tout moment et n'importe où."
+      },
+      "secure": {
+        "title": "Sécurisé",
+        "description": "Nos transporteurs sont vérifiés avec des contrôles de documents complets, pour réserver en toute tranquillité."
+      },
+      "price": {
+        "title": "Le Juste Prix",
+        "description": "Les tarifs sont transparents et affichés à l'avance. Pas de frais cachés, pas de surprises!"
+      }
+    },
+    "fleet": {
+      "boss": {
+        "title": "Soyez Votre Propre Patron",
+        "description": "Gérez votre flotte et vos réservations quand vous voulez depuis votre tableau de bord."
+      },
+      "grow": {
+        "title": "Développez Votre Entreprise",
+        "description": "Gagnez plus avec chaque réservation et élargissez votre clientèle dans toute la région."
+      },
+      "easy": {
+        "title": "Facile à Utiliser",
+        "description": "Le tableau de bord TruckLogistics est tout ce dont vous avez besoin pour gérer les réservations et suivre les performances."
+      }
+    },
+    "analytics": {
+      "insights": {
+        "title": "Insights en Temps Réel",
+        "description": "Surveillez vos opérations avec des tableaux de bord en direct montrant les réservations, les revenus et les performances."
+      },
+      "tracking": {
+        "title": "Suivi des Performances",
+        "description": "Suivez les indicateurs clés, identifiez les tendances et optimisez vos opérations logistiques."
+      },
+      "decisions": {
+        "title": "Décisions Basées sur les Données",
+        "description": "Prenez des décisions éclairées avec des outils d'analyse et de reporting complets."
+      }
+    }
+  },
+  "values": {
+    "title": "Nos Valeurs",
+    "subtitle": "Les principes qui nous guident",
+    "ambition": {
+      "title": "Ambition",
+      "description": "L'ambition sans limites de notre équipe nous pousse à innover, grandir et atteindre de nouveaux horizons dans l'excellence logistique."
+    },
+    "transparency": {
+      "title": "Transparence et Confiance",
+      "description": "Une communication ouverte et une transparence totale sont les piliers de notre plateforme, favorisant la confiance entre toutes les parties."
+    },
+    "quality": {
+      "title": "Qualité",
+      "description": "Nous nous engageons à fournir des services de qualité inégalée, établissant la norme de l'excellence logistique."
+    },
+    "performance": {
+      "title": "Performance",
+      "description": "Nous assurons des performances optimales dans tous les aspects, repoussant les limites du possible en logistique."
+    }
+  },
+  "partners": {
+    "title": "Partenaires de Confiance",
+    "subtitle": "Travaillant avec les principales organisations à travers l'Algérie"
+  },
+  "footer": {
+    "tagline": "Avançons ensemble à travers l'Algérie",
+    "services": {
+      "title": "Nos Services",
+      "transport": "Services de Transport",
+      "fleet": "Gestion de Flotte",
+      "analytics": "Tableau de Bord Analytique",
+      "provider": "Devenir Transporteur"
+    },
+    "company": {
+      "title": "Entreprise",
+      "about": "À Propos",
+      "values": "Nos Valeurs",
+      "privacy": "Politique de Confidentialité",
+      "terms": "Conditions d'Utilisation"
+    },
+    "contact": {
+      "title": "Contactez-Nous",
+      "email": "support@trucklogistics.me",
+      "phone": "+213 779 11 65 22",
+      "location": "Alger, Algérie",
+      "help": "Centre d'Aide"
+    },
+    "copyright": "© 2025 TruckLogistics. Tous droits réservés.",
+    "cookiePolicy": "Politique des Cookies"
+  }
+}

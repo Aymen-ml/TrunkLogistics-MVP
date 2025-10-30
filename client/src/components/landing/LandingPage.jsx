@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../contexts/AuthContext';
 import TruckLogo from '../common/TruckLogo';
+import LanguageSwitcher from '../common/LanguageSwitcher';
 import {
   Truck,
   Package,
@@ -23,85 +25,86 @@ import {
 } from 'lucide-react';
 
 const LandingPage = () => {
+  const { t } = useTranslation();
   const { user } = useAuth();
   const [activeTab, setActiveTab] = useState('transport');
 
   const tabs = [
-    { id: 'transport', label: 'TruckLogistics Transport', icon: Truck },
-    { id: 'fleet', label: 'TruckLogistics Fleet', icon: Users },
-    { id: 'analytics', label: 'TruckLogistics Analytics', icon: BarChart3 }
+    { id: 'transport', label: t('services.tabs.transport'), icon: Truck },
+    { id: 'fleet', label: t('services.tabs.fleet'), icon: Users },
+    { id: 'analytics', label: t('services.tabs.analytics'), icon: BarChart3 }
   ];
 
   const features = {
     transport: [
       {
         icon: Clock,
-        title: 'Quick & Easy',
-        description: 'Get verified truck providers to your location within minutes, anytime and anywhere.'
+        title: t('services.transport.quick.title'),
+        description: t('services.transport.quick.description')
       },
       {
         icon: Shield,
-        title: 'Secure',
-        description: 'Our providers are verified with complete document checks, so you can book with peace of mind.'
+        title: t('services.transport.secure.title'),
+        description: t('services.transport.secure.description')
       },
       {
         icon: CheckCircle,
-        title: 'The Right Price',
-        description: 'Rates are transparent and displayed in advance. No hidden fees, no surprises!'
+        title: t('services.transport.price.title'),
+        description: t('services.transport.price.description')
       }
     ],
     fleet: [
       {
         icon: Users,
-        title: 'Be Your Own Boss',
-        description: 'Manage your fleet and bookings whenever you want from the comfort of your dashboard.'
+        title: t('services.fleet.boss.title'),
+        description: t('services.fleet.boss.description')
       },
       {
         icon: TrendingUp,
-        title: 'Grow Your Business',
-        description: 'Earn more with every booking and expand your customer base across the region.'
+        title: t('services.fleet.grow.title'),
+        description: t('services.fleet.grow.description')
       },
       {
         icon: Zap,
-        title: 'Easy To Use',
-        description: 'The TruckLogistics dashboard is all you need to manage bookings and track performance.'
+        title: t('services.fleet.easy.title'),
+        description: t('services.fleet.easy.description')
       }
     ],
     analytics: [
       {
         icon: BarChart3,
-        title: 'Real-Time Insights',
-        description: 'Monitor your operations with live dashboards showing bookings, revenue, and performance.'
+        title: t('services.analytics.insights.title'),
+        description: t('services.analytics.insights.description')
       },
       {
         icon: Award,
-        title: 'Performance Tracking',
-        description: 'Track key metrics, identify trends, and optimize your logistics operations.'
+        title: t('services.analytics.tracking.title'),
+        description: t('services.analytics.tracking.description')
       },
       {
         icon: CheckCircle,
-        title: 'Data-Driven Decisions',
-        description: 'Make informed decisions with comprehensive analytics and reporting tools.'
+        title: t('services.analytics.decisions.title'),
+        description: t('services.analytics.decisions.description')
       }
     ]
   };
 
   const values = [
     {
-      title: 'Ambition',
-      description: 'Our team\'s boundless ambition propels us to innovate, grow, and reach new horizons in logistics excellence.'
+      title: t('values.ambition.title'),
+      description: t('values.ambition.description')
     },
     {
-      title: 'Transparency & Trust',
-      description: 'Open communication and complete transparency are the cornerstones of our platform, fostering trust between all parties.'
+      title: t('values.transparency.title'),
+      description: t('values.transparency.description')
     },
     {
-      title: 'Quality',
-      description: 'We are dedicated to delivering services of unparalleled quality, setting the standard for logistics excellence.'
+      title: t('values.quality.title'),
+      description: t('values.quality.description')
     },
     {
-      title: 'Performance',
-      description: 'We ensure optimal performance in every aspect, pushing the boundaries of what\'s possible in logistics.'
+      title: t('values.performance.title'),
+      description: t('values.performance.description')
     }
   ];
 
@@ -129,49 +132,50 @@ const LandingPage = () => {
                 onClick={() => scrollToSection('services')}
                 className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400 transition"
               >
-                Services
+                {t('nav.services')}
               </button>
               <button 
                 onClick={() => scrollToSection('values')}
                 className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400 transition"
               >
-                Values
+                {t('nav.values')}
               </button>
               <button 
                 onClick={() => scrollToSection('partners')}
                 className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400 transition"
               >
-                Partners
+                {t('nav.partners')}
               </button>
               <button 
                 onClick={() => scrollToSection('contact')}
                 className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400 transition"
               >
-                Contact
+                {t('nav.contact')}
               </button>
               <Link
                 to="/about"
                 className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400 transition"
               >
-                About Us
+                {t('nav.about')}
               </Link>
             </div>
 
-            {/* CTA Buttons */}
-            <div className="flex items-center space-x-3">
+            {/* CTA Buttons & Language Switcher */}
+            <div className="flex items-center space-x-2">
+              <LanguageSwitcher />
               {!user ? (
                 <>
                   <Link
                     to="/login"
                     className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400 transition"
                   >
-                    Sign In
+                    {t('nav.signin')}
                   </Link>
                   <Link
                     to="/register"
                     className="px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 rounded-lg transition"
                   >
-                    Get Started
+                    {t('nav.getStarted')}
                   </Link>
                 </>
               ) : (
@@ -179,7 +183,7 @@ const LandingPage = () => {
                   to="/dashboard"
                   className="px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 rounded-lg transition"
                 >
-                  Dashboard
+                  {t('nav.dashboard')}
                 </Link>
               )}
             </div>
@@ -209,21 +213,21 @@ const LandingPage = () => {
               {/* Badge */}
               <div className="inline-flex items-center px-4 py-2 rounded-full bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 text-sm font-semibold mb-6 shadow-sm">
                 <Shield className="h-4 w-4 mr-2" />
-                Trusted Logistics Platform for Algeria
+                {t('hero.badge')}
               </div>
 
               {/* Main Headline */}
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 dark:text-white mb-6 tracking-tight leading-tight">
-                Connect.<br />
-                Transport.<br />
+                {t('hero.headline1')}<br />
+                {t('hero.headline2')}<br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-600 to-orange-500 dark:from-orange-400 dark:to-orange-300">
-                  Grow Together.
+                  {t('hero.headline3')}
                 </span>
               </h1>
 
               {/* Subheadline */}
               <p className="mt-6 text-lg md:text-xl text-gray-600 dark:text-gray-300 leading-relaxed max-w-xl">
-                The complete logistics platform connecting businesses with verified truck providers across South Algeria
+                {t('hero.subheadline')}
               </p>
 
               {/* CTA Buttons */}
@@ -232,7 +236,7 @@ const LandingPage = () => {
                   to={user ? "/dashboard" : "/register"}
                   className="group px-8 py-4 bg-gradient-to-r from-orange-600 to-orange-500 hover:from-orange-700 hover:to-orange-600 text-white text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center"
                 >
-                  {user ? 'Go to Dashboard' : 'Get Started'}
+                  {user ? t('hero.ctaDashboard') : t('hero.ctaGetStarted')}
                   <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
                 {!user && (
@@ -240,7 +244,7 @@ const LandingPage = () => {
                     to="/login"
                     className="px-8 py-4 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-lg font-semibold rounded-xl border-2 border-gray-200 dark:border-gray-700 hover:border-orange-600 dark:hover:border-orange-500 shadow-sm hover:shadow-md transform hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center"
                   >
-                    Sign In
+                    {t('hero.ctaSignIn')}
                   </Link>
                 )}
               </div>
@@ -249,15 +253,15 @@ const LandingPage = () => {
               <div className="mt-12 flex flex-wrap lg:justify-start justify-center gap-6 text-sm text-gray-600 dark:text-gray-400">
                 <div className="flex items-center">
                   <CheckCircle className="h-5 w-5 text-orange-600 dark:text-orange-400 mr-2" />
-                  Verified Providers
+                  {t('hero.trustVerified')}
                 </div>
                 <div className="flex items-center">
                   <CheckCircle className="h-5 w-5 text-blue-600 dark:text-blue-400 mr-2" />
-                  Real-Time Tracking
+                  {t('hero.trustTracking')}
                 </div>
                 <div className="flex items-center">
                   <CheckCircle className="h-5 w-5 text-orange-600 dark:text-orange-400 mr-2" />
-                  Transparent Pricing
+                  {t('hero.trustPricing')}
                 </div>
               </div>
             </div>
@@ -277,7 +281,7 @@ const LandingPage = () => {
                   {/* Main Hero Image */}
                   <img 
                     src="/hero-oil-truck.jpg" 
-                    alt="Oil tanker truck transporting petroleum through the Algerian Sahara desert at sunset"
+                    alt={t('hero.heroAlt')}
                     className="w-full h-auto object-cover rounded-3xl transform group-hover:scale-105 transition-transform duration-500"
                     loading="lazy"
                   />
@@ -293,7 +297,7 @@ const LandingPage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-              All Your Needs in One App
+              {t('services.title')}
             </h2>
           </div>
 
@@ -445,10 +449,10 @@ const LandingPage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-              Our Core Values
+              {t('values.title')}
             </h2>
             <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-              The principles that guide everything we do and drive excellence in logistics
+              {t('values.subtitle')}
             </p>
           </div>
 
@@ -509,8 +513,11 @@ const LandingPage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-              Let's Partner Up
+              {t('partners.title')}
             </h2>
+            <p className="text-lg text-gray-600 dark:text-gray-300">
+              {t('partners.subtitle')}
+            </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
@@ -587,66 +594,66 @@ const LandingPage = () => {
                 <TruckLogo showFull={true} />
               </div>
               <p className="text-gray-400 text-sm mb-6">
-                Moving ahead together across Algeria
+                {t('footer.tagline')}
               </p>
             </div>
 
             {/* Services Column */}
             <div>
-              <h4 className="font-bold mb-4">Our Services</h4>
+              <h4 className="font-bold mb-4">{t('footer.services.title')}</h4>
               <ul className="space-y-2 text-sm">
-                <li><Link to="/trucks" className="text-gray-400 hover:text-white transition">Transport Services</Link></li>
-                <li><Link to="/register" className="text-gray-400 hover:text-white transition">Fleet Management</Link></li>
-                <li><Link to="/register" className="text-gray-400 hover:text-white transition">Analytics Dashboard</Link></li>
-                <li><Link to="/register?role=provider" className="text-gray-400 hover:text-white transition">Become a Provider</Link></li>
+                <li><Link to="/trucks" className="text-gray-400 hover:text-white transition">{t('footer.services.transport')}</Link></li>
+                <li><Link to="/register" className="text-gray-400 hover:text-white transition">{t('footer.services.fleet')}</Link></li>
+                <li><Link to="/register" className="text-gray-400 hover:text-white transition">{t('footer.services.analytics')}</Link></li>
+                <li><Link to="/register?role=provider" className="text-gray-400 hover:text-white transition">{t('footer.services.provider')}</Link></li>
               </ul>
             </div>
 
             {/* Company Column */}
             <div>
-              <h4 className="font-bold mb-4">Company</h4>
+              <h4 className="font-bold mb-4">{t('footer.company.title')}</h4>
               <ul className="space-y-2 text-sm">
                 <li>
                   <Link to="/about" className="text-gray-400 hover:text-white transition">
-                    About Us
+                    {t('footer.company.about')}
                   </Link>
                 </li>
                 <li>
                   <button onClick={() => scrollToSection('values')} className="text-gray-400 hover:text-white transition text-left">
-                    Our Values
+                    {t('footer.company.values')}
                   </button>
                 </li>
-                <li><Link to="/privacy" className="text-gray-400 hover:text-white transition">Privacy Policy</Link></li>
-                <li><Link to="/terms" className="text-gray-400 hover:text-white transition">Terms of Use</Link></li>
+                <li><Link to="/privacy" className="text-gray-400 hover:text-white transition">{t('footer.company.privacy')}</Link></li>
+                <li><Link to="/terms" className="text-gray-400 hover:text-white transition">{t('footer.company.terms')}</Link></li>
               </ul>
             </div>
 
             {/* Contact Column */}
             <div>
-              <h4 className="font-bold mb-4">Contact Us</h4>
+              <h4 className="font-bold mb-4">{t('footer.contact.title')}</h4>
               <ul className="space-y-3 text-sm">
                 <li className="flex items-start">
                   <Mail className="h-5 w-5 text-orange-500 mr-2 mt-0.5 flex-shrink-0" />
-                  <a href="mailto:support@trucklogistics.me" className="text-gray-400 hover:text-white transition break-all">
-                    support@trucklogistics.me
+                  <a href={`mailto:${t('footer.contact.email')}`} className="text-gray-400 hover:text-white transition break-all">
+                    {t('footer.contact.email')}
                   </a>
                 </li>
                 <li className="flex items-start">
                   <Phone className="h-5 w-5 text-orange-500 mr-2 mt-0.5 flex-shrink-0" />
-                  <a href="tel:+213779116522" className="text-gray-400 hover:text-white transition">
-                    +213 779 11 65 22
+                  <a href={`tel:${t('footer.contact.phone').replace(/\s/g, '')}`} className="text-gray-400 hover:text-white transition">
+                    {t('footer.contact.phone')}
                   </a>
                 </li>
                 <li className="flex items-start">
                   <MapPin className="h-5 w-5 text-orange-500 mr-2 mt-0.5 flex-shrink-0" />
                   <span className="text-gray-400">
-                    Algiers, Algeria
+                    {t('footer.contact.location')}
                   </span>
                 </li>
                 <li className="flex items-start">
                   <Headphones className="h-5 w-5 text-orange-500 mr-2 mt-0.5 flex-shrink-0" />
-                  <a href="mailto:support@trucklogistics.me" className="text-gray-400 hover:text-white transition">
-                    Help Center
+                  <a href={`mailto:${t('footer.contact.email')}`} className="text-gray-400 hover:text-white transition">
+                    {t('footer.contact.help')}
                   </a>
                 </li>
               </ul>
@@ -657,12 +664,12 @@ const LandingPage = () => {
           <div className="pt-8 border-t border-gray-800">
             <div className="flex flex-col md:flex-row justify-between items-center">
               <p className="text-gray-400 text-sm">
-                © 2025 TruckLogistics. All rights reserved.
+                {t('footer.copyright')}
               </p>
               <div className="flex space-x-6 mt-4 md:mt-0">
-                <Link to="/privacy" className="text-gray-400 hover:text-white text-sm transition">Privacy Policy</Link>
-                <Link to="/terms" className="text-gray-400 hover:text-white text-sm transition">Terms of Use</Link>
-                <Link to="/privacy" className="text-gray-400 hover:text-white text-sm transition">Cookie Policy</Link>
+                <Link to="/privacy" className="text-gray-400 hover:text-white text-sm transition">{t('footer.company.privacy')}</Link>
+                <Link to="/terms" className="text-gray-400 hover:text-white text-sm transition">{t('footer.company.terms')}</Link>
+                <Link to="/privacy" className="text-gray-400 hover:text-white text-sm transition">{t('footer.cookiePolicy')}</Link>
               </div>
             </div>
           </div>

@@ -11,17 +11,17 @@
 
 **Dispatch is broken in the field:**
 
-- **Fragmented coordination:** Phone/WhatsApp chains → delays, lost messages, zero audit trail
+- **Fragmented coordination:** Phone chains → delays, lost messages, zero audit trail
 - **Opaque status:** Shippers don't know where trucks are; late updates cause missed deadlines
 - **Non-standard pricing:** Ad-hoc quotes → disputes, budget overruns, no benchmarks
 - **Compliance nightmare:** Insurance/permits/registration scattered across emails/PDFs; expiries missed
-- **Connectivity constraints:** Desert ops + patchy 3G/4G break heavy TMS tools
+- **Manual processes:** Heavy paperwork and disconnected systems slow operations
 - **Trust gap:** No quick way to verify provider reliability, safety records, or incident history
 
 **Impact:**
 - Average 45+ min wasted per dispatch (calls, rework, confirmations)
 - 15–20% of trips delayed due to miscommunication or doc issues
-- Compliance audits require manual PDF hunts across multiple WhatsApp groups
+- Compliance audits require manual document searches across emails and files
 
 *Source: Initial field interviews, Hassi Messaoud logistics teams (Oct 2025)*
 
@@ -34,8 +34,7 @@
 - **Match loads instantly:** Verified providers respond in minutes, not hours
 - **Standard workflow:** Request → Offers → Confirm → Dispatch → ePOD → Archive
 - **Compliance by default:** Document vault with expiry alerts, performance scoring, incident log
-- **Real-time visibility:** Web + SMS/WhatsApp updates; offline-first roadmap for desert ops
-- **Local-first design:** Arabic/French UI, lean pages (<100 KB), works on 3G
+- **Real-time visibility:** Web platform with email notifications and status updates
 
 **The promise:**
 - **3× faster dispatch** (target: <10 min avg vs. 45+ min baseline)
@@ -104,11 +103,11 @@
 - Audit logs & analytics: lane performance, cost per km, dwell time
 
 ### **Integrations Roadmap**
-- **Phase 1 (live):** Email, SMS, basic notifications
-- **Phase 2 (3–6 mo):** WhatsApp Business API, offline PWA
+- **Phase 1 (live):** Email notifications
+- **Phase 2 (3–6 mo):** Advanced notifications, mobile app
 - **Phase 3 (6–12 mo):** GPS/telematics, payments, enterprise SSO
 
-**Tech stack:** React/Vite, Node.js, Supabase (Postgres + Auth), Resend (email), future: Twilio (SMS)
+**Tech stack:** React/Vite, Node.js, Supabase (Postgres + Auth), Resend (email)
 
 **Visuals to include in slides:**
 - User flow diagram (Request → Offers → Dispatch → ePOD)
@@ -120,15 +119,15 @@
 
 | **TruckLogistics** | **Heavy Global TMS** | **Status Quo (WhatsApp)** |
 |-------------------|---------------------|--------------------------|
-| Arabic/French native | English only | Manual translation |
+| French/English support | English only | Manual translation |
 | <10 min onboarding | 2–6 weeks setup | N/A |
-| Offline-ready (roadmap) | Requires stable internet | Works offline (but no records) |
+| Web-based platform | Requires installation | Works anywhere (but no records) |
 | Compliance built-in | Add-on modules | Manual tracking |
 | 7% take rate | $50K–200K license/year | Free (but hidden costs) |
-| 3G-optimized (<100 KB pages) | Heavy (slow on 3G) | Light but unstructured |
+| Lightweight & fast | Heavy enterprise systems | Light but unstructured |
 
 **Our unfair advantages:**
-1. **Local-first:** Built for Algeria by a team that knows the field (Arabic/French, low bandwidth, desert ops)
+1. **Local expertise:** Built for Algeria by a team that knows oilfield operations
 2. **Compliance obsessed:** Doc vault, expiry alerts, and scoring = built-in, not bolted-on
 3. **Speed to value:** Hours to onboard vs. weeks/months for SAP/Oracle TMS
 4. **Trust layer:** Provider verification + incident history = shipper confidence from day one
@@ -170,7 +169,6 @@
 
 ### **6.3 Value-Added Services (à la carte)**
 
-- **Notifications bundle:** SMS/WhatsApp lifecycle alerts (cost-plus margin, ≈50–100 DZD/trip)
 - **Document verification:** Assisted KYC/compliance checks (2,000–5,000 DZD one-time per provider)
 - **Featured listings:** Priority placement in offers (500–1,500 DZD/day or included in Pro)
 - **Analytics pack:** Lane performance, on-time %, benchmarks for shippers (6,000 DZD/mo add-on)
@@ -188,10 +186,10 @@
 ### **6.5 Unit Economics (Early Assumptions)**
 
 **Per-trip variable costs:**
-- Notifications (SMS/WhatsApp) + emails: ~100–200 DZD
+- Notifications (emails): ~50–100 DZD
 - Storage (images/docs/backups): ~50–100 DZD
 - Support (fractional avg): ~200–400 DZD
-- **Total variable cost:** ~350–700 DZD per trip
+- **Total variable cost:** ~300–600 DZD per trip
 
 **Contribution margin:**
 - Example: 12,600 DZD revenue − 700 DZD cost = **11,900 DZD contribution (94%)**
@@ -249,7 +247,7 @@
 | Category | % of Revenue | Notes |
 |----------|-------------|-------|
 | Cloud + Infra | 3–5% | Supabase, CDN, storage, observability |
-| Communications | 2–4% | SMS, WhatsApp, email (scales with volume) |
+| Communications | 1–2% | Email notifications (scales with volume) |
 | Support + Ops | 8–12% | Field onboarding, verification, customer success |
 | Product + Eng | 25–35% | Feature velocity, reliability, integrations |
 | Sales + BD | 15–20% | Pilots, partnerships, depots, operators |
@@ -264,9 +262,9 @@
 
 | Risk | Mitigation |
 |------|-----------|
-| Slow shipper adoption | Field onboarding playbooks; WhatsApp/SMS bridge; free tier for trial |
+| Slow shipper adoption | Field onboarding playbooks; simple onboarding; free tier for trial |
 | Provider quality variance | Verification workflows; scoring; incident tracking; deactivation policy |
-| Connectivity issues | Offline-first PWA (Phase 2); light payloads; retry logic; local caching |
+| System reliability | Robust infrastructure; monitoring; retry logic; redundancy |
 | Regulatory (payments/insurance) | Start with direct billing; partner with licensed entities when scaling |
 | Competitor entry | Speed to market; lock-in via network effects; compliance moat; local expertise |
 
@@ -282,7 +280,7 @@
 - Depot partnerships: co-locate onboarding days at major truck depots
 - Field workshops: doc verification + photography + training (3–5 providers/day)
 - Referral bounties: 1,500–3,000 DZD per verified provider brought in by existing users
-- WhatsApp groups: leverage existing logistics groups for awareness
+- Direct outreach: leverage existing logistics networks for awareness
 
 **Shipper acquisition:**
 - Direct BD: oilfield operators, service companies (focus: compliance pain, time-to-dispatch)
@@ -305,10 +303,10 @@
 - Cover top 10 lanes (80% of volume)
 
 **Product milestones:**
-- Arabic/French UI finalized
-- SMS/WhatsApp notifications live
+- Enhanced notification system
 - Rate cards module (benchmarking)
-- Offline-PWA first milestone (cache key screens)
+- Mobile-responsive improvements
+- Advanced analytics dashboard
 
 **Growth tactics:**
 - Provider: Pro tier upsell (analytics, priority)
@@ -372,17 +370,15 @@
 - [ ] Document vault with expiry alerts (30/15/7 days)
 - [ ] Provider scoring (acceptance rate, on-time %, doc validity)
 - [ ] Incident log (disputes, safety issues)
-- [ ] SMS notifications (Twilio integration)
+- [ ] Enhanced email notifications
 - [ ] Admin dashboard (exceptions, compliance monitoring)
 - [ ] Basic analytics (trip volume, avg dispatch time)
 
 ---
 
 ### **Phase 2: Scale Features (Months 3–6)**
-- [ ] Arabic UI finalized (RTL, translations)
-- [ ] French UI finalized
-- [ ] WhatsApp Business API (lifecycle updates)
-- [ ] Offline-PWA milestone (cache forms, offline queue)
+- [ ] Enhanced notification system (push notifications)
+- [ ] Mobile app development (iOS/Android)
 - [ ] Rate cards module (benchmark pricing per lane)
 - [ ] Simple tendering (multi-provider RFQ)
 - [ ] Analytics v1 (lane performance, cost/km, on-time trends)
@@ -448,11 +444,11 @@
 ### **Hiring Roadmap (Next 12 Months)**
 
 **Immediate (Mo 0–3):**
-- Field ops coordinator (Hassi Messaoud-based, bilingual Arabic/French)
+- Field ops coordinator (Hassi Messaoud-based)
 - Customer success associate (pilot support)
 
 **Phase 2 (Mo 3–6):**
-- Front-end engineer (Arabic/French UI specialist)
+- Front-end engineer (UI/UX specialist)
 - Mobile developer (React Native, iOS/Android)
 
 **Phase 3 (Mo 6–12):**
@@ -464,9 +460,9 @@
 
 ### **Why We're the Right Team**
 
-✅ **Domain expertise:** Lived the problem; understand field realities (connectivity, compliance, trust)  
+✅ **Domain expertise:** Lived the problem; understand field realities (compliance, trust, operations)  
 ✅ **Execution speed:** MVP shipped in 8 weeks; ready to pilot in <30 days  
-✅ **Local advantage:** Arabic/French fluency, on-the-ground network, regulatory know-how  
+✅ **Local advantage:** On-the-ground network, regulatory know-how, field operations expertise  
 ✅ **Scalable mindset:** Built for Algeria; designed to expand (Tunisia, Libya, West Africa)
 
 ---
@@ -495,7 +491,7 @@
 
 **Pilot commitments:**
 - [ ] [Company Name]: [X trips/week] starting [Month/Year], lanes [A→B, C→D]
-- [ ] [Company Name]: [Y trips/month] conditional on Arabic UI, start [Month/Year]
+- [ ] [Company Name]: [Y trips/month] starting [Month/Year]
 
 ---
 
@@ -546,10 +542,10 @@
 
 | Category | % | Amount (USD) | Purpose |
 |----------|---|--------------|---------|
-| **Product & Engineering** | 35% | $52K–88K | Feature velocity (Arabic/French, offline PWA, analytics), reliability, integrations |
+| **Product & Engineering** | 35% | $52K–88K | Feature velocity (mobile app, analytics, payments), reliability, integrations |
 | **Operations & Onboarding** | 25% | $38K–63K | Field ops (Hassi Messaoud presence), provider verification, training workshops |
 | **Go-to-Market** | 20% | $30K–50K | Pilot programs, shipper acquisition, case studies, BD partnerships |
-| **Cloud & Compliance** | 10% | $15K–25K | Infrastructure (Supabase, CDN, SMS/WhatsApp), security audits, legal/compliance |
+| **Cloud & Compliance** | 10% | $15K–25K | Infrastructure (Supabase, CDN, storage), security audits, legal/compliance |
 | **Runway Buffer** | 10% | $15K–25K | Contingency, unforeseen pivots |
 
 ---
@@ -559,13 +555,13 @@
 **Month 6:**
 - ✅ Pilot complete: 2–3 shippers, 50–100 providers, 150–300 trips
 - ✅ <15 min avg dispatch time, ≥90% on-time delivery, ≥95% doc validity
-- ✅ Arabic/French UI live
-- ✅ SMS/WhatsApp notifications launched
+- ✅ Enhanced notifications and analytics
+- ✅ Mobile-responsive platform optimized
 
 **Month 12:**
 - ✅ 12–18 active shippers, 150–220 providers
 - ✅ 900–1,300 monthly trips (≈ $158K–226K annual run rate)
-- ✅ Offline-PWA milestone, rate cards module
+- ✅ Rate cards module, mobile app launched
 - ✅ 1–2 enterprise pilots (custom SLAs)
 
 **Month 18:**
@@ -627,8 +623,8 @@
    - Remote operations normalized; digital workflows now expected, not exotic
 
 2. **Mobile + connectivity penetration**  
-   - 4G/LTE coverage expanding in South Algeria (even if patchy)
-   - Smartphone adoption among field teams (WhatsApp ubiquitous → bridge to structured platform)
+   - Internet coverage expanding in South Algeria
+   - Smartphone adoption among field teams increasing → enabling digital transformation
 
 3. **Compliance pressure intensifying**  
    - Safety audits stricter; insurance requirements tighter
@@ -636,7 +632,7 @@
 
 4. **Gap in localized solutions**  
    - Heavy global TMS tools (SAP, Oracle) too expensive/slow for SME providers
-   - No Arabic/French-native, field-grade logistics OS for Algeria
+   - No French-native, field-grade logistics OS for Algeria
 
 **Competitive timing:**
 
@@ -667,7 +663,7 @@
 
 **We're raising $150K–250K to:**
 - Run pilot (2–3 shippers, 50–100 providers, 150–300 trips in Hassi Messaoud)
-- Ship Arabic/French, SMS/WhatsApp, offline-PWA
+- Ship mobile app, advanced analytics, payment integrations
 - Hit $158K–226K ARR by Month 12; break-even or Series A-ready by Month 18
 
 **What we need from you:**
@@ -695,9 +691,9 @@
 
 ## Appendix A — One‑Pager Summary (for startup.dz)
 
-TruckLogistics is a lightweight logistics platform for Algeria’s oil & gas sector. We connect shippers with verified truck providers and streamline the workflow from booking to proof of delivery. The platform standardizes pricing, centralizes trip documents, and reduces back‑and‑forth calls with clear status updates. Built for South Algeria operations with Arabic/French support and an offline‑first roadmap, TruckLogistics helps teams move faster, cut delays, and gain visibility—without heavy systems.
+TruckLogistics is a lightweight logistics platform for Algeria's oil & gas sector. We connect shippers with verified truck providers and streamline the workflow from booking to proof of delivery. The platform standardizes pricing, centralizes trip documents, and reduces back‑and‑forth calls with clear status updates. Built for South Algeria operations with French/English support, TruckLogistics helps teams move faster, cut delays, and gain visibility—without heavy systems.
 
-Top features: verified providers, offers, booking confirmation, trip timeline, ePOD, document vault, notifications. Roadmap: offline PWA, rate cards/tendering, analytics, payments, GPS integrations.
+Top features: verified providers, offers, booking confirmation, trip timeline, ePOD, document vault, notifications. Roadmap: mobile app, rate cards/tendering, analytics, payments, GPS integrations.
 
 Business model: 7% take rate (pilot‑flexible), subscriptions for providers, analytics add‑ons, optional managed payments/insurance facilitation later.
 
@@ -725,10 +721,10 @@ Business model: 7% take rate (pilot‑flexible), subscriptions for providers, an
 ## Appendix C — FAQ (Investor Common Questions)
 
 **Q: Why won't Uber Freight or Trella just copy you?**  
-A: They could, but (1) we're local (Arabic/French, regulatory know-how, field network), (2) we move faster (MVP in 8 weeks vs. their 6–12 mo localization cycles), (3) network effects favor first-mover (once we lock 80%+ Hassi Messaoud providers, switching costs high for shippers).
+A: They could, but (1) we're local (French/English, regulatory know-how, field network), (2) we move faster (MVP in 8 weeks vs. their 6–12 mo localization cycles), (3) network effects favor first-mover (once we lock 80%+ Hassi Messaoud providers, switching costs high for shippers).
 
 **Q: What if providers don't adopt digital tools?**  
-A: We bridge with WhatsApp/SMS (they already use it). Our field onboarding includes doc scanning, photos, and training—providers see value in <1 trip (faster payment, more jobs). Free tier removes adoption friction.
+A: We simplify onboarding with intuitive web interface and email notifications they're familiar with. Our field onboarding includes doc scanning, photos, and training—providers see value in <1 trip (faster payment, more jobs). Free tier removes adoption friction.
 
 **Q: How do you enforce compliance (fake docs, expired insurance)?**  
 A: (1) Manual verification at onboarding (photos, cross-check with issuer), (2) expiry alerts 30/15/7 days out, (3) incident log affects provider score/ranking, (4) shippers can flag issues → deactivation policy.
@@ -756,7 +752,7 @@ A: (1) Acquisition by regional/global TMS (Oracle, SAP) or logistics unicorn (Tr
 | **TruckLogistics** | **Algeria (Hassi M.)** | **Oil & gas** | **Local-first, compliance, 7% take rate, fast** | **Early-stage, unproven at scale** |
 
 **Our moat:**  
-Network effects (more providers → faster offers) + compliance rigor (doc vault, scoring) + local expertise (Arabic/French, field ops, regulatory) + speed (MVP→pilot in <90 days).
+Network effects (more providers → faster offers) + compliance rigor (doc vault, scoring) + local expertise (field ops, regulatory know-how) + speed (MVP→pilot in <90 days).
 
 ---
 
