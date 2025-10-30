@@ -39,14 +39,31 @@ import LandingPage from './components/landing/LandingPage'
 import AboutUs from './components/legal/AboutUs'
 import PrivacyPolicy from './components/legal/PrivacyPolicy'
 import TermsOfUse from './components/legal/TermsOfUse'
+import { useState, useEffect } from 'react'
 
 // Wrapper component to force re-render on language change
 function AppContent() {
   const { i18n } = useTranslation();
+  const [currentLang, setCurrentLang] = useState(i18n.language);
   
-  // This will cause re-render when language changes
+  // Listen to language changes
+  useEffect(() => {
+    const handleLanguageChange = (lng) => {
+      console.log('Language changed event detected:', lng);
+      setCurrentLang(lng);
+      // Force a full page reload to ensure all components update
+      window.location.reload();
+    };
+    
+    i18n.on('languageChanged', handleLanguageChange);
+    
+    return () => {
+      i18n.off('languageChanged', handleLanguageChange);
+    };
+  }, [i18n]);
+  
   return (
-    <div key={i18n.language}>
+    <div>
       <PageTitleManager />
       <Routes>
                 {/* Public Routes */}
