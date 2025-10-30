@@ -160,7 +160,6 @@ const Settings = () => {
                       : 'border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 hover:border-gray-400 dark:hover:border-gray-500 hover:shadow'
                   }`}
                 >
-                  <span className="text-3xl mb-2">🇬🇧</span>
                   <span className={`text-sm font-medium ${language === 'en' ? 'text-blue-900 dark:text-blue-300' : 'text-gray-700 dark:text-gray-300'}`}>
                     English
                   </span>
@@ -179,7 +178,6 @@ const Settings = () => {
                       : 'border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 hover:border-gray-400 dark:hover:border-gray-500 hover:shadow'
                   }`}
                 >
-                  <span className="text-3xl mb-2">🇫🇷</span>
                   <span className={`text-sm font-medium ${language === 'fr' ? 'text-blue-900 dark:text-blue-300' : 'text-gray-700 dark:text-gray-300'}`}>
                     Français
                   </span>

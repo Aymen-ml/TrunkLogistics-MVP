@@ -8,8 +8,8 @@ const LanguageSwitcher = () => {
   const dropdownRef = useRef(null);
 
   const languages = [
-    { code: 'en', name: 'English', flag: '🇬🇧' },
-    { code: 'fr', name: 'Français', flag: '🇫🇷' }
+    { code: 'en', name: 'English' },
+    { code: 'fr', name: 'Français' }
   ];
 
   const currentLanguage = languages.find(lang => lang.code === i18n.language) || languages[0];
@@ -64,7 +64,6 @@ const LanguageSwitcher = () => {
                   : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
               }`}
             >
-              <span className="text-2xl">{lang.flag}</span>
               <span className="font-medium">{lang.name}</span>
               {i18n.language === lang.code && (
                 <svg className="w-4 h-4 ml-auto" fill="currentColor" viewBox="0 0 20 20">
