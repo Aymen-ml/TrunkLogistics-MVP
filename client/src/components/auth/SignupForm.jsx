@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../contexts/AuthContext';
 import { useToast } from '../../contexts/ToastContext';
 import TruckLogo from '../common/TruckLogo';
@@ -17,6 +18,7 @@ import {
 } from 'lucide-react';
 
 const SignupForm = () => {
+  const { t } = useTranslation();
   const { register } = useAuth();
   const { showSuccess, showError } = useToast();
   const [loading, setLoading] = useState(false);
@@ -168,8 +170,13 @@ const SignupForm = () => {
         <div className="flex justify-center mb-4">
           <TruckLogo className="h-16 w-16" />
         </div>
-        <h1 className="text-2xl sm:text-3xl font-bold text-primary-600">Create Your Account</h1>
-        <p className="mt-2 text-sm sm:text-base text-gray-600">Join TruckLogistics and start connecting with logistics providers</p>
+        <h1 className="text-2xl sm:text-3xl font-bold text-primary-600">{t('auth.register.title')}</h1>
+        <p className="mt-2 text-sm sm:text-base text-gray-600 dark:text-gray-400">
+          {t('auth.register.subtitle')}{' '}
+          <Link to="/login" className="font-medium text-accent-500 hover:text-accent-600">
+            {t('auth.register.signIn')}
+          </Link>
+        </p>
       </div>
 
       {/* Progress Steps */}

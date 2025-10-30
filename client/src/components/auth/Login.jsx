@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../contexts/AuthContext';
 import TruckLogo from '../common/TruckLogo';
 import { Mail, Lock, AlertCircle, Loader } from 'lucide-react';
 
 const Login = () => {
+  const { t } = useTranslation();
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -38,13 +40,13 @@ const Login = () => {
     const newErrors = {};
     
     if (!formData.email) {
-      newErrors.email = 'Email is required';
+      newErrors.email = t('auth.login.emailRequired');
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Email is invalid';
+      newErrors.email = t('auth.login.emailInvalid');
     }
     
     if (!formData.password) {
-      newErrors.password = 'Password is required';
+      newErrors.password = t('auth.login.passwordRequired');
     }
     
     return newErrors;
@@ -85,15 +87,15 @@ const Login = () => {
             </div>
           </div>
           <h2 className="mt-4 sm:mt-6 text-center text-2xl sm:text-3xl font-extrabold text-gray-900 dark:text-gray-100">
-            Sign in to your account
+            {t('auth.login.title')}
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600 dark:text-gray-400">
-            Or{' '}
+            {t('auth.login.subtitle')}{' '}
             <Link
               to="/register"
               className="font-medium text-accent-500 hover:text-accent-600"
             >
-              create a new account
+              {t('auth.login.createAccount')}
             </Link>
           </p>
         </div>
@@ -113,7 +115,7 @@ const Login = () => {
           <div className="space-y-4">
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-200">
-                Email address
+                {t('auth.login.email')}
               </label>
               <div className="mt-1 relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -128,7 +130,7 @@ const Login = () => {
                   className={`appearance-none relative block w-full pl-10 pr-3 py-2 border ${
                     errors.email ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'
                   } placeholder-gray-500 text-gray-900 dark:text-gray-100 rounded-md focus:outline-none focus:ring-accent-500 focus:border-blue-500 focus:z-10 sm:text-sm`}
-                  placeholder="Enter your email"
+                  placeholder={t('auth.login.emailPlaceholder')}
                   value={formData.email}
                   onChange={handleChange}
                 />
@@ -140,7 +142,7 @@ const Login = () => {
             
             <div>
               <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-200">
-                Password
+                {t('auth.login.password')}
               </label>
               <div className="mt-1 relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -155,7 +157,7 @@ const Login = () => {
                   className={`appearance-none relative block w-full pl-10 pr-3 py-2 border ${
                     errors.password ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'
                   } placeholder-gray-500 text-gray-900 dark:text-gray-100 rounded-md focus:outline-none focus:ring-accent-500 focus:border-blue-500 focus:z-10 sm:text-sm`}
-                  placeholder="Enter your password"
+                  placeholder={t('auth.login.passwordPlaceholder')}
                   value={formData.password}
                   onChange={handleChange}
                 />
@@ -175,7 +177,7 @@ const Login = () => {
               {loading ? (
                 <Loader className="h-5 w-5 animate-spin" />
               ) : (
-                'Sign in'
+                t('auth.login.signInButton')
               )}
             </button>
           </div>
@@ -185,7 +187,7 @@ const Login = () => {
               to="/forgot-password"
               className="text-sm text-primary-600 hover:text-primary-700 font-medium"
             >
-              Forgot your password?
+              {t('auth.login.forgotPassword')}
             </Link>
           </div>
         </form>
