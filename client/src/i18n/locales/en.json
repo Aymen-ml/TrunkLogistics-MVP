@@ -273,5 +273,34 @@
       "fieldRequired": "is required",
       "businessTypeInvalid": "Business type must be company"
     }
+  },
+  "admin": {
+    "analytics": {
+      "title": "Analytics & Reports",
+      "tabs": {
+        "overview": "Overview",
+        "bookings": "Bookings",
+        "revenue": "Revenue"
+      },
+      "metrics": {
+        "totalRevenue": "Total Revenue",
+        "totalBookings": "Total Bookings",
+        "completionRate": "Completion Rate",
+        "activeUsers": "Active Users",
+        "thisMonth": "this month",
+        "completed": "completed",
+        "providers": "providers"
+      },
+      "filters": {
+        "dateRange": "Date Range",
+        "last7Days": "Last 7 Days",
+        "last30Days": "Last 30 Days",
+        "last90Days": "Last 90 Days",
+        "custom": "Custom Range",
+        "from": "From",
+        "to": "To",
+        "apply": "Apply"
+      }
+    }
   }
 }

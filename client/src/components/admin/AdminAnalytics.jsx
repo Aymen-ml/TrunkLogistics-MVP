@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { apiClient } from '../../utils/apiClient';
 import { 
   LineChart as LineChartIcon, BarChart3, TrendingUp, TrendingDown, PieChart as PieChartIcon, Filter, Calendar, 
@@ -12,6 +13,7 @@ import {
 } from 'recharts';
 
 const AdminAnalytics = () => {
+  const { t } = useTranslation();
   const [bookings, setBookings] = useState([]);
   const [trucks, setTrucks] = useState([]);
   const [users, setUsers] = useState([]);
@@ -262,11 +264,11 @@ const AdminAnalytics = () => {
                 onClick={() => setActiveTab(tab)}
                 className={`whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm transition-colors ${
                   activeTab === tab
-                    ? 'border-primary-600 text-primary-600'
+                    ? 'border-primary-600 text-primary-600 dark:border-primary-400 dark:text-primary-400'
                     : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300'
                 }`}
               >
-                {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                {t(`admin.analytics.tabs.${tab}`)}
               </button>
             ))}
           </nav>
@@ -322,31 +324,31 @@ const AdminAnalytics = () => {
             {/* Top KPIs */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-6">
               <MetricCard 
-                title="Total Revenue" 
+                title={t('admin.analytics.metrics.totalRevenue')}
                 value={kpis.totalRevenue.toLocaleString('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0 })} 
                 icon={DollarSign} 
                 trend={kpis.growthRate}
                 color="bg-gradient-to-br from-green-500 to-emerald-600"
               />
               <MetricCard 
-                title="Total Bookings" 
+                title={t('admin.analytics.metrics.totalBookings')}
                 value={kpis.total} 
                 icon={Package} 
-                subtitle={`${kpis.currentPeriod} this month`}
+                subtitle={`${kpis.currentPeriod} ${t('admin.analytics.metrics.thisMonth')}`}
                 color="bg-gradient-to-br from-blue-500 to-primary-600"
               />
               <MetricCard 
-                title="Completion Rate" 
+                title={t('admin.analytics.metrics.completionRate')}
                 value={`${kpis.completionRate}%`} 
                 icon={Target} 
-                subtitle={`${kpis.completed} completed`}
+                subtitle={`${kpis.completed} ${t('admin.analytics.metrics.completed')}`}
                 color="bg-gradient-to-br from-purple-500 to-indigo-600"
               />
               <MetricCard 
-                title="Active Users" 
+                title={t('admin.analytics.metrics.activeUsers')}
                 value={platformStats.totalUsers} 
                 icon={Users} 
-                subtitle={`${platformStats.providers} providers`}
+                subtitle={`${platformStats.providers} ${t('admin.analytics.metrics.providers')}`}
                 color="bg-gradient-to-br from-orange-500 to-accent-600"
               />
             </div>

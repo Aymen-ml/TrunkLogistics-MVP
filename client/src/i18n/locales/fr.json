@@ -273,5 +273,34 @@
       "fieldRequired": "est requis",
       "businessTypeInvalid": "Le type d'entreprise doit être une entreprise"
     }
+  },
+  "admin": {
+    "analytics": {
+      "title": "Analyses et Rapports",
+      "tabs": {
+        "overview": "Aperçu",
+        "bookings": "Réservations",
+        "revenue": "Revenus"
+      },
+      "metrics": {
+        "totalRevenue": "Revenu Total",
+        "totalBookings": "Réservations Totales",
+        "completionRate": "Taux d'Achèvement",
+        "activeUsers": "Utilisateurs Actifs",
+        "thisMonth": "ce mois-ci",
+        "completed": "complétées",
+        "providers": "fournisseurs"
+      },
+      "filters": {
+        "dateRange": "Période",
+        "last7Days": "7 Derniers Jours",
+        "last30Days": "30 Derniers Jours",
+        "last90Days": "90 Derniers Jours",
+        "custom": "Période Personnalisée",
+        "from": "De",
+        "to": "À",
+        "apply": "Appliquer"
+      }
+    }
   }
 }
