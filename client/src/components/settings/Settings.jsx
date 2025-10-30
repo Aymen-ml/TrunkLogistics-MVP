@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { Sun, Moon, Save, Bell, BellOff, Check, AlertCircle, Globe } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { useToast } from '../../contexts/ToastContext';
+import { useAuth } from '../../contexts/AuthContext';
 import apiClient from '../../utils/apiClient';
 
 const Settings = () => {
   const { t, i18n } = useTranslation();
   const { showSuccess, showError } = useToast();
+  const { user, isAuthenticated } = useAuth();
   const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'light');
   const [language, setLanguage] = useState(() => localStorage.getItem('i18nextLng') || i18n.language);
   const [notifications, setNotifications] = useState(() => {
@@ -36,10 +38,17 @@ const Settings = () => {
   const handleSaveSettings = async () => {
     setSaving(true);
     try {
-      // Save theme to backend (user-specific)
-      await apiClient.put('/users/preferences/theme', { theme });
+      // Save theme to backend only if user is authenticated
+      if (isAuthenticated) {
+        try {
+          await apiClient.put('/users/preferences/theme', { theme });
+        } catch (apiError) {
+          console.warn('Failed to save to backend, continuing with local storage:', apiError);
+          // Continue with local storage even if backend fails
+        }
+      }
       
-      // Persist preferences to localStorage (as backup)
+      // Persist preferences to localStorage (works for all users)
       localStorage.setItem('theme', theme);
       localStorage.setItem('notificationsEnabled', JSON.stringify(notifications));
       
@@ -48,13 +57,9 @@ const Settings = () => {
         i18n.changeLanguage(language);
       }
       
-      // Ensure theme is applied immediately
-      document.documentElement.classList.toggle('dark', theme === 'dark');
-      
-      // Dispatch custom event to notify NotificationContext of the change
+      // Dispatch custom event
       window.dispatchEvent(new Event('notificationSettingsChanged'));
       
-      // Small delay for better UX
       await new Promise(resolve => setTimeout(resolve, 500));
       
       showSuccess(notifications 
