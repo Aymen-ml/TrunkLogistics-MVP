@@ -3,7 +3,7 @@ import { Sun, Moon, Save, Bell, BellOff, Check, AlertCircle, Globe } from 'lucid
 import { useTranslation } from 'react-i18next';
 import { useToast } from '../../contexts/ToastContext';
 import { useAuth } from '../../contexts/AuthContext';
-import apiClient from '../../utils/apiClient';
+import { apiClient } from '../../utils/apiClient';
 
 const Settings = () => {
   const { t, i18n } = useTranslation();
@@ -54,7 +54,10 @@ const Settings = () => {
       
       // Apply language change
       if (language !== i18n.language) {
-        i18n.changeLanguage(language);
+        await i18n.changeLanguage(language);
+        // Explicitly save to localStorage (i18next should do this, but let's be sure)
+        localStorage.setItem('i18nextLng', language);
+        console.log('Language changed to:', language);
       }
       
       // Dispatch custom event

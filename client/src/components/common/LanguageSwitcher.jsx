@@ -16,6 +16,9 @@ const LanguageSwitcher = () => {
 
   const changeLanguage = (langCode) => {
     i18n.changeLanguage(langCode);
+    // Explicitly save to localStorage
+    localStorage.setItem('i18nextLng', langCode);
+    console.log('Language changed to:', langCode);
     setIsOpen(false);
   };
 

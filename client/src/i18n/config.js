@@ -17,9 +17,17 @@ i18n
       }
     },
     fallbackLng: 'en',
-    debug: false,
+    debug: true, // Enable to see what's happening
+    lng: localStorage.getItem('i18nextLng') || 'en', // Explicitly set from localStorage
+    detection: {
+      order: ['localStorage', 'navigator'],
+      caches: ['localStorage']
+    },
     interpolation: {
       escapeValue: false
+    },
+    react: {
+      useSuspense: false
     }
   });
 
