@@ -201,9 +201,9 @@ const SignupForm = () => {
           ))}
         </div>
         <div className="flex justify-between mt-2">
-          <span className="text-[10px] sm:text-xs text-gray-600 dark:text-gray-400">Account Type</span>
-          <span className="text-[10px] sm:text-xs text-gray-600 dark:text-gray-400">Personal Info</span>
-          <span className="text-[10px] sm:text-xs text-gray-600 dark:text-gray-400">Business Details</span>
+          <span className="text-[10px] sm:text-xs text-gray-600 dark:text-gray-400">{t('auth.register.step')} 1</span>
+          <span className="text-[10px] sm:text-xs text-gray-600 dark:text-gray-400">{t('auth.register.step')} 2</span>
+          <span className="text-[10px] sm:text-xs text-gray-600 dark:text-gray-400">{t('auth.register.step')} 3</span>
         </div>
       </div>
 
@@ -211,7 +211,7 @@ const SignupForm = () => {
         {/* Step 1: Account Type */}
         {currentStep === 1 && (
           <div className="mb-6 sm:mb-8">
-            <label className="block text-sm font-medium text-gray-700 mb-3">I want to:</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-3">{t('auth.register.role')}</label>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               <button
                 type="button"
@@ -221,15 +221,14 @@ const SignupForm = () => {
                 }}
                 className={`p-4 sm:p-6 border-2 rounded-xl text-center transition-all duration-200 ${
                   formData.role === 'customer'
-                    ? 'border-blue-500 bg-blue-50 shadow-md'
-                    : 'border-gray-200 hover:border-gray-300 hover:shadow-md'
+                    ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20 shadow-md'
+                    : 'border-gray-200 dark:border-gray-600 hover:border-gray-300 dark:hover:border-gray-500 hover:shadow-md'
                 }`}
               >
-                <div className="inline-flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-blue-100 text-primary-600 mb-2 sm:mb-3">
+                <div className="inline-flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-blue-100 dark:bg-blue-900/40 text-primary-600 mb-2 sm:mb-3">
                   <User className="h-5 w-5 sm:h-6 sm:w-6" />
                 </div>
-                <div className="font-semibold text-base sm:text-lg mb-1">Rent Trucks</div>
-                <div className="text-xs sm:text-sm text-gray-600">Sign up as a Customer</div>
+                <div className="font-semibold text-base sm:text-lg mb-1 text-gray-900 dark:text-white">{t('auth.register.roleCustomer')}</div>
               </button>
 
               <button
@@ -240,15 +239,14 @@ const SignupForm = () => {
                 }}
                 className={`p-4 sm:p-6 border-2 rounded-xl text-center transition-all duration-200 ${
                   formData.role === 'provider'
-                    ? 'border-blue-500 bg-blue-50 shadow-md'
-                    : 'border-gray-200 hover:border-gray-300 hover:shadow-md'
+                    ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20 shadow-md'
+                    : 'border-gray-200 dark:border-gray-600 hover:border-gray-300 dark:hover:border-gray-500 hover:shadow-md'
                 }`}
               >
-                <div className="inline-flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-blue-100 text-primary-600 mb-2 sm:mb-3">
+                <div className="inline-flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-blue-100 dark:bg-blue-900/40 text-primary-600 mb-2 sm:mb-3">
                   <Truck className="h-5 w-5 sm:h-6 sm:w-6" />
                 </div>
-                <div className="font-semibold text-base sm:text-lg mb-1">Provide Trucks</div>
-                <div className="text-xs sm:text-sm text-gray-600">Sign up as a Provider</div>
+                <div className="font-semibold text-base sm:text-lg mb-1 text-gray-900 dark:text-white">{t('auth.register.roleProvider')}</div>
               </button>
             </div>
           </div>
@@ -256,11 +254,11 @@ const SignupForm = () => {
 
         {/* Step 2: Personal Information */}
         {currentStep === 2 && (
-          <div className="bg-white p-6 rounded-xl border border-gray-200 space-y-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Personal Information</h3>
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700 space-y-6">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">{t('auth.register.personalInfo')}</h3>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">First Name *</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">{t('auth.register.firstName')} *</label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                     <User className="h-5 w-5 text-gray-400" />
@@ -271,8 +269,8 @@ const SignupForm = () => {
                     value={formData.firstName}
                     onChange={handleInputChange}
                     required
-                    className={`w-full pl-10 pr-3 py-2 border ${errors.firstName ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all duration-200`}
-                    placeholder="John"
+                    className={`w-full pl-10 pr-3 py-2 border ${errors.firstName ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'} dark:bg-gray-700 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all duration-200`}
+                    placeholder={t('auth.register.firstNamePlaceholder')}
                   />
                   {errors.firstName && (
                     <p className="mt-1 text-sm text-red-600">{errors.firstName}</p>
@@ -281,7 +279,7 @@ const SignupForm = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Last Name *</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">{t('auth.register.lastName')} *</label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                     <User className="h-5 w-5 text-gray-400" />
@@ -292,15 +290,15 @@ const SignupForm = () => {
                     value={formData.lastName}
                     onChange={handleInputChange}
                     required
-                    className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all duration-200"
-                    placeholder="Doe"
+                    className="w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all duration-200"
+                    placeholder={t('auth.register.lastNamePlaceholder')}
                   />
                 </div>
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Email *</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">{t('auth.register.email')} *</label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <Mail className="h-5 w-5 text-gray-400" />
@@ -311,14 +309,14 @@ const SignupForm = () => {
                   value={formData.email}
                   onChange={handleInputChange}
                   required
-                  className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all duration-200"
-                  placeholder="you@example.com"
+                  className="w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all duration-200"
+                  placeholder={t('auth.register.emailPlaceholder')}
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Password *</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">{t('auth.register.password')} *</label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <Lock className="h-5 w-5 text-gray-400" />
@@ -330,15 +328,15 @@ const SignupForm = () => {
                   onChange={handleInputChange}
                   required
                   minLength={6}
-                  className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all duration-200"
-                  placeholder="••••••••"
+                  className="w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all duration-200"
+                  placeholder={t('auth.register.passwordPlaceholder')}
                 />
-                <p className="mt-1 text-xs text-gray-500">Must be at least 6 characters</p>
+                <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">{t('auth.register.passwordPlaceholder')}</p>
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Confirm Password *</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">{t('auth.register.confirmPassword')} *</label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <Lock className="h-5 w-5 text-gray-400" />
@@ -349,14 +347,14 @@ const SignupForm = () => {
                   value={formData.confirmPassword}
                   onChange={handleInputChange}
                   required
-                  className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all duration-200"
-                  placeholder="••••••••"
+                  className="w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all duration-200"
+                  placeholder={t('auth.register.confirmPasswordPlaceholder')}
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Phone *</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">{t('auth.register.phone')} *</label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <Phone className="h-5 w-5 text-gray-400" />
@@ -367,8 +365,8 @@ const SignupForm = () => {
                   value={formData.phone}
                   onChange={handleInputChange}
                   required
-                  className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all duration-200"
-                  placeholder="(123) 456-7890"
+                  className="w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all duration-200"
+                  placeholder={t('auth.register.phonePlaceholder')}
                 />
               </div>
             </div>
@@ -389,7 +387,7 @@ const SignupForm = () => {
                 }}
                 className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-accent-500 hover:bg-accent-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-500 transition-colors"
               >
-                Next Step
+                {t('auth.register.nextButton')}
                 <ChevronRight className="ml-2 h-4 w-4" />
               </button>
             </div>
@@ -398,15 +396,15 @@ const SignupForm = () => {
 
         {/* Step 3: Business Information */}
         {currentStep === 3 && (
-          <div className="bg-white p-6 rounded-xl border border-gray-200 space-y-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">
-              {formData.role === 'provider' ? 'Company Information' : 'Business Information'}
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700 space-y-6">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+              {formData.role === 'provider' ? t('auth.register.companyInfo') : t('auth.register.companyInfo')}
             </h3>
 
             {formData.role === 'provider' ? (
               <>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Company Name *</label>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">{t('auth.register.companyName')} *</label>
                   <div className="relative">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                       <Building2 className="h-5 w-5 text-gray-400" />
@@ -417,14 +415,14 @@ const SignupForm = () => {
                       value={formData.companyName}
                       onChange={handleInputChange}
                       required
-                      className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all duration-200"
-                      placeholder="Enter your company name"
+                      className="w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all duration-200"
+                      placeholder={t('auth.register.companyNamePlaceholder')}
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Business Phone *</label>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">{t('auth.register.businessPhone')} *</label>
                   <div className="relative">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                       <Phone className="h-5 w-5 text-gray-400" />
@@ -435,14 +433,14 @@ const SignupForm = () => {
                       value={formData.businessPhone}
                       onChange={handleInputChange}
                       required
-                      className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all duration-200"
-                      placeholder="Enter business phone"
+                      className="w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all duration-200"
+                      placeholder={t('auth.register.businessPhonePlaceholder')}
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Street Address *</label>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">{t('auth.register.streetAddress')} *</label>
                   <div className="relative">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                       <MapPin className="h-5 w-5 text-gray-400" />
@@ -453,8 +451,8 @@ const SignupForm = () => {
                       value={formData.streetAddress}
                       onChange={handleInputChange}
                       required
-                      className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all duration-200"
-                      placeholder="Enter street address"
+                      className="w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all duration-200"
+                      placeholder={t('auth.register.streetAddressPlaceholder')}
                     />
                     {errors.streetAddress && (
                       <p className="mt-1 text-sm text-red-600">{errors.streetAddress}</p>
@@ -465,42 +463,42 @@ const SignupForm = () => {
                 <div className="space-y-4">
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">City *</label>
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">{t('auth.register.city')} *</label>
                       <input
                         type="text"
                         name="city"
                         value={formData.city}
                         onChange={handleInputChange}
                         required
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all duration-200"
-                        placeholder="City"
+                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all duration-200"
+                        placeholder={t('auth.register.cityPlaceholder')}
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">State/Province *</label>
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">{t('auth.register.stateProvince')} *</label>
                       <input
                         type="text"
                         name="stateProvince"
                         value={formData.stateProvince}
                         onChange={handleInputChange}
                         required
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all duration-200"
-                        placeholder="State/Province"
+                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all duration-200"
+                        placeholder={t('auth.register.stateProvincePlaceholder')}
                       />
                     </div>
                   </div>
                   
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Postal Code *</label>
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">{t('auth.register.postalCode')} *</label>
                       <input
                         type="text"
                         name="postalCode"
                         value={formData.postalCode}
                         onChange={handleInputChange}
                         required
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all duration-200"
-                        placeholder="Enter postal code"
+                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all duration-200"
+                        placeholder={t('auth.register.postalCodePlaceholder')}
                       />
                     </div>
                     {/* Country field removed */}
@@ -510,7 +508,7 @@ const SignupForm = () => {
             ) : (
               <>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Company Name *</label>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">{t('auth.register.companyName')} *</label>
                   <div className="relative">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                       <Building2 className="h-5 w-5 text-gray-400" />
@@ -521,14 +519,14 @@ const SignupForm = () => {
                       value={formData.companyName}
                       onChange={handleInputChange}
                       required
-                      className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all duration-200"
-                      placeholder="Enter your company name"
+                      className="w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all duration-200"
+                      placeholder={t('auth.register.companyNamePlaceholder')}
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Street Address *</label>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">{t('auth.register.streetAddress')} *</label>
                   <div className="relative">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                       <MapPin className="h-5 w-5 text-gray-400" />
@@ -539,8 +537,8 @@ const SignupForm = () => {
                       value={formData.streetAddress}
                       onChange={handleInputChange}
                       required
-                      className={`w-full pl-10 pr-3 py-2 border ${errors.streetAddress ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all duration-200`}
-                      placeholder="Enter your street address"
+                      className={`w-full pl-10 pr-3 py-2 border ${errors.streetAddress ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'} dark:bg-gray-700 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all duration-200`}
+                      placeholder={t('auth.register.streetAddressPlaceholder')}
                     />
                     {errors.streetAddress && (
                       <p className="mt-1 text-sm text-red-600">{errors.streetAddress}</p>
@@ -599,9 +597,9 @@ const SignupForm = () => {
               <button
                 type="button"
                 onClick={() => setCurrentStep(2)}
-                className="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-500"
+                className="inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 text-sm font-medium rounded-md text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-500"
               >
-                Back
+                {t('auth.register.backButton')}
               </button>
               <button
                 type="submit"
@@ -611,10 +609,10 @@ const SignupForm = () => {
                 {loading ? (
                   <>
                     <Loader className="animate-spin -ml-1 mr-2 h-5 w-5" />
-                    Creating Account...
+                    {t('common.loading')}
                   </>
                 ) : (
-                  'Create Account'
+                  t('auth.register.registerButton')
                 )}
               </button>
             </div>
@@ -622,10 +620,10 @@ const SignupForm = () => {
         )}
       </form>
 
-      <div className="mt-6 text-center text-sm text-gray-600">
-        Already have an account?{' '}
+      <div className="mt-6 text-center text-sm text-gray-600 dark:text-gray-400">
+        {t('auth.register.subtitle')}{' '}
         <Link to="/login" className="font-medium text-accent-500 hover:text-accent-600 transition-colors">
-          Sign in instead
+          {t('auth.register.signIn')}
         </Link>
       </div>
     </div>
