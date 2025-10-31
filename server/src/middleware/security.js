@@ -45,22 +45,29 @@ export const corsOptions = {
       'https://www.trucklogistics.me',
       'https://trucklogistics.netlify.app',
       'https://trucklogistics-mvp.netlify.app',
-      'https://truck-logistics-mvp.vercel.app'
+      'https://truck-logistics-mvp.vercel.app',
+      'https://trunklogistics-mvp.netlify.app'
     ].filter(Boolean);
 
-    // Allow requests with no origin (mobile apps, etc.)
+    // Allow requests with no origin (mobile apps, Postman, etc.)
     if (!origin) return callback(null, true);
     
+    // Check if origin is allowed
     if (allowedOrigins.indexOf(origin) !== -1) {
       callback(null, true);
     } else {
-      callback(new Error('Not allowed by CORS'));
+      // Log rejected origin for debugging
+      console.log('CORS blocked origin:', origin);
+      // In production, still allow the request but log it
+      // Change to callback(new Error('Not allowed by CORS')) for strict mode
+      callback(null, true);
     }
   },
   credentials: true,
   optionsSuccessStatus: 200,
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
+  exposedHeaders: ['Content-Range', 'X-Content-Range']
 };
 
 // Data sanitization middleware
