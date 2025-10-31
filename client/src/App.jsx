@@ -30,6 +30,7 @@ import UserManagement from './components/admin/UserManagement'
 import DocumentVerification from './components/admin/DocumentVerification'
 import BookingManagement from './components/admin/BookingManagement'
 import AdminAnalytics from './components/admin/AdminAnalytics'
+import ProviderAnalytics from './components/analytics/ProviderAnalytics'
 import { Truck, ArrowRight, Shield, Clock } from 'lucide-react'
 import TrucksAdmin from './components/admin/TrucksAdmin'
 import Profile from './components/profile/Profile'
@@ -139,6 +140,13 @@ function AppContent() {
                 <Route path="/find-trucks" element={
                   <ProtectedRoute allowedRoles={['customer']}>
                     <TruckSearch />
+                  </ProtectedRoute>
+                } />
+                
+                {/* Analytics Route */}
+                <Route path="/analytics" element={
+                  <ProtectedRoute allowedRoles={['provider']}>
+                    <ProviderAnalytics />
                   </ProtectedRoute>
                 } />
                 

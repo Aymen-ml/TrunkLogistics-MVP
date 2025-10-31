@@ -123,8 +123,7 @@
 ## 5) Why We Win — Differentiation
 
 | **TruckLogistics** | **Heavy Global TMS** | **Status Quo (WhatsApp)** |
-|-------------------|---------------------|--------------------------|
-| French/English support | English only | Manual translation |
+|-------------------French/English support | English only | Manual translation |
 | <10 min onboarding | 2–6 weeks setup | N/A |
 | Web-based platform | Requires installation | Works anywhere (but no records) |
 | Compliance built-in | Add-on modules | Manual tracking |

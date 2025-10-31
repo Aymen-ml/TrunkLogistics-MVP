@@ -346,10 +346,10 @@ const ProviderDashboard = () => {
 
         {/* Quick Actions */}
         <div className="mb-6 sm:mb-8">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <Link
               to="/trucks"
-              className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 p-4 sm:p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow group"
+              className="bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow group"
             >
               <div className="flex items-center">
                 <div className="flex-shrink-0">
@@ -357,14 +357,14 @@ const ProviderDashboard = () => {
                 </div>
                 <div className="ml-3 sm:ml-4">
                   <h3 className="text-base sm:text-lg font-medium text-gray-900 dark:text-gray-100">Manage Fleet</h3>
-                  <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Add and manage trucks</p>
+                  <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">Add and manage trucks</p>
                 </div>
               </div>
             </Link>
 
             <Link
               to="/bookings"
-              className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 p-4 sm:p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow group"
+              className="bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow group"
             >
               <div className="flex items-center">
                 <div className="flex-shrink-0">
@@ -372,7 +372,22 @@ const ProviderDashboard = () => {
                 </div>
                 <div className="ml-3 sm:ml-4">
                   <h3 className="text-base sm:text-lg font-medium text-gray-900 dark:text-gray-100">View Bookings</h3>
-                  <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Manage your bookings</p>
+                  <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">Manage your bookings</p>
+                </div>
+              </div>
+            </Link>
+
+            <Link
+              to="/analytics"
+              className="bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow group"
+            >
+              <div className="flex items-center">
+                <div className="flex-shrink-0">
+                  <BarChart3 className="h-6 w-6 sm:h-8 sm:w-8 text-blue-600 group-hover:text-blue-700" />
+                </div>
+                <div className="ml-3 sm:ml-4">
+                  <h3 className="text-base sm:text-lg font-medium text-gray-900 dark:text-gray-100">Analytics</h3>
+                  <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">View detailed insights</p>
                 </div>
               </div>
             </Link>
