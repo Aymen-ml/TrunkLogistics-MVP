@@ -18,13 +18,24 @@ export const getProviderAnalytics = async (req, res) => {
     const providerId = req.user.id;
     const { months = 6 } = req.query;
 
+    // Validate months parameter
+    const validMonths = parseInt(months, 10);
+    if (isNaN(validMonths) || validMonths < 1 || validMonths > 24) {
+      return res.status(400).json({
+        success: false,
+        error: 'Invalid months parameter. Must be between 1 and 24.'
+      });
+    }
+
     // Get provider's profile ID
+    logger.info('Looking up provider profile for user:', providerId);
     const providerProfileResult = await pool.query(
       'SELECT id FROM provider_profiles WHERE user_id = $1',
       [providerId]
     );
 
     if (providerProfileResult.rows.length === 0) {
+      logger.warn('Provider profile not found for user:', providerId);
       return res.status(404).json({
         success: false,
         error: 'Provider profile not found'
@@ -32,8 +43,10 @@ export const getProviderAnalytics = async (req, res) => {
     }
 
     const providerProfileId = providerProfileResult.rows[0].id;
+    logger.info('Found provider profile:', providerProfileId);
 
     // 1. Revenue Trends (last N months)
+    logger.info('Fetching revenue trends for last', validMonths, 'months');
     const revenueTrendsQuery = `
       SELECT 
         TO_CHAR(DATE_TRUNC('month', pickup_date), 'Mon') as month,
@@ -56,9 +69,11 @@ export const getProviderAnalytics = async (req, res) => {
       LIMIT $2
     `;
 
-    const revenueData = await pool.query(revenueTrendsQuery, [providerProfileId, months]);
+    const revenueData = await pool.query(revenueTrendsQuery, [providerProfileId, validMonths]);
+    logger.info('Revenue trends fetched:', revenueData.rows.length, 'months');
 
     // 2. Booking Conversion Funnel
+    logger.info('Fetching booking conversion funnel');
     const conversionQuery = `
       SELECT 
         COUNT(*) FILTER (WHERE status = 'pending_review') as pending,
@@ -71,12 +86,14 @@ export const getProviderAnalytics = async (req, res) => {
       FROM bookings
       WHERE provider_id = $1
         AND deleted_by_provider_at IS NULL
-        AND created_at >= NOW() - INTERVAL '6 months'
+        AND created_at >= NOW() - ($2 || ' months')::interval
     `;
 
-    const conversionData = await pool.query(conversionQuery, [providerProfileId]);
+    const conversionData = await pool.query(conversionQuery, [providerProfileId, validMonths]);
+    logger.info('Conversion data fetched');
 
     // 3. Vehicle Utilization per Truck
+    logger.info('Fetching vehicle utilization');
     const vehicleUtilizationQuery = `
       SELECT 
         t.id,
@@ -98,8 +115,10 @@ export const getProviderAnalytics = async (req, res) => {
     `;
 
     const vehicleUtilization = await pool.query(vehicleUtilizationQuery, [providerProfileId]);
+    logger.info('Vehicle utilization fetched:', vehicleUtilization.rows.length, 'vehicles');
 
     // 4. Top Routes by Revenue
+    logger.info('Fetching top routes');
     const topRoutesQuery = `
       SELECT 
         pickup_city,
@@ -113,14 +132,15 @@ export const getProviderAnalytics = async (req, res) => {
       WHERE provider_id = $1
         AND service_type = 'transport'
         AND deleted_by_provider_at IS NULL
-        AND pickup_date >= NOW() - INTERVAL '6 months'
+        AND pickup_date >= NOW() - ($2 || ' months')::interval
       GROUP BY pickup_city, destination_city
       HAVING COUNT(*) > 0
       ORDER BY total_revenue DESC
       LIMIT 10
     `;
 
-    const topRoutes = await pool.query(topRoutesQuery, [providerProfileId]);
+    const topRoutes = await pool.query(topRoutesQuery, [providerProfileId, validMonths]);
+    logger.info('Top routes fetched:', topRoutes.rows.length, 'routes');
 
     // 5. Customer Ratings & Reviews (placeholder - to be implemented)
     const ratingsQuery = `
@@ -182,11 +202,15 @@ export const getProviderAnalytics = async (req, res) => {
     });
 
   } catch (error) {
-    logger.error('Error fetching provider analytics:', error);
+    logger.error('Error fetching provider analytics:', {
+      message: error.message,
+      stack: error.stack,
+      userId: req.user?.id
+    });
     res.status(500).json({
       success: false,
       error: 'Failed to fetch analytics data',
-      details: error.message
+      details: process.env.NODE_ENV === 'development' ? error.message : 'Internal server error'
     });
   }
 };
