@@ -13,7 +13,14 @@ import {
   Clock,
   CheckCircle,
   XCircle,
-  AlertCircle
+  AlertCircle,
+  Zap,
+  Globe,
+  Tag,
+  Brain,
+  Users,
+  Star,
+  Award
 } from 'lucide-react';
 import { apiClient } from '../../utils/apiClient';
 import { 
@@ -38,12 +45,19 @@ import {
 
 const ProviderAnalytics = () => {
   const [analytics, setAnalytics] = useState(null);
+  const [kpis, setKpis] = useState(null);
+  const [geographic, setGeographic] = useState(null);
+  const [pricing, setPricing] = useState(null);
+  const [predictive, setPredictive] = useState(null);
+  const [customers, setCustomers] = useState(null);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('overview');
   const [timeRange, setTimeRange] = useState(6); // months
 
   useEffect(() => {
     fetchAnalytics();
+    fetchPhase2Analytics();
+    fetchPhase3Analytics();
   }, [timeRange]);
 
   const fetchAnalytics = async () => {
@@ -57,6 +71,36 @@ const ProviderAnalytics = () => {
       console.error('Error fetching analytics:', error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const fetchPhase2Analytics = async () => {
+    try {
+      const [kpisRes, geoRes, pricingRes] = await Promise.all([
+        apiClient.get(`/analytics/provider/kpis?months=${timeRange}`),
+        apiClient.get(`/analytics/provider/geographic?months=${timeRange}`),
+        apiClient.get(`/analytics/provider/pricing?months=${timeRange}`)
+      ]);
+      
+      if (kpisRes.data.success) setKpis(kpisRes.data.data);
+      if (geoRes.data.success) setGeographic(geoRes.data.data);
+      if (pricingRes.data.success) setPricing(pricingRes.data.data);
+    } catch (error) {
+      console.error('Error fetching Phase 2 analytics:', error);
+    }
+  };
+
+  const fetchPhase3Analytics = async () => {
+    try {
+      const [predictiveRes, customersRes] = await Promise.all([
+        apiClient.get('/analytics/provider/predictive'),
+        apiClient.get('/analytics/provider/customers')
+      ]);
+      
+      if (predictiveRes.data.success) setPredictive(predictiveRes.data.data);
+      if (customersRes.data.success) setCustomers(customersRes.data.data);
+    } catch (error) {
+      console.error('Error fetching Phase 3 analytics:', error);
     }
   };
 
@@ -124,19 +168,24 @@ const ProviderAnalytics = () => {
           </div>
 
       {/* Tabs */}
-      <div className="border-b border-gray-200 dark:border-gray-700">
-        <nav className="flex space-x-8">
+      <div className="border-b border-gray-200 dark:border-gray-700 overflow-x-auto">
+        <nav className="flex space-x-6 min-w-max">
           {[
-            { id: 'overview', label: 'Overview', icon: BarChart3 },
-            { id: 'revenue', label: 'Revenue', icon: DollarSign },
-            { id: 'bookings', label: 'Bookings', icon: Package },
-            { id: 'fleet', label: 'Fleet', icon: Truck },
-            { id: 'routes', label: 'Routes', icon: MapPin }
+            { id: 'overview', label: 'Overview', icon: BarChart3, phase: 1 },
+            { id: 'revenue', label: 'Revenue', icon: DollarSign, phase: 1 },
+            { id: 'bookings', label: 'Bookings', icon: Package, phase: 1 },
+            { id: 'fleet', label: 'Fleet', icon: Truck, phase: 1 },
+            { id: 'routes', label: 'Routes', icon: MapPin, phase: 1 },
+            { id: 'performance', label: 'Performance', icon: Zap, phase: 2 },
+            { id: 'geographic', label: 'Geographic', icon: Globe, phase: 2 },
+            { id: 'pricing', label: 'Pricing', icon: Tag, phase: 2 },
+            { id: 'insights', label: 'AI Insights', icon: Brain, phase: 3 },
+            { id: 'customers', label: 'Customers', icon: Users, phase: 3 }
           ].map(tab => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`flex items-center gap-2 py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
+              className={`flex items-center gap-2 py-4 px-2 border-b-2 font-medium text-sm transition-colors whitespace-nowrap ${
                 activeTab === tab.id
                   ? 'border-blue-600 text-blue-600'
                   : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'
@@ -144,6 +193,14 @@ const ProviderAnalytics = () => {
             >
               <tab.icon className="w-4 h-4" />
               {tab.label}
+              {tab.phase > 1 && (
+                <span className={`text-xs px-1.5 py-0.5 rounded ${
+                  tab.phase === 2 ? 'bg-orange-100 text-orange-600 dark:bg-orange-900/30 dark:text-orange-400' :
+                  'bg-purple-100 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400'
+                }`}>
+                  P{tab.phase}
+                </span>
+              )}
             </button>
           ))}
         </nav>
@@ -1045,6 +1102,396 @@ const ProviderAnalytics = () => {
                               />
                             </div>
                           </div>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* PHASE 2: Performance Tab */}
+      {activeTab === 'performance' && kpis && (
+        <div className="space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* On-Time Delivery */}
+            <div className="bg-gradient-to-br from-green-500 to-emerald-600 text-white rounded-xl p-6 shadow-lg">
+              <div className="flex items-center justify-between mb-4">
+                <div className="p-3 bg-white/20 rounded-lg">
+                  <Clock className="w-6 h-6" />
+                </div>
+              </div>
+              <p className="text-white/80 text-sm font-medium mb-1">On-Time Delivery</p>
+              <p className="text-3xl font-bold">
+                {parseFloat(kpis.onTimeDelivery.on_time_percentage || 0).toFixed(1)}%
+              </p>
+              <p className="text-white/70 text-xs mt-2">
+                {kpis.onTimeDelivery.on_time_deliveries} of {kpis.onTimeDelivery.total_completed} deliveries
+              </p>
+            </div>
+
+            {/* Response Time */}
+            <div className="bg-gradient-to-br from-blue-500 to-blue-700 text-white rounded-xl p-6 shadow-lg">
+              <div className="flex items-center justify-between mb-4">
+                <div className="p-3 bg-white/20 rounded-lg">
+                  <Zap className="w-6 h-6" />
+                </div>
+              </div>
+              <p className="text-white/80 text-sm font-medium mb-1">Avg Response Time</p>
+              <p className="text-3xl font-bold">
+                {parseFloat(kpis.responseTime.avg_response_hours || 0).toFixed(1)}h
+              </p>
+              <p className="text-white/70 text-xs mt-2">
+                Median: {parseFloat(kpis.responseTime.median_response_hours || 0).toFixed(1)}h
+              </p>
+            </div>
+
+            {/* Customer Satisfaction */}
+            <div className="bg-gradient-to-br from-purple-500 to-indigo-600 text-white rounded-xl p-6 shadow-lg">
+              <div className="flex items-center justify-between mb-4">
+                <div className="p-3 bg-white/20 rounded-lg">
+                  <Star className="w-6 h-6" />
+                </div>
+              </div>
+              <p className="text-white/80 text-sm font-medium mb-1">Satisfaction Score</p>
+              <p className="text-3xl font-bold">
+                {parseFloat(kpis.satisfaction.avg_satisfaction_score || 0).toFixed(1)}/5.0
+              </p>
+              <p className="text-white/70 text-xs mt-2">
+                {kpis.satisfaction.satisfied_customers} satisfied customers
+              </p>
+            </div>
+          </div>
+
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border border-gray-200 dark:border-gray-700">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Performance Insights</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="space-y-4">
+                <h4 className="font-medium text-gray-900 dark:text-gray-100">Delivery Performance</h4>
+                <div className="space-y-3">
+                  <div>
+                    <div className="flex justify-between text-sm mb-1">
+                      <span className="text-gray-600 dark:text-gray-400">On-Time Rate</span>
+                      <span className="font-semibold">{parseFloat(kpis.onTimeDelivery.on_time_percentage || 0).toFixed(1)}%</span>
+                    </div>
+                    <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3">
+                      <div
+                        className="bg-green-500 h-3 rounded-full transition-all"
+                        style={{ width: `${kpis.onTimeDelivery.on_time_percentage}%` }}
+                      ></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <h4 className="font-medium text-gray-900 dark:text-gray-100">Response Metrics</h4>
+                <div className="flex items-center justify-between p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+                  <div>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">Average</p>
+                    <p className="text-2xl font-bold text-blue-600 dark:text-blue-400">
+                      {parseFloat(kpis.responseTime.avg_response_hours || 0).toFixed(1)}h
+                    </p>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-sm text-gray-600 dark:text-gray-400">Median</p>
+                    <p className="text-2xl font-bold text-blue-600 dark:text-blue-400">
+                      {parseFloat(kpis.responseTime.median_response_hours || 0).toFixed(1)}h
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* PHASE 2: Geographic Tab */}
+      {activeTab === 'geographic' && geographic && (
+        <div className="space-y-6">
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border border-gray-200 dark:border-gray-700">
+            <div className="mb-6">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Top Cities by Revenue</h3>
+              <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Geographic distribution of your business</p>
+            </div>
+            <ResponsiveContainer width="100%" height={400}>
+              <BarChart data={geographic.cities} layout="vertical">
+                <CartesianGrid strokeDasharray="3 3" stroke="#374151" opacity={0.3} />
+                <XAxis type="number" stroke="#9CA3AF" tickFormatter={(value) => `$${(value/1000).toFixed(0)}k`} />
+                <YAxis dataKey="city" type="category" stroke="#9CA3AF" width={100} />
+                <Tooltip 
+                  contentStyle={{ backgroundColor: '#1F2937', border: 'none', borderRadius: '0.75rem' }}
+                  formatter={(value) => formatCurrency(value)}
+                />
+                <Bar dataKey="total_revenue" fill="#3B82F6" radius={[0, 8, 8, 0]} />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {geographic.cities.slice(0, 6).map((city, idx) => (
+              <div key={idx} className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center gap-2">
+                    <Globe className="w-5 h-5 text-blue-500" />
+                    <h4 className="font-semibold text-gray-900 dark:text-gray-100">{city.city}</h4>
+                  </div>
+                </div>
+                <p className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-1">
+                  {formatCurrency(city.total_revenue)}
+                </p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  {city.booking_count} bookings • Avg: {formatCurrency(city.avg_revenue)}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* PHASE 2: Pricing Tab */}
+      {activeTab === 'pricing' && pricing && (
+        <div className="space-y-6">
+          <div className="grid grid-cols-1 gap-6">
+            {pricing.pricing_comparison.map((item, idx) => (
+              <div key={idx} className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border border-gray-200 dark:border-gray-700">
+                <div className="flex justify-between items-start mb-4">
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 capitalize">
+                      {item.truck_type}
+                    </h3>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">{item.booking_count} bookings</p>
+                  </div>
+                  <span className={`px-3 py-1 rounded-full text-sm font-semibold ${
+                    item.competitive_position === 'Competitive' 
+                      ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400'
+                      : item.competitive_position === 'Below Market'
+                      ? 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400'
+                      : 'bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-400'
+                  }`}>
+                    {item.competitive_position}
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+                  <div>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">Your Average</p>
+                    <p className="text-xl font-bold text-gray-900 dark:text-gray-100">
+                      {formatCurrency(item.your_avg_price)}
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">Market Average</p>
+                    <p className="text-xl font-bold text-gray-900 dark:text-gray-100">
+                      {formatCurrency(item.market_avg_price)}
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">Your Range</p>
+                    <p className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                      {formatCurrency(item.your_min_price)} - {formatCurrency(item.your_max_price)}
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">Difference</p>
+                    <p className={`text-xl font-bold ${
+                      item.price_difference_percentage > 0 ? 'text-orange-600' : 'text-green-600'
+                    }`}>
+                      {item.price_difference_percentage > 0 ? '+' : ''}{item.price_difference_percentage.toFixed(1)}%
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+                  <Tag className="w-4 h-4" />
+                  <span>Competing with {item.competitor_count} other providers</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* PHASE 3: AI Insights Tab */}
+      {activeTab === 'insights' && predictive && (
+        <div className="space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="bg-gradient-to-br from-purple-500 to-indigo-600 text-white rounded-xl p-6 shadow-lg">
+              <div className="flex items-center justify-between mb-4">
+                <div className="p-3 bg-white/20 rounded-lg">
+                  <Brain className="w-6 h-6" />
+                </div>
+              </div>
+              <p className="text-white/80 text-sm font-medium mb-1">Growth Trend</p>
+              <p className="text-3xl font-bold capitalize">
+                {predictive.trend_direction}
+              </p>
+              <p className="text-white/70 text-xs mt-2">
+                Growth rate: {predictive.growth_rate?.toFixed(2)} bookings/month
+              </p>
+            </div>
+
+            {predictive.forecast && predictive.forecast.length > 0 && predictive.forecast.map((month, idx) => (
+              <div key={idx} className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-200 dark:border-gray-700">
+                <div className="flex items-center gap-2 mb-4">
+                  <TrendingUp className="w-5 h-5 text-blue-500" />
+                  <h4 className="font-semibold text-gray-900 dark:text-gray-100">
+                    Next {month.month} Month{month.month > 1 ? 's' : ''}
+                  </h4>
+                </div>
+                <p className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-1">
+                  {month.predicted_bookings} bookings
+                </p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  Predicted revenue: {formatCurrency(month.predicted_revenue)}
+                </p>
+                <div className="mt-2">
+                  <span className="text-xs px-2 py-1 rounded bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400">
+                    {month.confidence} confidence
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {predictive.historical_trend && predictive.historical_trend.length > 0 && (
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border border-gray-200 dark:border-gray-700">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Historical Trend & Forecast</h3>
+              <ResponsiveContainer width="100%" height={300}>
+                <LineChart data={predictive.historical_trend}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="#374151" opacity={0.3} />
+                  <XAxis 
+                    dataKey="month" 
+                    stroke="#9CA3AF"
+                    tickFormatter={(value) => new Date(value).toLocaleDateString('en-US', { month: 'short', year: '2-digit' })}
+                  />
+                  <YAxis stroke="#9CA3AF" />
+                  <Tooltip 
+                    contentStyle={{ backgroundColor: '#1F2937', border: 'none', borderRadius: '0.75rem' }}
+                    labelFormatter={(value) => new Date(value).toLocaleDateString()}
+                  />
+                  <Legend />
+                  <Line type="monotone" dataKey="booking_count" stroke="#8B5CF6" strokeWidth={3} name="Bookings" />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* PHASE 3: Customers Tab */}
+      {activeTab === 'customers' && customers && (
+        <div className="space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <div className="bg-gradient-to-br from-blue-500 to-blue-700 text-white rounded-xl p-6 shadow-lg">
+              <div className="flex items-center justify-between mb-4">
+                <div className="p-3 bg-white/20 rounded-lg">
+                  <Users className="w-6 h-6" />
+                </div>
+              </div>
+              <p className="text-white/80 text-sm font-medium mb-1">Total Customers</p>
+              <p className="text-3xl font-bold">{customers.overview.total_customers}</p>
+            </div>
+
+            <div className="bg-gradient-to-br from-green-500 to-emerald-600 text-white rounded-xl p-6 shadow-lg">
+              <div className="flex items-center justify-between mb-4">
+                <div className="p-3 bg-white/20 rounded-lg">
+                  <Award className="w-6 h-6" />
+                </div>
+              </div>
+              <p className="text-white/80 text-sm font-medium mb-1">Repeat Rate</p>
+              <p className="text-3xl font-bold">
+                {parseFloat(customers.overview.repeat_rate || 0).toFixed(1)}%
+              </p>
+              <p className="text-white/70 text-xs mt-2">
+                {customers.overview.repeat_customers} repeat customers
+              </p>
+            </div>
+
+            <div className="bg-gradient-to-br from-purple-500 to-indigo-600 text-white rounded-xl p-6 shadow-lg">
+              <div className="flex items-center justify-between mb-4">
+                <div className="p-3 bg-white/20 rounded-lg">
+                  <DollarSign className="w-6 h-6" />
+                </div>
+              </div>
+              <p className="text-white/80 text-sm font-medium mb-1">Avg Lifetime Value</p>
+              <p className="text-3xl font-bold">
+                {formatCurrency(customers.overview.avg_customer_lifetime_value)}
+              </p>
+            </div>
+
+            <div className="bg-gradient-to-br from-orange-500 to-red-600 text-white rounded-xl p-6 shadow-lg">
+              <div className="flex items-center justify-between mb-4">
+                <div className="p-3 bg-white/20 rounded-lg">
+                  <Star className="w-6 h-6" />
+                </div>
+              </div>
+              <p className="text-white/80 text-sm font-medium mb-1">Top Customer Value</p>
+              <p className="text-3xl font-bold">
+                {formatCurrency(customers.overview.highest_customer_value)}
+              </p>
+            </div>
+          </div>
+
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-200 dark:border-gray-700">
+            <div className="p-6 border-b border-gray-200 dark:border-gray-700">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Top Customers by Lifetime Value</h3>
+              <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Your most valuable customers</p>
+            </div>
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead className="bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-700 dark:to-gray-800">
+                  <tr>
+                    <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase">Customer</th>
+                    <th className="px-6 py-4 text-center text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase">Bookings</th>
+                    <th className="px-6 py-4 text-right text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase">Lifetime Value</th>
+                    <th className="px-6 py-4 text-right text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase">Last Booking</th>
+                    <th className="px-6 py-4 text-center text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase">Status</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+                  {customers.top_customers.map((customer, idx) => {
+                    const daysSince = parseInt(customer.days_since_last_booking);
+                    const status = daysSince < 30 ? 'Active' : daysSince < 90 ? 'Recent' : 'Inactive';
+                    return (
+                      <tr key={idx} className="hover:bg-blue-50 dark:hover:bg-gray-700/50">
+                        <td className="px-6 py-4">
+                          <div className="flex items-center gap-3">
+                            <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold">
+                              {(customer.customer_name || 'Unknown')[0]}
+                            </div>
+                            <div>
+                              <p className="font-medium text-gray-900 dark:text-gray-100">
+                                {customer.customer_name || 'Unknown Customer'}
+                              </p>
+                              <p className="text-sm text-gray-500 dark:text-gray-400">
+                                {daysSince} days since last booking
+                              </p>
+                            </div>
+                          </div>
+                        </td>
+                        <td className="px-6 py-4 text-center">
+                          <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400">
+                            {customer.total_bookings}
+                          </span>
+                        </td>
+                        <td className="px-6 py-4 text-right font-bold text-gray-900 dark:text-gray-100">
+                          {formatCurrency(customer.lifetime_value)}
+                        </td>
+                        <td className="px-6 py-4 text-right text-sm text-gray-600 dark:text-gray-400">
+                          {new Date(customer.last_booking_date).toLocaleDateString()}
+                        </td>
+                        <td className="px-6 py-4 text-center">
+                          <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold ${
+                            status === 'Active' ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400' :
+                            status === 'Recent' ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400' :
+                            'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-400'
+                          }`}>
+                            {status}
+                          </span>
                         </td>
                       </tr>
                     );
