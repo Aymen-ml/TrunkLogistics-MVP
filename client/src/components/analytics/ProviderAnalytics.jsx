@@ -171,16 +171,16 @@ const ProviderAnalytics = () => {
       <div className="border-b border-gray-200 dark:border-gray-700 overflow-x-auto">
         <nav className="flex space-x-6 min-w-max">
           {[
-            { id: 'overview', label: 'Overview', icon: BarChart3, phase: 1 },
-            { id: 'revenue', label: 'Revenue', icon: DollarSign, phase: 1 },
-            { id: 'bookings', label: 'Bookings', icon: Package, phase: 1 },
-            { id: 'fleet', label: 'Fleet', icon: Truck, phase: 1 },
-            { id: 'routes', label: 'Routes', icon: MapPin, phase: 1 },
-            { id: 'performance', label: 'Performance', icon: Zap, phase: 2 },
-            { id: 'geographic', label: 'Geographic', icon: Globe, phase: 2 },
-            { id: 'pricing', label: 'Pricing', icon: Tag, phase: 2 },
-            { id: 'insights', label: 'AI Insights', icon: Brain, phase: 3 },
-            { id: 'customers', label: 'Customers', icon: Users, phase: 3 }
+            { id: 'overview', label: 'Overview', icon: BarChart3 },
+            { id: 'revenue', label: 'Revenue', icon: DollarSign },
+            { id: 'bookings', label: 'Bookings', icon: Package },
+            { id: 'fleet', label: 'Fleet', icon: Truck },
+            { id: 'routes', label: 'Routes', icon: MapPin },
+            { id: 'performance', label: 'Performance', icon: Zap },
+            { id: 'geographic', label: 'Geographic', icon: Globe },
+            { id: 'pricing', label: 'Pricing', icon: Tag },
+            { id: 'insights', label: 'AI Insights', icon: Brain },
+            { id: 'customers', label: 'Customers', icon: Users }
           ].map(tab => (
             <button
               key={tab.id}
@@ -193,14 +193,6 @@ const ProviderAnalytics = () => {
             >
               <tab.icon className="w-4 h-4" />
               {tab.label}
-              {tab.phase > 1 && (
-                <span className={`text-xs px-1.5 py-0.5 rounded ${
-                  tab.phase === 2 ? 'bg-orange-100 text-orange-600 dark:bg-orange-900/30 dark:text-orange-400' :
-                  'bg-purple-100 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400'
-                }`}>
-                  P{tab.phase}
-                </span>
-              )}
             </button>
           ))}
         </nav>
@@ -1359,24 +1351,123 @@ const ProviderAnalytics = () => {
 
           {predictive.historical_trend && predictive.historical_trend.length > 0 && (
             <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border border-gray-200 dark:border-gray-700">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Historical Trend & Forecast</h3>
-              <ResponsiveContainer width="100%" height={300}>
-                <LineChart data={predictive.historical_trend}>
+              <div className="flex justify-between items-center mb-4">
+                <div>
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Historical Trend & Forecast</h3>
+                  <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                    Past performance and predicted future bookings
+                  </p>
+                </div>
+                <div className="flex gap-4 text-xs">
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 bg-purple-500 rounded-full"></div>
+                    <span className="text-gray-600 dark:text-gray-400">Actual</span>
+                  </div>
+                  {predictive.forecast && predictive.forecast.length > 0 && (
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                      <span className="text-gray-600 dark:text-gray-400">Forecast</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+              <ResponsiveContainer width="100%" height={350}>
+                <LineChart data={(() => {
+                  // Combine historical and forecast data
+                  const historical = predictive.historical_trend.map(item => ({
+                    month: item.month,
+                    actual_bookings: parseInt(item.booking_count),
+                    forecast_bookings: null
+                  }));
+                  
+                  if (predictive.forecast && predictive.forecast.length > 0) {
+                    // Get last historical date
+                    const lastDate = new Date(predictive.historical_trend[predictive.historical_trend.length - 1].month);
+                    
+                    // Add forecast months
+                    predictive.forecast.forEach((forecast, idx) => {
+                      const forecastDate = new Date(lastDate);
+                      forecastDate.setMonth(lastDate.getMonth() + idx + 1);
+                      
+                      historical.push({
+                        month: forecastDate.toISOString(),
+                        actual_bookings: null,
+                        forecast_bookings: forecast.predicted_bookings
+                      });
+                    });
+                    
+                    // Add connecting point (last actual = first forecast)
+                    if (historical.length > predictive.historical_trend.length) {
+                      historical[predictive.historical_trend.length - 1].forecast_bookings = 
+                        historical[predictive.historical_trend.length - 1].actual_bookings;
+                    }
+                  }
+                  
+                  return historical;
+                })()}>
                   <CartesianGrid strokeDasharray="3 3" stroke="#374151" opacity={0.3} />
                   <XAxis 
                     dataKey="month" 
                     stroke="#9CA3AF"
+                    style={{ fontSize: '12px' }}
                     tickFormatter={(value) => new Date(value).toLocaleDateString('en-US', { month: 'short', year: '2-digit' })}
                   />
-                  <YAxis stroke="#9CA3AF" />
-                  <Tooltip 
-                    contentStyle={{ backgroundColor: '#1F2937', border: 'none', borderRadius: '0.75rem' }}
-                    labelFormatter={(value) => new Date(value).toLocaleDateString()}
+                  <YAxis 
+                    stroke="#9CA3AF" 
+                    style={{ fontSize: '12px' }}
+                    label={{ value: 'Bookings', angle: -90, position: 'insideLeft', style: { fill: '#9CA3AF' } }}
                   />
-                  <Legend />
-                  <Line type="monotone" dataKey="booking_count" stroke="#8B5CF6" strokeWidth={3} name="Bookings" />
+                  <Tooltip 
+                    contentStyle={{ 
+                      backgroundColor: '#1F2937', 
+                      border: 'none', 
+                      borderRadius: '0.75rem',
+                      boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.3)'
+                    }}
+                    labelStyle={{ color: '#F9FAFB', fontWeight: '600' }}
+                    labelFormatter={(value) => new Date(value).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
+                  />
+                  <Legend wrapperStyle={{ paddingTop: '20px' }} />
+                  <Line 
+                    type="monotone" 
+                    dataKey="actual_bookings" 
+                    stroke="#8B5CF6" 
+                    strokeWidth={3} 
+                    name="Actual Bookings"
+                    dot={{ fill: '#8B5CF6', r: 4 }}
+                    activeDot={{ r: 6 }}
+                  />
+                  {predictive.forecast && predictive.forecast.length > 0 && (
+                    <Line 
+                      type="monotone" 
+                      dataKey="forecast_bookings" 
+                      stroke="#10B981" 
+                      strokeWidth={3} 
+                      strokeDasharray="5 5"
+                      name="Predicted Bookings"
+                      dot={{ fill: '#10B981', r: 4 }}
+                      activeDot={{ r: 6 }}
+                    />
+                  )}
                 </LineChart>
               </ResponsiveContainer>
+              
+              {predictive.forecast && predictive.forecast.length > 0 && (
+                <div className="mt-4 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
+                  <div className="flex items-start gap-3">
+                    <Brain className="w-5 h-5 text-blue-600 dark:text-blue-400 mt-0.5" />
+                    <div>
+                      <h4 className="font-semibold text-blue-900 dark:text-blue-100 mb-1">AI Forecast Insight</h4>
+                      <p className="text-sm text-blue-800 dark:text-blue-300">
+                        Based on your {predictive.historical_trend.length} months of data, your business is <strong className="capitalize">{predictive.trend_direction.toLowerCase()}</strong>.
+                        {predictive.trend_direction === 'Growing' && " Keep up the great work! Consider expanding your fleet to meet increasing demand."}
+                        {predictive.trend_direction === 'Declining' && " Consider marketing campaigns or competitive pricing to boost bookings."}
+                        {predictive.trend_direction === 'Stable' && " Your business is consistent. Focus on customer retention and service quality."}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           )}
         </div>
