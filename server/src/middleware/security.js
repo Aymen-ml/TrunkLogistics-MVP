@@ -31,36 +31,45 @@ export const securityHeaders = helmet({
 // CORS configuration
 export const corsOptions = {
   origin: function (origin, callback) {
+    // Build allowed origins from environment and hardcoded defaults
+    const envOrigins = process.env.ALLOWED_ORIGINS 
+      ? process.env.ALLOWED_ORIGINS.split(',').map(o => o.trim())
+      : [];
+    
     const allowedOrigins = [
+      // Development
       'http://localhost:3000',
       'http://localhost:5173',
       'http://localhost:5174',
       'http://127.0.0.1:3000',
       'http://127.0.0.1:5173',
       'http://127.0.0.1:5174',
+      // Environment variables
       process.env.FRONTEND_URL,
       process.env.CLIENT_URL,
       process.env.APP_URL,
+      // Production domains
       'https://trucklogistics.me',
       'https://www.trucklogistics.me',
       'https://trucklogistics.netlify.app',
       'https://trucklogistics-mvp.netlify.app',
+      'https://trunk-logistics-mvp.netlify.app',
+      'https://trunklogistics-mvp.netlify.app',
       'https://truck-logistics-mvp.vercel.app',
-      'https://trunklogistics-mvp.netlify.app'
+      // Additional from env
+      ...envOrigins
     ].filter(Boolean);
 
-    // Allow requests with no origin (mobile apps, Postman, etc.)
+    // Allow requests with no origin (mobile apps, curl, Postman, server-to-server)
     if (!origin) return callback(null, true);
     
-    // Check if origin is allowed
+    // Check if origin is in whitelist
     if (allowedOrigins.indexOf(origin) !== -1) {
       callback(null, true);
     } else {
-      // Log rejected origin for debugging
-      console.log('CORS blocked origin:', origin);
-      // In production, still allow the request but log it
-      // Change to callback(new Error('Not allowed by CORS')) for strict mode
-      callback(null, true);
+      // Log rejected origin for security monitoring
+      console.warn('[CORS] Rejected origin:', origin);
+      callback(new Error(`Origin ${origin} is not allowed by CORS policy`));
     }
   },
   credentials: true,
