@@ -99,7 +99,7 @@ export const getProviderAnalytics = async (req, res) => {
       SELECT 
         t.id,
         t.license_plate,
-        t.vehicle_type,
+        t.truck_type,
         t.service_type,
         t.status as current_status,
         COUNT(b.id) as total_bookings,
@@ -111,7 +111,7 @@ export const getProviderAnalytics = async (req, res) => {
       FROM trucks t
       LEFT JOIN bookings b ON b.truck_id = t.id AND b.deleted_by_provider_at IS NULL
       WHERE t.provider_id = $1
-      GROUP BY t.id, t.license_plate, t.vehicle_type, t.service_type, t.status
+      GROUP BY t.id, t.license_plate, t.truck_type, t.service_type, t.status
       ORDER BY total_revenue DESC
     `;
 
