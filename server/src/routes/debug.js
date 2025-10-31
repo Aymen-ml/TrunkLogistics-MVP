@@ -27,9 +27,12 @@ router.get('/test-provider', authenticate, async (req, res) => {
       logger.info('Provider profile found:', profileQuery.rows[0]);
     }
     
-    // Test 2: Check bookings table
+    // Test 2: Check bookings table (through trucks join)
     const bookingsQuery = await pool.query(
-      'SELECT COUNT(*) as count FROM bookings WHERE provider_id = $1',
+      `SELECT COUNT(*) as count 
+       FROM bookings b
+       INNER JOIN trucks t ON b.truck_id = t.id
+       WHERE t.provider_id = $1`,
       [profileQuery.rows.length > 0 ? profileQuery.rows[0].id : null]
     );
     

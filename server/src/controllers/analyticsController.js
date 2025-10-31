@@ -49,22 +49,23 @@ export const getProviderAnalytics = async (req, res) => {
     logger.info('Fetching revenue trends for last', validMonths, 'months');
     const revenueTrendsQuery = `
       SELECT 
-        TO_CHAR(DATE_TRUNC('month', pickup_date), 'Mon') as month,
-        EXTRACT(YEAR FROM pickup_date) as year,
-        EXTRACT(MONTH FROM pickup_date) as month_num,
+        TO_CHAR(DATE_TRUNC('month', b.pickup_date), 'Mon') as month,
+        EXTRACT(YEAR FROM b.pickup_date) as year,
+        EXTRACT(MONTH FROM b.pickup_date) as month_num,
         COUNT(*) as total_bookings,
-        COUNT(*) FILTER (WHERE service_type = 'transport') as transport_bookings,
-        COUNT(*) FILTER (WHERE service_type = 'rental') as rental_bookings,
-        COALESCE(SUM(total_price) FILTER (WHERE status = 'completed'), 0) as total_revenue,
-        COALESCE(SUM(total_price) FILTER (WHERE status = 'completed' AND service_type = 'transport'), 0) as transport_revenue,
-        COALESCE(SUM(total_price) FILTER (WHERE status = 'completed' AND service_type = 'rental'), 0) as rental_revenue,
-        COUNT(*) FILTER (WHERE status = 'completed') as completed_count,
-        COUNT(*) FILTER (WHERE status = 'cancelled') as cancelled_count
-      FROM bookings
-      WHERE provider_id = $1 
-        AND pickup_date >= NOW() - ($2 || ' months')::interval
-        AND deleted_by_provider_at IS NULL
-      GROUP BY DATE_TRUNC('month', pickup_date), EXTRACT(YEAR FROM pickup_date), EXTRACT(MONTH FROM pickup_date)
+        COUNT(*) FILTER (WHERE b.service_type = 'transport') as transport_bookings,
+        COUNT(*) FILTER (WHERE b.service_type = 'rental') as rental_bookings,
+        COALESCE(SUM(b.total_price) FILTER (WHERE b.status = 'completed'), 0) as total_revenue,
+        COALESCE(SUM(b.total_price) FILTER (WHERE b.status = 'completed' AND b.service_type = 'transport'), 0) as transport_revenue,
+        COALESCE(SUM(b.total_price) FILTER (WHERE b.status = 'completed' AND b.service_type = 'rental'), 0) as rental_revenue,
+        COUNT(*) FILTER (WHERE b.status = 'completed') as completed_count,
+        COUNT(*) FILTER (WHERE b.status = 'cancelled') as cancelled_count
+      FROM bookings b
+      INNER JOIN trucks t ON b.truck_id = t.id
+      WHERE t.provider_id = $1 
+        AND b.pickup_date >= NOW() - ($2 || ' months')::interval
+        AND b.deleted_by_provider_at IS NULL
+      GROUP BY DATE_TRUNC('month', b.pickup_date), EXTRACT(YEAR FROM b.pickup_date), EXTRACT(MONTH FROM b.pickup_date)
       ORDER BY year DESC, month_num DESC
       LIMIT $2
     `;
@@ -76,17 +77,18 @@ export const getProviderAnalytics = async (req, res) => {
     logger.info('Fetching booking conversion funnel');
     const conversionQuery = `
       SELECT 
-        COUNT(*) FILTER (WHERE status = 'pending_review') as pending,
-        COUNT(*) FILTER (WHERE status = 'approved') as approved,
-        COUNT(*) FILTER (WHERE status = 'confirmed') as confirmed,
-        COUNT(*) FILTER (WHERE status = 'in_transit' OR status = 'active') as active,
-        COUNT(*) FILTER (WHERE status = 'completed') as completed,
-        COUNT(*) FILTER (WHERE status = 'cancelled') as cancelled,
+        COUNT(*) FILTER (WHERE b.status = 'pending_review') as pending,
+        COUNT(*) FILTER (WHERE b.status = 'approved') as approved,
+        COUNT(*) FILTER (WHERE b.status = 'confirmed') as confirmed,
+        COUNT(*) FILTER (WHERE b.status = 'in_transit' OR b.status = 'active') as active,
+        COUNT(*) FILTER (WHERE b.status = 'completed') as completed,
+        COUNT(*) FILTER (WHERE b.status = 'cancelled') as cancelled,
         COUNT(*) as total
-      FROM bookings
-      WHERE provider_id = $1
-        AND deleted_by_provider_at IS NULL
-        AND created_at >= NOW() - ($2 || ' months')::interval
+      FROM bookings b
+      INNER JOIN trucks t ON b.truck_id = t.id
+      WHERE t.provider_id = $1
+        AND b.deleted_by_provider_at IS NULL
+        AND b.created_at >= NOW() - ($2 || ' months')::interval
     `;
 
     const conversionData = await pool.query(conversionQuery, [providerProfileId, validMonths]);
@@ -121,19 +123,20 @@ export const getProviderAnalytics = async (req, res) => {
     logger.info('Fetching top routes');
     const topRoutesQuery = `
       SELECT 
-        pickup_city,
-        destination_city,
+        b.pickup_city,
+        b.destination_city,
         COUNT(*) as booking_count,
-        COALESCE(SUM(total_price) FILTER (WHERE status = 'completed'), 0) as total_revenue,
-        COALESCE(AVG(total_price) FILTER (WHERE status = 'completed'), 0) as avg_revenue,
-        COUNT(*) FILTER (WHERE status = 'completed') as completed_count,
-        COUNT(*) FILTER (WHERE status = 'cancelled') as cancelled_count
-      FROM bookings
-      WHERE provider_id = $1
-        AND service_type = 'transport'
-        AND deleted_by_provider_at IS NULL
-        AND pickup_date >= NOW() - ($2 || ' months')::interval
-      GROUP BY pickup_city, destination_city
+        COALESCE(SUM(b.total_price) FILTER (WHERE b.status = 'completed'), 0) as total_revenue,
+        COALESCE(AVG(b.total_price) FILTER (WHERE b.status = 'completed'), 0) as avg_revenue,
+        COUNT(*) FILTER (WHERE b.status = 'completed') as completed_count,
+        COUNT(*) FILTER (WHERE b.status = 'cancelled') as cancelled_count
+      FROM bookings b
+      INNER JOIN trucks t ON b.truck_id = t.id
+      WHERE t.provider_id = $1
+        AND b.service_type = 'transport'
+        AND b.deleted_by_provider_at IS NULL
+        AND b.pickup_date >= NOW() - ($2 || ' months')::interval
+      GROUP BY b.pickup_city, b.destination_city
       HAVING COUNT(*) > 0
       ORDER BY total_revenue DESC
       LIMIT 10
@@ -146,11 +149,13 @@ export const getProviderAnalytics = async (req, res) => {
     const ratingsQuery = `
       SELECT 
         COUNT(*) as total_reviews,
-        COALESCE(AVG(rating), 0) as average_rating,
-        COUNT(*) FILTER (WHERE rating >= 4) as positive_reviews,
-        COUNT(*) FILTER (WHERE rating <= 2) as negative_reviews
-      FROM booking_reviews
-      WHERE provider_id = $1
+        COALESCE(AVG(r.rating), 0) as average_rating,
+        COUNT(*) FILTER (WHERE r.rating >= 4) as positive_reviews,
+        COUNT(*) FILTER (WHERE r.rating <= 2) as negative_reviews
+      FROM booking_reviews r
+      INNER JOIN bookings b ON r.booking_id = b.id
+      INNER JOIN trucks t ON b.truck_id = t.id
+      WHERE t.provider_id = $1
     `;
 
     let ratingsData = { rows: [{ total_reviews: 0, average_rating: 0, positive_reviews: 0, negative_reviews: 0 }] };
@@ -257,17 +262,18 @@ export const getBookingAnalytics = async (req, res) => {
     const query = `
       SELECT 
         COUNT(*) as total,
-        COUNT(*) FILTER (WHERE service_type = 'transport') as transport_count,
-        COUNT(*) FILTER (WHERE service_type = 'rental') as rental_count,
-        AVG(total_price) FILTER (WHERE status = 'completed') as avg_booking_value,
-        SUM(total_price) FILTER (WHERE status = 'completed') as total_revenue,
-        COUNT(*) FILTER (WHERE status = 'completed') as completed,
-        COUNT(*) FILTER (WHERE status = 'cancelled') as cancelled,
-        COUNT(*) FILTER (WHERE status IN ('pending_review', 'approved')) as pending,
-        (COUNT(*) FILTER (WHERE status = 'cancelled')::FLOAT / NULLIF(COUNT(*), 0) * 100) as cancellation_rate
-      FROM bookings
-      WHERE provider_id = $1
-        AND deleted_by_provider_at IS NULL
+        COUNT(*) FILTER (WHERE b.service_type = 'transport') as transport_count,
+        COUNT(*) FILTER (WHERE b.service_type = 'rental') as rental_count,
+        AVG(b.total_price) FILTER (WHERE b.status = 'completed') as avg_booking_value,
+        SUM(b.total_price) FILTER (WHERE b.status = 'completed') as total_revenue,
+        COUNT(*) FILTER (WHERE b.status = 'completed') as completed,
+        COUNT(*) FILTER (WHERE b.status = 'cancelled') as cancelled,
+        COUNT(*) FILTER (WHERE b.status IN ('pending_review', 'approved')) as pending,
+        (COUNT(*) FILTER (WHERE b.status = 'cancelled')::FLOAT / NULLIF(COUNT(*), 0) * 100) as cancellation_rate
+      FROM bookings b
+      INNER JOIN trucks t ON b.truck_id = t.id
+      WHERE t.provider_id = $1
+        AND b.deleted_by_provider_at IS NULL
         ${dateFilter}
     `;
 
