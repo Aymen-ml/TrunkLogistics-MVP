@@ -5,7 +5,7 @@ import { getProviderAnalytics, getBookingAnalytics } from '../controllers/analyt
 const router = express.Router();
 
 // Provider analytics routes
-router.get('/provider', authenticate, authorize(['provider']), getProviderAnalytics);
-router.get('/provider/bookings', authenticate, authorize(['provider']), getBookingAnalytics);
+router.get('/provider', authenticate, authorize('provider'), getProviderAnalytics);
+router.get('/provider/bookings', authenticate, authorize('provider'), getBookingAnalytics);
 
 export default router;

@@ -8,6 +8,13 @@ import logger from '../utils/logger.js';
  */
 export const getProviderAnalytics = async (req, res) => {
   try {
+    // Log user info for debugging
+    logger.info('Provider analytics request:', {
+      userId: req.user?.id,
+      userRole: req.user?.role,
+      userEmail: req.user?.email
+    });
+
     const providerId = req.user.id;
     const { months = 6 } = req.query;
 
