@@ -67,7 +67,6 @@ export const getProviderAnalytics = async (req, res) => {
         AND b.deleted_by_provider_at IS NULL
       GROUP BY DATE_TRUNC('month', b.pickup_date), EXTRACT(YEAR FROM b.pickup_date), EXTRACT(MONTH FROM b.pickup_date)
       ORDER BY year DESC, month_num DESC
-      LIMIT $2
     `;
 
     const revenueData = await pool.query(revenueTrendsQuery, [providerProfileId, validMonths]);
