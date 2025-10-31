@@ -49,7 +49,7 @@ export const getProviderAnalytics = async (req, res) => {
         COUNT(*) FILTER (WHERE status = 'cancelled') as cancelled_count
       FROM bookings
       WHERE provider_id = $1 
-        AND pickup_date >= NOW() - INTERVAL '${months} months'
+        AND pickup_date >= NOW() - ($2 || ' months')::interval
         AND deleted_by_provider_at IS NULL
       GROUP BY DATE_TRUNC('month', pickup_date), EXTRACT(YEAR FROM pickup_date), EXTRACT(MONTH FROM pickup_date)
       ORDER BY year DESC, month_num DESC
