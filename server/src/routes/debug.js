@@ -38,6 +38,30 @@ router.get('/test-provider', authenticate, async (req, res) => {
     
     logger.info('Bookings count:', bookingsQuery.rows[0]);
     
+    // Test 2b: Get sample booking to check columns
+    const sampleBookingQuery = await pool.query(
+      `SELECT b.* 
+       FROM bookings b
+       INNER JOIN trucks t ON b.truck_id = t.id
+       WHERE t.provider_id = $1
+       LIMIT 1`,
+      [profileQuery.rows.length > 0 ? profileQuery.rows[0].id : null]
+    );
+    
+    const sampleBooking = sampleBookingQuery.rows[0] || null;
+    const bookingColumns = sampleBooking ? Object.keys(sampleBooking) : [];
+    logger.info('Booking columns:', bookingColumns);
+    
+    // Test 2c: Get sample truck to check columns
+    const sampleTruckQuery = await pool.query(
+      'SELECT * FROM trucks WHERE provider_id = $1 LIMIT 1',
+      [profileQuery.rows.length > 0 ? profileQuery.rows[0].id : null]
+    );
+    
+    const sampleTruck = sampleTruckQuery.rows[0] || null;
+    const truckColumns = sampleTruck ? Object.keys(sampleTruck) : [];
+    logger.info('Truck columns:', truckColumns);
+    
     // Test 3: Check trucks table
     const trucksQuery = await pool.query(
       'SELECT COUNT(*) as count FROM trucks WHERE provider_id = $1',
@@ -53,7 +77,18 @@ router.get('/test-provider', authenticate, async (req, res) => {
         userRole: req.user.role,
         providerProfile: profileQuery.rows[0] || null,
         bookingsCount: bookingsQuery.rows[0]?.count || 0,
-        trucksCount: trucksQuery.rows[0]?.count || 0
+        trucksCount: trucksQuery.rows[0]?.count || 0,
+        bookingColumns,
+        truckColumns,
+        sampleBooking: sampleBooking ? {
+          id: sampleBooking.id,
+          status: sampleBooking.status,
+          service_type: sampleBooking.service_type,
+          // Show which price column exists
+          price: sampleBooking.price,
+          total_price: sampleBooking.total_price,
+          base_price: sampleBooking.base_price
+        } : null
       }
     });
     
