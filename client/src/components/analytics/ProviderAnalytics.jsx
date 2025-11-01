@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { 
   TrendingUp, 
   DollarSign, 
@@ -44,6 +45,7 @@ import {
 } from 'recharts';
 
 const ProviderAnalytics = () => {
+  const { t } = useTranslation();
   const [analytics, setAnalytics] = useState(null);
   const [kpis, setKpis] = useState(null);
   const [geographic, setGeographic] = useState(null);
@@ -152,8 +154,8 @@ const ProviderAnalytics = () => {
           {/* Header */}
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
             <div>
-              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100">Analytics Dashboard</h1>
-              <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 mt-1 sm:mt-2">Track your performance and insights</p>
+              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100">{t('analytics.title')}</h1>
+              <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 mt-1 sm:mt-2">{t('analytics.subtitle')}</p>
             </div>
             
             <select
@@ -161,9 +163,9 @@ const ProviderAnalytics = () => {
               onChange={(e) => setTimeRange(Number(e.target.value))}
               className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             >
-              <option value={3}>Last 3 Months</option>
-              <option value={6}>Last 6 Months</option>
-              <option value={12}>Last 12 Months</option>
+              <option value={3}>{t('analytics.timeRange.last3Months')}</option>
+              <option value={6}>{t('analytics.timeRange.last6Months')}</option>
+              <option value={12}>{t('analytics.timeRange.last12Months')}</option>
             </select>
           </div>
 
@@ -171,16 +173,16 @@ const ProviderAnalytics = () => {
       <div className="border-b border-gray-200 dark:border-gray-700 overflow-x-auto">
         <nav className="flex space-x-6 min-w-max">
           {[
-            { id: 'overview', label: 'Overview', icon: BarChart3 },
-            { id: 'revenue', label: 'Revenue', icon: DollarSign },
-            { id: 'bookings', label: 'Bookings', icon: Package },
-            { id: 'fleet', label: 'Fleet', icon: Truck },
-            { id: 'routes', label: 'Routes', icon: MapPin },
-            { id: 'performance', label: 'Performance', icon: Zap },
-            { id: 'geographic', label: 'Geographic', icon: Globe },
-            { id: 'pricing', label: 'Pricing', icon: Tag },
-            { id: 'insights', label: 'AI Insights', icon: Brain },
-            { id: 'customers', label: 'Customers', icon: Users }
+            { id: 'overview', icon: BarChart3 },
+            { id: 'revenue', icon: DollarSign },
+            { id: 'bookings', icon: Package },
+            { id: 'fleet', icon: Truck },
+            { id: 'routes', icon: MapPin },
+            { id: 'performance', icon: Zap },
+            { id: 'geographic', icon: Globe },
+            { id: 'pricing', icon: Tag },
+            { id: 'insights', icon: Brain },
+            { id: 'customers', icon: Users }
           ].map(tab => (
             <button
               key={tab.id}
@@ -192,7 +194,7 @@ const ProviderAnalytics = () => {
               }`}
             >
               <tab.icon className="w-4 h-4" />
-              {tab.label}
+              {t(`analytics.tabs.${tab.id}`)}
             </button>
           ))}
         </nav>
@@ -204,32 +206,32 @@ const ProviderAnalytics = () => {
           {/* Summary Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <MetricCard
-              title="Total Revenue"
+              title={t('analytics.overview.totalRevenue')}
               value={formatCurrency(analytics.summary.totalRevenue)}
               icon={DollarSign}
               color="bg-gradient-to-br from-green-500 to-emerald-600"
               trend={analytics.revenueTrends.length > 1 ? calculateTrend(analytics.revenueTrends, 'total_revenue') : null}
             />
             <MetricCard
-              title="Total Bookings"
+              title={t('analytics.overview.totalBookings')}
               value={analytics.summary.totalBookings}
               icon={Package}
               color="bg-gradient-to-br from-blue-500 to-blue-700"
-              subtitle={`${analytics.summary.completedBookings} completed`}
+              subtitle={`${analytics.summary.completedBookings} ${t('analytics.overview.completedBookings')}`}
             />
             <MetricCard
-              title="Fleet Utilization"
+              title={t('analytics.overview.fleetUtilization')}
               value={`${analytics.summary.fleetUtilizationRate}%`}
               icon={Activity}
               color="bg-gradient-to-br from-purple-500 to-indigo-600"
-              subtitle={`${analytics.summary.activeVehicles} / ${analytics.summary.totalVehicles} active`}
+              subtitle={`${analytics.summary.activeVehicles} / ${analytics.summary.totalVehicles} ${t('analytics.overview.activeVehicles')}`}
             />
             <MetricCard
-              title="Conversion Rate"
+              title={t('analytics.overview.conversionRate')}
               value={`${analytics.bookingConversion.conversionRate}%`}
               icon={Target}
               color="bg-gradient-to-br from-orange-500 to-red-600"
-              subtitle={`${analytics.bookingConversion.approvalRate}% approval`}
+              subtitle={`${analytics.bookingConversion.approvalRate}% ${t('analytics.overview.approvalRate')}`}
             />
           </div>
 
@@ -239,7 +241,7 @@ const ProviderAnalytics = () => {
             <div className="lg:col-span-2 bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border border-gray-200 dark:border-gray-700">
               <div className="flex justify-between items-center mb-6">
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Revenue Trend</h3>
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">{t('analytics.overview.revenueTrend')}</h3>
                   <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Monthly revenue breakdown</p>
                 </div>
                 <div className="flex gap-4 text-xs">
@@ -310,7 +312,7 @@ const ProviderAnalytics = () => {
 
             {/* Booking Status Pie Chart */}
             <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border border-gray-200 dark:border-gray-700">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">Booking Status</h3>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">{t('analytics.overview.bookingStatus')}</h3>
               <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">Current distribution</p>
               <ResponsiveContainer width="100%" height={240}>
                 <PieChart>

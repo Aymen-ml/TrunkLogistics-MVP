@@ -315,5 +315,40 @@
     "noBookings": "No bookings yet",
     "viewAnalytics": "View analytics",
     "viewAll": "View All"
+  },
+  "analytics": {
+    "title": "Analytics Dashboard",
+    "subtitle": "Track your performance and insights",
+    "timeRange": {
+      "last3Months": "Last 3 Months",
+      "last6Months": "Last 6 Months",
+      "last12Months": "Last 12 Months"
+    },
+    "tabs": {
+      "overview": "Overview",
+      "revenue": "Revenue",
+      "bookings": "Bookings",
+      "fleet": "Fleet",
+      "routes": "Routes",
+      "performance": "Performance",
+      "geographic": "Geographic",
+      "pricing": "Pricing",
+      "insights": "AI Insights",
+      "customers": "Customers"
+    },
+    "overview": {
+      "totalRevenue": "Total Revenue",
+      "totalBookings": "Total Bookings",
+      "completedBookings": "completed",
+      "fleetUtilization": "Fleet Utilization",
+      "activeVehicles": "active",
+      "conversionRate": "Conversion Rate",
+      "approvalRate": "approval",
+      "revenueTrend": "Revenue Trend",
+      "bookingStatus": "Booking Status",
+      "bookingConversion": "Booking Conversion Funnel",
+      "topRoutes": "Top Routes",
+      "customerRatings": "Customer Ratings"
+    }
   }
 }

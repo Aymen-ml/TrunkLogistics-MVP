@@ -310,10 +310,45 @@
     "myBookings": "Mes Réservations",
     "myFleet": "Ma Flotte",
     "pendingItems": "Éléments en Attente",
-    "analytics": "Analyses",
+    "analytics": "Analytique",
     "noRecentActivity": "Aucune activité récente",
-    "noBookings": "Aucune réservation pour le moment",
-    "viewAnalytics": "Voir les analyses",
-    "viewAll": "Tout Voir"
+    "noBookings": "Aucune réservation",
+    "viewAnalytics": "Voir l'analytique",
+    "viewAll": "Voir Tout"
+  },
+  "analytics": {
+    "title": "Tableau de Bord Analytique",
+    "subtitle": "Suivez vos performances et informations",
+    "timeRange": {
+      "last3Months": "3 Derniers Mois",
+      "last6Months": "6 Derniers Mois",
+      "last12Months": "12 Derniers Mois"
+    },
+    "tabs": {
+      "overview": "Aperçu",
+      "revenue": "Revenus",
+      "bookings": "Réservations",
+      "fleet": "Flotte",
+      "routes": "Itinéraires",
+      "performance": "Performance",
+      "geographic": "Géographique",
+      "pricing": "Tarification",
+      "insights": "Prévisions IA",
+      "customers": "Clients"
+    },
+    "overview": {
+      "totalRevenue": "Revenu Total",
+      "totalBookings": "Réservations Totales",
+      "completedBookings": "terminées",
+      "fleetUtilization": "Utilisation de la Flotte",
+      "activeVehicles": "actifs",
+      "conversionRate": "Taux de Conversion",
+      "approvalRate": "taux d'approbation",
+      "revenueTrend": "Tendance des Revenus",
+      "bookingStatus": "Statut des Réservations",
+      "bookingConversion": "Entonnoir de Conversion",
+      "topRoutes": "Meilleurs Itinéraires",
+      "customerRatings": "Évaluations Clients"
+    }
   }
 }
