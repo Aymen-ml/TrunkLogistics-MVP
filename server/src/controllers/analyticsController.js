@@ -640,7 +640,7 @@ export const getPredictiveAnalytics = async (req, res) => {
 
     // Simple linear regression for next 3 months forecast
     const data = trendResult.rows;
-    if (data.length >= 3) {
+    if (data.length >= 1) { // TEMPORARY: Changed from 3 to 1 for testing
       const n = data.length;
       let sumX = 0, sumY = 0, sumXY = 0, sumX2 = 0;
 
@@ -668,7 +668,7 @@ export const getPredictiveAnalytics = async (req, res) => {
           month: i,
           predicted_bookings: forecastValue,
           predicted_revenue: forecastValue * avgRevenue,
-          confidence: 'Medium' // Simplified confidence level
+          confidence: data.length >= 3 ? 'Medium' : 'Low' // Lower confidence with less data
         });
       }
 
@@ -687,7 +687,7 @@ export const getPredictiveAnalytics = async (req, res) => {
         data: {
           historical_trend: data,
           forecast: [],
-          message: 'Insufficient data for forecasting. Need at least 3 months of history.'
+          message: 'Insufficient data for forecasting. Need at least 1 month of history.'
         }
       });
     }

@@ -1361,7 +1361,7 @@ const ProviderAnalytics = () => {
                       Building Your Forecast Model
                     </h4>
                     <p className="text-sm text-amber-800 dark:text-amber-300 mb-3">
-                      {predictive.message || 'Need at least 3 months of booking history to generate accurate predictions.'}
+                      {predictive.message || 'Need at least 1 month of booking history to generate accurate predictions.'}
                     </p>
                     <div className="flex items-center gap-2 text-xs text-amber-700 dark:text-amber-400">
                       <div className="flex items-center gap-1">
@@ -1369,7 +1369,7 @@ const ProviderAnalytics = () => {
                         <span>{predictive.historical_trend?.length || 0} months collected</span>
                       </div>
                       <span>•</span>
-                      <span>{Math.max(0, 3 - (predictive.historical_trend?.length || 0))} more needed</span>
+                      <span>{Math.max(0, 1 - (predictive.historical_trend?.length || 0))} more needed</span>
                     </div>
                   </div>
                 </div>
@@ -1496,7 +1496,7 @@ const ProviderAnalytics = () => {
                       ) : (
                         <>
                           You currently have <strong>{predictive.historical_trend.length} month{predictive.historical_trend.length !== 1 ? 's' : ''}</strong> of booking data. 
-                          Continue accepting bookings to unlock AI-powered forecasting! With <strong>{Math.max(0, 3 - predictive.historical_trend.length)} more month{Math.max(0, 3 - predictive.historical_trend.length) !== 1 ? 's' : ''}</strong> of data, 
+                          Continue accepting bookings to unlock AI-powered forecasting! With <strong>{Math.max(0, 1 - predictive.historical_trend.length)} more month{Math.max(0, 1 - predictive.historical_trend.length) !== 1 ? 's' : ''}</strong> of data, 
                           we'll predict your future bookings and revenue with machine learning algorithms.
                         </>
                       )}
