@@ -435,6 +435,26 @@
         "competitive": "Competitive",
         "belowMarket": "Below Market",
         "aboveMarket": "Above Market"
-      }
+        },
+        "insights": {
+          "growthTrend": "Growth Trend",
+          "growthRate": "Growth rate",
+          "bookingsPerMonth": "bookings/month",
+          "monthsOfData": "months of data collected",
+          "building": "Building...",
+          "nextMonth": "Next",
+          "months": "Months",
+          "bookings": "bookings",
+          "predictedRevenue": "Predicted revenue",
+          "confidence": "confidence",
+          "buildingForecast": "Building Your Forecast Model",
+          "needMoreData": "Need at least 1 month of booking history to generate accurate predictions.",
+          "monthsCollected": "months collected",
+          "moreNeeded": "more needed",
+          "historicalTrendForecast": "Historical Trend & Forecast",
+          "pastPerformance": "Past performance and predicted future bookings",
+          "actual": "Actual",
+          "forecast": "Forecast"
+        }
   }
 }

@@ -1319,14 +1319,14 @@ const ProviderAnalytics = () => {
                   <Brain className="w-6 h-6" />
                 </div>
               </div>
-              <p className="text-white/80 text-sm font-medium mb-1">Growth Trend</p>
+                <p className="text-white/80 text-sm font-medium mb-1">{t('analytics.insights.growthTrend')}</p>
               <p className="text-3xl font-bold capitalize">
-                {predictive.trend_direction || 'Building...'}
+                  {predictive.trend_direction || t('analytics.insights.building')}
               </p>
               <p className="text-white/70 text-xs mt-2">
                 {predictive.growth_rate 
-                  ? `Growth rate: ${predictive.growth_rate.toFixed(2)} bookings/month`
-                  : `${predictive.historical_trend?.length || 0} months of data collected`}
+                    ? `${t('analytics.insights.growthRate')}: ${predictive.growth_rate.toFixed(2)} ${t('analytics.insights.bookingsPerMonth')}`
+                    : `${predictive.historical_trend?.length || 0} ${t('analytics.insights.monthsOfData')}`}
               </p>
             </div>
 
@@ -1336,18 +1336,18 @@ const ProviderAnalytics = () => {
                   <div className="flex items-center gap-2 mb-4">
                     <TrendingUp className="w-5 h-5 text-blue-500" />
                     <h4 className="font-semibold text-gray-900 dark:text-gray-100">
-                      Next {month.month} Month{month.month > 1 ? 's' : ''}
+                        {t('analytics.insights.nextMonth')} {month.month} {t('analytics.insights.months')}
                     </h4>
                   </div>
                   <p className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-1">
-                    {month.predicted_bookings} bookings
+                      {month.predicted_bookings} {t('analytics.insights.bookings')}
                   </p>
                   <p className="text-sm text-gray-600 dark:text-gray-400">
-                    Predicted revenue: {formatCurrency(month.predicted_revenue)}
+                      {t('analytics.insights.predictedRevenue')}: {formatCurrency(month.predicted_revenue)}
                   </p>
                   <div className="mt-2">
                     <span className="text-xs px-2 py-1 rounded bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400">
-                      {month.confidence} confidence
+                        {month.confidence} {t('analytics.insights.confidence')}
                     </span>
                   </div>
                 </div>
@@ -1360,18 +1360,18 @@ const ProviderAnalytics = () => {
                   </div>
                   <div>
                     <h4 className="font-semibold text-amber-900 dark:text-amber-100 mb-2">
-                      Building Your Forecast Model
+                        {t('analytics.insights.buildingForecast')}
                     </h4>
                     <p className="text-sm text-amber-800 dark:text-amber-300 mb-3">
-                      {predictive.message || 'Need at least 1 month of booking history to generate accurate predictions.'}
+                        {predictive.message || t('analytics.insights.needMoreData')}
                     </p>
                     <div className="flex items-center gap-2 text-xs text-amber-700 dark:text-amber-400">
                       <div className="flex items-center gap-1">
                         <Package className="w-4 h-4" />
-                        <span>{predictive.historical_trend?.length || 0} months collected</span>
+                          <span>{predictive.historical_trend?.length || 0} {t('analytics.insights.monthsCollected')}</span>
                       </div>
                       <span>•</span>
-                      <span>{Math.max(0, 1 - (predictive.historical_trend?.length || 0))} more needed</span>
+                        <span>{Math.max(0, 1 - (predictive.historical_trend?.length || 0))} {t('analytics.insights.moreNeeded')}</span>
                     </div>
                   </div>
                 </div>
@@ -1383,20 +1383,20 @@ const ProviderAnalytics = () => {
             <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border border-gray-200 dark:border-gray-700">
               <div className="flex justify-between items-center mb-4">
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Historical Trend & Forecast</h3>
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">{t('analytics.insights.historicalTrendForecast')}</h3>
                   <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                    Past performance and predicted future bookings
+                      {t('analytics.insights.pastPerformance')}
                   </p>
                 </div>
                 <div className="flex gap-4 text-xs">
                   <div className="flex items-center gap-2">
                     <div className="w-3 h-3 bg-purple-500 rounded-full"></div>
-                    <span className="text-gray-600 dark:text-gray-400">Actual</span>
+                      <span className="text-gray-600 dark:text-gray-400">{t('analytics.insights.actual')}</span>
                   </div>
                   {predictive.forecast && predictive.forecast.length > 0 && (
                     <div className="flex items-center gap-2">
                       <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                      <span className="text-gray-600 dark:text-gray-400">Forecast</span>
+                        <span className="text-gray-600 dark:text-gray-400">{t('analytics.insights.forecast')}</span>
                     </div>
                   )}
                 </div>

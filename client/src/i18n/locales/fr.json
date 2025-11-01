@@ -435,6 +435,26 @@
         "competitive": "Compétitif",
         "belowMarket": "Sous le Marché",
         "aboveMarket": "Au-dessus du Marché"
-      }
+        },
+        "insights": {
+          "growthTrend": "Tendance de Croissance",
+          "growthRate": "Taux de croissance",
+          "bookingsPerMonth": "réservations/mois",
+          "monthsOfData": "mois de données collectées",
+          "building": "En Construction...",
+          "nextMonth": "Prochain",
+          "months": "Mois",
+          "bookings": "réservations",
+          "predictedRevenue": "Revenu prévu",
+          "confidence": "confiance",
+          "buildingForecast": "Construction de Votre Modèle de Prévision",
+          "needMoreData": "Besoin d'au moins 1 mois d'historique de réservations pour générer des prévisions précises.",
+          "monthsCollected": "mois collectés",
+          "moreNeeded": "plus nécessaires",
+          "historicalTrendForecast": "Tendance Historique et Prévisions",
+          "pastPerformance": "Performances passées et réservations futures prévues",
+          "actual": "Réel",
+          "forecast": "Prévision"
+        }
   }
 }
