@@ -642,19 +642,36 @@ export const getPredictiveAnalytics = async (req, res) => {
     const data = trendResult.rows;
     if (data.length >= 1) { // TEMPORARY: Changed from 3 to 1 for testing
       const n = data.length;
-      let sumX = 0, sumY = 0, sumXY = 0, sumX2 = 0;
+      let slope = 0;
+      let intercept = 0;
 
-      data.forEach((row, index) => {
-        const x = index;
-        const y = parseInt(row.booking_count);
-        sumX += x;
-        sumY += y;
-        sumXY += x * y;
-        sumX2 += x * x;
-      });
+      // Calculate linear regression only if we have enough data points
+      if (n >= 2) {
+        let sumX = 0, sumY = 0, sumXY = 0, sumX2 = 0;
 
-      const slope = (n * sumXY - sumX * sumY) / (n * sumX2 - sumX * sumX);
-      const intercept = (sumY - slope * sumX) / n;
+        data.forEach((row, index) => {
+          const x = index;
+          const y = parseInt(row.booking_count);
+          sumX += x;
+          sumY += y;
+          sumXY += x * y;
+          sumX2 += x * x;
+        });
+
+        const denominator = (n * sumX2 - sumX * sumX);
+        if (denominator !== 0) {
+          slope = (n * sumXY - sumX * sumY) / denominator;
+          intercept = (sumY - slope * sumX) / n;
+        } else {
+          // Fallback: use simple average if regression fails
+          intercept = sumY / n;
+          slope = 0;
+        }
+      } else {
+        // With only 1 data point, use that value as baseline
+        intercept = parseInt(data[0].booking_count);
+        slope = 0;
+      }
 
       // Forecast next 3 months
       const forecast = [];
@@ -667,7 +684,7 @@ export const getPredictiveAnalytics = async (req, res) => {
         forecast.push({
           month: i,
           predicted_bookings: forecastValue,
-          predicted_revenue: forecastValue * avgRevenue,
+          predicted_revenue: Math.round(forecastValue * avgRevenue),
           confidence: data.length >= 3 ? 'Medium' : 'Low' // Lower confidence with less data
         });
       }
