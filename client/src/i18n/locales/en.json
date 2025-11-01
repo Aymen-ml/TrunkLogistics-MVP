@@ -421,6 +421,20 @@
       "onTimeRate": "On-Time Rate",
       "responseMetrics": "Response Metrics",
       "average": "Average"
-    }
+      },
+      "geographic": {
+        "topCitiesByRevenue": "Top Cities by Revenue",
+        "geographicDistribution": "Geographic distribution of your business",
+        "avg": "Avg"
+      },
+      "pricing": {
+        "yourAverage": "Your Average",
+        "marketAverage": "Market Average",
+        "yourRange": "Your Range",
+        "marketRange": "Market Range",
+        "competitive": "Competitive",
+        "belowMarket": "Below Market",
+        "aboveMarket": "Above Market"
+      }
   }
 }

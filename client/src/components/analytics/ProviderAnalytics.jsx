@@ -1208,8 +1208,8 @@ const ProviderAnalytics = () => {
         <div className="space-y-6">
           <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border border-gray-200 dark:border-gray-700">
             <div className="mb-6">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Top Cities by Revenue</h3>
-              <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Geographic distribution of your business</p>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">{t('analytics.geographic.topCitiesByRevenue')}</h3>
+                <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{t('analytics.geographic.geographicDistribution')}</p>
             </div>
             <ResponsiveContainer width="100%" height={400}>
               <BarChart data={geographic.cities} layout="vertical">
@@ -1238,7 +1238,7 @@ const ProviderAnalytics = () => {
                   {formatCurrency(city.total_revenue)}
                 </p>
                 <p className="text-sm text-gray-600 dark:text-gray-400">
-                  {city.booking_count} bookings • Avg: {formatCurrency(city.avg_revenue)}
+                    {city.booking_count} {t('analytics.revenue.bookings')} • {t('analytics.geographic.avg')}: {formatCurrency(city.avg_revenue)}
                 </p>
               </div>
             ))}
@@ -1272,19 +1272,19 @@ const ProviderAnalytics = () => {
 
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
                   <div>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">Your Average</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">{t('analytics.pricing.yourAverage')}</p>
                     <p className="text-xl font-bold text-gray-900 dark:text-gray-100">
                       {formatCurrency(item.your_avg_price)}
                     </p>
                   </div>
                   <div>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">Market Average</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">{t('analytics.pricing.marketAverage')}</p>
                     <p className="text-xl font-bold text-gray-900 dark:text-gray-100">
                       {formatCurrency(item.market_avg_price)}
                     </p>
                   </div>
                   <div>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">Your Range</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">{t('analytics.pricing.yourRange')}</p>
                     <p className="text-sm font-semibold text-gray-900 dark:text-gray-100">
                       {formatCurrency(item.your_min_price)} - {formatCurrency(item.your_max_price)}
                     </p>

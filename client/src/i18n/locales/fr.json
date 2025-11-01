@@ -421,6 +421,20 @@
       "onTimeRate": "Taux à Temps",
       "responseMetrics": "Métriques de Réponse",
       "average": "Moyenne"
-    }
+      },
+      "geographic": {
+        "topCitiesByRevenue": "Villes Principales par Revenu",
+        "geographicDistribution": "Distribution géographique de votre entreprise",
+        "avg": "Moy"
+      },
+      "pricing": {
+        "yourAverage": "Votre Moyenne",
+        "marketAverage": "Moyenne du Marché",
+        "yourRange": "Votre Plage",
+        "marketRange": "Plage du Marché",
+        "competitive": "Compétitif",
+        "belowMarket": "Sous le Marché",
+        "aboveMarket": "Au-dessus du Marché"
+      }
   }
 }
