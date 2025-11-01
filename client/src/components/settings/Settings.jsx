@@ -69,15 +69,20 @@ const Settings = () => {
         console.log('i18n.language after change:', i18n.language);
         
         // Show success message
-        showSuccess('Language changed! Reloading page...');
+        showSuccess('Language changed! Check console, then manually refresh (F5) to see changes.');
         
-        // Force full page reload to ensure all components update
-        console.log('Reloading page in 1 second...');
-        setTimeout(() => {
-          console.log('RELOADING NOW');
-          window.location.reload();
-        }, 1000);
-        return; // Exit early since we're reloading
+        // TEMPORARILY DISABLED RELOAD FOR DEBUGGING
+        console.log('=== RELOAD DISABLED FOR DEBUGGING ===');
+        console.log('Please manually refresh the page (F5) to see language changes');
+        console.log('=== END DEBUG ===');
+        
+        // TODO: Re-enable this after debugging
+        // setTimeout(() => {
+        //   window.location.reload();
+        // }, 1000);
+        
+        setHasUnsavedChanges(false);
+        return;
       }
       
       // Dispatch custom event
