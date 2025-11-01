@@ -362,6 +362,23 @@
       "bookings": "Bookings",
       "total": "Total",
       "service": "Service"
+    },
+    "bookings": {
+      "pending": "Pending",
+      "approved": "Approved",
+      "confirmed": "Confirmed",
+      "inProgress": "In Progress",
+      "completed": "Completed",
+      "cancelled": "Cancelled",
+      "bookingVolume": "Booking Volume",
+      "bookingsByMonth": "Bookings by month",
+      "performanceMetrics": "Performance Metrics",
+      "completionRate": "Completion Rate",
+      "cancellationRate": "Cancellation Rate",
+      "approvalRate": "Approval Rate",
+      "bookingsByServiceType": "Bookings by Service Type",
+      "status": "Status",
+      "count": "Count"
     }
   }
 }

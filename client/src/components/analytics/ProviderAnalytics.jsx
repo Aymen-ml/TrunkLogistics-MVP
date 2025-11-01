@@ -606,7 +606,7 @@ const ProviderAnalytics = () => {
             <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border-l-4 border-yellow-500 shadow">
               <div className="flex items-center justify-between mb-2">
                 <Clock className="w-5 h-5 text-yellow-500" />
-                <span className="text-xs text-gray-500 dark:text-gray-400">Pending</span>
+                <span className="text-xs text-gray-500 dark:text-gray-400">{t('analytics.bookings.pending')}</span>
               </div>
               <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
                 {analytics.bookingConversion.funnel.pending}
@@ -616,7 +616,7 @@ const ProviderAnalytics = () => {
             <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border-l-4 border-blue-500 shadow">
               <div className="flex items-center justify-between mb-2">
                 <CheckCircle className="w-5 h-5 text-blue-500" />
-                <span className="text-xs text-gray-500 dark:text-gray-400">Approved</span>
+                <span className="text-xs text-gray-500 dark:text-gray-400">{t('analytics.bookings.approved')}</span>
               </div>
               <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
                 {analytics.bookingConversion.funnel.approved}
@@ -626,7 +626,7 @@ const ProviderAnalytics = () => {
             <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border-l-4 border-cyan-500 shadow">
               <div className="flex items-center justify-between mb-2">
                 <CheckCircle className="w-5 h-5 text-cyan-500" />
-                <span className="text-xs text-gray-500 dark:text-gray-400">Confirmed</span>
+                <span className="text-xs text-gray-500 dark:text-gray-400">{t('analytics.bookings.confirmed')}</span>
               </div>
               <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
                 {analytics.bookingConversion.funnel.confirmed}
@@ -636,7 +636,7 @@ const ProviderAnalytics = () => {
             <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border-l-4 border-purple-500 shadow">
               <div className="flex items-center justify-between mb-2">
                 <Activity className="w-5 h-5 text-purple-500" />
-                <span className="text-xs text-gray-500 dark:text-gray-400">Active</span>
+                <span className="text-xs text-gray-500 dark:text-gray-400">{t('analytics.bookings.inProgress')}</span>
               </div>
               <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
                 {analytics.bookingConversion.funnel.active}
@@ -646,7 +646,7 @@ const ProviderAnalytics = () => {
             <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border-l-4 border-green-500 shadow">
               <div className="flex items-center justify-between mb-2">
                 <CheckCircle className="w-5 h-5 text-green-500" />
-                <span className="text-xs text-gray-500 dark:text-gray-400">Completed</span>
+                <span className="text-xs text-gray-500 dark:text-gray-400">{t('analytics.bookings.completed')}</span>
               </div>
               <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
                 {analytics.bookingConversion.funnel.completed}
@@ -657,8 +657,8 @@ const ProviderAnalytics = () => {
           {/* Booking Trends Chart */}
           <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border border-gray-200 dark:border-gray-700">
             <div className="mb-6">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Booking Volume Trend</h3>
-              <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Monthly booking counts by service type</p>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">{t('analytics.bookings.bookingVolume')}</h3>
+              <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{t('analytics.bookings.bookingsByMonth')}</p>
             </div>
             <ResponsiveContainer width="100%" height={320}>
               <BarChart data={analytics.revenueTrends}>
@@ -698,13 +698,13 @@ const ProviderAnalytics = () => {
                 <Bar 
                   dataKey="transport_bookings" 
                   fill="url(#barTransportBookings)" 
-                  name="Transport Bookings"
+                  name={t('analytics.revenue.transport')}
                   radius={[8, 8, 0, 0]}
                 />
                 <Bar 
                   dataKey="rental_bookings" 
                   fill="url(#barRentalBookings)" 
-                  name="Rental Bookings"
+                  name={t('analytics.revenue.rental')}
                   radius={[8, 8, 0, 0]}
                 />
               </BarChart>
@@ -715,7 +715,7 @@ const ProviderAnalytics = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Completion Stats */}
             <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border border-gray-200 dark:border-gray-700">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Performance Metrics</h3>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">{t('analytics.bookings.performanceMetrics')}</h3>
               <div className="space-y-4">
                 <div className="flex items-center justify-between p-3 bg-green-50 dark:bg-green-900/20 rounded-lg">
                   <div className="flex items-center gap-3">
@@ -723,7 +723,7 @@ const ProviderAnalytics = () => {
                       <CheckCircle className="w-6 h-6 text-white" />
                     </div>
                     <div>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">Completed</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">{t('analytics.bookings.completed')}</p>
                       <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
                         {analytics.bookingConversion.funnel.completed}
                       </p>
@@ -733,7 +733,7 @@ const ProviderAnalytics = () => {
                     <p className="text-2xl font-bold text-green-600 dark:text-green-400">
                       {analytics.bookingConversion.conversionRate}%
                     </p>
-                    <p className="text-xs text-gray-500 dark:text-gray-400">Success Rate</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">{t('analytics.bookings.completionRate')}</p>
                   </div>
                 </div>
 
@@ -743,7 +743,7 @@ const ProviderAnalytics = () => {
                       <XCircle className="w-6 h-6 text-white" />
                     </div>
                     <div>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">Cancelled</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">{t('analytics.bookings.cancelled')}</p>
                       <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
                         {analytics.bookingConversion.funnel.cancelled}
                       </p>
@@ -755,7 +755,7 @@ const ProviderAnalytics = () => {
                         ? ((analytics.bookingConversion.funnel.cancelled / analytics.bookingConversion.funnel.total) * 100).toFixed(1)
                         : 0}%
                     </p>
-                    <p className="text-xs text-gray-500 dark:text-gray-400">Cancel Rate</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">{t('analytics.bookings.cancellationRate')}</p>
                   </div>
                 </div>
 
@@ -765,7 +765,7 @@ const ProviderAnalytics = () => {
                       <Package className="w-6 h-6 text-white" />
                     </div>
                     <div>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">Total Bookings</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">{t('analytics.overview.totalBookings')}</p>
                       <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
                         {analytics.bookingConversion.funnel.total}
                       </p>
@@ -775,7 +775,7 @@ const ProviderAnalytics = () => {
                     <p className="text-2xl font-bold text-blue-600 dark:text-blue-400">
                       {analytics.bookingConversion.approvalRate}%
                     </p>
-                    <p className="text-xs text-gray-500 dark:text-gray-400">Approval Rate</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">{t('analytics.overview.approvalRate')}</p>
                   </div>
                 </div>
               </div>
@@ -783,7 +783,7 @@ const ProviderAnalytics = () => {
 
             {/* Service Type Distribution */}
             <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border border-gray-200 dark:border-gray-700">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Service Type Distribution</h3>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">{t('analytics.bookings.bookingsByServiceType')}</h3>
               <ResponsiveContainer width="100%" height={260}>
                 <PieChart>
                   <Pie

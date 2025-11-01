@@ -362,6 +362,23 @@
       "bookings": "Réservations",
       "total": "Total",
       "service": "Service"
+    },
+    "bookings": {
+      "pending": "En Attente",
+      "approved": "Approuvé",
+      "confirmed": "Confirmé",
+      "inProgress": "En Cours",
+      "completed": "Terminé",
+      "cancelled": "Annulé",
+      "bookingVolume": "Volume de Réservations",
+      "bookingsByMonth": "Réservations par mois",
+      "performanceMetrics": "Métriques de Performance",
+      "completionRate": "Taux de Réalisation",
+      "cancellationRate": "Taux d'Annulation",
+      "approvalRate": "Taux d'Approbation",
+      "bookingsByServiceType": "Réservations par Type de Service",
+      "status": "Statut",
+      "count": "Nombre"
     }
   }
 }
