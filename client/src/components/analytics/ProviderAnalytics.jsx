@@ -975,9 +975,9 @@ const ProviderAnalytics = () => {
                   <MapPin className="w-6 h-6" />
                 </div>
               </div>
-              <p className="text-white/80 text-sm font-medium mb-1">Total Routes</p>
+              <p className="text-white/80 text-sm font-medium mb-1">{t('analytics.routes.totalRoutes')}</p>
               <p className="text-3xl font-bold">{analytics.topRoutes.length}</p>
-              <p className="text-white/70 text-xs mt-2">Unique city pairs</p>
+              <p className="text-white/70 text-xs mt-2">{t('analytics.routes.uniqueCityPairs')}</p>
             </div>
 
             <div className="bg-gradient-to-br from-green-500 to-emerald-600 text-white rounded-xl p-6 shadow-lg">
@@ -986,7 +986,7 @@ const ProviderAnalytics = () => {
                   <Target className="w-6 h-6" />
                 </div>
               </div>
-              <p className="text-white/80 text-sm font-medium mb-1">Top Route Revenue</p>
+              <p className="text-white/80 text-sm font-medium mb-1">{t('analytics.routes.topRouteRevenue')}</p>
               <p className="text-3xl font-bold">
                 {analytics.topRoutes.length > 0 ? formatCurrency(analytics.topRoutes[0].total_revenue) : '$0'}
               </p>
@@ -1001,7 +1001,7 @@ const ProviderAnalytics = () => {
                   <BarChart3 className="w-6 h-6" />
                 </div>
               </div>
-              <p className="text-white/80 text-sm font-medium mb-1">Avg Route Revenue</p>
+              <p className="text-white/80 text-sm font-medium mb-1">{t('analytics.routes.avgRouteRevenue')}</p>
               <p className="text-3xl font-bold">
                 {formatCurrency(
                   analytics.topRoutes.length > 0 
@@ -1009,26 +1009,26 @@ const ProviderAnalytics = () => {
                     : 0
                 )}
               </p>
-              <p className="text-white/70 text-xs mt-2">Per route average</p>
+              <p className="text-white/70 text-xs mt-2">{t('analytics.routes.perRouteAverage')}</p>
             </div>
           </div>
 
           {/* Top Routes Table */}
           <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-200 dark:border-gray-700">
             <div className="p-6 border-b border-gray-200 dark:border-gray-700">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Top Routes by Revenue</h3>
-              <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Most profitable transportation routes</p>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">{t('analytics.routes.topRoutesByRevenue')}</h3>
+              <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{t('analytics.routes.profitableRoutes')}</p>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead className="bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-700 dark:to-gray-800">
                   <tr>
-                    <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider">Rank</th>
-                    <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider">Route</th>
-                    <th className="px-6 py-4 text-center text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider">Bookings</th>
-                    <th className="px-6 py-4 text-right text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider">Total Revenue</th>
-                    <th className="px-6 py-4 text-right text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider">Avg Revenue</th>
-                    <th className="px-6 py-4 text-center text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider">Success Rate</th>
+                    <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider">{t('analytics.routes.rank')}</th>
+                    <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider">{t('analytics.routes.route')}</th>
+                    <th className="px-6 py-4 text-center text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider">{t('analytics.revenue.bookings')}</th>
+                    <th className="px-6 py-4 text-right text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider">{t('analytics.routes.totalRevenue')}</th>
+                    <th className="px-6 py-4 text-right text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider">{t('analytics.routes.avgRevenue')}</th>
+                    <th className="px-6 py-4 text-center text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider">{t('analytics.routes.successRate')}</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200 dark:divide-gray-700">

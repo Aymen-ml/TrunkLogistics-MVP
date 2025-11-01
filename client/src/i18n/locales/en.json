@@ -394,6 +394,20 @@
       "completion": "completion",
       "inUse": "In Use",
       "available": "Available"
+    },
+    "routes": {
+      "totalRoutes": "Total Routes",
+      "uniqueCityPairs": "Unique city pairs",
+      "topRouteRevenue": "Top Route Revenue",
+      "avgRouteRevenue": "Avg Route Revenue",
+      "perRouteAverage": "Per route average",
+      "topRoutesByRevenue": "Top Routes by Revenue",
+      "profitableRoutes": "Most profitable transportation routes",
+      "rank": "Rank",
+      "route": "Route",
+      "totalRevenue": "Total Revenue",
+      "avgRevenue": "Avg Revenue",
+      "successRate": "Success Rate"
     }
   }
 }
