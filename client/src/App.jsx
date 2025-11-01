@@ -47,13 +47,11 @@ function AppContent() {
   const { i18n } = useTranslation();
   const [currentLang, setCurrentLang] = useState(i18n.language);
   
-  // Listen to language changes
+  // Listen to language changes for state update (reload handled by Settings component)
   useEffect(() => {
     const handleLanguageChange = (lng) => {
-      console.log('Language changed event detected:', lng);
+      console.log('Language changed event detected in App:', lng);
       setCurrentLang(lng);
-      // Force a full page reload to ensure all components update
-      window.location.reload();
     };
     
     i18n.on('languageChanged', handleLanguageChange);

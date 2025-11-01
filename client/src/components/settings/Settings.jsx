@@ -54,10 +54,17 @@ const Settings = () => {
       
       // Apply language change
       if (language !== i18n.language) {
+        console.log('Changing language from', i18n.language, 'to', language);
         await i18n.changeLanguage(language);
-        // Explicitly save to localStorage (i18next should do this, but let's be sure)
+        // Explicitly save to localStorage
         localStorage.setItem('i18nextLng', language);
         console.log('Language changed to:', language);
+        
+        // Force full page reload to ensure all components update
+        setTimeout(() => {
+          window.location.reload();
+        }, 500);
+        return; // Exit early since we're reloading
       }
       
       // Dispatch custom event

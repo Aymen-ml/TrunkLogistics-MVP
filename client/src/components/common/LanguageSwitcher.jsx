@@ -15,11 +15,16 @@ const LanguageSwitcher = () => {
   const currentLanguage = languages.find(lang => lang.code === i18n.language) || languages[0];
 
   const changeLanguage = (langCode) => {
+    console.log('Changing language from', i18n.language, 'to', langCode);
     i18n.changeLanguage(langCode);
     // Explicitly save to localStorage
     localStorage.setItem('i18nextLng', langCode);
-    console.log('Language changed to:', langCode);
     setIsOpen(false);
+    
+    // Force full page reload to ensure all components update
+    setTimeout(() => {
+      window.location.reload();
+    }, 300);
   };
 
   // Close dropdown when clicking outside
