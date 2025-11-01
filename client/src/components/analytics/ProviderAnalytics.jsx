@@ -1521,7 +1521,7 @@ const ProviderAnalytics = () => {
                   <Users className="w-6 h-6" />
                 </div>
               </div>
-              <p className="text-white/80 text-sm font-medium mb-1">Total Customers</p>
+                <p className="text-white/80 text-sm font-medium mb-1">{t('analytics.customers.totalCustomers')}</p>
               <p className="text-3xl font-bold">{customers.overview.total_customers}</p>
             </div>
 
@@ -1531,12 +1531,12 @@ const ProviderAnalytics = () => {
                   <Award className="w-6 h-6" />
                 </div>
               </div>
-              <p className="text-white/80 text-sm font-medium mb-1">Repeat Rate</p>
+                <p className="text-white/80 text-sm font-medium mb-1">{t('analytics.customers.repeatRate')}</p>
               <p className="text-3xl font-bold">
                 {parseFloat(customers.overview.repeat_rate || 0).toFixed(1)}%
               </p>
               <p className="text-white/70 text-xs mt-2">
-                {customers.overview.repeat_customers} repeat customers
+                  {customers.overview.repeat_customers} {t('analytics.customers.repeatCustomers')}
               </p>
             </div>
 
@@ -1546,7 +1546,7 @@ const ProviderAnalytics = () => {
                   <DollarSign className="w-6 h-6" />
                 </div>
               </div>
-              <p className="text-white/80 text-sm font-medium mb-1">Avg Lifetime Value</p>
+                <p className="text-white/80 text-sm font-medium mb-1">{t('analytics.customers.avgLifetimeValue')}</p>
               <p className="text-3xl font-bold">
                 {formatCurrency(customers.overview.avg_customer_lifetime_value)}
               </p>
@@ -1558,7 +1558,7 @@ const ProviderAnalytics = () => {
                   <Star className="w-6 h-6" />
                 </div>
               </div>
-              <p className="text-white/80 text-sm font-medium mb-1">Top Customer Value</p>
+                <p className="text-white/80 text-sm font-medium mb-1">{t('analytics.customers.topCustomerValue')}</p>
               <p className="text-3xl font-bold">
                 {formatCurrency(customers.overview.highest_customer_value)}
               </p>
@@ -1567,24 +1567,24 @@ const ProviderAnalytics = () => {
 
           <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-200 dark:border-gray-700">
             <div className="p-6 border-b border-gray-200 dark:border-gray-700">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Top Customers by Lifetime Value</h3>
-              <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Your most valuable customers</p>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">{t('analytics.customers.topCustomersByLTV')}</h3>
+                <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{t('analytics.customers.mostValuable')}</p>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead className="bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-700 dark:to-gray-800">
                   <tr>
-                    <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase">Customer</th>
-                    <th className="px-6 py-4 text-center text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase">Bookings</th>
-                    <th className="px-6 py-4 text-right text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase">Lifetime Value</th>
-                    <th className="px-6 py-4 text-right text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase">Last Booking</th>
-                    <th className="px-6 py-4 text-center text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase">Status</th>
+                      <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase">{t('analytics.customers.customer')}</th>
+                      <th className="px-6 py-4 text-center text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase">{t('analytics.revenue.bookings')}</th>
+                      <th className="px-6 py-4 text-right text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase">{t('analytics.customers.lifetimeValue')}</th>
+                      <th className="px-6 py-4 text-right text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase">{t('analytics.customers.lastBooking')}</th>
+                      <th className="px-6 py-4 text-center text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase">{t('analytics.bookings.status')}</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
                   {customers.top_customers.map((customer, idx) => {
                     const daysSince = parseInt(customer.days_since_last_booking);
-                    const status = daysSince < 30 ? 'Active' : daysSince < 90 ? 'Recent' : 'Inactive';
+                      const status = daysSince < 30 ? t('analytics.customers.active') : daysSince < 90 ? t('analytics.customers.recent') : t('analytics.customers.inactive');
                     return (
                       <tr key={idx} className="hover:bg-blue-50 dark:hover:bg-gray-700/50">
                         <td className="px-6 py-4">
@@ -1597,7 +1597,7 @@ const ProviderAnalytics = () => {
                                 {customer.customer_name || 'Unknown Customer'}
                               </p>
                               <p className="text-sm text-gray-500 dark:text-gray-400">
-                                {daysSince} days since last booking
+                                  {daysSince} {t('analytics.customers.daysSince')}
                               </p>
                             </div>
                           </div>
@@ -1615,8 +1615,8 @@ const ProviderAnalytics = () => {
                         </td>
                         <td className="px-6 py-4 text-center">
                           <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold ${
-                            status === 'Active' ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400' :
-                            status === 'Recent' ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400' :
+                              status === t('analytics.customers.active') ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400' :
+                              status === t('analytics.customers.recent') ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400' :
                             'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-400'
                           }`}>
                             {status}

@@ -455,6 +455,22 @@
           "pastPerformance": "Past performance and predicted future bookings",
           "actual": "Actual",
           "forecast": "Forecast"
-        }
+          },
+          "customers": {
+            "totalCustomers": "Total Customers",
+            "repeatRate": "Repeat Rate",
+            "repeatCustomers": "repeat customers",
+            "avgLifetimeValue": "Avg Lifetime Value",
+            "topCustomerValue": "Top Customer Value",
+            "topCustomersByLTV": "Top Customers by Lifetime Value",
+            "mostValuable": "Your most valuable customers",
+            "customer": "Customer",
+            "lifetimeValue": "Lifetime Value",
+            "lastBooking": "Last Booking",
+            "daysSince": "days since last booking",
+            "active": "Active",
+            "recent": "Recent",
+            "inactive": "Inactive"
+          }
   }
 }

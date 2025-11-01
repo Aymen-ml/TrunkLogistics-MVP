@@ -455,6 +455,22 @@
           "pastPerformance": "Performances passées et réservations futures prévues",
           "actual": "Réel",
           "forecast": "Prévision"
-        }
+          },
+          "customers": {
+            "totalCustomers": "Total Clients",
+            "repeatRate": "Taux de Retour",
+            "repeatCustomers": "clients réguliers",
+            "avgLifetimeValue": "Valeur Vie Moyenne",
+            "topCustomerValue": "Valeur Client Principal",
+            "topCustomersByLTV": "Clients Principaux par Valeur Vie",
+            "mostValuable": "Vos clients les plus précieux",
+            "customer": "Client",
+            "lifetimeValue": "Valeur Vie",
+            "lastBooking": "Dernière Réservation",
+            "daysSince": "jours depuis la dernière réservation",
+            "active": "Actif",
+            "recent": "Récent",
+            "inactive": "Inactif"
+          }
   }
 }
