@@ -53,17 +53,30 @@ const Settings = () => {
       localStorage.setItem('notificationsEnabled', JSON.stringify(notifications));
       
       // Apply language change
-      if (language !== i18n.language) {
-        console.log('Changing language from', i18n.language, 'to', language);
-        await i18n.changeLanguage(language);
-        // Explicitly save to localStorage
+      const currentLang = i18n.language;
+      if (language !== currentLang) {
+        console.log('=== LANGUAGE CHANGE DEBUG ===');
+        console.log('Current language:', currentLang);
+        console.log('Target language:', language);
+        console.log('localStorage before:', localStorage.getItem('i18nextLng'));
+        
+        // Save to localStorage FIRST
         localStorage.setItem('i18nextLng', language);
-        console.log('Language changed to:', language);
+        console.log('localStorage after:', localStorage.getItem('i18nextLng'));
+        
+        // Then change i18n
+        await i18n.changeLanguage(language);
+        console.log('i18n.language after change:', i18n.language);
+        
+        // Show success message
+        showSuccess('Language changed! Reloading page...');
         
         // Force full page reload to ensure all components update
+        console.log('Reloading page in 1 second...');
         setTimeout(() => {
+          console.log('RELOADING NOW');
           window.location.reload();
-        }, 500);
+        }, 1000);
         return; // Exit early since we're reloading
       }
       
