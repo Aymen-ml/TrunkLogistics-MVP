@@ -349,6 +349,19 @@
       "bookingConversion": "Entonnoir de Conversion",
       "topRoutes": "Meilleurs Itinéraires",
       "customerRatings": "Évaluations Clients"
+    },
+    "revenue": {
+      "averageBooking": "Réservation Moyenne",
+      "transportRevenue": "Revenu Transport",
+      "rentalRevenue": "Revenu Location",
+      "revenueByMonth": "Revenu par Mois",
+      "revenueBreakdown": "Répartition des Revenus",
+      "month": "Mois",
+      "transport": "Transport",
+      "rental": "Location",
+      "bookings": "Réservations",
+      "total": "Total",
+      "service": "Service"
     }
   }
 }

@@ -431,12 +431,12 @@ const ProviderAnalytics = () => {
                   <Truck className="w-6 h-6" />
                 </div>
               </div>
-              <p className="text-white/80 text-sm font-medium mb-1">Transport Revenue</p>
+              <p className="text-white/80 text-sm font-medium mb-1">{t('analytics.revenue.transportRevenue')}</p>
               <p className="text-3xl font-bold">
                 {formatCurrency(analytics.revenueTrends.reduce((sum, m) => sum + parseFloat(m.transport_revenue || 0), 0))}
               </p>
               <p className="text-white/70 text-xs mt-2">
-                {analytics.revenueTrends.reduce((sum, m) => sum + parseInt(m.transport_bookings || 0), 0)} bookings
+                {analytics.revenueTrends.reduce((sum, m) => sum + parseInt(m.transport_bookings || 0), 0)} {t('analytics.revenue.bookings')}
               </p>
             </div>
 
@@ -446,12 +446,12 @@ const ProviderAnalytics = () => {
                   <Activity className="w-6 h-6" />
                 </div>
               </div>
-              <p className="text-white/80 text-sm font-medium mb-1">Rental Revenue</p>
+              <p className="text-white/80 text-sm font-medium mb-1">{t('analytics.revenue.rentalRevenue')}</p>
               <p className="text-3xl font-bold">
                 {formatCurrency(analytics.revenueTrends.reduce((sum, m) => sum + parseFloat(m.rental_revenue || 0), 0))}
               </p>
               <p className="text-white/70 text-xs mt-2">
-                {analytics.revenueTrends.reduce((sum, m) => sum + parseInt(m.rental_bookings || 0), 0)} bookings
+                {analytics.revenueTrends.reduce((sum, m) => sum + parseInt(m.rental_bookings || 0), 0)} {t('analytics.revenue.bookings')}
               </p>
             </div>
 
@@ -461,7 +461,7 @@ const ProviderAnalytics = () => {
                   <DollarSign className="w-6 h-6" />
                 </div>
               </div>
-              <p className="text-white/80 text-sm font-medium mb-1">Average per Booking</p>
+              <p className="text-white/80 text-sm font-medium mb-1">{t('analytics.revenue.averageBooking')}</p>
               <p className="text-3xl font-bold">
                 {formatCurrency(
                   analytics.summary.totalBookings > 0 
@@ -470,14 +470,14 @@ const ProviderAnalytics = () => {
                 )}
               </p>
               <p className="text-white/70 text-xs mt-2">
-                {analytics.summary.totalBookings} total bookings
+                {analytics.summary.totalBookings} {t('analytics.revenue.bookings')}
               </p>
             </div>
           </div>
 
           <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border border-gray-200 dark:border-gray-700">
             <div className="mb-6">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Revenue by Service Type</h3>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">{t('analytics.revenue.revenueByMonth')}</h3>
               <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Compare transport vs rental performance</p>
             </div>
             <ResponsiveContainer width="100%" height={350}>
@@ -520,13 +520,13 @@ const ProviderAnalytics = () => {
                 <Bar 
                   dataKey="transport_revenue" 
                   fill="url(#barTransport)" 
-                  name="Transport Revenue"
+                  name={t('analytics.revenue.transport')}
                   radius={[8, 8, 0, 0]}
                 />
                 <Bar 
                   dataKey="rental_revenue" 
                   fill="url(#barRental)" 
-                  name="Rental Revenue"
+                  name={t('analytics.revenue.rental')}
                   radius={[8, 8, 0, 0]}
                 />
               </BarChart>
@@ -536,19 +536,19 @@ const ProviderAnalytics = () => {
           {/* Monthly Revenue Details */}
           <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-200 dark:border-gray-700">
             <div className="p-6 border-b border-gray-200 dark:border-gray-700">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Monthly Revenue Details</h3>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">{t('analytics.revenue.revenueBreakdown')}</h3>
               <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Detailed breakdown by month</p>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead className="bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-700 dark:to-gray-800">
                   <tr>
-                    <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider">Month</th>
-                    <th className="px-6 py-4 text-right text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider">Transport</th>
-                    <th className="px-6 py-4 text-right text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider">Rental</th>
-                    <th className="px-6 py-4 text-right text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider">Total Revenue</th>
-                    <th className="px-6 py-4 text-right text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider">Bookings</th>
-                    <th className="px-6 py-4 text-right text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider">Avg/Booking</th>
+                    <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider">{t('analytics.revenue.month')}</th>
+                    <th className="px-6 py-4 text-right text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider">{t('analytics.revenue.transport')}</th>
+                    <th className="px-6 py-4 text-right text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider">{t('analytics.revenue.rental')}</th>
+                    <th className="px-6 py-4 text-right text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider">{t('analytics.overview.totalRevenue')}</th>
+                    <th className="px-6 py-4 text-right text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider">{t('analytics.revenue.bookings')}</th>
+                    <th className="px-6 py-4 text-right text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider">{t('analytics.revenue.averageBooking')}</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
@@ -570,7 +570,7 @@ const ProviderAnalytics = () => {
                 </tbody>
                 <tfoot className="bg-gray-50 dark:bg-gray-800 border-t-2 border-gray-300 dark:border-gray-600">
                   <tr>
-                    <td className="px-6 py-4 text-sm font-bold text-gray-900 dark:text-gray-100">TOTAL</td>
+                    <td className="px-6 py-4 text-sm font-bold text-gray-900 dark:text-gray-100">{t('analytics.revenue.total').toUpperCase()}</td>
                     <td className="px-6 py-4 text-sm text-right font-bold text-blue-600 dark:text-blue-400">
                       {formatCurrency(analytics.revenueTrends.reduce((sum, m) => sum + parseFloat(m.transport_revenue || 0), 0))}
                     </td>

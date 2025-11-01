@@ -349,6 +349,19 @@
       "bookingConversion": "Booking Conversion Funnel",
       "topRoutes": "Top Routes",
       "customerRatings": "Customer Ratings"
+    },
+    "revenue": {
+      "averageBooking": "Average Booking",
+      "transportRevenue": "Transport Revenue",
+      "rentalRevenue": "Rental Revenue",
+      "revenueByMonth": "Revenue by Month",
+      "revenueBreakdown": "Revenue Breakdown",
+      "month": "Month",
+      "transport": "Transport",
+      "rental": "Rental",
+      "bookings": "Bookings",
+      "total": "Total",
+      "service": "Service"
     }
   }
 }
