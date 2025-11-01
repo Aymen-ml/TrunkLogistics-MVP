@@ -1118,12 +1118,12 @@ const ProviderAnalytics = () => {
                   <Clock className="w-6 h-6" />
                 </div>
               </div>
-              <p className="text-white/80 text-sm font-medium mb-1">On-Time Delivery</p>
+              <p className="text-white/80 text-sm font-medium mb-1">{t('analytics.performance.onTimeDelivery')}</p>
               <p className="text-3xl font-bold">
                 {parseFloat(kpis.onTimeDelivery.on_time_percentage || 0).toFixed(1)}%
               </p>
               <p className="text-white/70 text-xs mt-2">
-                {kpis.onTimeDelivery.on_time_deliveries} of {kpis.onTimeDelivery.total_completed} deliveries
+                {kpis.onTimeDelivery.on_time_deliveries} of {kpis.onTimeDelivery.total_completed} {t('analytics.performance.deliveries')}
               </p>
             </div>
 
@@ -1134,12 +1134,12 @@ const ProviderAnalytics = () => {
                   <Zap className="w-6 h-6" />
                 </div>
               </div>
-              <p className="text-white/80 text-sm font-medium mb-1">Avg Response Time</p>
+              <p className="text-white/80 text-sm font-medium mb-1">{t('analytics.performance.avgResponseTime')}</p>
               <p className="text-3xl font-bold">
                 {parseFloat(kpis.responseTime.avg_response_hours || 0).toFixed(1)}h
               </p>
               <p className="text-white/70 text-xs mt-2">
-                Median: {parseFloat(kpis.responseTime.median_response_hours || 0).toFixed(1)}h
+                {t('analytics.performance.median')}: {parseFloat(kpis.responseTime.median_response_hours || 0).toFixed(1)}h
               </p>
             </div>
 
@@ -1150,25 +1150,25 @@ const ProviderAnalytics = () => {
                   <Star className="w-6 h-6" />
                 </div>
               </div>
-              <p className="text-white/80 text-sm font-medium mb-1">Satisfaction Score</p>
+              <p className="text-white/80 text-sm font-medium mb-1">{t('analytics.performance.satisfactionScore')}</p>
               <p className="text-3xl font-bold">
                 {parseFloat(kpis.satisfaction.avg_satisfaction_score || 0).toFixed(1)}/5.0
               </p>
               <p className="text-white/70 text-xs mt-2">
-                {kpis.satisfaction.satisfied_customers} satisfied customers
+                {kpis.satisfaction.satisfied_customers} {t('analytics.performance.satisfiedCustomers')}
               </p>
             </div>
           </div>
 
           <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border border-gray-200 dark:border-gray-700">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Performance Insights</h3>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">{t('analytics.performance.performanceInsights')}</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-4">
-                <h4 className="font-medium text-gray-900 dark:text-gray-100">Delivery Performance</h4>
+                  <h4 className="font-medium text-gray-900 dark:text-gray-100">{t('analytics.performance.deliveryPerformance')}</h4>
                 <div className="space-y-3">
                   <div>
                     <div className="flex justify-between text-sm mb-1">
-                      <span className="text-gray-600 dark:text-gray-400">On-Time Rate</span>
+                        <span className="text-gray-600 dark:text-gray-400">{t('analytics.performance.onTimeRate')}</span>
                       <span className="font-semibold">{parseFloat(kpis.onTimeDelivery.on_time_percentage || 0).toFixed(1)}%</span>
                     </div>
                     <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3">
@@ -1182,16 +1182,16 @@ const ProviderAnalytics = () => {
               </div>
 
               <div className="space-y-4">
-                <h4 className="font-medium text-gray-900 dark:text-gray-100">Response Metrics</h4>
+                  <h4 className="font-medium text-gray-900 dark:text-gray-100">{t('analytics.performance.responseMetrics')}</h4>
                 <div className="flex items-center justify-between p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
                   <div>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">Average</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">{t('analytics.performance.average')}</p>
                     <p className="text-2xl font-bold text-blue-600 dark:text-blue-400">
                       {parseFloat(kpis.responseTime.avg_response_hours || 0).toFixed(1)}h
                     </p>
                   </div>
                   <div className="text-right">
-                    <p className="text-sm text-gray-600 dark:text-gray-400">Median</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">{t('analytics.performance.median')}</p>
                     <p className="text-2xl font-bold text-blue-600 dark:text-blue-400">
                       {parseFloat(kpis.responseTime.median_response_hours || 0).toFixed(1)}h
                     </p>

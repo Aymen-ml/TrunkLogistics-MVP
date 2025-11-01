@@ -408,6 +408,19 @@
       "totalRevenue": "Revenu Total",
       "avgRevenue": "Revenu Moyen",
       "successRate": "Taux de Réussite"
+    },
+    "performance": {
+      "onTimeDelivery": "Livraison à Temps",
+      "deliveries": "livraisons",
+      "avgResponseTime": "Temps de Réponse Moyen",
+      "median": "Médiane",
+      "satisfactionScore": "Score de Satisfaction",
+      "satisfiedCustomers": "clients satisfaits",
+      "performanceInsights": "Perspectives de Performance",
+      "deliveryPerformance": "Performance de Livraison",
+      "onTimeRate": "Taux à Temps",
+      "responseMetrics": "Métriques de Réponse",
+      "average": "Moyenne"
     }
   }
 }

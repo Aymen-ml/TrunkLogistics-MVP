@@ -408,6 +408,19 @@
       "totalRevenue": "Total Revenue",
       "avgRevenue": "Avg Revenue",
       "successRate": "Success Rate"
+    },
+    "performance": {
+      "onTimeDelivery": "On-Time Delivery",
+      "deliveries": "deliveries",
+      "avgResponseTime": "Avg Response Time",
+      "median": "Median",
+      "satisfactionScore": "Satisfaction Score",
+      "satisfiedCustomers": "satisfied customers",
+      "performanceInsights": "Performance Insights",
+      "deliveryPerformance": "Delivery Performance",
+      "onTimeRate": "On-Time Rate",
+      "responseMetrics": "Response Metrics",
+      "average": "Average"
     }
   }
 }
