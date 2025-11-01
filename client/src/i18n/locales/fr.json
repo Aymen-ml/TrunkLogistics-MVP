@@ -379,6 +379,21 @@
       "bookingsByServiceType": "Réservations par Type de Service",
       "status": "Statut",
       "count": "Nombre"
+    },
+    "fleet": {
+      "totalVehicles": "Total Véhicules",
+      "currentlyActive": "Actuellement Actif",
+      "avgRevenuePerVehicle": "Revenu Moyen/Véhicule",
+      "vehiclePerformance": "Performance des Véhicules",
+      "vehicleMetrics": "Métriques individuelles et utilisation des véhicules",
+      "vehicle": "Véhicule",
+      "type": "Type",
+      "service": "Service",
+      "revenue": "Revenu",
+      "avgValue": "Valeur Moyenne",
+      "completion": "réalisation",
+      "inUse": "En Utilisation",
+      "available": "Disponible"
     }
   }
 }

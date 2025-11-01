@@ -379,6 +379,21 @@
       "bookingsByServiceType": "Bookings by Service Type",
       "status": "Status",
       "count": "Count"
+    },
+    "fleet": {
+      "totalVehicles": "Total Vehicles",
+      "currentlyActive": "Currently Active",
+      "avgRevenuePerVehicle": "Avg Revenue/Vehicle",
+      "vehiclePerformance": "Vehicle Performance",
+      "vehicleMetrics": "Individual vehicle metrics and utilization",
+      "vehicle": "Vehicle",
+      "type": "Type",
+      "service": "Service",
+      "revenue": "Revenue",
+      "avgValue": "Avg Value",
+      "completion": "completion",
+      "inUse": "In Use",
+      "available": "Available"
     }
   }
 }

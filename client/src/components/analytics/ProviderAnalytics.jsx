@@ -842,19 +842,19 @@ const ProviderAnalytics = () => {
           {/* Fleet Summary Cards */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border-l-4 border-blue-500 shadow">
-              <p className="text-sm text-gray-600 dark:text-gray-400">Total Vehicles</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">{t('analytics.fleet.totalVehicles')}</p>
               <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">{analytics.summary.totalVehicles}</p>
             </div>
             <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border-l-4 border-green-500 shadow">
-              <p className="text-sm text-gray-600 dark:text-gray-400">Currently Active</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">{t('analytics.fleet.currentlyActive')}</p>
               <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">{analytics.summary.activeVehicles}</p>
             </div>
             <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border-l-4 border-purple-500 shadow">
-              <p className="text-sm text-gray-600 dark:text-gray-400">Fleet Utilization</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">{t('analytics.overview.fleetUtilization')}</p>
               <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">{analytics.summary.fleetUtilizationRate}%</p>
             </div>
             <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border-l-4 border-orange-500 shadow">
-              <p className="text-sm text-gray-600 dark:text-gray-400">Avg Revenue/Vehicle</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">{t('analytics.fleet.avgRevenuePerVehicle')}</p>
               <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
                 {formatCurrency(
                   analytics.summary.totalVehicles > 0 
@@ -868,20 +868,20 @@ const ProviderAnalytics = () => {
           {/* Vehicle Performance Table */}
           <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-200 dark:border-gray-700">
             <div className="p-6 border-b border-gray-200 dark:border-gray-700">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Vehicle Performance</h3>
-              <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Individual vehicle metrics and utilization</p>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">{t('analytics.fleet.vehiclePerformance')}</h3>
+              <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{t('analytics.fleet.vehicleMetrics')}</p>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead className="bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-700 dark:to-gray-800">
                   <tr>
-                    <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider">Vehicle</th>
-                    <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider">Type</th>
-                    <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider">Service</th>
-                    <th className="px-6 py-4 text-center text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider">Completed</th>
-                    <th className="px-6 py-4 text-right text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider">Revenue</th>
-                    <th className="px-6 py-4 text-right text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider">Avg Value</th>
-                    <th className="px-6 py-4 text-center text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider">Status</th>
+                    <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider">{t('analytics.fleet.vehicle')}</th>
+                    <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider">{t('analytics.fleet.type')}</th>
+                    <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider">{t('analytics.fleet.service')}</th>
+                    <th className="px-6 py-4 text-center text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider">{t('analytics.bookings.completed')}</th>
+                    <th className="px-6 py-4 text-right text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider">{t('analytics.fleet.revenue')}</th>
+                    <th className="px-6 py-4 text-right text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider">{t('analytics.fleet.avgValue')}</th>
+                    <th className="px-6 py-4 text-center text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider">{t('analytics.bookings.status')}</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
@@ -903,7 +903,7 @@ const ProviderAnalytics = () => {
                             </div>
                             <div>
                               <p className="text-sm font-medium text-gray-900 dark:text-gray-100">{vehicle.license_plate}</p>
-                              <p className="text-xs text-gray-500 dark:text-gray-400">{completionRate}% completion</p>
+                              <p className="text-xs text-gray-500 dark:text-gray-400">{completionRate}% {t('analytics.fleet.completion')}</p>
                             </div>
                           </div>
                         </td>
@@ -951,7 +951,7 @@ const ProviderAnalytics = () => {
                             <div className={`w-2 h-2 rounded-full ${
                               vehicle.currently_active > 0 ? 'bg-green-500 animate-pulse' : 'bg-gray-400'
                             }`} />
-                            {vehicle.currently_active > 0 ? 'In Use' : 'Available'}
+                            {vehicle.currently_active > 0 ? t('analytics.fleet.inUse') : t('analytics.fleet.available')}
                           </span>
                         </td>
                       </tr>
