@@ -1319,34 +1319,62 @@ const ProviderAnalytics = () => {
               </div>
               <p className="text-white/80 text-sm font-medium mb-1">Growth Trend</p>
               <p className="text-3xl font-bold capitalize">
-                {predictive.trend_direction}
+                {predictive.trend_direction || 'Building...'}
               </p>
               <p className="text-white/70 text-xs mt-2">
-                Growth rate: {predictive.growth_rate?.toFixed(2)} bookings/month
+                {predictive.growth_rate 
+                  ? `Growth rate: ${predictive.growth_rate.toFixed(2)} bookings/month`
+                  : `${predictive.historical_trend?.length || 0} months of data collected`}
               </p>
             </div>
 
-            {predictive.forecast && predictive.forecast.length > 0 && predictive.forecast.map((month, idx) => (
-              <div key={idx} className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-200 dark:border-gray-700">
-                <div className="flex items-center gap-2 mb-4">
-                  <TrendingUp className="w-5 h-5 text-blue-500" />
-                  <h4 className="font-semibold text-gray-900 dark:text-gray-100">
-                    Next {month.month} Month{month.month > 1 ? 's' : ''}
-                  </h4>
+            {predictive.forecast && predictive.forecast.length > 0 ? (
+              predictive.forecast.map((month, idx) => (
+                <div key={idx} className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-200 dark:border-gray-700">
+                  <div className="flex items-center gap-2 mb-4">
+                    <TrendingUp className="w-5 h-5 text-blue-500" />
+                    <h4 className="font-semibold text-gray-900 dark:text-gray-100">
+                      Next {month.month} Month{month.month > 1 ? 's' : ''}
+                    </h4>
+                  </div>
+                  <p className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-1">
+                    {month.predicted_bookings} bookings
+                  </p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                    Predicted revenue: {formatCurrency(month.predicted_revenue)}
+                  </p>
+                  <div className="mt-2">
+                    <span className="text-xs px-2 py-1 rounded bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400">
+                      {month.confidence} confidence
+                    </span>
+                  </div>
                 </div>
-                <p className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-1">
-                  {month.predicted_bookings} bookings
-                </p>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
-                  Predicted revenue: {formatCurrency(month.predicted_revenue)}
-                </p>
-                <div className="mt-2">
-                  <span className="text-xs px-2 py-1 rounded bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400">
-                    {month.confidence} confidence
-                  </span>
+              ))
+            ) : (
+              <div className="md:col-span-2 bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 rounded-xl p-6 border-2 border-dashed border-amber-300 dark:border-amber-700">
+                <div className="flex items-start gap-4">
+                  <div className="p-3 bg-amber-100 dark:bg-amber-800/50 rounded-lg">
+                    <TrendingUp className="w-6 h-6 text-amber-600 dark:text-amber-400" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-amber-900 dark:text-amber-100 mb-2">
+                      Building Your Forecast Model
+                    </h4>
+                    <p className="text-sm text-amber-800 dark:text-amber-300 mb-3">
+                      {predictive.message || 'Need at least 3 months of booking history to generate accurate predictions.'}
+                    </p>
+                    <div className="flex items-center gap-2 text-xs text-amber-700 dark:text-amber-400">
+                      <div className="flex items-center gap-1">
+                        <Package className="w-4 h-4" />
+                        <span>{predictive.historical_trend?.length || 0} months collected</span>
+                      </div>
+                      <span>•</span>
+                      <span>{Math.max(0, 3 - (predictive.historical_trend?.length || 0))} more needed</span>
+                    </div>
+                  </div>
                 </div>
               </div>
-            ))}
+            )}
           </div>
 
           {predictive.historical_trend && predictive.historical_trend.length > 0 && (
@@ -1452,22 +1480,30 @@ const ProviderAnalytics = () => {
                 </LineChart>
               </ResponsiveContainer>
               
-              {predictive.forecast && predictive.forecast.length > 0 && (
-                <div className="mt-4 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
-                  <div className="flex items-start gap-3">
-                    <Brain className="w-5 h-5 text-blue-600 dark:text-blue-400 mt-0.5" />
-                    <div>
-                      <h4 className="font-semibold text-blue-900 dark:text-blue-100 mb-1">AI Forecast Insight</h4>
-                      <p className="text-sm text-blue-800 dark:text-blue-300">
-                        Based on your {predictive.historical_trend.length} months of data, your business is <strong className="capitalize">{predictive.trend_direction.toLowerCase()}</strong>.
-                        {predictive.trend_direction === 'Growing' && " Keep up the great work! Consider expanding your fleet to meet increasing demand."}
-                        {predictive.trend_direction === 'Declining' && " Consider marketing campaigns or competitive pricing to boost bookings."}
-                        {predictive.trend_direction === 'Stable' && " Your business is consistent. Focus on customer retention and service quality."}
-                      </p>
-                    </div>
+              <div className="mt-4 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
+                <div className="flex items-start gap-3">
+                  <Brain className="w-5 h-5 text-blue-600 dark:text-blue-400 mt-0.5" />
+                  <div>
+                    <h4 className="font-semibold text-blue-900 dark:text-blue-100 mb-1">AI Forecast Insight</h4>
+                    <p className="text-sm text-blue-800 dark:text-blue-300">
+                      {predictive.forecast && predictive.forecast.length > 0 ? (
+                        <>
+                          Based on your {predictive.historical_trend.length} months of data, your business is <strong className="capitalize">{predictive.trend_direction.toLowerCase()}</strong>.
+                          {predictive.trend_direction === 'Growing' && " Keep up the great work! Consider expanding your fleet to meet increasing demand."}
+                          {predictive.trend_direction === 'Declining' && " Consider marketing campaigns or competitive pricing to boost bookings."}
+                          {predictive.trend_direction === 'Stable' && " Your business is consistent. Focus on customer retention and service quality."}
+                        </>
+                      ) : (
+                        <>
+                          You currently have <strong>{predictive.historical_trend.length} month{predictive.historical_trend.length !== 1 ? 's' : ''}</strong> of booking data. 
+                          Continue accepting bookings to unlock AI-powered forecasting! With <strong>{Math.max(0, 3 - predictive.historical_trend.length)} more month{Math.max(0, 3 - predictive.historical_trend.length) !== 1 ? 's' : ''}</strong> of data, 
+                          we'll predict your future bookings and revenue with machine learning algorithms.
+                        </>
+                      )}
+                    </p>
                   </div>
                 </div>
-              )}
+              </div>
             </div>
           )}
         </div>
