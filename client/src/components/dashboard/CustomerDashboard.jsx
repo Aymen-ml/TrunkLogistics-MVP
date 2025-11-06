@@ -413,7 +413,7 @@ const CustomerDashboard = () => {
                     </thead>
                     <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
                       {recentBookings.map((booking) => (
-                        <tr key={booking.id} className="hover:bg-gray-50 dark:hover:bg-gray-700/50">
+                        <tr key={booking.id} className="hover:bg-gray-50 dark:hover:bg-gray-600/50">
                           <td className="px-4 sm:px-6 py-4 whitespace-nowrap">
                             <div className="flex items-center">
                               <div className="flex-shrink-0">

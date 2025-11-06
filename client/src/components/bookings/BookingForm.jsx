@@ -436,13 +436,13 @@ const BookingForm = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
         {/* Header */}
         <div className="mb-6 sm:mb-8">
           <button
             onClick={() => navigate('/find-trucks')}
-            className="inline-flex items-center text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:text-gray-700 dark:text-gray-200 mb-4"
+            className="inline-flex items-center text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:text-gray-200 mb-4"
           >
             <ArrowLeft className="h-4 w-4 mr-1" />
             Back to Truck Search
@@ -454,7 +454,7 @@ const BookingForm = () => {
               <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100">
                 Create Booking
               </h1>
-              <p className="mt-2 text-sm sm:text-base text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
+              <p className="mt-2 text-sm sm:text-base text-gray-600 dark:text-gray-400">
                 Book a truck for your shipment
               </p>
             </div>
@@ -464,7 +464,7 @@ const BookingForm = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Main Form */}
           <div className="lg:col-span-2">
-            <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 shadow-sm rounded-lg">
+            <div className="bg-white dark:bg-gray-800 shadow-sm rounded-lg">
               <form onSubmit={handleSubmit} className="p-6 space-y-6">
                 {errors.general && (
                   <div className="bg-red-50 border border-red-200 rounded-md p-4">
@@ -500,7 +500,7 @@ const BookingForm = () => {
                     {selectedTruck && (
                       <div className="mt-2">
                         {checkingAvailability ? (
-                          <div className="flex items-center text-sm text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
+                          <div className="flex items-center text-sm text-gray-600 dark:text-gray-400">
                             <Clock className="h-4 w-4 mr-2 animate-spin" />
                             Checking availability...
                           </div>
@@ -852,7 +852,7 @@ const BookingForm = () => {
                   <button
                     type="button"
                     onClick={() => navigate('/find-trucks')}
-                    className="w-full sm:w-auto px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 hover:bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900"
+                    className="w-full sm:w-auto px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:bg-gray-900"
                   >
                     Cancel
                   </button>
@@ -875,14 +875,14 @@ const BookingForm = () => {
 
           {/* Sidebar - Booking Summary */}
           <div className="lg:col-span-1">
-            <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 shadow-sm rounded-lg p-6 sticky top-8">
+            <div className="bg-white dark:bg-gray-800 shadow-sm rounded-lg p-6 sticky top-8">
               <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4">
                 {selectedTruck?.service_type === 'rental' ? 'Rental Summary' : 'Booking Summary'}
               </h3>
               
               {selectedTruck ? (
                 <div className="space-y-4">
-                  <div className="flex items-center p-3 bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900 rounded-lg">
+                  <div className="flex items-center p-3 bg-gray-50 dark:bg-gray-900 rounded-lg">
                     {selectedTruck.service_type === 'rental' ? (
                       <Settings className="h-8 w-8 text-primary-600" />
                     ) : (
@@ -890,7 +890,7 @@ const BookingForm = () => {
                     )}
                     <div className="ml-3">
                       <p className="font-medium text-gray-900 dark:text-gray-100">{selectedTruck.license_plate}</p>
-                      <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">{getTruckTypeLabel(selectedTruck.truck_type)}</p>
+                      <p className="text-sm text-gray-500 dark:text-gray-400">{getTruckTypeLabel(selectedTruck.truck_type)}</p>
                       {selectedTruck.service_type === 'rental' && (
                         <span className="inline-block px-2 py-1 text-xs font-medium bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 rounded-full mt-1">
                           Equipment Rental
@@ -901,15 +901,15 @@ const BookingForm = () => {
 
                   <div className="space-y-2 text-sm">
                     <div className="flex justify-between">
-                      <span className="text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Capacity:</span>
+                      <span className="text-gray-500 dark:text-gray-400">Capacity:</span>
                       <span className="font-medium">{selectedTruck.capacity_weight?.toLocaleString()} kg</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Provider:</span>
+                      <span className="text-gray-500 dark:text-gray-400">Provider:</span>
                       <span className="font-medium">{selectedTruck.provider_name}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Pricing:</span>
+                      <span className="text-gray-500 dark:text-gray-400">Pricing:</span>
                       <span className="font-medium">
                         {selectedTruck.service_type === 'rental' ? (
                           <div className="text-right text-xs">
@@ -935,7 +935,7 @@ const BookingForm = () => {
                         {loadingPrice ? (
                           <div className="flex items-center">
                             <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600 mr-2"></div>
-                            <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Calculating...</span>
+                            <span className="text-sm text-gray-500 dark:text-gray-400">Calculating...</span>
                           </div>
                         ) : priceEstimate ? (
                           <span className="font-bold text-green-600">
@@ -943,21 +943,21 @@ const BookingForm = () => {
                           </span>
                         ) : selectedTruck?.service_type === 'rental' ? (
                           formData.rental_start_datetime && formData.rental_end_datetime ? (
-                            <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Select equipment to see price</span>
+                            <span className="text-sm text-gray-500 dark:text-gray-400">Select equipment to see price</span>
                           ) : (
-                            <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Enter rental dates to calculate</span>
+                            <span className="text-sm text-gray-500 dark:text-gray-400">Enter rental dates to calculate</span>
                           )
                         ) : (
                           formData.pickup_city && formData.destination_city ? (
-                            <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Select truck to see price</span>
+                            <span className="text-sm text-gray-500 dark:text-gray-400">Select truck to see price</span>
                           ) : (
-                            <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Enter cities to calculate</span>
+                            <span className="text-sm text-gray-500 dark:text-gray-400">Enter cities to calculate</span>
                           )
                         )}
                       </div>
                       
                       {priceEstimate && (
-                        <div className="mt-3 space-y-2 text-xs text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
+                        <div className="mt-3 space-y-2 text-xs text-gray-600 dark:text-gray-400">
                           {selectedTruck?.service_type === 'rental' ? (
                             <>
                               <div className="flex justify-between">
@@ -1030,8 +1030,8 @@ const BookingForm = () => {
                 </div>
               ) : (
                 <div className="text-center py-8">
-                  <Truck className="mx-auto h-12 w-12 text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500" />
-                  <p className="mt-2 text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
+                  <Truck className="mx-auto h-12 w-12 text-gray-400 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500" />
+                  <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
                     Select a truck to see booking details
                   </p>
                 </div>

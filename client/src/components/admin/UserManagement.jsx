@@ -116,14 +116,14 @@ const UserManagement = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900 flex items-center justify-center">
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
         <div className="mb-8">
@@ -131,7 +131,7 @@ const UserManagement = () => {
             <Users className="h-8 w-8 text-primary-600 mr-3" />
             <div>
               <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">User Management</h1>
-              <p className="mt-2 text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
+              <p className="mt-2 text-gray-600 dark:text-gray-400">
                 Manage user accounts and permissions
               </p>
             </div>
@@ -140,15 +140,15 @@ const UserManagement = () => {
 
         {/* Stats */}
         <div className="grid grid-cols-2 md:grid-cols-6 gap-4 mb-8">
-          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 overflow-hidden shadow rounded-lg">
+          <div className="bg-white dark:bg-gray-800 overflow-hidden shadow rounded-lg">
             <div className="p-4">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
-                  <Users className="h-6 w-6 text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500" />
+                  <Users className="h-6 w-6 text-gray-400 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500" />
                 </div>
                 <div className="ml-3 w-0 flex-1">
                   <dl>
-                    <dt className="text-xs font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 truncate">Total</dt>
+                    <dt className="text-xs font-medium text-gray-500 dark:text-gray-400 truncate">Total</dt>
                     <dd className="text-lg font-medium text-gray-900 dark:text-gray-100">{stats.total}</dd>
                   </dl>
                 </div>
@@ -156,7 +156,7 @@ const UserManagement = () => {
             </div>
           </div>
 
-          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 overflow-hidden shadow rounded-lg">
+          <div className="bg-white dark:bg-gray-800 overflow-hidden shadow rounded-lg">
             <div className="p-4">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
@@ -164,7 +164,7 @@ const UserManagement = () => {
                 </div>
                 <div className="ml-3 w-0 flex-1">
                   <dl>
-                    <dt className="text-xs font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 truncate">Active</dt>
+                    <dt className="text-xs font-medium text-gray-500 dark:text-gray-400 truncate">Active</dt>
                     <dd className="text-lg font-medium text-gray-900 dark:text-gray-100">{stats.active}</dd>
                   </dl>
                 </div>
@@ -172,7 +172,7 @@ const UserManagement = () => {
             </div>
           </div>
 
-          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 overflow-hidden shadow rounded-lg">
+          <div className="bg-white dark:bg-gray-800 overflow-hidden shadow rounded-lg">
             <div className="p-4">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
@@ -180,7 +180,7 @@ const UserManagement = () => {
                 </div>
                 <div className="ml-3 w-0 flex-1">
                   <dl>
-                    <dt className="text-xs font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 truncate">Inactive</dt>
+                    <dt className="text-xs font-medium text-gray-500 dark:text-gray-400 truncate">Inactive</dt>
                     <dd className="text-lg font-medium text-gray-900 dark:text-gray-100">{stats.inactive}</dd>
                   </dl>
                 </div>
@@ -188,7 +188,7 @@ const UserManagement = () => {
             </div>
           </div>
 
-          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 overflow-hidden shadow rounded-lg">
+          <div className="bg-white dark:bg-gray-800 overflow-hidden shadow rounded-lg">
             <div className="p-4">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
@@ -196,7 +196,7 @@ const UserManagement = () => {
                 </div>
                 <div className="ml-3 w-0 flex-1">
                   <dl>
-                    <dt className="text-xs font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 truncate">Admins</dt>
+                    <dt className="text-xs font-medium text-gray-500 dark:text-gray-400 truncate">Admins</dt>
                     <dd className="text-lg font-medium text-gray-900 dark:text-gray-100">{stats.admins}</dd>
                   </dl>
                 </div>
@@ -204,7 +204,7 @@ const UserManagement = () => {
             </div>
           </div>
 
-          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 overflow-hidden shadow rounded-lg">
+          <div className="bg-white dark:bg-gray-800 overflow-hidden shadow rounded-lg">
             <div className="p-4">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
@@ -212,7 +212,7 @@ const UserManagement = () => {
                 </div>
                 <div className="ml-3 w-0 flex-1">
                   <dl>
-                    <dt className="text-xs font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 truncate">Providers</dt>
+                    <dt className="text-xs font-medium text-gray-500 dark:text-gray-400 truncate">Providers</dt>
                     <dd className="text-lg font-medium text-gray-900 dark:text-gray-100">{stats.providers}</dd>
                   </dl>
                 </div>
@@ -220,7 +220,7 @@ const UserManagement = () => {
             </div>
           </div>
 
-          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 overflow-hidden shadow rounded-lg">
+          <div className="bg-white dark:bg-gray-800 overflow-hidden shadow rounded-lg">
             <div className="p-4">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
@@ -228,7 +228,7 @@ const UserManagement = () => {
                 </div>
                 <div className="ml-3 w-0 flex-1">
                   <dl>
-                    <dt className="text-xs font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 truncate">Customers</dt>
+                    <dt className="text-xs font-medium text-gray-500 dark:text-gray-400 truncate">Customers</dt>
                     <dd className="text-lg font-medium text-gray-900 dark:text-gray-100">{stats.customers}</dd>
                   </dl>
                 </div>
@@ -238,7 +238,7 @@ const UserManagement = () => {
         </div>
 
         {/* Filters */}
-        <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 shadow rounded-lg mb-6">
+        <div className="bg-white dark:bg-gray-800 shadow rounded-lg mb-6">
           <div className="px-4 py-3 border-b border-gray-200 dark:border-gray-700">
             <div className="flex flex-wrap gap-2">
               {[
@@ -255,7 +255,7 @@ const UserManagement = () => {
                   className={`px-3 py-1 rounded-md text-sm font-medium ${
                     filter === key
                       ? 'bg-primary-100 dark:bg-primary-900 text-primary-700'
-                      : 'text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:text-gray-700 dark:text-gray-200'
+                      : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:text-gray-200'
                   }`}
                 >
                   {label}
@@ -266,12 +266,12 @@ const UserManagement = () => {
         </div>
 
         {/* Users Table */}
-        <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 shadow overflow-hidden sm:rounded-md">
+        <div className="bg-white dark:bg-gray-800 shadow overflow-hidden sm:rounded-md">
           <div className="px-4 py-5 sm:px-6 border-b border-gray-200 dark:border-gray-700">
             <h3 className="text-lg leading-6 font-medium text-gray-900 dark:text-gray-100">
               Users ({filteredUsers.length})
             </h3>
-            <p className="mt-1 max-w-2xl text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
+            <p className="mt-1 max-w-2xl text-sm text-gray-500 dark:text-gray-400">
               Manage user accounts and their status
             </p>
           </div>
@@ -283,7 +283,7 @@ const UserManagement = () => {
                   <div className="flex items-center">
                     <div className="flex-shrink-0">
                       <div className="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center">
-                        <Users className="h-5 w-5 text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500" />
+                        <Users className="h-5 w-5 text-gray-500 dark:text-gray-400" />
                       </div>
                     </div>
                     <div className="ml-4">
@@ -295,17 +295,17 @@ const UserManagement = () => {
                         {getStatusBadge(user.is_active)}
                       </div>
                       <div className="flex items-center space-x-4 mt-1">
-                        <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
+                        <div className="flex items-center text-sm text-gray-500 dark:text-gray-400">
                           <Mail className="h-4 w-4 mr-1" />
                           {user.email}
                         </div>
                         {user.phone && (
-                          <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
+                          <div className="flex items-center text-sm text-gray-500 dark:text-gray-400">
                             <Phone className="h-4 w-4 mr-1" />
                             {user.phone}
                           </div>
                         )}
-                        <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
+                        <div className="flex items-center text-sm text-gray-500 dark:text-gray-400">
                           <Calendar className="h-4 w-4 mr-1" />
                           {new Date(user.created_at).toLocaleDateString()}
                         </div>

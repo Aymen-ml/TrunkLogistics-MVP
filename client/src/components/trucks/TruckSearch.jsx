@@ -154,21 +154,21 @@ const TruckSearch = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 flex items-center justify-center">
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 dark:bg-gray-900">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
         {/* Header */}
         <div className="mb-6 sm:mb-8">
           <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100">
             {filters.serviceType === 'rental' ? 'Find Equipment' : 'Find Trucks'}
           </h1>
-          <p className="mt-2 text-sm sm:text-base text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
+          <p className="mt-2 text-sm sm:text-base text-gray-600 dark:text-gray-400 dark:text-gray-400">
             {filters.serviceType === 'rental' 
               ? 'Search for available equipment for rental.'
               : 'Search for available trucks for your shipment needs.'
@@ -177,7 +177,7 @@ const TruckSearch = () => {
         </div>
 
         {/* Search Filters */}
-        <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 p-4 sm:p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 mb-6">
+        <div className="bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 mb-6">
           <form onSubmit={handleSearch} className="space-y-4">
             {/* Service Type Toggle */}
             <div className="w-full mb-4">
@@ -217,7 +217,7 @@ const TruckSearch = () => {
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Search className="h-5 w-5 text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500" />
+                  <Search className="h-5 w-5 text-gray-400 dark:text-gray-400" />
                 </div>
                 <input
                   type="text"
@@ -365,7 +365,7 @@ const TruckSearch = () => {
               <button
                 type="button"
                 onClick={clearFilters}
-                className="w-full sm:w-auto px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 dark:bg-gray-800 hover:bg-gray-50 dark:bg-gray-900 dark:bg-gray-900"
+                className="w-full sm:w-auto px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:bg-gray-900"
               >
                 Clear Filters
               </button>
@@ -383,7 +383,7 @@ const TruckSearch = () => {
         {/* Results Summary */}
         {trucks.length > 0 && (
           <div className="mb-4 flex items-center justify-between">
-            <p className="text-sm text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
+            <p className="text-sm text-gray-600 dark:text-gray-400 dark:text-gray-400">
               Showing <span className="font-semibold">{filteredTrucks.length}</span> of <span className="font-semibold">{trucks.length}</span> {filters.serviceType === 'rental' ? 'equipment' : 'trucks'}
               {filters.availability !== 'all' && (
                 <span className="ml-1">
@@ -392,7 +392,7 @@ const TruckSearch = () => {
               )}
             </p>
             {filters.availability === 'all' && (
-              <p className="text-sm text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
+              <p className="text-sm text-gray-600 dark:text-gray-400 dark:text-gray-400">
                 <span className="font-semibold text-green-600">{trucks.filter(t => t.active_bookings_count === 0).length} available</span>
                 {' • '}
                 <span className="font-semibold text-red-600">{trucks.filter(t => t.active_bookings_count > 0).length} rented</span>
@@ -403,16 +403,16 @@ const TruckSearch = () => {
 
         {/* Results */}
         {filteredTrucks.length === 0 ? (
-          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-8 text-center">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-8 text-center">
             {filters.serviceType === 'rental' ? (
-              <Settings className="mx-auto h-12 w-12 text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500" />
+              <Settings className="mx-auto h-12 w-12 text-gray-400 dark:text-gray-400" />
             ) : (
-              <Truck className="mx-auto h-12 w-12 text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500" />
+              <Truck className="mx-auto h-12 w-12 text-gray-400 dark:text-gray-400" />
             )}
             <h3 className="mt-4 text-lg font-medium text-gray-900 dark:text-gray-100">
               No {filters.serviceType === 'rental' ? 'equipment' : 'trucks'} found
             </h3>
-            <p className="mt-2 text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
+            <p className="mt-2 text-gray-500 dark:text-gray-400 dark:text-gray-400">
               {trucks.length === 0 
                 ? `Try adjusting your search criteria to find available ${filters.serviceType === 'rental' ? 'equipment' : 'trucks'}.`
                 : `No ${filters.availability === 'available' ? 'available' : filters.availability === 'rented' ? 'rented' : ''} ${filters.serviceType === 'rental' ? 'equipment' : 'trucks'} match your criteria. Try changing the availability filter.`
@@ -424,7 +424,7 @@ const TruckSearch = () => {
             {filteredTrucks.map((truck) => {
               const isRented = truck.active_bookings_count > 0;
               return (
-              <div key={truck.id} className={`bg-white rounded-lg shadow-sm border overflow-hidden hover:shadow-md transition-shadow ${isRented ? 'border-gray-300 dark:border-gray-600 opacity-75' : 'border-gray-200 dark:border-gray-700'}`}>
+              <div key={truck.id} className={`bg-white dark:bg-gray-800 rounded-lg shadow-sm border overflow-hidden hover:shadow-md transition-shadow ${isRented ? 'border-gray-300 dark:border-gray-600 opacity-75' : 'border-gray-200 dark:border-gray-700'}`}>
                 {isRented && (
                   <div className="bg-red-50 border-b border-red-200 px-4 py-2">
                     <p className="text-xs font-medium text-red-800 dark:text-red-200 text-center">Currently Rented - Not Available</p>
@@ -484,39 +484,39 @@ const TruckSearch = () => {
                     </div>
                     <div className="flex items-center">
                       <Star className="h-4 w-4 text-yellow-400" />
-                      <span className="ml-1 text-sm text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">4.8</span>
+                      <span className="ml-1 text-sm text-gray-600 dark:text-gray-400 dark:text-gray-400">4.8</span>
                     </div>
                   </div>
 
                   <div className="mt-4 space-y-2">
                     <div className="flex justify-between text-sm">
-                      <span className="text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Type:</span>
+                      <span className="text-gray-500 dark:text-gray-400 dark:text-gray-400">Type:</span>
                       <span className="font-medium">{getTruckTypeLabel(truck.truck_type)}</span>
                     </div>
                     <div className="flex justify-between text-sm">
-                      <span className="text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Capacity:</span>
+                      <span className="text-gray-500 dark:text-gray-400 dark:text-gray-400">Capacity:</span>
                       <span className="font-medium">{truck.capacity_weight?.toLocaleString()} kg</span>
                     </div>
                     <div className="flex justify-between text-sm">
-                      <span className="text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Vehicle:</span>
+                      <span className="text-gray-500 dark:text-gray-400 dark:text-gray-400">Vehicle:</span>
                       <span className="font-medium">{truck.make} {truck.model}</span>
                     </div>
                     {truck.service_type === 'rental' && truck.work_location && (
                       <div className="flex justify-between text-sm">
-                        <span className="text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Location:</span>
+                        <span className="text-gray-500 dark:text-gray-400 dark:text-gray-400">Location:</span>
                         <span className="font-medium">{truck.work_location}</span>
                       </div>
                     )}
                     {(truck.provider_city || truck.provider_state || truck.provider_country) && (
                       <div className="flex justify-between text-sm">
-                        <span className="text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Provider Location:</span>
+                        <span className="text-gray-500 dark:text-gray-400 dark:text-gray-400">Provider Location:</span>
                         <span className="font-medium">
                           {[truck.provider_city, truck.provider_state, truck.provider_country].filter(Boolean).join(', ')}
                         </span>
                       </div>
                     )}
                     <div className="flex justify-between text-sm">
-                      <span className="text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Price:</span>
+                      <span className="text-gray-500 dark:text-gray-400 dark:text-gray-400">Price:</span>
                       <span className="font-medium text-green-600">
                         {truck.service_type === 'rental' ? (
                           <div className="text-right">
@@ -537,7 +537,7 @@ const TruckSearch = () => {
                       disabled={isRented}
                       className={`flex-1 text-sm font-medium py-2 px-4 rounded-md transition-colors flex items-center justify-center ${
                         isRented 
-                          ? 'bg-gray-300 text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 cursor-not-allowed' 
+                          ? 'bg-gray-300 text-gray-500 dark:text-gray-400 dark:text-gray-400 cursor-not-allowed' 
                           : 'bg-accent-500 hover:bg-accent-600 transition-colors text-white'
                       }`}
                     >
@@ -552,7 +552,7 @@ const TruckSearch = () => {
                     </button>
                     <button 
                       onClick={() => viewTruckDetails(truck.id)}
-                      className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:bg-gray-900 dark:bg-gray-900"
+                      className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:bg-gray-900"
                     >
                       View Details
                     </button>
@@ -567,7 +567,7 @@ const TruckSearch = () => {
         {/* Pagination would go here */}
         {trucks.length > 0 && (
           <div className="mt-8 flex justify-center">
-            <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
+            <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-400">
               Showing {trucks.length} available {filters.serviceType === 'rental' ? 'equipment' : 'trucks'}
             </p>
           </div>

@@ -314,14 +314,14 @@ const ProviderDashboard = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900 flex items-center justify-center">
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
         {/* Email Verification Banner */}
         <EmailVerificationBanner />
@@ -535,7 +535,7 @@ const ProviderDashboard = () => {
         {/* Analytics Section */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
           {/* Revenue Breakdown */}
-          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 shadow-sm rounded-lg">
+          <div className="bg-white dark:bg-gray-800 shadow-sm rounded-lg">
             <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
               <div className="flex items-center">
                 <PieChart className="h-5 w-5 text-green-500 mr-2" />
@@ -564,7 +564,7 @@ const ProviderDashboard = () => {
                 </div>
                 <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Total Revenue</span>
+                    <span className="text-gray-500 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500">Total Revenue</span>
                     <span className="font-semibold text-gray-900 dark:text-gray-100">
                       {formatCurrency(stats.totalRevenue)}
                     </span>
@@ -575,7 +575,7 @@ const ProviderDashboard = () => {
           </div>
 
           {/* Top Performing Vehicles */}
-          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 shadow-sm rounded-lg">
+          <div className="bg-white dark:bg-gray-800 shadow-sm rounded-lg">
             <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
               <div className="flex items-center">
                 <Award className="h-5 w-5 text-yellow-500 mr-2" />
@@ -596,29 +596,29 @@ const ProviderDashboard = () => {
                         </div>
                         <div>
                           <p className="text-sm font-medium text-gray-900 dark:text-gray-100">{vehicle.license_plate}</p>
-                          <p className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
+                          <p className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500">
                             {vehicle.service_type === 'rental' ? 'Equipment' : 'Transport'}
                           </p>
                         </div>
                       </div>
                       <div className="text-right">
                         <p className="text-sm font-semibold text-gray-900 dark:text-gray-100">{vehicle.bookingCount}</p>
-                        <p className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">bookings</p>
+                        <p className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500">bookings</p>
                       </div>
                     </div>
                   ))}
                 </div>
               ) : (
                 <div className="text-center py-4">
-                  <Award className="mx-auto h-8 w-8 text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500" />
-                  <p className="mt-2 text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">No performance data yet</p>
+                  <Award className="mx-auto h-8 w-8 text-gray-400 dark:text-gray-500 dark:text-gray-400" />
+                  <p className="mt-2 text-sm text-gray-500 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500">No performance data yet</p>
                 </div>
               )}
             </div>
           </div>
 
           {/* Quick Stats */}
-          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 shadow-sm rounded-lg">
+          <div className="bg-white dark:bg-gray-800 shadow-sm rounded-lg">
             <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
               <div className="flex items-center">
                 <BarChart3 className="h-5 w-5 text-purple-500 mr-2" />
@@ -628,25 +628,25 @@ const ProviderDashboard = () => {
             <div className="p-6">
               <div className="space-y-4">
                 <div className="flex justify-between">
-                  <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Fleet Size</span>
+                  <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500">Fleet Size</span>
                   <span className="text-sm font-semibold text-gray-900 dark:text-gray-100">
                     {stats.totalTrucks + stats.totalEquipment} vehicles
                   </span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Active Rate</span>
+                  <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500">Active Rate</span>
                   <span className="text-sm font-semibold text-gray-900 dark:text-gray-100">
                     {Math.round(((stats.activeTrucks + stats.activeEquipment) / (stats.totalTrucks + stats.totalEquipment || 1)) * 100)}%
                   </span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Maintenance</span>
+                  <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500">Maintenance</span>
                   <span className="text-sm font-semibold text-red-600">
                     {stats.maintenanceAlerts} vehicles
                   </span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Success Rate</span>
+                  <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500">Success Rate</span>
                   <span className="text-sm font-semibold text-green-600">
                     {stats.totalBookings > 0 ? Math.round((stats.completedBookings / stats.totalBookings) * 100) : 0}%
                   </span>
@@ -658,7 +658,7 @@ const ProviderDashboard = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Recent Bookings */}
-          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 shadow-sm rounded-lg">
+          <div className="bg-white dark:bg-gray-800 shadow-sm rounded-lg">
             <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
               <div className="flex items-center justify-between">
                 <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">{t('dashboard.recentBookings')}</h3>
@@ -673,9 +673,9 @@ const ProviderDashboard = () => {
             <div className="divide-y divide-gray-200 dark:divide-gray-700">
               {recentBookings.length === 0 ? (
                 <div className="px-6 py-8 text-center">
-                  <Package className="mx-auto h-12 w-12 text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500" />
+                  <Package className="mx-auto h-12 w-12 text-gray-400 dark:text-gray-500 dark:text-gray-400" />
                   <h3 className="mt-2 text-sm font-medium text-gray-900 dark:text-gray-100">No bookings yet</h3>
-                  <p className="mt-1 text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
+                  <p className="mt-1 text-sm text-gray-500 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500">
                     Bookings will appear here once customers request your trucks.
                   </p>
                 </div>
@@ -701,7 +701,7 @@ const ProviderDashboard = () => {
                               {booking.status.replace('_', ' ')}
                             </span>
                           </div>
-                          <div className="flex items-center mt-1 text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
+                          <div className="flex items-center mt-1 text-sm text-gray-500 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500">
                             <Calendar className="h-4 w-4 mr-1" />
                             <span>{formatDate(booking.pickup_date)}</span>
                           </div>
@@ -740,7 +740,7 @@ const ProviderDashboard = () => {
           </div>
 
           {/* My Fleet */}
-          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 shadow-sm rounded-lg">
+          <div className="bg-white dark:bg-gray-800 shadow-sm rounded-lg">
             <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-4">
@@ -751,7 +751,7 @@ const ProviderDashboard = () => {
                       className={`px-3 py-1 text-xs font-medium rounded-md ${
                         serviceFilter === 'all' 
                           ? 'bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200' 
-                          : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:bg-gray-200'
+                          : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500 hover:bg-gray-200'
                       }`}
                     >
                       All
@@ -761,7 +761,7 @@ const ProviderDashboard = () => {
                       className={`px-3 py-1 text-xs font-medium rounded-md ${
                         serviceFilter === 'transport' 
                           ? 'bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200' 
-                          : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:bg-gray-200'
+                          : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500 hover:bg-gray-200'
                       }`}
                     >
                       Trucks
@@ -771,7 +771,7 @@ const ProviderDashboard = () => {
                       className={`px-3 py-1 text-xs font-medium rounded-md ${
                         serviceFilter === 'rental' 
                           ? 'bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200' 
-                          : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:bg-gray-200'
+                          : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500 hover:bg-gray-200'
                       }`}
                     >
                       Equipment
@@ -798,14 +798,14 @@ const ProviderDashboard = () => {
                 return filteredTrucks.length === 0 ? (
                   <div className="px-6 py-8 text-center">
                     {serviceFilter === 'rental' ? (
-                      <Settings className="mx-auto h-12 w-12 text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500" />
+                      <Settings className="mx-auto h-12 w-12 text-gray-400 dark:text-gray-500 dark:text-gray-400" />
                     ) : (
-                      <Truck className="mx-auto h-12 w-12 text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500" />
+                      <Truck className="mx-auto h-12 w-12 text-gray-400 dark:text-gray-500 dark:text-gray-400" />
                     )}
                     <h3 className="mt-2 text-sm font-medium text-gray-900 dark:text-gray-100">
                       No {serviceFilter === 'rental' ? 'equipment' : serviceFilter === 'transport' ? 'trucks' : 'vehicles'} yet
                     </h3>
-                    <p className="mt-1 text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
+                    <p className="mt-1 text-sm text-gray-500 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500">
                       Add {serviceFilter === 'rental' ? 'equipment' : 'trucks'} to your fleet to start receiving bookings.
                     </p>
                     <div className="mt-6">
@@ -854,10 +854,10 @@ const ProviderDashboard = () => {
                                   </span>
                                 )}
                               </div>
-                              <div className="flex items-center mt-1 text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
+                              <div className="flex items-center mt-1 text-sm text-gray-500 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500">
                                 <span>Total Revenue: ${truck.total_revenue || 0}</span>
                               </div>
-                              <div className="flex items-center mt-1 text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
+                              <div className="flex items-center mt-1 text-sm text-gray-500 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500">
                                 <span>{truck.capacity_weight}kg {isRental ? 'operating weight' : 'capacity'}</span>
                                 <span className="mx-2">•</span>
                                 {isRental ? (
@@ -880,7 +880,7 @@ const ProviderDashboard = () => {
                                 )}
                               </div>
                               {isRental && truck.work_location && (
-                                <div className="flex items-center mt-1 text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
+                                <div className="flex items-center mt-1 text-sm text-gray-500 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500">
                                   <MapPin className="h-3 w-3 mr-1" />
                                   <span>{truck.work_location}</span>
                                 </div>

@@ -230,7 +230,7 @@ const NotificationCenter = () => {
               {displayNotifications.map((notification) => (
                 <div
                   key={notification.id}
-                  className={`p-4 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors ${
+                  className={`p-4 hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors ${
                     !notification.is_read ? 'bg-blue-50 border-l-4 border-l-blue-500' : ''
                   }`}
                 >

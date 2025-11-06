@@ -202,7 +202,7 @@ const TruckDetail = () => {
       case 'maintenance':
         return <AlertCircle className="h-5 w-5 text-red-500" />;
       default:
-        return <Clock className="h-5 w-5 text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500" />;
+        return <Clock className="h-5 w-5 text-gray-500 dark:text-gray-400" />;
     }
   };
 
@@ -235,7 +235,7 @@ const TruckDetail = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900 flex items-center justify-center">
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
       </div>
     );
@@ -243,13 +243,13 @@ const TruckDetail = () => {
 
   if (!truck) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900 flex items-center justify-center">
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
         <div className="text-center max-w-md">
           <AlertCircle className="h-12 w-12 text-red-500 mx-auto mb-4" />
           <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
             {error?.isAuthError ? 'Access Denied' : error ? 'Error Loading Truck' : 'Truck not found'}
           </h2>
-          <p className="mt-2 text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
+          <p className="mt-2 text-gray-600 dark:text-gray-400">
             {error ? error.message : "The truck you're looking for doesn't exist."}
           </p>
           
@@ -330,14 +330,14 @@ const TruckDetail = () => {
           )}
 
           {error && error.status && !error.isAuthError && (
-            <p className="mt-1 text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
+            <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
               Error {error.status}: {error.details?.error || 'Unknown error'}
             </p>
           )}
           
           {error && !error.isAuthError && (
             <div className="mt-4 p-3 bg-gray-100 dark:bg-gray-700 rounded-md text-left">
-              <p className="text-xs text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Debug Info:</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400">Debug Info:</p>
               <p className="text-xs text-gray-800">Truck ID: {id}</p>
               <p className="text-xs text-gray-800">User Role: {user?.role}</p>
               <p className="text-xs text-gray-800">Status: {error.status}</p>
@@ -357,7 +357,7 @@ const TruckDetail = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
         {/* Header */}
         <div className="mb-6 sm:mb-8">
@@ -372,7 +372,7 @@ const TruckDetail = () => {
                 navigate('/trucks');
               }
             }}
-            className="inline-flex items-center text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:text-gray-700 dark:text-gray-200 mb-4"
+            className="inline-flex items-center text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:text-gray-200 mb-4"
           >
             <ArrowLeft className="h-4 w-4 mr-1" />
             Back to {user?.role === 'customer' ? 'Search' : user?.role === 'admin' ? 'Admin Trucks' : 'Trucks'}
@@ -394,7 +394,7 @@ const TruckDetail = () => {
                     {truck.status.charAt(0).toUpperCase() + truck.status.slice(1)}
                   </span>
                 </div>
-                <p className="mt-2 text-sm sm:text-base text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
+                <p className="mt-2 text-sm sm:text-base text-gray-600 dark:text-gray-400">
                   {truck.make} {truck.model} {truck.year}
                 </p>
                 {truck.status !== 'active' && user?.role === 'customer' && (
@@ -419,7 +419,7 @@ const TruckDetail = () => {
               <div className="mt-4 sm:mt-0 flex items-center space-x-3">
                 <Link
                   to={`/trucks/${truck.id}/edit`}
-                  className="inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 hover:bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900"
+                  className="inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:bg-gray-900"
                 >
                   <Edit className="h-4 w-4 mr-2" />
                   Edit
@@ -460,7 +460,7 @@ const TruckDetail = () => {
         </div>
 
         {/* Truck Details */}
-        <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 shadow-sm rounded-lg overflow-hidden">
+        <div className="bg-white dark:bg-gray-800 shadow-sm rounded-lg overflow-hidden">
           <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
             <div className="flex items-center justify-between">
               <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">Truck Information</h3>
@@ -483,14 +483,14 @@ const TruckDetail = () => {
                 
                 <div className="space-y-3">
                   <div className="flex justify-between">
-                    <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Truck Type:</span>
+                    <span className="text-sm text-gray-500 dark:text-gray-400">Truck Type:</span>
                     <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                       {getTruckTypeLabel(truck.truck_type)}
                     </span>
                   </div>
                   
                   <div className="flex justify-between">
-                    <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">License Plate:</span>
+                    <span className="text-sm text-gray-500 dark:text-gray-400">License Plate:</span>
                     <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                       {truck.license_plate}
                     </span>
@@ -498,7 +498,7 @@ const TruckDetail = () => {
                   
                   {truck.year && (
                     <div className="flex justify-between">
-                      <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Year:</span>
+                      <span className="text-sm text-gray-500 dark:text-gray-400">Year:</span>
                       <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                         {truck.year}
                       </span>
@@ -507,7 +507,7 @@ const TruckDetail = () => {
                   
                   {truck.make && (
                     <div className="flex justify-between">
-                      <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Make:</span>
+                      <span className="text-sm text-gray-500 dark:text-gray-400">Make:</span>
                       <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                         {truck.make}
                       </span>
@@ -516,7 +516,7 @@ const TruckDetail = () => {
                   
                   {truck.model && (
                     <div className="flex justify-between">
-                      <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Model:</span>
+                      <span className="text-sm text-gray-500 dark:text-gray-400">Model:</span>
                       <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                         {truck.model}
                       </span>
@@ -533,7 +533,7 @@ const TruckDetail = () => {
                 
                 <div className="space-y-3">
                   <div className="flex justify-between">
-                    <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
+                    <span className="text-sm text-gray-500 dark:text-gray-400">
                       {truck.service_type === 'rental' ? 'Operating Weight:' : 'Weight Capacity:'}
                     </span>
                     <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
@@ -543,7 +543,7 @@ const TruckDetail = () => {
                   
                   {truck.capacity_volume && (
                     <div className="flex justify-between">
-                      <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Volume Capacity:</span>
+                      <span className="text-sm text-gray-500 dark:text-gray-400">Volume Capacity:</span>
                       <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                         {truck.capacity_volume} m³
                       </span>
@@ -552,7 +552,7 @@ const TruckDetail = () => {
                   
                   {truck.work_location && truck.service_type === 'rental' && (
                     <div className="flex justify-between">
-                      <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Work Location:</span>
+                      <span className="text-sm text-gray-500 dark:text-gray-400">Work Location:</span>
                       <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                         {truck.work_location}
                       </span>
@@ -564,7 +564,7 @@ const TruckDetail = () => {
                     <>
                       {truck.monthly_rate && (
                         <div className="flex justify-between">
-                          <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Monthly Rate:</span>
+                          <span className="text-sm text-gray-500 dark:text-gray-400">Monthly Rate:</span>
                           <span className="text-sm font-medium text-green-600">
                             {formatCurrency(truck.monthly_rate)}/month
                           </span>
@@ -575,14 +575,14 @@ const TruckDetail = () => {
                     /* Traditional Transport Pricing */
                     <>
                       <div className="flex justify-between">
-                        <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Pricing Type:</span>
+                        <span className="text-sm text-gray-500 dark:text-gray-400">Pricing Type:</span>
                         <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                           {truck.pricing_type === 'per_km' ? 'Per Kilometer' : 'Fixed Price'}
                         </span>
                       </div>
                       
                       <div className="flex justify-between">
-                        <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Price:</span>
+                        <span className="text-sm text-gray-500 dark:text-gray-400">Price:</span>
                         <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                           {truck.pricing_type === 'per_km' 
                             ? formatPriceWithUnit(truck.price_per_km)
@@ -606,7 +606,7 @@ const TruckDetail = () => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {truck.company_name && (
                     <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 flex items-center">
+                      <span className="text-sm text-gray-500 dark:text-gray-400 flex items-center">
                         <Building2 className="h-4 w-4 mr-1" />
                         Company:
                       </span>
@@ -618,7 +618,7 @@ const TruckDetail = () => {
                   
                   {(truck.first_name || truck.last_name) && (
                     <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 flex items-center">
+                      <span className="text-sm text-gray-500 dark:text-gray-400 flex items-center">
                         <User className="h-4 w-4 mr-1" />
                         Contact:
                       </span>
@@ -630,7 +630,7 @@ const TruckDetail = () => {
                   
                   {truck.phone && (
                     <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 flex items-center">
+                      <span className="text-sm text-gray-500 dark:text-gray-400 flex items-center">
                         <Phone className="h-4 w-4 mr-1" />
                         Phone:
                       </span>
@@ -645,7 +645,7 @@ const TruckDetail = () => {
                   {/* Provider Location Information */}
                   {(truck.provider_city || truck.provider_state || truck.provider_country) && (
                     <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 flex items-center">
+                      <span className="text-sm text-gray-500 dark:text-gray-400 flex items-center">
                         <MapPin className="h-4 w-4 mr-1" />
                         Location:
                       </span>
@@ -657,7 +657,7 @@ const TruckDetail = () => {
                   
                   {truck.street_address && (
                     <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 flex items-center">
+                      <span className="text-sm text-gray-500 dark:text-gray-400 flex items-center">
                         <MapPin className="h-4 w-4 mr-1" />
                         Address:
                       </span>
@@ -669,7 +669,7 @@ const TruckDetail = () => {
                   
                   {truck.provider_business_phone && (
                     <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 flex items-center">
+                      <span className="text-sm text-gray-500 dark:text-gray-400 flex items-center">
                         <Phone className="h-4 w-4 mr-1" />
                         Business Phone:
                       </span>
@@ -694,7 +694,7 @@ const TruckDetail = () => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {truck.driver_name && (
                     <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 flex items-center">
+                      <span className="text-sm text-gray-500 dark:text-gray-400 flex items-center">
                         <User className="h-4 w-4 mr-1" />
                         Name:
                       </span>
@@ -706,7 +706,7 @@ const TruckDetail = () => {
                   
                   {truck.driver_phone && (
                     <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 flex items-center">
+                      <span className="text-sm text-gray-500 dark:text-gray-400 flex items-center">
                         <Phone className="h-4 w-4 mr-1" />
                         Phone:
                       </span>
@@ -720,7 +720,7 @@ const TruckDetail = () => {
                   
                   {truck.driver_email && (
                     <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 flex items-center">
+                      <span className="text-sm text-gray-500 dark:text-gray-400 flex items-center">
                         <Mail className="h-4 w-4 mr-1" />
                         Email:
                       </span>
@@ -734,7 +734,7 @@ const TruckDetail = () => {
                   
                   {truck.driver_license_number && (
                     <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 flex items-center">
+                      <span className="text-sm text-gray-500 dark:text-gray-400 flex items-center">
                         <CreditCard className="h-4 w-4 mr-1" />
                         License #:
                       </span>
@@ -755,14 +755,14 @@ const TruckDetail = () => {
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="flex justify-between">
-                  <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Created:</span>
+                  <span className="text-sm text-gray-500 dark:text-gray-400">Created:</span>
                   <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                     {new Date(truck.created_at).toLocaleDateString()}
                   </span>
                 </div>
                 
                 <div className="flex justify-between">
-                  <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Last Updated:</span>
+                  <span className="text-sm text-gray-500 dark:text-gray-400">Last Updated:</span>
                   <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                     {new Date(truck.updated_at).toLocaleDateString()}
                   </span>
@@ -774,7 +774,7 @@ const TruckDetail = () => {
 
         {/* Images Section */}
         {truck.images && truck.images.length > 0 && (
-          <div className="mt-8 bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 shadow-sm rounded-lg overflow-hidden">
+          <div className="mt-8 bg-white dark:bg-gray-800 shadow-sm rounded-lg overflow-hidden">
             <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
               <div className="flex items-center">
                 <Image className="h-5 w-5 text-blue-500 mr-2" />
@@ -827,7 +827,7 @@ const TruckDetail = () => {
                           onClick={() => {
                             window.open(imageUrl, '_blank', 'noopener,noreferrer');
                           }}
-                          className="opacity-0 group-hover:opacity-100 bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 bg-opacity-90 hover:bg-opacity-100 rounded-full p-2 transition-all duration-200"
+                          className="opacity-0 group-hover:opacity-100 bg-white dark:bg-gray-800 bg-opacity-90 hover:bg-opacity-100 rounded-full p-2 transition-all duration-200"
                           title="View full size"
                         >
                           <Eye className="h-4 w-4 text-gray-700 dark:text-gray-200" />
@@ -843,7 +843,7 @@ const TruckDetail = () => {
 
         {/* Documents Section */}
         {truck.documents && truck.documents.length > 0 && (
-          <div className="mt-8 bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 shadow-sm rounded-lg overflow-hidden">
+          <div className="mt-8 bg-white dark:bg-gray-800 shadow-sm rounded-lg overflow-hidden">
             <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
               <div className="flex items-center">
                 <FileText className="h-5 w-5 text-green-500 mr-2" />
@@ -904,7 +904,7 @@ const TruckDetail = () => {
                       <div className="flex items-center justify-between">
                         <div className="flex items-center flex-1 min-w-0">
                           <div className="flex-shrink-0">
-                            <FileText className="h-10 w-10 text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500" />
+                            <FileText className="h-10 w-10 text-gray-400 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500" />
                           </div>
                           <div className="ml-4 flex-1 min-w-0">
                             <div className="flex items-center space-x-2">
@@ -915,11 +915,11 @@ const TruckDetail = () => {
                                 {doc.verification_status}
                               </span>
                             </div>
-                            <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
+                            <p className="text-sm text-gray-500 dark:text-gray-400">
                               {doc.document_type.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase())}
                               {doc.file_size && ` • ${(doc.file_size / 1024).toFixed(1)} KB`}
                             </p>
-                            <p className="text-xs text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
+                            <p className="text-xs text-gray-400 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500">
                               Uploaded: {new Date(doc.uploaded_at).toLocaleDateString()}
                             </p>
                           </div>
@@ -971,7 +971,7 @@ const TruckDetail = () => {
                                 alert(`Error viewing document: ${error.response?.data?.error || error.message}`);
                               }
                             }}
-                            className="inline-flex items-center px-3 py-2 border border-gray-300 dark:border-gray-600 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 hover:bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-500"
+                            className="inline-flex items-center px-3 py-2 border border-gray-300 dark:border-gray-600 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-500"
                           >
                             <Eye className="h-4 w-4 mr-1" />
                             View
@@ -988,37 +988,37 @@ const TruckDetail = () => {
 
         {/* Stats Cards */}
         <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-6">
-          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
             <div className="flex items-center">
               <div className="flex-shrink-0">
                 <Package className="h-8 w-8 text-primary-600" />
               </div>
               <div className="ml-4">
-                <p className="text-sm font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Completed Bookings</p>
+                <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Completed Bookings</p>
                 <p className="text-2xl font-semibold text-gray-900 dark:text-gray-100">{truckStats.completedBookings}</p>
               </div>
             </div>
           </div>
 
-          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
             <div className="flex items-center">
               <div className="flex-shrink-0">
                 <DollarSign className="h-8 w-8 text-green-600" />
               </div>
               <div className="ml-4">
-                <p className="text-sm font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Total Revenue</p>
+                <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Total Revenue</p>
                 <p className="text-2xl font-semibold text-gray-900 dark:text-gray-100">{formatCurrency(truckStats.totalRevenue)}</p>
               </div>
             </div>
           </div>
 
-          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
             <div className="flex items-center">
               <div className="flex-shrink-0">
                 <Calendar className="h-8 w-8 text-purple-600" />
               </div>
               <div className="ml-4">
-                <p className="text-sm font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Days Active</p>
+                <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Days Active</p>
                 <p className="text-2xl font-semibold text-gray-900 dark:text-gray-100">
                   {Math.floor((new Date() - new Date(truck.created_at)) / (1000 * 60 * 60 * 24))}
                 </p>

@@ -179,14 +179,14 @@ const AdminDashboard = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900 flex items-center justify-center">
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
         {/* Email Verification Banner */}
         <EmailVerificationBanner />
@@ -239,7 +239,7 @@ const AdminDashboard = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <Link
               to="/admin/users"
-              className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow group"
+              className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow group"
             >
               <div className="flex items-center">
                 <div className="flex-shrink-0">
@@ -247,14 +247,14 @@ const AdminDashboard = () => {
                 </div>
                 <div className="ml-4">
                   <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">Manage Users</h3>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">View and manage all users</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500">View and manage all users</p>
                 </div>
               </div>
             </Link>
 
             <Link
               to="/admin/analytics"
-              className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow group"
+              className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow group"
             >
               <div className="flex items-center">
                 <div className="flex-shrink-0">
@@ -262,14 +262,14 @@ const AdminDashboard = () => {
                 </div>
                 <div className="ml-4">
                   <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">{t('dashboard.analytics')}</h3>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Trends, funnels, breakdowns</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500">Trends, funnels, breakdowns</p>
                 </div>
               </div>
             </Link>
 
             <Link
               to="/admin/bookings"
-              className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow group"
+              className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow group"
             >
               <div className="flex items-center">
                 <div className="flex-shrink-0">
@@ -277,14 +277,14 @@ const AdminDashboard = () => {
                 </div>
                 <div className="ml-4">
                   <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">Bookings</h3>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Review and approve bookings</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500">Review and approve bookings</p>
                 </div>
               </div>
             </Link>
 
             <Link
               to="/admin/documents"
-              className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow group"
+              className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow group"
             >
               <div className="flex items-center">
                 <div className="flex-shrink-0">
@@ -292,14 +292,14 @@ const AdminDashboard = () => {
                 </div>
                 <div className="ml-4">
                   <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">Document Verification</h3>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Review and verify documents</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500">Review and verify documents</p>
                 </div>
               </div>
             </Link>
 
             <Link
               to="/admin/providers"
-              className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow group"
+              className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow group"
             >
               <div className="flex items-center">
                 <div className="flex-shrink-0">
@@ -307,7 +307,7 @@ const AdminDashboard = () => {
                 </div>
                 <div className="ml-4">
                   <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">Provider Verification</h3>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Review and verify providers</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500">Review and verify providers</p>
                 </div>
               </div>
             </Link>
@@ -458,7 +458,7 @@ const AdminDashboard = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Recent Activity */}
-          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 shadow-sm rounded-lg">
+          <div className="bg-white dark:bg-gray-800 shadow-sm rounded-lg">
             <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
               <div className="flex items-center justify-between">
                 <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">{t('dashboard.recentActivity')}</h3>
@@ -473,9 +473,9 @@ const AdminDashboard = () => {
             <div className="divide-y divide-gray-200 dark:divide-gray-700">
               {recentActivity.length === 0 ? (
                 <div className="px-6 py-8 text-center">
-                  <Activity className="mx-auto h-12 w-12 text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500" />
+                  <Activity className="mx-auto h-12 w-12 text-gray-400 dark:text-gray-500 dark:text-gray-400" />
                   <h3 className="mt-2 text-sm font-medium text-gray-900 dark:text-gray-100">{t('dashboard.noRecentActivity')}</h3>
-                  <p className="mt-1 text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
+                  <p className="mt-1 text-sm text-gray-500 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500">
                     System activity will appear here.
                   </p>
                 </div>
@@ -486,20 +486,20 @@ const AdminDashboard = () => {
                       <div className="flex items-start space-x-4">
                         <div className="flex-shrink-0">
                           <div className="h-8 w-8 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center">
-                            <Package className="h-4 w-4 text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500" />
+                            <Package className="h-4 w-4 text-gray-600 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500" />
                           </div>
                         </div>
                         <div className="min-w-0 flex-1">
                           <p className="text-sm font-medium text-gray-900 dark:text-gray-100">
                             {booking.service_type === 'rental' ? 'Equipment Rental' : 'Transport'} #{booking.id.slice(-8)}
                           </p>
-                          <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 mt-1">
+                          <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500 mt-1">
                             {booking.service_type === 'rental' 
                               ? (booking.work_address || 'Equipment rental')
                               : `${booking.pickup_city} → ${booking.destination_city}`
                             }
                           </p>
-                          <p className="text-xs text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 mt-1">
+                          <p className="text-xs text-gray-400 dark:text-gray-500 dark:text-gray-400 mt-1">
                             {formatDate(booking.created_at)} • {booking.status.replace('_', ' ')}
                           </p>
                         </div>
@@ -512,7 +512,7 @@ const AdminDashboard = () => {
           </div>
 
           {/* Pending Items */}
-          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 shadow-sm rounded-lg">
+          <div className="bg-white dark:bg-gray-800 shadow-sm rounded-lg">
             <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
               <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">Pending Actions</h3>
             </div>
@@ -521,7 +521,7 @@ const AdminDashboard = () => {
                 <div className="px-6 py-8 text-center">
                   <CheckCircle className="mx-auto h-12 w-12 text-green-400" />
                   <h3 className="mt-2 text-sm font-medium text-gray-900 dark:text-gray-100">All caught up!</h3>
-                  <p className="mt-1 text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
+                  <p className="mt-1 text-sm text-gray-500 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500">
                     No pending actions require your attention.
                   </p>
                 </div>
@@ -530,7 +530,7 @@ const AdminDashboard = () => {
                   <div key={index} className="px-6 py-4">
                     <Link
                       to={item.link}
-                      className="flex items-center justify-between hover:bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900 -mx-6 px-6 py-2 rounded-lg transition-colors"
+                      className="flex items-center justify-between hover:bg-gray-50 dark:bg-gray-900 -mx-6 px-6 py-2 rounded-lg transition-colors"
                     >
                       <div className="flex items-center space-x-4">
                         <div className="flex-shrink-0">
@@ -542,7 +542,7 @@ const AdminDashboard = () => {
                           <p className="text-sm font-medium text-gray-900 dark:text-gray-100">
                             {item.title}
                           </p>
-                          <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
+                          <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500">
                             {item.description}
                           </p>
                         </div>

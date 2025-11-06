@@ -91,33 +91,33 @@ const Profile = () => {
   if (!user) return null;
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 py-8 flex items-center justify-center">
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8 flex items-center justify-center">
         <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-600"></div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 py-8">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">Your Profile</h1>
-          <p className="mt-2 text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">View and update your account information.</p>
+          <p className="mt-2 text-gray-600 dark:text-gray-400 dark:text-gray-400">View and update your account information.</p>
         </div>
 
         <div className="space-y-8">
           {/* Account Overview Section */}
-          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 shadow-sm rounded-xl border border-gray-200 dark:border-gray-700 p-6">
+          <div className="bg-white dark:bg-gray-800 shadow-sm rounded-xl border border-gray-200 dark:border-gray-700 p-6">
             <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Account Overview</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              <div className="bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 rounded-lg p-4">
-                <div className="text-xs font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 uppercase tracking-wide">Role</div>
+              <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-4">
+                <div className="text-xs font-medium text-gray-500 dark:text-gray-400 dark:text-gray-400 uppercase tracking-wide">Role</div>
                 <div className="mt-2 inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200">
                   {meta.role}
                 </div>
               </div>
-              <div className="bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 rounded-lg p-4">
-                <div className="text-xs font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 uppercase tracking-wide">Email Verified</div>
+              <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-4">
+                <div className="text-xs font-medium text-gray-500 dark:text-gray-400 dark:text-gray-400 uppercase tracking-wide">Email Verified</div>
                 <div className="mt-2 text-sm font-medium text-gray-800">
                   <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
                     meta.emailVerified ? 'bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200' : 'bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200'
@@ -126,8 +126,8 @@ const Profile = () => {
                   </span>
                 </div>
               </div>
-              <div className="bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 rounded-lg p-4">
-                <div className="text-xs font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 uppercase tracking-wide">Account Status</div>
+              <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-4">
+                <div className="text-xs font-medium text-gray-500 dark:text-gray-400 dark:text-gray-400 uppercase tracking-wide">Account Status</div>
                 <div className="mt-2 text-sm font-medium text-gray-800">
                   <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
                     meta.isActive ? 'bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200' : 'bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200'
@@ -137,8 +137,8 @@ const Profile = () => {
                 </div>
               </div>
               {meta.createdAt && (
-                <div className="bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 rounded-lg p-4">
-                  <div className="text-xs font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 uppercase tracking-wide">Member Since</div>
+                <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-4">
+                  <div className="text-xs font-medium text-gray-500 dark:text-gray-400 dark:text-gray-400 uppercase tracking-wide">Member Since</div>
                   <div className="mt-2 text-sm font-medium text-gray-800">{new Date(meta.createdAt).toLocaleDateString()}</div>
                 </div>
               )}
@@ -146,20 +146,20 @@ const Profile = () => {
           </div>
 
           {/* Personal Information Section */}
-          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 shadow-sm rounded-xl border border-gray-200 dark:border-gray-700 p-6">
+          <div className="bg-white dark:bg-gray-800 shadow-sm rounded-xl border border-gray-200 dark:border-gray-700 p-6">
             <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Personal Information</h2>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">Email Address</label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <Mail className="h-5 w-5 text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500" />
+                    <Mail className="h-5 w-5 text-gray-400 dark:text-gray-400" />
                   </div>
-                  <div className="pl-10 pr-3 py-2 bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-lg text-sm text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 w-full">
+                  <div className="pl-10 pr-3 py-2 bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-lg text-sm text-gray-600 dark:text-gray-400 dark:text-gray-400 w-full">
                     {meta.email}
                   </div>
                 </div>
-                <p className="mt-1 text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Email address cannot be changed from this form</p>
+                <p className="mt-1 text-xs text-gray-500 dark:text-gray-400 dark:text-gray-400">Email address cannot be changed from this form</p>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -167,7 +167,7 @@ const Profile = () => {
                   <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">First Name</label>
                   <div className="relative">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                      <User className="h-5 w-5 text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500" />
+                      <User className="h-5 w-5 text-gray-400 dark:text-gray-400" />
                     </div>
                     <input 
                       id="firstName" 
@@ -183,7 +183,7 @@ const Profile = () => {
                   <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">Last Name</label>
                   <div className="relative">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                      <User className="h-5 w-5 text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500" />
+                      <User className="h-5 w-5 text-gray-400 dark:text-gray-400" />
                     </div>
                     <input 
                       id="lastName" 
@@ -201,7 +201,7 @@ const Profile = () => {
                 <label htmlFor="phone" className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">Phone Number</label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <Phone className="h-5 w-5 text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500" />
+                    <Phone className="h-5 w-5 text-gray-400 dark:text-gray-400" />
                   </div>
                   <input 
                     id="phone" 
@@ -238,13 +238,13 @@ const Profile = () => {
           </div>
 
           {/* Location Information Section */}
-          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 shadow-sm rounded-xl border border-gray-200 dark:border-gray-700 p-6">
+          <div className="bg-white dark:bg-gray-800 shadow-sm rounded-xl border border-gray-200 dark:border-gray-700 p-6">
             <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Location Information</h2>
             <LocationEditor />
           </div>
 
           {/* Security Section */}
-          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 shadow-sm rounded-xl border border-gray-200 dark:border-gray-700 p-6">
+          <div className="bg-white dark:bg-gray-800 shadow-sm rounded-xl border border-gray-200 dark:border-gray-700 p-6">
             <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Security</h2>
             <form onSubmit={updatePwd} className="space-y-4">
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
@@ -252,7 +252,7 @@ const Profile = () => {
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">Current Password</label>
                   <div className="relative">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                      <Lock className="h-5 w-5 text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500" />
+                      <Lock className="h-5 w-5 text-gray-400 dark:text-gray-400" />
                     </div>
                     <input 
                       type="password" 
@@ -267,7 +267,7 @@ const Profile = () => {
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">New Password</label>
                   <div className="relative">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                      <Lock className="h-5 w-5 text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500" />
+                      <Lock className="h-5 w-5 text-gray-400 dark:text-gray-400" />
                     </div>
                     <input 
                       type="password" 
@@ -282,7 +282,7 @@ const Profile = () => {
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">Confirm New Password</label>
                   <div className="relative">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                      <Lock className="h-5 w-5 text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500" />
+                      <Lock className="h-5 w-5 text-gray-400 dark:text-gray-400" />
                     </div>
                     <input 
                       type="password" 
@@ -383,7 +383,7 @@ const LocationEditor = () => {
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">Company Name</label>
           <div className="relative">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <Building2 className="h-5 w-5 text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500" />
+              <Building2 className="h-5 w-5 text-gray-400 dark:text-gray-400" />
             </div>
             <input 
               name="companyName" 
@@ -400,7 +400,7 @@ const LocationEditor = () => {
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">Street Address</label>
         <div className="relative">
           <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <MapPin className="h-5 w-5 text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500" />
+            <MapPin className="h-5 w-5 text-gray-400 dark:text-gray-400" />
           </div>
           <input 
             name="address" 

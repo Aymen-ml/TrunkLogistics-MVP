@@ -105,14 +105,14 @@ const ProviderVerification = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900 flex items-center justify-center">
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
         <div className="mb-8">
@@ -120,7 +120,7 @@ const ProviderVerification = () => {
             <Building className="h-8 w-8 text-primary-600 mr-3" />
             <div>
               <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">Provider Verification</h1>
-              <p className="mt-2 text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
+              <p className="mt-2 text-gray-600 dark:text-gray-400">
                 Review and verify provider applications
               </p>
             </div>
@@ -129,7 +129,7 @@ const ProviderVerification = () => {
 
         {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 overflow-hidden shadow rounded-lg">
+          <div className="bg-white dark:bg-gray-800 overflow-hidden shadow rounded-lg">
             <div className="p-5">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
@@ -137,7 +137,7 @@ const ProviderVerification = () => {
                 </div>
                 <div className="ml-5 w-0 flex-1">
                   <dl>
-                    <dt className="text-sm font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 truncate">
+                    <dt className="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">
                       Pending Verification
                     </dt>
                     <dd className="text-lg font-medium text-gray-900 dark:text-gray-100">
@@ -149,7 +149,7 @@ const ProviderVerification = () => {
             </div>
           </div>
 
-          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 overflow-hidden shadow rounded-lg">
+          <div className="bg-white dark:bg-gray-800 overflow-hidden shadow rounded-lg">
             <div className="p-5">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
@@ -157,7 +157,7 @@ const ProviderVerification = () => {
                 </div>
                 <div className="ml-5 w-0 flex-1">
                   <dl>
-                    <dt className="text-sm font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 truncate">
+                    <dt className="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">
                       Verified Providers
                     </dt>
                     <dd className="text-lg font-medium text-gray-900 dark:text-gray-100">
@@ -169,7 +169,7 @@ const ProviderVerification = () => {
             </div>
           </div>
 
-          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 overflow-hidden shadow rounded-lg">
+          <div className="bg-white dark:bg-gray-800 overflow-hidden shadow rounded-lg">
             <div className="p-5">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
@@ -177,7 +177,7 @@ const ProviderVerification = () => {
                 </div>
                 <div className="ml-5 w-0 flex-1">
                   <dl>
-                    <dt className="text-sm font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 truncate">
+                    <dt className="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">
                       Total Providers
                     </dt>
                     <dd className="text-lg font-medium text-gray-900 dark:text-gray-100">
@@ -191,21 +191,21 @@ const ProviderVerification = () => {
         </div>
 
         {/* Providers Table */}
-        <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 shadow overflow-hidden sm:rounded-md">
+        <div className="bg-white dark:bg-gray-800 shadow overflow-hidden sm:rounded-md">
           <div className="px-4 py-5 sm:px-6 border-b border-gray-200 dark:border-gray-700">
             <h3 className="text-lg leading-6 font-medium text-gray-900 dark:text-gray-100">
               Provider Applications
             </h3>
-            <p className="mt-1 max-w-2xl text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
+            <p className="mt-1 max-w-2xl text-sm text-gray-500 dark:text-gray-400">
               Review provider details and approve or reject applications
             </p>
           </div>
           
           {providers.length === 0 ? (
             <div className="text-center py-12">
-              <AlertCircle className="mx-auto h-12 w-12 text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500" />
+              <AlertCircle className="mx-auto h-12 w-12 text-gray-400 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500" />
               <h3 className="mt-2 text-sm font-medium text-gray-900 dark:text-gray-100">No providers found</h3>
-              <p className="mt-1 text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
+              <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
                 No provider applications to review at this time.
               </p>
             </div>
@@ -216,7 +216,7 @@ const ProviderVerification = () => {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center">
                       <div className="flex-shrink-0">
-                        <Building className="h-10 w-10 text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500" />
+                        <Building className="h-10 w-10 text-gray-400 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500" />
                       </div>
                       <div className="ml-4">
                         <div className="flex items-center">
@@ -227,12 +227,12 @@ const ProviderVerification = () => {
                             {getStatusBadge(provider)}
                           </div>
                         </div>
-                        <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">{provider.email}</p>
-                        <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
+                        <p className="text-sm text-gray-500 dark:text-gray-400">{provider.email}</p>
+                        <p className="text-sm text-gray-500 dark:text-gray-400">
                           Registered: {new Date(provider.created_at).toLocaleDateString()}
                         </p>
                         {provider.phone && (
-                          <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Phone: {provider.phone}</p>
+                          <p className="text-sm text-gray-500 dark:text-gray-400">Phone: {provider.phone}</p>
                         )}
                       </div>
                     </div>
@@ -240,7 +240,7 @@ const ProviderVerification = () => {
                     <div className="flex items-center space-x-2">
                       <button
                         onClick={() => handleViewDetails(provider)}
-                        className="inline-flex items-center px-3 py-2 border border-gray-300 dark:border-gray-600 text-sm leading-4 font-medium rounded-md text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 hover:bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-500"
+                        className="inline-flex items-center px-3 py-2 border border-gray-300 dark:border-gray-600 text-sm leading-4 font-medium rounded-md text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-500"
                       >
                         <Eye className="h-4 w-4 mr-2" />
                         View Details
@@ -274,7 +274,7 @@ const ProviderVerification = () => {
                           </button>
                         </>
                       ) : (
-                        <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
+                        <span className="text-sm text-gray-500 dark:text-gray-400">
                           {provider.updated_at ? `Verified on ${new Date(provider.updated_at).toLocaleDateString()}` : 'Verified'}
                         </span>
                       )}
@@ -290,7 +290,7 @@ const ProviderVerification = () => {
       {/* Provider Details Modal */}
       {selectedProvider && (
         <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
-          <div className="relative top-20 mx-auto p-5 border w-11/12 max-w-4xl shadow-lg rounded-md bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800">
+          <div className="relative top-20 mx-auto p-5 border w-11/12 max-w-4xl shadow-lg rounded-md bg-white dark:bg-gray-800">
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">
                 Provider Details - {selectedProvider.first_name} {selectedProvider.last_name}
@@ -300,7 +300,7 @@ const ProviderVerification = () => {
                   setSelectedProvider(null);
                   setProviderDetails(null);
                 }}
-                className="text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500"
+                className="text-gray-400 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:text-gray-400"
               >
                 <X className="h-6 w-6" />
               </button>
@@ -313,18 +313,18 @@ const ProviderVerification = () => {
             ) : (
               <div className="space-y-6">
                 {/* Basic Information */}
-                <div className="bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900 p-4 rounded-lg">
+                <div className="bg-gray-50 dark:bg-gray-900 p-4 rounded-lg">
                   <h4 className="text-md font-medium text-gray-900 dark:text-gray-100 mb-3 flex items-center">
                     <User className="h-5 w-5 mr-2" />
                     Basic Information
                   </h4>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <p className="text-sm font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Name</p>
+                      <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Name</p>
                       <p className="text-sm text-gray-900 dark:text-gray-100">{selectedProvider.first_name} {selectedProvider.last_name}</p>
                     </div>
                     <div>
-                      <p className="text-sm font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Email</p>
+                      <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Email</p>
                       <p className="text-sm text-gray-900 dark:text-gray-100 flex items-center">
                         <Mail className="h-4 w-4 mr-1" />
                         {selectedProvider.email}
@@ -332,7 +332,7 @@ const ProviderVerification = () => {
                     </div>
                     {selectedProvider.phone && (
                       <div>
-                        <p className="text-sm font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Phone</p>
+                        <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Phone</p>
                         <p className="text-sm text-gray-900 dark:text-gray-100 flex items-center">
                           <Phone className="h-4 w-4 mr-1" />
                           {selectedProvider.phone}
@@ -340,14 +340,14 @@ const ProviderVerification = () => {
                       </div>
                     )}
                     <div>
-                      <p className="text-sm font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Registration Date</p>
+                      <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Registration Date</p>
                       <p className="text-sm text-gray-900 dark:text-gray-100 flex items-center">
                         <Calendar className="h-4 w-4 mr-1" />
                         {new Date(selectedProvider.created_at).toLocaleDateString()}
                       </p>
                     </div>
                     <div>
-                      <p className="text-sm font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Email Verified</p>
+                      <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Email Verified</p>
                       <p className="text-sm text-gray-900 dark:text-gray-100">
                         {selectedProvider.email_verified ? (
                           <span className="text-green-600">✓ Verified</span>
@@ -357,7 +357,7 @@ const ProviderVerification = () => {
                       </p>
                     </div>
                     <div>
-                      <p className="text-sm font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Account Status</p>
+                      <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Account Status</p>
                       <p className="text-sm text-gray-900 dark:text-gray-100">
                         {selectedProvider.is_active ? (
                           <span className="text-green-600">Active</span>
@@ -379,31 +379,31 @@ const ProviderVerification = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       {providerDetails.profile.company_name && (
                         <div className="md:col-span-2">
-                          <p className="text-sm font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Company Name</p>
+                          <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Company Name</p>
                           <p className="text-lg font-semibold text-gray-900 dark:text-gray-100">{providerDetails.profile.company_name}</p>
                         </div>
                       )}
                       {providerDetails.profile.business_license && (
                         <div>
-                          <p className="text-sm font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Business License</p>
+                          <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Business License</p>
                           <p className="text-sm text-gray-900 dark:text-gray-100">{providerDetails.profile.business_license}</p>
                         </div>
                       )}
                       {providerDetails.profile.business_type && (
                         <div>
-                          <p className="text-sm font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Business Type</p>
+                          <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Business Type</p>
                           <p className="text-sm text-gray-900 dark:text-gray-100">{providerDetails.profile.business_type}</p>
                         </div>
                       )}
                       {providerDetails.profile.industry_sector && (
                         <div>
-                          <p className="text-sm font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Industry Sector</p>
+                          <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Industry Sector</p>
                           <p className="text-sm text-gray-900 dark:text-gray-100">{providerDetails.profile.industry_sector}</p>
                         </div>
                       )}
                       {providerDetails.profile.business_phone && (
                         <div>
-                          <p className="text-sm font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Business Phone</p>
+                          <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Business Phone</p>
                           <p className="text-sm text-gray-900 dark:text-gray-100 flex items-center">
                             <Phone className="h-4 w-4 mr-1" />
                             {providerDetails.profile.business_phone}
@@ -424,32 +424,32 @@ const ProviderVerification = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       {providerDetails.profile.street_address && (
                         <div className="md:col-span-2">
-                          <p className="text-sm font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Street Address</p>
+                          <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Street Address</p>
                           <p className="text-sm text-gray-900 dark:text-gray-100">{providerDetails.profile.street_address}</p>
                         </div>
                       )}
                       {providerDetails.profile.city && (
                         <div>
-                          <p className="text-sm font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">City</p>
+                          <p className="text-sm font-medium text-gray-500 dark:text-gray-400">City</p>
                           <p className="text-sm text-gray-900 dark:text-gray-100">{providerDetails.profile.city}</p>
                         </div>
                       )}
                       {providerDetails.profile.state_province && (
                         <div>
-                          <p className="text-sm font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">State/Province</p>
+                          <p className="text-sm font-medium text-gray-500 dark:text-gray-400">State/Province</p>
                           <p className="text-sm text-gray-900 dark:text-gray-100">{providerDetails.profile.state_province}</p>
                         </div>
                       )}
                       {providerDetails.profile.postal_code && (
                         <div>
-                          <p className="text-sm font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Postal Code</p>
+                          <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Postal Code</p>
                           <p className="text-sm text-gray-900 dark:text-gray-100 font-mono">{providerDetails.profile.postal_code}</p>
                         </div>
                       )}
                       {(providerDetails.profile.street_address || providerDetails.profile.city || providerDetails.profile.state_province || providerDetails.profile.postal_code) && (
                         <div className="md:col-span-2">
-                          <p className="text-sm font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Complete Address</p>
-                          <p className="text-sm text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 p-2 rounded border">
+                          <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Complete Address</p>
+                          <p className="text-sm text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-800 p-2 rounded border">
                             {[
                               providerDetails.profile.street_address,
                               providerDetails.profile.city,
@@ -473,16 +473,16 @@ const ProviderVerification = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       {providerDetails.profile.contact_person_name && (
                         <div>
-                          <p className="text-sm font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Name</p>
+                          <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Name</p>
                           <p className="text-sm text-gray-900 dark:text-gray-100">{providerDetails.profile.contact_person_name}</p>
                           {providerDetails.profile.contact_person_position && (
-                            <p className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">{providerDetails.profile.contact_person_position}</p>
+                            <p className="text-xs text-gray-500 dark:text-gray-400">{providerDetails.profile.contact_person_position}</p>
                           )}
                         </div>
                       )}
                       {providerDetails.profile.contact_person_email && (
                         <div>
-                          <p className="text-sm font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Email</p>
+                          <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Email</p>
                           <p className="text-sm text-gray-900 dark:text-gray-100 flex items-center">
                             <Mail className="h-4 w-4 mr-1" />
                             {providerDetails.profile.contact_person_email}
@@ -491,7 +491,7 @@ const ProviderVerification = () => {
                       )}
                       {providerDetails.profile.contact_person_phone && (
                         <div>
-                          <p className="text-sm font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Phone</p>
+                          <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Phone</p>
                           <p className="text-sm text-gray-900 dark:text-gray-100 flex items-center">
                             <Phone className="h-4 w-4 mr-1" />
                             {providerDetails.profile.contact_person_phone}
@@ -510,13 +510,13 @@ const ProviderVerification = () => {
                   </h4>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <p className="text-sm font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Admin Verification</p>
+                      <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Admin Verification</p>
                       <div className="mt-1">
                         {getStatusBadge(selectedProvider)}
                       </div>
                     </div>
                     <div>
-                      <p className="text-sm font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Last Updated</p>
+                      <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Last Updated</p>
                       <p className="text-sm text-gray-900 dark:text-gray-100">
                         {new Date(selectedProvider.updated_at).toLocaleString()}
                       </p>

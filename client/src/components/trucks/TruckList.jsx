@@ -89,7 +89,7 @@ const TruckList = () => {
       case 'maintenance':
         return <AlertCircle className="h-4 w-4 text-red-500" />;
       default:
-        return <Clock className="h-4 w-4 text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500" />;
+        return <Clock className="h-4 w-4 text-gray-500 dark:text-gray-400" />;
     }
   };
 
@@ -376,7 +376,7 @@ const TruckList = () => {
             {filteredTrucks.map((truck) => {
               const isRental = truck.service_type === 'rental';
               return (
-                <div key={truck.id} className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
+                <div key={truck.id} className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
                   <div className="p-6">
                     <div className="flex items-start justify-between">
                       <div className="flex items-center">
@@ -400,7 +400,7 @@ const TruckList = () => {
                               </span>
                             )}
                           </div>
-                          <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
+                          <p className="text-sm text-gray-500 dark:text-gray-400">
                             {truck.make} {truck.model} {truck.year}
                           </p>
                         </div>
@@ -412,18 +412,18 @@ const TruckList = () => {
 
                     <div className="mt-4 space-y-2">
                       <div className="flex justify-between text-sm">
-                        <span className="text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Type:</span>
+                        <span className="text-gray-500 dark:text-gray-400">Type:</span>
                         <span className="font-medium">{getTruckTypeLabel(truck.truck_type)}</span>
                       </div>
                       <div className="flex justify-between text-sm">
-                        <span className="text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">{isRental ? 'Weight:' : 'Capacity:'}</span>
+                        <span className="text-gray-500 dark:text-gray-400">{isRental ? 'Weight:' : 'Capacity:'}</span>
                         <span className="font-medium">{truck.capacity_weight?.toLocaleString()} kg</span>
                       </div>
                       
                       {/* Show rental rates or transport pricing */}
                       {isRental ? (
                         <div className="flex justify-between text-sm">
-                          <span className="text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Rates:</span>
+                          <span className="text-gray-500 dark:text-gray-400">Rates:</span>
                           <span className="font-medium">
                             {[
                               truck.hourly_rate && `$${truck.hourly_rate}/hr`,
@@ -435,7 +435,7 @@ const TruckList = () => {
                         </div>
                       ) : (
                         <div className="flex justify-between text-sm">
-                          <span className="text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Pricing:</span>
+                          <span className="text-gray-500 dark:text-gray-400">Pricing:</span>
                           <span className="font-medium">
                             {truck.pricing_type === 'per_km' 
                               ? `$${truck.price_per_km}/km`
@@ -448,7 +448,7 @@ const TruckList = () => {
                       {/* Show work location for rental equipment */}
                       {isRental && truck.work_location && (
                         <div className="flex items-start justify-between text-sm">
-                          <span className="text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 flex items-center">
+                          <span className="text-gray-500 dark:text-gray-400 flex items-center">
                             <MapPin className="h-3 w-3 mr-1" />
                             Location:
                           </span>
@@ -466,21 +466,21 @@ const TruckList = () => {
                         <div className="flex items-center space-x-2">
                           <Link
                             to={`/trucks/${truck.id}`}
-                            className="p-2 text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:text-primary-600 rounded-full hover:bg-gray-100 dark:bg-gray-700"
+                            className="p-2 text-gray-400 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500 hover:text-primary-600 rounded-full hover:bg-gray-100 dark:bg-gray-700"
                             title="View details"
                           >
                             <Eye className="h-4 w-4" />
                           </Link>
                           <Link
                             to={`/trucks/${truck.id}/edit`}
-                            className="p-2 text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:text-primary-600 rounded-full hover:bg-gray-100 dark:bg-gray-700"
+                            className="p-2 text-gray-400 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500 hover:text-primary-600 rounded-full hover:bg-gray-100 dark:bg-gray-700"
                             title={`Edit ${isRental ? 'equipment' : 'truck'}`}
                           >
                             <Edit className="h-4 w-4" />
                           </Link>
                           <button
                             onClick={() => deleteTruck(truck.id)}
-                            className="p-2 text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:text-red-600 rounded-full hover:bg-gray-100 dark:bg-gray-700"
+                            className="p-2 text-gray-400 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500 hover:text-red-600 rounded-full hover:bg-gray-100 dark:bg-gray-700"
                             title={`Delete ${isRental ? 'equipment' : 'truck'}`}
                           >
                             <Trash2 className="h-4 w-4" />

@@ -117,7 +117,7 @@ const BookingList = () => {
       case 'cancelled':
         return <XCircle className="h-4 w-4 text-red-500" />;
       default:
-        return <AlertCircle className="h-4 w-4 text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500" />;
+        return <AlertCircle className="h-4 w-4 text-gray-500 dark:text-gray-400" />;
     }
   };
 
@@ -435,7 +435,7 @@ const BookingList = () => {
                   </tr>
                 ) : (
                   filteredBookings.map((booking) => (
-                    <tr key={booking.id} className="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors">
+                    <tr key={booking.id} className="hover:bg-gray-50 dark:hover:bg-gray-600/50 transition-colors">
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="flex items-center">
                           <div className={`flex-shrink-0 h-10 w-10 flex items-center justify-center rounded-lg ${
@@ -451,7 +451,7 @@ const BookingList = () => {
                             <div className="text-sm font-medium text-gray-900 dark:text-gray-100">
                               {booking.service_type === 'rental' ? 'Equipment Rental' : 'Transport'} #{booking.reference || booking.id.slice(-8)}
                             </div>
-                            <div className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
+                            <div className="text-sm text-gray-500 dark:text-gray-400">
                               {VEHICLE_TYPE_LABELS[booking.truck_type] || booking.truck_type || 'Vehicle'}
                             </div>
                             {user.role === 'customer' && booking.provider_company && (
@@ -483,7 +483,7 @@ const BookingList = () => {
                       </td>
                       <td className="px-6 py-4">
                         <div className="flex items-center text-sm text-gray-900 dark:text-gray-100">
-                          <MapPin className="h-4 w-4 text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 mr-1" />
+                          <MapPin className="h-4 w-4 text-gray-400 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500 mr-1" />
                           {booking.service_type === 'rental' ? (
                             <span className="truncate max-w-48" title={booking.work_address}>
                               {booking.work_address || 'Work location'}
@@ -499,12 +499,12 @@ const BookingList = () => {
                       </td>
                       <td className="px-6 py-4">
                         <div className="flex items-center text-sm text-gray-900 dark:text-gray-100">
-                          <Calendar className="h-4 w-4 text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 mr-1" />
+                          <Calendar className="h-4 w-4 text-gray-400 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500 mr-1" />
                           {booking.service_type === 'rental' ? (
                             booking.rental_start_datetime ? (
                               <div className="flex flex-col">
                                 <span>{new Date(booking.rental_start_datetime).toLocaleDateString()}</span>
-                                <span className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
+                                <span className="text-xs text-gray-500 dark:text-gray-400">
                                   {new Date(booking.rental_start_datetime).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})} - 
                                   {new Date(booking.rental_end_datetime).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
                                 </span>
@@ -532,7 +532,7 @@ const BookingList = () => {
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="flex items-center text-sm text-gray-900 dark:text-gray-100">
-                          <DollarSign className="h-4 w-4 text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 mr-1" />
+                          <DollarSign className="h-4 w-4 text-gray-400 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500 mr-1" />
                           {booking.total_price?.toLocaleString('en-US', {
                             style: 'currency',
                             currency: 'USD'

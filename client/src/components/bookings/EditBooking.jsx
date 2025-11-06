@@ -233,26 +233,26 @@ const EditBooking = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900 flex items-center justify-center">
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900 py-8 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
         <div className="mb-8">
           <button
             onClick={() => navigate(-1)}
-            className="inline-flex items-center text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:text-gray-700 dark:text-gray-200 mb-4"
+            className="inline-flex items-center text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:text-gray-200 mb-4"
           >
             <ArrowLeft className="h-4 w-4 mr-1" />
             Back to Booking
           </button>
           
           <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">Edit Booking</h1>
-          <p className="text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">Update your booking details below.</p>
+          <p className="text-gray-600 dark:text-gray-400">Update your booking details below.</p>
         </div>
         
         {errors.form && (
@@ -273,7 +273,7 @@ const EditBooking = () => {
         <form onSubmit={handleSubmit} className="space-y-8">
           {/* Truck Information */}
           {truck && (
-            <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 shadow-sm rounded-lg overflow-hidden">
+            <div className="bg-white dark:bg-gray-800 shadow-sm rounded-lg overflow-hidden">
               <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
                 <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">Truck Information</h3>
               </div>
@@ -282,8 +282,8 @@ const EditBooking = () => {
                   <Truck className="h-5 w-5 text-blue-500 mr-3" />
                   <div>
                     <h4 className="font-medium">{truck.truck_type}</h4>
-                    <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">License: {truck.license_plate}</p>
-                    <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">
+                    <p className="text-sm text-gray-500 dark:text-gray-400">License: {truck.license_plate}</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
                       Capacity: {truck.capacity_weight} kg, {truck.capacity_volume} m³
                     </p>
                   </div>
@@ -293,7 +293,7 @@ const EditBooking = () => {
           )}
           
           {/* Route Information */}
-          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 shadow-sm rounded-lg overflow-hidden">
+          <div className="bg-white dark:bg-gray-800 shadow-sm rounded-lg overflow-hidden">
             <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
               <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">Route Information</h3>
             </div>
@@ -409,7 +409,7 @@ const EditBooking = () => {
           </div>
           
           {/* Cargo Information */}
-          <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 shadow-sm rounded-lg overflow-hidden">
+          <div className="bg-white dark:bg-gray-800 shadow-sm rounded-lg overflow-hidden">
             <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
               <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">Cargo Information</h3>
             </div>
@@ -492,7 +492,7 @@ const EditBooking = () => {
             <button
               type="button"
               onClick={() => navigate(-1)}
-              className="inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 shadow-sm text-sm font-medium rounded-md text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 hover:bg-gray-50 dark:bg-gray-900 dark:bg-gray-900 dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-500"
+              className="inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 shadow-sm text-sm font-medium rounded-md text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-500"
               disabled={saving}
             >
               Cancel
