@@ -170,7 +170,7 @@ const SignupForm = () => {
         <h1 className="text-2xl sm:text-3xl font-bold text-primary-600">{t('auth.register.title')}</h1>
         <p className="mt-2 text-sm sm:text-base text-gray-600 dark:text-gray-400">
           {t('auth.register.subtitle')}{' '}
-          <Link to="/login" className="font-medium text-accent-500 hover:text-accent-600">
+          <Link to="/login" className="font-medium text-accent-500 hover:text-accent-600 dark:text-accent-400 dark:hover:text-accent-300">
             {t('auth.register.signIn')}
           </Link>
         </p>
@@ -554,26 +554,26 @@ const SignupForm = () => {
                 <div className="space-y-4">
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">City *</label>
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">City *</label>
                       <input
                         type="text"
                         name="city"
                         value={formData.city}
                         onChange={handleInputChange}
                         required
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all duration-200"
+                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all duration-200"
                         placeholder="City"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">State/Province *</label>
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">State/Province *</label>
                       <input
                         type="text"
                         name="stateProvince"
                         value={formData.stateProvince}
                         onChange={handleInputChange}
                         required
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all duration-200"
+                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all duration-200"
                         placeholder="State/Province"
                       />
                     </div>
@@ -581,14 +581,14 @@ const SignupForm = () => {
                   
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Postal Code *</label>
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">Postal Code *</label>
                       <input
                         type="text"
                         name="postalCode"
                         value={formData.postalCode}
                         onChange={handleInputChange}
                         required
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all duration-200"
+                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all duration-200"
                         placeholder="Enter postal code"
                       />
                     </div>
@@ -627,7 +627,7 @@ const SignupForm = () => {
 
       <div className="mt-6 text-center text-sm text-gray-600 dark:text-gray-400">
         {t('auth.register.subtitle')}{' '}
-        <Link to="/login" className="font-medium text-accent-500 hover:text-accent-600 transition-colors">
+        <Link to="/login" className="font-medium text-accent-500 hover:text-accent-600 dark:text-accent-400 dark:hover:text-accent-300 transition-colors">
           {t('auth.register.signIn')}
         </Link>
       </div>
