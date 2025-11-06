@@ -591,7 +591,7 @@ const LandingPage = () => {
             {/* Brand Column */}
             <div>
               <div className="mb-4">
-                <TruckLogo showFull={true} />
+                <TruckLogo className="h-12 w-12" showFull={true} variant="footer" />
               </div>
               <p className="text-gray-400 text-sm mb-6">
                 {t('footer.tagline')}

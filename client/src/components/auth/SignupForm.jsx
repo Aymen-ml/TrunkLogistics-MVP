@@ -167,9 +167,6 @@ const SignupForm = () => {
   return (
     <div className="max-w-xl mx-auto p-4 sm:p-6 md:p-8">
       <div className="text-center mb-6 sm:mb-8">
-        <div className="flex justify-center mb-4">
-          <TruckLogo className="h-16 w-16" />
-        </div>
         <h1 className="text-2xl sm:text-3xl font-bold text-primary-600">{t('auth.register.title')}</h1>
         <p className="mt-2 text-sm sm:text-base text-gray-600 dark:text-gray-400">
           {t('auth.register.subtitle')}{' '}
@@ -181,29 +178,37 @@ const SignupForm = () => {
 
       {/* Progress Steps */}
       <div className="mb-6 sm:mb-8">
-        <div className="flex items-center justify-between">
-          {[1, 2, 3].map((step) => (
-            <div key={step} className="flex items-center">
-              <div className={`
-                w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-sm font-medium transition-colors
-                ${currentStep >= step 
-                  ? 'bg-accent-500 text-white' 
-                  : 'bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400'}
-              `}>
-                {step}
+        <div className="flex items-start justify-between w-full">
+          {[
+            { step: 1, label: 'Account Type' },
+            { step: 2, label: 'Personal Info' },
+            { step: 3, label: 'Business Details' }
+          ].map(({ step, label }, index) => (
+            <React.Fragment key={step}>
+              <div className="flex flex-col items-center min-w-0">
+                <div className={`
+                  w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center text-sm sm:text-base font-semibold transition-all duration-300 shadow-sm
+                  ${currentStep >= step 
+                    ? 'bg-accent-500 text-white ring-4 ring-accent-100 dark:ring-accent-900/30 scale-110' 
+                    : 'bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400'}
+                `}>
+                  {step}
+                </div>
+                <span className={`text-xs sm:text-sm mt-2 text-center font-medium transition-colors whitespace-nowrap ${
+                  currentStep >= step ? 'text-accent-600 dark:text-accent-400' : 'text-gray-500 dark:text-gray-400'
+                }`}>
+                  {label}
+                </span>
               </div>
-              {step < 3 && (
-                <div className={`w-16 sm:w-24 h-1 transition-colors ${
-                  currentStep > step ? 'bg-accent-500' : 'bg-gray-200 dark:bg-gray-700'
-                }`} />
+              {index < 2 && (
+                <div className="flex items-center flex-1 px-2 sm:px-4 pt-5">
+                  <div className={`w-full h-1 transition-all duration-300 rounded-full ${
+                    currentStep > step ? 'bg-accent-500' : 'bg-gray-300 dark:bg-gray-600'
+                  }`} />
+                </div>
               )}
-            </div>
+            </React.Fragment>
           ))}
-        </div>
-        <div className="flex justify-between mt-2">
-          <span className="text-[10px] sm:text-xs text-gray-600 dark:text-gray-400">{t('auth.register.step')} 1</span>
-          <span className="text-[10px] sm:text-xs text-gray-600 dark:text-gray-400">{t('auth.register.step')} 2</span>
-          <span className="text-[10px] sm:text-xs text-gray-600 dark:text-gray-400">{t('auth.register.step')} 3</span>
         </div>
       </div>
 
@@ -219,16 +224,16 @@ const SignupForm = () => {
                   setFormData(prev => ({ ...prev, role: 'customer' }));
                   setCurrentStep(2);
                 }}
-                className={`p-4 sm:p-6 border-2 rounded-xl text-center transition-all duration-200 ${
+                className={`p-6 border-2 rounded-xl text-center transition-all duration-200 ${
                   formData.role === 'customer'
-                    ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20 shadow-md'
-                    : 'border-gray-200 dark:border-gray-600 hover:border-gray-300 dark:hover:border-gray-500 hover:shadow-md'
+                    ? 'border-accent-500 bg-accent-50 dark:bg-accent-900/20 shadow-lg ring-2 ring-accent-200 dark:ring-accent-800'
+                    : 'border-gray-200 dark:border-gray-600 hover:border-accent-300 dark:hover:border-accent-700 hover:shadow-md'
                 }`}
               >
-                <div className="inline-flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-blue-100 dark:bg-blue-900/40 text-primary-600 mb-2 sm:mb-3">
-                  <User className="h-5 w-5 sm:h-6 sm:w-6" />
+                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900/40 text-primary-600 dark:text-blue-400 mb-3">
+                  <User className="h-6 w-6" />
                 </div>
-                <div className="font-semibold text-base sm:text-lg mb-1 text-gray-900 dark:text-white">{t('auth.register.roleCustomer')}</div>
+                <div className="font-semibold text-lg text-gray-900 dark:text-white">Customer</div>
               </button>
 
               <button
@@ -237,16 +242,16 @@ const SignupForm = () => {
                   setFormData(prev => ({ ...prev, role: 'provider' }));
                   setCurrentStep(2);
                 }}
-                className={`p-4 sm:p-6 border-2 rounded-xl text-center transition-all duration-200 ${
+                className={`p-6 border-2 rounded-xl text-center transition-all duration-200 ${
                   formData.role === 'provider'
-                    ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20 shadow-md'
-                    : 'border-gray-200 dark:border-gray-600 hover:border-gray-300 dark:hover:border-gray-500 hover:shadow-md'
+                    ? 'border-accent-500 bg-accent-50 dark:bg-accent-900/20 shadow-lg ring-2 ring-accent-200 dark:ring-accent-800'
+                    : 'border-gray-200 dark:border-gray-600 hover:border-accent-300 dark:hover:border-accent-700 hover:shadow-md'
                 }`}
               >
-                <div className="inline-flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-blue-100 dark:bg-blue-900/40 text-primary-600 mb-2 sm:mb-3">
-                  <Truck className="h-5 w-5 sm:h-6 sm:w-6" />
+                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900/40 text-primary-600 dark:text-blue-400 mb-3">
+                  <Truck className="h-6 w-6" />
                 </div>
-                <div className="font-semibold text-base sm:text-lg mb-1 text-gray-900 dark:text-white">{t('auth.register.roleProvider')}</div>
+                <div className="font-semibold text-lg text-gray-900 dark:text-white">Provider</div>
               </button>
             </div>
           </div>

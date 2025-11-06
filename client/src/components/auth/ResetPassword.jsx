@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
-import { Truck, Lock, AlertCircle, CheckCircle, Loader, Eye, EyeOff } from 'lucide-react';
+import { Lock, AlertCircle, CheckCircle, Loader, Eye, EyeOff } from 'lucide-react';
 import axios from 'axios';
+import TruckLogo from '../common/TruckLogo';
 
 const ResetPassword = () => {
   const { token } = useParams();
@@ -142,10 +143,7 @@ const ResetPassword = () => {
         <div className="max-w-md w-full space-y-8">
           <div>
             <div className="flex justify-center">
-              <div className="flex items-center space-x-2">
-                <Truck className="h-10 w-10 text-primary-600" />
-                <span className="text-2xl font-bold text-gray-900 dark:text-gray-100">TruckLogistics</span>
-              </div>
+              <TruckLogo className="h-20 w-20" showFull={true} />
             </div>
           </div>
 
@@ -192,10 +190,7 @@ const ResetPassword = () => {
         <div className="max-w-md w-full space-y-8">
           <div>
             <div className="flex justify-center">
-              <div className="flex items-center space-x-2">
-                <Truck className="h-10 w-10 text-primary-600" />
-                <span className="text-2xl font-bold text-gray-900 dark:text-gray-100">TruckLogistics</span>
-              </div>
+              <TruckLogo className="h-20 w-20" showFull={true} />
             </div>
           </div>
 
@@ -234,11 +229,8 @@ const ResetPassword = () => {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         <div>
-          <div className="flex justify-center">
-            <div className="flex items-center space-x-2">
-              <Truck className="h-10 w-10 text-primary-600" />
-              <span className="text-2xl font-bold text-gray-900 dark:text-gray-100">TruckLogistics</span>
-            </div>
+          <div className="flex justify-center mb-4">
+            <TruckLogo className="h-20 w-20" showFull={true} />
           </div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900 dark:text-gray-100">
             Reset your password
@@ -247,8 +239,8 @@ const ResetPassword = () => {
             Enter your new password below
           </p>
         </div>
-        
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+
+        <form className="mt-8 space-y-6 bg-white dark:bg-gray-800 shadow-lg rounded-lg p-8" onSubmit={handleSubmit}>
           {error && (
             <div className="bg-red-50 border border-red-200 rounded-md p-4">
               <div className="flex">

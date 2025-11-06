@@ -45,12 +45,8 @@ const Navbar = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
             <div className="flex items-center">
-              <Link to="/" className="flex items-center space-x-3">
-                <TruckLogo className="h-10 w-10" />
-                <div className="flex flex-col">
-                  <span className="text-xl font-bold text-primary-600">TruckLogistics</span>
-                  <span className="text-xs text-gray-500 hidden sm:block">Connecting Providers & Businesses</span>
-                </div>
+              <Link to="/" className="flex items-center">
+                <TruckLogo className="h-20 w-20" showFull={true} />
               </Link>
             </div>
             <div className="flex items-center space-x-4">
@@ -79,12 +75,8 @@ const Navbar = () => {
         <div className="flex justify-between h-16">
           {/* Logo and brand */}
           <div className="flex items-center">
-            <Link to="/dashboard" className="flex items-center space-x-3">
-              <TruckLogo className="h-10 w-10" />
-              <div className="flex flex-col">
-                <span className="text-xl font-bold text-primary-600 dark:text-primary-400">TruckLogistics</span>
-                <span className="text-xs text-gray-500 dark:text-gray-400 hidden lg:block">Connecting Providers & Businesses</span>
-              </div>
+            <Link to="/dashboard" className="flex items-center">
+              <TruckLogo className="h-20 w-20" showFull={true} />
             </Link>
           </div>
 

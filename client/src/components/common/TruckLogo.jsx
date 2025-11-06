@@ -1,23 +1,41 @@
 import React from 'react';
-import { Truck } from 'lucide-react';
 
-const TruckLogo = ({ className = "h-12 w-12", showFull = false }) => {
+const TruckLogo = ({ className = "h-20 w-20", showFull = false, variant = "default" }) => {
+  // Styling variants for different contexts
+  const textStyles = {
+    default: {
+      fontSize: '38px',
+      lineHeight: '80px',
+      color: '#2C3E50',
+      fontFamily: 'Nunito, Quicksand, Comfortaa, Varela Round, sans-serif'
+    },
+    footer: {
+      fontSize: '20px',
+      lineHeight: 'normal',
+      color: '#FFFFFF',
+      fontFamily: 'Nunito, Quicksand, Comfortaa, Varela Round, sans-serif'
+    }
+  };
+
+  const gapClass = variant === 'footer' ? 'gap-2' : 'gap-0.5';
+  const currentTextStyle = textStyles[variant] || textStyles.default;
+
   return (
-    <div className="flex items-center gap-3">
-      {/* Logo - Grey circle with orange truck icon */}
-      <div className="flex-shrink-0 flex items-center justify-center bg-gray-100 dark:bg-gray-700 rounded-full p-2.5 ring-2 ring-gray-200 dark:ring-gray-600">
-        <Truck className="text-accent-500 dark:text-accent-400" size={24} strokeWidth={2.5} />
+    <div className={`flex items-center ${gapClass}`}>
+      {/* Logo - movelinker Logo */}
+      <div className="flex-shrink-0 flex items-center justify-center">
+        <img 
+          src="/move-logo2.png" 
+          alt="movelinker Logo" 
+          className={className}
+          style={{ objectFit: 'contain' }}
+        />
       </div>
       
       {showFull && (
-        <div className="flex flex-col">
-          <span className="text-2xl font-bold text-primary-600 dark:text-primary-400">
-            TruckLogistics
-          </span>
-          <span className="text-xs text-gray-500 dark:text-gray-400 -mt-1">
-            Premium Fleet Solutions
-          </span>
-        </div>
+        <span className="font-extrabold" style={currentTextStyle}>
+          movelinker
+        </span>
       )}
     </div>
   );

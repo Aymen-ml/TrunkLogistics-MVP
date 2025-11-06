@@ -34,7 +34,7 @@ const AboutUs = () => {
               <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Our Mission</h2>
             </div>
             <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
-              TruckLogistics is dedicated to revolutionizing the logistics industry in South Algeria by creating a seamless, 
+              movelinker is dedicated to revolutionizing the logistics industry in South Algeria by creating a seamless, 
               transparent, and efficient platform that connects businesses with verified truck providers. We believe in empowering 
               both customers and providers through technology, making logistics accessible, reliable, and growth-oriented.
             </p>
@@ -94,7 +94,7 @@ const AboutUs = () => {
               <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Our Story</h2>
             </div>
             <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-              Founded in Algeria, TruckLogistics was born out of a simple observation: the logistics industry in South 
+              Founded in Algeria, movelinker was born out of a simple observation: the logistics industry in South 
               Algeria needed a modern, digital solution that could bring transparency, efficiency, and trust to freight 
               transportation.
             </p>
@@ -161,7 +161,7 @@ const AboutUs = () => {
           <div className="bg-gradient-to-r from-orange-500 to-orange-600 rounded-2xl p-8 md:p-12 text-center shadow-xl">
             <h2 className="text-3xl font-bold text-white mb-4">Get in Touch</h2>
             <p className="text-xl text-orange-100 mb-8 max-w-2xl mx-auto">
-              Have questions or want to learn more about how TruckLogistics can help your business?
+              Have questions or want to learn more about how movelinker can help your business?
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
@@ -171,7 +171,7 @@ const AboutUs = () => {
                 Call Us: +213 779 11 65 22
               </a>
               <a
-                href="mailto:support@trucklogistics.me"
+                href="mailto:support@movelinker.me"
                 className="px-8 py-4 bg-orange-700 text-white font-semibold rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all"
               >
                 Email Us

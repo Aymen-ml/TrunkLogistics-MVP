@@ -32,12 +32,12 @@ const PrivacyPolicy = () => {
           {/* Introduction */}
           <section className="mb-12">
             <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-              At TruckLogistics, we are committed to protecting your privacy and ensuring the security of your personal 
+              At movelinker, we are committed to protecting your privacy and ensuring the security of your personal 
               information. This Privacy Policy explains how we collect, use, disclose, and safeguard your information 
               when you use our platform.
             </p>
             <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
-              By using TruckLogistics, you agree to the collection and use of information in accordance with this policy.
+              By using movelinker, you agree to the collection and use of information in accordance with this policy.
             </p>
           </section>
 
@@ -182,8 +182,8 @@ const PrivacyPolicy = () => {
             
             <p className="text-gray-700 dark:text-gray-300 mt-4">
               To exercise these rights, please contact us at{' '}
-              <a href="mailto:privacy@trucklogistics.me" className="text-blue-600 dark:text-blue-400 hover:underline">
-                privacy@trucklogistics.me
+              <a href="mailto:privacy@movelinker.me" className="text-blue-600 dark:text-blue-400 hover:underline">
+                privacy@movelinker.me
               </a>
             </p>
           </section>
@@ -231,8 +231,8 @@ const PrivacyPolicy = () => {
             <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-6">
               <p className="text-gray-700 dark:text-gray-300 mb-2">
                 <strong>Email:</strong>{' '}
-                <a href="mailto:privacy@trucklogistics.me" className="text-blue-600 dark:text-blue-400 hover:underline">
-                  privacy@trucklogistics.me
+                <a href="mailto:privacy@movelinker.me" className="text-blue-600 dark:text-blue-400 hover:underline">
+                  privacy@movelinker.me
                 </a>
               </p>
               <p className="text-gray-700 dark:text-gray-300 mb-2">

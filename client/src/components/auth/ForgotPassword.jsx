@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Truck, Mail, AlertCircle, CheckCircle, Loader, ArrowLeft } from 'lucide-react';
+import { Mail, AlertCircle, CheckCircle, Loader, ArrowLeft } from 'lucide-react';
 import { apiClient } from '../../utils/apiClient';
+import TruckLogo from '../common/TruckLogo';
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
@@ -64,15 +65,6 @@ const ForgotPassword = () => {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-md w-full space-y-8">
-          <div>
-            <div className="flex justify-center">
-              <div className="flex items-center space-x-2">
-                <Truck className="h-10 w-10 text-primary-600" />
-                <span className="text-2xl font-bold text-gray-900 dark:text-gray-100">TruckLogistics</span>
-              </div>
-            </div>
-          </div>
-
           <div className="bg-white dark:bg-gray-800 dark:bg-gray-800 dark:bg-gray-800 shadow-lg rounded-lg p-8">
             <div className="text-center">
               <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100 dark:bg-green-900 mb-4">
@@ -122,13 +114,7 @@ const ForgotPassword = () => {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         <div>
-          <div className="flex justify-center">
-            <div className="flex items-center space-x-2">
-              <Truck className="h-10 w-10 text-primary-600" />
-              <span className="text-2xl font-bold text-gray-900 dark:text-gray-100">TruckLogistics</span>
-            </div>
-          </div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900 dark:text-gray-100">
+          <h2 className="text-center text-3xl font-extrabold text-gray-900 dark:text-gray-100">
             Forgot your password?
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 dark:text-gray-500">

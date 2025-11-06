@@ -32,8 +32,8 @@ const TermsOfUse = () => {
           {/* Introduction */}
           <section className="mb-12">
             <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-              Welcome to TruckLogistics. These Terms of Use ("Terms") govern your access to and use of our platform, 
-              services, and features. By accessing or using TruckLogistics, you agree to be bound by these Terms.
+              Welcome to movelinker. These Terms of Use ("Terms") govern your access to and use of our platform, 
+              services, and features. By accessing or using movelinker, you agree to be bound by these Terms.
             </p>
             <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
               Please read these Terms carefully before using our platform. If you do not agree with these Terms, 
@@ -51,7 +51,7 @@ const TermsOfUse = () => {
             </div>
             
             <p className="text-gray-700 dark:text-gray-300 mb-4">
-              By creating an account, accessing, or using TruckLogistics, you confirm that:
+              By creating an account, accessing, or using movelinker, you confirm that:
             </p>
             <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300 ml-4">
               <li>You are at least 18 years of age</li>
@@ -117,7 +117,7 @@ const TermsOfUse = () => {
             </div>
             
             <p className="text-gray-700 dark:text-gray-300 mb-4">
-              You agree to use TruckLogistics only for lawful purposes and in accordance with these Terms. You agree NOT to:
+              You agree to use movelinker only for lawful purposes and in accordance with these Terms. You agree NOT to:
             </p>
             <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300 ml-4">
               <li>Violate any applicable laws or regulations</li>
@@ -156,7 +156,7 @@ const TermsOfUse = () => {
                 <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">Payment Terms</h3>
                 <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300 ml-4">
                   <li>Payment terms are agreed upon between customers and providers</li>
-                  <li>TruckLogistics may facilitate payment processing (where applicable)</li>
+                  <li>movelinker may facilitate payment processing (where applicable)</li>
                   <li>All fees and charges will be clearly disclosed before transaction completion</li>
                   <li>Customers are responsible for any applicable taxes</li>
                 </ul>
@@ -168,7 +168,7 @@ const TermsOfUse = () => {
                   <li>Cancellation policies are set by individual providers</li>
                   <li>Customers should review cancellation terms before booking</li>
                   <li>Refunds are subject to provider policies and applicable laws</li>
-                  <li>TruckLogistics may mediate disputes but is not responsible for refund decisions</li>
+                  <li>movelinker may mediate disputes but is not responsible for refund decisions</li>
                 </ul>
               </div>
             </div>
@@ -194,7 +194,7 @@ const TermsOfUse = () => {
 
             <div className="space-y-4 text-gray-700 dark:text-gray-300">
               <p>
-                TruckLogistics acts as an intermediary platform connecting customers with providers. We do not:
+                movelinker acts as an intermediary platform connecting customers with providers. We do not:
               </p>
               <ul className="list-disc list-inside space-y-2 ml-4">
                 <li>Own, operate, or control the trucks or transportation services</li>
@@ -204,7 +204,7 @@ const TermsOfUse = () => {
               </ul>
 
               <p className="mt-4">
-                TO THE MAXIMUM EXTENT PERMITTED BY LAW, TRUCKLOGISTICS SHALL NOT BE LIABLE FOR:
+                TO THE MAXIMUM EXTENT PERMITTED BY LAW, MOVELINKER SHALL NOT BE LIABLE FOR:
               </p>
               <ul className="list-disc list-inside space-y-2 ml-4">
                 <li>Indirect, incidental, special, consequential, or punitive damages</li>
@@ -215,7 +215,7 @@ const TermsOfUse = () => {
               </ul>
 
               <p className="mt-4">
-                Our total liability for any claims shall not exceed the fees paid by you to TruckLogistics in the 
+                Our total liability for any claims shall not exceed the fees paid by you to movelinker in the 
                 12 months preceding the claim.
               </p>
             </div>
@@ -225,7 +225,7 @@ const TermsOfUse = () => {
           <section className="mb-12">
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Indemnification</h2>
             <p className="text-gray-700 dark:text-gray-300 mb-4">
-              You agree to indemnify, defend, and hold harmless TruckLogistics, its officers, directors, employees, 
+              You agree to indemnify, defend, and hold harmless movelinker, its officers, directors, employees, 
               and agents from any claims, liabilities, damages, losses, and expenses arising from:
             </p>
             <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300 ml-4">
@@ -327,14 +327,14 @@ const TermsOfUse = () => {
             <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-6">
               <p className="text-gray-700 dark:text-gray-300 mb-2">
                 <strong>Email:</strong>{' '}
-                <a href="mailto:legal@trucklogistics.me" className="text-blue-600 dark:text-blue-400 hover:underline">
-                  legal@trucklogistics.me
+                <a href="mailto:legal@movelinker.me" className="text-blue-600 dark:text-blue-400 hover:underline">
+                  legal@movelinker.me
                 </a>
               </p>
               <p className="text-gray-700 dark:text-gray-300 mb-2">
                 <strong>Support:</strong>{' '}
-                <a href="mailto:support@trucklogistics.me" className="text-blue-600 dark:text-blue-400 hover:underline">
-                  support@trucklogistics.me
+                <a href="mailto:support@movelinker.me" className="text-blue-600 dark:text-blue-400 hover:underline">
+                  support@movelinker.me
                 </a>
               </p>
               <p className="text-gray-700 dark:text-gray-300 mb-2">
