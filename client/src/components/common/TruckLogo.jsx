@@ -17,7 +17,7 @@ const TruckLogo = ({ className = "h-20 w-20", showFull = false, variant = "defau
         <img 
           src="/move-logo2.png" 
           alt="movelinker Logo" 
-          className={className}
+          className={`${className} dark:brightness-0 dark:invert`}
           style={{ objectFit: 'contain' }}
         />
       </div>
