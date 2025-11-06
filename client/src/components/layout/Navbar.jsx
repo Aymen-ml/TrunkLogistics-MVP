@@ -32,16 +32,16 @@ const Navbar = () => {
 
   const getRoleColor = (role) => {
     switch (role) {
-      case 'admin': return 'bg-red-100 text-red-800';
-      case 'provider': return 'bg-green-100 text-green-800';
-      case 'customer': return 'bg-blue-100 text-blue-800';
-      default: return 'bg-gray-100 text-gray-800';
+      case 'admin': return 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300';
+      case 'provider': return 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300';
+      case 'customer': return 'bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300';
+      default: return 'bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300';
     }
   };
 
   if (!isAuthenticated) {
     return (
-      <nav className="bg-white shadow-sm border-b">
+      <nav className="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
             <div className="flex items-center">
@@ -52,7 +52,7 @@ const Navbar = () => {
             <div className="flex items-center space-x-4">
               <Link
                 to="/login"
-                className="text-gray-700 hover:text-primary-600 px-3 py-2 rounded-md text-sm font-medium"
+                className="text-gray-700 dark:text-gray-200 hover:text-primary-600 dark:hover:text-primary-400 px-3 py-2 rounded-md text-sm font-medium transition-colors"
               >
                 Sign In
               </Link>
@@ -185,24 +185,24 @@ const Navbar = () => {
                     </span>
                   </div>
                   <div className="hidden lg:block text-left">
-                    <p className="text-sm font-medium text-gray-700">
+                    <p className="text-sm font-medium text-gray-700 dark:text-gray-200">
                       {user?.firstName} {user?.lastName}
                     </p>
                     <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${getRoleColor(user?.role)}`}>
                       {user?.role}
                     </span>
                   </div>
-                  <ChevronDown className="h-4 w-4 text-gray-400" />
+                  <ChevronDown className="h-4 w-4 text-gray-400 dark:text-gray-500" />
                 </div>
               </button>
 
               {/* Profile dropdown menu */}
               {isProfileOpen && (
-                <div className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50">
+                <div className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white dark:bg-gray-700 ring-1 ring-black ring-opacity-5 dark:ring-gray-600 z-50">
                   <div className="py-1">
                     <Link
                       to="/profile"
-                      className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      className="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600"
                       onClick={() => setIsProfileOpen(false)}
                     >
                       <User className="h-4 w-4 mr-3" />
@@ -210,7 +210,7 @@ const Navbar = () => {
                     </Link>
                     <Link
                       to="/settings"
-                      className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      className="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600"
                       onClick={() => setIsProfileOpen(false)}
                     >
                       <Settings className="h-4 w-4 mr-3" />
@@ -218,7 +218,7 @@ const Navbar = () => {
                     </Link>
                     <button
                       onClick={handleLogout}
-                      className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      className="flex items-center w-full px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600"
                     >
                       <LogOut className="h-4 w-4 mr-3" />
                       Sign out
@@ -234,7 +234,7 @@ const Navbar = () => {
             <NotificationBell />
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-accent-500 p-2"
+              className="text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-accent-500 p-2"
             >
               {isMenuOpen ? (
                 <X className="h-6 w-6" />
@@ -345,14 +345,14 @@ const Navbar = () => {
                 <>
                   <Link
                     to="/trucks"
-                    className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-accent-500 transition-colors hover:bg-gray-50"
+                    className="block px-4 py-3 text-base font-medium text-gray-700 dark:text-gray-200 hover:text-accent-500 transition-colors hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     My Trucks
                   </Link>
                   <Link
                     to="/bookings"
-                    className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-accent-500 transition-colors hover:bg-gray-50"
+                    className="block px-4 py-3 text-base font-medium text-gray-700 dark:text-gray-200 hover:text-accent-500 transition-colors hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     Bookings
