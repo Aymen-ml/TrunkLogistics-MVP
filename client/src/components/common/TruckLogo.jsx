@@ -1,24 +1,14 @@
 import React from 'react';
 
 const TruckLogo = ({ className = "h-20 w-20", showFull = false, variant = "default" }) => {
-  // Styling variants for different contexts
-  const textStyles = {
-    default: {
-      fontSize: '38px',
-      lineHeight: '80px',
-      color: '#2C3E50',
-      fontFamily: 'Nunito, Quicksand, Comfortaa, Varela Round, sans-serif'
-    },
-    footer: {
-      fontSize: '20px',
-      lineHeight: 'normal',
-      color: '#FFFFFF',
-      fontFamily: 'Nunito, Quicksand, Comfortaa, Varela Round, sans-serif'
-    }
+  // Styling variants for different contexts - now using Tailwind classes for dark mode support
+  const textClasses = {
+    default: 'text-[38px] leading-[80px] text-gray-800 dark:text-gray-100',
+    footer: 'text-[20px] leading-normal text-white'
   };
 
   const gapClass = variant === 'footer' ? 'gap-2' : 'gap-0.5';
-  const currentTextStyle = textStyles[variant] || textStyles.default;
+  const currentTextClass = textClasses[variant] || textClasses.default;
 
   return (
     <div className={`flex items-center ${gapClass}`}>
@@ -33,7 +23,10 @@ const TruckLogo = ({ className = "h-20 w-20", showFull = false, variant = "defau
       </div>
       
       {showFull && (
-        <span className="font-extrabold" style={currentTextStyle}>
+        <span 
+          className={`font-extrabold ${currentTextClass}`}
+          style={{ fontFamily: 'Nunito, Quicksand, Comfortaa, Varela Round, sans-serif' }}
+        >
           movelinker
         </span>
       )}
