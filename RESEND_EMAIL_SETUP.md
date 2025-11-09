@@ -81,7 +81,7 @@ Render will automatically redeploy when you save environment variables.
 
 ### Later: Add Your Own Domain (Optional)
 
-When you're ready for custom emails like `noreply@trucklogistics.com`:
+When you're ready for custom emails like `noreply@movelinker.com`:
 
 1. Add domain in Resend dashboard
 2. Add DNS records (SPF, DKIM)

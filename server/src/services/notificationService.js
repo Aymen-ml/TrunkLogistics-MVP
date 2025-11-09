@@ -118,7 +118,7 @@ class NotificationService {
         <h2 style="color: #2563eb;">${notification.title}</h2>
         <p>Dear ${userName},</p>
         <p>${notification.message}</p>
-        <p>Best regards,<br>TruckLogistics Team</p>
+        <p>Best regards,<br>movelinker Team</p>
       </div>
     `;
 
@@ -352,8 +352,8 @@ class NotificationService {
     return await this.createNotification({
       userId,
       type: 'welcome',
-      title: 'Welcome to TruckLogistics!',
-      message: 'Welcome to TruckLogistics! Complete your profile to get started with our logistics platform.',
+      title: 'Welcome to movelinker!',
+      message: 'Welcome to movelinker! Complete your profile to get started with our logistics platform.',
       relatedEntityType: 'user',
       relatedEntityId: userId,
       priority: 'medium'

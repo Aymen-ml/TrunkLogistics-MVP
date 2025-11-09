@@ -24,11 +24,11 @@
     "heroAlt": "Camion-citerne transportant du pétrole à travers le désert du Sahara algérien au coucher du soleil"
   },
   "services": {
-    "title": "Tous Vos Besoins dans Une Seule Application",
+    "title": "Tous vos besoins en une seule application",
     "tabs": {
-      "transport": "TruckLogistics Transport",
-      "fleet": "TruckLogistics Flotte",
-      "analytics": "TruckLogistics Analytique"
+      "transport": "movelinker Transport",
+      "fleet": "movelinker Flotte",
+      "analytics": "movelinker Analytique"
     },
     "transport": {
       "quick": {
@@ -55,7 +55,7 @@
       },
       "easy": {
         "title": "Facile à Utiliser",
-        "description": "Le tableau de bord TruckLogistics est tout ce dont vous avez besoin pour gérer les réservations et suivre les performances."
+        "description": "Le tableau de bord movelinker est tout ce dont vous avez besoin pour gérer les réservations et suivre les performances."
       }
     },
     "analytics": {
@@ -128,14 +128,14 @@
       "terms": "Conditions d'Utilisation"
     },
     "contact": {
-      "title": "Contactez-Nous",
-      "email": "support@trucklogistics.me",
+      "title": "Contactez-nous",
+      "email": "support@movelinker.com",
       "phone": "+213 779 11 65 22",
       "location": "Alger, Algérie",
-      "help": "Centre d'Aide"
+      "help": "Centre d'aide"
     },
-    "copyright": "© 2025 TruckLogistics. Tous droits réservés.",
-    "cookiePolicy": "Politique des Cookies"
+    "copyright": "© 2025 movelinker. Tous droits réservés.",
+    "cookiePolicy": "Politique des cookies"
   },
   "settings": {
     "title": "Paramètres",

@@ -30,10 +30,10 @@ router.post('/test-email', authenticate, async (req, res) => {
     // Send test email
     const result = await emailService.sendEmail(
       email,
-      'Test Email - TruckLogistics',
+      'Test Email - movelinker',
       `
         <h2>Email Service Test</h2>
-        <p>This is a test email from TruckLogistics.</p>
+        <p>This is a test email from movelinker.</p>
         <p>If you received this, the email service is working correctly!</p>
         <p>Sent at: ${new Date().toISOString()}</p>
       `

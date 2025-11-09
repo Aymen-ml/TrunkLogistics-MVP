@@ -247,25 +247,25 @@ export const register = async (req, res) => {
 
       // Send verification email directly using emailService (like password reset)
       try {
-        const verificationUrl = `${process.env.CLIENT_URL || "https://trucklogistics-mvp.netlify.app"}/verify-email/${verificationToken}`;
+        const verificationUrl = `${process.env.CLIENT_URL || "https://movelinker.com"}/verify-email/${verificationToken}`;
 
         const result = await emailService.sendEmail(
           user.email,
-          "Verify Your Email Address - TruckLogistics",
+          "Verify Your Email Address - movelinker",
           `
             <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #ffffff;">
               <div style="text-align: center; margin-bottom: 30px; border-bottom: 2px solid #e5e7eb; padding-bottom: 20px;">
-                <h1 style="color: #1f2937; margin: 0; font-size: 24px;">TruckLogistics</h1>
+                <h1 style="color: #1f2937; margin: 0; font-size: 24px;">movelinker</h1>
                 <p style="color: #6b7280; margin: 5px 0 0 0; font-size: 14px;">Logistics Management Platform</p>
               </div>
 
               <div style="margin-bottom: 30px;">
-                <h2 style="color: #1f2937; margin-top: 0; font-size: 20px;">Welcome to TruckLogistics!</h2>
+                <h2 style="color: #1f2937; margin-top: 0; font-size: 20px;">Welcome to movelinker!</h2>
 
                 <p style="margin-bottom: 20px; color: #374151; line-height: 1.6;">Hello ${user.first_name || "there"},</p>
 
                 <p style="margin-bottom: 20px; color: #374151; line-height: 1.6;">
-                  Thank you for registering with TruckLogistics! We're excited to have you join our logistics management platform.
+                  Thank you for registering with movelinker! We're excited to have you join our logistics management platform.
                 </p>
 
                 <p style="margin-bottom: 30px; color: #374151; line-height: 1.6;">
@@ -301,18 +301,16 @@ export const register = async (req, res) => {
                 <p style="margin: 0; color: #92400e; font-size: 14px; line-height: 1.5;">
                   <strong>⏰ Important:</strong> This verification link will expire in 24 hours for security reasons.
                 </p>
-              </div>
-
-              <div style="text-align: center; color: #6b7280; font-size: 12px; border-top: 1px solid #e5e7eb; padding-top: 20px;">
-                <p style="margin: 0 0 5px 0;">If you did not create an account with TruckLogistics, please ignore this email.</p>
-                <p style="margin: 0 0 5px 0;">© 2025 TruckLogistics. All rights reserved.</p>
-                <p style="margin: 0;">Need help? Contact us at support@trucklogistics.com</p>
-              </div>
             </div>
-          `,
-        );
 
-        if (result) {
+            <div style="text-align: center; color: #6b7280; font-size: 12px; border-top: 1px solid #e5e7eb; padding-top: 20px;">
+              <p style="margin: 0 0 5px 0;">If you did not create an account with movelinker, please ignore this email.</p>
+              <p style="margin: 0 0 5px 0;">© 2025 movelinker. All rights reserved.</p>
+              <p style="margin: 0;">Need help? Contact us at support@movelinker.com</p>
+            </div>
+          </div>
+        `,
+      );        if (result) {
           logger.info(
             `✅ Direct verification email sent successfully to: ${user.email}`,
           );
@@ -582,15 +580,15 @@ export const resendVerification = async (req, res) => {
       );
 
       // Send verification email directly using emailService
-      const verificationUrl = `${process.env.CLIENT_URL || "https://trucklogistics-mvp.netlify.app"}/verify-email/${verificationToken}`;
+      const verificationUrl = `${process.env.CLIENT_URL || "https://movelinker.com"}/verify-email/${verificationToken}`;
 
       const result = await emailService.sendEmail(
         user.email,
-        "Verify Your Email Address - TruckLogistics",
+        "Verify Your Email Address - movelinker",
         `
           <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #ffffff;">
             <div style="text-align: center; margin-bottom: 30px; border-bottom: 2px solid #e5e7eb; padding-bottom: 20px;">
-              <h1 style="color: #1f2937; margin: 0; font-size: 24px;">TruckLogistics</h1>
+              <h1 style="color: #1f2937; margin: 0; font-size: 24px;">movelinker</h1>
               <p style="color: #6b7280; margin: 5px 0 0 0; font-size: 14px;">Logistics Management Platform</p>
             </div>
 
@@ -600,7 +598,7 @@ export const resendVerification = async (req, res) => {
               <p style="margin-bottom: 20px; color: #374151; line-height: 1.6;">Hello ${user.first_name || "there"},</p>
 
               <p style="margin-bottom: 20px; color: #374151; line-height: 1.6;">
-                You requested a new email verification link for your TruckLogistics account.
+                You requested a new email verification link for your movelinker account.
               </p>
 
               <p style="margin-bottom: 30px; color: #374151; line-height: 1.6;">
@@ -640,8 +638,8 @@ export const resendVerification = async (req, res) => {
 
             <div style="text-align: center; color: #6b7280; font-size: 12px; border-top: 1px solid #e5e7eb; padding-top: 20px;">
               <p style="margin: 0 0 5px 0;">If you did not request this verification email, please ignore it.</p>
-              <p style="margin: 0 0 5px 0;">© 2025 TruckLogistics. All rights reserved.</p>
-              <p style="margin: 0;">Need help? Contact us at support@trucklogistics.com</p>
+              <p style="margin: 0 0 5px 0;">© 2025 movelinker. All rights reserved.</p>
+              <p style="margin: 0;">Need help? Contact us at support@movelinker.com</p>
             </div>
           </div>
         `,

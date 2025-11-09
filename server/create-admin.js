@@ -10,7 +10,7 @@ const createAdmin = async () => {
     logger.info('Creating admin user...');
 
     // Check if admin already exists
-    const existingAdmin = await query('SELECT id FROM users WHERE email = $1', ['admin@trucklogistics.com']);
+    const existingAdmin = await query('SELECT id FROM users WHERE email = $1', ['admin@movelinker.com']);
     if (existingAdmin.rows.length > 0) {
       logger.info('Admin user already exists');
       return;
@@ -24,7 +24,7 @@ const createAdmin = async () => {
       INSERT INTO users (email, password_hash, role, first_name, last_name, phone, is_active, email_verified)
       VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
       RETURNING id, email, role
-    `, ['admin@trucklogistics.com', adminPassword, 'admin', 'Admin', 'User', '+1234567890', true, true]);
+    `, ['admin@movelinker.com', adminPassword, 'admin', 'Admin', 'User', '+1234567890', true, true]);
     
     const admin = adminResult.rows[0];
     logger.info('Admin user created successfully:', {
@@ -34,7 +34,7 @@ const createAdmin = async () => {
     });
 
     logger.info('Admin credentials:');
-    logger.info('Email: admin@trucklogistics.com');
+    logger.info('Email: admin@movelinker.com');
     logger.info('Password: admin123');
 
   } catch (error) {

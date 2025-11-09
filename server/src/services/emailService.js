@@ -123,7 +123,7 @@ class EmailService {
         console.log(`📧 Sending email via Resend to: ${to}`);
         
         const result = await this.resend.emails.send({
-          from: `${process.env.EMAIL_FROM_NAME || 'TruckLogistics'} <${process.env.EMAIL_FROM || 'onboarding@resend.dev'}>`,
+          from: `${process.env.EMAIL_FROM_NAME || 'movelinker'} <${process.env.EMAIL_FROM || 'onboarding@resend.dev'}>`,
           to: to,
           subject: subject,
           html: htmlContent,
@@ -157,7 +157,7 @@ class EmailService {
 
     try {
       const mailOptions = {
-        from: `${process.env.EMAIL_FROM_NAME || 'TruckLogistics'} <${process.env.EMAIL_FROM || 'noreply@trucklogistics.com'}>`,
+        from: `${process.env.EMAIL_FROM_NAME || 'movelinker'} <${process.env.EMAIL_FROM || 'noreply@movelinker.com'}>`,
         to,
         subject,
         html: htmlContent,
@@ -187,7 +187,7 @@ class EmailService {
 
   // Booking notification templates
   async sendBookingCreatedEmail(userEmail, userName, booking) {
-    const subject = 'Booking Request Created - TruckLogistics';
+    const subject = 'Booking Request Created - movelinker';
     const html = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
         <h2 style="color: #2563eb;">Booking Request Created</h2>
@@ -204,7 +204,7 @@ class EmailService {
         </div>
         
         <p>We will notify you once an admin reviews your request.</p>
-        <p>Best regards,<br>TruckLogistics Team</p>
+        <p>Best regards,<br>movelinker Team</p>
       </div>
     `;
 
@@ -212,7 +212,7 @@ class EmailService {
   }
 
   async sendBookingStatusUpdateEmail(userEmail, userName, booking, oldStatus, newStatus) {
-    const subject = `Booking ${newStatus.charAt(0).toUpperCase() + newStatus.slice(1)} - TruckLogistics`;
+    const subject = `Booking ${newStatus.charAt(0).toUpperCase() + newStatus.slice(1)} - movelinker`;
     const html = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
         <h2 style="color: #2563eb;">Booking Status Update</h2>
@@ -228,7 +228,7 @@ class EmailService {
         
         ${this.getStatusMessage(newStatus)}
         
-        <p>Best regards,<br>TruckLogistics Team</p>
+        <p>Best regards,<br>movelinker Team</p>
       </div>
     `;
 
@@ -240,7 +240,7 @@ class EmailService {
       approved: '<p style="color: #059669;">Great news! Your booking has been approved. The provider will confirm shortly.</p>',
       confirmed: '<p style="color: #059669;">Your booking is confirmed! The truck is assigned and ready for pickup.</p>',
       in_transit: '<p style="color: #2563eb;">Your cargo is now in transit. You can track the progress with your provider.</p>',
-      completed: '<p style="color: #059669;">Your booking has been completed successfully. Thank you for using TruckLogistics!</p>',
+      completed: '<p style="color: #059669;">Your booking has been completed successfully. Thank you for using movelinker!</p>',
       cancelled: '<p style="color: #dc2626;">Your booking has been cancelled. If you have questions, please contact support.</p>'
     };
     
@@ -248,7 +248,7 @@ class EmailService {
   }
 
   async sendBookingConfirmationEmail(userEmail, userName, booking) {
-    const subject = `Booking Confirmed - TruckLogistics`;
+    const subject = `Booking Confirmed - movelinker`;
     const content = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
         <h2 style="color: #2563eb;">Booking Confirmed</h2>
@@ -263,7 +263,7 @@ class EmailService {
           <p><strong>Status:</strong> ${booking.status}</p>
         </div>
         
-        <p>Thank you for using TruckLogistics!</p>
+        <p>Thank you for using movelinker!</p>
       </div>
     `;
     
@@ -272,7 +272,7 @@ class EmailService {
 
   // Provider verification templates
   async sendProviderVerificationEmail(userEmail, userName, status) {
-    const subject = `Provider Account ${status.charAt(0).toUpperCase() + status.slice(1)} - TruckLogistics`;
+    const subject = `Provider Account ${status.charAt(0).toUpperCase() + status.slice(1)} - movelinker`;
     const statusColor = status === 'approved' ? '#059669' : '#dc2626';
     
     const html = `
@@ -301,7 +301,7 @@ class EmailService {
           `
         }
         
-        <p>Best regards,<br>TruckLogistics Team</p>
+        <p>Best regards,<br>movelinker Team</p>
       </div>
     `;
 
@@ -310,12 +310,12 @@ class EmailService {
 
   // Welcome email template
   async sendWelcomeEmail(userEmail, userName, userRole) {
-    const subject = 'Welcome to TruckLogistics!';
+    const subject = 'Welcome to movelinker!';
     const html = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-        <h2 style="color: #2563eb;">Welcome to TruckLogistics!</h2>
+        <h2 style="color: #2563eb;">Welcome to movelinker!</h2>
         <p>Dear ${userName},</p>
-        <p>Welcome to TruckLogistics! Your account has been successfully created as a <strong>${userRole}</strong>.</p>
+        <p>Welcome to movelinker! Your account has been successfully created as a <strong>${userRole}</strong>.</p>
         
         <div style="background-color: #f3f4f6; padding: 20px; border-radius: 8px; margin: 20px 0;">
           <h3 style="margin-top: 0;">Next Steps</h3>
@@ -346,7 +346,7 @@ class EmailService {
         </div>
         
         <p>If you have any questions, don't hesitate to contact our support team.</p>
-        <p>Best regards,<br>TruckLogistics Team</p>
+        <p>Best regards,<br>movelinker Team</p>
       </div>
     `;
 
@@ -354,12 +354,12 @@ class EmailService {
   }
 
   async sendPasswordResetEmail(userEmail, userName, resetUrl) {
-    const subject = 'Password Reset Request - TruckLogistics';
+    const subject = 'Password Reset Request - movelinker';
     
     const html = `
       <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #ffffff;">
         <div style="text-align: center; margin-bottom: 30px; border-bottom: 3px solid #1E3A8A; padding-bottom: 20px; background: linear-gradient(135deg, #EFF6FF 0%, #FFF7ED 100%); padding: 20px; border-radius: 8px 8px 0 0;">
-          <h1 style="color: #1E3A8A; margin: 0; font-size: 28px; font-weight: 700;">TruckLogistics</h1>
+          <h1 style="color: #1E3A8A; margin: 0; font-size: 28px; font-weight: 700;">movelinker</h1>
           <p style="color: #6B7280; margin: 8px 0 0 0; font-size: 13px; font-weight: 500;">Connecting Providers & Businesses</p>
         </div>
         
@@ -369,7 +369,7 @@ class EmailService {
           <p style="margin-bottom: 20px; color: #374151; line-height: 1.6;">Dear ${userName},</p>
           
           <p style="margin-bottom: 20px; color: #374151; line-height: 1.6;">
-            You have requested to reset your password for your TruckLogistics account. 
+            You have requested to reset your password for your movelinker account. 
             This is a security-protected action to ensure your account remains safe.
           </p>
           
@@ -411,9 +411,9 @@ class EmailService {
         </div>
         
         <div style="text-align: center; color: #6B7280; font-size: 12px; border-top: 1px solid #E5E7EB; padding-top: 20px;">
-          <p style="margin: 0 0 5px 0;">This is an automated security email from TruckLogistics</p>
-          <p style="margin: 0 0 5px 0; font-weight: 600;">© 2025 TruckLogistics. All rights reserved.</p>
-          <p style="margin: 5px 0 0 0; color: #1E3A8A;">Need help? Contact us at support@trucklogistics.com</p>
+          <p style="margin: 0 0 5px 0;">This is an automated security email from movelinker</p>
+          <p style="margin: 0 0 5px 0; font-weight: 600;">© 2025 movelinker. All rights reserved.</p>
+          <p style="margin: 5px 0 0 0; color: #1E3A8A;">Need help? Contact us at support@movelinker.com</p>
         </div>
       </div>
     `;

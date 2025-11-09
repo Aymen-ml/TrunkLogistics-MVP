@@ -1,7 +1,7 @@
-# 📧 Custom Email Setup Guide - noreply@trucklogistics.me
+# 📧 Custom Email Setup Guide - noreply@movelinker.com
 
 **Date:** October 22, 2025  
-**Email:** noreply@trucklogistics.me  
+**Email:** noreply@movelinker.com  
 **Purpose:** Complete setup and testing guide for custom domain email
 
 ---
@@ -26,14 +26,14 @@ Update your `server/.env` file:
 ```bash
 # Email Configuration - Custom Domain
 EMAIL_SERVICE=smtp
-EMAIL_FROM=noreply@trucklogistics.me
+EMAIL_FROM=noreply@movelinker.com
 EMAIL_FROM_NAME=TruckLogistics
 
 # SMTP Server Settings (from your email provider)
-EMAIL_HOST=mail.trucklogistics.me
+EMAIL_HOST=mail.movelinker.com
 EMAIL_PORT=587
 EMAIL_SECURE=false
-EMAIL_USER=noreply@trucklogistics.me
+EMAIL_USER=noreply@movelinker.com
 EMAIL_PASSWORD=your_email_password_here
 
 # OR if using TLS
@@ -47,7 +47,7 @@ EMAIL_SECURE=true
 # Email Configuration - SendGrid
 EMAIL_SERVICE=sendgrid
 SENDGRID_API_KEY=SG.your_api_key_here
-EMAIL_FROM=noreply@trucklogistics.me
+EMAIL_FROM=noreply@movelinker.com
 EMAIL_FROM_NAME=TruckLogistics
 ```
 
@@ -57,7 +57,7 @@ EMAIL_FROM_NAME=TruckLogistics
 # Email Configuration - Resend
 EMAIL_SERVICE=resend
 RESEND_API_KEY=re_your_api_key_here
-EMAIL_FROM=noreply@trucklogistics.me
+EMAIL_FROM=noreply@movelinker.com
 EMAIL_FROM_NAME=TruckLogistics
 ```
 
@@ -73,7 +73,7 @@ Add these to your domain registrar (e.g., Namecheap, GoDaddy, Cloudflare):
 ```
 Type: MX
 Host: @
-Value: mail.trucklogistics.me (or your email provider's server)
+Value: mail.movelinker.com (or your email provider's server)
 Priority: 10
 TTL: 3600
 ```
@@ -82,7 +82,7 @@ TTL: 3600
 ```
 Type: TXT
 Host: @
-Value: v=spf1 include:_spf.mail.trucklogistics.me ~all
+Value: v=spf1 include:_spf.mail.movelinker.com ~all
 TTL: 3600
 ```
 
@@ -105,7 +105,7 @@ TTL: 3600
 ```
 Type: TXT
 Host: _dmarc
-Value: v=DMARC1; p=quarantine; rua=mailto:postmaster@trucklogistics.me
+Value: v=DMARC1; p=quarantine; rua=mailto:postmaster@movelinker.com
 TTL: 3600
 ```
 
@@ -136,7 +136,7 @@ node test-custom-email.js youremail@example.com
 
 #### Test Password Reset Email
 ```bash
-node server/test-password-reset.js noreply@trucklogistics.me
+node server/test-password-reset.js noreply@movelinker.com
 ```
 
 #### Test Welcome Email
@@ -161,32 +161,32 @@ When you run the test script, you should see:
 🔧 TruckLogistics - Custom Email Test
 
 ========================================
-Testing: noreply@trucklogistics.me
+Testing: noreply@movelinker.com
 ========================================
 
 1️⃣  Checking environment configuration...
 
 Configuration:
    Service Type: smtp
-   From Email: noreply@trucklogistics.me
+   From Email: noreply@movelinker.com
    From Name: TruckLogistics
-   SMTP Host: mail.trucklogistics.me
+   SMTP Host: mail.movelinker.com
    SMTP Port: 587
    SMTP Secure: false
    Email User: ✅ SET
    Email Password: ✅ SET
 
-✅ Email sender correctly set to noreply@trucklogistics.me
+✅ Email sender correctly set to noreply@movelinker.com
 ✅ Email service initialized successfully
 
 2️⃣  Sending test email...
 
    Recipient: youremail@example.com
-   From: TruckLogistics <noreply@trucklogistics.me>
+   From: TruckLogistics <noreply@movelinker.com>
 
 ✅ Test email sent successfully!
 
-   Message ID: <some-message-id@trucklogistics.me>
+   Message ID: <some-message-id@movelinker.com>
 
 ========================================
 📬 Check your inbox at: youremail@example.com
@@ -281,7 +281,7 @@ Error: Sender email not verified
 **Solutions:**
 1. Log into SendGrid/Resend dashboard
 2. Go to Sender Authentication
-3. Add and verify noreply@trucklogistics.me
+3. Add and verify noreply@movelinker.com
 4. Wait for verification email and confirm
 
 ---
@@ -293,18 +293,18 @@ Error: Sender email not verified
 1. **Create Email Account:**
    - Login to cPanel/Plesk
    - Navigate to Email Accounts
-   - Create `noreply@trucklogistics.me`
+   - Create `noreply@movelinker.com`
    - Set a strong password
 
 2. **Get SMTP Settings:**
-   - Usually: `mail.trucklogistics.me`
+   - Usually: `mail.movelinker.com`
    - Port: 587 (TLS) or 465 (SSL)
    - Authentication: Required
 
 3. **Update .env:**
    ```bash
-   EMAIL_HOST=mail.trucklogistics.me
-   EMAIL_USER=noreply@trucklogistics.me
+   EMAIL_HOST=mail.movelinker.com
+   EMAIL_USER=noreply@movelinker.com
    EMAIL_PASSWORD=your_password
    ```
 
@@ -312,7 +312,7 @@ Error: Sender email not verified
 
 1. **Setup:**
    - Add domain to Google Workspace
-   - Create `noreply@trucklogistics.me` account
+   - Create `noreply@movelinker.com` account
    - Enable 2-Step Verification
    - Generate App Password
 
@@ -322,7 +322,7 @@ Error: Sender email not verified
    EMAIL_HOST=smtp.gmail.com
    EMAIL_PORT=587
    EMAIL_SECURE=false
-   EMAIL_USER=noreply@trucklogistics.me
+   EMAIL_USER=noreply@movelinker.com
    EMAIL_PASSWORD=your_app_password
    ```
 
@@ -331,14 +331,14 @@ Error: Sender email not verified
 1. **Setup:**
    - Create SendGrid account
    - Generate API key with "Mail Send" permission
-   - Authenticate sender (noreply@trucklogistics.me)
+   - Authenticate sender (noreply@movelinker.com)
    - Verify domain or single sender
 
 2. **Update .env:**
    ```bash
    EMAIL_SERVICE=sendgrid
    SENDGRID_API_KEY=SG.xxxxxxxxxxxxxx
-   EMAIL_FROM=noreply@trucklogistics.me
+   EMAIL_FROM=noreply@movelinker.com
    ```
 
 3. **Verify Sender:**
@@ -360,12 +360,12 @@ Update these on your hosting platform:
 # Email Configuration
 EMAIL_SERVICE=sendgrid
 SENDGRID_API_KEY=SG.your_production_key
-EMAIL_FROM=noreply@trucklogistics.me
+EMAIL_FROM=noreply@movelinker.com
 EMAIL_FROM_NAME=TruckLogistics
 
 # URLs
-CLIENT_URL=https://trucklogistics.me
-FRONTEND_URL=https://trucklogistics.me
+CLIENT_URL=https://movelinker.com
+FRONTEND_URL=https://movelinker.com
 ```
 
 ### DNS Configuration
@@ -404,7 +404,7 @@ Your platform sends these email types:
 6. **Provider Verification** - Provider approval
 7. **Notification Summary** - System notifications
 
-All templates will use `noreply@trucklogistics.me` as sender.
+All templates will use `noreply@movelinker.com` as sender.
 
 ---
 

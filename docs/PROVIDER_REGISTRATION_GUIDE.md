@@ -127,7 +127,7 @@ If you need assistance finding any of these documents or have questions about th
 1. Contact your local Chamber of Commerce
 2. Consult with a business registration agent
 3. Contact your local business licensing office
-4. Reach out to our support team at support@trucklogistics.com
+4. Reach out to our support team at support@movelinker.com
 
 Remember:
 - Keep copies of all submitted documents

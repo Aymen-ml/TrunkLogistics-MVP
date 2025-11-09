@@ -44,7 +44,7 @@
 4. **Environment Variables**
    Add these environment variables:
    ```
-   VITE_API_URL=https://trucklogistics-api.onrender.com
+   VITE_API_URL=https://api.movelinker.com
    ```
 
 5. **Deploy**
@@ -95,8 +95,8 @@ const allowedOrigins = [
   'http://127.0.0.1:5174',
   process.env.FRONTEND_URL,
   'https://your-vercel-domain.vercel.app',  // Add your new Vercel domain
-  'https://trucklogistics.netlify.app',     // Keep old domain if needed
-  'https://trucklogistics-mvp.netlify.app'  // Keep old domain if needed
+  'https://movelinker.com',     // Keep old domain if needed
+  'https://movelinker.com'  // Keep old domain if needed
 ];
 ```
 

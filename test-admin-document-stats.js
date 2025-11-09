@@ -10,7 +10,7 @@
 import fetch from 'node-fetch';
 import { query } from './server/src/config/database.js';
 
-const API_BASE_URL = 'https://trucklogistics-api.onrender.com';
+const API_BASE_URL = 'https://api.movelinker.com';
 const ADMIN_EMAIL = 'korichiaymen27@gmail.com';
 const ADMIN_PASSWORD = 'admin123';
 

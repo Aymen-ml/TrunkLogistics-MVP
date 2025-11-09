@@ -8,7 +8,7 @@
 import fetch from 'node-fetch';
 import fs from 'fs';
 
-const API_BASE = process.env.API_URL || 'https://trucklogistics-api.onrender.com/api';
+const API_BASE = process.env.API_URL || 'https://api.movelinker.com/api';
 const ADMIN_EMAIL = 'korichiaymen27@gmail.com';
 const ADMIN_PASSWORD = 'admin123';
 

@@ -95,7 +95,7 @@ trucklogistics/ (your cloud name)
 
 Instead of:
 ```
-❌ https://trucklogistics-api.onrender.com/uploads/trucks/images/file.jpg
+❌ https://api.movelinker.com/uploads/trucks/images/file.jpg
 ```
 
 You'll get:

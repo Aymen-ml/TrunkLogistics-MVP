@@ -12,7 +12,7 @@ Once you have your SendGrid API key, add these environment variables in your Ren
 ```
 EMAIL_SERVICE=sendgrid
 SENDGRID_API_KEY=SG.your_api_key_here
-EMAIL_FROM=noreply@trucklogistics.com
+EMAIL_FROM=noreply@movelinker.com
 EMAIL_FROM_NAME=TruckLogistics
 ```
 
@@ -27,7 +27,7 @@ Replace `SG.your_api_key_here` with your actual SendGrid API key.
 ## Test the Setup
 After deployment, test with:
 ```bash
-curl -X POST https://trucklogistics-api.onrender.com/api/email/send-test-email \
+curl -X POST https://api.movelinker.com/api/email/send-test-email \
   -H "Content-Type: application/json" \
   -d '{"email": "your-email@example.com"}'
 ```
@@ -35,7 +35,7 @@ curl -X POST https://trucklogistics-api.onrender.com/api/email/send-test-email \
 ## Verify Configuration
 Check configuration with:
 ```bash
-curl https://trucklogistics-api.onrender.com/api/email/test-email-config
+curl https://api.movelinker.com/api/email/test-email-config
 ```
 
 You should see:

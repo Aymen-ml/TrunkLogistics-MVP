@@ -65,7 +65,7 @@ async function testPasswordReset(userEmail) {
     // Step 5: Test email service
     console.log('\n5️⃣  Testing email service...');
     console.log(`   Email Service: ${process.env.EMAIL_SERVICE || 'SMTP'}`);
-    console.log(`   From: ${process.env.EMAIL_FROM_NAME || 'TruckLogistics'} <${process.env.EMAIL_FROM || 'noreply@trucklogistics.com'}>`);
+    console.log(`   From: ${process.env.EMAIL_FROM_NAME || 'movelinker'} <${process.env.EMAIL_FROM || 'noreply@movelinker.com'}>`);
     console.log(`   To: ${user.email}`);
     
     if (!emailService.transporter) {

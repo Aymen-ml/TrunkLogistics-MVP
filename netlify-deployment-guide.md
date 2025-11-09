@@ -22,7 +22,7 @@ Publish directory: dist
 ### 4. Environment Variables
 Go to Site settings → Environment variables → Add:
 ```
-VITE_API_URL = https://trucklogistics-api.onrender.com
+VITE_API_URL = https://api.movelinker.com
 ```
 
 ### 5. Deploy

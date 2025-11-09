@@ -214,7 +214,7 @@ className="bg-accent-500 hover:bg-accent-600 transition-colors"
 ### Logo Component
 - **TruckLogo.jsx** - Dual-mode logo component
   - Compact mode: Icon only
-  - Full mode: Icon + "TruckLogistics" text
+  - Full mode: Icon + "movelinker" text
   - Props: `className`, `showFull`
 
 ---

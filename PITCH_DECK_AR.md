@@ -4,7 +4,7 @@
 
 > منصة واحدة لحجز الشاحنات الموثوقة وتسليم الشحنات في الوقت المحدد. مصمّمة خصيصًا لعمليات النفط والغاز في جنوب الجزائر.
 
-وسائل الاتصال: support@trucklogistics.me • https://trucklogistics.me • +213 [رقم الهاتف]
+وسائل الاتصال: support@movelinker.com • https://movelinker.com • +213 [رقم الهاتف]
 
 ---
 
@@ -269,7 +269,7 @@
 
 - احجز شاحنات موثوقة. تحرّك أسرع مع الامتثال والوضوح.
 - مصمّم لجنوب الجزائر في قطاع النفط والغاز.
-- الاتصال: support@trucklogistics.me • https://trucklogistics.me • +213 [رقم الهاتف]
+- الاتصال: support@movelinker.com • https://movelinker.com • +213 [رقم الهاتف]
 
 ---
 

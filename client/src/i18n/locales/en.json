@@ -26,9 +26,9 @@
   "services": {
     "title": "All Your Needs in One App",
     "tabs": {
-      "transport": "TruckLogistics Transport",
-      "fleet": "TruckLogistics Fleet",
-      "analytics": "TruckLogistics Analytics"
+      "transport": "movelinker Transport",
+      "fleet": "movelinker Fleet",
+      "analytics": "movelinker Analytics"
     },
     "transport": {
       "quick": {
@@ -55,7 +55,7 @@
       },
       "easy": {
         "title": "Easy To Use",
-        "description": "The TruckLogistics dashboard is all you need to manage bookings and track performance."
+        "description": "The movelinker dashboard is all you need to manage bookings and track performance."
       }
     },
     "analytics": {
@@ -129,12 +129,12 @@
     },
     "contact": {
       "title": "Contact Us",
-      "email": "support@trucklogistics.me",
+      "email": "support@movelinker.com",
       "phone": "+213 779 11 65 22",
       "location": "Algiers, Algeria",
       "help": "Help Center"
     },
-    "copyright": "© 2025 TruckLogistics. All rights reserved.",
+    "copyright": "© 2025 movelinker. All rights reserved.",
     "cookiePolicy": "Cookie Policy"
   },
   "settings": {

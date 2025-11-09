@@ -115,7 +115,7 @@ node test-hybrid-storage.js
 
 ### File URL Examples
 ```
-Before: https://trucklogistics-api.onrender.com/uploads/trucks/images/file.jpg
+Before: https://api.movelinker.com/uploads/trucks/images/file.jpg
 After:  https://res.cloudinary.com/your-cloud/image/upload/v123/trucklogistics/trucks/images/truck_image_abc.jpg
 ```
 

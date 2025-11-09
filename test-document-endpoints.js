@@ -9,7 +9,7 @@
 import axios from 'axios';
 import chalk from 'chalk';
 
-const API_BASE_URL = 'https://trucklogistics-api.onrender.com/api';
+const API_BASE_URL = 'https://api.movelinker.com/api';
 
 async function testDocumentEndpoints() {
   console.log(chalk.blue('🔍 Testing Document Endpoints Configuration\n'));
@@ -73,7 +73,7 @@ async function testDocumentEndpoints() {
     try {
       const response = await axios.options(`${API_BASE_URL}/documents`, {
         headers: {
-          'Origin': 'https://trucklogistics.netlify.app',
+          'Origin': 'https://movelinker.com',
           'Access-Control-Request-Method': 'GET',
           'Access-Control-Request-Headers': 'authorization'
         }

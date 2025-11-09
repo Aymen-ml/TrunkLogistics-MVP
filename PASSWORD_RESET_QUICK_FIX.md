@@ -61,7 +61,7 @@ On **Render** (or your hosting platform), verify these are set:
 
 ```env
 # Required
-CLIENT_URL=https://trucklogistics.netlify.app
+CLIENT_URL=https://movelinker.com
 EMAIL_SERVICE=sendgrid
 SENDGRID_API_KEY=SG.xxx...
 
@@ -71,7 +71,7 @@ EMAIL_USER=your-email@gmail.com
 EMAIL_PASSWORD=your-app-password
 
 # Optional but recommended
-EMAIL_FROM=noreply@trucklogistics.com
+EMAIL_FROM=noreply@movelinker.com
 EMAIL_FROM_NAME=TruckLogistics
 ```
 
@@ -115,20 +115,20 @@ node test-password-reset.js user@example.com
 2. **Get API Key**:
    - Go to Settings → API Keys
    - Click "Create API Key"
-   - Name it "TruckLogistics"
+   - Name it "movelinker"
    - Choose "Full Access" or "Mail Send"
    - Copy the key (shown only once!)
 
 3. **Configure Sender Identity**:
    - Go to Settings → Sender Authentication
    - Choose "Single Sender Verification"
-   - Add and verify noreply@trucklogistics.com (or your domain)
+   - Add and verify noreply@movelinker.com (or your domain)
 
 4. **Update Environment Variables** on Render:
    ```env
    EMAIL_SERVICE=sendgrid
    SENDGRID_API_KEY=SG.xxx...
-   EMAIL_FROM=noreply@trucklogistics.com
+   EMAIL_FROM=noreply@movelinker.com
    EMAIL_FROM_NAME=TruckLogistics
    ```
 
@@ -144,7 +144,7 @@ node test-password-reset.js user@example.com
    - Go to Google Account → Security → 2-Step Verification
    - Scroll to "App passwords"
    - Select "Mail" and "Other (Custom name)"
-   - Name it "TruckLogistics"
+   - Name it "movelinker"
    - Copy the 16-character password
 
 3. **Update Environment Variables** on Render:
@@ -174,7 +174,7 @@ EMAIL_FROM_NAME=TruckLogistics
 
 1. **Go to Frontend**:
    ```
-   https://trucklogistics.netlify.app/forgot-password
+   https://movelinker.com/forgot-password
    ```
 
 2. **Enter Email Address** of a test user
@@ -236,7 +236,7 @@ Look in Render logs after forgot password request:
 
 **Solution**: Verify in client/src/utils/apiClient.js:
 ```javascript
-const API_URL = import.meta.env.VITE_API_URL || 'https://trucklogistics-api.onrender.com/api';
+const API_URL = import.meta.env.VITE_API_URL || 'https://api.movelinker.com/api';
 ```
 
 ## Environment Variables Checklist
@@ -261,11 +261,11 @@ SENDGRID_API_KEY=SG.xxx...
 # EMAIL_PASSWORD=your-app-password
 
 # Email Details
-EMAIL_FROM=noreply@trucklogistics.com
+EMAIL_FROM=noreply@movelinker.com
 EMAIL_FROM_NAME=TruckLogistics
 
 # URLs
-CLIENT_URL=https://trucklogistics.netlify.app
+CLIENT_URL=https://movelinker.com
 NODE_ENV=production
 
 # Rate Limiting
@@ -334,9 +334,9 @@ Add this to your .env and restart:
 
 EMAIL_SERVICE=sendgrid
 SENDGRID_API_KEY=[GET-FROM-SENDGRID]
-EMAIL_FROM=noreply@trucklogistics.com
+EMAIL_FROM=noreply@movelinker.com
 EMAIL_FROM_NAME=TruckLogistics
-CLIENT_URL=https://trucklogistics.netlify.app
+CLIENT_URL=https://movelinker.com
 ```
 
 Then restart your server on Render!

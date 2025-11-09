@@ -5,7 +5,7 @@ Testing the UI update functionality when clicking booking status change buttons 
 
 ## Deployment Information
 - **Frontend**: https://truck-logistics-mvp.vercel.app/
-- **Backend**: https://trucklogistics-api.onrender.com
+- **Backend**: https://api.movelinker.com
 - **Database**: Supabase PostgreSQL
 
 ## Code Analysis Summary

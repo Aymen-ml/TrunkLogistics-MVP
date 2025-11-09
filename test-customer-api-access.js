@@ -72,7 +72,7 @@ async function testCustomerApiAccess() {
     // 3. Test API access with the customer token
     console.log('\n3. Testing API access...\n');
     
-    const API_BASE_URL = process.env.API_URL || 'https://trucklogistics-api.onrender.com/api';
+    const API_BASE_URL = process.env.API_URL || 'https://api.movelinker.com/api';
     
     const apiClient = axios.create({
       baseURL: API_BASE_URL,

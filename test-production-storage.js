@@ -4,7 +4,7 @@ const testProductionStorage = async () => {
   try {
     console.log('🔍 Testing Production Storage Status...\n');
     
-    const apiUrl = 'https://trucklogistics-api.onrender.com';
+    const apiUrl = 'https://api.movelinker.com';
     
     // First, let's test if the server is responding
     console.log('1. Testing server health...');

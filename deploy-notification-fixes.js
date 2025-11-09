@@ -124,7 +124,7 @@ console.log('      - Run: node test-notifications.js');
 console.log('      - Check that all tests pass');
 console.log('   ');
 console.log('   3. Test the frontend:');
-console.log('      - Visit: https://trucklogistics-mvp.netlify.app');
+console.log('      - Visit: https://movelinker.com');
 console.log('      - Login with admin credentials');
 console.log('      - Test notification creation and viewing');
 

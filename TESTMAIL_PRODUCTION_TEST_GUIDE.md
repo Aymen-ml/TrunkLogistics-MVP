@@ -33,7 +33,7 @@ EMAIL_USER=trucklogistics@testmail.app
 EMAIL_PASSWORD=your-testmail-api-key
 
 # Email from address (can be anything)
-EMAIL_FROM=noreply@trucklogistics.com
+EMAIL_FROM=noreply@movelinker.com
 EMAIL_FROM_NAME=TruckLogistics
 
 # Your frontend URL
@@ -107,7 +107,7 @@ EMAIL_USER=trucklogistics@testmail.app
 EMAIL_PASSWORD=tm_xxxxxxxxxxxxxxxxxx
 
 # Email Details
-EMAIL_FROM=noreply@trucklogistics.com
+EMAIL_FROM=noreply@movelinker.com
 EMAIL_FROM_NAME=TruckLogistics
 
 # URLs

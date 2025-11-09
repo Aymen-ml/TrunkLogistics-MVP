@@ -187,7 +187,7 @@ const availableActions = useMemo(() => {
 
 ### URLs
 - **Frontend:** https://truck-logistics-mvp.vercel.app/
-- **Backend:** https://trucklogistics-api.onrender.com
+- **Backend:** https://api.movelinker.com
 - **Vercel Dashboard:** https://vercel.com/dashboard
 
 ---

@@ -2,7 +2,7 @@
 
 > **Book verified trucks. Deliver on time. Built for South Algeria oil & gas.**
 
-**Contact:** support@trucklogistics.me • trucklogistics.me • +213 779 11 65 22  
+**Contact:** support@movelinker.com • movelinker.com • +213 779 11 65 22  
 **Version:** Oct 2025 (Pre-Launch MVP)
 
 ---
@@ -491,7 +491,7 @@ Note: Communications are email-based in the MVP (1–2% of revenue), keeping var
 
 ### **Current Status (Oct 2025)**
 
-✅ **MVP deployed:** trucklogistics.me (live, production-ready)  
+✅ **MVP deployed:** movelinker.com (live, production-ready)  
 ✅ **Legal foundation:** Privacy Policy, Terms of Use, About Us pages published  
 ✅ **Security:** Supabase auth, password reset, session management, HTTPS  
 ✅ **Core features:** Provider onboarding, load posting, offers, bookings, ePOD, notifications
@@ -700,8 +700,8 @@ Note: Communications are email-based in the MVP (1–2% of revenue), keeping var
 ### **Let's Build the Future of Logistics in Algeria**
 
 **Contact:**  
-📧 support@trucklogistics.me  
-🌐 trucklogistics.me  
+📧 support@movelinker.com  
+🌐 movelinker.com  
 📱 +213 779 11 65 22  
 
 **Location:** Algiers, Algeria (field ops in Hassi Messaoud)  

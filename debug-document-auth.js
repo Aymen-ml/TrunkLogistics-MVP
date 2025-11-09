@@ -10,7 +10,7 @@
 import axios from 'axios';
 import chalk from 'chalk';
 
-const API_BASE_URL = 'https://trucklogistics-api.onrender.com/api';
+const API_BASE_URL = 'https://api.movelinker.com/api';
 
 // Test credentials - you'll need to replace these with actual credentials
 const TEST_CREDENTIALS = {

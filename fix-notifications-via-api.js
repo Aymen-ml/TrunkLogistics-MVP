@@ -3,7 +3,7 @@
 import axios from 'axios';
 import fs from 'fs';
 
-const API_BASE_URL = 'https://trucklogistics-api.onrender.com/api';
+const API_BASE_URL = 'https://api.movelinker.com/api';
 
 // Admin credentials from prompt.txt
 const ADMIN_CREDENTIALS = {

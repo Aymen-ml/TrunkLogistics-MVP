@@ -32,7 +32,7 @@
 3. You should see a new deployment in progress
 
 ### Backend (Render)
-- **URL:** https://trucklogistics-api.onrender.com
+- **URL:** https://api.movelinker.com
 - **Status:** ✅ No changes needed (backend code unchanged)
 - **Branch:** main
 

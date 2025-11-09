@@ -21,7 +21,7 @@
     "booking",
     "transportation"
   ],
-  "author": "TruckLogistics Team",
+  "author": "movelinker Team",
   "license": "MIT",
   "devDependencies": {
     "concurrently": "^8.2.2"

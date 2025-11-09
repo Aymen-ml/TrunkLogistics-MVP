@@ -2,7 +2,7 @@
 
 /**
  * Custom Email Test Script
- * Tests noreply@trucklogistics.me email configuration
+ * Tests noreply@movelinker.com email configuration
  * 
  * Usage:
  *   node test-custom-email.js [recipient-email]
@@ -38,7 +38,7 @@ const { default: emailService } = await import('./server/src/services/emailServi
 
 console.log('\n🔧 TruckLogistics - Custom Email Test\n');
 console.log('========================================');
-console.log('Testing: noreply@trucklogistics.me');
+console.log('Testing: noreply@movelinker.com');
 console.log('========================================\n');
 
 async function testCustomEmail() {
@@ -73,12 +73,12 @@ async function testCustomEmail() {
     console.log('');
     
     // Validate configuration
-    if (config.emailFrom !== 'noreply@trucklogistics.me') {
-      console.log('⚠️  WARNING: EMAIL_FROM is not set to noreply@trucklogistics.me');
+    if (config.emailFrom !== 'noreply@movelinker.com') {
+      console.log('⚠️  WARNING: EMAIL_FROM is not set to noreply@movelinker.com');
       console.log('   Current value:', config.emailFrom);
       console.log('   Please update your .env file\n');
     } else {
-      console.log('✅ Email sender correctly set to noreply@trucklogistics.me\n');
+      console.log('✅ Email sender correctly set to noreply@movelinker.com\n');
     }
     
     // Check if email service is configured
@@ -164,7 +164,7 @@ async function testCustomEmail() {
           
           <h2>Congratulations!</h2>
           
-          <p>Your custom email <strong>noreply@trucklogistics.me</strong> is now properly configured and working!</p>
+          <p>Your custom email <strong>noreply@movelinker.com</strong> is now properly configured and working!</p>
           
           <div class="info-box">
             <h3>📧 Email Configuration Details</h3>
@@ -227,14 +227,14 @@ async function testCustomEmail() {
     console.log('========================================\n');
     
     console.log('✅ All tests passed!\n');
-    console.log('Your custom email noreply@trucklogistics.me is working perfectly! 🎉\n');
+    console.log('Your custom email noreply@movelinker.com is working perfectly! 🎉\n');
     
     // Step 3: Additional tests
     console.log('3️⃣  Additional Email Templates Test...\n');
     
     // Test password reset email template
     console.log('   Testing Password Reset Email...');
-    const resetUrl = 'https://trucklogistics.me/reset-password/test-token-123';
+    const resetUrl = 'https://movelinker.com/reset-password/test-token-123';
     const resetResult = await emailService.sendPasswordResetEmail(
       recipientEmail,
       'Test User',
@@ -278,7 +278,7 @@ async function testCustomEmail() {
     }
     
     console.log('\n💡 Troubleshooting Tips:\n');
-    console.log('1. Verify EMAIL_FROM is set to noreply@trucklogistics.me');
+    console.log('1. Verify EMAIL_FROM is set to noreply@movelinker.com');
     console.log('2. Check SMTP credentials (EMAIL_USER, EMAIL_PASSWORD)');
     console.log('3. Ensure EMAIL_HOST and EMAIL_PORT are correct');
     console.log('4. Verify your email domain DNS records (SPF, DKIM, DMARC)');

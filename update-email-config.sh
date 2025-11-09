@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # Quick Email Update Script
-# Updates server/.env to use noreply@trucklogistics.me
+# Updates server/.env to use noreply@movelinker.com
 
-echo "📧 Updating email configuration to noreply@trucklogistics.me"
+echo "📧 Updating email configuration to noreply@movelinker.com"
 echo ""
 
 # Backup current .env
@@ -28,11 +28,11 @@ echo ""
 
 case $choice in
   1)
-    echo "📧 Configuring Resend with noreply@trucklogistics.me"
+    echo "📧 Configuring Resend with noreply@movelinker.com"
     echo ""
     echo "Steps to complete:"
     echo "1. Go to https://resend.com/domains"
-    echo "2. Add domain: trucklogistics.me"
+    echo "2. Add domain: movelinker.com"
     echo "3. Add DNS records shown by Resend"
     echo "4. Verify domain"
     echo "5. Your API key should already be set in .env"
@@ -40,11 +40,11 @@ case $choice in
     
     # Update EMAIL_FROM in .env
     if grep -q "^EMAIL_FROM=" server/.env; then
-      sed -i 's|^EMAIL_FROM=.*|EMAIL_FROM=noreply@trucklogistics.me|g' server/.env
-      echo "✅ Updated EMAIL_FROM to noreply@trucklogistics.me"
+      sed -i 's|^EMAIL_FROM=.*|EMAIL_FROM=noreply@movelinker.com|g' server/.env
+      echo "✅ Updated EMAIL_FROM to noreply@movelinker.com"
     else
-      echo "EMAIL_FROM=noreply@trucklogistics.me" >> server/.env
-      echo "✅ Added EMAIL_FROM=noreply@trucklogistics.me"
+      echo "EMAIL_FROM=noreply@movelinker.com" >> server/.env
+      echo "✅ Added EMAIL_FROM=noreply@movelinker.com"
     fi
     
     # Make sure EMAIL_SERVICE is set to resend
@@ -58,7 +58,7 @@ case $choice in
     ;;
     
   2)
-    echo "📧 Configuring SendGrid with noreply@trucklogistics.me"
+    echo "📧 Configuring SendGrid with noreply@movelinker.com"
     echo ""
     read -p "Enter your SendGrid API key: " api_key
     
@@ -81,22 +81,22 @@ case $choice in
     fi
     
     if grep -q "^EMAIL_FROM=" server/.env; then
-      sed -i 's|^EMAIL_FROM=.*|EMAIL_FROM=noreply@trucklogistics.me|g' server/.env
+      sed -i 's|^EMAIL_FROM=.*|EMAIL_FROM=noreply@movelinker.com|g' server/.env
     else
-      echo "EMAIL_FROM=noreply@trucklogistics.me" >> server/.env
+      echo "EMAIL_FROM=noreply@movelinker.com" >> server/.env
     fi
     
     echo "✅ Configuration updated for SendGrid"
     echo ""
     echo "⚠️  IMPORTANT: Verify sender in SendGrid:"
     echo "   1. Go to https://app.sendgrid.com/settings/sender_auth"
-    echo "   2. Verify noreply@trucklogistics.me"
+    echo "   2. Verify noreply@movelinker.com"
     ;;
     
   3)
-    echo "📧 Configuring Custom SMTP with noreply@trucklogistics.me"
+    echo "📧 Configuring Custom SMTP with noreply@movelinker.com"
     echo ""
-    read -p "SMTP Host (e.g., mail.trucklogistics.me): " smtp_host
+    read -p "SMTP Host (e.g., mail.movelinker.com): " smtp_host
     read -p "SMTP Port (587 or 465): " smtp_port
     read -p "Use TLS? (y/n): " use_tls
     read -p "SMTP Username: " smtp_user
@@ -151,9 +151,9 @@ case $choice in
     fi
     
     if grep -q "^EMAIL_FROM=" server/.env; then
-      sed -i 's|^EMAIL_FROM=.*|EMAIL_FROM=noreply@trucklogistics.me|g' server/.env
+      sed -i 's|^EMAIL_FROM=.*|EMAIL_FROM=noreply@movelinker.com|g' server/.env
     else
-      echo "EMAIL_FROM=noreply@trucklogistics.me" >> server/.env
+      echo "EMAIL_FROM=noreply@movelinker.com" >> server/.env
     fi
     
     echo "✅ Configuration updated for Custom SMTP"

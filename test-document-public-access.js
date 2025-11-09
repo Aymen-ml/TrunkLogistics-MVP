@@ -9,7 +9,7 @@
 import axios from 'axios';
 import chalk from 'chalk';
 
-const API_BASE_URL = 'https://trucklogistics-api.onrender.com/api';
+const API_BASE_URL = 'https://api.movelinker.com/api';
 
 async function testPublicDocumentAccess() {
   console.log(chalk.blue('🔍 Testing Public Document Access\n'));

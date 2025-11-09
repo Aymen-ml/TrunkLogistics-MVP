@@ -1,4 +1,4 @@
-# 🚀 Quick Start - Testing noreply@trucklogistics.me
+# 🚀 Quick Start - Testing noreply@movelinker.com
 
 ## Step 1: Update Email Configuration (Choose One Method)
 
@@ -14,24 +14,24 @@ Edit `server/.env` and update:
 ```bash
 # For Resend (Current Setup)
 EMAIL_SERVICE=resend
-EMAIL_FROM=noreply@trucklogistics.me
+EMAIL_FROM=noreply@movelinker.com
 EMAIL_FROM_NAME=TruckLogistics
 RESEND_API_KEY=your_api_key_here
 
 # OR for SendGrid
 EMAIL_SERVICE=sendgrid
 SENDGRID_API_KEY=SG.your_api_key_here
-EMAIL_FROM=noreply@trucklogistics.me
+EMAIL_FROM=noreply@movelinker.com
 EMAIL_FROM_NAME=TruckLogistics
 
 # OR for Custom SMTP
 EMAIL_SERVICE=smtp
-EMAIL_HOST=mail.trucklogistics.me
+EMAIL_HOST=mail.movelinker.com
 EMAIL_PORT=587
 EMAIL_SECURE=false
-EMAIL_USER=noreply@trucklogistics.me
+EMAIL_USER=noreply@movelinker.com
 EMAIL_PASSWORD=your_password
-EMAIL_FROM=noreply@trucklogistics.me
+EMAIL_FROM=noreply@movelinker.com
 EMAIL_FROM_NAME=TruckLogistics
 ```
 
@@ -39,17 +39,17 @@ EMAIL_FROM_NAME=TruckLogistics
 
 ### For Resend:
 1. Go to https://resend.com/domains
-2. Add domain: `trucklogistics.me`
+2. Add domain: `movelinker.com`
 3. Add DNS records shown by Resend to your domain
 4. Wait for verification (usually 5-10 minutes)
 
 ### For SendGrid:
 1. Go to https://app.sendgrid.com/settings/sender_auth
-2. Verify sender: `noreply@trucklogistics.me`
+2. Verify sender: `noreply@movelinker.com`
 3. Or authenticate entire domain (recommended)
 
 ### For Custom SMTP:
-1. Ensure email account `noreply@trucklogistics.me` exists
+1. Ensure email account `noreply@movelinker.com` exists
 2. Configure SPF, DKIM, DMARC records (see CUSTOM_EMAIL_SETUP.md)
 
 ## Step 3: Run Test
@@ -68,11 +68,11 @@ node test-custom-email.js
 🔧 TruckLogistics - Custom Email Test
 
 ========================================
-Testing: noreply@trucklogistics.me
+Testing: noreply@movelinker.com
 ========================================
 
 1️⃣  Checking environment configuration...
-✅ Email sender correctly set to noreply@trucklogistics.me
+✅ Email sender correctly set to noreply@movelinker.com
 ✅ Email service initialized successfully
 
 2️⃣  Sending test email...
@@ -114,7 +114,7 @@ After testing locally, update production environment variables on your hosting p
 
 ```bash
 EMAIL_SERVICE=resend
-EMAIL_FROM=noreply@trucklogistics.me
+EMAIL_FROM=noreply@movelinker.com
 EMAIL_FROM_NAME=TruckLogistics
 RESEND_API_KEY=re_your_production_key
 ```

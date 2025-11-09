@@ -225,13 +225,13 @@ EMAIL_FROM_NAME=TruckLogistics
 ```
 
 #### **2. Resend Email Service:**
-- Update sender name to "TruckLogistics"
+- Update sender name to "movelinker"
 - Update email templates if using stored templates
 
 #### **3. Domain/URLs (Future):**
 If you get a custom domain:
 - Consider: `trucklogistics.com`
-- Email: `noreply@trucklogistics.com`
+- Email: `noreply@movelinker.com`
 
 #### **4. GitHub Repository (Optional):**
 ```bash
@@ -333,7 +333,7 @@ import TrustBadges, { StatsBadges, VerificationBadge } from '../components/commo
 
 ### **Long-term (1-2 months):**
 1. Get custom domain: `trucklogistics.com`
-2. Professional email setup: `support@trucklogistics.com`
+2. Professional email setup: `support@movelinker.com`
 3. Create brand guidelines document
 4. Design mobile app with new branding
 5. White-label option for enterprise clients
