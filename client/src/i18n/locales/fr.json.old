@@ -1,0 +1,476 @@
+{
+  "nav": {
+    "services": "Services",
+    "values": "Valeurs",
+    "partners": "Partenaires",
+    "contact": "Contact",
+    "about": "À Propos",
+    "signin": "Se Connecter",
+    "getStarted": "Commencer",
+    "dashboard": "Tableau de Bord"
+  },
+  "hero": {
+    "badge": "Plateforme Logistique de Confiance pour l'Algérie",
+    "headline1": "Connecter.",
+    "headline2": "Transporter.",
+    "headline3": "Grandir Ensemble.",
+    "subheadline": "La plateforme logistique complète reliant les entreprises aux transporteurs vérifiés dans le sud de l'Algérie",
+    "ctaDashboard": "Accéder au Tableau de Bord",
+    "ctaGetStarted": "Commencer",
+    "ctaSignIn": "Se Connecter",
+    "trustVerified": "Transporteurs Vérifiés",
+    "trustTracking": "Suivi en Temps Réel",
+    "trustPricing": "Tarification Transparente",
+    "heroAlt": "Camion-citerne transportant du pétrole à travers le désert du Sahara algérien au coucher du soleil"
+  },
+  "services": {
+    "title": "Tous vos besoins en une seule application",
+    "tabs": {
+      "transport": "movelinker Transport",
+      "fleet": "movelinker Flotte",
+      "analytics": "movelinker Analytique"
+    },
+    "transport": {
+      "quick": {
+        "title": "Rapide et Facile",
+        "description": "Obtenez des transporteurs vérifiés à votre emplacement en quelques minutes, à tout moment et n'importe où."
+      },
+      "secure": {
+        "title": "Sécurisé",
+        "description": "Nos transporteurs sont vérifiés avec des contrôles de documents complets, pour réserver en toute tranquillité."
+      },
+      "price": {
+        "title": "Le Juste Prix",
+        "description": "Les tarifs sont transparents et affichés à l'avance. Pas de frais cachés, pas de surprises!"
+      }
+    },
+    "fleet": {
+      "boss": {
+        "title": "Soyez Votre Propre Patron",
+        "description": "Gérez votre flotte et vos réservations quand vous voulez depuis votre tableau de bord."
+      },
+      "grow": {
+        "title": "Développez Votre Entreprise",
+        "description": "Gagnez plus avec chaque réservation et élargissez votre clientèle dans toute la région."
+      },
+      "easy": {
+        "title": "Facile à Utiliser",
+        "description": "Le tableau de bord movelinker est tout ce dont vous avez besoin pour gérer les réservations et suivre les performances."
+      }
+    },
+    "analytics": {
+      "insights": {
+        "title": "Insights en Temps Réel",
+        "description": "Surveillez vos opérations avec des tableaux de bord en direct montrant les réservations, les revenus et les performances."
+      },
+      "tracking": {
+        "title": "Suivi des Performances",
+        "description": "Suivez les indicateurs clés, identifiez les tendances et optimisez vos opérations logistiques."
+      },
+      "decisions": {
+        "title": "Décisions Basées sur les Données",
+        "description": "Prenez des décisions éclairées avec des outils d'analyse et de reporting complets."
+      }
+    }
+  },
+  "values": {
+    "title": "Nos Valeurs",
+    "subtitle": "Les principes qui nous guident",
+    "ambition": {
+      "title": "Ambition",
+      "description": "L'ambition sans limites de notre équipe nous pousse à innover, grandir et atteindre de nouveaux horizons dans l'excellence logistique."
+    },
+    "transparency": {
+      "title": "Transparence et Confiance",
+      "description": "Une communication ouverte et une transparence totale sont les piliers de notre plateforme, favorisant la confiance entre toutes les parties."
+    },
+    "quality": {
+      "title": "Qualité",
+      "description": "Nous nous engageons à fournir des services de qualité inégalée, établissant la norme de l'excellence logistique."
+    },
+    "performance": {
+      "title": "Performance",
+      "description": "Nous assurons des performances optimales dans tous les aspects, repoussant les limites du possible en logistique."
+    }
+  },
+  "partners": {
+    "title": "Partenaires de Confiance",
+    "subtitle": "Travaillant avec les principales organisations à travers l'Algérie",
+    "customer": {
+      "title": "Réserver un Transport",
+      "benefit1": "Accédez instantanément aux transporteurs vérifiés",
+      "benefit2": "Suivez les expéditions en temps réel",
+      "benefit3": "Tarification et facturation transparentes",
+      "cta": "Réserver Maintenant"
+    },
+    "provider": {
+      "title": "Devenir Transporteur",
+      "benefit1": "Développez votre entreprise avec de nouveaux clients",
+      "benefit2": "Gérez votre flotte efficacement",
+      "benefit3": "Accédez aux analyses de performance",
+      "cta": "Devenir Transporteur"
+    }
+  },
+  "footer": {
+    "tagline": "Avançons ensemble à travers l'Algérie",
+    "services": {
+      "title": "Nos Services",
+      "transport": "Services de Transport",
+      "fleet": "Gestion de Flotte",
+      "analytics": "Tableau de Bord Analytique",
+      "provider": "Devenir Transporteur"
+    },
+    "company": {
+      "title": "Entreprise",
+      "about": "À Propos",
+      "values": "Nos Valeurs",
+      "privacy": "Politique de Confidentialité",
+      "terms": "Conditions d'Utilisation"
+    },
+    "contact": {
+      "title": "Contactez-nous",
+      "email": "support@movelinker.com",
+      "phone": "+213 779 11 65 22",
+      "location": "Alger, Algérie",
+      "help": "Centre d'aide"
+    },
+    "copyright": "© 2025 movelinker. Tous droits réservés.",
+    "cookiePolicy": "Politique des cookies"
+  },
+  "settings": {
+    "title": "Paramètres",
+    "subtitle": "Personnalisez votre expérience d'application",
+    "theme": {
+      "title": "Thème",
+      "subtitle": "Choisissez votre schéma de couleurs préféré",
+      "light": "Mode Clair",
+      "dark": "Mode Sombre",
+      "note": "Les changements de thème sont appliqués immédiatement et enregistrés dans votre navigateur"
+    },
+    "language": {
+      "title": "Langue",
+      "subtitle": "Choisissez votre langue préférée",
+      "note": "Les changements de langue sont appliqués immédiatement dans toute l'application"
+    },
+    "notifications": {
+      "title": "Notifications",
+      "subtitle": "Gérez vos préférences de notification",
+      "enable": "Activer les Notifications",
+      "description": "Recevez des mises à jour sur les réservations, les messages et les événements importants",
+      "disabled": "Les notifications sont actuellement désactivées. Vous ne recevrez pas de mises à jour en temps réel."
+    },
+    "save": "Enregistrer les Paramètres",
+    "saving": "Enregistrement...",
+    "unsavedChanges": "Vous avez des modifications non enregistrées",
+    "savedSuccess": "Paramètres enregistrés!",
+    "savedSuccessNotifications": "Paramètres enregistrés! Notifications activées.",
+    "savedSuccessNoNotifications": "Paramètres enregistrés! Notifications désactivées.",
+    "savedError": "Échec de l'enregistrement des paramètres. Veuillez réessayer.",
+    "tip": "Astuce: Vos préférences sont enregistrées localement dans votre navigateur et persisteront entre les sessions."
+  },
+  "common": {
+    "loading": "Chargement...",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "view": "Voir",
+    "search": "Rechercher",
+    "filter": "Filtrer",
+    "reset": "Réinitialiser",
+    "close": "Fermer",
+    "back": "Retour",
+    "next": "Suivant",
+    "previous": "Précédent",
+    "submit": "Soumettre",
+    "confirm": "Confirmer",
+    "yes": "Oui",
+    "no": "Non",
+    "error": "Erreur",
+    "success": "Succès",
+    "warning": "Avertissement",
+    "info": "Information"
+  },
+  "auth": {
+    "login": {
+      "title": "Connectez-vous à votre compte",
+      "subtitle": "Ou",
+      "createAccount": "créer un nouveau compte",
+      "email": "Adresse e-mail",
+      "emailPlaceholder": "Entrez votre e-mail",
+      "password": "Mot de passe",
+      "passwordPlaceholder": "Entrez votre mot de passe",
+      "signInButton": "Se connecter",
+      "forgotPassword": "Mot de passe oublié ?",
+      "emailRequired": "L'e-mail est requis",
+      "emailInvalid": "L'e-mail est invalide",
+      "passwordRequired": "Le mot de passe est requis"
+    },
+    "register": {
+      "title": "Créez votre compte",
+      "subtitle": "Vous avez déjà un compte ?",
+      "signIn": "Connectez-vous ici",
+      "personalInfo": "Informations personnelles",
+      "accountInfo": "Informations du compte",
+      "companyInfo": "Informations sur l'entreprise",
+      "addressInfo": "Informations d'adresse",
+      "firstName": "Prénom",
+      "firstNamePlaceholder": "Entrez votre prénom",
+      "lastName": "Nom",
+      "lastNamePlaceholder": "Entrez votre nom",
+      "email": "Adresse e-mail",
+      "emailPlaceholder": "votre.email@entreprise.com",
+      "phone": "Numéro de téléphone",
+      "phonePlaceholder": "+213 XXX XX XX XX",
+      "password": "Mot de passe",
+      "passwordPlaceholder": "Au moins 6 caractères",
+      "confirmPassword": "Confirmer le mot de passe",
+      "confirmPasswordPlaceholder": "Ressaisissez votre mot de passe",
+      "role": "Je suis",
+      "roleCustomer": "Client (j'ai besoin de camions)",
+      "roleProvider": "Fournisseur (j'ai des camions)",
+      "companyName": "Nom de l'entreprise",
+      "companyNamePlaceholder": "Nom de votre entreprise",
+      "businessType": "Type d'entreprise",
+      "businessTypeCompany": "Entreprise",
+      "industrySector": "Secteur d'activité",
+      "industrySectorPlaceholder": "ex. Pétrole et gaz, Construction",
+      "businessPhone": "Téléphone professionnel",
+      "businessPhonePlaceholder": "+213 XXX XX XX XX",
+      "contactPerson": "Nom de la personne de contact",
+      "contactPersonPlaceholder": "Nom complet",
+      "contactPosition": "Poste",
+      "contactPositionPlaceholder": "ex. Responsable logistique",
+      "contactEmail": "E-mail de contact",
+      "contactEmailPlaceholder": "contact@entreprise.com",
+      "contactPhone": "Téléphone de contact",
+      "contactPhonePlaceholder": "+213 XXX XX XX XX",
+      "streetAddress": "Adresse",
+      "streetAddressPlaceholder": "Nom et numéro de rue",
+      "city": "Ville",
+      "cityPlaceholder": "Nom de la ville",
+      "stateProvince": "Wilaya/Province",
+      "stateProvincePlaceholder": "Wilaya ou province",
+      "postalCode": "Code postal",
+      "postalCodePlaceholder": "Code postal",
+      "country": "Pays",
+      "countryPlaceholder": "Algérie",
+      "deliveryInstructions": "Instructions de livraison",
+      "deliveryInstructionsPlaceholder": "Instructions spéciales pour les livraisons",
+      "paymentMethods": "Modes de paiement préférés",
+      "paymentCash": "Espèces",
+      "paymentBankTransfer": "Virement bancaire",
+      "paymentCheck": "Chèque",
+      "backButton": "Retour",
+      "nextButton": "Suivant",
+      "registerButton": "Créer un compte",
+      "step": "Étape",
+      "of": "sur",
+      "passwordsNoMatch": "Les mots de passe ne correspondent pas",
+      "passwordTooShort": "Le mot de passe doit contenir au moins 6 caractères",
+      "emailInvalid": "Veuillez fournir une adresse e-mail valide",
+      "phoneInvalid": "Veuillez fournir un numéro de téléphone valide",
+      "fieldRequired": "est requis",
+      "businessTypeInvalid": "Le type d'entreprise doit être une entreprise"
+    }
+  },
+  "admin": {
+    "analytics": {
+      "title": "Analyses et Rapports",
+      "tabs": {
+        "overview": "Aperçu",
+        "bookings": "Réservations",
+        "revenue": "Revenus"
+      },
+      "metrics": {
+        "totalRevenue": "Revenu Total",
+        "totalBookings": "Réservations Totales",
+        "completionRate": "Taux d'Achèvement",
+        "activeUsers": "Utilisateurs Actifs",
+        "thisMonth": "ce mois-ci",
+        "completed": "complétées",
+        "providers": "fournisseurs"
+      },
+      "filters": {
+        "dateRange": "Période",
+        "last7Days": "7 Derniers Jours",
+        "last30Days": "30 Derniers Jours",
+        "last90Days": "90 Derniers Jours",
+        "custom": "Période Personnalisée",
+        "from": "De",
+        "to": "À",
+        "apply": "Appliquer"
+      }
+    }
+  },
+  "dashboard": {
+    "quickActions": "Actions Rapides",
+    "recentActivity": "Activité Récente",
+    "recentBookings": "Réservations Récentes",
+    "myBookings": "Mes Réservations",
+    "myFleet": "Ma Flotte",
+    "pendingItems": "Éléments en Attente",
+    "analytics": "Analytique",
+    "noRecentActivity": "Aucune activité récente",
+    "noBookings": "Aucune réservation",
+    "viewAnalytics": "Voir l'analytique",
+    "viewAll": "Voir Tout"
+  },
+  "analytics": {
+    "title": "Tableau de Bord Analytique",
+    "subtitle": "Suivez vos performances et informations",
+    "timeRange": {
+      "last3Months": "3 Derniers Mois",
+      "last6Months": "6 Derniers Mois",
+      "last12Months": "12 Derniers Mois"
+    },
+    "tabs": {
+      "overview": "Aperçu",
+      "revenue": "Revenus",
+      "bookings": "Réservations",
+      "fleet": "Flotte",
+      "routes": "Itinéraires",
+      "performance": "Performance",
+      "geographic": "Géographique",
+      "pricing": "Tarification",
+      "insights": "Prévisions IA",
+      "customers": "Clients"
+    },
+    "overview": {
+      "totalRevenue": "Revenu Total",
+      "totalBookings": "Réservations Totales",
+      "completedBookings": "terminées",
+      "fleetUtilization": "Utilisation de la Flotte",
+      "activeVehicles": "actifs",
+      "conversionRate": "Taux de Conversion",
+      "approvalRate": "taux d'approbation",
+      "revenueTrend": "Tendance des Revenus",
+      "bookingStatus": "Statut des Réservations",
+      "bookingConversion": "Entonnoir de Conversion",
+      "topRoutes": "Meilleurs Itinéraires",
+      "customerRatings": "Évaluations Clients"
+    },
+    "revenue": {
+      "averageBooking": "Réservation Moyenne",
+      "transportRevenue": "Revenu Transport",
+      "rentalRevenue": "Revenu Location",
+      "revenueByMonth": "Revenu par Mois",
+      "revenueBreakdown": "Répartition des Revenus",
+      "month": "Mois",
+      "transport": "Transport",
+      "rental": "Location",
+      "bookings": "Réservations",
+      "total": "Total",
+      "service": "Service"
+    },
+    "bookings": {
+      "pending": "En Attente",
+      "approved": "Approuvé",
+      "confirmed": "Confirmé",
+      "inProgress": "En Cours",
+      "completed": "Terminé",
+      "cancelled": "Annulé",
+      "bookingVolume": "Volume de Réservations",
+      "bookingsByMonth": "Réservations par mois",
+      "performanceMetrics": "Métriques de Performance",
+      "completionRate": "Taux de Réalisation",
+      "cancellationRate": "Taux d'Annulation",
+      "approvalRate": "Taux d'Approbation",
+      "bookingsByServiceType": "Réservations par Type de Service",
+      "status": "Statut",
+      "count": "Nombre"
+    },
+    "fleet": {
+      "totalVehicles": "Total Véhicules",
+      "currentlyActive": "Actuellement Actif",
+      "avgRevenuePerVehicle": "Revenu Moyen/Véhicule",
+      "vehiclePerformance": "Performance des Véhicules",
+      "vehicleMetrics": "Métriques individuelles et utilisation des véhicules",
+      "vehicle": "Véhicule",
+      "type": "Type",
+      "service": "Service",
+      "revenue": "Revenu",
+      "avgValue": "Valeur Moyenne",
+      "completion": "réalisation",
+      "inUse": "En Utilisation",
+      "available": "Disponible"
+    },
+    "routes": {
+      "totalRoutes": "Total Routes",
+      "uniqueCityPairs": "Paires de villes uniques",
+      "topRouteRevenue": "Revenu Route Principale",
+      "avgRouteRevenue": "Revenu Moyen Route",
+      "perRouteAverage": "Moyenne par route",
+      "topRoutesByRevenue": "Routes Principales par Revenu",
+      "profitableRoutes": "Routes de transport les plus rentables",
+      "rank": "Rang",
+      "route": "Route",
+      "totalRevenue": "Revenu Total",
+      "avgRevenue": "Revenu Moyen",
+      "successRate": "Taux de Réussite"
+    },
+    "performance": {
+      "onTimeDelivery": "Livraison à Temps",
+      "deliveries": "livraisons",
+      "avgResponseTime": "Temps de Réponse Moyen",
+      "median": "Médiane",
+      "satisfactionScore": "Score de Satisfaction",
+      "satisfiedCustomers": "clients satisfaits",
+      "performanceInsights": "Perspectives de Performance",
+      "deliveryPerformance": "Performance de Livraison",
+      "onTimeRate": "Taux à Temps",
+      "responseMetrics": "Métriques de Réponse",
+      "average": "Moyenne"
+      },
+      "geographic": {
+        "topCitiesByRevenue": "Villes Principales par Revenu",
+        "geographicDistribution": "Distribution géographique de votre entreprise",
+        "avg": "Moy"
+      },
+      "pricing": {
+        "yourAverage": "Votre Moyenne",
+        "marketAverage": "Moyenne du Marché",
+        "yourRange": "Votre Plage",
+        "marketRange": "Plage du Marché",
+        "competitive": "Compétitif",
+        "belowMarket": "Sous le Marché",
+        "aboveMarket": "Au-dessus du Marché"
+        },
+        "insights": {
+          "growthTrend": "Tendance de Croissance",
+          "growthRate": "Taux de croissance",
+          "bookingsPerMonth": "réservations/mois",
+          "monthsOfData": "mois de données collectées",
+          "building": "En Construction...",
+          "nextMonth": "Prochain",
+          "months": "Mois",
+          "bookings": "réservations",
+          "predictedRevenue": "Revenu prévu",
+          "confidence": "confiance",
+          "buildingForecast": "Construction de Votre Modèle de Prévision",
+          "needMoreData": "Besoin d'au moins 1 mois d'historique de réservations pour générer des prévisions précises.",
+          "monthsCollected": "mois collectés",
+          "moreNeeded": "plus nécessaires",
+          "historicalTrendForecast": "Tendance Historique et Prévisions",
+          "pastPerformance": "Performances passées et réservations futures prévues",
+          "actual": "Réel",
+          "forecast": "Prévision"
+          },
+          "customers": {
+            "totalCustomers": "Total Clients",
+            "repeatRate": "Taux de Retour",
+            "repeatCustomers": "clients réguliers",
+            "avgLifetimeValue": "Valeur Vie Moyenne",
+            "topCustomerValue": "Valeur Client Principal",
+            "topCustomersByLTV": "Clients Principaux par Valeur Vie",
+            "mostValuable": "Vos clients les plus précieux",
+            "customer": "Client",
+            "lifetimeValue": "Valeur Vie",
+            "lastBooking": "Dernière Réservation",
+            "daysSince": "jours depuis la dernière réservation",
+            "active": "Actif",
+            "recent": "Récent",
+            "inactive": "Inactif"
+          }
+  }
+}
