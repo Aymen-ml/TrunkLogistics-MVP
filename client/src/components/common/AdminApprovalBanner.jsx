@@ -1,8 +1,10 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../contexts/AuthContext';
 import { Clock, Shield, AlertCircle } from 'lucide-react';
 
 const AdminApprovalBanner = () => {
+  const { t } = useTranslation();
   const { user } = useAuth();
 
   // Only show for providers who are email verified but not admin approved

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Shield, Award, Clock, TrendingUp, Users, CheckCircle } from 'lucide-react';
 
 /**
@@ -6,6 +7,7 @@ import { Shield, Award, Clock, TrendingUp, Users, CheckCircle } from 'lucide-rea
  * Displays professional indicators for B2B platform
  */
 export const TrustBadges = () => {
+  const { t } = useTranslation();
   const badges = [
     {
       icon: Shield,

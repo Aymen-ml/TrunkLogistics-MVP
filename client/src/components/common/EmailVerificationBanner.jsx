@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../contexts/AuthContext';
 import { Mail, X, RefreshCw } from 'lucide-react';
 
 const EmailVerificationBanner = () => {
+  const { t } = useTranslation();
   const { user } = useAuth();
   const [isResending, setIsResending] = useState(false);
   const [isDismissed, setIsDismissed] = useState(false);
