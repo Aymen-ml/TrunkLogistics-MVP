@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { Shield, ArrowLeft, Lock, Eye, Database, UserCheck, Bell, FileText } from 'lucide-react';
 
 const PrivacyPolicy = () => {
+  const { t } = useTranslation();
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       {/* Header */}

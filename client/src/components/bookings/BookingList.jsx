@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { 
   Package, 
   Truck, 
@@ -26,6 +27,7 @@ import { useToast } from '../../contexts/ToastContext';
 import { VEHICLE_TYPE_LABELS } from '../../constants/truckTypes';
 
 const BookingList = () => {
+  const { t } = useTranslation();
   const { user } = useAuth();
   const { bookings, loading, deleteBooking, fetchBookings } = useBookings();
   const { showSuccess, showError } = useToast();

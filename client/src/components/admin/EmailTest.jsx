@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Mail, Send, CheckCircle, AlertCircle, Loader } from 'lucide-react';
 import usePageTitle from '../../hooks/usePageTitle';
 
 const EmailTest = () => {
+  const { t } = useTranslation();
   usePageTitle('Email Test');
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);

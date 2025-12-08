@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../contexts/AuthContext';
 import { useBookings } from '../../contexts/BookingContext';
 import { ArrowLeft, Save, Package, MapPin, Calendar, Truck, Settings, Clock, CheckCircle, AlertCircle } from 'lucide-react';
@@ -7,6 +8,7 @@ import axios from 'axios';
 import { VEHICLE_TYPE_LABELS } from '../../constants/truckTypes';
 
 const BookingForm = () => {
+  const { t } = useTranslation();
   const { user } = useAuth();
   const navigate = useNavigate();
   const { createBooking } = useBookings();

@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../contexts/AuthContext';
 import { apiClient } from '../../utils/apiClient';
 import { Save, User, Mail, Phone, Lock, MapPin, Building2 } from 'lucide-react';
 
 const Profile = () => {
+  const { t } = useTranslation();
   const { user, updateUser, refreshProfile } = useAuth();
   const [form, setForm] = useState({ firstName: '', lastName: '', phone: '' });
   const [meta, setMeta] = useState({ email: '', role: '', emailVerified: false, isActive: true, createdAt: '' });

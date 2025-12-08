@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { FileText, ArrowLeft, CheckCircle, AlertCircle, XCircle, Scale, UserX, DollarSign } from 'lucide-react';
 
 const TermsOfUse = () => {
+  const { t } = useTranslation();
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       {/* Header */}

@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { Lock, AlertCircle, CheckCircle, Loader, Eye, EyeOff } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import axios from 'axios';
 import TruckLogo from '../common/TruckLogo';
 
 const ResetPassword = () => {
+  const { t } = useTranslation();
   const { token } = useParams();
   const navigate = useNavigate();
   

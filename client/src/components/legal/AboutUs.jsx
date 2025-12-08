@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { Truck, Target, Users, Award, Shield, TrendingUp, ArrowLeft, MapPin, Package, CheckCircle } from 'lucide-react';
 
 const AboutUs = () => {
+  const { t } = useTranslation();
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       {/* Header */}

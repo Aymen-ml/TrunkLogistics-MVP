@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { apiClient } from '../../utils/apiClient';
 import { Package, Clock, CheckCircle, XCircle, Truck, MapPin, Calendar, DollarSign, Settings } from 'lucide-react';
 import { formatCurrency } from '../../utils/formatters';
 import { useToast } from '../../contexts/ToastContext';
 
 const BookingManagement = () => {
+  const { t } = useTranslation();
   const { showSuccess, showError } = useToast();
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);

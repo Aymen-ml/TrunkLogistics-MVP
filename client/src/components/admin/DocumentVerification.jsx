@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { apiClient } from '../../utils/apiClient';
 import { 
   FileText, 
@@ -20,6 +21,7 @@ import {
 } from 'lucide-react';
 
 const DocumentVerification = () => {
+  const { t } = useTranslation();
   const [documents, setDocuments] = useState([]);
   const [filterOptions, setFilterOptions] = useState({
     documentTypes: [],

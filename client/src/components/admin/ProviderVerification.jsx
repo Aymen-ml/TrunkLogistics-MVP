@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { apiClient } from '../../utils/apiClient';
 import { Building, Check, X, Clock, AlertCircle, Eye, User, Mail, Phone, Calendar, MapPin, FileText } from 'lucide-react';
 
 const ProviderVerification = () => {
+  const { t } = useTranslation();
   const [providers, setProviders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [verifying, setVerifying] = useState({});

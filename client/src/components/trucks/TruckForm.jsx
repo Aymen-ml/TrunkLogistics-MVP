@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../contexts/AuthContext';
 import { ArrowLeft, Save, Truck } from 'lucide-react';
 import { apiClient } from '../../utils/apiClient';
@@ -8,6 +9,7 @@ import ImageUpload from '../common/ImageUpload';
 import DocumentUpload from '../common/DocumentUpload';
 
 const TruckForm = () => {
+  const { t } = useTranslation();
   const { user } = useAuth();
   const navigate = useNavigate();
   const { id } = useParams();

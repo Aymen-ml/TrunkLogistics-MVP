@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../contexts/AuthContext';
 import { 
   Truck, 
@@ -23,6 +24,7 @@ import { formatCurrency, formatPriceWithUnit } from '../../utils/currency';
 import axios from 'axios';
 
 const TruckList = () => {
+  const { t } = useTranslation();
   const { user } = useAuth();
   const [trucks, setTrucks] = useState([]);
   const [loading, setLoading] = useState(true);

@@ -1,10 +1,12 @@
 import React from 'react';
 import { Bell } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../contexts/AuthContext';
 import { useNotifications } from '../../contexts/NotificationContext';
 import NotificationCenter from './NotificationCenter';
 
 const NotificationBell = () => {
+  const { t } = useTranslation();
   const { user } = useAuth();
   const { 
     unreadCount, 

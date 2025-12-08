@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Bell, X, Check, Trash2, Filter, RefreshCw, BellOff } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../contexts/AuthContext';
 import { useNotifications } from '../../contexts/NotificationContext';
 
 const NotificationCenter = () => {
+  const { t } = useTranslation();
   const { user } = useAuth();
   const {
     notifications,

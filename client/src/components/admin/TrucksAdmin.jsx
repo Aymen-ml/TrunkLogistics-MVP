@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { apiClient } from '../../utils/apiClient';
 import { Truck, Filter, RefreshCw, Eye } from 'lucide-react';
 
 const TrucksAdmin = () => {
+  const { t } = useTranslation();
   const [trucks, setTrucks] = useState([]);
   const [providers, setProviders] = useState([]);
   const [loading, setLoading] = useState(true);

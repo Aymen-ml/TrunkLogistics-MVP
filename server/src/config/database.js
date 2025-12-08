@@ -7,29 +7,16 @@ dotenv.config();
 const { Pool } = pg;
 
 // Database configuration that works with both Render and local development
-const dbConfig = process.env.DATABASE_URL ? {
-  connectionString: process.env.DATABASE_URL,
-  ssl: process.env.NODE_ENV === 'production' ? { 
-    rejectUnauthorized: false 
-  } : false,
-  // Connection pool settings optimized for Render/Supabase
-  max: 10,
-  min: 2,
-  idleTimeoutMillis: 30000,
-  connectionTimeoutMillis: 10000,
-  // Keep connections alive
-  keepAlive: true,
-  keepAliveInitialDelayMillis: 10000
-} : {
-  // Fallback for local development or when DATABASE_URL is not set
+// Always use individual params instead of connectionString to avoid parsing errors
+const dbConfig = {
   host: process.env.DB_HOST || 'db.drqkwioicbcihakxgsoe.supabase.co',
   port: parseInt(process.env.DB_PORT) || 5432,
   database: process.env.DB_NAME || 'postgres',
   user: process.env.DB_USER || 'postgres',
   password: process.env.DB_PASSWORD || 'igeem002',
-  ssl: {
+  ssl: process.env.NODE_ENV === 'production' || process.env.DB_HOST?.includes('supabase.co') ? {
     rejectUnauthorized: false
-  },
+  } : false,
   // Connection pool settings
   max: 10,
   min: 2,
@@ -49,6 +36,14 @@ const initializeDatabase = async () => {
   try {
     logger.info('🔌 Connecting to database...');
     console.log('🔌 Connecting to database...');
+    console.log('📋 DB Config:', {
+      host: dbConfig.host,
+      port: dbConfig.port,
+      database: dbConfig.database,
+      user: dbConfig.user,
+      password: dbConfig.password ? '***' + dbConfig.password.slice(-3) : 'NOT SET',
+      ssl: !!dbConfig.ssl
+    });
     
     // Clear any existing pool
     if (pool) {
