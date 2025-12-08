@@ -7,7 +7,19 @@
     "about": "À Propos",
     "signin": "Se Connecter",
     "getStarted": "Commencer",
-    "dashboard": "Tableau de Bord"
+    "dashboard": "Tableau de Bord",
+    "users": "Utilisateurs",
+    "providers": "Fournisseurs",
+    "documents": "Documents",
+    "bookings": "Réservations",
+    "trucks": "Camions",
+    "analytics": "Analytiques",
+    "myBookings": "Mes Réservations",
+    "findTrucks": "Trouver des Camions",
+    "myTrucks": "Mes Camions",
+    "profile": "Profil",
+    "settings": "Paramètres",
+    "signout": "Se Déconnecter"
   },
   "hero": {
     "badge": "Plateforme Logistique de Confiance pour l'Algérie",

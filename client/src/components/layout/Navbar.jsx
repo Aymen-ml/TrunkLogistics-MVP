@@ -56,13 +56,13 @@ const Navbar = () => {
                 to="/login"
                 className="text-gray-700 dark:text-gray-200 hover:text-primary-600 dark:hover:text-primary-400 px-3 py-2 rounded-md text-sm font-medium transition-colors"
               >
-                Sign In
+                {t('nav.signin')}
               </Link>
               <Link
                 to="/register"
                 className="bg-accent-500 hover:bg-accent-600 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors"
               >
-                Get Started
+                {t('nav.getStarted')}
               </Link>
             </div>
           </div>
@@ -90,37 +90,37 @@ const Navbar = () => {
                   to="/dashboard"
                   className="text-gray-700 dark:text-gray-200 hover:text-accent-500 transition-colors px-3 py-2 rounded-md text-sm font-medium"
                 >
-                  Dashboard
+                  {t('nav.dashboard')}
                 </Link>
                 <Link
                   to="/admin/providers"
                   className="text-gray-700 dark:text-gray-200 hover:text-accent-500 transition-colors px-3 py-2 rounded-md text-sm font-medium"
                 >
-                  Providers
+                  {t('nav.providers')}
                 </Link>
                 <Link
                   to="/admin/users"
                   className="text-gray-700 dark:text-gray-200 hover:text-accent-500 transition-colors px-3 py-2 rounded-md text-sm font-medium"
                 >
-                  Users
+                  {t('nav.users')}
                 </Link>
                 <Link
                   to="/admin/documents"
                   className="text-gray-700 dark:text-gray-200 hover:text-accent-500 transition-colors px-3 py-2 rounded-md text-sm font-medium"
                 >
-                  Documents
+                  {t('nav.documents')}
                 </Link>
                 <Link
                   to="/admin/bookings"
                   className="text-gray-700 dark:text-gray-200 hover:text-accent-500 transition-colors px-3 py-2 rounded-md text-sm font-medium"
                 >
-                  Bookings
+                  {t('nav.bookings')}
                 </Link>
                 <Link
                   to="/admin/trucks"
                   className="text-gray-700 dark:text-gray-200 hover:text-accent-500 transition-colors px-3 py-2 rounded-md text-sm font-medium"
                 >
-                  Trucks
+                  {t('nav.trucks')}
                 </Link>
               </>
             )}
@@ -131,19 +131,19 @@ const Navbar = () => {
                   to="/dashboard"
                   className="text-gray-700 dark:text-gray-200 hover:text-accent-500 transition-colors px-3 py-2 rounded-md text-sm font-medium"
                 >
-                  Dashboard
+                  {t('nav.dashboard')}
                 </Link>
                 <Link
                   to="/bookings"
                   className="text-gray-700 dark:text-gray-200 hover:text-accent-500 transition-colors px-3 py-2 rounded-md text-sm font-medium"
                 >
-                  My Bookings
+                  {t('nav.myBookings')}
                 </Link>
                 <Link
                   to="/find-trucks"
                   className="text-gray-700 dark:text-gray-200 hover:text-accent-500 transition-colors px-3 py-2 rounded-md text-sm font-medium"
                 >
-                  Find Trucks
+                  {t('nav.findTrucks')}
                 </Link>
               </>
             )}
@@ -154,19 +154,19 @@ const Navbar = () => {
                   to="/dashboard"
                   className="text-gray-700 dark:text-gray-200 hover:text-accent-500 transition-colors px-3 py-2 rounded-md text-sm font-medium"
                 >
-                  Dashboard
+                  {t('nav.dashboard')}
                 </Link>
                 <Link
                   to="/trucks"
                   className="text-gray-700 dark:text-gray-200 hover:text-accent-500 transition-colors px-3 py-2 rounded-md text-sm font-medium"
                 >
-                  My Trucks
+                  {t('nav.myTrucks')}
                 </Link>
                 <Link
                   to="/bookings"
                   className="text-gray-700 dark:text-gray-200 hover:text-accent-500 transition-colors px-3 py-2 rounded-md text-sm font-medium"
                 >
-                  Bookings
+                  {t('nav.bookings')}
                 </Link>
               </>
             )}
@@ -208,7 +208,7 @@ const Navbar = () => {
                       onClick={() => setIsProfileOpen(false)}
                     >
                       <User className="h-4 w-4 mr-3" />
-                      Profile
+                      {t('nav.profile')}
                     </Link>
                     <Link
                       to="/settings"
@@ -216,14 +216,14 @@ const Navbar = () => {
                       onClick={() => setIsProfileOpen(false)}
                     >
                       <Settings className="h-4 w-4 mr-3" />
-                      Settings
+                      {t('nav.settings')}
                     </Link>
                     <button
                       onClick={handleLogout}
                       className="flex items-center w-full px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600"
                     >
                       <LogOut className="h-4 w-4 mr-3" />
-                      Sign out
+                      {t('nav.signout')}
                     </button>
                   </div>
                 </div>
@@ -274,7 +274,7 @@ const Navbar = () => {
                 className="block px-4 py-3 text-base font-medium text-gray-700 dark:text-gray-200 hover:text-accent-500 transition-colors hover:bg-gray-50 dark:hover:bg-gray-600 rounded-lg"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Dashboard
+                {t('nav.dashboard')}
               </Link>
 
               {user.role === 'admin' && (
@@ -284,42 +284,42 @@ const Navbar = () => {
                     className="block px-4 py-3 text-base font-medium text-gray-700 dark:text-gray-200 hover:text-accent-500 transition-colors hover:bg-gray-50 dark:hover:bg-gray-600 rounded-lg"
                     onClick={() => setIsMenuOpen(false)}
                   >
-                    Users
+                    {t('nav.users')}
                   </Link>
                   <Link
                     to="/admin/providers"
                     className="block px-4 py-3 text-base font-medium text-gray-700 dark:text-gray-200 hover:text-accent-500 transition-colors hover:bg-gray-50 dark:hover:bg-gray-600 rounded-lg"
                     onClick={() => setIsMenuOpen(false)}
                   >
-                    Providers
+                    {t('nav.providers')}
                   </Link>
                   <Link
                     to="/admin/documents"
                     className="block px-4 py-3 text-base font-medium text-gray-700 dark:text-gray-200 hover:text-accent-500 transition-colors hover:bg-gray-50 dark:hover:bg-gray-600 rounded-lg"
                     onClick={() => setIsMenuOpen(false)}
                   >
-                    Documents
+                    {t('nav.documents')}
                   </Link>
                   <Link
                     to="/admin/bookings"
                     className="block px-4 py-3 text-base font-medium text-gray-700 dark:text-gray-200 hover:text-accent-500 transition-colors hover:bg-gray-50 dark:hover:bg-gray-600 rounded-lg"
                     onClick={() => setIsMenuOpen(false)}
                   >
-                    Bookings
+                    {t('nav.bookings')}
                   </Link>
                   <Link
                     to="/admin/trucks"
                     className="block px-4 py-3 text-base font-medium text-gray-700 dark:text-gray-200 hover:text-accent-500 transition-colors hover:bg-gray-50 dark:hover:bg-gray-600 rounded-lg"
                     onClick={() => setIsMenuOpen(false)}
                   >
-                    Trucks
+                    {t('nav.trucks')}
                   </Link>
                   <Link
                     to="/admin/analytics"
                     className="block px-4 py-3 text-base font-medium text-gray-700 dark:text-gray-200 hover:text-accent-500 transition-colors hover:bg-gray-50 dark:hover:bg-gray-600 rounded-lg"
                     onClick={() => setIsMenuOpen(false)}
                   >
-                    Analytics
+                    {t('nav.analytics')}
                   </Link>
                 </>
               )}
@@ -331,14 +331,14 @@ const Navbar = () => {
                     className="block px-4 py-3 text-base font-medium text-gray-700 dark:text-gray-200 hover:text-accent-500 transition-colors hover:bg-gray-50 dark:hover:bg-gray-600 rounded-lg"
                     onClick={() => setIsMenuOpen(false)}
                   >
-                    My Bookings
+                    {t('nav.myBookings')}
                   </Link>
                   <Link
                     to="/find-trucks"
                     className="block px-4 py-3 text-base font-medium text-gray-700 dark:text-gray-200 hover:text-accent-500 transition-colors hover:bg-gray-50 dark:hover:bg-gray-600 rounded-lg"
                     onClick={() => setIsMenuOpen(false)}
                   >
-                    Find Trucks
+                    {t('nav.findTrucks')}
                   </Link>
                 </>
               )}
@@ -350,14 +350,14 @@ const Navbar = () => {
                     className="block px-4 py-3 text-base font-medium text-gray-700 dark:text-gray-200 hover:text-accent-500 transition-colors hover:bg-gray-50 dark:hover:bg-gray-600 rounded-lg"
                     onClick={() => setIsMenuOpen(false)}
                   >
-                    My Trucks
+                    {t('nav.myTrucks')}
                   </Link>
                   <Link
                     to="/bookings"
                     className="block px-4 py-3 text-base font-medium text-gray-700 dark:text-gray-200 hover:text-accent-500 transition-colors hover:bg-gray-50 dark:hover:bg-gray-600 rounded-lg"
                     onClick={() => setIsMenuOpen(false)}
                   >
-                    Bookings
+                    {t('nav.bookings')}
                   </Link>
                 </>
               )}
@@ -367,7 +367,7 @@ const Navbar = () => {
                 className="block px-4 py-3 text-base font-medium text-gray-700 dark:text-gray-200 hover:text-accent-500 transition-colors hover:bg-gray-50 dark:hover:bg-gray-600 rounded-lg"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Profile
+                {t('nav.profile')}
               </Link>
 
               <Link
@@ -375,14 +375,14 @@ const Navbar = () => {
                 className="block px-4 py-3 text-base font-medium text-gray-700 dark:text-gray-200 hover:text-accent-500 transition-colors hover:bg-gray-50 dark:hover:bg-gray-600 rounded-lg"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Settings
+                {t('nav.settings')}
               </Link>
 
               <button
                 onClick={handleLogout}
                 className="block w-full text-left px-4 py-3 text-base font-medium text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors rounded-lg mt-2 border-t border-gray-200 dark:border-gray-700 pt-3"
               >
-                Sign out
+                {t('nav.signout')}
               </button>
             </div>
           </div>

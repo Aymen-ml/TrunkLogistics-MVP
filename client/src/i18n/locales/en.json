@@ -7,7 +7,19 @@
     "about": "About Us",
     "signin": "Sign In",
     "getStarted": "Get Started",
-    "dashboard": "Dashboard"
+    "dashboard": "Dashboard",
+    "users": "Users",
+    "providers": "Providers",
+    "documents": "Documents",
+    "bookings": "Bookings",
+    "trucks": "Trucks",
+    "analytics": "Analytics",
+    "myBookings": "My Bookings",
+    "findTrucks": "Find Trucks",
+    "myTrucks": "My Trucks",
+    "profile": "Profile",
+    "settings": "Settings",
+    "signout": "Sign out"
   },
   "hero": {
     "badge": "Trusted Logistics Platform for Algeria",
