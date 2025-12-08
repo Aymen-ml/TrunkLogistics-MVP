@@ -56,19 +56,19 @@ const ResetPassword = () => {
 
   const validateForm = () => {
     if (!formData.password) {
-      return 'Password is required';
+      return t('auth.resetPassword.passwordRequired');
     }
     
     if (formData.password.length < 8) {
-      return 'Password must be at least 8 characters long';
+      return t('auth.resetPassword.passwordTooShort');
     }
     
     if (!formData.confirmPassword) {
-      return 'Please confirm your password';
+      return t('auth.resetPassword.confirmPasswordRequired');
     }
     
     if (formData.password !== formData.confirmPassword) {
-      return 'Passwords do not match';
+      return t('auth.resetPassword.passwordsNoMatch');
     }
     
     return null;
@@ -126,13 +126,13 @@ const ResetPassword = () => {
       if (err.response?.data?.error) {
         setError(err.response.data.error);
       } else if (err.response?.status === 400) {
-        setError('Invalid or expired reset token. Please request a new password reset.');
+        setError(t('auth.resetPassword.invalidToken'));
       } else if (err.response?.status === 500) {
-        setError('Server error. Please try again later.');
+        setError(t('common.serverError'));
       } else if (err.message?.includes('Network')) {
-        setError('Network error. Please check your connection and try again.');
+        setError(t('common.networkError'));
       } else {
-        setError('Failed to reset password. Please try again.');
+        setError(t('auth.resetPassword.resetFailed'));
       }
     } finally {
       setLoading(false);
@@ -156,12 +156,11 @@ const ResetPassword = () => {
               </div>
               
               <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">
-                Invalid Reset Link
+                {t('auth.resetPassword.invalidToken')}
               </h2>
               
               <p className="text-gray-600 dark:text-gray-400 mb-6">
-                This password reset link is invalid or has expired. 
-                Please request a new password reset.
+                {t('auth.resetPassword.invalidTokenMessage')}
               </p>
               
               <div className="space-y-3">
@@ -169,14 +168,14 @@ const ResetPassword = () => {
                   to="/forgot-password"
                   className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-accent-500 hover:bg-accent-600 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-500"
                 >
-                  Request New Reset Link
+                  {t('auth.resetPassword.requestNew')}
                 </Link>
                 
                 <Link
                   to="/login"
                   className="w-full flex justify-center py-2 px-4 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-500"
                 >
-                  Back to Login
+                  {t('auth.login.backToLogin')}
                 </Link>
               </div>
             </div>
@@ -203,22 +202,22 @@ const ResetPassword = () => {
               </div>
               
               <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">
-                Password Reset Successful!
+                {t('auth.resetPassword.success')}
               </h2>
               
               <p className="text-gray-600 dark:text-gray-400 mb-6">
-                Your password has been successfully reset. You can now login with your new password.
+                {t('auth.resetPassword.successMessage')}
               </p>
               
               <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">
-                Redirecting to login page in 3 seconds...
+                {t('auth.resetPassword.redirecting')}
               </p>
               
               <Link
                 to="/login"
                 className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-accent-500 hover:bg-accent-600 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-500"
               >
-                Go to Login Now
+                {t('auth.resetPassword.goToLogin')}
               </Link>
             </div>
           </div>
@@ -235,10 +234,10 @@ const ResetPassword = () => {
             <TruckLogo className="h-20 w-20" showFull={true} />
           </div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900 dark:text-gray-100">
-            Reset your password
+            {t('auth.resetPassword.title')}
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600 dark:text-gray-400">
-            Enter your new password below
+            {t('auth.resetPassword.subtitle')}
           </p>
         </div>
 
@@ -257,7 +256,7 @@ const ResetPassword = () => {
           <div className="space-y-4">
             <div>
               <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-200">
-                New Password
+                {t('auth.resetPassword.newPassword')}
               </label>
               <div className="mt-1 relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -270,7 +269,7 @@ const ResetPassword = () => {
                   autoComplete="new-password"
                   required
                   className="appearance-none relative block w-full pl-10 pr-10 py-2 border border-gray-300 dark:border-gray-600 placeholder-gray-500 text-gray-900 dark:text-gray-100 rounded-md focus:outline-none focus:ring-accent-500 focus:border-blue-500 focus:z-10 sm:text-sm"
-                  placeholder="Enter new password"
+                  placeholder={t('auth.resetPassword.newPasswordPlaceholder')}
                   value={formData.password}
                   onChange={handleChange}
                 />
@@ -287,13 +286,13 @@ const ResetPassword = () => {
                 </button>
               </div>
               <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
-                Must be at least 8 characters long
+                {t('auth.resetPassword.passwordHint')}
               </p>
             </div>
             
             <div>
               <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 dark:text-gray-200">
-                Confirm New Password
+                {t('auth.resetPassword.confirmPassword')}
               </label>
               <div className="mt-1 relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -306,7 +305,7 @@ const ResetPassword = () => {
                   autoComplete="new-password"
                   required
                   className="appearance-none relative block w-full pl-10 pr-10 py-2 border border-gray-300 dark:border-gray-600 placeholder-gray-500 text-gray-900 dark:text-gray-100 rounded-md focus:outline-none focus:ring-accent-500 focus:border-blue-500 focus:z-10 sm:text-sm"
-                  placeholder="Confirm new password"
+                  placeholder={t('auth.resetPassword.confirmPasswordPlaceholder')}
                   value={formData.confirmPassword}
                   onChange={handleChange}
                 />
@@ -334,7 +333,7 @@ const ResetPassword = () => {
               {loading ? (
                 <Loader className="h-5 w-5 animate-spin" />
               ) : (
-                'Reset Password'
+                t('auth.resetPassword.resetButton')
               )}
             </button>
             
@@ -342,7 +341,7 @@ const ResetPassword = () => {
               to="/login"
               className="w-full flex justify-center py-2 px-4 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-500"
             >
-              Back to Login
+              {t('auth.login.backToLogin')}
             </Link>
           </div>
         </form>
