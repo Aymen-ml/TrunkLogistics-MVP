@@ -35,12 +35,11 @@ const EmailVerificationBanner = () => {
         </div>
         <div className="ml-3 flex-1">
           <h3 className="text-sm font-medium text-yellow-800 dark:text-yellow-200">
-            Email Verification Required
+            {t('common.emailVerificationBanner.title')}
           </h3>
           <div className="mt-2 text-sm text-yellow-700">
             <p>
-              Please check your email and click the verification link to activate your account.
-              Some features may be limited until your email is verified.
+              {t('common.emailVerificationBanner.message')}
             </p>
           </div>
           <div className="mt-4">
@@ -53,12 +52,12 @@ const EmailVerificationBanner = () => {
                 {isResending ? (
                   <>
                     <RefreshCw className="animate-spin h-4 w-4 mr-1" />
-                    Sending...
+                    {t('common.emailVerificationBanner.sending')}
                   </>
                 ) : (
                   <>
                     <Mail className="h-4 w-4 mr-1" />
-                    Resend Email
+                    {t('common.emailVerificationBanner.resend')}
                   </>
                 )}
               </button>
@@ -71,7 +70,7 @@ const EmailVerificationBanner = () => {
               onClick={() => setIsDismissed(true)}
               className="inline-flex rounded-md bg-yellow-50 p-1.5 text-yellow-500 hover:bg-yellow-100 dark:bg-yellow-900 focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:ring-offset-2 focus:ring-offset-yellow-50"
             >
-              <span className="sr-only">Dismiss</span>
+              <span className="sr-only">{t('common.dismiss')}</span>
               <X className="h-5 w-5" />
             </button>
           </div>

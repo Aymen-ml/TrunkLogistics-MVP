@@ -198,6 +198,47 @@
     "confirm": "Confirm",
     "yes": "Yes",
     "no": "No",
+    "dismiss": "Dismiss",
+    "emailVerificationBanner": {
+      "title": "Email Verification Required",
+      "message": "Please check your email and click the verification link to activate your account. Some features may be limited until your email is verified.",
+      "resend": "Resend Email",
+      "sending": "Sending..."
+    },
+    "adminApprovalBanner": {
+      "title": "Account Pending Admin Approval",
+      "message": "Your email has been verified successfully! Your provider account is now pending admin approval. You will receive a notification once your account has been reviewed and approved by our team.",
+      "limitedFeatures": "Some features may be limited until approval is complete."
+    },
+    "trustBadges": {
+      "securePlatform": {
+        "label": "Secure Platform",
+        "description": "End-to-end encryption"
+      },
+      "verifiedProviders": {
+        "label": "Verified Providers",
+        "description": "Background checked"
+      },
+      "support": {
+        "label": "24/7 Support",
+        "description": "Always available"
+      },
+      "tracking": {
+        "label": "Real-time Tracking",
+        "description": "Live updates"
+      }
+    },
+    "statsBadges": {
+      "activeProviders": "Active Providers",
+      "completedDeliveries": "Completed Deliveries",
+      "avgResponseTime": "Avg Response Time",
+      "customerSatisfaction": "Customer Satisfaction"
+    },
+    "verificationBadge": {
+      "verified": "Verified",
+      "provider": "Provider",
+      "business": "Business"
+    },
     "error": "Error",
     "success": "Success",
     "warning": "Warning",

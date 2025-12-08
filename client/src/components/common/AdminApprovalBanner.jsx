@@ -21,19 +21,18 @@ const AdminApprovalBanner = () => {
         <div className="ml-3">
           <div className="flex items-center">
             <h3 className="text-sm font-medium text-yellow-800 dark:text-yellow-200">
-              Account Pending Admin Approval
+              {t('common.adminApprovalBanner.title')}
             </h3>
             <Shield className="h-4 w-4 text-yellow-600 ml-2" />
           </div>
           <div className="mt-2 text-sm text-yellow-700">
             <p>
-              Your email has been verified successfully! Your provider account is now pending admin approval. 
-              You will receive a notification once your account has been reviewed and approved by our team.
+              {t('common.adminApprovalBanner.message')}
             </p>
           </div>
           <div className="mt-3 flex items-center text-xs text-yellow-600">
             <AlertCircle className="h-3 w-3 mr-1" />
-            <span>Some features may be limited until approval is complete.</span>
+            <span>{t('common.adminApprovalBanner.limitedFeatures')}</span>
           </div>
         </div>
       </div>

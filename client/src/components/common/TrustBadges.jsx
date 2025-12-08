@@ -11,29 +11,29 @@ export const TrustBadges = () => {
   const badges = [
     {
       icon: Shield,
-      label: 'Secure Platform',
-      description: 'End-to-end encryption',
+      label: t('common.trustBadges.securePlatform.label'),
+      description: t('common.trustBadges.securePlatform.description'),
       color: 'text-primary-600',
       bgColor: 'bg-primary-50'
     },
     {
       icon: Award,
-      label: 'Verified Providers',
-      description: 'Background checked',
+      label: t('common.trustBadges.verifiedProviders.label'),
+      description: t('common.trustBadges.verifiedProviders.description'),
       color: 'text-accent-600',
       bgColor: 'bg-accent-50'
     },
     {
       icon: Clock,
-      label: '24/7 Support',
-      description: 'Always available',
+      label: t('common.trustBadges.support.label'),
+      description: t('common.trustBadges.support.description'),
       color: 'text-green-600',
       bgColor: 'bg-green-50'
     },
     {
       icon: TrendingUp,
-      label: 'Real-time Tracking',
-      description: 'Live updates',
+      label: t('common.trustBadges.tracking.label'),
+      description: t('common.trustBadges.tracking.description'),
       color: 'text-blue-600',
       bgColor: 'bg-blue-50'
     }
@@ -69,30 +69,31 @@ export const TrustBadges = () => {
  * Shows key metrics for business impact
  */
 export const StatsBadges = ({ stats }) => {
+  const { t } = useTranslation();
   const defaultStats = [
     {
-      label: 'Active Providers',
+      label: t('common.statsBadges.activeProviders'),
       value: stats?.providers || '150+',
       icon: Users,
       change: '+12%',
       positive: true
     },
     {
-      label: 'Completed Deliveries',
+      label: t('common.statsBadges.completedDeliveries'),
       value: stats?.deliveries || '2,500+',
       icon: CheckCircle,
       change: '+23%',
       positive: true
     },
     {
-      label: 'Avg Response Time',
+      label: t('common.statsBadges.avgResponseTime'),
       value: stats?.responseTime || '< 2 hrs',
       icon: Clock,
       change: '-15%',
       positive: true
     },
     {
-      label: 'Customer Satisfaction',
+      label: t('common.statsBadges.customerSatisfaction'),
       value: stats?.satisfaction || '98%',
       icon: TrendingUp,
       change: '+5%',
@@ -137,10 +138,11 @@ export const StatsBadges = ({ stats }) => {
 export const VerificationBadge = ({ verified, type = 'provider' }) => {
   if (!verified) return null;
 
+  const { t } = useTranslation();
   return (
     <div className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-200">
       <CheckCircle className="h-3 w-3 mr-1" />
-      Verified {type === 'provider' ? 'Provider' : 'Business'}
+      {t('common.verificationBadge.verified')} {type === 'provider' ? t('common.verificationBadge.provider') : t('common.verificationBadge.business')}
     </div>
   );
 };

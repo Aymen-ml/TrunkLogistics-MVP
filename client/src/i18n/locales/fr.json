@@ -198,6 +198,47 @@
     "confirm": "Confirmer",
     "yes": "Oui",
     "no": "Non",
+    "dismiss": "Masquer",
+    "emailVerificationBanner": {
+      "title": "Vérification de l'Email Requise",
+      "message": "Veuillez vérifier votre email et cliquer sur le lien de vérification pour activer votre compte. Certaines fonctionnalités peuvent être limitées jusqu'à ce que votre email soit vérifié.",
+      "resend": "Renvoyer l'Email",
+      "sending": "Envoi en cours..."
+    },
+    "adminApprovalBanner": {
+      "title": "Compte en Attente d'Approbation Admin",
+      "message": "Votre email a été vérifié avec succès ! Votre compte prestataire est maintenant en attente d'approbation admin. Vous recevrez une notification une fois que votre compte aura été examiné et approuvé par notre équipe.",
+      "limitedFeatures": "Certaines fonctionnalités peuvent être limitées jusqu'à ce que l'approbation soit terminée."
+    },
+    "trustBadges": {
+      "securePlatform": {
+        "label": "Plateforme Sécurisée",
+        "description": "Chiffrement de bout en bout"
+      },
+      "verifiedProviders": {
+        "label": "Prestataires Vérifiés",
+        "description": "Contrôles d'antécédents"
+      },
+      "support": {
+        "label": "Support 24/7",
+        "description": "Toujours disponible"
+      },
+      "tracking": {
+        "label": "Suivi en Temps Réel",
+        "description": "Mises à jour en direct"
+      }
+    },
+    "statsBadges": {
+      "activeProviders": "Prestataires Actifs",
+      "completedDeliveries": "Livraisons Terminées",
+      "avgResponseTime": "Temps de Réponse Moyen",
+      "customerSatisfaction": "Satisfaction Client"
+    },
+    "verificationBadge": {
+      "verified": "Vérifié",
+      "provider": "Prestataire",
+      "business": "Entreprise"
+    },
     "error": "Erreur",
     "success": "Succès",
     "warning": "Avertissement",
