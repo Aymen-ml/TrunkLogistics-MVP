@@ -19,7 +19,7 @@ const EmailVerification = () => {
 
       if (!token) {
         setStatus('error');
-        setMessage('Invalid verification link');
+        setMessage(t('auth.emailVerification.invalidLink'));
         return;
       }
 
@@ -35,9 +35,9 @@ const EmailVerification = () => {
           
           // Set different messages based on user role
           if (user.role === 'provider') {
-            setMessage('Email verified successfully! Your account is now pending admin approval. You will be notified once approved.');
+            setMessage(t('auth.emailVerification.successProviderMessage'));
           } else {
-            setMessage('Email verified successfully!');
+            setMessage(t('auth.emailVerification.successMessage'));
           }
           
           // Update the auth context with both token and user
@@ -54,7 +54,7 @@ const EmailVerification = () => {
       } catch (error) {
         console.error('Email verification error:', error);
         setStatus('error');
-        setMessage(error.response?.data?.error || 'An error occurred during verification');
+        setMessage(error.response?.data?.error || t('auth.emailVerification.verificationError'));
       }
     };
 
@@ -70,10 +70,10 @@ const EmailVerification = () => {
               <>
                 <Loader className="mx-auto h-12 w-12 text-primary-600 animate-spin" />
                 <h2 className="mt-6 text-3xl font-extrabold text-gray-900 dark:text-gray-100">
-                  Verifying Your Email
+                  {t('auth.emailVerification.verifying')}
                 </h2>
                 <p className="mt-2 text-sm text-gray-600 dark:text-gray-400 dark:text-gray-500">
-                  Please wait while we verify your email address...
+                  {t('auth.emailVerification.verifyingMessage')}
                 </p>
               </>
             )}
@@ -82,13 +82,13 @@ const EmailVerification = () => {
               <>
                 <CheckCircle className="mx-auto h-12 w-12 text-green-600" />
                 <h2 className="mt-6 text-3xl font-extrabold text-gray-900 dark:text-gray-100">
-                  Email Verified!
+                  {t('auth.emailVerification.success')}
                 </h2>
                 <p className="mt-2 text-sm text-gray-600 dark:text-gray-400 dark:text-gray-500">
                   {message}
                 </p>
                 <p className="mt-2 text-sm text-primary-600">
-                  Redirecting to dashboard...
+                  {t('auth.emailVerification.redirecting')}
                 </p>
               </>
             )}
@@ -97,7 +97,7 @@ const EmailVerification = () => {
               <>
                 <XCircle className="mx-auto h-12 w-12 text-red-600" />
                 <h2 className="mt-6 text-3xl font-extrabold text-gray-900 dark:text-gray-100">
-                  Verification Failed
+                  {t('auth.emailVerification.failed')}
                 </h2>
                 <p className="mt-2 text-sm text-gray-600 dark:text-gray-400 dark:text-gray-500">
                   {message}
@@ -106,7 +106,7 @@ const EmailVerification = () => {
                   onClick={() => window.location.reload()}
                   className="mt-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-accent-500 hover:bg-accent-600 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-500"
                 >
-                  Try Again
+                  {t('common.tryAgain')}
                 </button>
               </>
             )}

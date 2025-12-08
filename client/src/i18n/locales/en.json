@@ -294,6 +294,29 @@
       "confirmPasswordRequired": "Please confirm your password",
       "passwordsNoMatch": "Passwords do not match",
       "resetFailed": "Failed to reset password. Please try again."
+    },
+    "emailVerification": {
+      "verifying": "Verifying Your Email",
+      "verifyingMessage": "Please wait while we verify your email address...",
+      "success": "Email Verified!",
+      "successMessage": "Your email address has been verified successfully!",
+      "successProviderMessage": "Email verified successfully! Your account is now pending admin approval. You will be notified once approved.",
+      "redirecting": "Redirecting to dashboard...",
+      "failed": "Verification Failed",
+      "invalidLink": "Invalid verification link",
+      "verificationError": "An error occurred during verification"
+    },
+    "verificationPending": {
+      "title": "Check Your Email",
+      "message": "We've sent a verification link to your email address. Please click the link to verify your account.",
+      "whatNext": "What happens next?",
+      "checkInbox": "Check your email inbox (and spam folder)",
+      "clickLink": "Click the verification link in the email",
+      "startUsing": "Once verified, you can start using your account",
+      "notReceived": "Didn't receive the email? Check your spam folder or",
+      "resendButton": "Click here to resend",
+      "resent": "Verification email resent",
+      "continueToLogin": "Continue to Login"
     }
   },
   "admin": {
