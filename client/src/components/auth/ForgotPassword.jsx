@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Mail, AlertCircle, CheckCircle, Loader, ArrowLeft } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { apiClient } from '../../utils/apiClient';
 import TruckLogo from '../common/TruckLogo';
 
 const ForgotPassword = () => {
+  const { t } = useTranslation();
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -14,12 +16,12 @@ const ForgotPassword = () => {
     e.preventDefault();
     
     if (!email) {
-      setError('Email is required');
+      setError(t('auth.forgotPassword.emailRequired'));
       return;
     }
 
     if (!/\S+@\S+\.\S+/.test(email)) {
-      setError('Please enter a valid email address');
+      setError(t('auth.forgotPassword.emailInvalid'));
       return;
     }
 
@@ -36,11 +38,11 @@ const ForgotPassword = () => {
       }
     } catch (err) {
       if (err.code === 'ERR_NETWORK') {
-        setError('Network error. Please check if the server is running and try again.');
+        setError(t('auth.forgotPassword.networkError'));
       } else if (err.response?.status === 429) {
-        setError('Too many requests. Please wait 5 minutes before trying again.');
+        setError(t('auth.forgotPassword.tooManyRequests'));
       } else if (err.response?.status === 404) {
-        setError('Service not available. Please contact support.');
+        setError(t('auth.forgotPassword.serviceUnavailable'));
       } else if (err.response?.data?.message && err.response.data.message.includes('Validation failed')) {
         // Handle validation errors
         const errors = err.response.data.errors || [];
@@ -72,16 +74,15 @@ const ForgotPassword = () => {
               </div>
               
               <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">
-                Check Your Email
+                {t('auth.forgotPassword.checkEmail')}
               </h2>
               
               <p className="text-gray-600 dark:text-gray-400 mb-6">
-                We've sent a password reset link to <strong className="dark:text-gray-300">{email}</strong>
+                {t('auth.forgotPassword.emailSent')} <strong className="dark:text-gray-300">{email}</strong>
               </p>
               
               <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">
-                If you don't see the email in your inbox, please check your spam folder. 
-                The reset link will expire in 1 hour for security reasons.
+                {t('auth.forgotPassword.checkSpam')}
               </p>
               
               <div className="space-y-3">
@@ -90,7 +91,7 @@ const ForgotPassword = () => {
                   className="w-full flex justify-center items-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-accent-500 hover:bg-accent-600 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-500"
                 >
                   <ArrowLeft className="h-4 w-4 mr-2" />
-                  Back to Login
+                  {t('auth.forgotPassword.backToLogin')}
                 </Link>
                 
                 <button
@@ -100,7 +101,7 @@ const ForgotPassword = () => {
                   }}
                   className="w-full flex justify-center py-2 px-4 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-500 transition-colors"
                 >
-                  Send Another Email
+                  {t('auth.forgotPassword.resendEmail')}
                 </button>
               </div>
             </div>
@@ -115,10 +116,10 @@ const ForgotPassword = () => {
       <div className="max-w-md w-full space-y-8">
         <div>
           <h2 className="text-center text-3xl font-extrabold text-gray-900 dark:text-gray-100">
-            Forgot your password?
+            {t('auth.forgotPassword.title')}
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600 dark:text-gray-400">
-            Enter your email address and we'll send you a link to reset your password.
+            {t('auth.forgotPassword.subtitle')}
           </p>
         </div>
         
@@ -136,7 +137,7 @@ const ForgotPassword = () => {
           
           <div>
             <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-200">
-              Email address
+              {t('auth.forgotPassword.email')}
             </label>
             <div className="mt-1 relative">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -151,7 +152,7 @@ const ForgotPassword = () => {
                 className={`appearance-none relative block w-full pl-10 pr-3 py-2 border ${
                   error ? 'border-red-300 dark:border-red-600' : 'border-gray-300 dark:border-gray-600'
                 } placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-gray-100 dark:bg-gray-700 rounded-md focus:outline-none focus:ring-accent-500 focus:border-accent-500 focus:z-10 sm:text-sm transition-colors`}
-                placeholder="Enter your email address"
+                placeholder={t('auth.forgotPassword.emailPlaceholder')}
                 value={email}
                 onChange={handleEmailChange}
               />
@@ -167,7 +168,7 @@ const ForgotPassword = () => {
               {loading ? (
                 <Loader className="h-5 w-5 animate-spin" />
               ) : (
-                'Send Reset Link'
+                t('auth.forgotPassword.sendLink')
               )}
             </button>
             
@@ -176,7 +177,7 @@ const ForgotPassword = () => {
               className="w-full flex justify-center items-center py-2 px-4 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-500 transition-colors"
             >
               <ArrowLeft className="h-4 w-4 mr-2" />
-              Back to Login
+              {t('auth.forgotPassword.backToLogin')}
             </Link>
           </div>
         </form>
