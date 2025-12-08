@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../contexts/AuthContext';
 import { useBookings } from '../../contexts/BookingContext';
 import { useToast } from '../../contexts/ToastContext';
@@ -28,6 +29,7 @@ import {
  */
 
 const BookingDetailTest = () => {
+  const { t } = useTranslation();
   const { id } = useParams();
   const navigate = useNavigate();
   const { user } = useAuth();
