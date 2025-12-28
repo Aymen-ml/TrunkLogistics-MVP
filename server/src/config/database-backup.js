@@ -1,6 +1,10 @@
 import pg from 'pg';
 import dotenv from 'dotenv';
 import logger from '../utils/logger.js';
+import dns from 'dns';
+
+// Force IPv4 resolution globally
+dns.setDefaultResultOrder('ipv4first');
 
 dotenv.config();
 

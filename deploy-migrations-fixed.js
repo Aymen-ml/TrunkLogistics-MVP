@@ -9,6 +9,10 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import pg from 'pg';
+import dns from 'dns';
+
+// Force IPv4 resolution globally
+dns.setDefaultResultOrder('ipv4first');
 
 const { Client } = pg;
 const __filename = fileURLToPath(import.meta.url);
