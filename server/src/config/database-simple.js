@@ -16,6 +16,8 @@ const dbConfig = {
   ssl: {
     rejectUnauthorized: false
   },
+  // Force IPv4 to avoid Render's IPv6 incompatibility
+  family: 4,
   // Simple pool settings
   max: 5,
   min: 1,

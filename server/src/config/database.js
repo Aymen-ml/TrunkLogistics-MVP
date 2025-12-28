@@ -17,6 +17,8 @@ const dbConfig = {
   ssl: process.env.NODE_ENV === 'production' || process.env.DB_HOST?.includes('supabase.co') ? {
     rejectUnauthorized: false
   } : false,
+  // Force IPv4 to avoid Render's IPv6 incompatibility
+  family: 4,
   // Connection pool settings
   max: 10,
   min: 2,

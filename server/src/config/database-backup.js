@@ -17,6 +17,8 @@ const dbConfig = {
   ssl: process.env.NODE_ENV === 'production' ? { 
     rejectUnauthorized: false 
   } : false,
+  // Force IPv4 to avoid Render's IPv6 incompatibility
+  family: 4,
   // Connection pool settings optimized for production with longer timeouts
   max: process.env.NODE_ENV === 'production' ? 10 : 5, // Reduced max connections
   min: 1, // Reduced minimum connections
