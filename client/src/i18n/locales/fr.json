@@ -719,6 +719,8 @@
     },
     "documents": {
       "title": "Documents",
+      "verification": "Vérification des Documents",
+      "viewAndVerify": "Examiner et vérifier les documents de camions téléchargés",
       "approved": "Approuvé",
       "rejected": "Rejeté",
       "viewDocument": "Voir le document",
@@ -726,7 +728,17 @@
       "trucks": "Camions",
       "providers": "Fournisseurs",
       "advancedFilters": "Filtres avancés",
-      "searchByFile": "Rechercher par nom de fichier, plaque, fournisseur..."
+      "searchByFile": "Rechercher par nom de fichier, plaque, fournisseur...",
+      "totalDocuments": "Documents Totaux",
+      "refresh": "Actualiser",
+      "showFilters": "Afficher les Filtres",
+      "hideFilters": "Masquer les Filtres",
+      "search": "Rechercher",
+      "status": "Statut",
+      "serviceType": "Type de Service",
+      "allServices": "Tous les Services",
+      "noDocuments": "Aucun document trouvé",
+      "adjustFilters": "Aucun document ne correspond aux filtres actuels."
     },
     "analytics": {
       "title": "Analyses et Rapports",

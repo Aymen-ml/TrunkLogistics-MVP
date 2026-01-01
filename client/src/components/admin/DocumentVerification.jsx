@@ -410,7 +410,7 @@ const DocumentVerification = () => {
                 {/* Status Filter */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
-                    Status
+                    {t('admin.documents.status')}
                   </label>
                   <select
                     value={filters.status}
@@ -427,16 +427,16 @@ const DocumentVerification = () => {
                 {/* Service Type Filter */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
-                    Service Type
+                    {t('admin.documents.serviceType')}
                   </label>
                   <select
                     value={filters.serviceType}
                     onChange={(e) => handleFilterChange('serviceType', e.target.value)}
                     className="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-accent-500 focus:border-blue-500"
                   >
-                    <option value="all">All Services</option>
-                    <option value="transport">Transportation</option>
-                    <option value="rental">Equipment Rental</option>
+                    <option value="all">{t('admin.documents.allServices')}</option>
+                    <option value="transport">{t('bookings.transportation')}</option>
+                    <option value="rental">{t('bookings.equipmentRental')}</option>
                   </select>
                 </div>
 
@@ -517,16 +517,16 @@ const DocumentVerification = () => {
               Documents ({documents.length})
             </h3>
             <p className="mt-1 max-w-2xl text-sm text-gray-500 dark:text-gray-400">
-              Review and verify uploaded truck documents
+              {t('admin.documents.viewAndVerify')}
             </p>
           </div>
           
           {documents.length === 0 ? (
             <div className="text-center py-12">
               <AlertCircle className="mx-auto h-12 w-12 text-gray-400 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500" />
-              <h3 className="mt-2 text-sm font-medium text-gray-900 dark:text-gray-100">No documents found</h3>
+              <h3 className="mt-2 text-sm font-medium text-gray-900 dark:text-gray-100">{t('admin.documents.noDocuments')}</h3>
               <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-                No documents match the current filters.
+                {t('admin.documents.adjustFilters')}
               </p>
             </div>
           ) : (
@@ -608,7 +608,7 @@ const DocumentVerification = () => {
                           <div className="flex items-center">
                             {getServiceTypeIcon(document.service_type)}
                             <span className="ml-1">
-                              {document.service_type === 'rental' ? 'Equipment Rental' : 'Transportation'}
+                              {document.service_type === 'rental' ? t('bookings.equipmentRental') : t('bookings.transportation')}
                             </span>
                           </div>
                         </div>

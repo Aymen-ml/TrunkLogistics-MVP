@@ -719,6 +719,8 @@
     },
     "documents": {
       "title": "Documents",
+      "verification": "Document Verification",
+      "viewAndVerify": "Review and verify uploaded truck documents",
       "approved": "Approved",
       "rejected": "Rejected",
       "viewDocument": "View Document",
@@ -726,7 +728,17 @@
       "trucks": "Trucks",
       "providers": "Providers",
       "advancedFilters": "Advanced Filters",
-      "searchByFile": "Search by file name, license plate, provider..."
+      "searchByFile": "Search by file name, license plate, provider...",
+      "totalDocuments": "Total Documents",
+      "refresh": "Refresh",
+      "showFilters": "Show Filters",
+      "hideFilters": "Hide Filters",
+      "search": "Search",
+      "status": "Status",
+      "serviceType": "Service Type",
+      "allServices": "All Services",
+      "noDocuments": "No documents found",
+      "adjustFilters": "No documents match the current filters."
     },
     "analytics": {
       "title": "Analytics & Reports",
