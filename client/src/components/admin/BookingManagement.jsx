@@ -294,12 +294,6 @@ const BookingManagement = () => {
                 { key: 'completed', label: t('admin.bookingManagement.completed') },
                 { key: 'cancelled', label: t('admin.bookingManagement.cancelled') }
               ].map(({ key, label }) => (
-                { key: 'approved', label: 'Approved' },
-                { key: 'in_transit', label: 'In Transit (Logistics)' },
-                { key: 'active', label: 'Active (Rental)' },
-                { key: 'completed', label: 'Completed' },
-                { key: 'cancelled', label: 'Cancelled' }
-              ].map(({ key, label }) => (
                 <button
                   key={key}
                   onClick={() => setFilter(key)}
