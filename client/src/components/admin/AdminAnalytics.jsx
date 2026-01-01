@@ -227,7 +227,7 @@ const AdminAnalytics = () => {
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto mb-4"></div>
-          <p className="text-gray-600 dark:text-gray-400">Loading analytics...</p>
+          <p className="text-gray-600 dark:text-gray-400">{t('admin.dashboard.loadingAnalytics')}</p>
         </div>
       </div>
     );
@@ -290,7 +290,7 @@ const AdminAnalytics = () => {
                 <option value="7d">Last 7 days</option>
                 <option value="30d">Last 30 days</option>
                 <option value="90d">Last 90 days</option>
-                <option value="custom">Custom Range</option>
+                <option value="custom">{t('admin.dashboard.customRange')}</option>
               </select>
             </div>
             {dateRange.preset === 'custom' && (
@@ -359,13 +359,13 @@ const AdminAnalytics = () => {
               <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
                   <Zap className="h-5 w-5 text-accent-500" />
-                  Platform Statistics
+                  {t('admin.dashboard.platformStatistics')}
                 </h3>
                 <div className="space-y-4">
-                  <StatRow label="Total Providers" value={platformStats.providers} icon={Truck} color="text-blue-600" />
-                  <StatRow label="Total Customers" value={platformStats.customers} icon={Users} color="text-green-600" />
-                  <StatRow label="Active Trucks" value={`${platformStats.activeTrucks} / ${platformStats.totalTrucks}`} icon={Truck} color="text-orange-600" />
-                  <StatRow label="Fleet Utilization" value={`${platformStats.utilizationRate}%`} icon={Activity} color="text-purple-600" />
+                  <StatRow label={t('admin.dashboard.totalProviders')} value={platformStats.providers} icon={Truck} color="text-blue-600" />
+                  <StatRow label={t('admin.dashboard.totalCustomers')} value={platformStats.customers} icon={Users} color="text-green-600" />
+                  <StatRow label={t('admin.dashboard.activeTrucks')} value={`${platformStats.activeTrucks} / ${platformStats.totalTrucks}`} icon={Truck} color="text-orange-600" />
+                  <StatRow label={t('admin.dashboard.fleetUtilization')} value={`${platformStats.utilizationRate}%`} icon={Activity} color="text-purple-600" />
                 </div>
               </div>
 
@@ -373,19 +373,19 @@ const AdminAnalytics = () => {
               <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
                   <BarChart3 className="h-5 w-5 text-primary-600" />
-                  Performance Metrics
+                  {t('admin.dashboard.performanceMetrics')}
                 </h3>
                 <div className="space-y-4">
                   <StatRow 
-                    label="Avg. Booking Value" 
+                    label={t('admin.dashboard.avgBookingValue')} 
                     value={kpis.avgBookingValue.toLocaleString('en-US', { style: 'currency', currency: 'USD' })} 
                     icon={DollarSign} 
                     color="text-green-600" 
                   />
-                  <StatRow label="Approval Rate" value={`${kpis.approvalRate}%`} icon={CheckCircle} color="text-blue-600" />
-                  <StatRow label="Cancellation Rate" value={`${kpis.cancellationRate}%`} icon={XCircle} color="text-red-600" />
+                  <StatRow label={t('admin.dashboard.approvalRate')} value={`${kpis.approvalRate}%`} icon={CheckCircle} color="text-blue-600" />
+                  <StatRow label={t('admin.dashboard.cancellationRate')} value={`${kpis.cancellationRate}%`} icon={XCircle} color="text-red-600" />
                   <StatRow 
-                    label="Growth (30d)" 
+                    label={t('admin.dashboard.growthRate')} 
                     value={`${kpis.growthRate > 0 ? '+' : ''}${kpis.growthRate}%`} 
                     icon={kpis.growthRate >= 0 ? TrendingUp : TrendingDown} 
                     color={kpis.growthRate >= 0 ? 'text-green-600' : 'text-red-600'} 
@@ -400,7 +400,7 @@ const AdminAnalytics = () => {
               <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
                   <LineChartIcon className="h-5 w-5 text-primary-600" />
-                  Bookings Trend (Last 30 Days)
+                  {t('admin.dashboard.bookingsTrend')}
                 </h3>
                 <ResponsiveContainer width="100%" height={300}>
                   <AreaChart data={bookingsTrendData}>
@@ -440,7 +440,7 @@ const AdminAnalytics = () => {
               <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
                   <PieChartIcon className="h-5 w-5 text-accent-500" />
-                  Bookings by Status
+                  {t('admin.dashboard.bookingsByStatus')}
                 </h3>
                 <ResponsiveContainer width="100%" height={300}>
                   <PieChart>
@@ -471,12 +471,12 @@ const AdminAnalytics = () => {
           <>
             {/* Status Breakdown */}
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 mb-6">
-              <StatusCard label="Pending" value={kpis.pending} icon={Clock} color="bg-yellow-500" />
-              <StatusCard label="Approved" value={kpis.approved} icon={CheckCircle} color="bg-blue-500" />
-              <StatusCard label="In Transit" value={kpis.inTransit} icon={TrendingUp} color="bg-indigo-500" />
-              <StatusCard label="Active" value={kpis.active} icon={Activity} color="bg-purple-500" />
-              <StatusCard label="Completed" value={kpis.completed} icon={CheckCircle} color="bg-green-500" />
-              <StatusCard label="Cancelled" value={kpis.cancelled} icon={XCircle} color="bg-red-500" />
+              <StatusCard label={t('admin.dashboard.pending')} value={kpis.pending} icon={Clock} color="bg-yellow-500" />
+              <StatusCard label={t('admin.dashboard.approved')} value={kpis.approved} icon={CheckCircle} color="bg-blue-500" />
+              <StatusCard label={t('admin.dashboard.inTransit')} value={kpis.inTransit} icon={TrendingUp} color="bg-indigo-500" />
+              <StatusCard label={t('admin.dashboard.active')} value={kpis.active} icon={Activity} color="bg-purple-500" />
+              <StatusCard label={t('admin.dashboard.completed')} value={kpis.completed} icon={CheckCircle} color="bg-green-500" />
+              <StatusCard label={t('admin.dashboard.cancelled')} value={kpis.cancelled} icon={XCircle} color="bg-red-500" />
             </div>
 
             {/* Service Type Breakdown */}
@@ -527,13 +527,13 @@ const AdminAnalytics = () => {
             <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-6 flex items-center gap-2">
                 <BarChart3 className="h-5 w-5 text-primary-600" />
-                Booking Conversion Funnel
+                {t('admin.dashboard.bookingConversionFunnel')}
               </h3>
               <div className="space-y-3">
-                <FunnelBar label="Total Requests" value={kpis.total} max={kpis.total} percentage={100} />
-                <FunnelBar label="Approved" value={kpis.approved} max={kpis.total} percentage={kpis.total > 0 ? Math.round((kpis.approved / kpis.total) * 100) : 0} />
-                <FunnelBar label="In Progress" value={kpis.inTransit + kpis.active} max={kpis.total} percentage={kpis.total > 0 ? Math.round(((kpis.inTransit + kpis.active) / kpis.total) * 100) : 0} />
-                <FunnelBar label="Completed" value={kpis.completed} max={kpis.total} percentage={kpis.completionRate} />
+                <FunnelBar label={t('admin.dashboard.totalRequests')} value={kpis.total} max={kpis.total} percentage={100} />
+                <FunnelBar label={t('admin.dashboard.approved')} value={kpis.approved} max={kpis.total} percentage={kpis.total > 0 ? Math.round((kpis.approved / kpis.total) * 100) : 0} />
+                <FunnelBar label={t('admin.dashboard.inProgress')} value={kpis.inTransit + kpis.active} max={kpis.total} percentage={kpis.total > 0 ? Math.round(((kpis.inTransit + kpis.active) / kpis.total) * 100) : 0} />
+                <FunnelBar label={t('admin.dashboard.completed')} value={kpis.completed} max={kpis.total} percentage={kpis.completionRate} />
               </div>
             </div>
           </>
@@ -545,20 +545,20 @@ const AdminAnalytics = () => {
             {/* Revenue KPIs */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-6">
               <RevenueCard 
-                title="Total Revenue" 
+                title={t('admin.dashboard.totalRevenue')} 
                 value={kpis.totalRevenue} 
                 icon={DollarSign} 
                 color="text-green-600"
               />
               <RevenueCard 
-                title="Transport Revenue" 
+                title={t('admin.dashboard.transportRevenue')} 
                 value={byService.transport.revenue} 
                 icon={Truck} 
                 color="text-blue-600"
                 percentage={kpis.totalRevenue > 0 ? Math.round((byService.transport.revenue / kpis.totalRevenue) * 100) : 0}
               />
               <RevenueCard 
-                title="Rental Revenue" 
+                title={t('admin.dashboard.rentalRevenue')} 
                 value={byService.rental.revenue} 
                 icon={Package} 
                 color="text-orange-600"
@@ -570,7 +570,7 @@ const AdminAnalytics = () => {
             <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 mb-6">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-6 flex items-center gap-2">
                 <LineChartIcon className="h-5 w-5 text-green-600" />
-                Revenue Trend (Last 30 Days)
+                {t('admin.dashboard.revenueTrend')}
               </h3>
               <ResponsiveContainer width="100%" height={300}>
                 <LineChart data={dailyRevenueData}>
@@ -607,7 +607,7 @@ const AdminAnalytics = () => {
 
             {/* Revenue Breakdown */}
             <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-6">Revenue Analysis</h3>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-6">{t('admin.dashboard.revenueAnalysis')}</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">{t('admin.dashboard.byServiceType')}</h4>
@@ -627,20 +627,20 @@ const AdminAnalytics = () => {
                   </div>
                 </div>
                 <div>
-                  <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Key Metrics</h4>
+                  <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">{t('admin.dashboard.keyMetrics')}</h4>
                   <div className="space-y-3">
                     <div className="flex justify-between items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                      <span className="text-sm text-gray-600 dark:text-gray-400">Average Booking Value</span>
+                      <span className="text-sm text-gray-600 dark:text-gray-400">{t('admin.dashboard.averageBookingValue')}</span>
                       <span className="font-semibold text-gray-900 dark:text-gray-100">
                         {kpis.avgBookingValue.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
                       </span>
                     </div>
                     <div className="flex justify-between items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                      <span className="text-sm text-gray-600 dark:text-gray-400">Completed Bookings</span>
+                      <span className="text-sm text-gray-600 dark:text-gray-400">{t('admin.dashboard.completedBookings')}</span>
                       <span className="font-semibold text-gray-900 dark:text-gray-100">{kpis.completed}</span>
                     </div>
                     <div className="flex justify-between items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                      <span className="text-sm text-gray-600 dark:text-gray-400">Revenue per Booking</span>
+                      <span className="text-sm text-gray-600 dark:text-gray-400">{t('admin.dashboard.revenuePerBooking')}</span>
                       <span className="font-semibold text-gray-900 dark:text-gray-100">
                         {kpis.avgBookingValue.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
                       </span>
