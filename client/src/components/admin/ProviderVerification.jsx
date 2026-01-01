@@ -78,7 +78,7 @@ const ProviderVerification = () => {
         setProviderDetails(null);
       }
       
-      alert(t('admin.providers.successfully' + (status === 'approved' ? 'Approved' : 'Rejected')));
+      alert(status === 'approved' ? t('admin.providers.successfullyApproved') : t('admin.providers.successfullyRejected'));
     } catch (error) {
       console.error('Error verifying provider:', error);
       alert(t('admin.providers.errorVerifying'));
@@ -349,22 +349,22 @@ const ProviderVerification = () => {
                       </p>
                     </div>
                     <div>
-                      <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Email Verified</p>
+                      <p className="text-sm font-medium text-gray-500 dark:text-gray-400">{t('admin.providers.emailVerified')}</p>
                       <p className="text-sm text-gray-900 dark:text-gray-100">
                         {selectedProvider.email_verified ? (
-                          <span className="text-green-600">✓ Verified</span>
+                          <span className="text-green-600">{t('admin.providers.emailVerifiedYes')}</span>
                         ) : (
-                          <span className="text-red-600">✗ Not Verified</span>
+                          <span className="text-red-600">{t('admin.providers.emailVerifiedNo')}</span>
                         )}
                       </p>
                     </div>
                     <div>
-                      <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Account Status</p>
+                      <p className="text-sm font-medium text-gray-500 dark:text-gray-400">{t('admin.providers.accountStatus')}</p>
                       <p className="text-sm text-gray-900 dark:text-gray-100">
                         {selectedProvider.is_active ? (
-                          <span className="text-green-600">Active</span>
+                          <span className="text-green-600">{t('admin.providers.accountActive')}</span>
                         ) : (
-                          <span className="text-red-600">Inactive</span>
+                          <span className="text-red-600">{t('admin.providers.accountInactive')}</span>
                         )}
                       </p>
                     </div>
@@ -373,39 +373,39 @@ const ProviderVerification = () => {
 
                 {/* Provider Profile Information */}
                 {providerDetails?.profile && (
-                  <div className="bg-blue-50 p-4 rounded-lg">
+                  <div className="bg-blue-50 dark:bg-gray-700 p-4 rounded-lg">
                     <h4 className="text-md font-medium text-gray-900 dark:text-gray-100 mb-3 flex items-center">
                       <Building className="h-5 w-5 mr-2" />
-                      Company Information
+                      {t('admin.providers.companyInformation')}
                     </h4>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       {providerDetails.profile.company_name && (
                         <div className="md:col-span-2">
-                          <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Company Name</p>
+                          <p className="text-sm font-medium text-gray-500 dark:text-gray-400">{t('admin.providers.companyName')}</p>
                           <p className="text-lg font-semibold text-gray-900 dark:text-gray-100">{providerDetails.profile.company_name}</p>
                         </div>
                       )}
                       {providerDetails.profile.business_license && (
                         <div>
-                          <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Business License</p>
+                          <p className="text-sm font-medium text-gray-500 dark:text-gray-400">{t('admin.providers.businessLicense')}</p>
                           <p className="text-sm text-gray-900 dark:text-gray-100">{providerDetails.profile.business_license}</p>
                         </div>
                       )}
                       {providerDetails.profile.business_type && (
                         <div>
-                          <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Business Type</p>
+                          <p className="text-sm font-medium text-gray-500 dark:text-gray-400">{t('admin.providers.businessType')}</p>
                           <p className="text-sm text-gray-900 dark:text-gray-100">{providerDetails.profile.business_type}</p>
                         </div>
                       )}
                       {providerDetails.profile.industry_sector && (
                         <div>
-                          <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Industry Sector</p>
+                          <p className="text-sm font-medium text-gray-500 dark:text-gray-400">{t('admin.providers.industrySector')}</p>
                           <p className="text-sm text-gray-900 dark:text-gray-100">{providerDetails.profile.industry_sector}</p>
                         </div>
                       )}
                       {providerDetails.profile.business_phone && (
                         <div>
-                          <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Business Phone</p>
+                          <p className="text-sm font-medium text-gray-500 dark:text-gray-400">{t('admin.providers.businessPhone')}</p>
                           <p className="text-sm text-gray-900 dark:text-gray-100 flex items-center">
                             <Phone className="h-4 w-4 mr-1" />
                             {providerDetails.profile.business_phone}
@@ -418,39 +418,39 @@ const ProviderVerification = () => {
 
                 {/* Company Address Information */}
                 {providerDetails?.profile && (
-                  <div className="bg-green-50 p-4 rounded-lg">
+                  <div className="bg-green-50 dark:bg-gray-700 p-4 rounded-lg">
                     <h4 className="text-md font-medium text-gray-900 dark:text-gray-100 mb-3 flex items-center">
                       <MapPin className="h-5 w-5 mr-2" />
-                      Company Address
+                      {t('admin.providers.companyAddress')}
                     </h4>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       {providerDetails.profile.street_address && (
                         <div className="md:col-span-2">
-                          <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Street Address</p>
+                          <p className="text-sm font-medium text-gray-500 dark:text-gray-400">{t('admin.providers.streetAddress')}</p>
                           <p className="text-sm text-gray-900 dark:text-gray-100">{providerDetails.profile.street_address}</p>
                         </div>
                       )}
                       {providerDetails.profile.city && (
                         <div>
-                          <p className="text-sm font-medium text-gray-500 dark:text-gray-400">City</p>
+                          <p className="text-sm font-medium text-gray-500 dark:text-gray-400">{t('admin.providers.city')}</p>
                           <p className="text-sm text-gray-900 dark:text-gray-100">{providerDetails.profile.city}</p>
                         </div>
                       )}
                       {providerDetails.profile.state_province && (
                         <div>
-                          <p className="text-sm font-medium text-gray-500 dark:text-gray-400">State/Province</p>
+                          <p className="text-sm font-medium text-gray-500 dark:text-gray-400">{t('admin.providers.stateProvince')}</p>
                           <p className="text-sm text-gray-900 dark:text-gray-100">{providerDetails.profile.state_province}</p>
                         </div>
                       )}
                       {providerDetails.profile.postal_code && (
                         <div>
-                          <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Postal Code</p>
+                          <p className="text-sm font-medium text-gray-500 dark:text-gray-400">{t('admin.providers.postalCode')}</p>
                           <p className="text-sm text-gray-900 dark:text-gray-100 font-mono">{providerDetails.profile.postal_code}</p>
                         </div>
                       )}
                       {(providerDetails.profile.street_address || providerDetails.profile.city || providerDetails.profile.state_province || providerDetails.profile.postal_code) && (
                         <div className="md:col-span-2">
-                          <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Complete Address</p>
+                          <p className="text-sm font-medium text-gray-500 dark:text-gray-400">{t('admin.providers.completeAddress')}</p>
                           <p className="text-sm text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-800 p-2 rounded border">
                             {[
                               providerDetails.profile.street_address,
@@ -467,15 +467,15 @@ const ProviderVerification = () => {
 
                 {/* Contact Person Information */}
                 {providerDetails?.profile && (providerDetails.profile.contact_person_name || providerDetails.profile.contact_person_email || providerDetails.profile.contact_person_phone) && (
-                  <div className="bg-purple-50 p-4 rounded-lg">
+                  <div className="bg-purple-50 dark:bg-gray-700 p-4 rounded-lg">
                     <h4 className="text-md font-medium text-gray-900 dark:text-gray-100 mb-3 flex items-center">
                       <User className="h-5 w-5 mr-2" />
-                      Contact Person
+                      {t('admin.providers.contactPerson')}
                     </h4>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       {providerDetails.profile.contact_person_name && (
                         <div>
-                          <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Name</p>
+                          <p className="text-sm font-medium text-gray-500 dark:text-gray-400">{t('admin.providers.contactPersonName')}</p>
                           <p className="text-sm text-gray-900 dark:text-gray-100">{providerDetails.profile.contact_person_name}</p>
                           {providerDetails.profile.contact_person_position && (
                             <p className="text-xs text-gray-500 dark:text-gray-400">{providerDetails.profile.contact_person_position}</p>
@@ -484,7 +484,7 @@ const ProviderVerification = () => {
                       )}
                       {providerDetails.profile.contact_person_email && (
                         <div>
-                          <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Email</p>
+                          <p className="text-sm font-medium text-gray-500 dark:text-gray-400">{t('admin.providers.contactPersonEmail')}</p>
                           <p className="text-sm text-gray-900 dark:text-gray-100 flex items-center">
                             <Mail className="h-4 w-4 mr-1" />
                             {providerDetails.profile.contact_person_email}
@@ -493,7 +493,7 @@ const ProviderVerification = () => {
                       )}
                       {providerDetails.profile.contact_person_phone && (
                         <div>
-                          <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Phone</p>
+                          <p className="text-sm font-medium text-gray-500 dark:text-gray-400">{t('admin.providers.contactPersonPhone')}</p>
                           <p className="text-sm text-gray-900 dark:text-gray-100 flex items-center">
                             <Phone className="h-4 w-4 mr-1" />
                             {providerDetails.profile.contact_person_phone}
@@ -505,20 +505,20 @@ const ProviderVerification = () => {
                 )}
 
                 {/* Verification Status */}
-                <div className="bg-yellow-50 p-4 rounded-lg">
+                <div className="bg-yellow-50 dark:bg-gray-700 p-4 rounded-lg">
                   <h4 className="text-md font-medium text-gray-900 dark:text-gray-100 mb-3 flex items-center">
                     <AlertCircle className="h-5 w-5 mr-2" />
-                    Verification Status
+                    {t('admin.providers.verificationStatus')}
                   </h4>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Admin Verification</p>
+                      <p className="text-sm font-medium text-gray-500 dark:text-gray-400">{t('admin.providers.adminVerification')}</p>
                       <div className="mt-1">
                         {getStatusBadge(selectedProvider)}
                       </div>
                     </div>
                     <div>
-                      <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Last Updated</p>
+                      <p className="text-sm font-medium text-gray-500 dark:text-gray-400">{t('admin.providers.lastUpdated')}</p>
                       <p className="text-sm text-gray-900 dark:text-gray-100">
                         {new Date(selectedProvider.updated_at).toLocaleString()}
                       </p>
@@ -528,7 +528,7 @@ const ProviderVerification = () => {
 
                 {/* Action Buttons */}
                 {!selectedProvider.is_verified && (
-                  <div className="flex justify-end space-x-3 pt-4 border-t">
+                  <div className="flex justify-end space-x-3 pt-4 border-t dark:border-gray-600">
                     <button
                       onClick={() => handleVerification(selectedProvider.id, 'rejected')}
                       disabled={verifying[selectedProvider.id]}
@@ -539,7 +539,7 @@ const ProviderVerification = () => {
                       ) : (
                         <X className="h-4 w-4 mr-2" />
                       )}
-                      Reject Provider
+                      {t('admin.providers.rejectProvider')}
                     </button>
                     <button
                       onClick={() => handleVerification(selectedProvider.id, 'approved')}
@@ -551,7 +551,7 @@ const ProviderVerification = () => {
                       ) : (
                         <Check className="h-4 w-4 mr-2" />
                       )}
-                      Approve Provider
+                      {t('admin.providers.approveProvider')}
                     </button>
                   </div>
                 )}
