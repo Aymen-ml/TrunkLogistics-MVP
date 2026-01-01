@@ -330,7 +330,7 @@ const TruckSearch = () => {
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
-                  Availability
+                  {t('trucks.availability.label')}
                 </label>
                 <select
                   name="availability"
@@ -338,9 +338,9 @@ const TruckSearch = () => {
                   onChange={handleFilterChange}
                   className="w-full border-gray-300 dark:border-gray-600 rounded-md focus:ring-accent-500 focus:border-blue-500"
                 >
-                  <option value="all">All {filters.serviceType === 'rental' ? 'Equipment' : 'Trucks'}</option>
-                  <option value="available">Available Only</option>
-                  <option value="rented">Rented Only</option>
+                  <option value="all">{t('trucks.availability.all')} {filters.serviceType === 'rental' ? t('trucks.rentalBadge') : t('trucks.logisticsBadge')}</option>
+                  <option value="available">{t('trucks.availability.availableOnly')}</option>
+                  <option value="rented">{t('trucks.availability.rentedOnly')}</option>
                 </select>
               </div>
 
@@ -429,7 +429,7 @@ const TruckSearch = () => {
               <div key={truck.id} className={`bg-white dark:bg-gray-800 rounded-lg shadow-sm border overflow-hidden hover:shadow-md transition-shadow ${isRented ? 'border-gray-300 dark:border-gray-600 opacity-75' : 'border-gray-200 dark:border-gray-700'}`}>
                 {isRented && (
                   <div className="bg-red-50 border-b border-red-200 px-4 py-2">
-                    <p className="text-xs font-medium text-red-800 dark:text-red-200 text-center">Currently Rented - Not Available</p>
+                    <p className="text-xs font-medium text-red-800 dark:text-red-200 text-center">{t('trucks.statuses.currentlyRented')} - {t('trucks.statuses.notAvailable')}</p>
                   </div>
                 )}
                 <div className="p-6">
@@ -458,11 +458,11 @@ const TruckSearch = () => {
                           {truck.active_bookings_count !== undefined && (
                             truck.active_bookings_count === 0 ? (
                               <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200">
-                                Available
+                                {t('trucks.statuses.available')}
                               </span>
                             ) : (
                               <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200">
-                                Rented
+                                {t('trucks.statuses.rented')}
                               </span>
                             )
                           )}
@@ -546,10 +546,10 @@ const TruckSearch = () => {
                       {truck.service_type === 'rental' ? (
                         <>
                           <Clock className="h-4 w-4 mr-2" />
-                          {isRented ? 'Currently Rented' : 'Rent Equipment'}
+                          {isRented ? t('trucks.statuses.currentlyRented') : 'Rent Equipment'}
                         </>
                       ) : (
-                        isRented ? 'Currently Booked' : 'Request Booking'
+                        isRented ? t('trucks.statuses.currentlyBooked') : 'Request Booking'
                       )}
                     </button>
                     <button 

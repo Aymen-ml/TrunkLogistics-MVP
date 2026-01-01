@@ -151,9 +151,9 @@ const DocumentVerification = () => {
 
   const getStatusBadge = (status) => {
     const statusConfig = {
-      pending: { color: 'bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200', icon: Clock, label: 'Pending' },
-      approved: { color: 'bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200', icon: Check, label: 'Approved' },
-      rejected: { color: 'bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200', icon: X, label: 'Rejected' }
+      pending: { color: 'bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200', icon: Clock, label: t('admin.documents.statuses.pending') },
+      approved: { color: 'bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200', icon: Check, label: t('admin.documents.statuses.approved') },
+      rejected: { color: 'bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200', icon: X, label: t('admin.documents.statuses.rejected') }
     };
 
     const config = statusConfig[status] || statusConfig.pending;

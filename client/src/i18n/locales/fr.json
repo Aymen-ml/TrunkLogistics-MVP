@@ -903,6 +903,23 @@
     "editEquipmentTitle": "Éditer l'équipement",
     "deleteTruckTitle": "Supprimer le camion",
     "deleteEquipmentTitle": "Supprimer l'équipement",
+    "statuses": {
+      "active": "Actif",
+      "inactive": "Inactif",
+      "rented": "Loué",
+      "maintenance": "Maintenance",
+      "available": "Disponible",
+      "booked": "Réservé",
+      "currentlyRented": "Actuellement loué",
+      "currentlyBooked": "Actuellement réservé",
+      "notAvailable": "Non disponible"
+    },
+    "availability": {
+      "label": "Disponibilité",
+      "all": "Tous",
+      "availableOnly": "Disponible uniquement",
+      "rentedOnly": "Loué uniquement"
+    },
     "backToTrucks": "Retour aux camions",
     "editTruckForm": "Modifier le camion",
     "addNewTruckForm": "Ajouter un nouveau camion",

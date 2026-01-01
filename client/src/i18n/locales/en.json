@@ -903,6 +903,23 @@
     "editEquipmentTitle": "Edit equipment",
     "deleteTruckTitle": "Delete truck",
     "deleteEquipmentTitle": "Delete equipment",
+    "statuses": {
+      "active": "Active",
+      "inactive": "Inactive",
+      "rented": "Rented",
+      "maintenance": "Maintenance",
+      "available": "Available",
+      "booked": "Booked",
+      "currentlyRented": "Currently Rented",
+      "currentlyBooked": "Currently Booked",
+      "notAvailable": "Not Available"
+    },
+    "availability": {
+      "label": "Availability",
+      "all": "All",
+      "availableOnly": "Available Only",
+      "rentedOnly": "Rented Only"
+    },
     "backToTrucks": "Back to Trucks",
     "editTruckForm": "Edit Truck",
     "addNewTruckForm": "Add New Truck",
@@ -1130,6 +1147,11 @@
       "title": "Documents",
       "verification": "Document Verification",
       "viewAndVerify": "Review and verify uploaded truck documents",
+      "statuses": {
+        "pending": "Pending",
+        "approved": "Approved",
+        "rejected": "Rejected"
+      },
       "approved": "Approved",
       "rejected": "Rejected",
       "viewDocument": "View Document",

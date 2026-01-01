@@ -462,7 +462,7 @@ const TruckList = () => {
                       
                       <div className="flex items-center justify-between">
                         <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(truck.status)}`}>
-                          {truck.status}
+                          {t(`trucks.statuses.${truck.status}`)}
                         </span>
                         
                         <div className="flex items-center space-x-2">
