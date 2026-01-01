@@ -334,10 +334,10 @@ const ProviderDashboard = () => {
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100">
-                Provider Dashboard
+                {t('dashboard.providerDashboard')}
               </h1>
               <p className="mt-2 text-sm sm:text-base text-gray-600 dark:text-gray-400">
-                Manage your fleet, bookings, and grow your logistics business.
+                {t('dashboard.manageFleetGrow')}
               </p>
             </div>
             <VerificationBadge isVerified={user?.admin_approved || false} />
@@ -356,8 +356,8 @@ const ProviderDashboard = () => {
                   <Truck className="h-6 w-6 sm:h-8 sm:w-8 text-primary-600 group-hover:text-accent-500 transition-colors" />
                 </div>
                 <div className="ml-3 sm:ml-4">
-                  <h3 className="text-base sm:text-lg font-medium text-gray-900 dark:text-gray-100">Manage Fleet</h3>
-                  <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">Add and manage trucks</p>
+                  <h3 className="text-base sm:text-lg font-medium text-gray-900 dark:text-gray-100">{t('dashboard.manageFleet')}</h3>
+                  <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">{t('dashboard.addManageTrucks')}</p>
                 </div>
               </div>
             </Link>
@@ -371,8 +371,8 @@ const ProviderDashboard = () => {
                   <Package className="h-6 w-6 sm:h-8 sm:w-8 text-green-600 group-hover:text-green-700" />
                 </div>
                 <div className="ml-3 sm:ml-4">
-                  <h3 className="text-base sm:text-lg font-medium text-gray-900 dark:text-gray-100">View Bookings</h3>
-                  <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">Manage your bookings</p>
+                  <h3 className="text-base sm:text-lg font-medium text-gray-900 dark:text-gray-100">{t('dashboard.viewBookings')}</h3>
+                  <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">{t('dashboard.manageYourBookings')}</p>
                 </div>
               </div>
             </Link>
@@ -386,8 +386,8 @@ const ProviderDashboard = () => {
                   <BarChart3 className="h-6 w-6 sm:h-8 sm:w-8 text-blue-600 group-hover:text-blue-700" />
                 </div>
                 <div className="ml-3 sm:ml-4">
-                  <h3 className="text-base sm:text-lg font-medium text-gray-900 dark:text-gray-100">Analytics</h3>
-                  <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">View detailed insights</p>
+                  <h3 className="text-base sm:text-lg font-medium text-gray-900 dark:text-gray-100">{t('dashboard.analyticsLabel')}</h3>
+                  <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">{t('dashboard.viewDetailedInsights')}</p>
                 </div>
               </div>
             </Link>
@@ -539,7 +539,7 @@ const ProviderDashboard = () => {
             <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
               <div className="flex items-center">
                 <PieChart className="h-5 w-5 text-green-500 mr-2" />
-                <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">Revenue Breakdown</h3>
+                <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">{t('dashboard.revenueBreakdown')}</h3>
               </div>
             </div>
             <div className="p-6">
@@ -547,7 +547,7 @@ const ProviderDashboard = () => {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center">
                     <div className="w-3 h-3 bg-blue-500 rounded-full mr-3"></div>
-                    <span className="text-sm font-medium text-gray-900 dark:text-gray-100">Transportation</span>
+                    <span className="text-sm font-medium text-gray-900 dark:text-gray-100">{t('dashboard.transportationLabel')}</span>
                   </div>
                   <span className="text-sm font-semibold text-gray-900 dark:text-gray-100">
                     {formatCurrency(stats.transportRevenue)}
@@ -556,7 +556,7 @@ const ProviderDashboard = () => {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center">
                     <div className="w-3 h-3 bg-orange-500 rounded-full mr-3"></div>
-                    <span className="text-sm font-medium text-gray-900 dark:text-gray-100">Equipment Rental</span>
+                    <span className="text-sm font-medium text-gray-900 dark:text-gray-100">{t('dashboard.equipmentRentalLabel')}</span>
                   </div>
                   <span className="text-sm font-semibold text-gray-900 dark:text-gray-100">
                     {formatCurrency(stats.rentalRevenue)}
@@ -564,7 +564,7 @@ const ProviderDashboard = () => {
                 </div>
                 <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-500 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500">Total Revenue</span>
+                    <span className="text-gray-500 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500">{t('dashboard.totalRevenueLabel')}</span>
                     <span className="font-semibold text-gray-900 dark:text-gray-100">
                       {formatCurrency(stats.totalRevenue)}
                     </span>
@@ -579,7 +579,7 @@ const ProviderDashboard = () => {
             <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
               <div className="flex items-center">
                 <Award className="h-5 w-5 text-yellow-500 mr-2" />
-                <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">Top Performers</h3>
+                <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">{t('dashboard.topPerformers')}</h3>
               </div>
             </div>
             <div className="p-6">
@@ -597,13 +597,13 @@ const ProviderDashboard = () => {
                         <div>
                           <p className="text-sm font-medium text-gray-900 dark:text-gray-100">{vehicle.license_plate}</p>
                           <p className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500">
-                            {vehicle.service_type === 'rental' ? 'Equipment' : 'Transport'}
+                            {vehicle.service_type === 'rental' ? t('dashboard.equipmentLabel') : t('dashboard.transportLabel')}
                           </p>
                         </div>
                       </div>
                       <div className="text-right">
                         <p className="text-sm font-semibold text-gray-900 dark:text-gray-100">{vehicle.bookingCount}</p>
-                        <p className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500">bookings</p>
+                        <p className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500">{t('dashboard.bookingsLabel')}</p>
                       </div>
                     </div>
                   ))}
@@ -611,7 +611,7 @@ const ProviderDashboard = () => {
               ) : (
                 <div className="text-center py-4">
                   <Award className="mx-auto h-8 w-8 text-gray-400 dark:text-gray-500 dark:text-gray-400" />
-                  <p className="mt-2 text-sm text-gray-500 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500">No performance data yet</p>
+                  <p className="mt-2 text-sm text-gray-500 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500">{t('dashboard.noPerformanceData')}</p>
                 </div>
               )}
             </div>
@@ -622,31 +622,31 @@ const ProviderDashboard = () => {
             <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
               <div className="flex items-center">
                 <BarChart3 className="h-5 w-5 text-purple-500 mr-2" />
-                <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">Quick Stats</h3>
+                <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">{t('dashboard.quickStats')}</h3>
               </div>
             </div>
             <div className="p-6">
               <div className="space-y-4">
                 <div className="flex justify-between">
-                  <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500">Fleet Size</span>
+                  <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500">{t('dashboard.fleetSize')}</span>
                   <span className="text-sm font-semibold text-gray-900 dark:text-gray-100">
-                    {stats.totalTrucks + stats.totalEquipment} vehicles
+                    {stats.totalTrucks + stats.totalEquipment} {t('dashboard.vehiclesLabel')}
                   </span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500">Active Rate</span>
+                  <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500">{t('dashboard.activeRate')}</span>
                   <span className="text-sm font-semibold text-gray-900 dark:text-gray-100">
                     {Math.round(((stats.activeTrucks + stats.activeEquipment) / (stats.totalTrucks + stats.totalEquipment || 1)) * 100)}%
                   </span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500">Maintenance</span>
+                  <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500">{t('dashboard.maintenanceLabel')}</span>
                   <span className="text-sm font-semibold text-red-600">
-                    {stats.maintenanceAlerts} vehicles
+                    {stats.maintenanceAlerts} {t('dashboard.vehiclesLabel')}
                   </span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500">Success Rate</span>
+                  <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500">{t('dashboard.successRate')}</span>
                   <span className="text-sm font-semibold text-green-600">
                     {stats.totalBookings > 0 ? Math.round((stats.completedBookings / stats.totalBookings) * 100) : 0}%
                   </span>
@@ -674,9 +674,9 @@ const ProviderDashboard = () => {
               {recentBookings.length === 0 ? (
                 <div className="px-6 py-8 text-center">
                   <Package className="mx-auto h-12 w-12 text-gray-400 dark:text-gray-500 dark:text-gray-400" />
-                  <h3 className="mt-2 text-sm font-medium text-gray-900 dark:text-gray-100">No bookings yet</h3>
+                  <h3 className="mt-2 text-sm font-medium text-gray-900 dark:text-gray-100">{t('dashboard.noBookingsYet')}</h3>
                   <p className="mt-1 text-sm text-gray-500 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500">
-                    Bookings will appear here once customers request your trucks.
+                    {t('dashboard.bookingsWillAppear')}
                   </p>
                 </div>
               ) : (
@@ -714,13 +714,13 @@ const ProviderDashboard = () => {
                               onClick={() => handleBookingAction(booking.id, 'accept')}
                               className="inline-flex items-center px-3 py-1 border border-transparent text-xs font-medium rounded-md text-white bg-green-600 hover:bg-green-700"
                             >
-                              Accept
+                              {t('dashboard.acceptButton')}
                             </button>
                             <button
                               onClick={() => handleBookingAction(booking.id, 'reject')}
                               className="inline-flex items-center px-3 py-1 border border-transparent text-xs font-medium rounded-md text-white bg-red-600 hover:bg-red-700"
                             >
-                              Reject
+                              {t('dashboard.rejectButton')}
                             </button>
                           </>
                         ) : (
@@ -728,7 +728,7 @@ const ProviderDashboard = () => {
                             to={`/bookings/${booking.id}`}
                             className="text-accent-500 hover:text-accent-600 transition-colors text-sm font-medium"
                           >
-                            View
+                            {t('dashboard.viewButton')}
                           </Link>
                         )}
                       </div>
@@ -754,7 +754,7 @@ const ProviderDashboard = () => {
                           : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500 hover:bg-gray-200'
                       }`}
                     >
-                      All
+                      {t('dashboard.allFilter')}
                     </button>
                     <button
                       onClick={() => setServiceFilter('transport')}
@@ -764,7 +764,7 @@ const ProviderDashboard = () => {
                           : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500 hover:bg-gray-200'
                       }`}
                     >
-                      Trucks
+                      {t('dashboard.trucksFilter')}
                     </button>
                     <button
                       onClick={() => setServiceFilter('rental')}
@@ -774,7 +774,7 @@ const ProviderDashboard = () => {
                           : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500 hover:bg-gray-200'
                       }`}
                     >
-                      Equipment
+                      {t('dashboard.equipmentFilter')}
                     </button>
                   </div>
                 </div>
@@ -782,7 +782,7 @@ const ProviderDashboard = () => {
                   to="/trucks"
                   className="text-sm text-accent-500 hover:text-accent-600 transition-colors font-medium"
                 >
-                  View all
+                  {t('dashboard.viewAllLink')}
                 </Link>
               </div>
             </div>
@@ -803,10 +803,10 @@ const ProviderDashboard = () => {
                       <Truck className="mx-auto h-12 w-12 text-gray-400 dark:text-gray-500 dark:text-gray-400" />
                     )}
                     <h3 className="mt-2 text-sm font-medium text-gray-900 dark:text-gray-100">
-                      No {serviceFilter === 'rental' ? 'equipment' : serviceFilter === 'transport' ? 'trucks' : 'vehicles'} yet
+                      {serviceFilter === 'rental' ? t('dashboard.noEquipmentYet') : serviceFilter === 'transport' ? t('dashboard.noTrucksYet') : t('dashboard.noVehiclesYet')}
                     </h3>
                     <p className="mt-1 text-sm text-gray-500 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500">
-                      Add {serviceFilter === 'rental' ? 'equipment' : 'trucks'} to your fleet to start receiving bookings.
+                      {serviceFilter === 'rental' ? t('dashboard.addEquipmentToFleet') : t('dashboard.addTrucksToFleet')}
                     </p>
                     <div className="mt-6">
                       <Link
@@ -814,7 +814,7 @@ const ProviderDashboard = () => {
                         className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-accent-500 hover:bg-accent-600 transition-colors"
                       >
                         <Plus className="h-4 w-4 mr-2" />
-                        Add {serviceFilter === 'rental' ? 'Equipment' : 'Truck'}
+                        {serviceFilter === 'rental' ? t('dashboard.addEquipment') : t('dashboard.addTruck')}
                       </Link>
                     </div>
                   </div>
@@ -846,19 +846,19 @@ const ProviderDashboard = () => {
                                 </span>
                                 {isRental ? (
                                   <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-orange-100 text-orange-800">
-                                    Rental
+                                    {t('dashboard.rentalLabel')}
                                   </span>
                                 ) : (
                                   <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200">
-                                    Logistics
+                                    {t('dashboard.logisticsLabel')}
                                   </span>
                                 )}
                               </div>
                               <div className="flex items-center mt-1 text-sm text-gray-500 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500">
-                                <span>Total Revenue: ${truck.total_revenue || 0}</span>
+                                <span>{t('dashboard.totalRevenueVehicle')} ${truck.total_revenue || 0}</span>
                               </div>
                               <div className="flex items-center mt-1 text-sm text-gray-500 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500">
-                                <span>{truck.capacity_weight}kg {isRental ? 'operating weight' : 'capacity'}</span>
+                                <span>{truck.capacity_weight}kg {isRental ? t('dashboard.operatingWeightLabel') : t('dashboard.capacityLabel')}</span>
                                 <span className="mx-2">•</span>
                                 {isRental ? (
                                   <span>
@@ -868,7 +868,7 @@ const ProviderDashboard = () => {
                                       truck.daily_rate && `$${truck.daily_rate}/day`,
                                       truck.weekly_rate && `$${truck.weekly_rate}/wk`,
                                       truck.monthly_rate && `$${truck.monthly_rate}/mo`
-                                    ].filter(Boolean).slice(0, 2).join(', ') || 'Rates available'}
+                                    ].filter(Boolean).slice(0, 2).join(', ') || t('dashboard.ratesAvailable')}
                                   </span>
                                 ) : (
                                   <span>
