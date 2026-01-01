@@ -8,7 +8,12 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test": "echo 'No tests yet'"
+    "test": "echo 'No tests yet'",
+    "i18n:compare": "node src/i18n/compare-translations.js",
+    "i18n:sync": "node src/i18n/sync-translations.js",
+    "i18n:translate": "node src/i18n/translate-to-english.js",
+    "i18n:validate": "node src/i18n/validate-translations.js",
+    "i18n:manage": "node src/i18n/translation-manager.js"
   },
   "dependencies": {
     "@types/uuid": "^10.0.0",

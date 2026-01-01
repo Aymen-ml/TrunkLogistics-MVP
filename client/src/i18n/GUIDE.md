@@ -4,6 +4,30 @@
 
 The movelinker app uses **react-i18next** for internationalization, supporting **English (en)** and **French (fr)** languages.
 
+## 🚀 Quick Start - Translation Management
+
+### npm Scripts (Recommended)
+From the `client` directory:
+
+```bash
+# Compare translation files (find differences)
+npm run i18n:compare
+
+# Sync translations (add missing keys)
+npm run i18n:sync
+
+# Translate placeholders to English
+npm run i18n:translate
+
+# Validate translation consistency
+npm run i18n:validate
+
+# Interactive translation manager
+npm run i18n:manage
+```
+
+📖 **For detailed workflow and best practices, see [README.md](./README.md)**
+
 ## How It Works
 
 ### 1. Configuration
