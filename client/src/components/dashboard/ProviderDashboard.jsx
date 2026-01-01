@@ -406,13 +406,13 @@ const ProviderDashboard = () => {
                 <TrendingUp className="h-5 w-5 opacity-60" />
               </div>
               <dt className="text-sm font-medium opacity-90 mb-1">
-                Total Fleet
+                {t('dashboard.totalFleetCard')}
               </dt>
               <dd className="text-3xl font-bold">
                 {stats.totalTrucks + stats.totalEquipment}
               </dd>
               <div className="mt-2 text-xs opacity-75">
-                {stats.activeTrucks + stats.activeEquipment} active vehicles
+                {stats.activeTrucks + stats.activeEquipment} {t('dashboard.activeVehiclesCard')}
               </div>
             </div>
           </div>
@@ -427,13 +427,13 @@ const ProviderDashboard = () => {
                 <TrendingUp className="h-5 w-5 opacity-60" />
               </div>
               <dt className="text-sm font-medium opacity-90 mb-1">
-                Total Revenue
+                {t('dashboard.totalRevenueCard')}
               </dt>
               <dd className="text-3xl font-bold">
                 {formatCurrency(stats.totalRevenue)}
               </dd>
               <div className="mt-2 text-xs opacity-75">
-                {formatCurrency(stats.monthlyRevenue)} this month
+                {formatCurrency(stats.monthlyRevenue)} {t('dashboard.thisMonthCard')}
               </div>
             </div>
           </div>
@@ -448,13 +448,13 @@ const ProviderDashboard = () => {
                 <Zap className="h-5 w-5 opacity-60" />
               </div>
               <dt className="text-sm font-medium opacity-90 mb-1">
-                Utilization Rate
+                {t('dashboard.utilizationRateCard')}
               </dt>
               <dd className="text-3xl font-bold">
                 {stats.fleetUtilization}%
               </dd>
               <div className="mt-2 text-xs opacity-75">
-                {stats.activeBookings}/{stats.totalTrucks + stats.totalEquipment} in use
+                {stats.activeBookings}/{stats.totalTrucks + stats.totalEquipment} {t('dashboard.inUseCard')}
               </div>
             </div>
           </div>
@@ -469,13 +469,13 @@ const ProviderDashboard = () => {
                 <Bell className="h-5 w-5 opacity-60" />
               </div>
               <dt className="text-sm font-medium opacity-90 mb-1">
-                Pending Reviews
+                {t('dashboard.pendingReviewsCard')}
               </dt>
               <dd className="text-3xl font-bold">
                 {stats.pendingBookings}
               </dd>
               <div className="mt-2 text-xs opacity-75">
-                Awaiting your action
+                {t('dashboard.awaitingActionCard')}
               </div>
             </div>
           </div>
@@ -485,49 +485,49 @@ const ProviderDashboard = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 border border-gray-200 dark:border-gray-700">
             <div className="flex items-center justify-between mb-3">
-              <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400">Transportation</h3>
+              <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400">{t('dashboard.transportationCard')}</h3>
               <Truck className="h-5 w-5 text-primary-600" />
             </div>
             <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">{stats.totalTrucks}</p>
-            <p className="text-xs text-green-600 mt-1">{stats.activeTrucks} active</p>
+            <p className="text-xs text-green-600 mt-1">{stats.activeTrucks} {t('dashboard.activeCard')}</p>
             <div className="mt-3 pt-3 border-t border-gray-200 dark:border-gray-700">
-              <p className="text-xs text-gray-500 dark:text-gray-400">Revenue: {formatCurrency(stats.transportRevenue)}</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400">{t('dashboard.revenueCard')} {formatCurrency(stats.transportRevenue)}</p>
             </div>
           </div>
 
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 border border-gray-200 dark:border-gray-700">
             <div className="flex items-center justify-between mb-3">
-              <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400">Equipment Rental</h3>
+              <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400">{t('dashboard.equipmentRentalCard')}</h3>
               <Settings className="h-5 w-5 text-orange-600" />
             </div>
             <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">{stats.totalEquipment}</p>
-            <p className="text-xs text-green-600 mt-1">{stats.activeEquipment} active</p>
+            <p className="text-xs text-green-600 mt-1">{stats.activeEquipment} {t('dashboard.activeCard')}</p>
             <div className="mt-3 pt-3 border-t border-gray-200 dark:border-gray-700">
-              <p className="text-xs text-gray-500 dark:text-gray-400">Revenue: {formatCurrency(stats.rentalRevenue)}</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400">{t('dashboard.revenueCard')} {formatCurrency(stats.rentalRevenue)}</p>
             </div>
           </div>
 
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 border border-gray-200 dark:border-gray-700">
             <div className="flex items-center justify-between mb-3">
-              <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400">Avg Booking Value</h3>
+              <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400">{t('dashboard.avgBookingValueCard')}</h3>
               <Target className="h-5 w-5 text-indigo-600" />
             </div>
             <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">{formatCurrency(stats.avgBookingValue)}</p>
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{stats.completedBookings} completed</p>
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{stats.completedBookings} {t('dashboard.completedCard')}</p>
             <div className="mt-3 pt-3 border-t border-gray-200 dark:border-gray-700">
-              <p className="text-xs text-gray-500 dark:text-gray-400">Total: {stats.totalBookings} bookings</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400">{t('dashboard.totalBookingsCard')} {stats.totalBookings} {t('dashboard.bookingsCard')}</p>
             </div>
           </div>
 
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 border border-gray-200 dark:border-gray-700">
             <div className="flex items-center justify-between mb-3">
-              <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400">Customer Rating</h3>
+              <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400">{t('dashboard.customerRatingCard')}</h3>
               <Star className="h-5 w-5 text-yellow-500" />
             </div>
             <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">{stats.customerRating}/5.0</p>
             <p className="text-xs text-yellow-500 mt-1">★★★★☆</p>
             <div className="mt-3 pt-3 border-t border-gray-200 dark:border-gray-700">
-              <p className="text-xs text-gray-500 dark:text-gray-400">Based on reviews</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400">{t('dashboard.basedOnReviewsCard')}</p>
             </div>
           </div>
         </div>
