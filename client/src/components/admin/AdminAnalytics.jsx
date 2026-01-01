@@ -241,10 +241,10 @@ const AdminAnalytics = () => {
           <div>
             <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100 flex items-center gap-2">
               <Activity className="h-8 w-8 text-primary-600" />
-              Analytics Dashboard
+              {t('admin.dashboard.analytics')} {t('admin.dashboard.title')}
             </h1>
             <p className="mt-1 text-sm sm:text-base text-gray-600 dark:text-gray-400">
-              Real-time insights into your business performance
+              {t('admin.dashboard.viewAndFilter')}
             </p>
           </div>
           <Link 

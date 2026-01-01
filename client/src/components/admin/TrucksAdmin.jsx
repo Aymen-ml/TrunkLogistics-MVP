@@ -71,13 +71,13 @@ const TrucksAdmin = () => {
           <div className="flex items-center">
             <Truck className="h-8 w-8 text-primary-600 mr-3" />
             <div>
-              <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">Trucks</h1>
-              <p className="mt-2 text-gray-600 dark:text-gray-400">View and filter all trucks</p>
+              <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">{t('admin.trucksAdmin.title')}</h1>
+              <p className="mt-2 text-gray-600 dark:text-gray-400">{t('admin.trucksAdmin.viewAndFilter')}</p>
             </div>
           </div>
           <div className="flex items-center space-x-2">
             <button onClick={fetchTrucks} className="inline-flex items-center px-3 py-2 border border-gray-300 dark:border-gray-600 text-sm font-medium rounded-md text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:bg-gray-900">
-              <RefreshCw className="h-4 w-4 mr-2" /> Refresh
+              <RefreshCw className="h-4 w-4 mr-2" /> {t('admin.trucksAdmin.refresh')}
             </button>
           </div>
         </div>
@@ -86,17 +86,17 @@ const TrucksAdmin = () => {
           <div className="px-4 py-3 border-b border-gray-200 dark:border-gray-700">
             <div className="flex flex-wrap gap-3 items-end">
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">Service Type</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">{t('admin.trucksAdmin.serviceType')}</label>
                 <select value={filters.serviceType} onChange={e => setFilters(f => ({ ...f, serviceType: e.target.value }))} className="block w-48 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-accent-500 focus:border-blue-500">
-                  <option value="all">All</option>
-                  <option value="transport">Transport</option>
-                  <option value="rental">Rental</option>
+                  <option value="all">{t('admin.trucksAdmin.all')}</option>
+                  <option value="transport">{t('admin.trucksAdmin.transport')}</option>
+                  <option value="rental">{t('admin.trucksAdmin.rental')}</option>
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">Provider</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">{t('admin.trucksAdmin.provider')}</label>
                 <select value={filters.provider || 'all'} onChange={e => setFilters(f => ({ ...f, provider: e.target.value }))} className="block w-56 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-accent-500 focus:border-blue-500">
-                  <option value="all">All Providers</option>
+                  <option value="all">{t('admin.trucksAdmin.allProviders')}</option>
                   {providers.map(p => (
                     <option key={p.id} value={p.company_name || `${p.first_name} ${p.last_name}`}>
                       {p.company_name || `${p.first_name} ${p.last_name}`}
@@ -105,9 +105,9 @@ const TrucksAdmin = () => {
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">Status</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">{t('trucks.status')}</label>
                 <select value={filters.status} onChange={e => setFilters(f => ({ ...f, status: e.target.value }))} className="block w-48 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-accent-500 focus:border-blue-500">
-                  <option value="all">All</option>
+                  <option value="all">{t('admin.trucksAdmin.all')}</option>
                   <option value="active">Active</option>
                   <option value="rented">Rented</option>
                   <option value="maintenance">Maintenance</option>
@@ -115,8 +115,8 @@ const TrucksAdmin = () => {
                 </select>
               </div>
               <div className="flex-1 min-w-[220px]">
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">Search</label>
-                <input value={filters.search} onChange={e => setFilters(f => ({ ...f, search: e.target.value }))} placeholder="License plate, provider, make/model" className="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-accent-500 focus:border-blue-500" />
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">{t('trucks.search')}</label>
+                <input value={filters.search} onChange={e => setFilters(f => ({ ...f, search: e.target.value }))} placeholder={t('trucks.searchTrucks')} className="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-accent-500 focus:border-blue-500" />
               </div>
             </div>
           </div>
@@ -124,8 +124,8 @@ const TrucksAdmin = () => {
 
         <div className="bg-white dark:bg-gray-800 shadow overflow-hidden sm:rounded-md">
           <div className="px-4 py-5 sm:px-6 border-b border-gray-200 dark:border-gray-700">
-            <h3 className="text-lg leading-6 font-medium text-gray-900 dark:text-gray-100">Trucks ({trucks.length})</h3>
-            <p className="mt-1 max-w-2xl text-sm text-gray-500 dark:text-gray-400">Filter by state and view details</p>
+            <h3 className="text-lg leading-6 font-medium text-gray-900 dark:text-gray-100">{t('admin.trucksAdmin.title')} ({trucks.length})</h3>
+            <p className="mt-1 max-w-2xl text-sm text-gray-500 dark:text-gray-400">{t('admin.trucksAdmin.viewAndFilter')}</p>
           </div>
           <ul className="divide-y divide-gray-200 dark:divide-gray-700">
             {trucks.map(truck => (
@@ -149,7 +149,7 @@ const TrucksAdmin = () => {
                   </div>
                   <div className="flex items-center space-x-2">
                     <a href={`/trucks/${truck.id}`} className="inline-flex items-center px-3 py-2 border border-gray-300 dark:border-gray-600 text-sm font-medium rounded-md text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:bg-gray-900">
-                      <Eye className="h-4 w-4 mr-2" /> View
+                      <Eye className="h-4 w-4 mr-2" /> {t('admin.trucksAdmin.viewDetails')}
                     </a>
                   </div>
                 </div>

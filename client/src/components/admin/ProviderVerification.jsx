@@ -78,10 +78,10 @@ const ProviderVerification = () => {
         setProviderDetails(null);
       }
       
-      alert(`Provider ${status} successfully!`);
+      alert(t('admin.providers.successfully' + (status === 'approved' ? 'Approved' : 'Rejected')));
     } catch (error) {
       console.error('Error verifying provider:', error);
-      alert('Error updating provider status');
+      alert(t('admin.providers.errorVerifying'));
     } finally {
       setVerifying(prev => ({ ...prev, [providerId]: false }));
     }
@@ -92,7 +92,7 @@ const ProviderVerification = () => {
       return (
         <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200">
           <Check className="w-3 h-3 mr-1" />
-          Verified
+          {t('admin.providers.verified')}
         </span>
       );
     }
@@ -100,7 +100,7 @@ const ProviderVerification = () => {
     return (
       <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200">
         <Clock className="w-3 h-3 mr-1" />
-        Pending
+        {t('bookings.pendingReview')}
       </span>
     );
   };
@@ -121,9 +121,9 @@ const ProviderVerification = () => {
           <div className="flex items-center">
             <Building className="h-8 w-8 text-primary-600 mr-3" />
             <div>
-              <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">Provider Verification</h1>
+              <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">{t('admin.providers.verification')}</h1>
               <p className="mt-2 text-gray-600 dark:text-gray-400">
-                Review and verify provider applications
+                {t('admin.providers.viewAndVerify')}
               </p>
             </div>
           </div>
@@ -140,7 +140,7 @@ const ProviderVerification = () => {
                 <div className="ml-5 w-0 flex-1">
                   <dl>
                     <dt className="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">
-                      Pending Verification
+                      {t('admin.providers.pendingVerification')}
                     </dt>
                     <dd className="text-lg font-medium text-gray-900 dark:text-gray-100">
                       {providers.filter(p => !p.is_verified).length}
@@ -160,7 +160,7 @@ const ProviderVerification = () => {
                 <div className="ml-5 w-0 flex-1">
                   <dl>
                     <dt className="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">
-                      Verified Providers
+                      {t('admin.providers.verified')} {t('admin.providers.title')}
                     </dt>
                     <dd className="text-lg font-medium text-gray-900 dark:text-gray-100">
                       {providers.filter(p => p.is_verified).length}
@@ -180,7 +180,7 @@ const ProviderVerification = () => {
                 <div className="ml-5 w-0 flex-1">
                   <dl>
                     <dt className="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">
-                      Total Providers
+                      {t('bookings.total')} {t('admin.providers.title')}
                     </dt>
                     <dd className="text-lg font-medium text-gray-900 dark:text-gray-100">
                       {providers.length}
@@ -196,7 +196,7 @@ const ProviderVerification = () => {
         <div className="bg-white dark:bg-gray-800 shadow overflow-hidden sm:rounded-md">
           <div className="px-4 py-5 sm:px-6 border-b border-gray-200 dark:border-gray-700">
             <h3 className="text-lg leading-6 font-medium text-gray-900 dark:text-gray-100">
-              Provider Applications
+              {t('admin.providers.title')}
             </h3>
             <p className="mt-1 max-w-2xl text-sm text-gray-500 dark:text-gray-400">
               Review provider details and approve or reject applications

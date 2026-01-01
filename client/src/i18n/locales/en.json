@@ -693,12 +693,28 @@
   },
   "admin": {
     "title": "Administration",
-    "dashboard": "Admin Dashboard",
+    "dashboard": {
+      "title": "Dashboard",
+      "analytics": "Analytics",
+      "overview": "Overview"
+    },
     "users": "Users",
     "bookings": "Bookings",
     "trucks": "Trucks",
-    "providers": "Providers",
-    "documents": "Documents",
+    "providers": {
+      "title": "Providers",
+      "verified": "Verified",
+      "unverified": "Unverified",
+      "viewDetails": "View Details",
+      "approve": "Approve",
+      "reject": "Reject"
+    },
+    "documents": {
+      "title": "Documents",
+      "approved": "Approved",
+      "rejected": "Rejected",
+      "viewDocument": "View Document"
+    },
     "analytics": {
       "title": "Analytics & Reports",
       "tabs": {
@@ -853,28 +869,9 @@
       "other": "Other"
     },
     "trucksAdmin": {
-      "title": "Truck Management",
-      "subtitle": "Manage all trucks on the platform",
-      "total": "Total",
-      "available": "Available",
-      "booked": "Booked",
-      "maintenance": "Maintenance",
-      "inactive": "Inactive",
-      "truckId": "Truck ID",
-      "provider": "Provider",
-      "type": "Type",
-      "capacity": "Capacity",
-      "pricePerDay": "Price/Day",
-      "pricePerKm": "Price/KM",
-      "status": "Status",
-      "actions": "Actions",
-      "viewDetails": "View Details",
-      "editTruck": "Edit Truck",
-      "deactivate": "Deactivate",
-      "activate": "Activate",
-      "filterByStatus": "Filter by status",
-      "all": "All",
-      "tons": "tons"
+      "title": "Trucks",
+      "refresh": "Refresh",
+      "viewDetails": "View Details"
     }
   },
   "analytics": {

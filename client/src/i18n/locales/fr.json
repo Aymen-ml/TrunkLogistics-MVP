@@ -693,12 +693,28 @@
   },
   "admin": {
     "title": "Administration",
-    "dashboard": "Tableau de Bord Admin",
+    "dashboard": {
+      "title": "Tableau de bord",
+      "analytics": "Analytique",
+      "overview": "Aperçu"
+    },
     "users": "Utilisateurs",
     "bookings": "Réservations",
     "trucks": "Camions",
-    "providers": "Prestataires",
-    "documents": "Documents",
+    "providers": {
+      "title": "Fournisseurs",
+      "verified": "Vérifié",
+      "unverified": "Non vérifié",
+      "viewDetails": "Voir les détails",
+      "approve": "Approuver",
+      "reject": "Rejeter"
+    },
+    "documents": {
+      "title": "Documents",
+      "approved": "Approuvé",
+      "rejected": "Rejeté",
+      "viewDocument": "Voir le document"
+    },
     "analytics": {
       "title": "Analyses et Rapports",
       "tabs": {
@@ -853,28 +869,9 @@
       "other": "Autre"
     },
     "trucksAdmin": {
-      "title": "Gestion des Camions",
-      "subtitle": "Gérer tous les camions sur la plateforme",
-      "total": "Total",
-      "available": "Disponibles",
-      "booked": "Réservés",
-      "maintenance": "En Maintenance",
-      "inactive": "Inactifs",
-      "truckId": "ID Camion",
-      "provider": "Prestataire",
-      "type": "Type",
-      "capacity": "Capacité",
-      "pricePerDay": "Prix/Jour",
-      "pricePerKm": "Prix/KM",
-      "status": "Statut",
-      "actions": "Actions",
-      "viewDetails": "Voir les Détails",
-      "editTruck": "Modifier le Camion",
-      "deactivate": "Désactiver",
-      "activate": "Activer",
-      "filterByStatus": "Filtrer par statut",
-      "all": "Tous",
-      "tons": "tonnes"
+      "title": "Camions",
+      "refresh": "Actualiser",
+      "viewDetails": "Voir les détails"
     }
   },
   "analytics": {

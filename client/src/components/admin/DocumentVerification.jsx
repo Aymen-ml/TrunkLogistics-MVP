@@ -256,9 +256,9 @@ const DocumentVerification = () => {
             <div className="flex items-center">
               <FileText className="h-8 w-8 text-primary-600 mr-3" />
               <div>
-                <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">Document Verification</h1>
+                <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">{t('admin.documents.verification')}</h1>
                 <p className="mt-2 text-gray-600 dark:text-gray-400">
-                  Review and verify uploaded truck documents
+                  {t('admin.documents.viewAndVerify')}
                 </p>
               </div>
             </div>
@@ -268,14 +268,14 @@ const DocumentVerification = () => {
                 className="inline-flex items-center px-3 py-2 border border-gray-300 dark:border-gray-600 text-sm font-medium rounded-md text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:bg-gray-900"
               >
                 <RefreshCw className="h-4 w-4 mr-2" />
-                Refresh
+                {t('admin.documents.refresh')}
               </button>
               <button
                 onClick={() => setShowFilters(!showFilters)}
                 className="inline-flex items-center px-3 py-2 border border-gray-300 dark:border-gray-600 text-sm font-medium rounded-md text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:bg-gray-900"
               >
                 <Filter className="h-4 w-4 mr-2" />
-                {showFilters ? 'Hide Filters' : 'Show Filters'}
+                {showFilters ? t('admin.documents.hideFilters') : t('admin.documents.showFilters')}
               </button>
             </div>
           </div>
@@ -291,7 +291,7 @@ const DocumentVerification = () => {
                 </div>
                 <div className="ml-3 w-0 flex-1">
                   <dl>
-                    <dt className="text-xs font-medium text-gray-500 dark:text-gray-400 truncate">Total Documents</dt>
+                    <dt className="text-xs font-medium text-gray-500 dark:text-gray-400 truncate">{t('admin.documents.totalDocuments')}</dt>
                     <dd className="text-lg font-medium text-gray-900 dark:text-gray-100">{stats.total_documents}</dd>
                   </dl>
                 </div>
