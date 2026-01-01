@@ -533,6 +533,8 @@
     "serviceType": "Service Type",
     "transport": "Transport",
     "rental": "Rental",
+    "transportation": "Transportation",
+    "equipmentRental": "Equipment Rental",
     "createdDate": "Created Date",
     "routeInfo": "Route Information",
     "pickup": "Pickup",
@@ -729,7 +731,8 @@
       "keyMetrics": "Key Metrics",
       "averageBookingValue": "Average Booking Value",
       "completedBookings": "Completed Bookings",
-      "revenuePerBooking": "Revenue per Booking"
+      "revenuePerBooking": "Revenue per Booking",
+      "viewAndFilter": "View and filter analytics data"
     },
     "users": "Users",
     "bookings": "Bookings",

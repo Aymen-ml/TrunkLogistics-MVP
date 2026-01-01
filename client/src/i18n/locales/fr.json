@@ -533,6 +533,8 @@
     "serviceType": "Type de Service",
     "transport": "Transport",
     "rental": "Location",
+    "transportation": "Transport",
+    "equipmentRental": "Location d'Équipement",
     "createdDate": "Date de Création",
     "routeInfo": "Informations sur l'Itinéraire",
     "pickup": "Ramassage",
@@ -729,7 +731,8 @@
       "keyMetrics": "Métriques Clés",
       "averageBookingValue": "Valeur Moyenne des Réservations",
       "completedBookings": "Réservations Complétées",
-      "revenuePerBooking": "Revenu par Réservation"
+      "revenuePerBooking": "Revenu par Réservation",
+      "viewAndFilter": "Afficher et filtrer les données analytiques"
     },
     "users": "Utilisateurs",
     "bookings": "Réservations",
