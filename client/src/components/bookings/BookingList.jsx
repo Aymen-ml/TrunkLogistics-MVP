@@ -143,15 +143,9 @@ const BookingList = () => {
   };
 
   const getStatusLabel = (status, serviceType) => {
-    const labels = {
-      pending_review: 'Pending Review',
-      approved: 'Approved',
-      in_transit: 'In Transit',
-      active: serviceType === 'rental' ? 'Equipment In Use' : 'Active',
-      completed: 'Completed',
-      cancelled: 'Cancelled'
-    };
-    return labels[status] || status;
+    const statusKey = status === 'active' && serviceType === 'rental' ? 'equipmentInUse' : status.replace('_', '');
+    const translationKey = `bookings.${statusKey === 'pendingreview' ? 'pendingReview' : statusKey === 'intransit' ? 'inTransit' : statusKey}`;
+    return t(translationKey);
   };
 
   if (loading) {
