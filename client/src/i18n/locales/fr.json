@@ -732,7 +732,14 @@
       "averageBookingValue": "Valeur Moyenne des Réservations",
       "completedBookings": "Réservations Complétées",
       "revenuePerBooking": "Revenu par Réservation",
-      "viewAndFilter": "Afficher et filtrer les données analytiques"
+      "viewAndFilter": "Afficher et filtrer les données analytiques",
+      "timePeriod": "Période",
+      "last7Days": "7 derniers jours",
+      "last30Days": "30 derniers jours",
+      "last90Days": "90 derniers jours",
+      "from": "Du",
+      "to": "Au",
+      "backToBookings": "Retour aux Réservations"
     },
     "users": "Utilisateurs",
     "bookings": "Réservations",

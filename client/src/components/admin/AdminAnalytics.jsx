@@ -251,7 +251,7 @@ const AdminAnalytics = () => {
             to="/admin/bookings" 
             className="mt-3 sm:mt-0 text-sm text-primary-600 hover:text-accent-600 transition-colors font-medium"
           >
-            ← Back to Bookings
+            ← {t('admin.dashboard.backToBookings')}
           </Link>
         </div>
 
@@ -280,23 +280,23 @@ const AdminAnalytics = () => {
             <div className="flex-1 min-w-[120px]">
               <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">
                 <Calendar className="h-3 w-3 inline mr-1" />
-                Time Period
+                {t('admin.dashboard.timePeriod')}
               </label>
               <select
                 className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded-md text-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                 value={dateRange.preset}
                 onChange={(e) => setDateRange(prev => ({ ...prev, preset: e.target.value }))}
               >
-                <option value="7d">Last 7 days</option>
-                <option value="30d">Last 30 days</option>
-                <option value="90d">Last 90 days</option>
+                <option value="7d">{t('admin.dashboard.last7Days')}</option>
+                <option value="30d">{t('admin.dashboard.last30Days')}</option>
+                <option value="90d">{t('admin.dashboard.last90Days')}</option>
                 <option value="custom">{t('admin.dashboard.customRange')}</option>
               </select>
             </div>
             {dateRange.preset === 'custom' && (
               <>
                 <div className="flex-1 min-w-[120px]">
-                  <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">From</label>
+                  <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">{t('admin.dashboard.from')}</label>
                   <input 
                     type="date" 
                     className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded-md text-sm focus:ring-2 focus:ring-primary-500"
@@ -305,7 +305,7 @@ const AdminAnalytics = () => {
                   />
                 </div>
                 <div className="flex-1 min-w-[120px]">
-                  <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">To</label>
+                  <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">{t('admin.dashboard.to')}</label>
                   <input 
                     type="date" 
                     className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded-md text-sm focus:ring-2 focus:ring-primary-500"

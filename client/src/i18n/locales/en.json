@@ -732,7 +732,14 @@
       "averageBookingValue": "Average Booking Value",
       "completedBookings": "Completed Bookings",
       "revenuePerBooking": "Revenue per Booking",
-      "viewAndFilter": "View and filter analytics data"
+      "viewAndFilter": "View and filter analytics data",
+      "timePeriod": "Time Period",
+      "last7Days": "Last 7 days",
+      "last30Days": "Last 30 days",
+      "last90Days": "Last 90 days",
+      "from": "From",
+      "to": "To",
+      "backToBookings": "Back to Bookings"
     },
     "users": "Users",
     "bookings": "Bookings",
