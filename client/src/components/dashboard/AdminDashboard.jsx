@@ -246,8 +246,8 @@ const AdminDashboard = () => {
                   <Users className="h-8 w-8 text-primary-600 group-hover:text-accent-500 transition-colors" />
                 </div>
                 <div className="ml-4">
-                  <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">Manage Users</h3>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500">View and manage all users</p>
+                  <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">{t('dashboard.manageUsers')}</h3>
+                  <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500">{t('dashboard.manageUsersDesc')}</p>
                 </div>
               </div>
             </Link>
@@ -262,7 +262,7 @@ const AdminDashboard = () => {
                 </div>
                 <div className="ml-4">
                   <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">{t('dashboard.analytics')}</h3>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500">Trends, funnels, breakdowns</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500">{t('dashboard.trendsAndFunnels')}</p>
                 </div>
               </div>
             </Link>
@@ -276,8 +276,8 @@ const AdminDashboard = () => {
                   <Package className="h-8 w-8 text-green-600 group-hover:text-green-700" />
                 </div>
                 <div className="ml-4">
-                  <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">Bookings</h3>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500">Review and approve bookings</p>
+                  <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">{t('dashboard.bookings')}</h3>
+                  <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500">{t('dashboard.reviewBookings')}</p>
                 </div>
               </div>
             </Link>
@@ -291,8 +291,8 @@ const AdminDashboard = () => {
                   <FileText className="h-8 w-8 text-purple-600 group-hover:text-purple-700" />
                 </div>
                 <div className="ml-4">
-                  <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">Document Verification</h3>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500">Review and verify documents</p>
+                  <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">{t('dashboard.documentVerification')}</h3>
+                  <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500">{t('dashboard.reviewDocuments')}</p>
                 </div>
               </div>
             </Link>
@@ -306,8 +306,8 @@ const AdminDashboard = () => {
                   <Building className="h-8 w-8 text-orange-600 group-hover:text-orange-700" />
                 </div>
                 <div className="ml-4">
-                  <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">Provider Verification</h3>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500">Review and verify providers</p>
+                  <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">{t('dashboard.providerVerification')}</h3>
+                  <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500">{t('dashboard.reviewProviders')}</p>
                 </div>
               </div>
             </Link>
@@ -326,13 +326,13 @@ const AdminDashboard = () => {
                 <TrendingUp className="h-5 w-5 opacity-60" />
               </div>
               <dt className="text-sm font-medium opacity-90 mb-1">
-                Total Users
+                {t('dashboard.totalUsers')}
               </dt>
               <dd className="text-3xl font-bold">
                 {stats.totalUsers}
               </dd>
               <div className="mt-2 text-xs opacity-75">
-                {stats.totalCustomers} customers • {stats.totalProviders} providers
+                {stats.totalCustomers} {t('dashboard.customers')} • {stats.totalProviders} {t('dashboard.providers')}
               </div>
             </div>
           </div>
@@ -347,13 +347,13 @@ const AdminDashboard = () => {
                 <Activity className="h-5 w-5 opacity-60" />
               </div>
               <dt className="text-sm font-medium opacity-90 mb-1">
-                Total Bookings
+                {t('dashboard.totalBookings')}
               </dt>
               <dd className="text-3xl font-bold">
                 {stats.totalBookings}
               </dd>
               <div className="mt-2 text-xs opacity-75">
-                {stats.pendingBookings > 0 ? `${stats.pendingBookings} pending review` : 'All up to date'}
+                {stats.pendingBookings > 0 ? `${stats.pendingBookings} ${t('dashboard.pendingReview')}` : t('dashboard.allUpToDate')}
               </div>
             </div>
           </div>
@@ -368,13 +368,13 @@ const AdminDashboard = () => {
                 <TrendingUp className="h-5 w-5 opacity-60" />
               </div>
               <dt className="text-sm font-medium opacity-90 mb-1">
-                Total Revenue
+                {t('dashboard.totalRevenue')}
               </dt>
               <dd className="text-3xl font-bold">
                 {formatCurrency(stats.totalRevenue)}
               </dd>
               <div className="mt-2 text-xs opacity-75">
-                {formatCurrency(stats.monthlyRevenue)} this month
+                {formatCurrency(stats.monthlyRevenue)} {t('dashboard.thisMonth')}
               </div>
             </div>
           </div>
@@ -389,13 +389,13 @@ const AdminDashboard = () => {
                 <Zap className="h-5 w-5 opacity-60" />
               </div>
               <dt className="text-sm font-medium opacity-90 mb-1">
-                Total Fleet
+                {t('dashboard.totalFleet')}
               </dt>
               <dd className="text-3xl font-bold">
                 {stats.totalTrucks}
               </dd>
               <div className="mt-2 text-xs opacity-75">
-                {stats.activeTrucks} active vehicles
+                {stats.activeTrucks} {t('dashboard.activeVehicles')}
               </div>
             </div>
           </div>
@@ -405,49 +405,49 @@ const AdminDashboard = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 border border-gray-200 dark:border-gray-700">
             <div className="flex items-center justify-between mb-3">
-              <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400">Transport Bookings</h3>
+              <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400">{t('dashboard.transportBookings')}</h3>
               <Truck className="h-5 w-5 text-primary-600" />
             </div>
             <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">{stats.transportBookings}</p>
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Logistics services</p>
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{t('dashboard.logisticsServices')}</p>
             <div className="mt-3 pt-3 border-t border-gray-200 dark:border-gray-700">
-              <p className="text-xs text-gray-500 dark:text-gray-400">Vehicles: {stats.logisticsTrucks || 0}</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400">{t('dashboard.vehicles')}: {stats.logisticsTrucks || 0}</p>
             </div>
           </div>
 
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 border border-gray-200 dark:border-gray-700">
             <div className="flex items-center justify-between mb-3">
-              <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400">Rental Bookings</h3>
+              <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400">{t('dashboard.rentalBookings')}</h3>
               <Building className="h-5 w-5 text-orange-600" />
             </div>
             <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">{stats.rentalBookings}</p>
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Equipment rentals</p>
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{t('dashboard.equipmentRentals')}</p>
             <div className="mt-3 pt-3 border-t border-gray-200 dark:border-gray-700">
-              <p className="text-xs text-gray-500 dark:text-gray-400">Equipment: {stats.rentalTrucks || 0}</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400">{t('dashboard.equipment')}: {stats.rentalTrucks || 0}</p>
             </div>
           </div>
 
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 border border-gray-200 dark:border-gray-700">
             <div className="flex items-center justify-between mb-3">
-              <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400">Pending Providers</h3>
+              <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400">{t('dashboard.pendingProviders')}</h3>
               <Shield className="h-5 w-5 text-yellow-600" />
             </div>
             <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">{stats.pendingProviders}</p>
-            <p className="text-xs text-yellow-600 mt-1">Need verification</p>
+            <p className="text-xs text-yellow-600 mt-1">{t('dashboard.needVerification')}</p>
             <div className="mt-3 pt-3 border-t border-gray-200 dark:border-gray-700">
               <Link to="/admin/providers" className="text-xs text-primary-600 hover:text-primary-700 flex items-center gap-1">
-                Review now <ArrowRight className="h-3 w-3" />
+                {t('dashboard.reviewNow')} <ArrowRight className="h-3 w-3" />
               </Link>
             </div>
           </div>
 
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 border border-gray-200 dark:border-gray-700">
             <div className="flex items-center justify-between mb-3">
-              <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400">Platform Health</h3>
+              <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400">{t('dashboard.platformHealth')}</h3>
               <Activity className="h-5 w-5 text-green-600" />
             </div>
-            <p className="text-2xl font-bold text-green-600">Excellent</p>
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">All systems operational</p>
+            <p className="text-2xl font-bold text-green-600">{t('dashboard.excellent')}</p>
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{t('dashboard.allSystemsOperational')}</p>
             <div className="mt-3 pt-3 border-t border-gray-200 dark:border-gray-700">
               <Link to="/admin/analytics" className="text-xs text-primary-600 hover:text-primary-700 flex items-center gap-1">
                 View analytics <ArrowRight className="h-3 w-3" />
