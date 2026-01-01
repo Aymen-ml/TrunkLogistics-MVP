@@ -527,7 +527,13 @@
     "reviewNow": "Examiner maintenant",
     "platformHealth": "Santé de la Plateforme",
     "excellent": "Excellent",
-    "allSystemsOperational": "Tous les systèmes opérationnels"
+    "allSystemsOperational": "Tous les systèmes opérationnels",
+    "pendingActionsRequired": "Actions en Attente Requises",
+    "youHave": "Vous avez",
+    "itemsRequiringAttention": "éléments nécessitant votre attention",
+    "pendingActions": "Actions en Attente",
+    "allCaughtUp": "Tout est à jour !",
+    "noPendingActions": "Aucune action en attente ne nécessite votre attention."
   },
   "bookings": {
     "myBookings": "Mes Réservations",

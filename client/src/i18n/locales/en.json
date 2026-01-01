@@ -527,7 +527,13 @@
     "reviewNow": "Review now",
     "platformHealth": "Platform Health",
     "excellent": "Excellent",
-    "allSystemsOperational": "All systems operational"
+    "allSystemsOperational": "All systems operational",
+    "pendingActionsRequired": "Pending Actions Required",
+    "youHave": "You have",
+    "itemsRequiringAttention": "items requiring attention",
+    "pendingActions": "Pending Actions",
+    "allCaughtUp": "All caught up!",
+    "noPendingActions": "No pending actions require your attention."
   },
   "bookings": {
     "myBookings": "My Bookings",

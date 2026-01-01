@@ -213,10 +213,10 @@ const AdminDashboard = () => {
               <AlertTriangle className="h-5 w-5 text-yellow-400" />
               <div className="ml-3">
                 <h3 className="text-sm font-medium text-yellow-800 dark:text-yellow-200">
-                  Pending Actions Required
+                  {t('dashboard.pendingActionsRequired')}
                 </h3>
                 <div className="mt-2 text-sm text-yellow-700">
-                  <p>You have {pendingItems.reduce((sum, item) => sum + item.count, 0)} items requiring attention.</p>
+                  <p>{t('dashboard.youHave')} {pendingItems.reduce((sum, item) => sum + item.count, 0)} {t('dashboard.itemsRequiringAttention')}</p>
                 </div>
                 <div className="mt-4 flex flex-wrap gap-2">
                   {pendingItems.map((item, index) => (
@@ -514,15 +514,15 @@ const AdminDashboard = () => {
           {/* Pending Items */}
           <div className="bg-white dark:bg-gray-800 shadow-sm rounded-lg">
             <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
-              <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">Pending Actions</h3>
+              <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">{t('dashboard.pendingActions')}</h3>
             </div>
             <div className="divide-y divide-gray-200 dark:divide-gray-700">
               {pendingItems.length === 0 ? (
                 <div className="px-6 py-8 text-center">
                   <CheckCircle className="mx-auto h-12 w-12 text-green-400" />
-                  <h3 className="mt-2 text-sm font-medium text-gray-900 dark:text-gray-100">All caught up!</h3>
+                  <h3 className="mt-2 text-sm font-medium text-gray-900 dark:text-gray-100">{t('dashboard.allCaughtUp')}</h3>
                   <p className="mt-1 text-sm text-gray-500 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500">
-                    No pending actions require your attention.
+                    {t('dashboard.noPendingActions')}
                   </p>
                 </div>
               ) : (
