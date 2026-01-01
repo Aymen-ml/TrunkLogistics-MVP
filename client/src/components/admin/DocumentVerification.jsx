@@ -503,7 +503,7 @@ const DocumentVerification = () => {
                   onClick={clearFilters}
                   className="px-4 py-2 border border-gray-300 dark:border-gray-600 text-sm font-medium rounded-md text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:bg-gray-900"
                 >
-                  Clear Filters
+                  {t('admin.documents.clearFilters')}
                 </button>
               </div>
             </div>

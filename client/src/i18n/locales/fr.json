@@ -828,7 +828,17 @@
       "tableHeaderUploaded": "Téléchargé",
       "tableHeaderActions": "Actions",
       "unnamedDocument": "Document Sans Nom",
-      "unknownSize": "Taille inconnue"
+      "unknownSize": "Taille inconnue",
+      "allStatuses": "Tous les Statuts",
+      "approved": "Approuvé",
+      "allServices": "Tous les Services",
+      "documentTypeLabel": "Type de Document",
+      "allTypes": "Tous les Types",
+      "providerLabel": "Fournisseur",
+      "allProviders": "Tous les Fournisseurs",
+      "truckLabel": "Camion",
+      "allTrucks": "Tous les Camions",
+      "clearFilters": "Effacer les Filtres"
     },
     "analytics": {
       "title": "Analyses et Rapports",
@@ -985,17 +995,7 @@
       "insurance": "Assurance",
       "driverLicense": "Permis de Conduire",
       "vehicleRegistration": "Immatriculation du Véhicule",
-      "other": "Autre",
-      "allStatuses": "Tous les Statuts",
-      "approved": "Approuvé",
-      "serviceType": "Type de Service",
-      "allServices": "Tous les Services",
-      "documentTypeLabel": "Type de Document",
-      "allTypes": "Tous les Types",
-      "providerLabel": "Fournisseur",
-      "allProviders": "Tous les Fournisseurs",
-      "truckLabel": "Camion",
-      "allTrucks": "Tous les Camions"
+      "other": "Autre"
     },
     "trucksAdmin": {
       "title": "Camions",

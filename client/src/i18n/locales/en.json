@@ -828,7 +828,17 @@
       "tableHeaderUploaded": "Uploaded",
       "tableHeaderActions": "Actions",
       "unnamedDocument": "Unnamed Document",
-      "unknownSize": "Unknown size"
+      "unknownSize": "Unknown size",
+      "allStatuses": "All Statuses",
+      "approved": "Approved",
+      "allServices": "All Services",
+      "documentTypeLabel": "Document Type",
+      "allTypes": "All Types",
+      "providerLabel": "Provider",
+      "allProviders": "All Providers",
+      "truckLabel": "Truck",
+      "allTrucks": "All Trucks",
+      "clearFilters": "Clear Filters"
     },
     "analytics": {
       "title": "Analytics & Reports",
@@ -989,17 +999,7 @@
       "insurance": "Insurance",
       "driverLicense": "Driver License",
       "vehicleRegistration": "Vehicle Registration",
-      "other": "Other",
-      "allStatuses": "All Statuses",
-      "approved": "Approved",
-      "serviceType": "Service Type",
-      "allServices": "All Services",
-      "documentTypeLabel": "Document Type",
-      "allTypes": "All Types",
-      "providerLabel": "Provider",
-      "allProviders": "All Providers",
-      "truckLabel": "Truck",
-      "allTrucks": "All Trucks"
+      "other": "Other"
     },
     "trucksAdmin": {
       "title": "Trucks",
