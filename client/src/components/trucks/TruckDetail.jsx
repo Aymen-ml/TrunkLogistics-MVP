@@ -118,7 +118,7 @@ const TruckDetail = () => {
   };
 
   const deleteTruck = async () => {
-    if (!window.confirm('Are you sure you want to delete this truck?')) {
+    if (!window.confirm(t('trucks.deleteConfirm'))) {
       return;
     }
 
@@ -312,18 +312,18 @@ const TruckDetail = () => {
                 </div>
                 <div className="ml-3">
                   <h3 className="text-sm font-medium text-orange-800">
-                    Document Verification Required
+                    {t('trucks.documentVerificationRequired')}
                   </h3>
                   <div className="mt-2 text-sm text-orange-700">
-                    <p>This truck is not available for viewing.</p>
+                    <p>{t('trucks.truckNotAvailable')}</p>
                     <p className="mt-1">
                       {error.details?.pendingDocuments 
-                        ? `${error.details.pendingDocuments} document(s) are still pending admin verification.`
-                        : 'All truck documents must be verified by admin before customers can view the truck.'
+                        ? `${error.details.pendingDocuments} ${t('trucks.pendingDocsMessage')}`
+                        : t('trucks.allDocsVerified')
                       }
                     </p>
                     <p className="mt-1 font-medium">
-                      Only trucks with ALL documents verified are visible to customers.
+                      {t('trucks.onlyVerifiedVisible')}
                     </p>
                   </div>
                 </div>
@@ -351,7 +351,7 @@ const TruckDetail = () => {
             className="mt-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-accent-500 hover:bg-accent-600 transition-colors"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
-            Back to {user?.role === 'customer' ? 'Search' : 'Trucks'}
+            {user?.role === 'customer' ? t('trucks.backToSearch') : t('trucks.backToTrucks')}
           </Link>
         </div>
       </div>
@@ -377,7 +377,7 @@ const TruckDetail = () => {
             className="inline-flex items-center text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:text-gray-200 mb-4"
           >
             <ArrowLeft className="h-4 w-4 mr-1" />
-            Back to {user?.role === 'customer' ? 'Search' : user?.role === 'admin' ? 'Admin Trucks' : 'Trucks'}
+            {user?.role === 'customer' ? t('trucks.backToSearch') : user?.role === 'admin' ? t('trucks.backToAdminTrucks') : t('trucks.backToTrucks')}
           </button>
           
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
@@ -393,7 +393,7 @@ const TruckDetail = () => {
                     {truck.license_plate}
                   </h1>
                   <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(truck.status)}`}>
-                    {truck.status.charAt(0).toUpperCase() + truck.status.slice(1)}
+                    {t(`trucks.${truck.status}Status`)}
                   </span>
                 </div>
                 <p className="mt-2 text-sm sm:text-base text-gray-600 dark:text-gray-400">
@@ -407,7 +407,7 @@ const TruckDetail = () => {
                       </div>
                       <div className="ml-3">
                         <p className="text-sm text-yellow-700">
-                          This truck is currently {truck.status}. It is not available for new bookings.
+                          {t('trucks.truckCurrentlyStatus')} {t(`trucks.${truck.status}Status`).toLowerCase()}. {t('trucks.notAvailableBookings')}
                         </p>
                       </div>
                     </div>
@@ -424,14 +424,14 @@ const TruckDetail = () => {
                   className="inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:bg-gray-900"
                 >
                   <Edit className="h-4 w-4 mr-2" />
-                  Edit
+                  {t('trucks.editButton')}
                 </Link>
                 <button
                   onClick={deleteTruck}
                   className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700"
                 >
                   <Trash2 className="h-4 w-4 mr-2" />
-                  Delete
+                  {t('trucks.deleteButton')}
                 </button>
               </div>
             )}
@@ -445,7 +445,7 @@ const TruckDetail = () => {
                     className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700"
                   >
                     <Eye className="h-4 w-4 mr-2" />
-                    View Your Booking
+                    {t('trucks.viewYourBooking')}
                   </Link>
                 ) : (
                   <Link
@@ -809,7 +809,7 @@ const TruckDetail = () => {
                       <div className="aspect-square rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-700">
                         <img
                           src={imageUrl}
-                          alt={`Truck image ${index + 1}`}
+                          alt={`${t('trucks.truckImageAlt')} ${index + 1}`}
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
                           onError={(e) => {
                             console.error('Image load error:', {
@@ -830,7 +830,7 @@ const TruckDetail = () => {
                             window.open(imageUrl, '_blank', 'noopener,noreferrer');
                           }}
                           className="opacity-0 group-hover:opacity-100 bg-white dark:bg-gray-800 bg-opacity-90 hover:bg-opacity-100 rounded-full p-2 transition-all duration-200"
-                          title="View full size"
+                          title={t('trucks.viewFullSize')}
                         >
                           <Eye className="h-4 w-4 text-gray-700 dark:text-gray-200" />
                         </button>
@@ -922,7 +922,7 @@ const TruckDetail = () => {
                               {doc.file_size && ` • ${(doc.file_size / 1024).toFixed(1)} KB`}
                             </p>
                             <p className="text-xs text-gray-400 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500">
-                              Uploaded: {new Date(doc.uploaded_at).toLocaleDateString()}
+                              {t('trucks.uploadedLabel')} {new Date(doc.uploaded_at).toLocaleDateString()}
                             </p>
                           </div>
                         </div>
@@ -976,7 +976,7 @@ const TruckDetail = () => {
                             className="inline-flex items-center px-3 py-2 border border-gray-300 dark:border-gray-600 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-500"
                           >
                             <Eye className="h-4 w-4 mr-1" />
-                            View
+                            {t('trucks.viewButton')}
                           </button>
                         </div>
                       </div>
@@ -996,7 +996,7 @@ const TruckDetail = () => {
                 <Package className="h-8 w-8 text-primary-600" />
               </div>
               <div className="ml-4">
-                <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Completed Bookings</p>
+                <p className="text-sm font-medium text-gray-500 dark:text-gray-400">{t('trucks.completedBookings')}</p>
                 <p className="text-2xl font-semibold text-gray-900 dark:text-gray-100">{truckStats.completedBookings}</p>
               </div>
             </div>
@@ -1008,7 +1008,7 @@ const TruckDetail = () => {
                 <DollarSign className="h-8 w-8 text-green-600" />
               </div>
               <div className="ml-4">
-                <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Total Revenue</p>
+                <p className="text-sm font-medium text-gray-500 dark:text-gray-400">{t('trucks.totalRevenue')}</p>
                 <p className="text-2xl font-semibold text-gray-900 dark:text-gray-100">{formatCurrency(truckStats.totalRevenue)}</p>
               </div>
             </div>
@@ -1020,7 +1020,7 @@ const TruckDetail = () => {
                 <Calendar className="h-8 w-8 text-purple-600" />
               </div>
               <div className="ml-4">
-                <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Days Active</p>
+                <p className="text-sm font-medium text-gray-500 dark:text-gray-400">{t('trucks.daysActive')}</p>
                 <p className="text-2xl font-semibold text-gray-900 dark:text-gray-100">
                   {Math.floor((new Date() - new Date(truck.created_at)) / (1000 * 60 * 60 * 24))}
                 </p>
