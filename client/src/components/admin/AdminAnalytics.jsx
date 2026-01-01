@@ -694,26 +694,29 @@ const StatusCard = ({ label, value, icon: Icon, color }) => (
   </div>
 );
 
-const ServiceCard = ({ title, count, revenue, percentage, color }) => (
+const ServiceCard = ({ title, count, revenue, percentage, color }) => {
+  const { t } = useTranslation();
+  return (
   <div className={`bg-gradient-to-br ${color} text-white rounded-lg shadow-lg p-6`}>
     <h3 className="text-lg font-semibold mb-4">{title}</h3>
     <div className="space-y-3">
       <div>
-        <div className="text-sm opacity-90">Bookings</div>
+        <div className="text-sm opacity-90">{t('admin.dashboard.bookingsLabel')}</div>
         <div className="text-3xl font-bold">{count}</div>
       </div>
       <div>
-        <div className="text-sm opacity-90">Revenue</div>
+        <div className="text-sm opacity-90">{t('admin.dashboard.revenueLabel')}</div>
         <div className="text-2xl font-bold">
           {revenue.toLocaleString('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0 })}
         </div>
       </div>
       <div className="pt-2 border-t border-white border-opacity-20">
-        <div className="text-sm opacity-90">{percentage}% of total bookings</div>
+        <div className="text-sm opacity-90">{percentage}% {t('admin.dashboard.ofTotalBookings')}</div>
       </div>
     </div>
   </div>
 );
+};
 
 const FunnelBar = ({ label, value, max, percentage }) => (
   <div>

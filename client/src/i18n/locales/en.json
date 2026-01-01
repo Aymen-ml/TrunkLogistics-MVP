@@ -739,7 +739,10 @@
       "last90Days": "Last 90 days",
       "from": "From",
       "to": "To",
-      "backToBookings": "Back to Bookings"
+      "backToBookings": "Back to Bookings",
+      "bookingsLabel": "Bookings",
+      "revenueLabel": "Revenue",
+      "ofTotalBookings": "of total bookings"
     },
     "users": "Users",
     "bookings": "Bookings",
@@ -986,7 +989,17 @@
       "insurance": "Insurance",
       "driverLicense": "Driver License",
       "vehicleRegistration": "Vehicle Registration",
-      "other": "Other"
+      "other": "Other",
+      "allStatuses": "All Statuses",
+      "approved": "Approved",
+      "serviceType": "Service Type",
+      "allServices": "All Services",
+      "documentTypeLabel": "Document Type",
+      "allTypes": "All Types",
+      "providerLabel": "Provider",
+      "allProviders": "All Providers",
+      "truckLabel": "Truck",
+      "allTrucks": "All Trucks"
     },
     "trucksAdmin": {
       "title": "Trucks",
@@ -999,7 +1012,11 @@
       "statusActive": "Active",
       "statusRented": "Rented",
       "statusMaintenance": "Maintenance",
-      "statusInactive": "Inactive"
+      "statusInactive": "Inactive",
+      "serviceType": "Service Type",
+      "transport": "Transport",
+      "rental": "Rental",
+      "statusLabel": "Status"
     }
   },
   "analytics": {

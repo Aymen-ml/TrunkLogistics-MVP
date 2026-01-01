@@ -739,7 +739,10 @@
       "last90Days": "90 derniers jours",
       "from": "Du",
       "to": "Au",
-      "backToBookings": "Retour aux Réservations"
+      "backToBookings": "Retour aux Réservations",
+      "bookingsLabel": "Réservations",
+      "revenueLabel": "Revenu",
+      "ofTotalBookings": "du total des réservations"
     },
     "users": "Utilisateurs",
     "bookings": "Réservations",
@@ -982,7 +985,17 @@
       "insurance": "Assurance",
       "driverLicense": "Permis de Conduire",
       "vehicleRegistration": "Immatriculation du Véhicule",
-      "other": "Autre"
+      "other": "Autre",
+      "allStatuses": "Tous les Statuts",
+      "approved": "Approuvé",
+      "serviceType": "Type de Service",
+      "allServices": "Tous les Services",
+      "documentTypeLabel": "Type de Document",
+      "allTypes": "Tous les Types",
+      "providerLabel": "Fournisseur",
+      "allProviders": "Tous les Fournisseurs",
+      "truckLabel": "Camion",
+      "allTrucks": "Tous les Camions"
     },
     "trucksAdmin": {
       "title": "Camions",
@@ -995,7 +1008,11 @@
       "statusActive": "Actif",
       "statusRented": "Loué",
       "statusMaintenance": "Maintenance",
-      "statusInactive": "Inactif"
+      "statusInactive": "Inactif",
+      "serviceType": "Type de Service",
+      "transport": "Transport",
+      "rental": "Location",
+      "statusLabel": "Statut"
     }
   },
   "analytics": {

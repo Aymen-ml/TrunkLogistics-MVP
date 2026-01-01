@@ -417,10 +417,10 @@ const DocumentVerification = () => {
                     onChange={(e) => handleFilterChange('status', e.target.value)}
                     className="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-accent-500 focus:border-blue-500"
                   >
-                    <option value="all">All Statuses</option>
-                    <option value="pending">Pending</option>
-                    <option value="approved">Approved</option>
-                    <option value="rejected">Rejected</option>
+                    <option value="all">{t('admin.documents.allStatuses')}</option>
+                    <option value="pending">{t('admin.documents.pending')}</option>
+                    <option value="approved">{t('admin.documents.approved')}</option>
+                    <option value="rejected">{t('admin.documents.rejected')}</option>
                   </select>
                 </div>
 
@@ -443,14 +443,14 @@ const DocumentVerification = () => {
                 {/* Document Type Filter */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
-                    Document Type
+                    {t('admin.documents.documentTypeLabel')}
                   </label>
                   <select
                     value={filters.documentType}
                     onChange={(e) => handleFilterChange('documentType', e.target.value)}
                     className="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-accent-500 focus:border-blue-500"
                   >
-                    <option value="all">All Types</option>
+                    <option value="all">{t('admin.documents.allTypes')}</option>
                     {filterOptions.documentTypes.map(type => (
                       <option key={type} value={type}>
                         {getDocumentTypeLabel(type)}
@@ -462,14 +462,14 @@ const DocumentVerification = () => {
                 {/* Provider Filter */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
-                    Provider
+                    {t('admin.documents.providerLabel')}
                   </label>
                   <select
                     value={filters.providerId}
                     onChange={(e) => handleFilterChange('providerId', e.target.value)}
                     className="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-accent-500 focus:border-blue-500"
                   >
-                    <option value="">All Providers</option>
+                    <option value="">{t('admin.documents.allProviders')}</option>
                     {filterOptions.providers.map(provider => (
                       <option key={provider.id} value={provider.id}>
                         {provider.company_name}
@@ -481,14 +481,14 @@ const DocumentVerification = () => {
                 {/* Truck Filter */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
-                    Truck
+                    {t('admin.documents.truckLabel')}
                   </label>
                   <select
                     value={filters.truckId}
                     onChange={(e) => handleFilterChange('truckId', e.target.value)}
                     className="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-accent-500 focus:border-blue-500"
                   >
-                    <option value="">All Trucks</option>
+                    <option value="">{t('admin.documents.allTrucks')}</option>
                     {filterOptions.trucks.map(truck => (
                       <option key={truck.id} value={truck.id}>
                         {truck.license_plate} - {truck.truck_type} ({truck.company_name})
