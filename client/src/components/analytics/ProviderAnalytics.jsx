@@ -242,7 +242,7 @@ const ProviderAnalytics = () => {
               <div className="flex justify-between items-center mb-6">
                 <div>
                   <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">{t('analytics.overview.revenueTrend')}</h3>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Monthly revenue breakdown</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{t('analytics.common.monthlyBreakdown')}</p>
                 </div>
                 <div className="flex gap-4 text-xs">
                   <div className="flex items-center gap-2">
@@ -313,7 +313,7 @@ const ProviderAnalytics = () => {
             {/* Booking Status Pie Chart */}
             <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border border-gray-200 dark:border-gray-700">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">{t('analytics.overview.bookingStatus')}</h3>
-              <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">Current distribution</p>
+              <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">{t('analytics.common.currentDistribution')}</p>
               <ResponsiveContainer width="100%" height={240}>
                 <PieChart>
                   <Pie
@@ -360,8 +360,8 @@ const ProviderAnalytics = () => {
           {/* Booking Conversion Funnel */}
           <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border border-gray-200 dark:border-gray-700">
             <div className="mb-6">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Booking Conversion Funnel</h3>
-              <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Track your booking pipeline</p>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">{t('analytics.common.bookingConversionFunnel')}</h3>
+              <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{t('analytics.common.trackPipeline')}</p>
             </div>
             <div className="space-y-5">
               {[
@@ -407,13 +407,13 @@ const ProviderAnalytics = () => {
                 <p className="text-2xl font-bold text-green-600 dark:text-green-400">
                   {analytics.bookingConversion.conversionRate}%
                 </p>
-                <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Conversion Rate</p>
+                <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">{t('analytics.common.conversionRate')}</p>
               </div>
               <div className="text-center">
                 <p className="text-2xl font-bold text-blue-600 dark:text-blue-400">
                   {analytics.bookingConversion.approvalRate}%
                 </p>
-                <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Approval Rate</p>
+                <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">{t('analytics.common.approvalRate')}</p>
               </div>
             </div>
           </div>
@@ -478,7 +478,7 @@ const ProviderAnalytics = () => {
           <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border border-gray-200 dark:border-gray-700">
             <div className="mb-6">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">{t('analytics.revenue.revenueByMonth')}</h3>
-              <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Compare transport vs rental performance</p>
+              <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{t('analytics.common.compareServices')}</p>
             </div>
             <ResponsiveContainer width="100%" height={350}>
               <BarChart data={analytics.revenueTrends} barGap={8}>
@@ -537,7 +537,7 @@ const ProviderAnalytics = () => {
           <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-200 dark:border-gray-700">
             <div className="p-6 border-b border-gray-200 dark:border-gray-700">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">{t('analytics.revenue.revenueBreakdown')}</h3>
-              <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Detailed breakdown by month</p>
+              <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{t('analytics.common.detailedBreakdown')}</p>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full">
@@ -1463,7 +1463,7 @@ const ProviderAnalytics = () => {
                     dataKey="actual_bookings" 
                     stroke="#8B5CF6" 
                     strokeWidth={3} 
-                    name="Actual Bookings"
+                    name={t('analytics.common.actualBookings')}
                     dot={{ fill: '#8B5CF6', r: 4 }}
                     activeDot={{ r: 6 }}
                   />
@@ -1474,7 +1474,7 @@ const ProviderAnalytics = () => {
                       stroke="#10B981" 
                       strokeWidth={3} 
                       strokeDasharray="5 5"
-                      name="Predicted Bookings"
+                      name={t('analytics.common.predictedBookings')}
                       dot={{ fill: '#10B981', r: 4 }}
                       activeDot={{ r: 6 }}
                     />
@@ -1486,20 +1486,19 @@ const ProviderAnalytics = () => {
                 <div className="flex items-start gap-3">
                   <Brain className="w-5 h-5 text-blue-600 dark:text-blue-400 mt-0.5" />
                   <div>
-                    <h4 className="font-semibold text-blue-900 dark:text-blue-100 mb-1">AI Forecast Insight</h4>
+                    <h4 className="font-semibold text-blue-900 dark:text-blue-100 mb-1">{t('analytics.common.aiForecastInsight')}</h4>
                     <p className="text-sm text-blue-800 dark:text-blue-300">
                       {predictive.forecast && predictive.forecast.length > 0 ? (
                         <>
-                          Based on your {predictive.historical_trend.length} months of data, your business is <strong className="capitalize">{predictive.trend_direction.toLowerCase()}</strong>.
-                          {predictive.trend_direction === 'Growing' && " Keep up the great work! Consider expanding your fleet to meet increasing demand."}
-                          {predictive.trend_direction === 'Declining' && " Consider marketing campaigns or competitive pricing to boost bookings."}
-                          {predictive.trend_direction === 'Stable' && " Your business is consistent. Focus on customer retention and service quality."}
+                          {t('analytics.common.basedOnData')} {predictive.historical_trend.length} {t('analytics.common.monthsOfData')} <strong className="capitalize">{predictive.trend_direction === 'Growing' ? t('analytics.common.growing') : predictive.trend_direction === 'Declining' ? t('analytics.common.declining') : t('analytics.common.stable')}</strong>.
+                          {predictive.trend_direction === 'Growing' && ' ' + t('analytics.common.growingTip')}
+                          {predictive.trend_direction === 'Declining' && ' ' + t('analytics.common.decliningTip')}
+                          {predictive.trend_direction === 'Stable' && ' ' + t('analytics.common.stableTip')}
                         </>
                       ) : (
                         <>
-                          You currently have <strong>{predictive.historical_trend.length} month{predictive.historical_trend.length !== 1 ? 's' : ''}</strong> of booking data. 
-                          Continue accepting bookings to unlock AI-powered forecasting! With <strong>{Math.max(0, 1 - predictive.historical_trend.length)} more month{Math.max(0, 1 - predictive.historical_trend.length) !== 1 ? 's' : ''}</strong> of data, 
-                          we'll predict your future bookings and revenue with machine learning algorithms.
+                          {t('analytics.common.youCurrentlyHave')} <strong>{predictive.historical_trend.length} {predictive.historical_trend.length !== 1 ? t('analytics.insights.months') : t('analytics.insights.months').slice(0, -1)}</strong> {t('analytics.common.ofBookingData')} 
+                          {t('analytics.common.continueAccepting')} <strong>{Math.max(0, 1 - predictive.historical_trend.length)} {t('analytics.common.moreMonthsNeeded')}{Math.max(0, 1 - predictive.historical_trend.length) !== 1 ? 's' : ''}</strong> {t('analytics.common.ofData')}
                         </>
                       )}
                     </p>

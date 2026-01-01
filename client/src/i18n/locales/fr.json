@@ -1496,6 +1496,33 @@
       "active": "Actif",
       "recent": "Récent",
       "inactive": "Inactif"
+    },
+    "common": {
+      "noData": "Aucune donnée analytique disponible",
+      "monthlyBreakdown": "Répartition mensuelle des revenus",
+      "currentDistribution": "Distribution actuelle",
+      "bookingConversionFunnel": "Entonnoir de Conversion des Réservations",
+      "trackPipeline": "Suivez votre pipeline de réservations",
+      "conversionRate": "Taux de Conversion",
+      "approvalRate": "Taux d'Approbation",
+      "compareServices": "Comparer les performances transport vs location",
+      "detailedBreakdown": "Répartition détaillée par mois",
+      "actualBookings": "Réservations Réelles",
+      "predictedBookings": "Réservations Prédites",
+      "aiForecastInsight": "Prévisions IA",
+      "basedOnData": "Basé sur vos",
+      "monthsOfData": "mois de données, votre entreprise est en",
+      "growing": "Croissance",
+      "declining": "Déclin",
+      "stable": "Stable",
+      "growingTip": "Continuez comme ça ! Envisagez d'élargir votre flotte pour répondre à la demande croissante.",
+      "decliningTip": "Envisagez des campagnes marketing ou une tarification compétitive pour augmenter les réservations.",
+      "stableTip": "Votre entreprise est cohérente. Concentrez-vous sur la fidélisation des clients et la qualité du service.",
+      "youCurrentlyHave": "Vous avez actuellement",
+      "ofBookingData": "de données de réservation.",
+      "continueAccepting": "Continuez à accepter des réservations pour débloquer les prévisions basées sur l'IA ! Avec",
+      "moreMonthsNeeded": "mois supplémentaire",
+      "ofData": "de données, nous prédirons vos futures réservations et revenus avec des algorithmes d'apprentissage automatique."
     }
   },
   "legal": {

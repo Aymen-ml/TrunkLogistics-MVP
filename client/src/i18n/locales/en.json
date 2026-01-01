@@ -1500,6 +1500,33 @@
       "active": "Active",
       "recent": "Recent",
       "inactive": "Inactive"
+    },
+    "common": {
+      "noData": "No analytics data available",
+      "monthlyBreakdown": "Monthly revenue breakdown",
+      "currentDistribution": "Current distribution",
+      "bookingConversionFunnel": "Booking Conversion Funnel",
+      "trackPipeline": "Track your booking pipeline",
+      "conversionRate": "Conversion Rate",
+      "approvalRate": "Approval Rate",
+      "compareServices": "Compare transport vs rental performance",
+      "detailedBreakdown": "Detailed breakdown by month",
+      "actualBookings": "Actual Bookings",
+      "predictedBookings": "Predicted Bookings",
+      "aiForecastInsight": "AI Forecast Insight",
+      "basedOnData": "Based on your",
+      "monthsOfData": "months of data, your business is",
+      "growing": "Growing",
+      "declining": "Declining",
+      "stable": "Stable",
+      "growingTip": "Keep up the great work! Consider expanding your fleet to meet increasing demand.",
+      "decliningTip": "Consider marketing campaigns or competitive pricing to boost bookings.",
+      "stableTip": "Your business is consistent. Focus on customer retention and service quality.",
+      "youCurrentlyHave": "You currently have",
+      "ofBookingData": "of booking data.",
+      "continueAccepting": "Continue accepting bookings to unlock AI-powered forecasting! With",
+      "moreMonthsNeeded": "more month",
+      "ofData": "of data, we'll predict your future bookings and revenue with machine learning algorithms."
     }
   },
   "legal": {
