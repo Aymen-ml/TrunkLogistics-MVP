@@ -15,14 +15,14 @@ const TermsOfUse = () => {
             className="inline-flex items-center text-white hover:text-purple-100 mb-6 transition"
           >
             <ArrowLeft className="h-5 w-5 mr-2" />
-            Back to Home
+            {t('legal.terms.backToHome')}
           </Link>
           <div className="flex items-center mb-4">
             <FileText className="h-12 w-12 text-white mr-4" />
-            <h1 className="text-4xl md:text-5xl font-bold text-white">Terms of Use</h1>
+            <h1 className="text-4xl md:text-5xl font-bold text-white">{t('legal.terms.title')}</h1>
           </div>
           <p className="text-xl text-purple-100">
-            Last updated: October 27, 2025
+            {t('legal.terms.lastUpdated')}
           </p>
         </div>
       </div>
@@ -34,12 +34,10 @@ const TermsOfUse = () => {
           {/* Introduction */}
           <section className="mb-12">
             <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-              Welcome to movelinker. These Terms of Use ("Terms") govern your access to and use of our platform, 
-              services, and features. By accessing or using movelinker, you agree to be bound by these Terms.
+              {t('legal.terms.intro.paragraph1')}
             </p>
             <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
-              Please read these Terms carefully before using our platform. If you do not agree with these Terms, 
-              you must not use our services.
+              {t('legal.terms.intro.paragraph2')}
             </p>
           </section>
 
@@ -49,18 +47,18 @@ const TermsOfUse = () => {
               <div className="bg-green-100 dark:bg-green-900/30 rounded-lg p-3 mr-4">
                 <CheckCircle className="h-6 w-6 text-green-600 dark:text-green-400" />
               </div>
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Acceptance of Terms</h2>
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">{t('legal.terms.acceptance.title')}</h2>
             </div>
             
             <p className="text-gray-700 dark:text-gray-300 mb-4">
-              By creating an account, accessing, or using movelinker, you confirm that:
+              {t('legal.terms.acceptance.intro')}
             </p>
             <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300 ml-4">
-              <li>You are at least 18 years of age</li>
-              <li>You have the legal capacity to enter into binding agreements</li>
-              <li>You will comply with all applicable laws and regulations</li>
-              <li>All information you provide is accurate and complete</li>
-              <li>You agree to these Terms and our Privacy Policy</li>
+              <li>{t('legal.terms.acceptance.items.age')}</li>
+              <li>{t('legal.terms.acceptance.items.capacity')}</li>
+              <li>{t('legal.terms.acceptance.items.comply')}</li>
+              <li>{t('legal.terms.acceptance.items.accurate')}</li>
+              <li>{t('legal.terms.acceptance.items.agree')}</li>
             </ul>
           </section>
 
@@ -70,40 +68,40 @@ const TermsOfUse = () => {
               <div className="bg-blue-100 dark:bg-blue-900/30 rounded-lg p-3 mr-4">
                 <UserX className="h-6 w-6 text-blue-600 dark:text-blue-400" />
               </div>
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">User Accounts</h2>
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">{t('legal.terms.accounts.title')}</h2>
             </div>
             
             <div className="space-y-4">
               <div>
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">Account Registration</h3>
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">{t('legal.terms.accounts.registration.title')}</h3>
                 <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300 ml-4">
-                  <li>You must register for an account to use certain features</li>
-                  <li>You are responsible for maintaining the confidentiality of your account credentials</li>
-                  <li>You agree to notify us immediately of any unauthorized access</li>
-                  <li>You are responsible for all activities that occur under your account</li>
-                  <li>One person or entity may not maintain more than one account without our permission</li>
+                  <li>{t('legal.terms.accounts.registration.items.required')}</li>
+                  <li>{t('legal.terms.accounts.registration.items.confidentiality')}</li>
+                  <li>{t('legal.terms.accounts.registration.items.notify')}</li>
+                  <li>{t('legal.terms.accounts.registration.items.responsible')}</li>
+                  <li>{t('legal.terms.accounts.registration.items.oneAccount')}</li>
                 </ul>
               </div>
 
               <div>
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">Account Types</h3>
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">{t('legal.terms.accounts.types.title')}</h3>
                 <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300 ml-4">
-                  <li><strong>Customer Accounts:</strong> For businesses and individuals seeking transportation services</li>
-                  <li><strong>Provider Accounts:</strong> For truck owners and logistics companies offering services</li>
-                  <li><strong>Admin Accounts:</strong> For platform administrators and support staff</li>
+                  <li><strong>{t('legal.terms.accounts.types.customer.title')}:</strong> {t('legal.terms.accounts.types.customer.desc')}</li>
+                  <li><strong>{t('legal.terms.accounts.types.provider.title')}:</strong> {t('legal.terms.accounts.types.provider.desc')}</li>
+                  <li><strong>{t('legal.terms.accounts.types.admin.title')}:</strong> {t('legal.terms.accounts.types.admin.desc')}</li>
                 </ul>
               </div>
 
               <div>
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">Provider Verification</h3>
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">{t('legal.terms.accounts.verification.title')}</h3>
                 <p className="text-gray-700 dark:text-gray-300 mb-2">
-                  Providers must complete our verification process, which includes:
+                  {t('legal.terms.accounts.verification.intro')}
                 </p>
                 <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300 ml-4">
-                  <li>Submission of valid business documentation</li>
-                  <li>Verification of vehicle registration and insurance</li>
-                  <li>Background checks as required by law</li>
-                  <li>Compliance with safety standards</li>
+                  <li>{t('legal.terms.accounts.verification.items.documentation')}</li>
+                  <li>{t('legal.terms.accounts.verification.items.vehicle')}</li>
+                  <li>{t('legal.terms.accounts.verification.items.background')}</li>
+                  <li>{t('legal.terms.accounts.verification.items.compliance')}</li>
                 </ul>
               </div>
             </div>
@@ -115,22 +113,22 @@ const TermsOfUse = () => {
               <div className="bg-orange-100 dark:bg-orange-900/30 rounded-lg p-3 mr-4">
                 <Scale className="h-6 w-6 text-orange-600 dark:text-orange-400" />
               </div>
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Permitted Use</h2>
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">{t('legal.terms.use.title')}</h2>
             </div>
             
             <p className="text-gray-700 dark:text-gray-300 mb-4">
-              You agree to use movelinker only for lawful purposes and in accordance with these Terms. You agree NOT to:
+              {t('legal.terms.use.intro')}
             </p>
             <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300 ml-4">
-              <li>Violate any applicable laws or regulations</li>
-              <li>Infringe on the rights of others</li>
-              <li>Upload malicious code, viruses, or harmful content</li>
-              <li>Attempt to gain unauthorized access to our systems</li>
-              <li>Impersonate another person or entity</li>
-              <li>Harass, abuse, or harm other users</li>
-              <li>Use automated systems to access the platform without permission</li>
-              <li>Manipulate reviews, ratings, or platform metrics</li>
-              <li>Engage in fraudulent activities or money laundering</li>
+              <li>{t('legal.terms.use.items.laws')}</li>
+              <li>{t('legal.terms.use.items.rights')}</li>
+              <li>{t('legal.terms.use.items.malicious')}</li>
+              <li>{t('legal.terms.use.items.access')}</li>
+              <li>{t('legal.terms.use.items.impersonate')}</li>
+              <li>{t('legal.terms.use.items.harass')}</li>
+              <li>{t('legal.terms.use.items.automated')}</li>
+              <li>{t('legal.terms.use.items.manipulate')}</li>
+              <li>{t('legal.terms.use.items.fraud')}</li>
             </ul>
           </section>
 
@@ -140,37 +138,37 @@ const TermsOfUse = () => {
               <div className="bg-purple-100 dark:bg-purple-900/30 rounded-lg p-3 mr-4">
                 <DollarSign className="h-6 w-6 text-purple-600 dark:text-purple-400" />
               </div>
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Bookings and Transactions</h2>
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">{t('legal.terms.bookings.title')}</h2>
             </div>
             
             <div className="space-y-4">
               <div>
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">Booking Process</h3>
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">{t('legal.terms.bookings.process.title')}</h3>
                 <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300 ml-4">
-                  <li>Customers can search for and book available trucks through the platform</li>
-                  <li>All bookings are subject to provider acceptance</li>
-                  <li>Prices are determined by providers and displayed clearly before booking</li>
-                  <li>Booking confirmations are sent via email and platform notifications</li>
+                  <li>{t('legal.terms.bookings.process.items.search')}</li>
+                  <li>{t('legal.terms.bookings.process.items.acceptance')}</li>
+                  <li>{t('legal.terms.bookings.process.items.prices')}</li>
+                  <li>{t('legal.terms.bookings.process.items.confirmations')}</li>
                 </ul>
               </div>
 
               <div>
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">Payment Terms</h3>
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">{t('legal.terms.bookings.payment.title')}</h3>
                 <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300 ml-4">
-                  <li>Payment terms are agreed upon between customers and providers</li>
-                  <li>movelinker may facilitate payment processing (where applicable)</li>
-                  <li>All fees and charges will be clearly disclosed before transaction completion</li>
-                  <li>Customers are responsible for any applicable taxes</li>
+                  <li>{t('legal.terms.bookings.payment.items.terms')}</li>
+                  <li>{t('legal.terms.bookings.payment.items.facilitate')}</li>
+                  <li>{t('legal.terms.bookings.payment.items.disclosed')}</li>
+                  <li>{t('legal.terms.bookings.payment.items.taxes')}</li>
                 </ul>
               </div>
 
               <div>
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">Cancellations and Refunds</h3>
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">{t('legal.terms.bookings.cancellation.title')}</h3>
                 <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300 ml-4">
-                  <li>Cancellation policies are set by individual providers</li>
-                  <li>Customers should review cancellation terms before booking</li>
-                  <li>Refunds are subject to provider policies and applicable laws</li>
-                  <li>movelinker may mediate disputes but is not responsible for refund decisions</li>
+                  <li>{t('legal.terms.bookings.cancellation.items.policies')}</li>
+                  <li>{t('legal.terms.bookings.cancellation.items.review')}</li>
+                  <li>{t('legal.terms.bookings.cancellation.items.refunds')}</li>
+                  <li>{t('legal.terms.bookings.cancellation.items.mediate')}</li>
                 </ul>
               </div>
             </div>
@@ -182,59 +180,57 @@ const TermsOfUse = () => {
               <div className="bg-red-100 dark:bg-red-900/30 rounded-lg p-3 mr-4">
                 <AlertCircle className="h-6 w-6 text-red-600 dark:text-red-400" />
               </div>
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Limitation of Liability</h2>
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">{t('legal.terms.liability.title')}</h2>
             </div>
             
             <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-6 mb-4">
               <p className="text-gray-700 dark:text-gray-300 font-semibold mb-2">
-                IMPORTANT: Please read this section carefully.
+                {t('legal.terms.liability.important.title')}
               </p>
               <p className="text-gray-700 dark:text-gray-300 text-sm">
-                This section limits our liability to you and affects your legal rights.
+                {t('legal.terms.liability.important.desc')}
               </p>
             </div>
 
             <div className="space-y-4 text-gray-700 dark:text-gray-300">
               <p>
-                movelinker acts as an intermediary platform connecting customers with providers. We do not:
+                {t('legal.terms.liability.intermediary')}
               </p>
               <ul className="list-disc list-inside space-y-2 ml-4">
-                <li>Own, operate, or control the trucks or transportation services</li>
-                <li>Employ or directly contract with providers</li>
-                <li>Guarantee the quality, safety, or legality of services provided</li>
-                <li>Assume liability for damages, losses, or injuries during transportation</li>
+                <li>{t('legal.terms.liability.notItems.own')}</li>
+                <li>{t('legal.terms.liability.notItems.employ')}</li>
+                <li>{t('legal.terms.liability.notItems.guarantee')}</li>
+                <li>{t('legal.terms.liability.notItems.assume')}</li>
               </ul>
 
               <p className="mt-4">
-                TO THE MAXIMUM EXTENT PERMITTED BY LAW, MOVELINKER SHALL NOT BE LIABLE FOR:
+                {t('legal.terms.liability.notLiable')}
               </p>
               <ul className="list-disc list-inside space-y-2 ml-4">
-                <li>Indirect, incidental, special, consequential, or punitive damages</li>
-                <li>Loss of profits, revenue, data, or business opportunities</li>
-                <li>Damages arising from provider actions or omissions</li>
-                <li>Damages resulting from cargo loss, damage, or delay</li>
-                <li>Service interruptions or technical failures</li>
+                <li>{t('legal.terms.liability.notLiableItems.indirect')}</li>
+                <li>{t('legal.terms.liability.notLiableItems.loss')}</li>
+                <li>{t('legal.terms.liability.notLiableItems.provider')}</li>
+                <li>{t('legal.terms.liability.notLiableItems.cargo')}</li>
+                <li>{t('legal.terms.liability.notLiableItems.service')}</li>
               </ul>
 
               <p className="mt-4">
-                Our total liability for any claims shall not exceed the fees paid by you to movelinker in the 
-                12 months preceding the claim.
+                {t('legal.terms.liability.maxLiability')}
               </p>
             </div>
           </section>
 
           {/* Indemnification */}
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Indemnification</h2>
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">{t('legal.terms.indemnification.title')}</h2>
             <p className="text-gray-700 dark:text-gray-300 mb-4">
-              You agree to indemnify, defend, and hold harmless movelinker, its officers, directors, employees, 
-              and agents from any claims, liabilities, damages, losses, and expenses arising from:
+              {t('legal.terms.indemnification.intro')}
             </p>
             <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300 ml-4">
-              <li>Your violation of these Terms</li>
-              <li>Your use of the platform</li>
-              <li>Your violation of any rights of another party</li>
-              <li>Your provision or use of transportation services</li>
+              <li>{t('legal.terms.indemnification.items.violation')}</li>
+              <li>{t('legal.terms.indemnification.items.use')}</li>
+              <li>{t('legal.terms.indemnification.items.rights')}</li>
+              <li>{t('legal.terms.indemnification.items.services')}</li>
             </ul>
           </section>
 
@@ -244,109 +240,104 @@ const TermsOfUse = () => {
               <div className="bg-red-100 dark:bg-red-900/30 rounded-lg p-3 mr-4">
                 <XCircle className="h-6 w-6 text-red-600 dark:text-red-400" />
               </div>
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Prohibited Conduct</h2>
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">{t('legal.terms.prohibited.title')}</h2>
             </div>
             
             <p className="text-gray-700 dark:text-gray-300 mb-4">
-              The following activities are strictly prohibited:
+              {t('legal.terms.prohibited.intro')}
             </p>
             <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300 ml-4">
-              <li>Transportation of illegal, hazardous, or prohibited materials</li>
-              <li>Circumventing the platform to conduct direct transactions</li>
-              <li>Creating fake accounts or reviews</li>
-              <li>Scraping or collecting user data</li>
-              <li>Reverse engineering or copying our platform</li>
-              <li>Discriminating against users based on protected characteristics</li>
+              <li>{t('legal.terms.prohibited.items.illegal')}</li>
+              <li>{t('legal.terms.prohibited.items.circumvent')}</li>
+              <li>{t('legal.terms.prohibited.items.fake')}</li>
+              <li>{t('legal.terms.prohibited.items.scraping')}</li>
+              <li>{t('legal.terms.prohibited.items.reverse')}</li>
+              <li>{t('legal.terms.prohibited.items.discriminate')}</li>
             </ul>
           </section>
 
           {/* Termination */}
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Termination</h2>
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">{t('legal.terms.termination.title')}</h2>
             <p className="text-gray-700 dark:text-gray-300 mb-4">
-              We reserve the right to suspend or terminate your account at any time, with or without notice, for:
+              {t('legal.terms.termination.intro')}
             </p>
             <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300 ml-4">
-              <li>Violation of these Terms</li>
-              <li>Fraudulent or illegal activity</li>
-              <li>Non-payment of fees</li>
-              <li>Misuse of the platform</li>
-              <li>At our sole discretion for any reason</li>
+              <li>{t('legal.terms.termination.items.violation')}</li>
+              <li>{t('legal.terms.termination.items.fraudulent')}</li>
+              <li>{t('legal.terms.termination.items.nonpayment')}</li>
+              <li>{t('legal.terms.termination.items.misuse')}</li>
+              <li>{t('legal.terms.termination.items.discretion')}</li>
             </ul>
             <p className="text-gray-700 dark:text-gray-300 mt-4">
-              You may terminate your account at any time by contacting our support team.
+              {t('legal.terms.termination.userTerminate')}
             </p>
           </section>
 
           {/* Changes to Terms */}
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Changes to Terms</h2>
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">{t('legal.terms.changes.title')}</h2>
             <p className="text-gray-700 dark:text-gray-300">
-              We may modify these Terms at any time. We will notify you of material changes via email or platform 
-              notification. Your continued use of the platform after changes constitute acceptance of the modified Terms.
+              {t('legal.terms.changes.text')}
             </p>
           </section>
 
           {/* Governing Law */}
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Governing Law</h2>
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">{t('legal.terms.governing.title')}</h2>
             <p className="text-gray-700 dark:text-gray-300">
-              These Terms shall be governed by and construed in accordance with the laws of Algeria. Any disputes 
-              arising from these Terms or your use of the platform shall be subject to the exclusive jurisdiction 
-              of the courts of Algiers, Algeria.
+              {t('legal.terms.governing.text')}
             </p>
           </section>
 
           {/* Dispute Resolution */}
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Dispute Resolution</h2>
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">{t('legal.terms.dispute.title')}</h2>
             <p className="text-gray-700 dark:text-gray-300 mb-4">
-              In the event of a dispute:
+              {t('legal.terms.dispute.intro')}
             </p>
             <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300 ml-4">
-              <li>Contact our support team to attempt informal resolution</li>
-              <li>If unresolved, parties agree to mediation before pursuing legal action</li>
-              <li>Legal proceedings must be filed within one year of the dispute arising</li>
+              <li>{t('legal.terms.dispute.items.contact')}</li>
+              <li>{t('legal.terms.dispute.items.mediation')}</li>
+              <li>{t('legal.terms.dispute.items.legal')}</li>
             </ul>
           </section>
 
           {/* Severability */}
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Severability</h2>
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">{t('legal.terms.severability.title')}</h2>
             <p className="text-gray-700 dark:text-gray-300">
-              If any provision of these Terms is found to be unenforceable or invalid, that provision shall be 
-              limited or eliminated to the minimum extent necessary, and the remaining provisions shall remain in 
-              full force and effect.
+              {t('legal.terms.severability.text')}
             </p>
           </section>
 
           {/* Contact */}
           <section>
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Contact Us</h2>
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">{t('legal.terms.contact.title')}</h2>
             <p className="text-gray-700 dark:text-gray-300 mb-4">
-              If you have any questions about these Terms of Use, please contact us:
+              {t('legal.terms.contact.intro')}
             </p>
             <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-6">
               <p className="text-gray-700 dark:text-gray-300 mb-2">
-                <strong>Email:</strong>{' '}
+                <strong>{t('legal.terms.contact.email')}:</strong>{' '}
                 <a href="mailto:legal@movelinker.me" className="text-blue-600 dark:text-blue-400 hover:underline">
                   legal@movelinker.me
                 </a>
               </p>
               <p className="text-gray-700 dark:text-gray-300 mb-2">
-                <strong>Support:</strong>{' '}
+                <strong>{t('legal.terms.contact.support')}:</strong>{' '}
                 <a href="mailto:support@movelinker.me" className="text-blue-600 dark:text-blue-400 hover:underline">
                   support@movelinker.me
                 </a>
               </p>
               <p className="text-gray-700 dark:text-gray-300 mb-2">
-                <strong>Phone:</strong>{' '}
+                <strong>{t('legal.terms.contact.phone')}:</strong>{' '}
                 <a href="tel:+213779116522" className="text-blue-600 dark:text-blue-400 hover:underline">
                   +213 779 11 65 22
                 </a>
               </p>
               <p className="text-gray-700 dark:text-gray-300">
-                <strong>Location:</strong> Algiers, Algeria
+                <strong>{t('legal.terms.contact.location')}:</strong> {t('legal.terms.contact.address')}
               </p>
             </div>
           </section>

@@ -15,14 +15,14 @@ const PrivacyPolicy = () => {
             className="inline-flex items-center text-white hover:text-blue-100 mb-6 transition"
           >
             <ArrowLeft className="h-5 w-5 mr-2" />
-            Back to Home
+            {t('legal.privacy.backToHome')}
           </Link>
           <div className="flex items-center mb-4">
             <Shield className="h-12 w-12 text-white mr-4" />
-            <h1 className="text-4xl md:text-5xl font-bold text-white">Privacy Policy</h1>
+            <h1 className="text-4xl md:text-5xl font-bold text-white">{t('legal.privacy.title')}</h1>
           </div>
           <p className="text-xl text-blue-100">
-            Last updated: October 27, 2025
+            {t('legal.privacy.lastUpdated')}
           </p>
         </div>
       </div>
@@ -34,12 +34,10 @@ const PrivacyPolicy = () => {
           {/* Introduction */}
           <section className="mb-12">
             <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-              At movelinker, we are committed to protecting your privacy and ensuring the security of your personal 
-              information. This Privacy Policy explains how we collect, use, disclose, and safeguard your information 
-              when you use our platform.
+              {t('legal.privacy.intro.paragraph1')}
             </p>
             <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
-              By using movelinker, you agree to the collection and use of information in accordance with this policy.
+              {t('legal.privacy.intro.paragraph2')}
             </p>
           </section>
 
@@ -49,35 +47,35 @@ const PrivacyPolicy = () => {
               <div className="bg-blue-100 dark:bg-blue-900/30 rounded-lg p-3 mr-4">
                 <Database className="h-6 w-6 text-blue-600 dark:text-blue-400" />
               </div>
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Information We Collect</h2>
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">{t('legal.privacy.collect.title')}</h2>
             </div>
             
             <div className="space-y-6">
               <div>
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">Personal Information</h3>
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">{t('legal.privacy.collect.personal.title')}</h3>
                 <p className="text-gray-700 dark:text-gray-300 mb-2">
-                  We collect information that you provide directly to us when you:
+                  {t('legal.privacy.collect.personal.intro')}
                 </p>
                 <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300 ml-4">
-                  <li>Create an account (name, email address, phone number, password)</li>
-                  <li>Complete your profile (business information, address)</li>
-                  <li>Submit verification documents (for providers)</li>
-                  <li>Create bookings or list trucks</li>
-                  <li>Contact our support team</li>
-                  <li>Subscribe to notifications or newsletters</li>
+                  <li>{t('legal.privacy.collect.personal.items.account')}</li>
+                  <li>{t('legal.privacy.collect.personal.items.profile')}</li>
+                  <li>{t('legal.privacy.collect.personal.items.verification')}</li>
+                  <li>{t('legal.privacy.collect.personal.items.bookings')}</li>
+                  <li>{t('legal.privacy.collect.personal.items.support')}</li>
+                  <li>{t('legal.privacy.collect.personal.items.subscribe')}</li>
                 </ul>
               </div>
 
               <div>
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">Automatically Collected Information</h3>
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">{t('legal.privacy.collect.auto.title')}</h3>
                 <p className="text-gray-700 dark:text-gray-300 mb-2">
-                  When you use our platform, we automatically collect certain information, including:
+                  {t('legal.privacy.collect.auto.intro')}
                 </p>
                 <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300 ml-4">
-                  <li>Device information (IP address, browser type, operating system)</li>
-                  <li>Usage data (pages visited, time spent, clicks)</li>
-                  <li>Location data (if you grant permission)</li>
-                  <li>Cookies and similar tracking technologies</li>
+                  <li>{t('legal.privacy.collect.auto.items.device')}</li>
+                  <li>{t('legal.privacy.collect.auto.items.usage')}</li>
+                  <li>{t('legal.privacy.collect.auto.items.location')}</li>
+                  <li>{t('legal.privacy.collect.auto.items.cookies')}</li>
                 </ul>
               </div>
             </div>
@@ -89,22 +87,22 @@ const PrivacyPolicy = () => {
               <div className="bg-orange-100 dark:bg-orange-900/30 rounded-lg p-3 mr-4">
                 <Eye className="h-6 w-6 text-orange-600 dark:text-orange-400" />
               </div>
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">How We Use Your Information</h2>
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">{t('legal.privacy.use.title')}</h2>
             </div>
             
             <p className="text-gray-700 dark:text-gray-300 mb-4">
-              We use the collected information for various purposes:
+              {t('legal.privacy.use.intro')}
             </p>
             <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300 ml-4">
-              <li>To provide and maintain our service</li>
-              <li>To process and manage bookings</li>
-              <li>To verify provider credentials and ensure platform safety</li>
-              <li>To send you important notifications about your bookings and account</li>
-              <li>To improve our platform and user experience</li>
-              <li>To provide customer support</li>
-              <li>To detect and prevent fraud or abuse</li>
-              <li>To comply with legal obligations</li>
-              <li>To send marketing communications (with your consent)</li>
+              <li>{t('legal.privacy.use.items.provide')}</li>
+              <li>{t('legal.privacy.use.items.process')}</li>
+              <li>{t('legal.privacy.use.items.verify')}</li>
+              <li>{t('legal.privacy.use.items.notifications')}</li>
+              <li>{t('legal.privacy.use.items.improve')}</li>
+              <li>{t('legal.privacy.use.items.support')}</li>
+              <li>{t('legal.privacy.use.items.fraud')}</li>
+              <li>{t('legal.privacy.use.items.legal')}</li>
+              <li>{t('legal.privacy.use.items.marketing')}</li>
             </ul>
           </section>
 
@@ -114,23 +112,23 @@ const PrivacyPolicy = () => {
               <div className="bg-green-100 dark:bg-green-900/30 rounded-lg p-3 mr-4">
                 <UserCheck className="h-6 w-6 text-green-600 dark:text-green-400" />
               </div>
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Information Sharing and Disclosure</h2>
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">{t('legal.privacy.sharing.title')}</h2>
             </div>
             
             <p className="text-gray-700 dark:text-gray-300 mb-4">
-              We may share your information in the following circumstances:
+              {t('legal.privacy.sharing.intro')}
             </p>
             <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300 ml-4">
-              <li><strong>With Other Users:</strong> When you create a booking, necessary information is shared with the provider (and vice versa)</li>
-              <li><strong>Service Providers:</strong> We may share information with third-party service providers who help us operate our platform</li>
-              <li><strong>Legal Requirements:</strong> We may disclose information if required by law or to protect our rights</li>
-              <li><strong>Business Transfers:</strong> In case of merger, acquisition, or sale of assets</li>
-              <li><strong>With Your Consent:</strong> We may share information for other purposes with your explicit consent</li>
+              <li><strong>{t('legal.privacy.sharing.items.users.title')}:</strong> {t('legal.privacy.sharing.items.users.desc')}</li>
+              <li><strong>{t('legal.privacy.sharing.items.providers.title')}:</strong> {t('legal.privacy.sharing.items.providers.desc')}</li>
+              <li><strong>{t('legal.privacy.sharing.items.legal.title')}:</strong> {t('legal.privacy.sharing.items.legal.desc')}</li>
+              <li><strong>{t('legal.privacy.sharing.items.business.title')}:</strong> {t('legal.privacy.sharing.items.business.desc')}</li>
+              <li><strong>{t('legal.privacy.sharing.items.consent.title')}:</strong> {t('legal.privacy.sharing.items.consent.desc')}</li>
             </ul>
             
             <div className="mt-4 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
               <p className="text-gray-700 dark:text-gray-300">
-                <strong>Note:</strong> We never sell your personal information to third parties for marketing purposes.
+                <strong>{t('legal.privacy.sharing.note.title')}:</strong> {t('legal.privacy.sharing.note.desc')}
               </p>
             </div>
           </section>
@@ -141,23 +139,22 @@ const PrivacyPolicy = () => {
               <div className="bg-red-100 dark:bg-red-900/30 rounded-lg p-3 mr-4">
                 <Lock className="h-6 w-6 text-red-600 dark:text-red-400" />
               </div>
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Data Security</h2>
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">{t('legal.privacy.security.title')}</h2>
             </div>
             
             <p className="text-gray-700 dark:text-gray-300 mb-4">
-              We implement appropriate technical and organizational security measures to protect your personal information:
+              {t('legal.privacy.security.intro')}
             </p>
             <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300 ml-4">
-              <li>Encryption of data in transit and at rest</li>
-              <li>Secure authentication and password protection</li>
-              <li>Regular security audits and updates</li>
-              <li>Access controls and employee training</li>
-              <li>Secure cloud infrastructure with industry-leading providers</li>
+              <li>{t('legal.privacy.security.items.encryption')}</li>
+              <li>{t('legal.privacy.security.items.authentication')}</li>
+              <li>{t('legal.privacy.security.items.audits')}</li>
+              <li>{t('legal.privacy.security.items.access')}</li>
+              <li>{t('legal.privacy.security.items.cloud')}</li>
             </ul>
             
             <p className="text-gray-700 dark:text-gray-300 mt-4">
-              However, no method of transmission over the Internet is 100% secure. While we strive to protect your 
-              information, we cannot guarantee absolute security.
+              {t('legal.privacy.security.disclaimer')}
             </p>
           </section>
 
@@ -167,23 +164,23 @@ const PrivacyPolicy = () => {
               <div className="bg-purple-100 dark:bg-purple-900/30 rounded-lg p-3 mr-4">
                 <FileText className="h-6 w-6 text-purple-600 dark:text-purple-400" />
               </div>
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Your Rights</h2>
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">{t('legal.privacy.rights.title')}</h2>
             </div>
             
             <p className="text-gray-700 dark:text-gray-300 mb-4">
-              You have the following rights regarding your personal information:
+              {t('legal.privacy.rights.intro')}
             </p>
             <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300 ml-4">
-              <li><strong>Access:</strong> Request a copy of your personal information</li>
-              <li><strong>Correction:</strong> Update or correct inaccurate information</li>
-              <li><strong>Deletion:</strong> Request deletion of your personal information</li>
-              <li><strong>Data Portability:</strong> Request transfer of your data to another service</li>
-              <li><strong>Opt-out:</strong> Unsubscribe from marketing communications</li>
-              <li><strong>Withdraw Consent:</strong> Withdraw consent for data processing at any time</li>
+              <li><strong>{t('legal.privacy.rights.items.access.title')}:</strong> {t('legal.privacy.rights.items.access.desc')}</li>
+              <li><strong>{t('legal.privacy.rights.items.correction.title')}:</strong> {t('legal.privacy.rights.items.correction.desc')}</li>
+              <li><strong>{t('legal.privacy.rights.items.deletion.title')}:</strong> {t('legal.privacy.rights.items.deletion.desc')}</li>
+              <li><strong>{t('legal.privacy.rights.items.portability.title')}:</strong> {t('legal.privacy.rights.items.portability.desc')}</li>
+              <li><strong>{t('legal.privacy.rights.items.optout.title')}:</strong> {t('legal.privacy.rights.items.optout.desc')}</li>
+              <li><strong>{t('legal.privacy.rights.items.withdraw.title')}:</strong> {t('legal.privacy.rights.items.withdraw.desc')}</li>
             </ul>
             
             <p className="text-gray-700 dark:text-gray-300 mt-4">
-              To exercise these rights, please contact us at{' '}
+              {t('legal.privacy.rights.contact')}{' '}
               <a href="mailto:privacy@movelinker.me" className="text-blue-600 dark:text-blue-400 hover:underline">
                 privacy@movelinker.me
               </a>
@@ -196,55 +193,51 @@ const PrivacyPolicy = () => {
               <div className="bg-yellow-100 dark:bg-yellow-900/30 rounded-lg p-3 mr-4">
                 <Bell className="h-6 w-6 text-yellow-600 dark:text-yellow-400" />
               </div>
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Cookies and Tracking</h2>
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">{t('legal.privacy.cookies.title')}</h2>
             </div>
             
             <p className="text-gray-700 dark:text-gray-300 mb-4">
-              We use cookies and similar tracking technologies to enhance your experience. You can control cookies through 
-              your browser settings. However, disabling cookies may limit your ability to use certain features of our platform.
+              {t('legal.privacy.cookies.text')}
             </p>
           </section>
 
           {/* Children's Privacy */}
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Children's Privacy</h2>
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">{t('legal.privacy.children.title')}</h2>
             <p className="text-gray-700 dark:text-gray-300">
-              Our service is not intended for individuals under the age of 18. We do not knowingly collect personal 
-              information from children. If you believe we have collected information from a child, please contact us 
-              immediately.
+              {t('legal.privacy.children.text')}
             </p>
           </section>
 
           {/* Changes to Policy */}
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Changes to This Privacy Policy</h2>
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">{t('legal.privacy.changes.title')}</h2>
             <p className="text-gray-700 dark:text-gray-300">
-              We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new 
-              policy on this page and updating the "Last updated" date. We encourage you to review this policy periodically.
+              {t('legal.privacy.changes.text')}
             </p>
           </section>
 
           {/* Contact */}
           <section>
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Contact Us</h2>
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">{t('legal.privacy.contact.title')}</h2>
             <p className="text-gray-700 dark:text-gray-300 mb-4">
-              If you have any questions about this Privacy Policy, please contact us:
+              {t('legal.privacy.contact.intro')}
             </p>
             <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-6">
               <p className="text-gray-700 dark:text-gray-300 mb-2">
-                <strong>Email:</strong>{' '}
+                <strong>{t('legal.privacy.contact.email')}:</strong>{' '}
                 <a href="mailto:privacy@movelinker.me" className="text-blue-600 dark:text-blue-400 hover:underline">
                   privacy@movelinker.me
                 </a>
               </p>
               <p className="text-gray-700 dark:text-gray-300 mb-2">
-                <strong>Phone:</strong>{' '}
+                <strong>{t('legal.privacy.contact.phone')}:</strong>{' '}
                 <a href="tel:+213779116522" className="text-blue-600 dark:text-blue-400 hover:underline">
                   +213 779 11 65 22
                 </a>
               </p>
               <p className="text-gray-700 dark:text-gray-300">
-                <strong>Location:</strong> Algiers, Algeria
+                <strong>{t('legal.privacy.contact.location')}:</strong> {t('legal.privacy.contact.address')}
               </p>
             </div>
           </section>

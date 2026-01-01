@@ -112,6 +112,21 @@
 **Script:**
 > "Customers can track all their bookings in one place, with real-time status updates from pending to completed."
 
+#### Booking Status Colors
+
+**[Status Badge Colors]**
+
+**Actions:**
+- Point out the color-coded status badges:
+  - **Gray**: Pending - Awaiting provider confirmation
+  - **Blue**: Confirmed - Provider accepted the booking
+  - **Yellow**: In Transit - Cargo is on the way
+  - **Green**: Completed - Delivery successfully finished
+  - **Red**: Cancelled - Booking was cancelled
+
+**Script:**
+> "Each booking has a color-coded status badge for quick visual recognition. Gray for pending, blue for confirmed, yellow for in transit, green for completed, and red for cancelled bookings. This makes it easy to see your booking status at a glance."
+
 ---
 
 ## 🚛 Provider Journey (2-3 minutes)
