@@ -49,7 +49,7 @@ const TruckList = () => {
   };
 
   const deleteTruck = async (truckId) => {
-    if (!window.confirm('Are you sure you want to delete this truck?')) {
+    if (!window.confirm(t('trucks.confirmDelete'))) {
       return;
     }
 
@@ -62,7 +62,7 @@ const TruckList = () => {
       // Check if it's an error about active bookings
       if (error.response?.status === 400 && error.response?.data?.activeBookings) {
         const activeBookings = error.response.data.activeBookings;
-        let message = `Cannot delete truck: It has ${activeBookings.length} active booking(s):\n\n`;
+        let message = `${t('trucks.cannotDelete')}: ${t('trucks.activeBookings')} (${activeBookings.length}):\n\n`;
         
         activeBookings.forEach((booking, index) => {
           message += `${index + 1}. Customer: ${booking.customer_name || 'N/A'}\n`;
@@ -71,11 +71,11 @@ const TruckList = () => {
           message += `   Date: ${new Date(booking.pickup_date).toLocaleDateString()}\n\n`;
         });
         
-        message += 'Please wait for these bookings to be completed or cancelled before deleting the truck.';
+        message += t('trucks.waitForCompletion');
         alert(message);
       } else {
         // Generic error message for other types of failures
-        alert(error.response?.data?.message || 'Failed to delete truck. Please try again.');
+        alert(error.response?.data?.message || t('trucks.errorDeleting'));
       }
     }
   };
@@ -178,9 +178,9 @@ const TruckList = () => {
         <div className="mb-6">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100">My Fleet</h1>
+              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100">{t('trucks.myFleet')}</h1>
               <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                Manage your trucks and rental equipment
+                {t('trucks.manageFleet', 'Manage your trucks and rental equipment')}
               </p>
             </div>
             <div className="mt-4 sm:mt-0">
@@ -189,7 +189,7 @@ const TruckList = () => {
                 className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-accent-500 hover:bg-accent-600 transition-colors"
               >
                 <Plus className="h-4 w-4 mr-2" />
-                Add Vehicle
+                {t('trucks.addTruck')}
               </Link>
             </div>
           </div>
@@ -200,10 +200,10 @@ const TruckList = () => {
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 border border-gray-200 dark:border-gray-700">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Total Fleet</p>
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">{t('trucks.total')} {t('trucks.myFleet', 'Fleet')}</p>
                 <p className="text-2xl font-bold text-gray-900 dark:text-gray-100 mt-1">{stats.total}</p>
                 <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                  {stats.transport} transport • {stats.rental} rental
+                  {stats.transport} {t('trucks.transport').toLowerCase()} • {stats.rental} {t('trucks.rental').toLowerCase()}
                 </p>
               </div>
               <div className="p-3 bg-primary-100 dark:bg-primary-900/20 rounded-lg">
@@ -215,9 +215,9 @@ const TruckList = () => {
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 border border-gray-200 dark:border-gray-700">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Active</p>
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">{t('trucks.active')}</p>
                 <p className="text-2xl font-bold text-gray-900 dark:text-gray-100 mt-1">{stats.active}</p>
-                <p className="text-xs text-green-600 mt-1">Ready to use</p>
+                <p className="text-xs text-green-600 mt-1">{t('trucks.readyToUse', 'Ready to use')}</p>
               </div>
               <div className="p-3 bg-green-100 dark:bg-green-900/20 rounded-lg">
                 <CheckCircle className="h-6 w-6 text-green-600" />
@@ -228,9 +228,9 @@ const TruckList = () => {
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 border border-gray-200 dark:border-gray-700">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">In Use</p>
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">{t('trucks.rented', 'In Use')}</p>
                 <p className="text-2xl font-bold text-gray-900 dark:text-gray-100 mt-1">{stats.rented}</p>
-                <p className="text-xs text-blue-600 mt-1">Currently rented</p>
+                <p className="text-xs text-blue-600 mt-1">{t('trucks.currentlyRented', 'Currently rented')}</p>
               </div>
               <div className="p-3 bg-blue-100 dark:bg-blue-900/20 rounded-lg">
                 <Activity className="h-6 w-6 text-blue-600" />
@@ -241,9 +241,9 @@ const TruckList = () => {
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 border border-gray-200 dark:border-gray-700">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Maintenance</p>
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">{t('trucks.maintenance')}</p>
                 <p className="text-2xl font-bold text-gray-900 dark:text-gray-100 mt-1">{stats.maintenance}</p>
-                <p className="text-xs text-red-600 mt-1">Under repair</p>
+                <p className="text-xs text-red-600 mt-1">{t('trucks.underRepair', 'Under repair')}</p>
               </div>
               <div className="p-3 bg-red-100 dark:bg-red-900/20 rounded-lg">
                 <AlertCircle className="h-6 w-6 text-red-600" />
@@ -258,7 +258,7 @@ const TruckList = () => {
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <Filter className="h-5 w-5 text-gray-400" />
-                <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">Filters</h3>
+                <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">{t('trucks.filters')}</h3>
                 {activeFiltersCount > 0 && (
                   <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 dark:bg-primary-900/20 text-primary-800 dark:text-primary-400">
                     {activeFiltersCount} active

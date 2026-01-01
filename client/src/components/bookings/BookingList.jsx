@@ -201,10 +201,10 @@ const BookingList = () => {
           <div className="flex flex-col md:flex-row md:items-center md:justify-between">
             <div className="flex-1 min-w-0">
               <h2 className="text-2xl font-bold leading-7 text-gray-900 dark:text-gray-100 sm:text-3xl">
-                Bookings
+                {t('bookings.myBookings')}
               </h2>
               <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-                Manage and track all your bookings
+                {t('bookings.manageBookings')}
               </p>
             </div>
             {user.role === 'customer' && (
@@ -214,7 +214,7 @@ const BookingList = () => {
                   className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-accent-500 hover:bg-accent-600 transition-colors"
                 >
                   <Plus className="h-4 w-4 mr-2" />
-                  New Booking
+                  {t('bookings.createBooking')}
                 </Link>
               </div>
             )}
@@ -226,7 +226,7 @@ const BookingList = () => {
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 border border-gray-200 dark:border-gray-700">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Total Bookings</p>
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">{t('bookings.total')} {t('bookings.myBookings')}</p>
                 <p className="text-2xl font-bold text-gray-900 dark:text-gray-100 mt-1">{stats.total}</p>
               </div>
               <div className="p-3 bg-primary-100 dark:bg-primary-900/20 rounded-lg">
@@ -238,7 +238,7 @@ const BookingList = () => {
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 border border-gray-200 dark:border-gray-700">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Active</p>
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">{t('bookings.activeBookings')}</p>
                 <p className="text-2xl font-bold text-gray-900 dark:text-gray-100 mt-1">{stats.active}</p>
               </div>
               <div className="p-3 bg-green-100 dark:bg-green-900/20 rounded-lg">
@@ -250,7 +250,7 @@ const BookingList = () => {
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 border border-gray-200 dark:border-gray-700">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Completed</p>
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">{t('bookings.completedBookings')}</p>
                 <p className="text-2xl font-bold text-gray-900 dark:text-gray-100 mt-1">{stats.completed}</p>
               </div>
               <div className="p-3 bg-purple-100 dark:bg-purple-900/20 rounded-lg">
@@ -262,7 +262,7 @@ const BookingList = () => {
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 border border-gray-200 dark:border-gray-700">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Total Revenue</p>
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">{t('bookings.totalRevenue')}</p>
                 <p className="text-2xl font-bold text-gray-900 dark:text-gray-100 mt-1">{formatCurrency(stats.totalRevenue)}</p>
               </div>
               <div className="p-3 bg-orange-100 dark:bg-orange-900/20 rounded-lg">
@@ -278,7 +278,7 @@ const BookingList = () => {
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <Filter className="h-5 w-5 text-gray-400" />
-                <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">Filters</h3>
+                <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">{t('bookings.filters')}</h3>
                 {activeFiltersCount > 0 && (
                   <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 dark:bg-primary-900/20 text-primary-800 dark:text-primary-400">
                     {activeFiltersCount} active
@@ -292,7 +292,7 @@ const BookingList = () => {
                   className="inline-flex items-center gap-1 text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200"
                 >
                   <X className="h-4 w-4" />
-                  Clear all
+                  {t('bookings.clearFilters')}
                 </button>
               )}
             </div>
@@ -302,7 +302,7 @@ const BookingList = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 <div className="lg:col-span-2">
                   <label htmlFor="search" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    Search
+                    {t('bookings.search')}
                   </label>
                   <div className="relative">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -315,7 +315,7 @@ const BookingList = () => {
                       value={filters.search}
                       onChange={handleFilterChange}
                       className="block w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-gray-100 sm:text-sm"
-                      placeholder="Search by reference, location..."
+                      placeholder={t('bookings.searchPlaceholder')}
                       autoComplete="off"
                     />
                   </div>
@@ -323,7 +323,7 @@ const BookingList = () => {
 
                 <div>
                   <label htmlFor="status" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    Status
+                    {t('bookings.status')}
                   </label>
                   <select
                     id="status"
@@ -332,19 +332,19 @@ const BookingList = () => {
                     onChange={handleFilterChange}
                     className="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-gray-100 sm:text-sm"
                   >
-                    <option value="all">All Status</option>
-                    <option value="pending_review">Pending Review</option>
-                    <option value="approved">Approved</option>
-                    <option value="in_transit">In Transit</option>
-                    <option value="active">Active</option>
-                    <option value="completed">Completed</option>
-                    <option value="cancelled">Cancelled</option>
+                    <option value="all">{t('bookings.allStatuses')}</option>
+                    <option value="pending_review">{t('bookings.pendingReview')}</option>
+                    <option value="approved">{t('bookings.approved')}</option>
+                    <option value="in_transit">{t('bookings.inTransit')}</option>
+                    <option value="active">{t('bookings.active')}</option>
+                    <option value="completed">{t('bookings.completed')}</option>
+                    <option value="cancelled">{t('bookings.cancelled')}</option>
                   </select>
                 </div>
                 
                 <div>
                   <label htmlFor="service_type" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    Service Type
+                    {t('bookings.serviceType')}
                   </label>
                   <select
                     id="service_type"
@@ -353,9 +353,9 @@ const BookingList = () => {
                     onChange={handleFilterChange}
                     className="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-gray-100 sm:text-sm"
                   >
-                    <option value="all">All Services</option>
-                    <option value="transport">Transportation</option>
-                    <option value="rental">Equipment Rental</option>
+                    <option value="all">{t('bookings.allServices')}</option>
+                    <option value="transport">{t('bookings.transportation')}</option>
+                    <option value="rental">{t('bookings.equipmentRental')}</option>
                   </select>
                 </div>
               </div>
@@ -363,7 +363,7 @@ const BookingList = () => {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div>
                   <label htmlFor="date_from" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    From Date
+                    {t('bookings.fromDate')}
                   </label>
                   <input
                     type="date"
@@ -377,7 +377,7 @@ const BookingList = () => {
 
                 <div>
                   <label htmlFor="date_to" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    To Date
+                    {t('bookings.toDate')}
                   </label>
                   <input
                     type="date"
@@ -398,7 +398,7 @@ const BookingList = () => {
           <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
             <div className="flex items-center justify-between">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
-                All Bookings ({filteredBookings.length})
+                {t('bookings.allBookings')} ({filteredBookings.length})
               </h3>
             </div>
           </div>
@@ -407,22 +407,22 @@ const BookingList = () => {
               <thead className="bg-gray-50 dark:bg-gray-900/50">
                 <tr>
                   <th scope="col" className="px-6 py-4 text-left text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
-                    Booking Details
+                    {t('bookings.bookingDetails')}
                   </th>
                   <th scope="col" className="px-6 py-4 text-left text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
-                    Location
+                    {t('bookings.location')}
                   </th>
                   <th scope="col" className="px-6 py-4 text-left text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
-                    Schedule
+                    {t('bookings.schedule')}
                   </th>
                   <th scope="col" className="px-6 py-4 text-left text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
-                    Status
+                    {t('bookings.status')}
                   </th>
                   <th scope="col" className="px-6 py-4 text-left text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
-                    Price
+                    {t('bookings.price')}
                   </th>
                   <th scope="col" className="px-6 py-4 text-right text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
-                    Actions
+                    {t('bookings.actions')}
                   </th>
                 </tr>
               </thead>
@@ -431,8 +431,8 @@ const BookingList = () => {
                   <tr>
                     <td colSpan="6" className="px-6 py-12 text-center">
                       <Package className="mx-auto h-12 w-12 text-gray-400 dark:text-gray-500 mb-3" />
-                      <p className="text-sm font-medium text-gray-900 dark:text-gray-100">No bookings found</p>
-                      <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Try adjusting your filters</p>
+                      <p className="text-sm font-medium text-gray-900 dark:text-gray-100">{t('bookings.notFound')}</p>
+                      <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{t('bookings.tryAdjustingFilters')}</p>
                     </td>
                   </tr>
                 ) : (
@@ -451,10 +451,10 @@ const BookingList = () => {
                           </div>
                           <div className="ml-4">
                             <div className="text-sm font-medium text-gray-900 dark:text-gray-100">
-                              {booking.service_type === 'rental' ? 'Equipment Rental' : 'Transport'} #{booking.reference || booking.id.slice(-8)}
+                              {booking.service_type === 'rental' ? t('bookings.equipmentRental') : t('bookings.transportation')} #{booking.reference || booking.id.slice(-8)}
                             </div>
                             <div className="text-sm text-gray-500 dark:text-gray-400">
-                              {VEHICLE_TYPE_LABELS[booking.truck_type] || booking.truck_type || 'Vehicle'}
+                              {VEHICLE_TYPE_LABELS[booking.truck_type] || booking.truck_type || t('bookings.vehicle')}
                             </div>
                             {user.role === 'customer' && booking.provider_company && (
                               <div className="text-xs text-primary-600 font-medium mt-1">
@@ -470,12 +470,12 @@ const BookingList = () => {
                               <>
                                 {booking.provider_company && (
                                   <div className="text-xs text-primary-600 font-medium mt-1">
-                                    Provider: {booking.provider_company}
+                                    {t('bookings.provider')}: {booking.provider_company}
                                   </div>
                                 )}
                                 {booking.customer_company && (
                                   <div className="text-xs text-green-600 font-medium mt-1">
-                                    Customer: {booking.customer_company}
+                                    {t('bookings.customer')}: {booking.customer_company}
                                   </div>
                                 )}
                               </>
@@ -488,7 +488,7 @@ const BookingList = () => {
                           <MapPin className="h-4 w-4 text-gray-400 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500 mr-1" />
                           {booking.service_type === 'rental' ? (
                             <span className="truncate max-w-48" title={booking.work_address}>
-                              {booking.work_address || 'Work location'}
+                              {booking.work_address || t('bookings.workLocation')}
                             </span>
                           ) : (
                             <>
@@ -512,13 +512,13 @@ const BookingList = () => {
                                 </span>
                               </div>
                             ) : (
-                              <span>Rental dates TBD</span>
+                              <span>{t('bookings.rentalDatesTBD')}</span>
                             )
                           ) : (
                             <>
                               {new Date(booking.pickup_date).toLocaleDateString()}
                               {booking.pickup_time && (
-                                <span className="ml-1">at {booking.pickup_time}</span>
+                                <span className="ml-1">{t('bookings.at')} {booking.pickup_time}</span>
                               )}
                             </>
                           )}
@@ -548,7 +548,7 @@ const BookingList = () => {
                             className="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded-md text-primary-700 bg-primary-100 dark:bg-primary-900 hover:bg-primary-200 transition-colors"
                           >
                             <Eye className="h-4 w-4 mr-1" />
-                            View Details
+                            {t('bookings.viewDetails')}
                           </Link>
                           {(
                             (user.role === 'provider' && ['cancelled', 'completed'].includes(booking.status)) ||
@@ -562,12 +562,12 @@ const BookingList = () => {
                               {deletingBookingId === booking.id ? (
                                 <>
                                   <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-red-700 mr-1"></div>
-                                  Deleting...
+                                  {t('bookings.deleting')}
                                 </>
                               ) : (
                                 <>
                                   <Trash2 className="h-4 w-4 mr-1" />
-                                  Delete
+                                  {t('bookings.delete')}
                                 </>
                               )}
                             </button>

@@ -58,7 +58,7 @@ const BookingDetail = () => {
   }, [booking, bookings]);
 
   const handleUpdateStatus = async (newStatus) => {
-    const confirmMessage = `Are you sure you want to change the status to ${newStatus.replace('_', ' ')}?`;
+    const confirmMessage = `${t('bookings.confirmStatusChange')} ${newStatus.replace('_', ' ')}?`;
     if (!window.confirm(confirmMessage)) {
       return;
     }
@@ -84,28 +84,28 @@ const BookingDetail = () => {
       setUpdatingAction(null);
       console.log('✅ Updating action cleared, buttons should be clickable now');
 
-      showSuccess(`Booking status updated to ${newStatus.replace('_', ' ')} successfully!`);
+      showSuccess(`${t('bookings.statusUpdated')} ${newStatus.replace('_', ' ')}!`);
       
     } catch (error) {
       console.error('❌ Error updating booking status:', error);
-      showError(`Failed to update booking status: ${error.response?.data?.error || error.message}`);
+      showError(`${t('bookings.statusUpdateFailed')}: ${error.response?.data?.error || error.message}`);
       setUpdatingAction(null);
     }
   };
 
   const handleDeleteBooking = async () => {
-    if (!window.confirm('Are you sure you want to delete this booking? This action cannot be undone.')) {
+    if (!window.confirm(t('bookings.confirmDelete'))) {
       return;
     }
 
     setUpdating(true);
     try {
       await deleteBooking(id);
-      showSuccess('Booking deleted successfully');
+      showSuccess(t('bookings.bookingDeleted'));
       navigate('/bookings');
     } catch (error) {
       console.error('Error deleting booking:', error);
-      showError('Failed to delete booking. Please try again.');
+      showError(t('bookings.deleteFailed'));
     } finally {
       setUpdating(false);
     }
@@ -153,12 +153,12 @@ const BookingDetail = () => {
 
   const getStatusLabel = (status, serviceType) => {
     const labels = {
-      pending_review: 'Pending Review',
-      approved: 'Approved',
-      in_transit: 'In Transit',
-      active: serviceType === 'rental' ? 'Equipment In Use' : 'Active',
-      completed: 'Completed',
-      cancelled: 'Cancelled'
+      pending_review: t('bookings.pendingReview'),
+      approved: t('bookings.approved'),
+      in_transit: t('bookings.inTransit'),
+      active: serviceType === 'rental' ? t('bookings.equipmentInUse') : t('bookings.active'),
+      completed: t('bookings.completed'),
+      cancelled: t('bookings.cancelled')
     };
     return labels[status] || status;
   };
@@ -174,18 +174,18 @@ const BookingDetail = () => {
     if (user?.role === 'admin') {
       // Admin actions - can change to any status except current one
       const allStatuses = [
-        { status: 'pending_review', label: 'Pending Review', color: 'yellow', icon: <Clock className="h-4 w-4 mr-1" /> },
-        { status: 'approved', label: 'Approved', color: 'blue', icon: <CheckCircle className="h-4 w-4 mr-1" /> },
-        { status: 'in_transit', label: 'In Transit', color: 'purple', icon: <Truck className="h-4 w-4 mr-1" /> },
-        { status: 'active', label: booking.service_type === 'rental' ? 'Active (Rental)' : 'Active', color: 'orange', icon: <Settings className="h-4 w-4 mr-1" /> },
-        { status: 'completed', label: 'Completed', color: 'green', icon: <CheckCircle className="h-4 w-4 mr-1" /> }
+        { status: 'pending_review', label: t('bookings.pendingReview'), color: 'yellow', icon: <Clock className="h-4 w-4 mr-1" /> },
+        { status: 'approved', label: t('bookings.approved'), color: 'blue', icon: <CheckCircle className="h-4 w-4 mr-1" /> },
+        { status: 'in_transit', label: t('bookings.inTransit'), color: 'purple', icon: <Truck className="h-4 w-4 mr-1" /> },
+        { status: 'active', label: booking.service_type === 'rental' ? `${t('bookings.active')} (${t('bookings.rentalEquipment')})` : t('bookings.active'), color: 'orange', icon: <Settings className="h-4 w-4 mr-1" /> },
+        { status: 'completed', label: t('bookings.completed'), color: 'green', icon: <CheckCircle className="h-4 w-4 mr-1" /> }
       ];
       
       // Add status change buttons for all statuses except current one
       allStatuses.forEach(statusOption => {
         if (statusOption.status !== booking.status) {
           actions.push({
-            label: `Set to ${statusOption.label}`,
+            label: `${t('bookings.setTo')} ${statusOption.label}`,
             action: statusOption.status,
             color: statusOption.color,
             icon: statusOption.icon,
@@ -196,7 +196,7 @@ const BookingDetail = () => {
       
       // Add delete button
       actions.push({
-        label: 'Delete Booking',
+        label: t('bookings.deleteBooking'),
         action: 'delete',
         color: 'red',
         icon: <Trash2 className="h-4 w-4 mr-1" />,
@@ -208,14 +208,14 @@ const BookingDetail = () => {
       if (booking.status === 'pending_review') {
         actions.push(
           { 
-            label: 'Edit Booking', 
+            label: t('bookings.editBooking'), 
             action: 'edit', 
             color: 'blue',
             icon: <Edit className="h-4 w-4 mr-1" />,
             path: `/bookings/${booking.id}/edit`
           },
           { 
-            label: 'Cancel', 
+            label: t('bookings.cancel'), 
             action: 'cancelled', 
             color: 'red',
             icon: <XCircle className="h-4 w-4 mr-1" />,
@@ -226,7 +226,7 @@ const BookingDetail = () => {
       
       if (booking.status === 'in_transit') {
         actions.push({
-          label: 'Confirm Delivery',
+          label: t('bookings.confirmDelivery'),
           action: 'completed',
           color: 'green',
           icon: <CheckCircle className="h-4 w-4 mr-1" />,
@@ -236,7 +236,7 @@ const BookingDetail = () => {
       
       if (booking.status === 'active' && booking.service_type === 'rental') {
         actions.push({
-          label: 'Return Equipment',
+          label: t('bookings.returnEquipment'),
           action: 'completed',
           color: 'green',
           icon: <CheckCircle className="h-4 w-4 mr-1" />,
@@ -246,7 +246,7 @@ const BookingDetail = () => {
       
       if (['pending_review', 'cancelled', 'completed'].includes(booking.status)) {
         actions.push({
-          label: 'Delete Booking',
+          label: t('bookings.deleteBooking'),
           action: 'delete',
           color: 'red',
           icon: <Trash2 className="h-4 w-4 mr-1" />,
@@ -257,25 +257,25 @@ const BookingDetail = () => {
       // Provider actions
       if (!['completed', 'cancelled'].includes(booking.status)) {
         actions.push({
-          label: 'Send Message',
+          label: t('bookings.sendMessage'),
           action: 'message',
           color: 'green',
           icon: <MessageSquare className="h-4 w-4 mr-1" />,
-          onClick: () => alert('Messaging feature coming soon!')
+          onClick: () => alert(t('bookings.messagingComingSoon'))
         });
       }
       
       if (booking.status === 'pending_review') {
         actions.push(
           { 
-            label: 'Approve Booking', 
+            label: t('bookings.approveBooking'), 
             action: 'approved', 
             color: 'blue',
             icon: <CheckCircle className="h-4 w-4 mr-1" />,
             onClick: () => handleUpdateStatus('approved')
           },
           { 
-            label: 'Reject Booking', 
+            label: t('bookings.rejectBooking'), 
             action: 'cancelled', 
             color: 'red',
             icon: <XCircle className="h-4 w-4 mr-1" />,
@@ -284,7 +284,7 @@ const BookingDetail = () => {
         );
       } else if (booking.status === 'approved') {
         const nextStatus = booking.service_type === 'rental' ? 'active' : 'in_transit';
-        const actionLabel = booking.service_type === 'rental' ? 'Start Rental' : 'Start Trip';
+        const actionLabel = booking.service_type === 'rental' ? t('bookings.startRental') : t('bookings.startTrip');
         const actionIcon = booking.service_type === 'rental' ? 
           <Settings className="h-4 w-4 mr-1" /> : 
           <Truck className="h-4 w-4 mr-1" />;
@@ -301,7 +301,7 @@ const BookingDetail = () => {
       
       if (['cancelled', 'completed'].includes(booking.status)) {
         actions.push({
-          label: 'Delete Booking',
+          label: t('bookings.deleteBooking'),
           action: 'delete',
           color: 'red',
           icon: <Trash2 className="h-4 w-4 mr-1" />,
@@ -346,13 +346,13 @@ const BookingDetail = () => {
     return (
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Booking not found</h2>
-          <p className="mt-2 text-gray-600 dark:text-gray-400">The booking you're looking for doesn't exist.</p>
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">{t('bookings.bookingNotFound')}</h2>
+          <p className="mt-2 text-gray-600 dark:text-gray-400">{t('bookings.bookingNotFoundDesc')}</p>
           <button
             onClick={() => navigate('/bookings')}
             className="mt-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-accent-500 hover:bg-accent-600 transition-colors"
           >
-            Back to Bookings
+            {t('bookings.backToBookings')}
           </button>
         </div>
       </div>
@@ -369,7 +369,7 @@ const BookingDetail = () => {
             className="inline-flex items-center text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:text-gray-200 mb-4"
           >
             <ArrowLeft className="h-4 w-4 mr-1" />
-            Back to Bookings
+            {t('bookings.backToBookings')}
           </button>
           
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
@@ -381,10 +381,10 @@ const BookingDetail = () => {
               )}
               <div>
                 <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100">
-                  {booking.service_type === 'rental' ? 'Equipment Rental' : 'Booking'} #{booking.reference || booking.id.slice(-8)}
+                  {booking.service_type === 'rental' ? t('bookings.equipmentRental') : t('bookings.myBookings').replace(/s$/, '')} #{booking.reference || booking.id.slice(-8)}
                 </h1>
                 <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-                  Created on {new Date(booking.created_at).toLocaleDateString()} at {new Date(booking.created_at).toLocaleTimeString()}
+                  {t('bookings.createdOn')} {new Date(booking.created_at).toLocaleDateString()} {t('bookings.at')} {new Date(booking.created_at).toLocaleTimeString()}
                 </p>
                 <div className="mt-2 flex items-center flex-wrap gap-2">
                   <div className="flex items-center">
@@ -396,7 +396,7 @@ const BookingDetail = () => {
                   {booking.service_type === 'rental' && (
                     <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-orange-100 text-orange-800">
                       <Settings className="h-3 w-3 mr-1" />
-                      Rental Equipment
+                      {t('bookings.rentalEquipment')}
                     </span>
                   )}
                 </div>
@@ -432,14 +432,14 @@ const BookingDetail = () => {
             {/* Route Information */}
             <div className="bg-white dark:bg-gray-800 shadow-sm rounded-lg overflow-hidden">
               <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
-                <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">Route Information</h3>
+                <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">{t('bookings.routeInformation')}</h3>
               </div>
               <div className="px-6 py-6">
                 <div className="space-y-4">
                   <div className="flex items-start">
                     <MapPin className="h-5 w-5 text-green-500 mt-0.5" />
                     <div className="ml-3">
-                      <p className="text-sm font-medium text-gray-900 dark:text-gray-100">Pickup Location</p>
+                      <p className="text-sm font-medium text-gray-900 dark:text-gray-100">{t('bookings.pickupLocation')}</p>
                       <p className="text-sm text-gray-600 dark:text-gray-400">{booking.pickup_address}</p>
                       <p className="text-sm text-gray-600 dark:text-gray-400">{booking.pickup_city}</p>
                     </div>
@@ -448,7 +448,7 @@ const BookingDetail = () => {
                   <div className="flex items-start">
                     <MapPin className="h-5 w-5 text-red-500 mt-0.5" />
                     <div className="ml-3">
-                      <p className="text-sm font-medium text-gray-900 dark:text-gray-100">Destination</p>
+                      <p className="text-sm font-medium text-gray-900 dark:text-gray-100">{t('bookings.destination')}</p>
                       <p className="text-sm text-gray-600 dark:text-gray-400">{booking.destination_address}</p>
                       <p className="text-sm text-gray-600 dark:text-gray-400">{booking.destination_city}</p>
                     </div>
@@ -457,17 +457,17 @@ const BookingDetail = () => {
                   <div className="flex items-start">
                     <Calendar className="h-5 w-5 text-blue-500 mt-0.5" />
                     <div className="ml-3">
-                      <p className="text-sm font-medium text-gray-900 dark:text-gray-100">Pickup Date & Time</p>
+                      <p className="text-sm font-medium text-gray-900 dark:text-gray-100">{t('bookings.pickupDate')} & {t('bookings.pickupTime')}</p>
                       <p className="text-sm text-gray-600 dark:text-gray-400">
                         {new Date(booking.pickup_date).toLocaleDateString()}
-                        {booking.pickup_time && ` at ${booking.pickup_time}`}
+                        {booking.pickup_time && ` ${t('bookings.at')} ${booking.pickup_time}`}
                       </p>
                     </div>
                   </div>
 
                   {booking.estimated_distance && (
                     <div className="flex justify-between text-sm">
-                      <span className="text-gray-500 dark:text-gray-400">Estimated Distance:</span>
+                      <span className="text-gray-500 dark:text-gray-400">{t('bookings.estimatedDuration')}:</span>
                       <span className="font-medium">{booking.estimated_distance} km</span>
                     </div>
                   )}
@@ -479,7 +479,7 @@ const BookingDetail = () => {
             {booking.service_type !== 'rental' && (
               <div className="bg-white dark:bg-gray-800 shadow-sm rounded-lg overflow-hidden">
                 <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
-                  <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">Cargo Information</h3>
+                  <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">{t('bookings.cargoInformation')}</h3>
                 </div>
                 <div className="px-6 py-6">
                   <div className="space-y-4">
