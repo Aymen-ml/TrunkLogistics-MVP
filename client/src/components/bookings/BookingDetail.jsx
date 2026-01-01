@@ -484,7 +484,7 @@ const BookingDetail = () => {
                 <div className="px-6 py-6">
                   <div className="space-y-4">
                     <div>
-                      <p className="text-sm font-medium text-gray-900 dark:text-gray-100">Description</p>
+                      <p className="text-sm font-medium text-gray-900 dark:text-gray-100">{t('bookings.description')}</p>
                       <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">{booking.cargo_description}</p>
                     </div>
                     
@@ -492,7 +492,7 @@ const BookingDetail = () => {
                       <div className="flex items-center">
                         <Weight className="h-4 w-4 text-gray-400 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500 mr-2" />
                         <div>
-                          <p className="text-sm font-medium text-gray-900 dark:text-gray-100">Weight</p>
+                          <p className="text-sm font-medium text-gray-900 dark:text-gray-100">{t('bookings.weight')}</p>
                           <p className="text-sm text-gray-600 dark:text-gray-400">{booking.cargo_weight?.toLocaleString()} kg</p>
                         </div>
                       </div>
@@ -501,7 +501,7 @@ const BookingDetail = () => {
                         <div className="flex items-center">
                           <Package className="h-4 w-4 text-gray-400 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500 mr-2" />
                           <div>
-                            <p className="text-sm font-medium text-gray-900 dark:text-gray-100">Volume</p>
+                            <p className="text-sm font-medium text-gray-900 dark:text-gray-100">{t('bookings.volume')}</p>
                             <p className="text-sm text-gray-600 dark:text-gray-400">{booking.cargo_volume} m³</p>
                           </div>
                         </div>
@@ -510,7 +510,7 @@ const BookingDetail = () => {
 
                     {booking.notes && (
                       <div>
-                        <p className="text-sm font-medium text-gray-900 dark:text-gray-100">Additional Notes</p>
+                        <p className="text-sm font-medium text-gray-900 dark:text-gray-100">{t('bookings.additionalNotes')}</p>
                         <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">{booking.notes}</p>
                       </div>
                     )}
@@ -605,7 +605,7 @@ const BookingDetail = () => {
                       <div className="flex items-start">
                         <MessageSquare className="h-4 w-4 text-gray-400 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500 mt-0.5 mr-2" />
                         <div>
-                          <p className="text-sm font-medium text-gray-900 dark:text-gray-100">Additional Notes</p>
+                          <p className="text-sm font-medium text-gray-900 dark:text-gray-100">{t('bookings.additionalNotes')}</p>
                           <p className="text-sm text-gray-600 dark:text-gray-400">{booking.notes}</p>
                         </div>
                       </div>
@@ -619,7 +619,7 @@ const BookingDetail = () => {
             <div className="bg-white dark:bg-gray-800 shadow-sm rounded-lg overflow-hidden">
               <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
                 <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">
-                  {booking.service_type === 'rental' ? 'Equipment' : 'Truck'} Information
+                  {booking.service_type === 'rental' ? t('bookings.equipmentInformation') : t('bookings.truckInformation')}
                 </h3>
               </div>
               <div className="px-6 py-6">
@@ -644,7 +644,7 @@ const BookingDetail = () => {
                 <div className="space-y-3">
                   {/* Vehicle Type */}
                   <div className="flex justify-between items-center py-2 border-b border-gray-100">
-                    <span className="text-sm text-gray-500 dark:text-gray-400">Type:</span>
+                    <span className="text-sm text-gray-500 dark:text-gray-400">{t('bookings.type')}:</span>
                     <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                       {booking.truck_type || 'N/A'}
                     </span>
@@ -653,7 +653,7 @@ const BookingDetail = () => {
                   {/* Capacity Weight */}
                   <div className="flex justify-between items-center py-2 border-b border-gray-100">
                     <span className="text-sm text-gray-500 dark:text-gray-400">
-                      {booking.service_type === 'rental' ? 'Operating Weight:' : 'Capacity:'}
+                      {booking.service_type === 'rental' ? t('bookings.operatingWeight') : t('bookings.capacity')}:
                     </span>
                     <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                       {(booking.truck_capacity?.toLocaleString() || booking.capacity_weight?.toLocaleString() || 'N/A')} 
@@ -664,7 +664,7 @@ const BookingDetail = () => {
                   {/* Year */}
                   {(booking.truck_year || booking.year) && (
                     <div className="flex justify-between items-center py-2 border-b border-gray-100">
-                      <span className="text-sm text-gray-500 dark:text-gray-400">Year:</span>
+                      <span className="text-sm text-gray-500 dark:text-gray-400">{t('bookings.year')}:</span>
                       <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                         {booking.truck_year || booking.year}
                       </span>
@@ -674,7 +674,7 @@ const BookingDetail = () => {
                   {/* Volume Capacity */}
                   {(booking.capacity_volume) && (
                     <div className="flex justify-between items-center py-2 border-b border-gray-100">
-                      <span className="text-sm text-gray-500 dark:text-gray-400">Volume:</span>
+                      <span className="text-sm text-gray-500 dark:text-gray-400">{t('bookings.volume')}:</span>
                       <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                         {booking.capacity_volume} m³
                       </span>
@@ -684,9 +684,9 @@ const BookingDetail = () => {
                   {/* Pricing Information */}
                   {booking.pricing_type && (
                     <div className="flex justify-between items-center py-2 border-b border-gray-100">
-                      <span className="text-sm text-gray-500 dark:text-gray-400">Pricing Type:</span>
+                      <span className="text-sm text-gray-500 dark:text-gray-400">{t('bookings.pricingType')}:</span>
                       <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
-                        {booking.pricing_type === 'fixed' ? 'Fixed Price' : 'Per Kilometer'}
+                        {booking.pricing_type === 'fixed' ? t('bookings.fixedPrice') : t('bookings.perKilometer')}
                       </span>
                     </div>
                   )}
@@ -694,7 +694,7 @@ const BookingDetail = () => {
                   {/* Price per km or Fixed price */}
                   {booking.pricing_type === 'per_km' && booking.price_per_km && (
                     <div className="flex justify-between items-center py-2 border-b border-gray-100">
-                      <span className="text-sm text-gray-500 dark:text-gray-400">Rate:</span>
+                      <span className="text-sm text-gray-500 dark:text-gray-400">{t('bookings.rate')}:</span>
                       <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                         ${booking.price_per_km}/km
                       </span>
@@ -703,7 +703,7 @@ const BookingDetail = () => {
                   
                   {booking.pricing_type === 'fixed' && booking.fixed_price && (
                     <div className="flex justify-between items-center py-2 border-b border-gray-100">
-                      <span className="text-sm text-gray-500 dark:text-gray-400">Fixed Rate:</span>
+                      <span className="text-sm text-gray-500 dark:text-gray-400">{t('bookings.fixedRate')}:</span>
                       <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                         ${booking.fixed_price}
                       </span>
@@ -718,15 +718,15 @@ const BookingDetail = () => {
           <div className="lg:col-span-1 space-y-6">
             {/* Pricing */}
             <div className="bg-white dark:bg-gray-800 shadow-sm rounded-lg p-6">
-              <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4">Pricing</h3>
+              <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4">{t('bookings.pricing')}</h3>
               <div className="space-y-3">
                 <div className="flex justify-between text-sm">
-                  <span className="text-gray-500 dark:text-gray-400">Base Price:</span>
+                  <span className="text-gray-500 dark:text-gray-400">{t('bookings.basePrice')}:</span>
                   <span className="font-medium">${booking.total_price?.toLocaleString()}</span>
                 </div>
                 <div className="pt-3 border-t border-gray-200 dark:border-gray-700">
                   <div className="flex justify-between">
-                    <span className="text-lg font-medium text-gray-900 dark:text-gray-100">Total:</span>
+                    <span className="text-lg font-medium text-gray-900 dark:text-gray-100">{t('bookings.total')}:</span>
                     <span className="text-lg font-bold text-green-600">
                       ${booking.total_price?.toLocaleString()}
                     </span>
@@ -738,19 +738,19 @@ const BookingDetail = () => {
             {/* Contact Information */}
             <div className="bg-white dark:bg-gray-800 shadow-sm rounded-lg p-6">
               <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4">
-                {user.role === 'customer' ? 'Provider' : 'Customer'} Contact
+                {user.role === 'customer' ? t('bookings.providerContact') : t('bookings.customerContact')}
               </h3>
               <div className="space-y-4">
                 {/* Company Name */}
                 <div>
                   <div className="flex items-center mb-2">
                     <Building className="h-5 w-5 text-primary-600 mr-2" />
-                    <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Company</p>
+                    <p className="text-sm font-medium text-gray-500 dark:text-gray-400">{t('bookings.company')}</p>
                   </div>
                   <p className="text-base font-semibold text-gray-900 dark:text-gray-100 ml-7">
                     {user.role === 'customer' 
-                      ? (booking.provider_company || 'Not provided') 
-                      : (booking.customer_company || 'Not provided')
+                      ? (booking.provider_company || t('bookings.notProvided')) 
+                      : (booking.customer_company || t('bookings.notProvided'))
                     }
                   </p>
                 </div>
@@ -759,12 +759,12 @@ const BookingDetail = () => {
                 <div>
                   <div className="flex items-center mb-2">
                     <User className="h-5 w-5 text-purple-600 mr-2" />
-                    <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Contact Person</p>
+                    <p className="text-sm font-medium text-gray-500 dark:text-gray-400">{t('bookings.contactPerson')}</p>
                   </div>
                   <p className="text-base font-semibold text-gray-900 dark:text-gray-100 ml-7">
                     {user.role === 'customer' 
-                      ? (booking.provider_name || `${booking.provider_first_name || ''} ${booking.provider_last_name || ''}`.trim() || 'Not provided')
-                      : (booking.customer_name || `${booking.customer_first_name || ''} ${booking.customer_last_name || ''}`.trim() || 'Not provided')
+                      ? (booking.provider_name || `${booking.provider_first_name || ''} ${booking.provider_last_name || ''}`.trim() || t('bookings.notProvided'))
+                      : (booking.customer_name || `${booking.customer_first_name || ''} ${booking.customer_last_name || ''}`.trim() || t('bookings.notProvided'))
                     }
                   </p>
                 </div>
@@ -773,12 +773,12 @@ const BookingDetail = () => {
                 <div>
                   <div className="flex items-center mb-2">
                     <Phone className="h-5 w-5 text-green-600 mr-2" />
-                    <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Phone Number</p>
+                    <p className="text-sm font-medium text-gray-500 dark:text-gray-400">{t('bookings.phone')}</p>
                   </div>
                   <p className="text-base font-semibold text-gray-900 dark:text-gray-100 ml-7">
                     {user.role === 'customer' 
-                      ? (booking.provider_phone || 'Not provided') 
-                      : (booking.customer_phone || 'Not provided')
+                      ? (booking.provider_phone || t('bookings.notProvided')) 
+                      : (booking.customer_phone || t('bookings.notProvided'))
                     }
                   </p>
                 </div>
@@ -789,20 +789,20 @@ const BookingDetail = () => {
                 className="mt-6 w-full inline-flex justify-center items-center px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:bg-gray-900"
               >
                 <MessageSquare className="h-4 w-4 mr-2" />
-                Send Message
+                {t('bookings.sendMessage')}
               </button>
             </div>
 
             {/* Timeline */}
             <div className="bg-white dark:bg-gray-800 shadow-sm rounded-lg p-6">
-              <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4">Timeline</h3>
+              <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4">{t('bookings.timeline')}</h3>
               <div className="space-y-3">
                 <div className="flex items-center text-sm">
                   <div className="flex-shrink-0 w-2 h-2 bg-blue-600 rounded-full"></div>
                   <div className="ml-3">
-                    <p className="font-medium text-gray-900 dark:text-gray-100">Booking Created</p>
+                    <p className="font-medium text-gray-900 dark:text-gray-100">{t('bookings.bookingCreated')}</p>
                     <p className="text-gray-500 dark:text-gray-400">
-                      {new Date(booking.created_at).toLocaleDateString()} at {new Date(booking.created_at).toLocaleTimeString()}
+                      {new Date(booking.created_at).toLocaleDateString()} {t('bookings.at')} {new Date(booking.created_at).toLocaleTimeString()}
                     </p>
                   </div>
                 </div>
@@ -811,9 +811,9 @@ const BookingDetail = () => {
                   <div className="flex items-center text-sm">
                     <div className="flex-shrink-0 w-2 h-2 bg-green-600 rounded-full"></div>
                     <div className="ml-3">
-                      <p className="font-medium text-gray-900 dark:text-gray-100">Status Updated</p>
+                      <p className="font-medium text-gray-900 dark:text-gray-100">{t('bookings.statusChanged')}</p>
                       <p className="text-gray-500 dark:text-gray-400">
-                        {new Date(booking.updated_at).toLocaleDateString()} at {new Date(booking.updated_at).toLocaleTimeString()}
+                        {new Date(booking.updated_at).toLocaleDateString()} {t('bookings.at')} {new Date(booking.updated_at).toLocaleTimeString()}
                       </p>
                     </div>
                   </div>
