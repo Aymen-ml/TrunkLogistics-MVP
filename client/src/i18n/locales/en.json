@@ -696,13 +696,17 @@
     "dashboard": {
       "title": "Dashboard",
       "analytics": "Analytics",
-      "overview": "Overview"
+      "overview": "Overview",
+      "byServiceType": "By Service Type"
     },
     "users": "Users",
     "bookings": "Bookings",
     "trucks": "Trucks",
     "providers": {
       "title": "Providers",
+      "verification": "Provider Verification",
+      "viewAndVerify": "Review and verify provider applications",
+      "pendingVerification": "Pending Verification",
       "verified": "Verified",
       "unverified": "Unverified",
       "viewDetails": "View Details",
@@ -895,6 +899,7 @@
     },
     "trucksAdmin": {
       "title": "Trucks",
+      "viewAndFilter": "View and filter all trucks across providers",
       "refresh": "Refresh",
       "viewDetails": "View Details"
     }

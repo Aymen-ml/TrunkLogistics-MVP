@@ -696,13 +696,17 @@
     "dashboard": {
       "title": "Tableau de bord",
       "analytics": "Analytique",
-      "overview": "Aperçu"
+      "overview": "Aperçu",
+      "byServiceType": "Par Type de Service"
     },
     "users": "Utilisateurs",
     "bookings": "Réservations",
     "trucks": "Camions",
     "providers": {
       "title": "Fournisseurs",
+      "verification": "Vérification des Prestataires",
+      "viewAndVerify": "Examiner et vérifier les candidatures des prestataires",
+      "pendingVerification": "Vérification en Attente",
       "verified": "Vérifié",
       "unverified": "Non vérifié",
       "viewDetails": "Voir les détails",
@@ -895,6 +899,7 @@
     },
     "trucksAdmin": {
       "title": "Camions",
+      "viewAndFilter": "Voir et filtrer tous les camions de tous les prestataires",
       "refresh": "Actualiser",
       "viewDetails": "Voir les détails"
     }

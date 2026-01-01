@@ -191,8 +191,8 @@ const AdminAnalytics = () => {
 
   const revenueByServiceData = useMemo(() => {
     return [
-      { name: 'Transportation', revenue: byService.transport.revenue, bookings: byService.transport.count },
-      { name: 'Rental', revenue: byService.rental.revenue, bookings: byService.rental.count }
+      { name: t('bookings.transportation'), revenue: byService.transport.revenue, bookings: byService.transport.count },
+      { name: t('bookings.equipmentRental'), revenue: byService.rental.revenue, bookings: byService.rental.count }
     ];
   }, [byService]);
 
@@ -482,14 +482,14 @@ const AdminAnalytics = () => {
             {/* Service Type Breakdown */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
               <ServiceCard 
-                title="Transportation" 
+                title={t('bookings.transportation')} 
                 count={byService.transport.count} 
                 revenue={byService.transport.revenue} 
                 percentage={kpis.total > 0 ? Math.round((byService.transport.count / kpis.total) * 100) : 0}
                 color="from-blue-500 to-primary-600"
               />
               <ServiceCard 
-                title="Rental" 
+                title={t('bookings.equipmentRental')} 
                 count={byService.rental.count} 
                 revenue={byService.rental.revenue} 
                 percentage={kpis.total > 0 ? Math.round((byService.rental.count / kpis.total) * 100) : 0}
@@ -610,16 +610,16 @@ const AdminAnalytics = () => {
               <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-6">Revenue Analysis</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">By Service Type</h4>
+                  <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">{t('admin.dashboard.byServiceType')}</h4>
                   <div className="space-y-3">
                     <RevenueBar 
-                      label="Transportation" 
+                      label={t('bookings.transportation')} 
                       value={byService.transport.revenue} 
                       max={kpis.totalRevenue} 
                       color="bg-blue-500"
                     />
                     <RevenueBar 
-                      label="Rental" 
+                      label={t('bookings.equipmentRental')} 
                       value={byService.rental.revenue} 
                       max={kpis.totalRevenue} 
                       color="bg-orange-500"
