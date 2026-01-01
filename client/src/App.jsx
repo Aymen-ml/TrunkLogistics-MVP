@@ -40,6 +40,7 @@ import LandingPage from './components/landing/LandingPage'
 import AboutUs from './components/legal/AboutUs'
 import PrivacyPolicy from './components/legal/PrivacyPolicy'
 import TermsOfUse from './components/legal/TermsOfUse'
+import CookiePolicy from './components/legal/CookiePolicy'
 import { useState, useEffect } from 'react'
 
 // Wrapper component to force re-render on language change
@@ -70,6 +71,7 @@ function AppContent() {
                 <Route path="/about" element={<AboutUs />} />
                 <Route path="/privacy" element={<PrivacyPolicy />} />
                 <Route path="/terms" element={<TermsOfUse />} />
+                <Route path="/cookies" element={<CookiePolicy />} />
                 
                 {/* All other routes with Navbar */}
                 <Route path="/*" element={

@@ -669,7 +669,7 @@ const LandingPage = () => {
               <div className="flex space-x-6 mt-4 md:mt-0">
                 <Link to="/privacy" className="text-gray-400 hover:text-white text-sm transition">{t('footer.company.privacy')}</Link>
                 <Link to="/terms" className="text-gray-400 hover:text-white text-sm transition">{t('footer.company.terms')}</Link>
-                <Link to="/privacy" className="text-gray-400 hover:text-white text-sm transition">{t('footer.cookiePolicy')}</Link>
+                <Link to="/cookies" className="text-gray-400 hover:text-white text-sm transition">{t('footer.cookiePolicy')}</Link>
               </div>
             </div>
           </div>

@@ -916,5 +916,470 @@
       "recent": "Récent",
       "inactive": "Inactif"
     }
+  },
+  "legal": {
+    "backToHome": "Retour à l'accueil",
+    "lastUpdated": "Dernière mise à jour",
+    "about": {
+      "title": "À Propos de Nous",
+      "subtitle": "Connecter les entreprises aux transporteurs de confiance à travers le sud de l'Algérie",
+      "mission": {
+        "title": "Notre Mission",
+        "description1": "movelinker se consacre à révolutionner l'industrie logistique dans le sud de l'Algérie en créant une plateforme transparente et efficace qui connecte les entreprises aux transporteurs vérifiés. Nous croyons en l'autonomisation des clients et des prestataires grâce à la technologie, rendant la logistique accessible, fiable et orientée vers la croissance.",
+        "description2": "Notre plateforme comble le fossé entre l'offre et la demande, garantissant que chaque expédition atteint sa destination en toute sécurité et à temps tout en fournissant aux prestataires les outils dont ils ont besoin pour développer leur activité."
+      },
+      "whatWeDo": {
+        "title": "Ce Que Nous Faisons",
+        "transport": {
+          "title": "Services de Transport",
+          "description": "Connecter les entreprises avec des transporteurs vérifiés pour un transport sûr et fiable des marchandises à travers le sud de l'Algérie."
+        },
+        "fleet": {
+          "title": "Gestion de Flotte",
+          "description": "Donner aux transporteurs les outils pour gérer leur flotte, suivre les réservations et développer leur activité."
+        },
+        "platform": {
+          "title": "Plateforme Digitale",
+          "description": "Fournir une plateforme conviviale avec suivi en temps réel, tarification transparente et expérience de réservation fluide."
+        }
+      },
+      "whyChoose": {
+        "title": "Pourquoi Choisir movelinker ?",
+        "verified": {
+          "title": "Transporteurs Vérifiés",
+          "description": "Tous les transporteurs font l'objet d'une vérification approfondie et de contrôles de documents"
+        },
+        "transparent": {
+          "title": "Tarification Transparente",
+          "description": "Prix clairs et directs sans frais cachés ni surprises"
+        },
+        "reliable": {
+          "title": "Service Fiable",
+          "description": "Suivi en temps réel et support professionnel tout au long de votre parcours"
+        },
+        "growth": {
+          "title": "Axé sur la Croissance",
+          "description": "Outils et informations pour aider les entreprises et les prestataires à évoluer efficacement"
+        }
+      },
+      "commitment": {
+        "title": "Notre Engagement",
+        "description": "Nous nous engageons à construire la plateforme logistique la plus fiable et la plus efficace du sud de l'Algérie. Grâce à l'innovation continue, notre approche centrée sur le client et notre dévouement inébranlable à la qualité, nous visons à transformer la façon dont les entreprises et les transporteurs se connectent et collaborent."
+      },
+      "contact": {
+        "title": "Contactez-nous",
+        "description": "Des questions ou vous voulez en savoir plus ? Nous serions ravis de vous entendre."
+      }
+    },
+    "terms": {
+      "title": "Conditions d'Utilisation",
+      "subtitle": "Dernière mise à jour : 27 octobre 2025",
+      "intro1": "Bienvenue sur movelinker. Ces Conditions d'Utilisation (\"Conditions\") régissent votre accès et votre utilisation de notre plateforme, services et fonctionnalités. En accédant ou en utilisant movelinker, vous acceptez d'être lié par ces Conditions.",
+      "intro2": "Veuillez lire attentivement ces Conditions avant d'utiliser notre plateforme. Si vous n'acceptez pas ces Conditions, vous ne devez pas utiliser nos services.",
+      "acceptance": {
+        "title": "1. Acceptation des Conditions",
+        "description": "En créant un compte ou en utilisant movelinker, vous reconnaissez avoir lu, compris et accepté d'être lié par ces Conditions. Vous acceptez également de vous conformer à toutes les lois et règlements applicables. Pour utiliser nos services, vous devez :",
+        "list": [
+          "Avoir au moins 18 ans ou l'âge de la majorité dans votre juridiction",
+          "Avoir la capacité juridique de conclure des contrats contraignants",
+          "Accepter ces Conditions et notre Politique de Confidentialité",
+          "Fournir des informations exactes et complètes lors de l'inscription"
+        ]
+      },
+      "services": {
+        "title": "2. Description des Services",
+        "description": "movelinker fournit une plateforme numérique qui :",
+        "list": [
+          "Connecte les entreprises (\"Clients\") avec les prestataires de services de camionnage (\"Prestataires\")",
+          "Facilite la réservation et la gestion des services de transport",
+          "Fournit des outils pour la gestion de flotte et l'analytique",
+          "Offre des fonctionnalités de suivi en temps réel et de communication"
+        ],
+        "note": "Nous ne possédons ni n'exploitons de camions. Nous sommes une plateforme intermédiaire reliant les Clients aux Prestataires indépendants."
+      },
+      "accounts": {
+        "title": "3. Comptes Utilisateurs",
+        "registration": {
+          "title": "3.1 Inscription au Compte",
+          "description": "Pour accéder à certaines fonctionnalités, vous devez créer un compte. Vous acceptez de :",
+          "list": [
+            "Fournir des informations exactes, actuelles et complètes",
+            "Maintenir et mettre à jour vos informations pour les garder exactes",
+            "Maintenir la sécurité des identifiants de votre compte",
+            "Nous informer immédiatement de tout accès non autorisé",
+            "Être responsable de toutes les activités sous votre compte"
+          ]
+        },
+        "types": {
+          "title": "3.2 Types de Comptes",
+          "customer": "Compte Client : Pour les entreprises cherchant des services de transport",
+          "provider": "Compte Prestataire : Pour les propriétaires/opérateurs de camions offrant des services (sous réserve de vérification)",
+          "admin": "Compte Administrateur : Pour la gestion de la plateforme (sur invitation uniquement)"
+        },
+        "verification": {
+          "title": "3.3 Vérification",
+          "description": "Les comptes Prestataire nécessitent une vérification avant activation. Nous nous réservons le droit de :",
+          "list": [
+            "Demander des documents ou informations supplémentaires",
+            "Vérifier l'authenticité des documents soumis",
+            "Approuver ou rejeter les candidatures à notre discrétion",
+            "Suspendre ou résilier les comptes qui échouent à la vérification"
+          ]
+        }
+      },
+      "conduct": {
+        "title": "4. Conduite des Utilisateurs et Activités Interdites",
+        "description": "Vous acceptez de ne pas :",
+        "list": [
+          "Violer les lois, règlements ou droits de tiers",
+          "Fournir des informations fausses, trompeuses ou frauduleuses",
+          "Usurper l'identité de toute personne ou entité",
+          "Interférer avec ou perturber la plateforme ou les serveurs",
+          "Tenter d'obtenir un accès non autorisé à toute partie de la plateforme",
+          "Utiliser des systèmes automatisés (bots, scrapers) sans autorisation",
+          "Harceler, abuser ou nuire à d'autres utilisateurs",
+          "Publier ou transmettre du code ou du contenu malveillant",
+          "Utiliser la plateforme à des fins illégales ou non autorisées",
+          "Contourner les fonctionnalités de sécurité ou les contrôles d'accès"
+        ]
+      },
+      "bookings": {
+        "title": "5. Réservations et Transactions",
+        "process": {
+          "title": "5.1 Processus de Réservation",
+          "list": [
+            "Les Clients peuvent rechercher et réserver des camions disponibles via la plateforme",
+            "Les Prestataires peuvent accepter ou refuser les demandes de réservation",
+            "Toutes les réservations sont soumises à la disponibilité et à l'approbation du Prestataire",
+            "Les prix sont déterminés par les Prestataires et affichés avant confirmation"
+          ]
+        },
+        "payment": {
+          "title": "5.2 Paiement",
+          "list": [
+            "Les conditions de paiement sont convenues entre les Clients et les Prestataires",
+            "movelinker peut faciliter les paiements mais n'est pas responsable des litiges de paiement",
+            "Tous les frais et charges doivent être payés conformément aux conditions convenues",
+            "Les politiques de remboursement sont déterminées par les Prestataires individuels"
+          ]
+        },
+        "cancellation": {
+          "title": "5.3 Annulation",
+          "list": [
+            "Les politiques d'annulation varient selon le Prestataire",
+            "Les Clients peuvent être soumis à des frais d'annulation",
+            "Les Prestataires doivent honorer les réservations confirmées ou faire face à des pénalités",
+            "Nous nous réservons le droit d'annuler les réservations en cas de fraude ou de violation"
+          ]
+        }
+      },
+      "liability": {
+        "title": "6. Limitation de Responsabilité",
+        "description": "Dans la mesure maximale permise par la loi :",
+        "list": [
+          "movelinker est une plateforme reliant les Clients et les Prestataires",
+          "Nous ne sommes pas responsables de la qualité, sécurité ou légalité des services fournis",
+          "Nous ne sommes pas responsables des dommages directs, indirects, accessoires ou consécutifs",
+          "Notre responsabilité totale ne dépassera pas les frais que vous avez payés au cours des 12 derniers mois",
+          "Nous ne garantissons pas un service ininterrompu ou sans erreur",
+          "Les Prestataires sont des entrepreneurs indépendants, pas des employés ou agents de movelinker"
+        ]
+      },
+      "intellectual": {
+        "title": "7. Propriété Intellectuelle",
+        "description": "Tout le contenu, les fonctionnalités et les fonctions sur movelinker sont notre propriété ou celle de nos concédants de licence et sont protégés par les lois sur les droits d'auteur, les marques et autres lois sur la propriété intellectuelle. Vous ne pouvez pas :",
+        "list": [
+          "Copier, modifier ou créer des œuvres dérivées",
+          "Distribuer, vendre ou louer toute partie de la plateforme",
+          "Faire de l'ingénierie inverse ou tenter d'extraire le code source",
+          "Supprimer ou modifier les avis de droits d'auteur ou propriétaires",
+          "Utiliser nos marques sans autorisation écrite préalable"
+        ]
+      },
+      "termination": {
+        "title": "8. Résiliation",
+        "description": "Nous pouvons suspendre ou résilier votre compte :",
+        "list": [
+          "Pour violation de ces Conditions",
+          "Pour activité frauduleuse ou illégale",
+          "À votre demande",
+          "Pour inactivité prolongée",
+          "À notre discrétion avec ou sans préavis"
+        ],
+        "note": "Après la résiliation, votre droit d'utiliser la plateforme cessera immédiatement. Nous pouvons conserver certaines informations comme l'exige la loi."
+      },
+      "changes": {
+        "title": "9. Modifications des Conditions",
+        "description": "Nous nous réservons le droit de modifier ces Conditions à tout moment. Nous vous informerons des changements importants en :",
+        "list": [
+          "Publiant les Conditions mises à jour sur notre plateforme",
+          "Envoyant un email à votre adresse enregistrée",
+          "Affichant un avis sur la plateforme"
+        ],
+        "note": "Votre utilisation continue de movelinker après l'entrée en vigueur des modifications constitue l'acceptation des nouvelles Conditions."
+      },
+      "governing": {
+        "title": "10. Loi Applicable",
+        "description": "Ces Conditions sont régies et interprétées conformément aux lois de l'Algérie, sans égard à ses dispositions en matière de conflit de lois. Tout litige découlant de ces Conditions sera soumis à la juridiction exclusive des tribunaux d'Alger, Algérie."
+      },
+      "contact": {
+        "title": "Contactez-nous",
+        "description": "Si vous avez des questions concernant ces Conditions d'Utilisation, veuillez nous contacter :"
+      }
+    },
+    "privacy": {
+      "title": "Politique de Confidentialité",
+      "subtitle": "Dernière mise à jour : 27 octobre 2025",
+      "intro1": "Chez movelinker, nous nous engageons à protéger votre vie privée et à assurer la sécurité de vos informations personnelles. Cette Politique de Confidentialité explique comment nous collectons, utilisons, divulguons et protégeons vos informations lorsque vous utilisez notre plateforme.",
+      "intro2": "En utilisant movelinker, vous acceptez la collecte et l'utilisation des informations conformément à cette politique.",
+      "collection": {
+        "title": "1. Informations Que Nous Collectons",
+        "personal": {
+          "title": "1.1 Informations Personnelles",
+          "description": "Lorsque vous créez un compte ou utilisez nos services, nous pouvons collecter :",
+          "list": [
+            "Nom, adresse e-mail et numéro de téléphone",
+            "Nom de l'entreprise et informations commerciales",
+            "Adresse physique et coordonnées",
+            "Pièce d'identité émise par le gouvernement pour vérification",
+            "Informations de paiement et de facturation"
+          ]
+        },
+        "usage": {
+          "title": "1.2 Informations d'Utilisation",
+          "description": "Nous collectons automatiquement des informations sur la façon dont vous utilisez notre plateforme :",
+          "list": [
+            "Adresse IP et informations sur l'appareil",
+            "Type de navigateur et système d'exploitation",
+            "Pages visitées et fonctionnalités utilisées",
+            "Date et heure d'accès",
+            "Adresses de sites Web de référence"
+          ]
+        },
+        "location": {
+          "title": "1.3 Informations de Localisation",
+          "description": "Nous pouvons collecter des données de localisation pour :",
+          "list": [
+            "Fournir des services basés sur la localisation",
+            "Associer les Clients avec les Prestataires à proximité",
+            "Suivre les expéditions en temps réel",
+            "Améliorer nos services et recommandations"
+          ]
+        }
+      },
+      "usage": {
+        "title": "2. Comment Nous Utilisons Vos Informations",
+        "description": "Nous utilisons les informations collectées pour :",
+        "list": [
+          "Fournir, exploiter et maintenir notre plateforme",
+          "Traiter les réservations et faciliter les transactions",
+          "Vérifier les identifiants et documents des Prestataires",
+          "Envoyer des notifications sur les réservations et mises à jour",
+          "Répondre à vos demandes et fournir un support client",
+          "Analyser les modèles d'utilisation et améliorer nos services",
+          "Détecter et prévenir la fraude ou l'activité non autorisée",
+          "Se conformer aux obligations légales",
+          "Envoyer des communications marketing (avec votre consentement)"
+        ]
+      },
+      "sharing": {
+        "title": "3. Partage et Divulgation d'Informations",
+        "description": "Nous pouvons partager vos informations avec :",
+        "providers": {
+          "title": "3.1 Fournisseurs de Services",
+          "description": "Des tiers qui nous aident avec :",
+          "list": [
+            "Traitement des paiements",
+            "Analyse de données et insights",
+            "Stockage et hébergement cloud",
+            "Services d'e-mail et de communication",
+            "Outils de support client"
+          ]
+        },
+        "users": {
+          "title": "3.2 Autres Utilisateurs",
+          "description": "Nous partageons des informations limitées pour faciliter les services :",
+          "list": [
+            "Les Clients peuvent voir les profils des Prestataires et leur statut de vérification",
+            "Les Prestataires peuvent voir les coordonnées des Clients pour les réservations confirmées",
+            "Les utilisateurs peuvent voir les évaluations et avis"
+          ]
+        },
+        "legal": {
+          "title": "3.3 Exigences Légales",
+          "description": "Nous pouvons divulguer des informations lorsque cela est requis pour :",
+          "list": [
+            "Se conformer aux obligations légales ou aux ordonnances judiciaires",
+            "Protéger nos droits, propriété ou sécurité",
+            "Prévenir la fraude ou les menaces de sécurité",
+            "Faire respecter nos Conditions d'Utilisation"
+          ]
+        }
+      },
+      "security": {
+        "title": "4. Sécurité des Données",
+        "description": "Nous mettons en œuvre des mesures techniques et organisationnelles appropriées pour protéger vos informations :",
+        "list": [
+          "Chiffrement des données en transit et au repos",
+          "Évaluations et audits de sécurité réguliers",
+          "Contrôles d'accès et authentification",
+          "Formation des employés sur la protection des données",
+          "Procédures de réponse aux incidents"
+        ],
+        "note": "Cependant, aucune méthode de transmission sur Internet n'est 100% sécurisée. Nous ne pouvons garantir une sécurité absolue."
+      },
+      "retention": {
+        "title": "5. Conservation des Données",
+        "description": "Nous conservons vos informations aussi longtemps que nécessaire pour :",
+        "list": [
+          "Vous fournir nos services",
+          "Se conformer aux obligations légales",
+          "Résoudre les litiges et faire respecter les accords",
+          "Maintenir les dossiers commerciaux"
+        ],
+        "note": "Lorsque vous supprimez votre compte, nous supprimerons ou anonymiserons vos informations personnelles, sauf si la conservation est requise par la loi."
+      },
+      "rights": {
+        "title": "6. Vos Droits",
+        "description": "Vous avez le droit de :",
+        "list": [
+          "Accéder à vos informations personnelles",
+          "Corriger les données inexactes ou incomplètes",
+          "Demander la suppression de vos données",
+          "Vous opposer au traitement de vos informations",
+          "Retirer votre consentement pour les communications marketing",
+          "Portabilité des données (recevoir vos données dans un format structuré)",
+          "Déposer une plainte auprès d'une autorité de contrôle"
+        ],
+        "note": "Pour exercer ces droits, veuillez nous contacter en utilisant les informations fournies ci-dessous."
+      },
+      "cookies": {
+        "title": "7. Cookies et Suivi",
+        "description": "Nous utilisons des cookies et des technologies similaires pour :",
+        "list": [
+          "Mémoriser vos préférences et paramètres",
+          "Analyser le trafic et les modèles d'utilisation du site",
+          "Personnaliser votre expérience",
+          "Fournir de la publicité ciblée"
+        ],
+        "note": "Vous pouvez contrôler les cookies via les paramètres de votre navigateur. Cependant, la désactivation des cookies peut limiter votre capacité à utiliser certaines fonctionnalités."
+      },
+      "children": {
+        "title": "8. Confidentialité des Enfants",
+        "description": "Nos services ne sont pas destinés aux personnes de moins de 18 ans. Nous ne collectons pas sciemment d'informations personnelles auprès d'enfants. Si vous apprenez qu'un enfant nous a fourni des informations personnelles, veuillez nous contacter immédiatement."
+      },
+      "changes": {
+        "title": "9. Modifications de Cette Politique de Confidentialité",
+        "description": "Nous pouvons mettre à jour cette Politique de Confidentialité de temps en temps. Nous vous informerons de tout changement en publiant la nouvelle Politique de Confidentialité sur cette page et en mettant à jour la date de \"Dernière mise à jour\". Il vous est conseillé de consulter périodiquement cette Politique de Confidentialité pour tout changement."
+      },
+      "contact": {
+        "title": "Contactez-nous",
+        "description": "Si vous avez des questions concernant cette Politique de Confidentialité, veuillez nous contacter :"
+      }
+    },
+    "cookie": {
+      "title": "Politique des Cookies",
+      "subtitle": "Dernière mise à jour : 27 octobre 2025",
+      "intro": "Cette Politique des Cookies explique comment movelinker utilise les cookies et technologies similaires pour vous reconnaître lorsque vous visitez notre plateforme. Elle explique ce que sont ces technologies et pourquoi nous les utilisons, ainsi que vos droits de contrôler notre utilisation de celles-ci.",
+      "what": {
+        "title": "1. Qu'est-ce que les Cookies ?",
+        "description": "Les cookies sont de petits fichiers texte placés sur votre appareil lorsque vous visitez un site Web. Ils sont largement utilisés pour faire fonctionner les sites Web de manière plus efficace, fournir des informations aux propriétaires de sites Web et améliorer l'expérience utilisateur."
+      },
+      "types": {
+        "title": "2. Types de Cookies Que Nous Utilisons",
+        "essential": {
+          "title": "2.1 Cookies Essentiels",
+          "description": "Ces cookies sont nécessaires au bon fonctionnement de la plateforme. Ils permettent des fonctions de base comme :",
+          "list": [
+            "Authentification et sécurité de l'utilisateur",
+            "Gestion de session",
+            "Équilibrage de charge",
+            "Mémorisation de vos préférences"
+          ],
+          "note": "Ces cookies ne peuvent pas être désactivés car ils sont essentiels au fonctionnement de la plateforme."
+        },
+        "performance": {
+          "title": "2.2 Cookies de Performance",
+          "description": "Ces cookies nous aident à comprendre comment les visiteurs interagissent avec notre plateforme en collectant et en rapportant des informations de manière anonyme. Ils nous aident à :",
+          "list": [
+            "Compter les visites et sources de trafic",
+            "Mesurer et améliorer les performances de la plateforme",
+            "Identifier les pages et fonctionnalités populaires",
+            "Comprendre les modèles de navigation"
+          ]
+        },
+        "functional": {
+          "title": "2.3 Cookies Fonctionnels",
+          "description": "Ces cookies permettent des fonctionnalités améliorées et une personnalisation, telles que :",
+          "list": [
+            "Mémoriser votre préférence de langue",
+            "Enregistrer votre sélection de mode sombre/clair",
+            "Sauvegarder vos paramètres de localisation",
+            "Personnaliser le contenu en fonction de vos préférences"
+          ]
+        },
+        "targeting": {
+          "title": "2.4 Cookies de Ciblage/Publicité",
+          "description": "Ces cookies peuvent être définis par nos partenaires publicitaires pour :",
+          "list": [
+            "Construire un profil de vos intérêts",
+            "Afficher des publicités pertinentes",
+            "Mesurer l'efficacité de la publicité",
+            "Limiter le nombre de fois où vous voyez une annonce"
+          ]
+        }
+      },
+      "thirdParty": {
+        "title": "3. Cookies Tiers",
+        "description": "En plus de nos propres cookies, nous pouvons utiliser des cookies tiers pour :",
+        "list": [
+          "Analyser l'utilisation de la plateforme (par ex., Google Analytics)",
+          "Fournir des fonctionnalités de médias sociaux",
+          "Diffuser de la publicité ciblée",
+          "Permettre le traitement des paiements"
+        ],
+        "note": "Ces tiers ont leurs propres politiques de confidentialité et nous n'avons aucun contrôle sur leurs cookies."
+      },
+      "control": {
+        "title": "4. Comment Contrôler les Cookies",
+        "browser": {
+          "title": "4.1 Contrôles du Navigateur",
+          "description": "La plupart des navigateurs vous permettent de :",
+          "list": [
+            "Voir et supprimer les cookies",
+            "Bloquer les cookies de sites Web spécifiques",
+            "Bloquer tous les cookies",
+            "Supprimer tous les cookies lorsque vous fermez votre navigateur"
+          ],
+          "note": "Notez que la désactivation des cookies peut affecter la fonctionnalité de notre plateforme et de nombreux autres sites Web."
+        },
+        "preferences": {
+          "title": "4.2 Préférences de Cookies",
+          "description": "Vous pouvez gérer vos préférences de cookies en :",
+          "list": [
+            "Utilisant la bannière de cookies lors de votre première visite sur notre plateforme",
+            "Accédant à vos paramètres de compte",
+            "Nous contactant directement"
+          ]
+        }
+      },
+      "doNotTrack": {
+        "title": "5. Signaux Ne Pas Suivre",
+        "description": "Certains navigateurs incluent une fonctionnalité \"Ne Pas Suivre\" (DNT) qui signale aux sites Web que vous ne souhaitez pas être suivi. Actuellement, il n'existe pas de norme universelle sur la façon de répondre aux signaux DNT. Par conséquent, nous ne répondons actuellement pas aux signaux DNT du navigateur."
+      },
+      "updates": {
+        "title": "6. Mises à Jour de Cette Politique",
+        "description": "Nous pouvons mettre à jour cette Politique des Cookies de temps en temps pour refléter les changements dans la technologie, la législation ou nos opérations commerciales. Nous vous informerons de tout changement important en publiant la politique mise à jour sur notre plateforme."
+      },
+      "contact": {
+        "title": "Contactez-nous",
+        "description": "Si vous avez des questions sur notre utilisation des cookies, veuillez nous contacter :"
+      }
+    },
+    "contactInfo": {
+      "email": "E-mail",
+      "phone": "Téléphone",
+      "location": "Localisation"
+    }
   }
 }

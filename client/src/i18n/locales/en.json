@@ -916,5 +916,470 @@
       "recent": "Recent",
       "inactive": "Inactive"
     }
+  },
+  "legal": {
+    "backToHome": "Back to Home",
+    "lastUpdated": "Last updated",
+    "about": {
+      "title": "About Us",
+      "subtitle": "Connecting businesses with trusted logistics providers across South Algeria",
+      "mission": {
+        "title": "Our Mission",
+        "description1": "movelinker is dedicated to revolutionizing the logistics industry in South Algeria by creating a seamless, transparent, and efficient platform that connects businesses with verified truck providers. We believe in empowering both customers and providers through technology, making logistics accessible, reliable, and growth-oriented.",
+        "description2": "Our platform bridges the gap between supply and demand, ensuring that every shipment reaches its destination safely and on time while providing providers with the tools they need to grow their business."
+      },
+      "whatWeDo": {
+        "title": "What We Do",
+        "transport": {
+          "title": "Transport Services",
+          "description": "Connect businesses with verified truck providers for safe and reliable transportation of goods across South Algeria."
+        },
+        "fleet": {
+          "title": "Fleet Management",
+          "description": "Empower truck providers with tools to manage their fleet, track bookings, and grow their business."
+        },
+        "platform": {
+          "title": "Digital Platform",
+          "description": "Provide a user-friendly platform with real-time tracking, transparent pricing, and seamless booking experience."
+        }
+      },
+      "whyChoose": {
+        "title": "Why Choose movelinker?",
+        "verified": {
+          "title": "Verified Providers",
+          "description": "All truck providers undergo thorough verification and document checks"
+        },
+        "transparent": {
+          "title": "Transparent Pricing",
+          "description": "Clear, upfront pricing with no hidden fees or surprises"
+        },
+        "reliable": {
+          "title": "Reliable Service",
+          "description": "Real-time tracking and professional support throughout your journey"
+        },
+        "growth": {
+          "title": "Growth Focused",
+          "description": "Tools and insights to help businesses and providers scale efficiently"
+        }
+      },
+      "commitment": {
+        "title": "Our Commitment",
+        "description": "We are committed to building the most trusted and efficient logistics platform in South Algeria. Through continuous innovation, customer-first approach, and unwavering dedication to quality, we aim to transform how businesses and truck providers connect and collaborate."
+      },
+      "contact": {
+        "title": "Get in Touch",
+        "description": "Have questions or want to learn more? We'd love to hear from you."
+      }
+    },
+    "terms": {
+      "title": "Terms of Use",
+      "subtitle": "Last updated: October 27, 2025",
+      "intro1": "Welcome to movelinker. These Terms of Use (\"Terms\") govern your access to and use of our platform, services, and features. By accessing or using movelinker, you agree to be bound by these Terms.",
+      "intro2": "Please read these Terms carefully before using our platform. If you do not agree with these Terms, you must not use our services.",
+      "acceptance": {
+        "title": "1. Acceptance of Terms",
+        "description": "By creating an account or using movelinker, you acknowledge that you have read, understood, and agree to be bound by these Terms. You also agree to comply with all applicable laws and regulations. To use our services, you must:",
+        "list": [
+          "Be at least 18 years old or the age of majority in your jurisdiction",
+          "Have the legal capacity to enter into binding contracts",
+          "You agree to these Terms and our Privacy Policy",
+          "Provide accurate and complete information during registration"
+        ]
+      },
+      "services": {
+        "title": "2. Description of Services",
+        "description": "movelinker provides a digital platform that:",
+        "list": [
+          "Connects businesses (\"Customers\") with truck service providers (\"Providers\")",
+          "Facilitates booking and management of transportation services",
+          "Provides tools for fleet management and analytics",
+          "Offers real-time tracking and communication features"
+        ],
+        "note": "We do not own or operate any trucks. We are an intermediary platform connecting Customers with independent Providers."
+      },
+      "accounts": {
+        "title": "3. User Accounts",
+        "registration": {
+          "title": "3.1 Account Registration",
+          "description": "To access certain features, you must create an account. You agree to:",
+          "list": [
+            "Provide accurate, current, and complete information",
+            "Maintain and update your information to keep it accurate",
+            "Maintain the security of your account credentials",
+            "Notify us immediately of any unauthorized access",
+            "Be responsible for all activities under your account"
+          ]
+        },
+        "types": {
+          "title": "3.2 Account Types",
+          "customer": "Customer Account: For businesses seeking transportation services",
+          "provider": "Provider Account: For truck owners/operators offering services (subject to verification)",
+          "admin": "Administrator Account: For platform management (by invitation only)"
+        },
+        "verification": {
+          "title": "3.3 Verification",
+          "description": "Provider accounts require verification before activation. We reserve the right to:",
+          "list": [
+            "Request additional documentation or information",
+            "Verify the authenticity of submitted documents",
+            "Approve or reject applications at our discretion",
+            "Suspend or terminate accounts that fail verification"
+          ]
+        }
+      },
+      "conduct": {
+        "title": "4. User Conduct and Prohibited Activities",
+        "description": "You agree not to:",
+        "list": [
+          "Violate any laws, regulations, or third-party rights",
+          "Provide false, misleading, or fraudulent information",
+          "Impersonate any person or entity",
+          "Interfere with or disrupt the platform or servers",
+          "Attempt to gain unauthorized access to any part of the platform",
+          "Use automated systems (bots, scrapers) without permission",
+          "Harass, abuse, or harm other users",
+          "Post or transmit malicious code or content",
+          "Use the platform for any illegal or unauthorized purpose",
+          "Circumvent any security features or access controls"
+        ]
+      },
+      "bookings": {
+        "title": "5. Bookings and Transactions",
+        "process": {
+          "title": "5.1 Booking Process",
+          "list": [
+            "Customers can search and book available trucks through the platform",
+            "Providers can accept or decline booking requests",
+            "All bookings are subject to Provider availability and approval",
+            "Prices are determined by Providers and displayed before confirmation"
+          ]
+        },
+        "payment": {
+          "title": "5.2 Payment",
+          "list": [
+            "Payment terms are agreed upon between Customers and Providers",
+            "movelinker may facilitate payments but is not responsible for payment disputes",
+            "All fees and charges must be paid in accordance with agreed terms",
+            "Refund policies are determined by individual Providers"
+          ]
+        },
+        "cancellation": {
+          "title": "5.3 Cancellation",
+          "list": [
+            "Cancellation policies vary by Provider",
+            "Customers may be subject to cancellation fees",
+            "Providers must honor confirmed bookings or face penalties",
+            "We reserve the right to cancel bookings in case of fraud or violation"
+          ]
+        }
+      },
+      "liability": {
+        "title": "6. Limitation of Liability",
+        "description": "To the maximum extent permitted by law:",
+        "list": [
+          "movelinker is a platform connecting Customers and Providers",
+          "We are not responsible for the quality, safety, or legality of services provided",
+          "We are not liable for any direct, indirect, incidental, or consequential damages",
+          "Our total liability shall not exceed the fees paid by you in the past 12 months",
+          "We do not guarantee uninterrupted or error-free service",
+          "Providers are independent contractors, not employees or agents of movelinker"
+        ]
+      },
+      "intellectual": {
+        "title": "7. Intellectual Property",
+        "description": "All content, features, and functionality on movelinker are owned by us or our licensors and protected by copyright, trademark, and other intellectual property laws. You may not:",
+        "list": [
+          "Copy, modify, or create derivative works",
+          "Distribute, sell, or lease any part of the platform",
+          "Reverse engineer or attempt to extract source code",
+          "Remove or modify any copyright or proprietary notices",
+          "Use our trademarks without prior written permission"
+        ]
+      },
+      "termination": {
+        "title": "8. Termination",
+        "description": "We may suspend or terminate your account:",
+        "list": [
+          "For violation of these Terms",
+          "For fraudulent or illegal activity",
+          "At your request",
+          "For extended inactivity",
+          "At our discretion with or without notice"
+        ],
+        "note": "Upon termination, your right to use the platform will immediately cease. We may retain certain information as required by law."
+      },
+      "changes": {
+        "title": "9. Changes to Terms",
+        "description": "We reserve the right to modify these Terms at any time. We will notify you of material changes by:",
+        "list": [
+          "Posting the updated Terms on our platform",
+          "Sending an email to your registered address",
+          "Displaying a notice on the platform"
+        ],
+        "note": "Your continued use of movelinker after changes become effective constitutes acceptance of the new Terms."
+      },
+      "governing": {
+        "title": "10. Governing Law",
+        "description": "These Terms shall be governed by and construed in accordance with the laws of Algeria, without regard to its conflict of law provisions. Any disputes arising from these Terms shall be subject to the exclusive jurisdiction of the courts of Algiers, Algeria."
+      },
+      "contact": {
+        "title": "Contact Us",
+        "description": "If you have any questions about these Terms of Use, please contact us:"
+      }
+    },
+    "privacy": {
+      "title": "Privacy Policy",
+      "subtitle": "Last updated: October 27, 2025",
+      "intro1": "At movelinker, we are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our platform.",
+      "intro2": "By using movelinker, you agree to the collection and use of information in accordance with this policy.",
+      "collection": {
+        "title": "1. Information We Collect",
+        "personal": {
+          "title": "1.1 Personal Information",
+          "description": "When you create an account or use our services, we may collect:",
+          "list": [
+            "Name, email address, and phone number",
+            "Company name and business information",
+            "Physical address and contact details",
+            "Government-issued identification for verification",
+            "Payment and billing information"
+          ]
+        },
+        "usage": {
+          "title": "1.2 Usage Information",
+          "description": "We automatically collect information about how you use our platform:",
+          "list": [
+            "IP address and device information",
+            "Browser type and operating system",
+            "Pages visited and features used",
+            "Date and time of access",
+            "Referring website addresses"
+          ]
+        },
+        "location": {
+          "title": "1.3 Location Information",
+          "description": "We may collect location data to:",
+          "list": [
+            "Provide location-based services",
+            "Match Customers with nearby Providers",
+            "Track shipments in real-time",
+            "Improve our services and recommendations"
+          ]
+        }
+      },
+      "usage": {
+        "title": "2. How We Use Your Information",
+        "description": "We use collected information to:",
+        "list": [
+          "Provide, operate, and maintain our platform",
+          "Process bookings and facilitate transactions",
+          "Verify Provider credentials and documents",
+          "Send notifications about bookings and updates",
+          "Respond to your requests and provide customer support",
+          "Analyze usage patterns and improve our services",
+          "Detect and prevent fraud or unauthorized activity",
+          "Comply with legal obligations",
+          "Send marketing communications (with your consent)"
+        ]
+      },
+      "sharing": {
+        "title": "3. Information Sharing and Disclosure",
+        "description": "We may share your information with:",
+        "providers": {
+          "title": "3.1 Service Providers",
+          "description": "Third-party vendors who assist us with:",
+          "list": [
+            "Payment processing",
+            "Data analytics and insights",
+            "Cloud storage and hosting",
+            "Email and communication services",
+            "Customer support tools"
+          ]
+        },
+        "users": {
+          "title": "3.2 Other Users",
+          "description": "We share limited information to facilitate services:",
+          "list": [
+            "Customers can view Provider profiles and verification status",
+            "Providers can view Customer contact information for confirmed bookings",
+            "Users can view ratings and reviews"
+          ]
+        },
+        "legal": {
+          "title": "3.3 Legal Requirements",
+          "description": "We may disclose information when required to:",
+          "list": [
+            "Comply with legal obligations or court orders",
+            "Protect our rights, property, or safety",
+            "Prevent fraud or security threats",
+            "Enforce our Terms of Use"
+          ]
+        }
+      },
+      "security": {
+        "title": "4. Data Security",
+        "description": "We implement appropriate technical and organizational measures to protect your information:",
+        "list": [
+          "Encryption of data in transit and at rest",
+          "Regular security assessments and audits",
+          "Access controls and authentication",
+          "Employee training on data protection",
+          "Incident response procedures"
+        ],
+        "note": "However, no method of transmission over the Internet is 100% secure. We cannot guarantee absolute security."
+      },
+      "retention": {
+        "title": "5. Data Retention",
+        "description": "We retain your information for as long as necessary to:",
+        "list": [
+          "Provide our services to you",
+          "Comply with legal obligations",
+          "Resolve disputes and enforce agreements",
+          "Maintain business records"
+        ],
+        "note": "When you delete your account, we will delete or anonymize your personal information, except where retention is required by law."
+      },
+      "rights": {
+        "title": "6. Your Rights",
+        "description": "You have the right to:",
+        "list": [
+          "Access your personal information",
+          "Correct inaccurate or incomplete data",
+          "Request deletion of your data",
+          "Object to processing of your information",
+          "Withdraw consent for marketing communications",
+          "Data portability (receive your data in a structured format)",
+          "Lodge a complaint with a supervisory authority"
+        ],
+        "note": "To exercise these rights, please contact us using the information provided below."
+      },
+      "cookies": {
+        "title": "7. Cookies and Tracking",
+        "description": "We use cookies and similar technologies to:",
+        "list": [
+          "Remember your preferences and settings",
+          "Analyze site traffic and usage patterns",
+          "Personalize your experience",
+          "Provide targeted advertising"
+        ],
+        "note": "You can control cookies through your browser settings. However, disabling cookies may limit your ability to use certain features."
+      },
+      "children": {
+        "title": "8. Children's Privacy",
+        "description": "Our services are not intended for individuals under 18 years of age. We do not knowingly collect personal information from children. If you become aware that a child has provided us with personal information, please contact us immediately."
+      },
+      "changes": {
+        "title": "9. Changes to This Privacy Policy",
+        "description": "We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the \"Last updated\" date. You are advised to review this Privacy Policy periodically for any changes."
+      },
+      "contact": {
+        "title": "Contact Us",
+        "description": "If you have any questions about this Privacy Policy, please contact us:"
+      }
+    },
+    "cookie": {
+      "title": "Cookie Policy",
+      "subtitle": "Last updated: October 27, 2025",
+      "intro": "This Cookie Policy explains how movelinker uses cookies and similar technologies to recognize you when you visit our platform. It explains what these technologies are and why we use them, as well as your rights to control our use of them.",
+      "what": {
+        "title": "1. What Are Cookies?",
+        "description": "Cookies are small text files that are placed on your device when you visit a website. They are widely used to make websites work more efficiently, provide information to website owners, and improve user experience."
+      },
+      "types": {
+        "title": "2. Types of Cookies We Use",
+        "essential": {
+          "title": "2.1 Essential Cookies",
+          "description": "These cookies are necessary for the platform to function properly. They enable basic functions like:",
+          "list": [
+            "User authentication and security",
+            "Session management",
+            "Load balancing",
+            "Remembering your preferences"
+          ],
+          "note": "These cookies cannot be disabled as they are essential for the platform to work."
+        },
+        "performance": {
+          "title": "2.2 Performance Cookies",
+          "description": "These cookies help us understand how visitors interact with our platform by collecting and reporting information anonymously. They help us:",
+          "list": [
+            "Count visits and traffic sources",
+            "Measure and improve platform performance",
+            "Identify popular pages and features",
+            "Understand navigation patterns"
+          ]
+        },
+        "functional": {
+          "title": "2.3 Functional Cookies",
+          "description": "These cookies enable enhanced functionality and personalization, such as:",
+          "list": [
+            "Remembering your language preference",
+            "Storing your dark/light mode selection",
+            "Saving your location settings",
+            "Customizing content based on your preferences"
+          ]
+        },
+        "targeting": {
+          "title": "2.4 Targeting/Advertising Cookies",
+          "description": "These cookies may be set by our advertising partners to:",
+          "list": [
+            "Build a profile of your interests",
+            "Show relevant advertisements",
+            "Measure advertising effectiveness",
+            "Limit how many times you see an ad"
+          ]
+        }
+      },
+      "thirdParty": {
+        "title": "3. Third-Party Cookies",
+        "description": "In addition to our own cookies, we may use third-party cookies to:",
+        "list": [
+          "Analyze platform usage (e.g., Google Analytics)",
+          "Provide social media features",
+          "Deliver targeted advertising",
+          "Enable payment processing"
+        ],
+        "note": "These third parties have their own privacy policies, and we have no control over their cookies."
+      },
+      "control": {
+        "title": "4. How to Control Cookies",
+        "browser": {
+          "title": "4.1 Browser Controls",
+          "description": "Most browsers allow you to:",
+          "list": [
+            "View and delete cookies",
+            "Block cookies from specific websites",
+            "Block all cookies",
+            "Delete all cookies when you close your browser"
+          ],
+          "note": "Note that disabling cookies may affect the functionality of our platform and many other websites."
+        },
+        "preferences": {
+          "title": "4.2 Cookie Preferences",
+          "description": "You can manage your cookie preferences by:",
+          "list": [
+            "Using the cookie banner when you first visit our platform",
+            "Accessing your account settings",
+            "Contacting us directly"
+          ]
+        }
+      },
+      "doNotTrack": {
+        "title": "5. Do Not Track Signals",
+        "description": "Some browsers include a \"Do Not Track\" (DNT) feature that signals to websites that you do not want to be tracked. Currently, there is no universal standard for how to respond to DNT signals. As such, we do not currently respond to DNT browser signals."
+      },
+      "updates": {
+        "title": "6. Updates to This Policy",
+        "description": "We may update this Cookie Policy from time to time to reflect changes in technology, legislation, or our business operations. We will notify you of any material changes by posting the updated policy on our platform."
+      },
+      "contact": {
+        "title": "Contact Us",
+        "description": "If you have questions about our use of cookies, please contact us:"
+      }
+    },
+    "contactInfo": {
+      "email": "Email",
+      "phone": "Phone",
+      "location": "Location"
+    }
   }
 }

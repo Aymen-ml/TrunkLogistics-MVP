@@ -15,11 +15,11 @@ const AboutUs = () => {
             className="inline-flex items-center text-white hover:text-orange-100 mb-6 transition"
           >
             <ArrowLeft className="h-5 w-5 mr-2" />
-            Back to Home
+            {t('legal.backToHome')}
           </Link>
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">About Us</h1>
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">{t('legal.about.title')}</h1>
           <p className="text-xl text-orange-100 max-w-3xl">
-            Connecting businesses with trusted logistics providers across South Algeria
+            {t('legal.about.subtitle')}
           </p>
         </div>
       </div>
@@ -33,32 +33,28 @@ const AboutUs = () => {
               <div className="bg-orange-100 dark:bg-orange-900/30 rounded-lg p-3 mr-4">
                 <Target className="h-8 w-8 text-orange-600 dark:text-orange-400" />
               </div>
-              <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Our Mission</h2>
+              <h2 className="text-3xl font-bold text-gray-900 dark:text-white">{t('legal.about.mission.title')}</h2>
             </div>
             <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
-              movelinker is dedicated to revolutionizing the logistics industry in South Algeria by creating a seamless, 
-              transparent, and efficient platform that connects businesses with verified truck providers. We believe in empowering 
-              both customers and providers through technology, making logistics accessible, reliable, and growth-oriented.
+              {t('legal.about.mission.description1')}
             </p>
             <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
-              Our platform bridges the gap between supply and demand, ensuring that every shipment reaches its destination 
-              safely and on time while providing providers with the tools they need to grow their business.
+              {t('legal.about.mission.description2')}
             </p>
           </div>
         </section>
 
         {/* What We Do */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">What We Do</h2>
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">{t('legal.about.whatWeDo.title')}</h2>
           <div className="grid md:grid-cols-3 gap-8">
             <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 hover:shadow-xl transition-shadow">
               <div className="bg-blue-100 dark:bg-blue-900/30 rounded-lg p-3 w-fit mb-4">
                 <Package className="h-8 w-8 text-blue-600 dark:text-blue-400" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">Connect Businesses</h3>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">{t('legal.about.whatWeDo.transport.title')}</h3>
               <p className="text-gray-600 dark:text-gray-300">
-                We connect businesses of all sizes with verified truck providers, making it easy to find and book 
-                transportation services for any cargo.
+                {t('legal.about.whatWeDo.transport.description')}
               </p>
             </div>
 
@@ -66,10 +62,9 @@ const AboutUs = () => {
               <div className="bg-orange-100 dark:bg-orange-900/30 rounded-lg p-3 w-fit mb-4">
                 <Shield className="h-8 w-8 text-orange-600 dark:text-orange-400" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">Ensure Trust & Safety</h3>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">{t('legal.about.whatWeDo.fleet.title')}</h3>
               <p className="text-gray-600 dark:text-gray-300">
-                Every provider on our platform is thoroughly verified. We conduct background checks and document 
-                verification to ensure safety and reliability.
+                {t('legal.about.whatWeDo.fleet.description')}
               </p>
             </div>
 
@@ -77,106 +72,94 @@ const AboutUs = () => {
               <div className="bg-green-100 dark:bg-green-900/30 rounded-lg p-3 w-fit mb-4">
                 <TrendingUp className="h-8 w-8 text-green-600 dark:text-green-400" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">Drive Growth</h3>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">{t('legal.about.whatWeDo.platform.title')}</h3>
               <p className="text-gray-600 dark:text-gray-300">
-                We provide providers with tools and analytics to manage their fleet efficiently, track performance, 
-                and grow their business sustainably.
+                {t('legal.about.whatWeDo.platform.description')}
               </p>
             </div>
           </div>
         </section>
 
-        {/* Our Story */}
+        {/* Why Choose Us */}
+        <section className="mb-16">
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">{t('legal.about.whyChoose.title')}</h2>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow">
+              <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg p-4 w-fit mx-auto mb-4">
+                <CheckCircle className="h-8 w-8 text-white" />
+              </div>
+              <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2 text-center">{t('legal.about.whyChoose.verified.title')}</h3>
+              <p className="text-gray-600 dark:text-gray-300 text-sm text-center">
+                {t('legal.about.whyChoose.verified.description')}
+              </p>
+            </div>
+
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow">
+              <div className="bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg p-4 w-fit mx-auto mb-4">
+                <Shield className="h-8 w-8 text-white" />
+              </div>
+              <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2 text-center">{t('legal.about.whyChoose.transparent.title')}</h3>
+              <p className="text-gray-600 dark:text-gray-300 text-sm text-center">
+                {t('legal.about.whyChoose.transparent.description')}
+              </p>
+            </div>
+
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow">
+              <div className="bg-gradient-to-br from-green-500 to-green-600 rounded-lg p-4 w-fit mx-auto mb-4">
+                <Award className="h-8 w-8 text-white" />
+              </div>
+              <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2 text-center">{t('legal.about.whyChoose.reliable.title')}</h3>
+              <p className="text-gray-600 dark:text-gray-300 text-sm text-center">
+                {t('legal.about.whyChoose.reliable.description')}
+              </p>
+            </div>
+
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow">
+              <div className="bg-gradient-to-br from-purple-500 to-purple-600 rounded-lg p-4 w-fit mx-auto mb-4">
+                <TrendingUp className="h-8 w-8 text-white" />
+              </div>
+              <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2 text-center">{t('legal.about.whyChoose.growth.title')}</h3>
+              <p className="text-gray-600 dark:text-gray-300 text-sm text-center">
+                {t('legal.about.whyChoose.growth.description')}
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Commitment */}
         <section className="mb-16">
           <div className="bg-gradient-to-br from-blue-50 to-orange-50 dark:from-gray-800 dark:to-gray-800 rounded-2xl p-8 md:p-12">
             <div className="flex items-center mb-6">
               <div className="bg-white dark:bg-gray-700 rounded-lg p-3 mr-4 shadow-md">
-                <MapPin className="h-8 w-8 text-orange-600 dark:text-orange-400" />
+                <Target className="h-8 w-8 text-orange-600 dark:text-orange-400" />
               </div>
-              <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Our Story</h2>
+              <h2 className="text-3xl font-bold text-gray-900 dark:text-white">{t('legal.about.commitment.title')}</h2>
             </div>
-            <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-              Founded in Algeria, movelinker was born out of a simple observation: the logistics industry in South 
-              Algeria needed a modern, digital solution that could bring transparency, efficiency, and trust to freight 
-              transportation.
-            </p>
-            <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-              We started with a vision to create a platform where businesses could easily find reliable truck providers, 
-              and where providers could access a steady stream of customers while managing their operations more effectively.
-            </p>
             <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
-              As we prepare to launch, we're building a platform designed to transform logistics in Algeria. Our goal is to 
-              connect businesses with verified truck providers, streamline operations, and set new standards for transparency 
-              and efficiency in the freight transportation industry.
+              {t('legal.about.commitment.description')}
             </p>
-          </div>
-        </section>
-
-        {/* Our Values */}
-        <section className="mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">Our Core Values</h2>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition-shadow">
-              <div className="bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg p-4 w-fit mx-auto mb-4">
-                <TrendingUp className="h-8 w-8 text-white" />
-              </div>
-              <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">Ambition</h3>
-              <p className="text-gray-600 dark:text-gray-300 text-sm">
-                We constantly strive to innovate and push boundaries in the logistics industry.
-              </p>
-            </div>
-
-            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition-shadow">
-              <div className="bg-gradient-to-br from-orange-500 to-red-600 rounded-lg p-4 w-fit mx-auto mb-4">
-                <Shield className="h-8 w-8 text-white" />
-              </div>
-              <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">Transparency & Trust</h3>
-              <p className="text-gray-600 dark:text-gray-300 text-sm">
-                Open communication and complete transparency are the foundation of our platform.
-              </p>
-            </div>
-
-            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition-shadow">
-              <div className="bg-gradient-to-br from-blue-600 to-cyan-600 rounded-lg p-4 w-fit mx-auto mb-4">
-                <Award className="h-8 w-8 text-white" />
-              </div>
-              <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">Quality</h3>
-              <p className="text-gray-600 dark:text-gray-300 text-sm">
-                We are committed to delivering services of the highest quality at every touchpoint.
-              </p>
-            </div>
-
-            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition-shadow">
-              <div className="bg-gradient-to-br from-orange-600 to-amber-600 rounded-lg p-4 w-fit mx-auto mb-4">
-                <CheckCircle className="h-8 w-8 text-white" />
-              </div>
-              <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">Performance</h3>
-              <p className="text-gray-600 dark:text-gray-300 text-sm">
-                We ensure optimal performance in every aspect of our operations and service delivery.
-              </p>
-            </div>
           </div>
         </section>
 
         {/* Contact CTA */}
         <section>
           <div className="bg-gradient-to-r from-orange-500 to-orange-600 rounded-2xl p-8 md:p-12 text-center shadow-xl">
-            <h2 className="text-3xl font-bold text-white mb-4">Get in Touch</h2>
+            <h2 className="text-3xl font-bold text-white mb-4">{t('legal.about.contact.title')}</h2>
             <p className="text-xl text-orange-100 mb-8 max-w-2xl mx-auto">
-              Have questions or want to learn more about how movelinker can help your business?
+              {t('legal.about.contact.description')}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
                 href="tel:+213779116522"
                 className="px-8 py-4 bg-white text-orange-600 font-semibold rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all"
               >
-                Call Us: +213 779 11 65 22
+                {t('legal.contactInfo.phone')}: +213 779 11 65 22
               </a>
               <a
                 href="mailto:support@movelinker.me"
                 className="px-8 py-4 bg-orange-700 text-white font-semibold rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all"
               >
-                Email Us
+                {t('legal.contactInfo.email')}
               </a>
             </div>
           </div>
