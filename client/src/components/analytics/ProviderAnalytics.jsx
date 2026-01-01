@@ -247,11 +247,11 @@ const ProviderAnalytics = () => {
                 <div className="flex gap-4 text-xs">
                   <div className="flex items-center gap-2">
                     <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
-                    <span className="text-gray-600 dark:text-gray-400">Transport</span>
+                    <span className="text-gray-600 dark:text-gray-400">{t('analytics.revenue.transport')}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                    <span className="text-gray-600 dark:text-gray-400">Rental</span>
+                    <span className="text-gray-600 dark:text-gray-400">{t('analytics.revenue.rental')}</span>
                   </div>
                 </div>
               </div>
@@ -295,7 +295,7 @@ const ProviderAnalytics = () => {
                     fillOpacity={1}
                     fill="url(#colorTransport)"
                     strokeWidth={3}
-                    name="Transport"
+                    name={t('analytics.revenue.transport')}
                   />
                   <Area 
                     type="monotone" 
@@ -304,7 +304,7 @@ const ProviderAnalytics = () => {
                     fillOpacity={1}
                     fill="url(#colorRental)"
                     strokeWidth={3}
-                    name="Rental"
+                    name={t('analytics.revenue.rental')}
                   />
                 </AreaChart>
               </ResponsiveContainer>
@@ -365,11 +365,11 @@ const ProviderAnalytics = () => {
             </div>
             <div className="space-y-5">
               {[
-                { label: 'Pending Review', value: analytics.bookingConversion.funnel.pending, color: 'bg-yellow-500', icon: Clock },
-                { label: 'Approved', value: analytics.bookingConversion.funnel.approved, color: 'bg-blue-500', icon: CheckCircle },
-                { label: 'Confirmed', value: analytics.bookingConversion.funnel.confirmed, color: 'bg-cyan-500', icon: CheckCircle },
-                { label: 'Active/In Transit', value: analytics.bookingConversion.funnel.active, color: 'bg-purple-500', icon: Truck },
-                { label: 'Completed', value: analytics.bookingConversion.funnel.completed, color: 'bg-green-500', icon: CheckCircle },
+                { label: t('bookings.pendingReview'), value: analytics.bookingConversion.funnel.pending, color: 'bg-yellow-500', icon: Clock },
+                { label: t('bookings.approved'), value: analytics.bookingConversion.funnel.approved, color: 'bg-blue-500', icon: CheckCircle },
+                { label: t('analytics.bookings.confirmed'), value: analytics.bookingConversion.funnel.confirmed, color: 'bg-cyan-500', icon: CheckCircle },
+                { label: t('bookings.active') + '/' + t('bookings.inTransit'), value: analytics.bookingConversion.funnel.active, color: 'bg-purple-500', icon: Truck },
+                { label: t('bookings.completed'), value: analytics.bookingConversion.funnel.completed, color: 'bg-green-500', icon: CheckCircle },
               ].map((stage, idx) => {
                 const total = analytics.bookingConversion.funnel.total;
                 const percentage = total > 0 ? (stage.value / total * 100).toFixed(1) : 0;
