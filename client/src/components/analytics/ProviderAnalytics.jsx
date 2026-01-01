@@ -318,12 +318,12 @@ const ProviderAnalytics = () => {
                 <PieChart>
                   <Pie
                     data={[
-                      { name: 'Completed', value: analytics.bookingConversion.funnel.completed, color: COLORS.completed },
-                      { name: 'Active', value: analytics.bookingConversion.funnel.active, color: COLORS.active },
-                      { name: 'Confirmed', value: analytics.bookingConversion.funnel.confirmed, color: COLORS.confirmed },
-                      { name: 'Approved', value: analytics.bookingConversion.funnel.approved, color: COLORS.approved },
-                      { name: 'Pending', value: analytics.bookingConversion.funnel.pending, color: COLORS.pending },
-                      { name: 'Cancelled', value: analytics.bookingConversion.funnel.cancelled, color: COLORS.cancelled },
+                      { name: t('bookings.completed'), value: analytics.bookingConversion.funnel.completed, color: COLORS.completed },
+                      { name: t('bookings.active'), value: analytics.bookingConversion.funnel.active, color: COLORS.active },
+                      { name: t('analytics.bookings.confirmed'), value: analytics.bookingConversion.funnel.confirmed, color: COLORS.confirmed },
+                      { name: t('bookings.approved'), value: analytics.bookingConversion.funnel.approved, color: COLORS.approved },
+                      { name: t('analytics.bookings.pending'), value: analytics.bookingConversion.funnel.pending, color: COLORS.pending },
+                      { name: t('bookings.cancelled'), value: analytics.bookingConversion.funnel.cancelled, color: COLORS.cancelled },
                     ].filter(item => item.value > 0)}
                     cx="50%"
                     cy="50%"
@@ -335,12 +335,12 @@ const ProviderAnalytics = () => {
                     labelLine={false}
                   >
                     {[
-                      { name: 'Completed', value: analytics.bookingConversion.funnel.completed, color: COLORS.completed },
-                      { name: 'Active', value: analytics.bookingConversion.funnel.active, color: COLORS.active },
-                      { name: 'Confirmed', value: analytics.bookingConversion.funnel.confirmed, color: COLORS.confirmed },
-                      { name: 'Approved', value: analytics.bookingConversion.funnel.approved, color: COLORS.approved },
-                      { name: 'Pending', value: analytics.bookingConversion.funnel.pending, color: COLORS.pending },
-                      { name: 'Cancelled', value: analytics.bookingConversion.funnel.cancelled, color: COLORS.cancelled },
+                      { name: t('bookings.completed'), value: analytics.bookingConversion.funnel.completed, color: COLORS.completed },
+                      { name: t('bookings.active'), value: analytics.bookingConversion.funnel.active, color: COLORS.active },
+                      { name: t('analytics.bookings.confirmed'), value: analytics.bookingConversion.funnel.confirmed, color: COLORS.confirmed },
+                      { name: t('bookings.approved'), value: analytics.bookingConversion.funnel.approved, color: COLORS.approved },
+                      { name: t('analytics.bookings.pending'), value: analytics.bookingConversion.funnel.pending, color: COLORS.pending },
+                      { name: t('bookings.cancelled'), value: analytics.bookingConversion.funnel.cancelled, color: COLORS.cancelled },
                     ].filter(item => item.value > 0).map((entry, index) => (
                       <Cell key={`cell-${index}`} fill={entry.color} />
                     ))}
