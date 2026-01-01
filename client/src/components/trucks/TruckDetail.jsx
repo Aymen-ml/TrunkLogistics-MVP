@@ -480,19 +480,19 @@ const TruckDetail = () => {
               {/* Basic Information */}
               <div className="space-y-4">
                 <h4 className="text-sm font-medium text-gray-900 dark:text-gray-100 uppercase tracking-wide">
-                  Basic Information
+                  {t('trucks.basicInformation')}
                 </h4>
                 
                 <div className="space-y-3">
                   <div className="flex justify-between">
-                    <span className="text-sm text-gray-500 dark:text-gray-400">Truck Type:</span>
+                    <span className="text-sm text-gray-500 dark:text-gray-400">{t('trucks.truckTypeLabel')}</span>
                     <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                       {getTruckTypeLabel(truck.truck_type)}
                     </span>
                   </div>
                   
                   <div className="flex justify-between">
-                    <span className="text-sm text-gray-500 dark:text-gray-400">License Plate:</span>
+                    <span className="text-sm text-gray-500 dark:text-gray-400">{t('trucks.licensePlateLabel')}</span>
                     <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                       {truck.license_plate}
                     </span>
@@ -500,7 +500,7 @@ const TruckDetail = () => {
                   
                   {truck.year && (
                     <div className="flex justify-between">
-                      <span className="text-sm text-gray-500 dark:text-gray-400">Year:</span>
+                      <span className="text-sm text-gray-500 dark:text-gray-400">{t('trucks.yearLabel')}</span>
                       <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                         {truck.year}
                       </span>
@@ -509,7 +509,7 @@ const TruckDetail = () => {
                   
                   {truck.make && (
                     <div className="flex justify-between">
-                      <span className="text-sm text-gray-500 dark:text-gray-400">Make:</span>
+                      <span className="text-sm text-gray-500 dark:text-gray-400">{t('trucks.makeLabel')}</span>
                       <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                         {truck.make}
                       </span>
@@ -518,7 +518,7 @@ const TruckDetail = () => {
                   
                   {truck.model && (
                     <div className="flex justify-between">
-                      <span className="text-sm text-gray-500 dark:text-gray-400">Model:</span>
+                      <span className="text-sm text-gray-500 dark:text-gray-400">{t('trucks.modelLabel')}</span>
                       <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                         {truck.model}
                       </span>
@@ -530,13 +530,13 @@ const TruckDetail = () => {
               {/* Capacity & Pricing */}
               <div className="space-y-4">
                 <h4 className="text-sm font-medium text-gray-900 dark:text-gray-100 uppercase tracking-wide">
-                  {truck.service_type === 'rental' ? 'Capacity & Rental Rates' : 'Capacity & Pricing'}
+                  {truck.service_type === 'rental' ? t('trucks.capacityRentalRates') : t('trucks.capacityPricing')}
                 </h4>
                 
                 <div className="space-y-3">
                   <div className="flex justify-between">
                     <span className="text-sm text-gray-500 dark:text-gray-400">
-                      {truck.service_type === 'rental' ? 'Operating Weight:' : 'Weight Capacity:'}
+                      {truck.service_type === 'rental' ? t('trucks.operatingWeight') : t('trucks.weightCapacityLabel')}
                     </span>
                     <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                       {truck.capacity_weight?.toLocaleString()} kg
@@ -545,7 +545,7 @@ const TruckDetail = () => {
                   
                   {truck.capacity_volume && (
                     <div className="flex justify-between">
-                      <span className="text-sm text-gray-500 dark:text-gray-400">Volume Capacity:</span>
+                      <span className="text-sm text-gray-500 dark:text-gray-400">{t('trucks.volumeCapacityLabel')}</span>
                       <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                         {truck.capacity_volume} m³
                       </span>
@@ -554,7 +554,7 @@ const TruckDetail = () => {
                   
                   {truck.work_location && truck.service_type === 'rental' && (
                     <div className="flex justify-between">
-                      <span className="text-sm text-gray-500 dark:text-gray-400">Work Location:</span>
+                      <span className="text-sm text-gray-500 dark:text-gray-400">{t('trucks.workLocationLabel')}</span>
                       <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                         {truck.work_location}
                       </span>
@@ -566,9 +566,9 @@ const TruckDetail = () => {
                     <>
                       {truck.monthly_rate && (
                         <div className="flex justify-between">
-                          <span className="text-sm text-gray-500 dark:text-gray-400">Monthly Rate:</span>
+                          <span className="text-sm text-gray-500 dark:text-gray-400">{t('trucks.monthlyRateLabel')}</span>
                           <span className="text-sm font-medium text-green-600">
-                            {formatCurrency(truck.monthly_rate)}/month
+                            {formatCurrency(truck.monthly_rate)}{t('trucks.perMonth')}
                           </span>
                         </div>
                       )}
@@ -577,14 +577,14 @@ const TruckDetail = () => {
                     /* Traditional Transport Pricing */
                     <>
                       <div className="flex justify-between">
-                        <span className="text-sm text-gray-500 dark:text-gray-400">Pricing Type:</span>
+                        <span className="text-sm text-gray-500 dark:text-gray-400">{t('trucks.pricingTypeLabel')}</span>
                         <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
-                          {truck.pricing_type === 'per_km' ? 'Per Kilometer' : 'Fixed Price'}
+                          {truck.pricing_type === 'per_km' ? t('trucks.perKilometer') : t('trucks.fixedPrice')}
                         </span>
                       </div>
                       
                       <div className="flex justify-between">
-                        <span className="text-sm text-gray-500 dark:text-gray-400">Price:</span>
+                        <span className="text-sm text-gray-500 dark:text-gray-400">{t('trucks.priceLabel')}</span>
                         <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                           {truck.pricing_type === 'per_km' 
                             ? formatPriceWithUnit(truck.price_per_km)
@@ -602,7 +602,7 @@ const TruckDetail = () => {
             {user?.role === 'customer' && (truck.company_name || truck.first_name || truck.last_name || truck.phone) && (
               <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
                 <h4 className="text-sm font-medium text-gray-900 dark:text-gray-100 uppercase tracking-wide mb-4">
-                  Provider Information
+                  {t('trucks.providerInformationLabel')}
                 </h4>
                 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -610,7 +610,7 @@ const TruckDetail = () => {
                     <div className="flex items-center justify-between">
                       <span className="text-sm text-gray-500 dark:text-gray-400 flex items-center">
                         <Building2 className="h-4 w-4 mr-1" />
-                        Company:
+                        {t('trucks.companyLabel')}
                       </span>
                       <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                         {truck.company_name}
@@ -622,7 +622,7 @@ const TruckDetail = () => {
                     <div className="flex items-center justify-between">
                       <span className="text-sm text-gray-500 dark:text-gray-400 flex items-center">
                         <User className="h-4 w-4 mr-1" />
-                        Contact:
+                        {t('trucks.contactLabel')}
                       </span>
                       <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                         {[truck.first_name, truck.last_name].filter(Boolean).join(' ')}
@@ -634,7 +634,7 @@ const TruckDetail = () => {
                     <div className="flex items-center justify-between">
                       <span className="text-sm text-gray-500 dark:text-gray-400 flex items-center">
                         <Phone className="h-4 w-4 mr-1" />
-                        Phone:
+                        {t('trucks.phoneLabel')}
                       </span>
                       <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                         <a href={`tel:${truck.phone}`} className="text-primary-600 hover:text-blue-800 dark:text-blue-200">
@@ -649,7 +649,7 @@ const TruckDetail = () => {
                     <div className="flex items-center justify-between">
                       <span className="text-sm text-gray-500 dark:text-gray-400 flex items-center">
                         <MapPin className="h-4 w-4 mr-1" />
-                        Location:
+                        {t('trucks.locationLabel')}
                       </span>
                       <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                         {[truck.provider_city, truck.provider_state, truck.provider_country].filter(Boolean).join(', ')}
@@ -661,7 +661,7 @@ const TruckDetail = () => {
                     <div className="flex items-center justify-between">
                       <span className="text-sm text-gray-500 dark:text-gray-400 flex items-center">
                         <MapPin className="h-4 w-4 mr-1" />
-                        Address:
+                        {t('trucks.addressLabel')}
                       </span>
                       <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                         {truck.street_address}
@@ -673,7 +673,7 @@ const TruckDetail = () => {
                     <div className="flex items-center justify-between">
                       <span className="text-sm text-gray-500 dark:text-gray-400 flex items-center">
                         <Phone className="h-4 w-4 mr-1" />
-                        Business Phone:
+                        {t('trucks.businessPhoneLabel')}
                       </span>
                       <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                         <a href={`tel:${truck.provider_business_phone}`} className="text-primary-600 hover:text-blue-800 dark:text-blue-200">
@@ -690,7 +690,7 @@ const TruckDetail = () => {
             {(truck.driver_name || truck.driver_phone || truck.driver_email || truck.driver_license_number) && (
               <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
                 <h4 className="text-sm font-medium text-gray-900 dark:text-gray-100 uppercase tracking-wide mb-4">
-                  Driver Information
+                  {t('trucks.driverInformationLabel')}
                 </h4>
                 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -698,7 +698,7 @@ const TruckDetail = () => {
                     <div className="flex items-center justify-between">
                       <span className="text-sm text-gray-500 dark:text-gray-400 flex items-center">
                         <User className="h-4 w-4 mr-1" />
-                        Name:
+                        {t('trucks.nameLabel')}
                       </span>
                       <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                         {truck.driver_name}
@@ -710,7 +710,7 @@ const TruckDetail = () => {
                     <div className="flex items-center justify-between">
                       <span className="text-sm text-gray-500 dark:text-gray-400 flex items-center">
                         <Phone className="h-4 w-4 mr-1" />
-                        Phone:
+                        {t('trucks.phoneLabel')}
                       </span>
                       <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                         <a href={`tel:${truck.driver_phone}`} className="text-primary-600 hover:text-blue-800 dark:text-blue-200">
@@ -724,7 +724,7 @@ const TruckDetail = () => {
                     <div className="flex items-center justify-between">
                       <span className="text-sm text-gray-500 dark:text-gray-400 flex items-center">
                         <Mail className="h-4 w-4 mr-1" />
-                        Email:
+                        {t('trucks.emailLabel')}
                       </span>
                       <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                         <a href={`mailto:${truck.driver_email}`} className="text-primary-600 hover:text-blue-800 dark:text-blue-200">
@@ -738,7 +738,7 @@ const TruckDetail = () => {
                     <div className="flex items-center justify-between">
                       <span className="text-sm text-gray-500 dark:text-gray-400 flex items-center">
                         <CreditCard className="h-4 w-4 mr-1" />
-                        License #:
+                        {t('trucks.licenseNumberLabel')}
                       </span>
                       <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                         {truck.driver_license_number}
@@ -752,19 +752,19 @@ const TruckDetail = () => {
             {/* Timestamps */}
             <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
               <h4 className="text-sm font-medium text-gray-900 dark:text-gray-100 uppercase tracking-wide mb-4">
-                Timestamps
+                {t('trucks.timestampsLabel')}
               </h4>
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="flex justify-between">
-                  <span className="text-sm text-gray-500 dark:text-gray-400">Created:</span>
+                  <span className="text-sm text-gray-500 dark:text-gray-400">{t('trucks.createdLabel')}</span>
                   <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                     {new Date(truck.created_at).toLocaleDateString()}
                   </span>
                 </div>
                 
                 <div className="flex justify-between">
-                  <span className="text-sm text-gray-500 dark:text-gray-400">Last Updated:</span>
+                  <span className="text-sm text-gray-500 dark:text-gray-400">{t('trucks.lastUpdatedLabel')}</span>
                   <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                     {new Date(truck.updated_at).toLocaleDateString()}
                   </span>
