@@ -789,12 +789,12 @@ const ProviderAnalytics = () => {
                   <Pie
                     data={[
                       { 
-                        name: 'Transport', 
+                        name: t('analytics.revenue.transport'), 
                         value: analytics.revenueTrends.reduce((sum, m) => sum + parseInt(m.transport_bookings || 0), 0),
                         color: COLORS.transport 
                       },
                       { 
-                        name: 'Rental', 
+                        name: t('analytics.revenue.rental'), 
                         value: analytics.revenueTrends.reduce((sum, m) => sum + parseInt(m.rental_bookings || 0), 0),
                         color: COLORS.rental 
                       },
@@ -809,12 +809,12 @@ const ProviderAnalytics = () => {
                   >
                     {[
                       { 
-                        name: 'Transport', 
+                        name: t('analytics.revenue.transport'), 
                         value: analytics.revenueTrends.reduce((sum, m) => sum + parseInt(m.transport_bookings || 0), 0),
                         color: COLORS.transport 
                       },
                       { 
-                        name: 'Rental', 
+                        name: t('analytics.revenue.rental'), 
                         value: analytics.revenueTrends.reduce((sum, m) => sum + parseInt(m.rental_bookings || 0), 0),
                         color: COLORS.rental 
                       },
