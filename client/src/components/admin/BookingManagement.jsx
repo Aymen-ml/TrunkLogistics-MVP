@@ -35,7 +35,7 @@ const BookingManagement = () => {
 
     // If no notes provided and it's a significant change, prompt for explanation
     if (!notes && ['cancelled', 'completed'].includes(newStatus)) {
-      const explanation = prompt(`Please provide a reason for changing this booking to ${newStatus.replace('_', ' ')}:`);
+      const explanation = prompt(t('admin.bookingManagement.confirmReason') + ' ' + newStatus.replace('_', ' ') + ':');
       if (explanation === null) return; // User cancelled
       notes = explanation.trim();
     }
@@ -66,11 +66,11 @@ const BookingManagement = () => {
           : booking
       ));
       
-      showSuccess(`Booking status updated to ${newStatus.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase())} successfully!`);
+      showSuccess(t('admin.bookingManagement.statusUpdated'));
     } catch (error) {
       console.error('Error updating booking status:', error);
       const errorMessage = error.response?.data?.error || error.message || 'Error updating booking status';
-      showError(`Failed to update booking status: ${errorMessage}`);
+      showError(t('admin.bookingManagement.errorUpdating') + ': ' + errorMessage);
       
       // Refetch all bookings on error to ensure consistency
       fetchBookings();
@@ -107,7 +107,7 @@ const BookingManagement = () => {
           ? 'bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200' 
           : 'bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200'
       }`}>
-        {serviceType === 'rental' ? 'Rental' : 'Transport'}
+        {serviceType === 'rental' ? t('admin.bookingManagement.rental') : t('admin.bookingManagement.transport')}
       </span>
     );
   };
@@ -157,9 +157,9 @@ const BookingManagement = () => {
           <div className="flex items-center">
             <Package className="h-8 w-8 text-primary-600 mr-3" />
             <div>
-              <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">Booking Management</h1>
+              <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">{t('admin.bookingManagement.title')}</h1>
               <p className="mt-2 text-gray-600 dark:text-gray-400">
-                Monitor and manage all platform bookings
+                {t('admin.bookingManagement.subtitle')}
               </p>
             </div>
           </div>
@@ -175,7 +175,7 @@ const BookingManagement = () => {
                 </div>
                 <div className="ml-3 w-0 flex-1">
                   <dl>
-                    <dt className="text-xs font-medium text-gray-500 dark:text-gray-400 truncate">Total</dt>
+                    <dt className="text-xs font-medium text-gray-500 dark:text-gray-400 truncate">{t('admin.bookingManagement.total')}</dt>
                     <dd className="text-lg font-medium text-gray-900 dark:text-gray-100">{stats.total}</dd>
                   </dl>
                 </div>
@@ -193,7 +193,7 @@ const BookingManagement = () => {
                 </div>
                 <div className="ml-3 w-0 flex-1">
                   <dl>
-                    <dt className="text-xs font-medium text-gray-500 dark:text-gray-400 truncate">Approved</dt>
+                    <dt className="text-xs font-medium text-gray-500 dark:text-gray-400 truncate">{t('admin.bookingManagement.approved')}</dt>
                     <dd className="text-lg font-medium text-gray-900 dark:text-gray-100">{stats.approved}</dd>
                   </dl>
                 </div>
@@ -209,7 +209,7 @@ const BookingManagement = () => {
                 </div>
                 <div className="ml-3 w-0 flex-1">
                   <dl>
-                    <dt className="text-xs font-medium text-gray-500 dark:text-gray-400 truncate">In Transit (Logistics)</dt>
+                    <dt className="text-xs font-medium text-gray-500 dark:text-gray-400 truncate">{t('admin.bookingManagement.inTransit')}</dt>
                     <dd className="text-lg font-medium text-gray-900 dark:text-gray-100">{stats.in_transit}</dd>
                   </dl>
                 </div>
@@ -224,7 +224,7 @@ const BookingManagement = () => {
                 </div>
                 <div className="ml-3 w-0 flex-1">
                   <dl>
-                    <dt className="text-xs font-medium text-gray-500 dark:text-gray-400 truncate">Active (Rental)</dt>
+                    <dt className="text-xs font-medium text-gray-500 dark:text-gray-400 truncate">{t('admin.bookingManagement.active')}</dt>
                     <dd className="text-lg font-medium text-gray-900 dark:text-gray-100">{stats.active}</dd>
                   </dl>
                 </div>
@@ -240,7 +240,7 @@ const BookingManagement = () => {
                 </div>
                 <div className="ml-3 w-0 flex-1">
                   <dl>
-                    <dt className="text-xs font-medium text-gray-500 dark:text-gray-400 truncate">Completed</dt>
+                    <dt className="text-xs font-medium text-gray-500 dark:text-gray-400 truncate">{t('admin.bookingManagement.completed')}</dt>
                     <dd className="text-lg font-medium text-gray-900 dark:text-gray-100">{stats.completed}</dd>
                   </dl>
                 </div>
@@ -256,7 +256,7 @@ const BookingManagement = () => {
                 </div>
                 <div className="ml-3 w-0 flex-1">
                   <dl>
-                    <dt className="text-xs font-medium text-gray-500 dark:text-gray-400 truncate">Cancelled</dt>
+                    <dt className="text-xs font-medium text-gray-500 dark:text-gray-400 truncate">{t('admin.bookingManagement.cancelled')}</dt>
                     <dd className="text-lg font-medium text-gray-900 dark:text-gray-100">{stats.cancelled}</dd>
                   </dl>
                 </div>
@@ -272,7 +272,7 @@ const BookingManagement = () => {
                 </div>
                 <div className="ml-3 w-0 flex-1">
                   <dl>
-                    <dt className="text-xs font-medium text-gray-500 dark:text-gray-400 truncate">Review</dt>
+                    <dt className="text-xs font-medium text-gray-500 dark:text-gray-400 truncate">{t('admin.bookingManagement.pendingReview')}</dt>
                     <dd className="text-lg font-medium text-gray-900 dark:text-gray-100">{stats.pending_review}</dd>
                   </dl>
                 </div>
@@ -286,8 +286,14 @@ const BookingManagement = () => {
           <div className="px-4 py-3 border-b border-gray-200 dark:border-gray-700">
             <div className="flex flex-wrap gap-2">
               {[
-                { key: 'all', label: 'All Bookings' },
-                { key: 'pending_review', label: 'Pending Review' },
+                { key: 'all', label: t('admin.bookingManagement.allBookings') },
+                { key: 'pending_review', label: t('admin.bookingManagement.pendingReview') },
+                { key: 'approved', label: t('admin.bookingManagement.approved') },
+                { key: 'in_transit', label: t('admin.bookingManagement.inTransit') },
+                { key: 'active', label: t('admin.bookingManagement.active') },
+                { key: 'completed', label: t('admin.bookingManagement.completed') },
+                { key: 'cancelled', label: t('admin.bookingManagement.cancelled') }
+              ].map(({ key, label }) => (
                 { key: 'approved', label: 'Approved' },
                 { key: 'in_transit', label: 'In Transit (Logistics)' },
                 { key: 'active', label: 'Active (Rental)' },

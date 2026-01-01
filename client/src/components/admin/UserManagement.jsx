@@ -41,25 +41,25 @@ const UserManagement = () => {
           : user
       ));
       
-      alert(`User ${!currentStatus ? 'activated' : 'deactivated'} successfully!`);
+      alert(t(`admin.userManagement.user${!currentStatus ? 'Activated' : 'Deactivated'}`));
     } catch (error) {
       console.error('Error updating user status:', error);
-      alert('Error updating user status');
+      alert(t('admin.userManagement.errorUpdating'));
     } finally {
       setUpdating(prev => ({ ...prev, [userId]: false }));
     }
   };
 
   const handleDeleteUser = async (userId) => {
-    if (!confirm('Are you sure you want to permanently delete this user? This action cannot be undone.')) return;
+    if (!confirm(t('admin.userManagement.confirmDelete'))) return;
     setUpdating(prev => ({ ...prev, [userId]: true }));
     try {
       await apiClient.delete(`/users/${userId}`);
       setUsers(prev => prev.filter(u => u.id !== userId));
-      alert('User deleted successfully');
+      alert(t('admin.userManagement.userDeleted'));
     } catch (error) {
       console.error('Error deleting user:', error);
-      alert('Error deleting user');
+      alert(t('admin.userManagement.errorDeleting'));
     } finally {
       setUpdating(prev => ({ ...prev, [userId]: false }));
     }
@@ -78,7 +78,7 @@ const UserManagement = () => {
     return (
       <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${config.color}`}>
         <Icon className="w-3 h-3 mr-1" />
-        {role.charAt(0).toUpperCase() + role.slice(1)}
+        {t(`admin.userManagement.${role}`)}
       </span>
     );
   };
@@ -95,7 +95,7 @@ const UserManagement = () => {
         ) : (
           <UserX className="w-3 h-3 mr-1" />
         )}
-        {isActive ? 'Active' : 'Inactive'}
+        {t(`admin.userManagement.${isActive ? 'active' : 'inactive'}`)}
       </span>
     );
   };
@@ -132,9 +132,9 @@ const UserManagement = () => {
           <div className="flex items-center">
             <Users className="h-8 w-8 text-primary-600 mr-3" />
             <div>
-              <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">User Management</h1>
+              <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">{t('admin.userManagement.title')}</h1>
               <p className="mt-2 text-gray-600 dark:text-gray-400">
-                Manage user accounts and permissions
+                {t('admin.userManagement.subtitle')}
               </p>
             </div>
           </div>
@@ -150,7 +150,7 @@ const UserManagement = () => {
                 </div>
                 <div className="ml-3 w-0 flex-1">
                   <dl>
-                    <dt className="text-xs font-medium text-gray-500 dark:text-gray-400 truncate">Total</dt>
+                    <dt className="text-xs font-medium text-gray-500 dark:text-gray-400 truncate">{t('admin.userManagement.total')}</dt>
                     <dd className="text-lg font-medium text-gray-900 dark:text-gray-100">{stats.total}</dd>
                   </dl>
                 </div>
@@ -166,7 +166,7 @@ const UserManagement = () => {
                 </div>
                 <div className="ml-3 w-0 flex-1">
                   <dl>
-                    <dt className="text-xs font-medium text-gray-500 dark:text-gray-400 truncate">Active</dt>
+                    <dt className="text-xs font-medium text-gray-500 dark:text-gray-400 truncate">{t('admin.userManagement.activeUsers')}</dt>
                     <dd className="text-lg font-medium text-gray-900 dark:text-gray-100">{stats.active}</dd>
                   </dl>
                 </div>
@@ -182,7 +182,7 @@ const UserManagement = () => {
                 </div>
                 <div className="ml-3 w-0 flex-1">
                   <dl>
-                    <dt className="text-xs font-medium text-gray-500 dark:text-gray-400 truncate">Inactive</dt>
+                    <dt className="text-xs font-medium text-gray-500 dark:text-gray-400 truncate">{t('admin.userManagement.inactiveUsers')}</dt>
                     <dd className="text-lg font-medium text-gray-900 dark:text-gray-100">{stats.inactive}</dd>
                   </dl>
                 </div>
@@ -198,7 +198,7 @@ const UserManagement = () => {
                 </div>
                 <div className="ml-3 w-0 flex-1">
                   <dl>
-                    <dt className="text-xs font-medium text-gray-500 dark:text-gray-400 truncate">Admins</dt>
+                    <dt className="text-xs font-medium text-gray-500 dark:text-gray-400 truncate">{t('admin.userManagement.admins')}</dt>
                     <dd className="text-lg font-medium text-gray-900 dark:text-gray-100">{stats.admins}</dd>
                   </dl>
                 </div>
@@ -214,7 +214,7 @@ const UserManagement = () => {
                 </div>
                 <div className="ml-3 w-0 flex-1">
                   <dl>
-                    <dt className="text-xs font-medium text-gray-500 dark:text-gray-400 truncate">Providers</dt>
+                    <dt className="text-xs font-medium text-gray-500 dark:text-gray-400 truncate">{t('admin.userManagement.providers')}</dt>
                     <dd className="text-lg font-medium text-gray-900 dark:text-gray-100">{stats.providers}</dd>
                   </dl>
                 </div>
@@ -230,7 +230,7 @@ const UserManagement = () => {
                 </div>
                 <div className="ml-3 w-0 flex-1">
                   <dl>
-                    <dt className="text-xs font-medium text-gray-500 dark:text-gray-400 truncate">Customers</dt>
+                    <dt className="text-xs font-medium text-gray-500 dark:text-gray-400 truncate">{t('admin.userManagement.customers')}</dt>
                     <dd className="text-lg font-medium text-gray-900 dark:text-gray-100">{stats.customers}</dd>
                   </dl>
                 </div>
@@ -244,12 +244,12 @@ const UserManagement = () => {
           <div className="px-4 py-3 border-b border-gray-200 dark:border-gray-700">
             <div className="flex flex-wrap gap-2">
               {[
-                { key: 'all', label: 'All Users' },
-                { key: 'active', label: 'Active' },
-                { key: 'inactive', label: 'Inactive' },
-                { key: 'admin', label: 'Admins' },
-                { key: 'provider', label: 'Providers' },
-                { key: 'customer', label: 'Customers' }
+                { key: 'all', label: t('admin.userManagement.allRoles') },
+                { key: 'active', label: t('admin.userManagement.active') },
+                { key: 'inactive', label: t('admin.userManagement.inactive') },
+                { key: 'admin', label: t('admin.userManagement.admins') },
+                { key: 'provider', label: t('admin.userManagement.providers') },
+                { key: 'customer', label: t('admin.userManagement.customers') }
               ].map(({ key, label }) => (
                 <button
                   key={key}
@@ -340,7 +340,7 @@ const UserManagement = () => {
                       disabled={updating[user.id]}
                       className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 disabled:opacity-50"
                     >
-                      Delete
+                      {t('admin.userManagement.deleteUser')}
                     </button>
                   </div>
                 </div>
