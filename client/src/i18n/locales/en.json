@@ -959,9 +959,6 @@
       "statusMaintenance": "Maintenance",
       "statusInactive": "Inactive"
     }
-      "statusMaintenance": "Maintenance",
-      "statusInactive": "Inactive"
-    }
   },
   "analytics": {
     "title": "Analytics Dashboard",
