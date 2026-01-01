@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import { Upload, X, Image as ImageIcon } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const ImageUpload = ({ 
   images = [], 
@@ -10,6 +11,7 @@ const ImageUpload = ({
   label = 'Truck Images',
   required = false 
 }) => {
+  const { t } = useTranslation();
   const [dragActive, setDragActive] = useState(false);
   const [error, setError] = useState(null);
   
@@ -181,19 +183,19 @@ const ImageUpload = ({
         
         {/* Photography Guidelines */}
         <div className="mb-4 p-4 bg-blue-50 rounded-lg border border-blue-200">
-          <h4 className="text-sm font-medium text-blue-900 mb-2">📸 Photography Guidelines</h4>
+          <h4 className="text-sm font-medium text-blue-900 mb-2">{t('trucks.photographyGuidelines')}</h4>
           <div className="text-xs text-blue-800 dark:text-blue-200 space-y-1">
             <div className="mb-2 p-2 bg-red-50 border border-red-200 rounded">
-              <p className="text-red-800 dark:text-red-200 font-medium">⚠️ REQUIRED: At least one image must clearly show the license plate (matricule)</p>
+              <p className="text-red-800 dark:text-red-200 font-medium">{t('trucks.requiredPlateWarning')}</p>
             </div>
-            <p><strong>Recommended shots:</strong></p>
+            <p><strong>{t('trucks.recommendedShots')}</strong></p>
             <ul className="list-disc ml-4 space-y-0.5">
-              <li><strong>Front view</strong> - Show matricule (license plate) clearly visible ⭐ <em>Required</em></li>
-              <li><strong>Rear view</strong> - Include rear license plate if different</li>
-              <li><strong>Left & Right sides</strong> - Full profile view of the truck</li>
-              <li><strong>Cargo area</strong> - Inside view of loading space</li>
+              <li>{t('trucks.frontViewRequired')}</li>
+              <li>{t('trucks.rearView')}</li>
+              <li>{t('trucks.sidesView')}</li>
+              <li>{t('trucks.cargoAreaView')}</li>
             </ul>
-            <p className="mt-2"><strong>Tips:</strong> Take photos in good lighting, ensure matricule is readable, avoid blurry images</p>
+            <p className="mt-2">{t('trucks.photoTips')}</p>
           </div>
         </div>
 
@@ -218,7 +220,7 @@ const ImageUpload = ({
                 htmlFor={`image-upload-${label.replace(/\s+/g, '-').toLowerCase()}`}
                 className="relative cursor-pointer bg-white dark:bg-gray-800 rounded-md font-medium text-accent-500 hover:text-accent-600 transition-colors focus-within:outline-none"
               >
-                <span>Upload images</span>
+                <span>{t('trucks.uploadImages')}</span>
                 <input
                   id={`image-upload-${label.replace(/\s+/g, '-').toLowerCase()}`}
                   name="images"
@@ -229,13 +231,13 @@ const ImageUpload = ({
                   onChange={handleFileSelect}
                 />
               </label>
-              <p className="pl-1">or drag and drop</p>
+              <p className="pl-1">{t('trucks.orDragDrop')}</p>
             </div>
             <p className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500">
-              PNG, JPG, GIF up to {Math.round(maxSize / (1024 * 1024))}MB
+              {t('trucks.imageFileTypes')}
             </p>
             <p className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500">
-              {processedImages.length}/{maxImages} images
+              {processedImages.length}/{maxImages} {t('trucks.imagesCount')}
             </p>
           </div>
         </div>

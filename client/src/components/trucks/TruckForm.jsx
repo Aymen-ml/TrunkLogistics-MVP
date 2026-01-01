@@ -603,10 +603,10 @@ const TruckForm = () => {
             className="inline-flex items-center text-sm text-gray-600 dark:text-gray-400 dark:text-gray-400 hover:text-gray-900 dark:text-gray-100"
           >
             <ArrowLeft className="h-4 w-4 mr-1" />
-            Back to Trucks
+            {t('trucks.backToTrucks')}
           </button>
           <h1 className="mt-2 text-2xl font-bold text-gray-900 dark:text-gray-100">
-            {isEditing ? 'Edit Truck' : 'Add New Truck'}
+            {isEditing ? t('trucks.editTruckForm') : t('trucks.addNewTruckForm')}
           </h1>
         </div>
 
@@ -615,7 +615,7 @@ const TruckForm = () => {
             {/* Service Type Selection */}
             <div className="col-span-2">
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-3">
-                Service Type *
+                {t('trucks.serviceTypeLabel')} *
               </label>
               <div className="flex space-x-4">
                 <label className="inline-flex items-center">
@@ -627,7 +627,7 @@ const TruckForm = () => {
                     onChange={handleChange}
                     className="form-radio h-4 w-4 text-primary-600 transition duration-150 ease-in-out"
                   />
-                  <span className="ml-2 text-sm text-gray-700 dark:text-gray-200">Transport</span>
+                  <span className="ml-2 text-sm text-gray-700 dark:text-gray-200">{t('trucks.transportOption')}</span>
                 </label>
                 <label className="inline-flex items-center">
                   <input
@@ -638,11 +638,11 @@ const TruckForm = () => {
                     onChange={handleChange}
                     className="form-radio h-4 w-4 text-primary-600 transition duration-150 ease-in-out"
                   />
-                  <span className="ml-2 text-sm text-gray-700 dark:text-gray-200">Rental</span>
+                  <span className="ml-2 text-sm text-gray-700 dark:text-gray-200">{t('trucks.rentalOption')}</span>
                 </label>
               </div>
               <p className="mt-1 text-sm text-gray-500 dark:text-gray-400 dark:text-gray-400">
-                Choose whether this vehicle is for logistics or retail services
+                {t('trucks.serviceTypeHelp')}
               </p>
             </div>
 
@@ -650,7 +650,7 @@ const TruckForm = () => {
               {/* License Plate */}
               <div className="col-span-2">
                 <label htmlFor="licensePlate" className="block text-sm font-medium text-gray-700 dark:text-gray-200">
-                  License Plate *
+                  {t('trucks.licensePlateLabel')} *
                 </label>
                 <input
                   type="text"
@@ -671,7 +671,7 @@ const TruckForm = () => {
               {/* Truck Type */}
               <div>
                 <label htmlFor="truckType" className="block text-sm font-medium text-gray-700 dark:text-gray-200">
-                  {formData.serviceType === 'retail' ? 'Equipment Type *' : 'Truck Type *'}
+                  {formData.serviceType === 'rental' ? `${t('trucks.equipmentTypeLabel')} *` : `${t('trucks.truckTypeLabel')} *`}
                 </label>
                   <select
                     id="truckType"
@@ -686,28 +686,28 @@ const TruckForm = () => {
                     {formData.serviceType === 'transport' ? (
                       // Transport truck types
                       <>
-                        <option value="flatbed">Flatbed</option>
-                        <option value="container">Container</option>
-                        <option value="refrigerated">Refrigerated</option>
-                        <option value="tanker">Tanker</option>
-                        <option value="box">Box Truck</option>
-                        <option value="other">Other</option>
+                        <option value="flatbed">{t('trucks.flatbed')}</option>
+                        <option value="container">{t('trucks.container')}</option>
+                        <option value="refrigerated">{t('trucks.refrigerated')}</option>
+                        <option value="tanker">{t('trucks.tanker')}</option>
+                        <option value="box">{t('trucks.boxTruck')}</option>
+                        <option value="other">{t('trucks.other')}</option>
                       </>
                     ) : (
                       // Rental equipment types
                       <>
-                        <option value="excavator">Excavator</option>
-                        <option value="crane">Crane</option>
-                        <option value="mobile_crane">Mobile Crane</option>
-                        <option value="tower_crane">Tower Crane</option>
-                        <option value="bulldozer">Bulldozer</option>
-                        <option value="loader">Loader</option>
-                        <option value="forklift">Forklift</option>
-                        <option value="reach_truck">Reach Truck</option>
-                        <option value="pallet_jack">Pallet Jack</option>
-                        <option value="dump_truck">Dump Truck</option>
-                        <option value="concrete_mixer">Concrete Mixer</option>
-                        <option value="other">Other</option>
+                        <option value="excavator">{t('trucks.excavator')}</option>
+                        <option value="crane">{t('trucks.crane')}</option>
+                        <option value="mobile_crane">{t('trucks.mobileCrane')}</option>
+                        <option value="tower_crane">{t('trucks.towerCrane')}</option>
+                        <option value="bulldozer">{t('trucks.bulldozer')}</option>
+                        <option value="loader">{t('trucks.loader')}</option>
+                        <option value="forklift">{t('trucks.forklift')}</option>
+                        <option value="reach_truck">{t('trucks.reachTruck')}</option>
+                        <option value="pallet_jack">{t('trucks.palletJack')}</option>
+                        <option value="dump_truck">{t('trucks.dumpTruck')}</option>
+                        <option value="concrete_mixer">{t('trucks.concreteMixer')}</option>
+                        <option value="other">{t('trucks.other')}</option>
                       </>
                     )}
                   </select>
@@ -719,7 +719,7 @@ const TruckForm = () => {
               {/* Make */}
               <div>
                 <label htmlFor="make" className="block text-sm font-medium text-gray-700 dark:text-gray-200">
-                  Make *
+                  {t('trucks.makeLabel')} *
                 </label>
                 <input
                   type="text"
@@ -740,7 +740,7 @@ const TruckForm = () => {
               {/* Model */}
               <div>
                 <label htmlFor="model" className="block text-sm font-medium text-gray-700 dark:text-gray-200">
-                  Model *
+                  {t('trucks.modelLabel')} *
                 </label>
                 <input
                   type="text"
@@ -761,7 +761,7 @@ const TruckForm = () => {
               {/* Year */}
               <div>
                 <label htmlFor="year" className="block text-sm font-medium text-gray-700 dark:text-gray-200">
-                  Year *
+                  {t('trucks.yearLabel')} *
                 </label>
                 <input
                   type="number"
@@ -784,7 +784,7 @@ const TruckForm = () => {
               {/* Status */}
               <div>
                 <label htmlFor="status" className="block text-sm font-medium text-gray-700 dark:text-gray-200">
-                  Status *
+                  {t('trucks.statusLabelForm')} *
                 </label>
                 <select
                   id="status"
@@ -796,9 +796,9 @@ const TruckForm = () => {
                   } shadow-sm focus:border-blue-500 focus:ring-accent-500 sm:text-sm`}
                   required
                 >
-                  <option value="active">Active</option>
-                  <option value="inactive">Inactive</option>
-                  <option value="maintenance">Maintenance</option>
+                  <option value="active">{t('trucks.activeStatus')}</option>
+                  <option value="inactive">{t('trucks.inactiveStatus')}</option>
+                  <option value="maintenance">{t('trucks.maintenanceStatus')}</option>
                 </select>
                 {errors.status && (
                   <p className="mt-1 text-sm text-red-600 font-medium">{errors.status}</p>
@@ -808,7 +808,7 @@ const TruckForm = () => {
               {/* Capacity Weight */}
               <div>
                 <label htmlFor="capacity_weight" className="block text-sm font-medium text-gray-700 dark:text-gray-200">
-                  Capacity (kg) *
+                  {t('trucks.capacityKgLabel')} *
                 </label>
                 <input
                   type="number"
@@ -831,7 +831,7 @@ const TruckForm = () => {
               {/* Capacity Volume */}
               <div>
                 <label htmlFor="capacity_volume" className="block text-sm font-medium text-gray-700 dark:text-gray-200">
-                  Volume (m³)
+                  {t('trucks.volumeM3Label')}
                 </label>
                 <input
                   type="number"
@@ -856,7 +856,7 @@ const TruckForm = () => {
                   {/* Pricing Type */}
                   <div>
                     <label htmlFor="pricingType" className="block text-sm font-medium text-gray-700 dark:text-gray-200">
-                      Pricing Type *
+                      {t('trucks.pricingTypeLabel')} *
                     </label>
                     <select
                       id="pricingType"
@@ -868,8 +868,8 @@ const TruckForm = () => {
                       } shadow-sm focus:border-blue-500 focus:ring-accent-500 sm:text-sm`}
                       required
                     >
-                      <option value="per_km">Price per km</option>
-                      <option value="fixed">Fixed price</option>
+                      <option value="per_km">{t('trucks.pricePerKmOption')}</option>
+                      <option value="fixed">{t('trucks.fixedPriceOption')}</option>
                     </select>
                   </div>
 
@@ -880,7 +880,7 @@ const TruckForm = () => {
                         htmlFor="pricePerKm"
                         className="block text-sm font-medium text-gray-700 dark:text-gray-200"
                       >
-                        Price per km *
+                        {t('trucks.pricePerKmLabel')} *
                       </label>
                       <input
                         type="number"
@@ -908,7 +908,7 @@ const TruckForm = () => {
                         htmlFor="fixedPrice"
                         className="block text-sm font-medium text-gray-700 dark:text-gray-200"
                       >
-                        Fixed price *
+                        {t('trucks.fixedPriceLabel')} *
                       </label>
                       <input
                         type="number"
@@ -937,7 +937,7 @@ const TruckForm = () => {
                   {/* Monthly Rate */}
                   <div>
                     <label htmlFor="monthly_rate" className="block text-sm font-medium text-gray-700 dark:text-gray-200">
-                      Monthly Rate ($) *
+                      {t('trucks.monthlyRateLabel')} *
                     </label>
                     <input
                       type="number"
@@ -960,7 +960,7 @@ const TruckForm = () => {
                   {/* Work Location */}
                   <div>
                     <label htmlFor="work_location" className="block text-sm font-medium text-gray-700 dark:text-gray-200">
-                      Work Location *
+                      {t('trucks.workLocationLabel')} *
                     </label>
                     <input
                       type="text"
@@ -971,7 +971,7 @@ const TruckForm = () => {
                       className={`mt-1 block w-full rounded-md ${
                         errors.work_location ? 'border-red-500 bg-red-50' : 'border-gray-300 dark:border-gray-600'
                       } shadow-sm focus:border-blue-500 focus:ring-accent-500 sm:text-sm`}
-                      placeholder="e.g., Construction Site, Warehouse, Office"
+                      placeholder={t('trucks.workLocationPlaceholder')}
                       required
                     />
                     {errors.work_location && (
@@ -985,13 +985,13 @@ const TruckForm = () => {
 
             {/* Driver Information Section */}
             <div className="space-y-6 pt-6 border-t border-gray-200 dark:border-gray-700">
-              <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">Driver Information</h2>
+              <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">{t('trucks.driverInformationTitle')}</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 
                 {/* Driver Name */}
                 <div>
                   <label htmlFor="driverName" className="block text-sm font-medium text-gray-700 dark:text-gray-200">
-                    Driver Name
+                    {t('trucks.driverNameLabel')}
                   </label>
                   <input
                     type="text"
@@ -1002,7 +1002,7 @@ const TruckForm = () => {
                     className={`mt-1 block w-full rounded-md ${
                       errors.driverName ? 'border-red-500 bg-red-50' : 'border-gray-300 dark:border-gray-600'
                     } shadow-sm focus:border-blue-500 focus:ring-accent-500 sm:text-sm`}
-                    placeholder="Enter driver's full name"
+                    placeholder={t('trucks.driverNamePlaceholder')}
                   />
                   {errors.driverName && (
                     <p className="mt-1 text-sm text-red-600 font-medium">{errors.driverName}</p>
@@ -1012,7 +1012,7 @@ const TruckForm = () => {
                 {/* Driver Phone */}
                 <div>
                   <label htmlFor="driverPhone" className="block text-sm font-medium text-gray-700 dark:text-gray-200">
-                    Driver Phone
+                    {t('trucks.driverPhoneLabel')}
                   </label>
                   <input
                     type="tel"
@@ -1023,7 +1023,7 @@ const TruckForm = () => {
                     className={`mt-1 block w-full rounded-md ${
                       errors.driverPhone ? 'border-red-500 bg-red-50' : 'border-gray-300 dark:border-gray-600'
                     } shadow-sm focus:border-blue-500 focus:ring-accent-500 sm:text-sm`}
-                    placeholder="Enter driver's phone number"
+                    placeholder={t('trucks.driverPhonePlaceholder')}
                   />
                   {errors.driverPhone && (
                     <p className="mt-1 text-sm text-red-600 font-medium">{errors.driverPhone}</p>
@@ -1033,7 +1033,7 @@ const TruckForm = () => {
                 {/* Driver License Number */}
                 <div className="md:col-span-2">
                   <label htmlFor="driverLicenseNumber" className="block text-sm font-medium text-gray-700 dark:text-gray-200">
-                    Driver License Number
+                    {t('trucks.driverLicenseNumberLabel')}
                   </label>
                   <input
                     type="text"
@@ -1044,7 +1044,7 @@ const TruckForm = () => {
                     className={`mt-1 block w-full rounded-md ${
                       errors.driverLicenseNumber ? 'border-red-500 bg-red-50' : 'border-gray-300 dark:border-gray-600'
                     } shadow-sm focus:border-blue-500 focus:ring-accent-500 sm:text-sm`}
-                    placeholder="Enter driver's license number"
+                    placeholder={t('trucks.driverLicenseNumberPlaceholder')}
                   />
                   {errors.driverLicenseNumber && (
                     <p className="mt-1 text-sm text-red-600 font-medium">{errors.driverLicenseNumber}</p>
@@ -1056,14 +1056,14 @@ const TruckForm = () => {
 
             {/* Upload Sections */}
             <div className="space-y-6 pt-6 border-t border-gray-200 dark:border-gray-700">
-              <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">Truck Images & Documents</h2>
+              <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">{t('trucks.truckImagesDocsTitle')}</h2>
               
               {/* Image Upload */}
               <ImageUpload 
                 images={images}
                 onImagesChange={setImages}
                 maxImages={10}
-                label="Truck Images (Required)"
+                label={t('trucks.truckImagesRequired')}
                 required={true}
               />
               
@@ -1099,7 +1099,7 @@ const TruckForm = () => {
                 onClick={() => navigate('/trucks')}
                 className="w-full sm:w-auto px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:bg-gray-900"
               >
-                Cancel
+                {t('trucks.cancelButton')}
               </button>
               <button
                 type="submit"
@@ -1111,7 +1111,7 @@ const TruckForm = () => {
                 ) : (
                   <Save className="h-4 w-4 mr-2" />
                 )}
-                {isEditing ? 'Update Truck' : 'Add Truck'}
+                {isEditing ? t('trucks.updateTruckButton') : t('trucks.addTruckButton')}
               </button>
             </div>
           </form>

@@ -1,5 +1,6 @@
 import React, { useCallback } from 'react';
 import { X, Shield, Car, FileCheck, Building2, Plus, FileText } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const DocumentUpload = ({
   // Individual document types
@@ -20,43 +21,45 @@ const DocumentUpload = ({
   maxSize = 10 * 1024 * 1024, // 10MB
   className = ''
 }) => {
+  const { t } = useTranslation();
+  
   // Document types configuration
   const documentTypes = [
     {
       id: 'inspection',
-      name: 'Technical Inspection',
+      name: t('trucks.technicalInspection'),
       icon: Shield,
       required: true,
       value: inspectionDoc,
       onChange: onInspectionDocChange,
-      description: 'Upload mandatory truck inspection certificate'
+      description: t('trucks.technicalInspectionDesc')
     },
     {
       id: 'registration',
-      name: 'Registration',
+      name: t('trucks.registrationDoc'),
       icon: Car,
       required: false,
       value: registrationDoc,
       onChange: onRegistrationDocChange,
-      description: 'Upload vehicle registration document'
+      description: t('trucks.registrationDocDesc')
     },
     {
       id: 'license',
-      name: 'Driver License',
+      name: t('trucks.driverLicenseDoc'),
       icon: FileCheck,
       required: false,
       value: licenseDoc,
       onChange: onLicenseDocChange,
-      description: 'Upload driver license document'
+      description: t('trucks.driverLicenseDocDesc')
     },
     {
       id: 'businessLicense',
-      name: 'Business License',
+      name: t('trucks.businessLicenseDoc'),
       icon: Building2,
       required: false,
       value: businessLicenseDoc,
       onChange: onBusinessLicenseDocChange,
-      description: 'Upload business license document'
+      description: t('trucks.businessLicenseDocDesc')
     }
   ];
 
@@ -262,7 +265,7 @@ const DocumentUpload = ({
               type="button"
               onClick={() => removeDocument(docType.value, docType.onChange)}
               className="inline-flex items-center p-1 text-red-600 hover:text-red-800 dark:text-red-200"
-              title="Remove document"
+              title={t('trucks.removeDocument')}
             >
               <X className="h-4 w-4" />
             </button>
@@ -275,7 +278,7 @@ const DocumentUpload = ({
               htmlFor={`${docType.id}-upload`}
               className="cursor-pointer text-sm text-accent-500 hover:text-accent-600 transition-colors"
             >
-              Choose file
+              {t('trucks.chooseFile')}
               <input
                 id={`${docType.id}-upload`}
                 name={`${docType.id}Doc`}
@@ -285,9 +288,9 @@ const DocumentUpload = ({
                 onChange={(e) => handleFileSelect(e, docType.onChange)}
               />
             </label>
-            <p className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 mt-1">PDF, Word, or image</p>
+            <p className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 mt-1">{t('trucks.pdfWordImage')}</p>
             {docType.required && (
-              <p className="text-xs text-red-500 mt-1">Required</p>
+              <p className="text-xs text-red-500 mt-1">{t('trucks.requiredDoc')}</p>
             )}
           </div>
         )}
@@ -300,7 +303,7 @@ const DocumentUpload = ({
   return (
     <div className={`space-y-6 ${className}`}>
       <div>
-        <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4">Document Upload</h3>
+        <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4">{t('trucks.documentUploadTitle')}</h3>
         
         {/* Specific Document Types */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
@@ -314,11 +317,11 @@ const DocumentUpload = ({
           <div className="flex items-center space-x-2 mb-4">
             <Plus className="h-5 w-5 text-gray-600 dark:text-gray-400 dark:text-gray-500" />
             <label className="text-sm font-medium text-gray-700 dark:text-gray-200">
-              Additional Documents (Optional)
+              {t('trucks.additionalDocsOptional')}
             </label>
           </div>
           <p className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 mb-3">
-            Upload any additional documents up to {maxAdditionalDocs} files
+            {t('trucks.uploadAdditionalDocs')}
           </p>
 
           {/* Additional Upload Area */}
@@ -332,7 +335,7 @@ const DocumentUpload = ({
                 normalizedAdditionalDocs.length >= maxAdditionalDocs ? 'pointer-events-none' : ''
               }`}
             >
-              Upload additional documents
+              {t('trucks.uploadAdditionalDocsBtn')}
               <input
                 id="additional-upload"
                 name="additionalDocs"
@@ -344,7 +347,7 @@ const DocumentUpload = ({
               />
             </label>
             <p className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 mt-1">
-              {normalizedAdditionalDocs.length}/{maxAdditionalDocs} documents
+              {normalizedAdditionalDocs.length}/{maxAdditionalDocs} {t('trucks.documentsCount')}
             </p>
           </div>
 
@@ -364,7 +367,7 @@ const DocumentUpload = ({
                     type="button"
                     onClick={() => removeAdditionalDocument(index)}
                     className="inline-flex items-center p-1 text-red-600 hover:text-red-800 dark:text-red-200"
-                    title="Remove document"
+                    title={t('trucks.removeDocument')}
                   >
                     <X className="h-4 w-4" />
                   </button>
