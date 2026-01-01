@@ -307,7 +307,7 @@ const DocumentVerification = () => {
                 </div>
                 <div className="ml-3 w-0 flex-1">
                   <dl>
-                    <dt className="text-xs font-medium text-gray-500 dark:text-gray-400 truncate">Pending</dt>
+                    <dt className="text-xs font-medium text-gray-500 dark:text-gray-400 truncate">{t('admin.documents.pending')}</dt>
                     <dd className="text-lg font-medium text-gray-900 dark:text-gray-100">{stats.pending_documents}</dd>
                   </dl>
                 </div>
@@ -323,7 +323,7 @@ const DocumentVerification = () => {
                 </div>
                 <div className="ml-3 w-0 flex-1">
                   <dl>
-                    <dt className="text-xs font-medium text-gray-500 dark:text-gray-400 truncate">Approved</dt>
+                    <dt className="text-xs font-medium text-gray-500 dark:text-gray-400 truncate">{t('admin.documents.approved')}</dt>
                     <dd className="text-lg font-medium text-gray-900 dark:text-gray-100">{stats.approved_documents}</dd>
                   </dl>
                 </div>
@@ -339,7 +339,7 @@ const DocumentVerification = () => {
                 </div>
                 <div className="ml-3 w-0 flex-1">
                   <dl>
-                    <dt className="text-xs font-medium text-gray-500 dark:text-gray-400 truncate">Rejected</dt>
+                    <dt className="text-xs font-medium text-gray-500 dark:text-gray-400 truncate">{t('admin.documents.rejected')}</dt>
                     <dd className="text-lg font-medium text-gray-900 dark:text-gray-100">{stats.rejected_documents}</dd>
                   </dl>
                 </div>
@@ -355,7 +355,7 @@ const DocumentVerification = () => {
                 </div>
                 <div className="ml-3 w-0 flex-1">
                   <dl>
-                    <dt className="text-xs font-medium text-gray-500 dark:text-gray-400 truncate">Trucks</dt>
+                    <dt className="text-xs font-medium text-gray-500 dark:text-gray-400 truncate">{t('admin.documents.trucks')}</dt>
                     <dd className="text-lg font-medium text-gray-900 dark:text-gray-100">{stats.trucks_with_documents}</dd>
                   </dl>
                 </div>
@@ -371,7 +371,7 @@ const DocumentVerification = () => {
                 </div>
                 <div className="ml-3 w-0 flex-1">
                   <dl>
-                    <dt className="text-xs font-medium text-gray-500 dark:text-gray-400 truncate">Providers</dt>
+                    <dt className="text-xs font-medium text-gray-500 dark:text-gray-400 truncate">{t('admin.documents.providers')}</dt>
                     <dd className="text-lg font-medium text-gray-900 dark:text-gray-100">{stats.providers_with_documents}</dd>
                   </dl>
                 </div>
@@ -384,14 +384,14 @@ const DocumentVerification = () => {
         {showFilters && (
           <div className="bg-white dark:bg-gray-800 shadow rounded-lg mb-6">
             <div className="px-4 py-3 border-b border-gray-200 dark:border-gray-700">
-              <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">Advanced Filters</h3>
+              <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">{t('admin.documents.advancedFilters')}</h3>
             </div>
             <div className="p-4">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {/* Search */}
                 <div className="lg:col-span-3">
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
-                    Search
+                    {t('admin.documents.search')}
                   </label>
                   <div className="relative">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -401,7 +401,7 @@ const DocumentVerification = () => {
                       type="text"
                       value={filters.search}
                       onChange={(e) => handleFilterChange('search', e.target.value)}
-                      placeholder="Search by file name, license plate, provider..."
+                      placeholder={t('admin.documents.searchByFile')}
                       className="block w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-accent-500 focus:border-blue-500"
                     />
                   </div>

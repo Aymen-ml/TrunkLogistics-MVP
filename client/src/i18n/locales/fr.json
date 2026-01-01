@@ -707,13 +707,26 @@
       "unverified": "Non vérifié",
       "viewDetails": "Voir les détails",
       "approve": "Approuver",
-      "reject": "Rejeter"
+      "reject": "Rejeter",
+      "reviewDetails": "Examiner les détails du fournisseur et approuver ou rejeter les candidatures",
+      "noProviders": "Aucun fournisseur trouvé",
+      "noProvidersDesc": "Aucune candidature de fournisseur à examiner pour le moment.",
+      "registered": "Inscrit",
+      "verifiedOn": "Vérifié le",
+      "basicInformation": "Informations de base",
+      "name": "Nom",
+      "registrationDate": "Date d'inscription"
     },
     "documents": {
       "title": "Documents",
       "approved": "Approuvé",
       "rejected": "Rejeté",
-      "viewDocument": "Voir le document"
+      "viewDocument": "Voir le document",
+      "pending": "En attente",
+      "trucks": "Camions",
+      "providers": "Fournisseurs",
+      "advancedFilters": "Filtres avancés",
+      "searchByFile": "Rechercher par nom de fichier, plaque, fournisseur..."
     },
     "analytics": {
       "title": "Analyses et Rapports",

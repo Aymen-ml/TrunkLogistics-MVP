@@ -707,13 +707,26 @@
       "unverified": "Unverified",
       "viewDetails": "View Details",
       "approve": "Approve",
-      "reject": "Reject"
+      "reject": "Reject",
+      "reviewDetails": "Review provider details and approve or reject applications",
+      "noProviders": "No providers found",
+      "noProvidersDesc": "No provider applications to review at this time.",
+      "registered": "Registered",
+      "verifiedOn": "Verified on",
+      "basicInformation": "Basic Information",
+      "name": "Name",
+      "registrationDate": "Registration Date"
     },
     "documents": {
       "title": "Documents",
       "approved": "Approved",
       "rejected": "Rejected",
-      "viewDocument": "View Document"
+      "viewDocument": "View Document",
+      "pending": "Pending",
+      "trucks": "Trucks",
+      "providers": "Providers",
+      "advancedFilters": "Advanced Filters",
+      "searchByFile": "Search by file name, license plate, provider..."
     },
     "analytics": {
       "title": "Analytics & Reports",

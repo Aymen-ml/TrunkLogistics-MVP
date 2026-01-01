@@ -199,16 +199,16 @@ const ProviderVerification = () => {
               {t('admin.providers.title')}
             </h3>
             <p className="mt-1 max-w-2xl text-sm text-gray-500 dark:text-gray-400">
-              Review provider details and approve or reject applications
+              {t('admin.providers.reviewDetails')}
             </p>
           </div>
           
           {providers.length === 0 ? (
             <div className="text-center py-12">
               <AlertCircle className="mx-auto h-12 w-12 text-gray-400 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500" />
-              <h3 className="mt-2 text-sm font-medium text-gray-900 dark:text-gray-100">No providers found</h3>
+              <h3 className="mt-2 text-sm font-medium text-gray-900 dark:text-gray-100">{t('admin.providers.noProviders')}</h3>
               <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-                No provider applications to review at this time.
+                {t('admin.providers.noProvidersDesc')}
               </p>
             </div>
           ) : (
@@ -231,10 +231,10 @@ const ProviderVerification = () => {
                         </div>
                         <p className="text-sm text-gray-500 dark:text-gray-400">{provider.email}</p>
                         <p className="text-sm text-gray-500 dark:text-gray-400">
-                          Registered: {new Date(provider.created_at).toLocaleDateString()}
+                          {t('admin.providers.registered')}: {new Date(provider.created_at).toLocaleDateString()}
                         </p>
                         {provider.phone && (
-                          <p className="text-sm text-gray-500 dark:text-gray-400">Phone: {provider.phone}</p>
+                          <p className="text-sm text-gray-500 dark:text-gray-400">{t('admin.providers.phone')}: {provider.phone}</p>
                         )}
                       </div>
                     </div>
@@ -245,7 +245,7 @@ const ProviderVerification = () => {
                         className="inline-flex items-center px-3 py-2 border border-gray-300 dark:border-gray-600 text-sm leading-4 font-medium rounded-md text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-500"
                       >
                         <Eye className="h-4 w-4 mr-2" />
-                        View Details
+                        {t('admin.providers.viewDetails')}
                       </button>
                       
                       {!provider.is_verified ? (
@@ -260,7 +260,7 @@ const ProviderVerification = () => {
                             ) : (
                               <Check className="h-4 w-4 mr-2" />
                             )}
-                            Approve
+                            {t('admin.providers.approve')}
                           </button>
                           <button
                             onClick={() => handleVerification(provider.id, 'rejected')}
@@ -272,12 +272,12 @@ const ProviderVerification = () => {
                             ) : (
                               <X className="h-4 w-4 mr-2" />
                             )}
-                            Reject
+                            {t('admin.providers.reject')}
                           </button>
                         </>
                       ) : (
                         <span className="text-sm text-gray-500 dark:text-gray-400">
-                          {provider.updated_at ? `Verified on ${new Date(provider.updated_at).toLocaleDateString()}` : 'Verified'}
+                          {provider.updated_at ? `${t('admin.providers.verifiedOn')} ${new Date(provider.updated_at).toLocaleDateString()}` : t('admin.providers.verified')}
                         </span>
                       )}
                     </div>
@@ -295,7 +295,7 @@ const ProviderVerification = () => {
           <div className="relative top-20 mx-auto p-5 border w-11/12 max-w-4xl shadow-lg rounded-md bg-white dark:bg-gray-800">
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">
-                Provider Details - {selectedProvider.first_name} {selectedProvider.last_name}
+                {t('admin.providers.providerDetails')} - {selectedProvider.first_name} {selectedProvider.last_name}
               </h3>
               <button
                 onClick={() => {
@@ -318,15 +318,15 @@ const ProviderVerification = () => {
                 <div className="bg-gray-50 dark:bg-gray-900 p-4 rounded-lg">
                   <h4 className="text-md font-medium text-gray-900 dark:text-gray-100 mb-3 flex items-center">
                     <User className="h-5 w-5 mr-2" />
-                    Basic Information
+                    {t('admin.providers.basicInformation')}
                   </h4>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Name</p>
+                      <p className="text-sm font-medium text-gray-500 dark:text-gray-400">{t('admin.providers.name')}</p>
                       <p className="text-sm text-gray-900 dark:text-gray-100">{selectedProvider.first_name} {selectedProvider.last_name}</p>
                     </div>
                     <div>
-                      <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Email</p>
+                      <p className="text-sm font-medium text-gray-500 dark:text-gray-400">{t('admin.providers.email')}</p>
                       <p className="text-sm text-gray-900 dark:text-gray-100 flex items-center">
                         <Mail className="h-4 w-4 mr-1" />
                         {selectedProvider.email}
@@ -334,7 +334,7 @@ const ProviderVerification = () => {
                     </div>
                     {selectedProvider.phone && (
                       <div>
-                        <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Phone</p>
+                        <p className="text-sm font-medium text-gray-500 dark:text-gray-400">{t('admin.providers.phone')}</p>
                         <p className="text-sm text-gray-900 dark:text-gray-100 flex items-center">
                           <Phone className="h-4 w-4 mr-1" />
                           {selectedProvider.phone}
@@ -342,7 +342,7 @@ const ProviderVerification = () => {
                       </div>
                     )}
                     <div>
-                      <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Registration Date</p>
+                      <p className="text-sm font-medium text-gray-500 dark:text-gray-400">{t('admin.providers.registrationDate')}</p>
                       <p className="text-sm text-gray-900 dark:text-gray-100 flex items-center">
                         <Calendar className="h-4 w-4 mr-1" />
                         {new Date(selectedProvider.created_at).toLocaleDateString()}
