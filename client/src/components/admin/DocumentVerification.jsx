@@ -564,10 +564,10 @@ const DocumentVerification = () => {
                           </div>
                           <div className="ml-4">
                             <div className="text-sm font-medium text-gray-900 dark:text-gray-100">
-                              {document.file_name || 'Unnamed Document'}
+                              {document.file_name || t('admin.documents.unnamedDocument')}
                             </div>
                             <div className="text-sm text-gray-500 dark:text-gray-400">
-                              {document.file_size ? `${(document.file_size / 1024).toFixed(1)} KB` : 'Unknown size'}
+                              {document.file_size ? `${(document.file_size / 1024).toFixed(1)} KB` : t('admin.documents.unknownSize')}
                             </div>
                           </div>
                         </div>

@@ -776,7 +776,14 @@
       "serviceType": "Type de Service",
       "allServices": "Tous les Services",
       "noDocuments": "Aucun document trouvé",
-      "adjustFilters": "Aucun document ne correspond aux filtres actuels."
+      "adjustFilters": "Aucun document ne correspond aux filtres actuels.",
+      "tableHeaderTruckProvider": "Camion & Prestataire",
+      "tableHeaderTypeService": "Type & Service",
+      "tableHeaderStatus": "Statut",
+      "tableHeaderUploaded": "Téléchargé",
+      "tableHeaderActions": "Actions",
+      "unnamedDocument": "Document Sans Nom",
+      "unknownSize": "Taille inconnue"
     },
     "analytics": {
       "title": "Analyses et Rapports",
@@ -808,6 +815,8 @@
     "userManagement": {
       "title": "Gestion des Utilisateurs",
       "subtitle": "Gérer les comptes et permissions des utilisateurs",
+      "manageAccounts": "Gérer les comptes utilisateurs et leur statut",
+      "usersCount": "Utilisateurs",
       "totalUsers": "Total Utilisateurs",
       "activeUsers": "Actifs",
       "inactiveUsers": "Inactifs",
@@ -845,6 +854,8 @@
     "bookingManagement": {
       "title": "Gestion des Réservations",
       "subtitle": "Surveiller et gérer toutes les réservations de la plateforme",
+      "bookingsCount": "Réservations",
+      "manageBookings": "Gérer les statuts des réservations et surveiller l'activité de la plateforme",
       "allBookings": "Toutes les Réservations",
       "filterByStatus": "Filtrer par statut",
       "approve": "Approuver",
@@ -935,7 +946,14 @@
       "title": "Camions",
       "viewAndFilter": "Voir et filtrer tous les camions de tous les prestataires",
       "refresh": "Actualiser",
-      "viewDetails": "Voir les détails"
+      "viewDetails": "Voir les détails",
+      "provider": "Prestataire",
+      "allProviders": "Tous les Prestataires",
+      "all": "Tous",
+      "statusActive": "Actif",
+      "statusRented": "Loué",
+      "statusMaintenance": "Maintenance",
+      "statusInactive": "Inactif"
     }
   },
   "analytics": {

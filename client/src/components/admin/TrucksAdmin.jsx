@@ -108,10 +108,10 @@ const TrucksAdmin = () => {
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">{t('trucks.status')}</label>
                 <select value={filters.status} onChange={e => setFilters(f => ({ ...f, status: e.target.value }))} className="block w-48 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-accent-500 focus:border-blue-500">
                   <option value="all">{t('admin.trucksAdmin.all')}</option>
-                  <option value="active">Active</option>
-                  <option value="rented">Rented</option>
-                  <option value="maintenance">Maintenance</option>
-                  <option value="inactive">Inactive</option>
+                  <option value="active">{t('admin.trucksAdmin.statusActive')}</option>
+                  <option value="rented">{t('admin.trucksAdmin.statusRented')}</option>
+                  <option value="maintenance">{t('admin.trucksAdmin.statusMaintenance')}</option>
+                  <option value="inactive">{t('admin.trucksAdmin.statusInactive')}</option>
                 </select>
               </div>
               <div className="flex-1 min-w-[220px]">

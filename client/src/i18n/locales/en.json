@@ -776,7 +776,14 @@
       "serviceType": "Service Type",
       "allServices": "All Services",
       "noDocuments": "No documents found",
-      "adjustFilters": "No documents match the current filters."
+      "adjustFilters": "No documents match the current filters.",
+      "tableHeaderTruckProvider": "Truck & Provider",
+      "tableHeaderTypeService": "Type & Service",
+      "tableHeaderStatus": "Status",
+      "tableHeaderUploaded": "Uploaded",
+      "tableHeaderActions": "Actions",
+      "unnamedDocument": "Unnamed Document",
+      "unknownSize": "Unknown size"
     },
     "analytics": {
       "title": "Analytics & Reports",
@@ -808,6 +815,8 @@
     "userManagement": {
       "title": "User Management",
       "subtitle": "Manage user accounts and permissions",
+      "manageAccounts": "Manage user accounts and their status",
+      "usersCount": "Users",
       "totalUsers": "Total Users",
       "activeUsers": "Active",
       "inactiveUsers": "Inactive",
@@ -845,6 +854,8 @@
     "bookingManagement": {
       "title": "Booking Management",
       "subtitle": "Monitor and manage all platform bookings",
+      "bookingsCount": "Bookings",
+      "manageBookings": "Manage booking statuses and monitor platform activity",
       "allBookings": "All Bookings",
       "filterByStatus": "Filter by status",
       "approve": "Approve",
@@ -861,6 +872,10 @@
       "completed": "Completed",
       "cancelled": "Cancelled",
       "pendingReview": "Pending Review",
+      "allStatuses": "All Statuses",
+      "searchBookings": "Search bookings...",
+      "all": "All",
+      "pending": "Pending",
       "bookingId": "Booking ID",
       "customer": "Customer",
       "provider": "Provider",
@@ -935,7 +950,17 @@
       "title": "Trucks",
       "viewAndFilter": "View and filter all trucks across providers",
       "refresh": "Refresh",
-      "viewDetails": "View Details"
+      "viewDetails": "View Details",
+      "provider": "Provider",
+      "allProviders": "All Providers",
+      "all": "All",
+      "statusActive": "Active",
+      "statusRented": "Rented",
+      "statusMaintenance": "Maintenance",
+      "statusInactive": "Inactive"
+    }
+      "statusMaintenance": "Maintenance",
+      "statusInactive": "Inactive"
     }
   },
   "analytics": {
