@@ -119,10 +119,11 @@ const CustomerDashboard = () => {
   };
 
   const formatStatus = (status) => {
-    if (!status) return 'Unknown';
-    return status.split('_').map(word => 
-      word.charAt(0).toUpperCase() + word.slice(1)
-    ).join(' ');
+    if (!status) return t('dashboard.unknown');
+    // Use translation keys for booking statuses
+    const statusKey = status === 'pending_review' ? 'pendingReview' : 
+                      status === 'in_transit' ? 'inTransit' : status;
+    return t(`bookings.statuses.${statusKey}`);
   };
 
   const formatDate = (dateString) => {
@@ -204,8 +205,8 @@ const CustomerDashboard = () => {
                   <Plus className="h-6 w-6 sm:h-8 sm:w-8 text-green-600 group-hover:text-green-700" />
                 </div>
                 <div className="ml-3 sm:ml-4">
-                  <h3 className="text-base sm:text-lg font-medium text-gray-900 dark:text-gray-100">New Booking</h3>
-                  <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">Create a new shipment</p>
+                  <h3 className="text-base sm:text-lg font-medium text-gray-900 dark:text-gray-100">{t('dashboard.newBooking')}</h3>
+                  <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">{t('dashboard.createNewShipment')}</p>
                 </div>
               </div>
             </Link>
@@ -220,7 +221,7 @@ const CustomerDashboard = () => {
                 </div>
                 <div className="ml-3 sm:ml-4">
                   <h3 className="text-base sm:text-lg font-medium text-gray-900 dark:text-gray-100">{t('dashboard.myBookings')}</h3>
-                  <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">View all bookings</p>
+                  <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">{t('dashboard.viewAllBookings')}</p>
                 </div>
               </div>
             </Link>
@@ -240,13 +241,13 @@ const CustomerDashboard = () => {
                 <TrendingUp className="h-5 w-5 opacity-60" />
               </div>
               <dt className="text-sm font-medium opacity-90 mb-1">
-                Total Bookings
+                {t('dashboard.totalBookingsLabel')}
               </dt>
               <dd className="text-3xl font-bold">
                 {stats.totalBookings}
               </dd>
               <div className="mt-2 text-xs opacity-75">
-                {stats.activeBookings} active now
+                {stats.activeBookings} {t('dashboard.activeNow')}
               </div>
             </div>
           </div>
@@ -261,13 +262,13 @@ const CustomerDashboard = () => {
                 <Zap className="h-5 w-5 opacity-60" />
               </div>
               <dt className="text-sm font-medium opacity-90 mb-1">
-                Active Bookings
+                {t('dashboard.activeBookingsLabel')}
               </dt>
               <dd className="text-3xl font-bold">
                 {stats.activeBookings}
               </dd>
               <div className="mt-2 text-xs opacity-75">
-                In progress
+                {t('dashboard.inProgressLabel')}
               </div>
             </div>
           </div>
@@ -282,13 +283,13 @@ const CustomerDashboard = () => {
                 <Target className="h-5 w-5 opacity-60" />
               </div>
               <dt className="text-sm font-medium opacity-90 mb-1">
-                Completed
+                {t('dashboard.completedLabel')}
               </dt>
               <dd className="text-3xl font-bold">
                 {stats.completedBookings}
               </dd>
               <div className="mt-2 text-xs opacity-75">
-                {stats.totalBookings > 0 ? Math.round((stats.completedBookings / stats.totalBookings) * 100) : 0}% completion rate
+                {stats.totalBookings > 0 ? Math.round((stats.completedBookings / stats.totalBookings) * 100) : 0}% {t('dashboard.completionRate')}
               </div>
             </div>
           </div>
@@ -303,13 +304,13 @@ const CustomerDashboard = () => {
                 <TrendingUp className="h-5 w-5 opacity-60" />
               </div>
               <dt className="text-sm font-medium opacity-90 mb-1">
-                Total Spent
+                {t('dashboard.totalSpent')}
               </dt>
               <dd className="text-3xl font-bold">
                 {formatCurrency(stats.totalSpent)}
               </dd>
               <div className="mt-2 text-xs opacity-75">
-                On completed bookings
+                {t('dashboard.onCompletedBookings')}
               </div>
             </div>
           </div>
@@ -320,11 +321,11 @@ const CustomerDashboard = () => {
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 border border-gray-200 dark:border-gray-700">
             <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
               <Truck className="h-5 w-5 text-primary-600" />
-              Transportation Services
+              {t('dashboard.transportationServices')}
             </h3>
             <div className="space-y-3">
               <div className="flex items-center justify-between">
-                <span className="text-sm text-gray-600 dark:text-gray-400">Total Bookings</span>
+                <span className="text-sm text-gray-600 dark:text-gray-400">{t('dashboard.totalBookingsService')}</span>
                 <span className="text-2xl font-bold text-primary-600">{stats.transportBookings}</span>
               </div>
               <div className="h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
@@ -334,7 +335,7 @@ const CustomerDashboard = () => {
                 />
               </div>
               <div className="text-xs text-gray-500 dark:text-gray-400">
-                {stats.totalBookings > 0 ? Math.round((stats.transportBookings / stats.totalBookings) * 100) : 0}% of total bookings
+                {stats.totalBookings > 0 ? Math.round((stats.transportBookings / stats.totalBookings) * 100) : 0}% {t('dashboard.ofTotalBookings')}
               </div>
             </div>
           </div>
@@ -342,11 +343,11 @@ const CustomerDashboard = () => {
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 border border-gray-200 dark:border-gray-700">
             <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
               <Settings className="h-5 w-5 text-orange-600" />
-              Equipment Rental
+              {t('dashboard.equipmentRental')}
             </h3>
             <div className="space-y-3">
               <div className="flex items-center justify-between">
-                <span className="text-sm text-gray-600 dark:text-gray-400">Total Bookings</span>
+                <span className="text-sm text-gray-600 dark:text-gray-400">{t('dashboard.totalBookingsService')}</span>
                 <span className="text-2xl font-bold text-orange-600">{stats.rentalBookings}</span>
               </div>
               <div className="h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
@@ -356,7 +357,7 @@ const CustomerDashboard = () => {
                 />
               </div>
               <div className="text-xs text-gray-500 dark:text-gray-400">
-                {stats.totalBookings > 0 ? Math.round((stats.rentalBookings / stats.totalBookings) * 100) : 0}% of total bookings
+                {stats.totalBookings > 0 ? Math.round((stats.rentalBookings / stats.totalBookings) * 100) : 0}% {t('dashboard.ofTotalBookings')}
               </div>
             </div>
           </div>
@@ -379,15 +380,15 @@ const CustomerDashboard = () => {
             {recentBookings.length === 0 ? (
               <div className="text-center py-8 sm:py-12">
                 <Package className="mx-auto h-10 w-10 sm:h-12 sm:w-12 text-gray-400" />
-                <h3 className="mt-2 text-sm font-medium text-gray-900 dark:text-gray-100">No bookings yet</h3>
-                <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">Get started by creating your first booking.</p>
+                <h3 className="mt-2 text-sm font-medium text-gray-900 dark:text-gray-100">{t('dashboard.noBookingsYetMessage')}</h3>
+                <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">{t('dashboard.getStartedMessage')}</p>
                 <div className="mt-6">
                   <Link
                     to="/new-booking"
                     className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
                   >
                     <Plus className="h-5 w-5 mr-2" />
-                    New Booking
+                    {t('dashboard.newBooking')}
                   </Link>
                 </div>
               </div>
@@ -398,16 +399,16 @@ const CustomerDashboard = () => {
                     <thead>
                       <tr className="bg-gray-50 dark:bg-gray-900/50">
                         <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                          Service Type
+                          {t('dashboard.serviceTypeLabel')}
                         </th>
                         <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                          Status
+                          {t('dashboard.statusLabel')}
                         </th>
                         <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                          Date
+                          {t('dashboard.dateLabel')}
                         </th>
                         <th className="px-4 sm:px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                          Price
+                          {t('dashboard.priceLabel')}
                         </th>
                       </tr>
                     </thead>
@@ -425,7 +426,7 @@ const CustomerDashboard = () => {
                               </div>
                               <div className="ml-3 sm:ml-4">
                                 <div className="text-sm font-medium text-gray-900 dark:text-gray-100">
-                                  {booking.service_type === 'transport' ? 'Transportation' : 'Equipment Rental'}
+                                  {booking.service_type === 'transport' ? t('dashboard.transportation') : t('dashboard.equipmentRental')}
                                 </div>
                               </div>
                             </div>
