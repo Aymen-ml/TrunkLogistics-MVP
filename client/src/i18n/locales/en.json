@@ -1631,10 +1631,24 @@
     "terms": {
       "title": "Terms of Use",
       "subtitle": "Last updated: October 27, 2025",
+      "backToHome": "Back to Home",
+      "lastUpdated": "Last updated: October 27, 2025",
+      "intro": {
+        "paragraph1": "Welcome to movelinker. These Terms of Use (\"Terms\") govern your access to and use of our platform, services, and features. By accessing or using movelinker, you agree to be bound by these Terms.",
+        "paragraph2": "Please read these Terms carefully before using our platform. If you do not agree with these Terms, you must not use our services."
+      },
       "intro1": "Welcome to movelinker. These Terms of Use (\"Terms\") govern your access to and use of our platform, services, and features. By accessing or using movelinker, you agree to be bound by these Terms.",
       "intro2": "Please read these Terms carefully before using our platform. If you do not agree with these Terms, you must not use our services.",
       "acceptance": {
         "title": "1. Acceptance of Terms",
+        "intro": "By creating an account or using movelinker, you acknowledge that you have read, understood, and agree to be bound by these Terms. You also agree to comply with all applicable laws and regulations. To use our services, you must:",
+        "items": {
+          "age": "Be at least 18 years old or the age of majority in your jurisdiction",
+          "capacity": "Have the legal capacity to enter into binding contracts",
+          "comply": "You agree to these Terms and our Privacy Policy",
+          "accurate": "Provide accurate and complete information during registration",
+          "agree": "Agree to be bound by these Terms"
+        },
         "description": "By creating an account or using movelinker, you acknowledge that you have read, understood, and agree to be bound by these Terms. You also agree to comply with all applicable laws and regulations. To use our services, you must:",
         "list": [
           "Be at least 18 years old or the age of majority in your jurisdiction",
@@ -1658,6 +1672,14 @@
         "title": "3. User Accounts",
         "registration": {
           "title": "3.1 Account Registration",
+          "intro": "To access certain features, you must create an account. You agree to:",
+          "items": {
+            "required": "Provide accurate, current, and complete information",
+            "confidentiality": "Maintain the security of your account credentials",
+            "notify": "Notify us immediately of any unauthorized access",
+            "responsible": "Be responsible for all activities under your account",
+            "oneAccount": "Maintain only one active account"
+          },
           "description": "To access certain features, you must create an account. You agree to:",
           "list": [
             "Provide accurate, current, and complete information",
@@ -1669,12 +1691,31 @@
         },
         "types": {
           "title": "3.2 Account Types",
+          "customer": {
+            "title": "Customer Account",
+            "desc": "For businesses seeking transportation services"
+          },
+          "provider": {
+            "title": "Provider Account",
+            "desc": "For truck owners/operators offering services (subject to verification)"
+          },
+          "admin": {
+            "title": "Administrator Account",
+            "desc": "For platform management (by invitation only)"
+          },
           "customer": "Customer Account: For businesses seeking transportation services",
           "provider": "Provider Account: For truck owners/operators offering services (subject to verification)",
           "admin": "Administrator Account: For platform management (by invitation only)"
         },
         "verification": {
           "title": "3.3 Verification",
+          "intro": "Provider accounts require verification before activation. We reserve the right to:",
+          "items": {
+            "documentation": "Request additional documentation or information",
+            "vehicle": "Verify the authenticity of submitted documents and vehicles",
+            "background": "Conduct background checks if necessary",
+            "compliance": "Suspend or terminate accounts that fail verification"
+          },
           "description": "Provider accounts require verification before activation. We reserve the right to:",
           "list": [
             "Request additional documentation or information",
@@ -1682,6 +1723,21 @@
             "Approve or reject applications at our discretion",
             "Suspend or terminate accounts that fail verification"
           ]
+        }
+      },
+      "use": {
+        "title": "4. User Conduct and Prohibited Activities",
+        "intro": "You agree not to:",
+        "items": {
+          "laws": "Violate any laws, regulations, or third-party rights",
+          "rights": "Provide false, misleading, or fraudulent information",
+          "malicious": "Post or transmit malicious code or content",
+          "access": "Attempt to gain unauthorized access to any part of the platform",
+          "impersonate": "Impersonate any person or entity",
+          "harass": "Harass, abuse, or harm other users",
+          "automated": "Use automated systems (bots, scrapers) without permission",
+          "manipulate": "Manipulate or circumvent security features",
+          "fraud": "Use the platform for illegal or fraudulent purposes"
         }
       },
       "conduct": {
@@ -1704,6 +1760,12 @@
         "title": "5. Bookings and Transactions",
         "process": {
           "title": "5.1 Booking Process",
+          "items": {
+            "search": "Customers can search and book available trucks through the platform",
+            "acceptance": "Providers can accept or decline booking requests",
+            "prices": "Prices are determined by Providers and displayed before confirmation",
+            "confirmations": "All bookings are subject to Provider availability and approval"
+          },
           "list": [
             "Customers can search and book available trucks through the platform",
             "Providers can accept or decline booking requests",
@@ -1713,6 +1775,12 @@
         },
         "payment": {
           "title": "5.2 Payment",
+          "items": {
+            "terms": "Payment terms are agreed upon between Customers and Providers",
+            "facilitate": "movelinker may facilitate payments but is not responsible for payment disputes",
+            "disclosed": "All fees and charges must be paid in accordance with agreed terms",
+            "taxes": "Refund policies are determined by individual Providers"
+          },
           "list": [
             "Payment terms are agreed upon between Customers and Providers",
             "movelinker may facilitate payments but is not responsible for payment disputes",
@@ -1722,6 +1790,12 @@
         },
         "cancellation": {
           "title": "5.3 Cancellation",
+          "items": {
+            "policies": "Cancellation policies vary by Provider",
+            "review": "Customers may be subject to cancellation fees",
+            "refunds": "Providers must honor confirmed bookings or face penalties",
+            "mediate": "We reserve the right to cancel bookings in case of fraud or violation"
+          },
           "list": [
             "Cancellation policies vary by Provider",
             "Customers may be subject to cancellation fees",
@@ -1732,6 +1806,26 @@
       },
       "liability": {
         "title": "6. Limitation of Liability",
+        "important": {
+          "title": "IMPORTANT",
+          "desc": "To the maximum extent permitted by law"
+        },
+        "intermediary": "movelinker is a platform connecting Customers and Providers. We do not own or operate any trucks.",
+        "notItems": {
+          "own": "We do not own or operate any trucks",
+          "employ": "Providers are independent contractors",
+          "guarantee": "We do not guarantee uninterrupted service",
+          "assume": "We do not guarantee quality, safety, or legality of services"
+        },
+        "notLiable": "We are not liable for:",
+        "notLiableItems": {
+          "indirect": "Any direct, indirect, incidental, or consequential damages",
+          "loss": "Loss of profits, revenue, or data",
+          "provider": "Actions or omissions of Providers",
+          "cargo": "Damage to cargo or transported goods",
+          "service": "Service interruptions or technical errors"
+        },
+        "maxLiability": "Our total liability shall not exceed the fees paid by you in the past 12 months.",
         "description": "To the maximum extent permitted by law:",
         "list": [
           "movelinker is a platform connecting Customers and Providers",
@@ -1741,6 +1835,28 @@
           "We do not guarantee uninterrupted or error-free service",
           "Providers are independent contractors, not employees or agents of movelinker"
         ]
+      },
+      "indemnification": {
+        "title": "7. Indemnification",
+        "intro": "You agree to indemnify and hold harmless movelinker from any claims resulting from:",
+        "items": {
+          "violation": "Breach of these Terms",
+          "use": "Your use of the platform",
+          "rights": "Infringement of third-party rights",
+          "services": "Your provision or use of transportation services"
+        }
+      },
+      "prohibited": {
+        "title": "8. Prohibited Activities",
+        "intro": "Strictly prohibited activities include:",
+        "items": {
+          "illegal": "Any illegal or fraudulent activity",
+          "circumvent": "Circumventing platform payments or fees",
+          "fake": "Creating fake accounts or identities",
+          "scraping": "Data scraping or unauthorized extraction",
+          "reverse": "Reverse engineering the platform",
+          "discriminate": "Discriminatory practices or harassment"
+        }
       },
       "intellectual": {
         "title": "7. Intellectual Property",
@@ -1755,6 +1871,15 @@
       },
       "termination": {
         "title": "8. Termination",
+        "intro": "We may suspend or terminate your account:",
+        "items": {
+          "violation": "For violation of these Terms",
+          "fraudulent": "For fraudulent or illegal activity",
+          "nonpayment": "For non-payment of fees owed",
+          "misuse": "For misuse of the platform",
+          "discretion": "At our discretion with or without notice"
+        },
+        "userTerminate": "You may terminate your account at any time through your account settings.",
         "description": "We may suspend or terminate your account:",
         "list": [
           "For violation of these Terms",
@@ -1767,6 +1892,7 @@
       },
       "changes": {
         "title": "9. Changes to Terms",
+        "text": "We reserve the right to modify these Terms at any time. We will notify you of material changes by posting updated Terms, sending an email, or displaying a notice. Your continued use constitutes acceptance of the new Terms.",
         "description": "We reserve the right to modify these Terms at any time. We will notify you of material changes by:",
         "list": [
           "Posting the updated Terms on our platform",
@@ -1777,18 +1903,69 @@
       },
       "governing": {
         "title": "10. Governing Law",
+        "text": "These Terms shall be governed by and construed in accordance with the laws of Algeria, without regard to its conflict of law provisions. Any disputes shall be subject to the exclusive jurisdiction of the courts of Algiers, Algeria.",
         "description": "These Terms shall be governed by and construed in accordance with the laws of Algeria, without regard to its conflict of law provisions. Any disputes arising from these Terms shall be subject to the exclusive jurisdiction of the courts of Algiers, Algeria."
+      },
+      "dispute": {
+        "title": "11. Dispute Resolution",
+        "intro": "In case of disputes, we encourage:",
+        "items": {
+          "contact": "Contact us first to attempt amicable resolution",
+          "mediation": "Resort to mediation if direct resolution fails",
+          "legal": "Resort to competent courts as a last resort"
+        }
+      },
+      "severability": {
+        "title": "12. Severability",
+        "text": "If any provision of these Terms is found to be invalid or unenforceable, the remaining provisions will remain in full force and effect."
       },
       "contact": {
         "title": "Contact Us",
+        "intro": "If you have any questions about these Terms of Use, please contact us:",
+        "email": "Email",
+        "support": "Support",
+        "phone": "Phone",
+        "location": "Location",
+        "address": "Tamanrasset, Algeria",
         "description": "If you have any questions about these Terms of Use, please contact us:"
       }
     },
     "privacy": {
       "title": "Privacy Policy",
       "subtitle": "Last updated: October 27, 2025",
+      "backToHome": "Back to Home",
+      "lastUpdated": "Last updated: October 27, 2025",
+      "intro": {
+        "paragraph1": "At movelinker, we are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our platform.",
+        "paragraph2": "By using movelinker, you agree to the collection and use of information in accordance with this policy."
+      },
       "intro1": "At movelinker, we are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our platform.",
       "intro2": "By using movelinker, you agree to the collection and use of information in accordance with this policy.",
+      "collect": {
+        "title": "1. Information We Collect",
+        "personal": {
+          "title": "1.1 Personal Information",
+          "intro": "When you create an account or use our services, we may collect:",
+          "items": {
+            "account": "Name, email address, and phone number",
+            "profile": "Company name and business information",
+            "verification": "Government-issued identification for verification",
+            "bookings": "Booking and shipment information",
+            "support": "Communications with our customer support",
+            "subscribe": "Payment and billing information"
+          }
+        },
+        "auto": {
+          "title": "1.2 Automatically Collected Information",
+          "intro": "We automatically collect information about how you use our platform:",
+          "items": {
+            "device": "IP address and device information",
+            "usage": "Browser type, operating system, pages visited",
+            "location": "Location data (with your consent)",
+            "cookies": "Cookies and tracking technologies"
+          }
+        }
+      },
       "collection": {
         "title": "1. Information We Collect",
         "personal": {
@@ -1824,6 +2001,21 @@
           ]
         }
       },
+      "use": {
+        "title": "2. How We Use Your Information",
+        "intro": "We use collected information to:",
+        "items": {
+          "provide": "Provide, operate, and maintain our platform",
+          "process": "Process bookings and facilitate transactions",
+          "verify": "Verify Provider credentials and documents",
+          "notifications": "Send notifications about bookings and updates",
+          "improve": "Analyze usage patterns and improve our services",
+          "support": "Respond to your requests and provide customer support",
+          "fraud": "Detect and prevent fraud or unauthorized activity",
+          "legal": "Comply with legal obligations",
+          "marketing": "Send marketing communications (with your consent)"
+        }
+      },
       "usage": {
         "title": "2. How We Use Your Information",
         "description": "We use collected information to:",
@@ -1841,7 +2033,33 @@
       },
       "sharing": {
         "title": "3. Information Sharing and Disclosure",
-        "description": "We may share your information with:",
+        "intro": "We may share your information with:",
+        "items": {
+          "users": {
+            "title": "Other Users",
+            "desc": "Limited information to facilitate services (profiles, verification status, contact information for confirmed bookings)"
+          },
+          "providers": {
+            "title": "Service Providers",
+            "desc": "Third-party vendors who assist us with payment processing, analytics, cloud storage, and customer support"
+          },
+          "legal": {
+            "title": "Legal Requirements",
+            "desc": "When required to comply with legal obligations, protect our rights, or prevent fraud"
+          },
+          "business": {
+            "title": "Business Transfers",
+            "desc": "In the event of a merger, acquisition, or sale of assets"
+          },
+          "consent": {
+            "title": "With Your Consent",
+            "desc": "With your explicit permission for other purposes"
+          }
+        },
+        "note": {
+          "title": "Important Note",
+          "desc": "We never sell your personal information to third parties for marketing purposes"
+        },
         "providers": {
           "title": "3.1 Service Providers",
           "description": "Third-party vendors who assist us with:",
@@ -1875,6 +2093,15 @@
       },
       "security": {
         "title": "4. Data Security",
+        "intro": "We implement appropriate technical and organizational measures to protect your information:",
+        "items": {
+          "encryption": "Encryption of data in transit and at rest",
+          "authentication": "Access controls and multi-factor authentication",
+          "audits": "Regular security assessments and audits",
+          "access": "Employee training on data protection",
+          "cloud": "Incident response procedures"
+        },
+        "disclaimer": "However, no method of transmission over the Internet is 100% secure. We cannot guarantee absolute security.",
         "description": "We implement appropriate technical and organizational measures to protect your information:",
         "list": [
           "Encryption of data in transit and at rest",
@@ -1898,6 +2125,34 @@
       },
       "rights": {
         "title": "6. Your Rights",
+        "intro": "You have the right to:",
+        "items": {
+          "access": {
+            "title": "Access",
+            "desc": "Access your personal information"
+          },
+          "correction": {
+            "title": "Correction",
+            "desc": "Correct inaccurate or incomplete data"
+          },
+          "deletion": {
+            "title": "Deletion",
+            "desc": "Request deletion of your data"
+          },
+          "portability": {
+            "title": "Portability",
+            "desc": "Receive your data in a structured format"
+          },
+          "optout": {
+            "title": "Opt-out",
+            "desc": "Unsubscribe from marketing communications"
+          },
+          "withdraw": {
+            "title": "Withdraw Consent",
+            "desc": "Withdraw your consent at any time"
+          }
+        },
+        "contact": "To exercise these rights, please contact us at",
         "description": "You have the right to:",
         "list": [
           "Access your personal information",
@@ -1912,6 +2167,7 @@
       },
       "cookies": {
         "title": "7. Cookies and Tracking",
+        "text": "We use cookies and similar technologies to remember your preferences, analyze site traffic, personalize your experience, and provide targeted advertising. You can control cookies through your browser settings, but disabling them may limit certain features.",
         "description": "We use cookies and similar technologies to:",
         "list": [
           "Remember your preferences and settings",
@@ -1923,14 +2179,21 @@
       },
       "children": {
         "title": "8. Children's Privacy",
+        "text": "Our services are not intended for individuals under 18 years of age. We do not knowingly collect personal information from children. If you become aware that a child has provided us with personal information, please contact us immediately.",
         "description": "Our services are not intended for individuals under 18 years of age. We do not knowingly collect personal information from children. If you become aware that a child has provided us with personal information, please contact us immediately."
       },
       "changes": {
         "title": "9. Changes to This Privacy Policy",
+        "text": "We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the \"Last updated\" date. You are advised to review this Privacy Policy periodically for any changes.",
         "description": "We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the \"Last updated\" date. You are advised to review this Privacy Policy periodically for any changes."
       },
       "contact": {
         "title": "Contact Us",
+        "intro": "If you have any questions about this Privacy Policy, please contact us:",
+        "email": "Email",
+        "phone": "Phone",
+        "location": "Location",
+        "address": "Tamanrasset, Algeria",
         "description": "If you have any questions about this Privacy Policy, please contact us:"
       }
     },

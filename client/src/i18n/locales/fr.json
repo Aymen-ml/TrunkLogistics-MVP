@@ -1622,10 +1622,24 @@
     "terms": {
       "title": "Conditions d'Utilisation",
       "subtitle": "Dernière mise à jour : 27 octobre 2025",
+      "backToHome": "Retour à l'accueil",
+      "lastUpdated": "Dernière mise à jour : 27 octobre 2025",
+      "intro": {
+        "paragraph1": "Bienvenue sur movelinker. Ces Conditions d'Utilisation (\"Conditions\") régissent votre accès et votre utilisation de notre plateforme, services et fonctionnalités. En accédant ou en utilisant movelinker, vous acceptez d'être lié par ces Conditions.",
+        "paragraph2": "Veuillez lire attentivement ces Conditions avant d'utiliser notre plateforme. Si vous n'acceptez pas ces Conditions, vous ne devez pas utiliser nos services."
+      },
       "intro1": "Bienvenue sur movelinker. Ces Conditions d'Utilisation (\"Conditions\") régissent votre accès et votre utilisation de notre plateforme, services et fonctionnalités. En accédant ou en utilisant movelinker, vous acceptez d'être lié par ces Conditions.",
       "intro2": "Veuillez lire attentivement ces Conditions avant d'utiliser notre plateforme. Si vous n'acceptez pas ces Conditions, vous ne devez pas utiliser nos services.",
       "acceptance": {
         "title": "1. Acceptation des Conditions",
+        "intro": "En créant un compte ou en utilisant movelinker, vous reconnaissez avoir lu, compris et accepté d'être lié par ces Conditions. Vous acceptez également de vous conformer à toutes les lois et règlements applicables. Pour utiliser nos services, vous devez :",
+        "items": {
+          "age": "Avoir au moins 18 ans ou l'âge de la majorité dans votre juridiction",
+          "capacity": "Avoir la capacité juridique de conclure des contrats contraignants",
+          "comply": "Accepter ces Conditions et notre Politique de Confidentialité",
+          "accurate": "Fournir des informations exactes et complètes lors de l'inscription",
+          "agree": "Accepter d'être lié par ces Conditions"
+        },
         "description": "En créant un compte ou en utilisant movelinker, vous reconnaissez avoir lu, compris et accepté d'être lié par ces Conditions. Vous acceptez également de vous conformer à toutes les lois et règlements applicables. Pour utiliser nos services, vous devez :",
         "list": [
           "Avoir au moins 18 ans ou l'âge de la majorité dans votre juridiction",
@@ -1649,6 +1663,14 @@
         "title": "3. Comptes Utilisateurs",
         "registration": {
           "title": "3.1 Inscription au Compte",
+          "intro": "Pour accéder à certaines fonctionnalités, vous devez créer un compte. Vous acceptez de :",
+          "items": {
+            "required": "Fournir des informations exactes, actuelles et complètes",
+            "confidentiality": "Maintenir la sécurité des identifiants de votre compte",
+            "notify": "Nous informer immédiatement de tout accès non autorisé",
+            "responsible": "Être responsable de toutes les activités sous votre compte",
+            "oneAccount": "Ne maintenir qu'un seul compte actif"
+          },
           "description": "Pour accéder à certaines fonctionnalités, vous devez créer un compte. Vous acceptez de :",
           "list": [
             "Fournir des informations exactes, actuelles et complètes",
@@ -1660,12 +1682,31 @@
         },
         "types": {
           "title": "3.2 Types de Comptes",
+          "customer": {
+            "title": "Compte Client",
+            "desc": "Pour les entreprises cherchant des services de transport"
+          },
+          "provider": {
+            "title": "Compte Prestataire",
+            "desc": "Pour les propriétaires/opérateurs de camions offrant des services (sous réserve de vérification)"
+          },
+          "admin": {
+            "title": "Compte Administrateur",
+            "desc": "Pour la gestion de la plateforme (sur invitation uniquement)"
+          },
           "customer": "Compte Client : Pour les entreprises cherchant des services de transport",
           "provider": "Compte Prestataire : Pour les propriétaires/opérateurs de camions offrant des services (sous réserve de vérification)",
           "admin": "Compte Administrateur : Pour la gestion de la plateforme (sur invitation uniquement)"
         },
         "verification": {
           "title": "3.3 Vérification",
+          "intro": "Les comptes Prestataire nécessitent une vérification avant activation. Nous nous réservons le droit de :",
+          "items": {
+            "documentation": "Demander des documents ou informations supplémentaires",
+            "vehicle": "Vérifier l'authenticité des documents et véhicules soumis",
+            "background": "Effectuer des vérifications d'antécédents si nécessaire",
+            "compliance": "Suspendre ou résilier les comptes qui échouent à la vérification"
+          },
           "description": "Les comptes Prestataire nécessitent une vérification avant activation. Nous nous réservons le droit de :",
           "list": [
             "Demander des documents ou informations supplémentaires",
@@ -1673,6 +1714,21 @@
             "Approuver ou rejeter les candidatures à notre discrétion",
             "Suspendre ou résilier les comptes qui échouent à la vérification"
           ]
+        }
+      },
+      "use": {
+        "title": "4. Conduite des Utilisateurs et Activités Interdites",
+        "intro": "Vous acceptez de ne pas :",
+        "items": {
+          "laws": "Violer les lois, règlements ou droits de tiers",
+          "rights": "Fournir des informations fausses, trompeuses ou frauduleuses",
+          "malicious": "Publier ou transmettre du code ou du contenu malveillant",
+          "access": "Tenter d'obtenir un accès non autorisé à toute partie de la plateforme",
+          "impersonate": "Usurper l'identité de toute personne ou entité",
+          "harass": "Harceler, abuser ou nuire à d'autres utilisateurs",
+          "automated": "Utiliser des systèmes automatisés (bots, scrapers) sans autorisation",
+          "manipulate": "Manipuler ou contourner les fonctionnalités de sécurité",
+          "fraud": "Utiliser la plateforme à des fins illégales ou frauduleuses"
         }
       },
       "conduct": {
@@ -1695,6 +1751,12 @@
         "title": "5. Réservations et Transactions",
         "process": {
           "title": "5.1 Processus de Réservation",
+          "items": {
+            "search": "Les Clients peuvent rechercher et réserver des camions disponibles via la plateforme",
+            "acceptance": "Les Prestataires peuvent accepter ou refuser les demandes de réservation",
+            "prices": "Les prix sont déterminés par les Prestataires et affichés avant confirmation",
+            "confirmations": "Toutes les réservations sont soumises à la disponibilité et à l'approbation du Prestataire"
+          },
           "list": [
             "Les Clients peuvent rechercher et réserver des camions disponibles via la plateforme",
             "Les Prestataires peuvent accepter ou refuser les demandes de réservation",
@@ -1704,6 +1766,12 @@
         },
         "payment": {
           "title": "5.2 Paiement",
+          "items": {
+            "terms": "Les conditions de paiement sont convenues entre les Clients et les Prestataires",
+            "facilitate": "movelinker peut faciliter les paiements mais n'est pas responsable des litiges de paiement",
+            "disclosed": "Tous les frais et charges doivent être payés conformément aux conditions convenues",
+            "taxes": "Les politiques de remboursement sont déterminées par les Prestataires individuels"
+          },
           "list": [
             "Les conditions de paiement sont convenues entre les Clients et les Prestataires",
             "movelinker peut faciliter les paiements mais n'est pas responsable des litiges de paiement",
@@ -1713,6 +1781,12 @@
         },
         "cancellation": {
           "title": "5.3 Annulation",
+          "items": {
+            "policies": "Les politiques d'annulation varient selon le Prestataire",
+            "review": "Les Clients peuvent être soumis à des frais d'annulation",
+            "refunds": "Les Prestataires doivent honorer les réservations confirmées ou faire face à des pénalités",
+            "mediate": "Nous nous réservons le droit d'annuler les réservations en cas de fraude ou de violation"
+          },
           "list": [
             "Les politiques d'annulation varient selon le Prestataire",
             "Les Clients peuvent être soumis à des frais d'annulation",
@@ -1723,6 +1797,26 @@
       },
       "liability": {
         "title": "6. Limitation de Responsabilité",
+        "important": {
+          "title": "IMPORTANT",
+          "desc": "Dans la mesure maximale permise par la loi"
+        },
+        "intermediary": "movelinker est une plateforme reliant les Clients et les Prestataires. Nous ne possédons ni n'exploitons de camions.",
+        "notItems": {
+          "own": "Nous ne possédons ni n'exploitons de camions",
+          "employ": "Les Prestataires sont des entrepreneurs indépendants",
+          "guarantee": "Nous ne garantissons pas un service ininterrompu",
+          "assume": "Nous ne garantissons pas la qualité, sécurité ou légalité des services"
+        },
+        "notLiable": "Nous ne sommes pas responsables de :",
+        "notLiableItems": {
+          "indirect": "Dommages directs, indirects, accessoires ou consécutifs",
+          "loss": "Perte de profits, revenus ou données",
+          "provider": "Actions ou omissions des Prestataires",
+          "cargo": "Dommages à la cargaison ou aux marchandises transportées",
+          "service": "Interruptions de service ou erreurs techniques"
+        },
+        "maxLiability": "Notre responsabilité totale ne dépassera pas les frais que vous avez payés au cours des 12 derniers mois.",
         "description": "Dans la mesure maximale permise par la loi :",
         "list": [
           "movelinker est une plateforme reliant les Clients et les Prestataires",
@@ -1732,6 +1826,28 @@
           "Nous ne garantissons pas un service ininterrompu ou sans erreur",
           "Les Prestataires sont des entrepreneurs indépendants, pas des employés ou agents de movelinker"
         ]
+      },
+      "indemnification": {
+        "title": "7. Indemnisation",
+        "intro": "Vous acceptez d'indemniser et de dégager de toute responsabilité movelinker contre toute réclamation résultant de :",
+        "items": {
+          "violation": "Violation de ces Conditions",
+          "use": "Votre utilisation de la plateforme",
+          "rights": "Violation des droits de tiers",
+          "services": "Votre fourniture ou utilisation de services de transport"
+        }
+      },
+      "prohibited": {
+        "title": "8. Activités Interdites",
+        "intro": "Les activités strictement interdites incluent :",
+        "items": {
+          "illegal": "Toute activité illégale ou frauduleuse",
+          "circumvent": "Contourner les paiements ou frais de la plateforme",
+          "fake": "Créer de faux comptes ou identités",
+          "scraping": "Grattage de données ou extraction non autorisée",
+          "reverse": "Ingénierie inverse de la plateforme",
+          "discriminate": "Pratiques discriminatoires ou harcèlement"
+        }
       },
       "intellectual": {
         "title": "7. Propriété Intellectuelle",
@@ -1746,6 +1862,15 @@
       },
       "termination": {
         "title": "8. Résiliation",
+        "intro": "Nous pouvons suspendre ou résilier votre compte :",
+        "items": {
+          "violation": "Pour violation de ces Conditions",
+          "fraudulent": "Pour activité frauduleuse ou illégale",
+          "nonpayment": "Pour non-paiement des frais dus",
+          "misuse": "Pour utilisation abusive de la plateforme",
+          "discretion": "À notre discrétion avec ou sans préavis"
+        },
+        "userTerminate": "Vous pouvez résilier votre compte à tout moment via les paramètres de votre compte.",
         "description": "Nous pouvons suspendre ou résilier votre compte :",
         "list": [
           "Pour violation de ces Conditions",
@@ -1758,6 +1883,7 @@
       },
       "changes": {
         "title": "9. Modifications des Conditions",
+        "text": "Nous nous réservons le droit de modifier ces Conditions à tout moment. Nous vous informerons des changements importants en publiant les Conditions mises à jour sur notre plateforme, en envoyant un email, ou en affichant un avis. Votre utilisation continue constitue l'acceptation des nouvelles Conditions.",
         "description": "Nous nous réservons le droit de modifier ces Conditions à tout moment. Nous vous informerons des changements importants en :",
         "list": [
           "Publiant les Conditions mises à jour sur notre plateforme",
@@ -1768,18 +1894,69 @@
       },
       "governing": {
         "title": "10. Loi Applicable",
+        "text": "Ces Conditions sont régies et interprétées conformément aux lois de l'Algérie, sans égard à ses dispositions en matière de conflit de lois. Tout litige sera soumis à la juridiction exclusive des tribunaux d'Alger, Algérie.",
         "description": "Ces Conditions sont régies et interprétées conformément aux lois de l'Algérie, sans égard à ses dispositions en matière de conflit de lois. Tout litige découlant de ces Conditions sera soumis à la juridiction exclusive des tribunaux d'Alger, Algérie."
+      },
+      "dispute": {
+        "title": "11. Résolution des Litiges",
+        "intro": "En cas de litige, nous encourageons :",
+        "items": {
+          "contact": "Nous contacter d'abord pour tenter de résoudre le problème à l'amiable",
+          "mediation": "Recourir à la médiation si la résolution directe échoue",
+          "legal": "Recourir aux tribunaux compétents en dernier recours"
+        }
+      },
+      "severability": {
+        "title": "12. Divisibilité",
+        "text": "Si une disposition de ces Conditions est jugée invalide ou inapplicable, les autres dispositions resteront en vigueur."
       },
       "contact": {
         "title": "Contactez-nous",
+        "intro": "Si vous avez des questions concernant ces Conditions d'Utilisation, veuillez nous contacter :",
+        "email": "E-mail",
+        "support": "Support",
+        "phone": "Téléphone",
+        "location": "Localisation",
+        "address": "Tamanrasset, Algérie",
         "description": "Si vous avez des questions concernant ces Conditions d'Utilisation, veuillez nous contacter :"
       }
     },
     "privacy": {
       "title": "Politique de Confidentialité",
       "subtitle": "Dernière mise à jour : 27 octobre 2025",
+      "backToHome": "Retour à l'accueil",
+      "lastUpdated": "Dernière mise à jour : 27 octobre 2025",
+      "intro": {
+        "paragraph1": "Chez movelinker, nous nous engageons à protéger votre vie privée et à assurer la sécurité de vos informations personnelles. Cette Politique de Confidentialité explique comment nous collectons, utilisons, divulguons et protégeons vos informations lorsque vous utilisez notre plateforme.",
+        "paragraph2": "En utilisant movelinker, vous acceptez la collecte et l'utilisation des informations conformément à cette politique."
+      },
       "intro1": "Chez movelinker, nous nous engageons à protéger votre vie privée et à assurer la sécurité de vos informations personnelles. Cette Politique de Confidentialité explique comment nous collectons, utilisons, divulguons et protégeons vos informations lorsque vous utilisez notre plateforme.",
       "intro2": "En utilisant movelinker, vous acceptez la collecte et l'utilisation des informations conformément à cette politique.",
+      "collect": {
+        "title": "1. Informations Que Nous Collectons",
+        "personal": {
+          "title": "1.1 Informations Personnelles",
+          "intro": "Lorsque vous créez un compte ou utilisez nos services, nous pouvons collecter :",
+          "items": {
+            "account": "Nom, adresse e-mail et numéro de téléphone",
+            "profile": "Nom de l'entreprise et informations commerciales",
+            "verification": "Pièce d'identité émise par le gouvernement pour vérification",
+            "bookings": "Informations de réservation et d'expédition",
+            "support": "Communications avec notre support client",
+            "subscribe": "Informations de paiement et de facturation"
+          }
+        },
+        "auto": {
+          "title": "1.2 Informations Collectées Automatiquement",
+          "intro": "Nous collectons automatiquement des informations sur la façon dont vous utilisez notre plateforme :",
+          "items": {
+            "device": "Adresse IP et informations sur l'appareil",
+            "usage": "Type de navigateur, système d'exploitation, pages visitées",
+            "location": "Données de localisation (avec votre consentement)",
+            "cookies": "Cookies et technologies de suivi"
+          }
+        }
+      },
       "collection": {
         "title": "1. Informations Que Nous Collectons",
         "personal": {
@@ -1815,6 +1992,21 @@
           ]
         }
       },
+      "use": {
+        "title": "2. Comment Nous Utilisons Vos Informations",
+        "intro": "Nous utilisons les informations collectées pour :",
+        "items": {
+          "provide": "Fournir, exploiter et maintenir notre plateforme",
+          "process": "Traiter les réservations et faciliter les transactions",
+          "verify": "Vérifier les identifiants et documents des Prestataires",
+          "notifications": "Envoyer des notifications sur les réservations et mises à jour",
+          "improve": "Analyser les modèles d'utilisation et améliorer nos services",
+          "support": "Répondre à vos demandes et fournir un support client",
+          "fraud": "Détecter et prévenir la fraude ou l'activité non autorisée",
+          "legal": "Se conformer aux obligations légales",
+          "marketing": "Envoyer des communications marketing (avec votre consentement)"
+        }
+      },
       "usage": {
         "title": "2. Comment Nous Utilisons Vos Informations",
         "description": "Nous utilisons les informations collectées pour :",
@@ -1832,7 +2024,33 @@
       },
       "sharing": {
         "title": "3. Partage et Divulgation d'Informations",
-        "description": "Nous pouvons partager vos informations avec :",
+        "intro": "Nous pouvons partager vos informations avec :",
+        "items": {
+          "users": {
+            "title": "Autres Utilisateurs",
+            "desc": "Informations limitées pour faciliter les services (profils, statut de vérification, coordonnées pour réservations confirmées)"
+          },
+          "providers": {
+            "title": "Fournisseurs de Services",
+            "desc": "Tiers qui nous aident avec le traitement des paiements, l'analyse, le stockage cloud, et le support client"
+          },
+          "legal": {
+            "title": "Exigences Légales",
+            "desc": "Lorsque requis pour se conformer aux obligations légales, protéger nos droits, ou prévenir la fraude"
+          },
+          "business": {
+            "title": "Transferts Commerciaux",
+            "desc": "En cas de fusion, acquisition ou vente d'actifs"
+          },
+          "consent": {
+            "title": "Avec Votre Consentement",
+            "desc": "Avec votre autorisation explicite pour d'autres fins"
+          }
+        },
+        "note": {
+          "title": "Note Importante",
+          "desc": "Nous ne vendons jamais vos informations personnelles à des tiers à des fins marketing"
+        },
         "providers": {
           "title": "3.1 Fournisseurs de Services",
           "description": "Des tiers qui nous aident avec :",
@@ -1866,6 +2084,15 @@
       },
       "security": {
         "title": "4. Sécurité des Données",
+        "intro": "Nous mettons en œuvre des mesures techniques et organisationnelles appropriées pour protéger vos informations :",
+        "items": {
+          "encryption": "Chiffrement des données en transit et au repos",
+          "authentication": "Contrôles d'accès et authentification multi-facteurs",
+          "audits": "Évaluations et audits de sécurité réguliers",
+          "access": "Formation des employés sur la protection des données",
+          "cloud": "Procédures de réponse aux incidents"
+        },
+        "disclaimer": "Cependant, aucune méthode de transmission sur Internet n'est 100% sécurisée. Nous ne pouvons garantir une sécurité absolue.",
         "description": "Nous mettons en œuvre des mesures techniques et organisationnelles appropriées pour protéger vos informations :",
         "list": [
           "Chiffrement des données en transit et au repos",
@@ -1889,6 +2116,34 @@
       },
       "rights": {
         "title": "6. Vos Droits",
+        "intro": "Vous avez le droit de :",
+        "items": {
+          "access": {
+            "title": "Accès",
+            "desc": "Accéder à vos informations personnelles"
+          },
+          "correction": {
+            "title": "Correction",
+            "desc": "Corriger les données inexactes ou incomplètes"
+          },
+          "deletion": {
+            "title": "Suppression",
+            "desc": "Demander la suppression de vos données"
+          },
+          "portability": {
+            "title": "Portabilité",
+            "desc": "Recevoir vos données dans un format structuré"
+          },
+          "optout": {
+            "title": "Désabonnement",
+            "desc": "Vous désabonner des communications marketing"
+          },
+          "withdraw": {
+            "title": "Retrait du Consentement",
+            "desc": "Retirer votre consentement à tout moment"
+          }
+        },
+        "contact": "Pour exercer ces droits, veuillez nous contacter à",
         "description": "Vous avez le droit de :",
         "list": [
           "Accéder à vos informations personnelles",
@@ -1903,6 +2158,7 @@
       },
       "cookies": {
         "title": "7. Cookies et Suivi",
+        "text": "Nous utilisons des cookies et des technologies similaires pour mémoriser vos préférences, analyser le trafic, personnaliser votre expérience et fournir de la publicité ciblée. Vous pouvez contrôler les cookies via les paramètres de votre navigateur, mais la désactivation peut limiter certaines fonctionnalités.",
         "description": "Nous utilisons des cookies et des technologies similaires pour :",
         "list": [
           "Mémoriser vos préférences et paramètres",
@@ -1914,14 +2170,21 @@
       },
       "children": {
         "title": "8. Confidentialité des Enfants",
+        "text": "Nos services ne sont pas destinés aux personnes de moins de 18 ans. Nous ne collectons pas sciemment d'informations personnelles auprès d'enfants. Si vous apprenez qu'un enfant nous a fourni des informations personnelles, veuillez nous contacter immédiatement.",
         "description": "Nos services ne sont pas destinés aux personnes de moins de 18 ans. Nous ne collectons pas sciemment d'informations personnelles auprès d'enfants. Si vous apprenez qu'un enfant nous a fourni des informations personnelles, veuillez nous contacter immédiatement."
       },
       "changes": {
         "title": "9. Modifications de Cette Politique de Confidentialité",
+        "text": "Nous pouvons mettre à jour cette Politique de Confidentialité de temps en temps. Nous vous informerons de tout changement en publiant la nouvelle Politique de Confidentialité sur cette page et en mettant à jour la date de \"Dernière mise à jour\". Il vous est conseillé de consulter périodiquement cette Politique de Confidentialité pour tout changement.",
         "description": "Nous pouvons mettre à jour cette Politique de Confidentialité de temps en temps. Nous vous informerons de tout changement en publiant la nouvelle Politique de Confidentialité sur cette page et en mettant à jour la date de \"Dernière mise à jour\". Il vous est conseillé de consulter périodiquement cette Politique de Confidentialité pour tout changement."
       },
       "contact": {
         "title": "Contactez-nous",
+        "intro": "Si vous avez des questions concernant cette Politique de Confidentialité, veuillez nous contacter :",
+        "email": "E-mail",
+        "phone": "Téléphone",
+        "location": "Localisation",
+        "address": "Tamanrasset, Algérie",
         "description": "Si vous avez des questions concernant cette Politique de Confidentialité, veuillez nous contacter :"
       }
     },

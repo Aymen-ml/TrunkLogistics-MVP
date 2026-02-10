@@ -320,14 +320,14 @@ const TermsOfUse = () => {
             <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-6">
               <p className="text-gray-700 dark:text-gray-300 mb-2">
                 <strong>{t('legal.terms.contact.email')}:</strong>{' '}
-                <a href="mailto:legal@movelinker.me" className="text-blue-600 dark:text-blue-400 hover:underline">
-                  legal@movelinker.me
+                <a href="mailto:support@movelinker.com" className="text-blue-600 dark:text-blue-400 hover:underline">
+                  support@movelinker.com
                 </a>
               </p>
               <p className="text-gray-700 dark:text-gray-300 mb-2">
                 <strong>{t('legal.terms.contact.support')}:</strong>{' '}
-                <a href="mailto:support@movelinker.me" className="text-blue-600 dark:text-blue-400 hover:underline">
-                  support@movelinker.me
+                <a href="mailto:support@movelinker.com" className="text-blue-600 dark:text-blue-400 hover:underline">
+                  support@movelinker.com
                 </a>
               </p>
               <p className="text-gray-700 dark:text-gray-300 mb-2">

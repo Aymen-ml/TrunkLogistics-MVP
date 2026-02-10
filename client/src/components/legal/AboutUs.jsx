@@ -156,7 +156,7 @@ const AboutUs = () => {
                 {t('legal.contactInfo.phone')}: +213 779 11 65 22
               </a>
               <a
-                href="mailto:support@movelinker.me"
+                href="mailto:support@movelinker.com"
                 className="px-8 py-4 bg-orange-700 text-white font-semibold rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all"
               >
                 {t('legal.contactInfo.email')}

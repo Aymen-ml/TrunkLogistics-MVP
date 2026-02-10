@@ -176,8 +176,8 @@ const CookiePolicy = () => {
               <div className="space-y-3">
                 <p className="text-gray-700 dark:text-gray-300">
                   <span className="font-semibold">{t('legal.contactInfo.email')}:</span>{' '}
-                  <a href="mailto:support@movelinker.me" className="text-amber-600 dark:text-amber-400 hover:underline">
-                    support@movelinker.me
+                  <a href="mailto:support@movelinker.com" className="text-amber-600 dark:text-amber-400 hover:underline">
+                    support@movelinker.com
                   </a>
                 </p>
                 <p className="text-gray-700 dark:text-gray-300">

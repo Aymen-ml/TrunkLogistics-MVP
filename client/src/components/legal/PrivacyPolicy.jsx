@@ -181,8 +181,8 @@ const PrivacyPolicy = () => {
             
             <p className="text-gray-700 dark:text-gray-300 mt-4">
               {t('legal.privacy.rights.contact')}{' '}
-              <a href="mailto:privacy@movelinker.me" className="text-blue-600 dark:text-blue-400 hover:underline">
-                privacy@movelinker.me
+              <a href="mailto:support@movelinker.com" className="text-blue-600 dark:text-blue-400 hover:underline">
+                support@movelinker.com
               </a>
             </p>
           </section>
@@ -226,8 +226,8 @@ const PrivacyPolicy = () => {
             <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-6">
               <p className="text-gray-700 dark:text-gray-300 mb-2">
                 <strong>{t('legal.privacy.contact.email')}:</strong>{' '}
-                <a href="mailto:privacy@movelinker.me" className="text-blue-600 dark:text-blue-400 hover:underline">
-                  privacy@movelinker.me
+                <a href="mailto:support@movelinker.com" className="text-blue-600 dark:text-blue-400 hover:underline">
+                  support@movelinker.com
                 </a>
               </p>
               <p className="text-gray-700 dark:text-gray-300 mb-2">
