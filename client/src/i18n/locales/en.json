@@ -662,6 +662,7 @@
     "bookingDetails": "Booking Details",
     "reference": "Reference",
     "status": "Status",
+    "currentStatus": "Current Status",
     "serviceType": "Service Type",
     "transport": "Transport",
     "rental": "Rental",

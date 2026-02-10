@@ -118,12 +118,16 @@ const CustomerDashboard = () => {
     }
   };
 
-  const formatStatus = (status) => {
-    if (!status) return t('dashboard.unknown');
-    // Use translation keys for booking statuses
-    const statusKey = status === 'pending_review' ? 'pendingReview' : 
-                      status === 'in_transit' ? 'inTransit' : status;
-    return t(`bookings.statuses.${statusKey}`);
+  const formatStatus = (status, serviceType) => {
+    const labels = {
+      pending_review: t('bookings.pendingReview'),
+      approved: t('bookings.approved'),
+      in_transit: t('bookings.inTransit'),
+      active: serviceType === 'rental' ? t('bookings.equipmentInUse') : t('bookings.active'),
+      completed: t('bookings.completed'),
+      cancelled: t('bookings.cancelled')
+    };
+    return labels[status] || status;
   };
 
   const formatDate = (dateString) => {
@@ -433,7 +437,7 @@ const CustomerDashboard = () => {
                           </td>
                           <td className="px-4 sm:px-6 py-4 whitespace-nowrap">
                             <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(booking.status)}`}>
-                              {formatStatus(booking.status)}
+                              {formatStatus(booking.status, booking.service_type)}
                             </span>
                           </td>
                           <td className="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">

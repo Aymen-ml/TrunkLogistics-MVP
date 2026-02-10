@@ -52,13 +52,14 @@ const BookingDetailTest = () => {
 
   // Handle status update
   const handleUpdateStatus = async (newStatus) => {
-    if (!window.confirm(`Update status to ${newStatus}?`)) return;
+    const statusLabel = getStatusLabel(newStatus, booking?.service_type);
+    if (!window.confirm(`${t('bookings.confirmStatusChange')} ${statusLabel}?`)) return;
 
     setUpdatingAction(newStatus);
     try {
       console.log('🧪 TEST - Updating to:', newStatus);
       
-      const result = await updateBookingStatus(id, newStatus, `Status updated to ${newStatus}`);
+      const result = await updateBookingStatus(id, newStatus, `${t('bookings.statusUpdated')} ${statusLabel}`);
       
       // Update local state immediately
       if (result?.booking) {
@@ -73,7 +74,7 @@ const BookingDetailTest = () => {
       setUpdatingAction(null);
       console.log('🧪 TEST - Cleared updating, buttons should be clickable');
       
-      showSuccess(`Status updated to ${newStatus}`);
+      showSuccess(`${t('bookings.statusUpdated')} ${statusLabel}!`);
       
     } catch (error) {
       console.error('🧪 TEST - Error:', error);
@@ -120,6 +121,18 @@ const BookingDetailTest = () => {
     return actions;
   }, [booking?.status, booking?.service_type, booking?.id, user?.role]);
 
+  const getStatusLabel = (status, serviceType) => {
+    const labels = {
+      pending_review: t('bookings.pendingReview'),
+      approved: t('bookings.approved'),
+      in_transit: t('bookings.inTransit'),
+      active: serviceType === 'rental' ? t('bookings.equipmentInUse') : t('bookings.active'),
+      completed: t('bookings.completed'),
+      cancelled: t('bookings.cancelled')
+    };
+    return labels[status] || status;
+  };
+
   const getButtonClass = (color, isUpdating) => {
     const base = "inline-flex items-center px-4 py-2 rounded-md text-sm font-medium transition-colors pointer-events-auto";
     const disabled = "opacity-50 cursor-not-allowed";
@@ -134,19 +147,19 @@ const BookingDetailTest = () => {
     return `${base} ${colors[color] || colors.blue} ${isUpdating ? disabled : ''}`;
   };
 
-  const getStatusBadge = (status) => {
+  const getStatusBadge = (status, serviceType) => {
     const colors = {
-      pending_review: 'bg-yellow-100 text-yellow-800',
-      approved: 'bg-blue-100 text-blue-800',
-      in_transit: 'bg-purple-100 text-purple-800',
-      active: 'bg-orange-100 text-orange-800',
-      completed: 'bg-green-100 text-green-800',
-      cancelled: 'bg-red-100 text-red-800'
+      pending_review: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200',
+      approved: 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200',
+      in_transit: 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200',
+      active: 'bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200',
+      completed: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200',
+      cancelled: 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200'
     };
     
     return (
-      <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${colors[status] || 'bg-gray-100 text-gray-800'}`}>
-        {status.replace('_', ' ').toUpperCase()}
+      <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${colors[status] || 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200'}`}>
+        {getStatusLabel(status, serviceType)}
       </span>
     );
   };
@@ -243,13 +256,13 @@ const BookingDetailTest = () => {
                 </p>
               </div>
             </div>
-            {getStatusBadge(booking.status)}
+            {getStatusBadge(booking.status, booking.service_type)}
           </div>
 
           {/* ACTION BUTTONS - KEY AREA BEING TESTED */}
           <div className="border-t pt-4">
-            <p className="text-sm text-gray-600 mb-3">
-              <strong>Current Status:</strong> {booking.status}
+            <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
+              <strong>{t('bookings.currentStatus')}:</strong> {getStatusLabel(booking.status, booking.service_type)}
             </p>
             
             {/* Container with key that forces remount on status change */}

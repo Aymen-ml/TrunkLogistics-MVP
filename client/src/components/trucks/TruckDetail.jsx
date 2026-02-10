@@ -117,6 +117,18 @@ const TruckDetail = () => {
     }
   };
 
+  const getStatusLabel = (status, serviceType) => {
+    const labels = {
+      pending_review: t('bookings.pendingReview'),
+      approved: t('bookings.approved'),
+      in_transit: t('bookings.inTransit'),
+      active: serviceType === 'rental' ? t('bookings.equipmentInUse') : t('bookings.active'),
+      completed: t('bookings.completed'),
+      cancelled: t('bookings.cancelled')
+    };
+    return labels[status] || status;
+  };
+
   const deleteTruck = async () => {
     if (!window.confirm(t('trucks.deleteConfirm'))) {
       return;
@@ -152,7 +164,7 @@ const TruckDetail = () => {
               if (activeBookings.length > 0) {
                 errorMessage += `\n\nActive bookings (${activeBookings.length}):`;
                 activeBookings.forEach((booking, index) => {
-                  const statusDisplay = booking.status.replace('_', ' ').toUpperCase();
+                  const statusDisplay = getStatusLabel(booking.status, booking.serviceType);
                   const dateDisplay = new Date(booking.pickupDate).toLocaleDateString();
                   errorMessage += `\n\n${index + 1}. ${booking.customerName} (${booking.customerCompany})`;
                   errorMessage += `\n   Route: ${booking.pickupCity} → ${booking.destinationCity}`;

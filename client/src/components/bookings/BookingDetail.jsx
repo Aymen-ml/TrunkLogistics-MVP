@@ -58,7 +58,8 @@ const BookingDetail = () => {
   }, [booking, bookings]);
 
   const handleUpdateStatus = async (newStatus) => {
-    const confirmMessage = `${t('bookings.confirmStatusChange')} ${newStatus.replace('_', ' ')}?`;
+    const statusLabel = getStatusLabel(newStatus, booking?.service_type);
+    const confirmMessage = `${t('bookings.confirmStatusChange')} ${statusLabel}?`;
     if (!window.confirm(confirmMessage)) {
       return;
     }
@@ -67,7 +68,7 @@ const BookingDetail = () => {
     try {
       console.log(`🔄 Initiating status update to: ${newStatus}`);
       
-      const result = await updateBookingStatus(id, newStatus, `Status updated to ${newStatus}`);
+      const result = await updateBookingStatus(id, newStatus, `${t('bookings.statusUpdated')} ${statusLabel}`);
       
       console.log('✅ Status update successful');
       
@@ -84,7 +85,7 @@ const BookingDetail = () => {
       setUpdatingAction(null);
       console.log('✅ Updating action cleared, buttons should be clickable now');
 
-      showSuccess(`${t('bookings.statusUpdated')} ${newStatus.replace('_', ' ')}!`);
+      showSuccess(`${t('bookings.statusUpdated')} ${statusLabel}!`);
       
     } catch (error) {
       console.error('❌ Error updating booking status:', error);

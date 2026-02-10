@@ -79,6 +79,18 @@ const BookingManagement = () => {
     }
   };
 
+  const getStatusLabel = (status, serviceType) => {
+    const labels = {
+      pending_review: t('bookings.pendingReview'),
+      approved: t('bookings.approved'),
+      in_transit: t('bookings.inTransit'),
+      active: serviceType === 'rental' ? t('bookings.equipmentInUse') : t('bookings.active'),
+      completed: t('bookings.completed'),
+      cancelled: t('bookings.cancelled')
+    };
+    return labels[status] || status;
+  };
+
   const getStatusBadge = (status, serviceType) => {
     const statusConfig = {
       approved: { color: 'bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200', icon: CheckCircle },
@@ -95,7 +107,7 @@ const BookingManagement = () => {
     return (
       <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${config.color}`}>
         <Icon className="w-3 h-3 mr-1" />
-        {status.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase())}
+        {getStatusLabel(status, serviceType)}
       </span>
     );
   };
@@ -427,11 +439,11 @@ const BookingManagement = () => {
                       className="block w-40 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-accent-500 focus:border-blue-500 sm:text-sm disabled:opacity-50"
                     >
                       <option value={booking.status}>
-                        {booking.status.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase())}
+                        {getStatusLabel(booking.status, booking.service_type)}
                       </option>
                       {getStatusOptions(booking.status, booking.service_type).map(status => (
                         <option key={status} value={status}>
-                          {status.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase())}
+                          {getStatusLabel(status, booking.service_type)}
                         </option>
                       ))}
                     </select>

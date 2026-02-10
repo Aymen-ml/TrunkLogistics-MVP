@@ -168,6 +168,18 @@ const AdminDashboard = () => {
     }
   };
 
+  const formatStatus = (status, serviceType) => {
+    const labels = {
+      pending_review: t('bookings.pendingReview'),
+      approved: t('bookings.approved'),
+      in_transit: t('bookings.inTransit'),
+      active: serviceType === 'rental' ? t('bookings.equipmentInUse') : t('bookings.active'),
+      completed: t('bookings.completed'),
+      cancelled: t('bookings.cancelled')
+    };
+    return labels[status] || status;
+  };
+
   const formatDate = (dateString) => {
     return new Date(dateString).toLocaleDateString('en-US', {
       month: 'short',
@@ -500,7 +512,7 @@ const AdminDashboard = () => {
                             }
                           </p>
                           <p className="text-xs text-gray-400 dark:text-gray-500 dark:text-gray-400 mt-1">
-                            {formatDate(booking.created_at)} • {booking.status.replace('_', ' ')}
+                            {formatDate(booking.created_at)} • {formatStatus(booking.status, booking.service_type)}
                           </p>
                         </div>
                       </div>

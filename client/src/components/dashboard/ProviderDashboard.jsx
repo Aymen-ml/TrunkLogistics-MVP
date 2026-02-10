@@ -282,11 +282,16 @@ const ProviderDashboard = () => {
   };
 
   // Add status formatting function
-  const formatStatus = (status) => {
-    if (!status) return 'Unknown';
-    return status.split('_').map(word => 
-      word.charAt(0).toUpperCase() + word.slice(1)
-    ).join(' ');
+  const formatStatus = (status, serviceType) => {
+    const labels = {
+      pending_review: t('bookings.pendingReview'),
+      approved: t('bookings.approved'),
+      in_transit: t('bookings.inTransit'),
+      active: serviceType === 'rental' ? t('bookings.equipmentInUse') : t('bookings.active'),
+      completed: t('bookings.completed'),
+      cancelled: t('bookings.cancelled')
+    };
+    return labels[status] || status;
   };
 
   const { 
@@ -698,7 +703,7 @@ const ProviderDashboard = () => {
                               }
                             </p>
                             <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(booking.status)}`}>
-                              {booking.status.replace('_', ' ')}
+                              {formatStatus(booking.status, booking.service_type)}
                             </span>
                           </div>
                           <div className="flex items-center mt-1 text-sm text-gray-500 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500">
