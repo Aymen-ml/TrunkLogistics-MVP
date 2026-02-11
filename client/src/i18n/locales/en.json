@@ -1045,19 +1045,48 @@
   },
   "notifications": {
     "title": "Notifications",
-    "markAllRead": "Tout Marquer Comme Lu",
-    "noNotifications": "No Notifications",
-    "newNotification": "Nouvelle notification",
-    "unread": "Non lu",
-    "markAsRead": "Marquer comme lu",
-    "markAsUnread": "Marquer comme non lu",
-    "delete": "Supprimer",
+    "markAllRead": "Mark all read",
+    "noNotifications": "No notifications",
+    "newNotification": "New",
+    "unread": "Unread",
+    "read": "Read",
+    "markAsRead": "Mark as read",
+    "markAsUnread": "Mark as unread",
+    "delete": "Delete",
+    "refresh": "Refresh notifications",
+    "loading": "Loading...",
+    "loadMore": "Load more notifications",
+    "filter": {
+      "all": "All",
+      "unread": "Unread",
+      "read": "Read"
+    },
+    "disabled": {
+      "title": "Notifications Disabled",
+      "message": "You have disabled notifications in your settings. Enable them to receive updates about bookings and messages.",
+      "goToSettings": "Go to Settings"
+    },
+    "empty": {
+      "noUnread": "No unread notifications",
+      "allCaughtUp": "You're all caught up!"
+    },
+    "time": {
+      "justNow": "Just now",
+      "minuteAgo": "minute ago",
+      "minutesAgo": "minutes ago",
+      "hourAgo": "hour ago",
+      "hoursAgo": "hours ago",
+      "dayAgo": "day ago",
+      "daysAgo": "days ago",
+      "weekAgo": "week ago",
+      "weeksAgo": "weeks ago"
+    },
     "types": {
-      "booking": "Réservation",
-      "truck": "Camion",
+      "booking": "Booking",
+      "truck": "Truck",
       "message": "Message",
-      "system": "Système",
-      "payment": "Paiement"
+      "system": "System",
+      "payment": "Payment"
     }
   },
   "admin": {

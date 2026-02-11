@@ -95,27 +95,27 @@ const NotificationCenter = () => {
 
       // Less than 1 minute
       if (diffInMinutes < 1) {
-        return 'Just now';
+        return t('notifications.time.justNow');
       }
       // Less than 1 hour
       else if (diffInMinutes < 60) {
         const mins = Math.floor(diffInMinutes);
-        return `${mins} ${mins === 1 ? 'minute' : 'minutes'} ago`;
+        return `${mins} ${mins === 1 ? t('notifications.time.minuteAgo') : t('notifications.time.minutesAgo')}`;
       }
       // Less than 24 hours
       else if (diffInHours < 24) {
         const hours = Math.floor(diffInHours);
-        return `${hours} ${hours === 1 ? 'hour' : 'hours'} ago`;
+        return `${hours} ${hours === 1 ? t('notifications.time.hourAgo') : t('notifications.time.hoursAgo')}`;
       }
       // Less than 7 days
       else if (diffInDays < 7) {
         const days = Math.floor(diffInDays);
-        return `${days} ${days === 1 ? 'day' : 'days'} ago`;
+        return `${days} ${days === 1 ? t('notifications.time.dayAgo') : t('notifications.time.daysAgo')}`;
       }
       // Less than 30 days
       else if (diffInDays < 30) {
         const weeks = Math.floor(diffInDays / 7);
-        return `${weeks} ${weeks === 1 ? 'week' : 'weeks'} ago`;
+        return `${weeks} ${weeks === 1 ? t('notifications.time.weekAgo') : t('notifications.time.weeksAgo')}`;
       }
       // Show full date
       else {
@@ -150,7 +150,7 @@ const NotificationCenter = () => {
         <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700 flex-shrink-0">
           <div className="flex items-center space-x-2">
             <Bell className="h-5 w-5 text-gray-600 dark:text-gray-400 dark:text-gray-500" />
-            <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Notifications</h2>
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">{t('notifications.title')}</h2>
           </div>
           <button
             onClick={closeNotificationCenter}
@@ -171,9 +171,9 @@ const NotificationCenter = () => {
                   onChange={(e) => setFilter(e.target.value)}
                   className="text-sm border-gray-300 dark:border-gray-600 rounded-md focus:ring-accent-500 focus:border-blue-500"
                 >
-                  <option value="all">All</option>
-                  <option value="unread">Unread</option>
-                  <option value="read">Read</option>
+                  <option value="all">{t('notifications.filter.all')}</option>
+                  <option value="unread">{t('notifications.filter.unread')}</option>
+                  <option value="read">{t('notifications.filter.read')}</option>
                 </select>
               </div>
               <div className="flex items-center space-x-2">
@@ -181,7 +181,7 @@ const NotificationCenter = () => {
                   onClick={() => loadNotifications(1)}
                   disabled={loading}
                   className="p-1 rounded-full hover:bg-gray-200 disabled:opacity-50"
-                  title="Refresh notifications"
+                  title={t('notifications.refresh')}
                 >
                   <RefreshCw className={`h-4 w-4 text-gray-500 dark:text-gray-400 dark:text-gray-500 ${loading ? 'animate-spin' : ''}`} />
                 </button>
@@ -189,7 +189,7 @@ const NotificationCenter = () => {
                   onClick={contextMarkAllAsRead}
                   className="text-sm text-primary-600 hover:text-accent-600 transition-colors font-medium"
                 >
-                  Mark all read
+                  {t('notifications.markAllRead')}
                 </button>
               </div>
             </div>
@@ -204,15 +204,15 @@ const NotificationCenter = () => {
               <div className="bg-gray-100 dark:bg-gray-700 rounded-full p-6 mb-4">
                 <BellOff className="h-12 w-12 text-gray-400 dark:text-gray-500" />
               </div>
-              <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-2">Notifications Disabled</h3>
+              <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-2">{t('notifications.disabled.title')}</h3>
               <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 mb-4 max-w-xs">
-                You have disabled notifications in your settings. Enable them to receive updates about bookings and messages.
+                {t('notifications.disabled.message')}
               </p>
               <a
                 href="/settings"
                 className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-accent-500 hover:bg-accent-600 transition-colors"
               >
-                Go to Settings
+                {t('notifications.disabled.goToSettings')}
               </a>
             </div>
           ) : loading && notifications.length === 0 ? (
@@ -222,9 +222,9 @@ const NotificationCenter = () => {
           ) : displayNotifications.length === 0 ? (
             <div className="flex flex-col items-center justify-center p-8 text-center">
               <Bell className="h-12 w-12 text-gray-300 mb-4" />
-              <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-2">No notifications</h3>
+              <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-2">{t('notifications.noNotifications')}</h3>
               <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500">
-                {filter === 'unread' ? 'No unread notifications' : 'You\'re all caught up!'}
+                {filter === 'unread' ? t('notifications.empty.noUnread') : t('notifications.empty.allCaughtUp')}
               </p>
             </div>
           ) : (
@@ -257,7 +257,7 @@ const NotificationCenter = () => {
                             </p>
                             {!notification.is_read && (
                               <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200">
-                                New
+                                {t('notifications.newNotification')}
                               </span>
                             )}
                           </div>
@@ -270,7 +270,7 @@ const NotificationCenter = () => {
                                 contextMarkAsRead(notification.id);
                               }}
                               className="p-2 rounded-full hover:bg-blue-100 dark:bg-blue-900 transition-colors"
-                              title="Mark as read"
+                              title={t('notifications.markAsRead')}
                             >
                               <Check className="h-4 w-4 text-primary-600" />
                             </button>
@@ -281,7 +281,7 @@ const NotificationCenter = () => {
                               contextDeleteNotification(notification.id);
                             }}
                             className="p-2 rounded-full hover:bg-red-100 dark:bg-red-900 transition-colors"
-                            title="Delete"
+                            title={t('notifications.delete')}
                           >
                             <Trash2 className="h-4 w-4 text-red-600" />
                           </button>
@@ -302,7 +302,7 @@ const NotificationCenter = () => {
                     disabled={loading}
                     className="px-4 py-2 text-sm text-primary-600 hover:text-accent-600 transition-colors font-medium disabled:opacity-50 hover:bg-accent-50 rounded-md transition-colors"
                   >
-                    {loading ? 'Loading...' : 'Load more notifications'}
+                    {loading ? t('notifications.loading') : t('notifications.loadMore')}
                   </button>
                 </div>
               )}

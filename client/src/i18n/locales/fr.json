@@ -1045,13 +1045,42 @@
   },
   "notifications": {
     "title": "Notifications",
-    "markAllRead": "Tout Marquer Comme Lu",
+    "markAllRead": "Tout marquer comme lu",
     "noNotifications": "Aucune notification",
-    "newNotification": "Nouvelle notification",
+    "newNotification": "Nouveau",
     "unread": "Non lu",
+    "read": "Lu",
     "markAsRead": "Marquer comme lu",
     "markAsUnread": "Marquer comme non lu",
     "delete": "Supprimer",
+    "refresh": "Actualiser les notifications",
+    "loading": "Chargement...",
+    "loadMore": "Charger plus de notifications",
+    "filter": {
+      "all": "Tout",
+      "unread": "Non lu",
+      "read": "Lu"
+    },
+    "disabled": {
+      "title": "Notifications Désactivées",
+      "message": "Vous avez désactivé les notifications dans vos paramètres. Activez-les pour recevoir des mises à jour sur les réservations et les messages.",
+      "goToSettings": "Aller aux Paramètres"
+    },
+    "empty": {
+      "noUnread": "Aucune notification non lue",
+      "allCaughtUp": "Vous êtes à jour !"
+    },
+    "time": {
+      "justNow": "À l'instant",
+      "minuteAgo": "minute",
+      "minutesAgo": "minutes",
+      "hourAgo": "heure",
+      "hoursAgo": "heures",
+      "dayAgo": "jour",
+      "daysAgo": "jours",
+      "weekAgo": "semaine",
+      "weeksAgo": "semaines"
+    },
     "types": {
       "booking": "Réservation",
       "truck": "Camion",
