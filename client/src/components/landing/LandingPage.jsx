@@ -408,15 +408,15 @@ const LandingPage = () => {
           </div>
 
           {/* Tabs - Two rows on mobile (2+1 centered), single row on larger screens */}
-          <div className="flex flex-wrap justify-center gap-2 sm:gap-2 md:gap-3 mb-16 px-2">
+          <div className="flex flex-wrap justify-center gap-2 sm:gap-2 md:gap-3 mb-16 px-2 max-w-full">
             {tabs.map((tab, index) => {
               const Icon = tab.icon;
               return (
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`flex items-center px-3 sm:px-3 md:px-5 py-2 sm:py-2 md:py-3 rounded-md sm:rounded-lg md:rounded-xl font-semibold text-xs sm:text-xs md:text-base transition-all duration-200 whitespace-nowrap ${
-                    index === 2 ? 'w-full sm:w-auto justify-center' : 'basis-[calc(50%-4px)] sm:basis-auto flex-shrink-0'
+                  className={`flex items-center px-3 sm:px-3 md:px-5 py-2.5 sm:py-2 md:py-3 rounded-md sm:rounded-lg md:rounded-xl font-semibold text-xs sm:text-xs md:text-base transition-all duration-200 whitespace-nowrap ${
+                    index === 2 ? 'w-full sm:w-auto justify-center' : 'w-[48%] sm:w-auto justify-center'
                   } ${
                     activeTab === tab.id
                       ? 'bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-lg scale-105'
