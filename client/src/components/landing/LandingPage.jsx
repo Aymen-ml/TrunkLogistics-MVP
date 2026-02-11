@@ -407,15 +407,17 @@ const LandingPage = () => {
             </h2>
           </div>
 
-          {/* Tabs - Extra small on mobile, hide icons to fit in one row */}
-          <div className="flex justify-center gap-1 sm:gap-2 md:gap-3 mb-16 overflow-x-auto md:flex-wrap px-2">
-            {tabs.map((tab) => {
+          {/* Tabs - Two rows on mobile (2+1 centered), single row on larger screens */}
+          <div className="flex flex-wrap justify-center gap-2 sm:gap-2 md:gap-3 mb-16 px-2">
+            {tabs.map((tab, index) => {
               const Icon = tab.icon;
               return (
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`flex items-center px-1.5 sm:px-3 md:px-5 py-1.5 sm:py-2 md:py-3 rounded-md sm:rounded-lg md:rounded-xl font-semibold text-[9px] sm:text-xs md:text-base transition-all duration-200 whitespace-nowrap flex-shrink-0 ${
+                  className={`flex items-center px-2 sm:px-3 md:px-5 py-2 sm:py-2 md:py-3 rounded-md sm:rounded-lg md:rounded-xl font-semibold text-[10px] sm:text-xs md:text-base transition-all duration-200 whitespace-nowrap ${
+                    index === 2 ? 'w-full sm:w-auto flex justify-center' : ''
+                  } ${
                     activeTab === tab.id
                       ? 'bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-lg scale-105'
                       : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
