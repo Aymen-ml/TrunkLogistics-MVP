@@ -827,8 +827,76 @@ const ProviderDashboard = () => {
                   filteredTrucks.map((truck) => {
                     const isRental = truck.service_type === 'rental';
                     return (
-                      <div key={truck.id} className="px-6 py-4">
-                        <div className="flex items-center justify-between">
+                      <div key={truck.id} className="px-4 sm:px-6 py-4">
+                        {/* Mobile Layout */}
+                        <div className="md:hidden">
+                          <div className="flex items-start gap-3 mb-3">
+                            <div className="flex-shrink-0">
+                              <div className={`h-10 w-10 rounded-full flex items-center justify-center ${
+                                isRental ? 'bg-orange-100' : 'bg-blue-100 dark:bg-blue-900'
+                              }`}>
+                                {isRental ? (
+                                  <Settings className="h-5 w-5 text-orange-600" />
+                                ) : (
+                                  <Truck className="h-5 w-5 text-primary-600" />
+                                )}
+                              </div>
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center gap-2 flex-wrap">
+                                <p className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                                  {truck.license_plate}
+                                </p>
+                                <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${getStatusColor(truck.status)}`}>
+                                  {truck.status}
+                                </span>
+                                {isRental ? (
+                                  <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-orange-100 text-orange-800">
+                                    {t('dashboard.rentalLabel')}
+                                  </span>
+                                ) : (
+                                  <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200">
+                                    {t('dashboard.logisticsLabel')}
+                                  </span>
+                                )}
+                              </div>
+                              <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
+                                {VEHICLE_TYPE_LABELS[truck.truck_type] || truck.truck_type}
+                              </p>
+                              <div className="mt-2 text-xs text-gray-500 dark:text-gray-400">
+                                <div>{truck.capacity_weight}kg</div>
+                                <div className="mt-1">
+                                  {isRental ? (
+                                    [
+                                      truck.hourly_rate && `$${truck.hourly_rate}/hr`,
+                                      truck.daily_rate && `$${truck.daily_rate}/day`,
+                                      truck.weekly_rate && `$${truck.weekly_rate}/wk`,
+                                      truck.monthly_rate && `$${truck.monthly_rate}/mo`
+                                    ].filter(Boolean).slice(0, 2).join(', ') || t('dashboard.ratesAvailable')
+                                  ) : (
+                                    truck.pricing_type === 'per_km' 
+                                      ? `$${truck.price_per_km}/km`
+                                      : `$${truck.fixed_price}`
+                                  )}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="flex items-center justify-between mt-3 pt-3 border-t border-gray-200 dark:border-gray-700">
+                            <span className="text-xs text-gray-500 dark:text-gray-400">
+                              {t('dashboard.totalRevenueVehicle')} ${truck.total_revenue || 0}
+                            </span>
+                            <Link
+                              to={`/trucks/${truck.id}`}
+                              className="inline-flex items-center px-3 py-1.5 border border-gray-300 dark:border-gray-600 shadow-sm text-xs font-medium rounded text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors"
+                            >
+                              {t('dashboard.view')}
+                            </Link>
+                          </div>
+                        </div>
+
+                        {/* Desktop Layout */}
+                        <div className="hidden md:flex items-center justify-between">
                           <div className="flex items-center space-x-4">
                             <div className="flex-shrink-0">
                               <div className={`h-10 w-10 rounded-full flex items-center justify-center ${
@@ -898,6 +966,8 @@ const ProviderDashboard = () => {
                           >
                             View
                           </Link>
+                        </div>
+                      </div>
                         </div>
                       </div>
                     );

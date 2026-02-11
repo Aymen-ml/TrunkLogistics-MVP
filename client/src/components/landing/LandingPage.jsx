@@ -407,21 +407,21 @@ const LandingPage = () => {
             </h2>
           </div>
 
-          {/* Tabs - Single row on mobile, wrapped on desktop */}
-          <div className="flex justify-center gap-2 md:gap-3 mb-16 overflow-x-auto md:flex-wrap">
+          {/* Tabs - Smaller text on mobile to fit in one row */}
+          <div className="flex justify-center gap-1 sm:gap-2 md:gap-3 mb-16 overflow-x-auto md:flex-wrap px-2">
             {tabs.map((tab) => {
               const Icon = tab.icon;
               return (
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`flex items-center px-3 md:px-5 py-2 md:py-3 rounded-xl font-semibold text-xs md:text-base transition-all duration-200 whitespace-nowrap flex-shrink-0 ${
+                  className={`flex items-center px-2 sm:px-3 md:px-5 py-2 md:py-3 rounded-lg md:rounded-xl font-semibold text-[10px] sm:text-xs md:text-base transition-all duration-200 whitespace-nowrap flex-shrink-0 ${
                     activeTab === tab.id
                       ? 'bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-lg scale-105'
                       : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
                   }`}
                 >
-                  <Icon className="h-4 md:h-5 w-4 md:w-5 mr-1 md:mr-2" />
+                  <Icon className="h-3 sm:h-4 md:h-5 w-3 sm:w-4 md:w-5 mr-1 md:mr-2" />
                   {tab.label}
                 </button>
               );

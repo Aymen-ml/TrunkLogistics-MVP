@@ -387,8 +387,8 @@ const BookingList = () => {
           </div>
         </div>
 
-        {/* Bookings List */}
-        <div className="bg-white dark:bg-gray-800 shadow-sm rounded-lg overflow-hidden">
+        {/* Bookings List - Desktop Table */}
+        <div className="hidden md:block bg-white dark:bg-gray-800 shadow-sm rounded-lg overflow-hidden">
           <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
             <div className="flex items-center justify-between">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
@@ -574,6 +574,120 @@ const BookingList = () => {
               </tbody>
             </table>
           </div>
+        </div>
+
+        {/* Bookings Cards - Mobile */}
+        <div className="md:hidden space-y-4">
+          {filteredBookings.length === 0 ? (
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm px-6 py-12 text-center">
+              <Package className="mx-auto h-12 w-12 text-gray-400 dark:text-gray-500 mb-3" />
+              <p className="text-sm font-medium text-gray-900 dark:text-gray-100">{t('bookings.notFound')}</p>
+              <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{t('bookings.tryAdjustingFilters')}</p>
+            </div>
+          ) : (
+            filteredBookings.map((booking) => (
+              <div key={booking.id} className="bg-white dark:bg-gray-800 rounded-lg shadow-sm overflow-hidden">
+                <div className="p-4">
+                  {/* Header */}
+                  <div className="flex items-start justify-between mb-3">
+                    <div className="flex items-center space-x-3">
+                      <div className={`flex-shrink-0 h-10 w-10 flex items-center justify-center rounded-lg ${
+                        booking.service_type === 'rental' ? 'bg-orange-100 text-orange-600' : 'bg-blue-100 dark:bg-blue-900 text-blue-600'
+                      }`}>
+                        {booking.service_type === 'rental' ? (
+                          <Settings className="h-5 w-5" />
+                        ) : (
+                          <Package className="h-5 w-5" />
+                        )}
+                      </div>
+                      <div>
+                        <div className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                          #{booking.reference || booking.id.slice(-8)}
+                        </div>
+                        <div className="text-xs text-gray-500 dark:text-gray-400">
+                          {VEHICLE_TYPE_LABELS[booking.truck_type] || booking.truck_type || t('bookings.vehicle')}
+                        </div>
+                      </div>
+                    </div>
+                    <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium whitespace-nowrap ${getStatusColor(booking.status)}`}>
+                      <span className="mr-1">{getStatusIcon(booking.status, booking.service_type)}</span>
+                      {getStatusLabel(booking.status, booking.service_type)}
+                    </span>
+                  </div>
+
+                  {/* Location/Address */}
+                  <div className="mb-3">
+                    <div className="flex items-center text-sm text-gray-700 dark:text-gray-300">
+                      <MapPin className="h-4 w-4 text-gray-400 mr-2 flex-shrink-0" />
+                      {booking.service_type === 'rental' ? (
+                        <span className="truncate">{booking.work_address || t('bookings.workLocation')}</span>
+                      ) : (
+                        <span className="truncate">{booking.pickup_city} → {booking.destination_city}</span>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Date */}
+                  <div className="mb-3">
+                    <div className="flex items-center text-sm text-gray-700 dark:text-gray-300">
+                      <Calendar className="h-4 w-4 text-gray-400 mr-2 flex-shrink-0" />
+                      {booking.service_type === 'rental' ? (
+                        booking.rental_start_datetime ? (
+                          <span>{new Date(booking.rental_start_datetime).toLocaleDateString()}</span>
+                        ) : t('bookings.noDate')
+                      ) : (
+                        booking.pickup_date ? (
+                          <span>{new Date(booking.pickup_date).toLocaleDateString()}</span>
+                        ) : t('bookings.noDate')
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Price */}
+                  <div className="mb-4">
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-gray-500 dark:text-gray-400">{t('bookings.price')}</span>
+                      <span className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+                        {formatCurrency(booking.total_price)}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Company info */}
+                  {user.role === 'customer' && booking.provider_company && (
+                    <div className="text-xs text-blue-600 dark:text-blue-400 mb-3">
+                      {t('bookings.provider')}: {booking.provider_company}
+                    </div>
+                  )}
+                  {user.role === 'provider' && booking.customer_company && (
+                    <div className="text-xs text-green-600 dark:text-green-400 mb-3">
+                      {t('bookings.customer')}: {booking.customer_company}
+                    </div>
+                  )}
+
+                  {/* Actions */}
+                  <div className="flex items-center gap-2 pt-3 border-t border-gray-200 dark:border-gray-700">
+                    <Link
+                      to={`/bookings/${booking.id}`}
+                      className="flex-1 inline-flex items-center justify-center px-3 py-2 border border-gray-300 dark:border-gray-600 shadow-sm text-sm font-medium rounded-md text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors"
+                    >
+                      <Eye className="h-4 w-4 mr-1" />
+                      {t('bookings.viewDetails')}
+                    </Link>
+                    {(user.role === 'customer' && booking.status === 'pending_review') && (
+                      <button
+                        onClick={() => handleDeleteBooking(booking.id)}
+                        disabled={deletingBookingId === booking.id}
+                        className="inline-flex items-center justify-center px-3 py-2 border border-red-300 dark:border-red-600 shadow-sm text-sm font-medium rounded-md text-red-700 dark:text-red-300 bg-white dark:bg-gray-700 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors disabled:opacity-50"
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </button>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ))
+          )}
         </div>
       </div>
     </div>
