@@ -21,13 +21,16 @@ import {
   Zap,
   FileText,
   Building2,
-  Headphones
+  Headphones,
+  Menu,
+  X
 } from 'lucide-react';
 
 const LandingPage = () => {
   const { t } = useTranslation();
   const { user } = useAuth();
   const [activeTab, setActiveTab] = useState('transport');
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const tabs = [
     { id: 'transport', label: t('services.tabs.transport'), icon: Truck },
@@ -126,7 +129,7 @@ const LandingPage = () => {
               <TruckLogo showFull={true} />
             </div>
             
-            {/* Navigation Tabs */}
+            {/* Desktop Navigation Tabs */}
             <div className="hidden md:flex items-center space-x-1">
               <button 
                 onClick={() => scrollToSection('services')}
@@ -160,8 +163,8 @@ const LandingPage = () => {
               </Link>
             </div>
 
-            {/* CTA Buttons & Language Switcher */}
-            <div className="flex items-center space-x-2">
+            {/* Desktop CTA Buttons & Language Switcher */}
+            <div className="hidden md:flex items-center space-x-2">
               <LanguageSwitcher />
               {!user ? (
                 <>
@@ -187,7 +190,103 @@ const LandingPage = () => {
                 </Link>
               )}
             </div>
+
+            {/* Mobile menu button & Language Switcher */}
+            <div className="md:hidden flex items-center space-x-2">
+              <LanguageSwitcher />
+              <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="p-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-orange-500"
+              >
+                {isMobileMenuOpen ? (
+                  <X className="h-6 w-6" />
+                ) : (
+                  <Menu className="h-6 w-6" />
+                )}
+              </button>
+            </div>
           </div>
+
+          {/* Mobile Menu */}
+          {isMobileMenuOpen && (
+            <div className="md:hidden border-t border-gray-200 dark:border-gray-700">
+              <div className="px-2 pt-2 pb-3 space-y-1">
+                <button
+                  onClick={() => {
+                    scrollToSection('services');
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className="block w-full text-left px-4 py-3 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg transition"
+                >
+                  {t('nav.services')}
+                </button>
+                <button
+                  onClick={() => {
+                    scrollToSection('values');
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className="block w-full text-left px-4 py-3 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg transition"
+                >
+                  {t('nav.values')}
+                </button>
+                <button
+                  onClick={() => {
+                    scrollToSection('partners');
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className="block w-full text-left px-4 py-3 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg transition"
+                >
+                  {t('nav.partners')}
+                </button>
+                <button
+                  onClick={() => {
+                    scrollToSection('contact');
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className="block w-full text-left px-4 py-3 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg transition"
+                >
+                  {t('nav.contact')}
+                </button>
+                <Link
+                  to="/about"
+                  className="block px-4 py-3 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg transition"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {t('nav.about')}
+                </Link>
+                
+                {/* Mobile CTA Buttons */}
+                <div className="pt-4 space-y-2 border-t border-gray-200 dark:border-gray-700 mt-2">
+                  {!user ? (
+                    <>
+                      <Link
+                        to="/login"
+                        className="block px-4 py-3 text-center text-base font-medium text-gray-700 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400 border border-gray-300 dark:border-gray-600 rounded-lg transition"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        {t('nav.signin')}
+                      </Link>
+                      <Link
+                        to="/register"
+                        className="block px-4 py-3 text-center text-base font-medium text-white bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 rounded-lg transition"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        {t('nav.getStarted')}
+                      </Link>
+                    </>
+                  ) : (
+                    <Link
+                      to="/dashboard"
+                      className="block px-4 py-3 text-center text-base font-medium text-white bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 rounded-lg transition"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      {t('nav.dashboard')}
+                    </Link>
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </nav>
 
