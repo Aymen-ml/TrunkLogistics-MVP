@@ -642,6 +642,16 @@
     "filters": "Filtres",
     "searchBookings": "Rechercher des réservations",
     "allStatuses": "Tous les Statuts",
+    "statuses": {
+      "pending_review": "En attente d'examen",
+      "approved": "Approuvé",
+      "confirmed": "Confirmé",
+      "in_transit": "En transit",
+      "active": "Actif",
+      "completed": "Terminé",
+      "cancelled": "Annulé",
+      "rejected": "Rejeté"
+    },
     "dateFrom": "Date de Début",
     "dateTo": "Date de Fin",
     "clearFilters": "Effacer les Filtres",
@@ -1148,8 +1158,21 @@
       "newTruckAdded": {
         "title": "Nouveau Camion Ajouté",
         "message": "Le prestataire {{providerName}} a ajouté un nouveau camion ({{truckType}}) nécessitant une vérification."
+      },
+      "passwordReset": {
+        "title": "Réinitialisation du Mot de Passe Réussie",
+        "message": "Votre mot de passe a été réinitialisé avec succès. Si vous n'avez pas demandé ce changement, veuillez contacter le support immédiatement."
+      },
+      "genericStatusChange": {
+        "title": "Réservation {{newStatus}}",
+        "message": "Réservation #{{bookingId}} statut changé de \"{{oldStatus}}\" à \"{{newStatus}}\". Changé par {{role}} : {{name}}."
       }
     }
+  },
+  "roles": {
+    "admin": "admin",
+    "provider": "prestataire",
+    "customer": "client"
   },
   "admin": {
     "title": "Administration",

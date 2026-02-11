@@ -80,6 +80,66 @@ const NotificationCenter = () => {
   const translateNotification = (notification) => {
     const { title, message, type } = notification;
 
+    // Helper function to translate status names
+    const translateStatus = (status) => {
+      const statusTranslations = {
+        'pending_review': t('bookings.statuses.pending_review'),
+        'approved': t('bookings.statuses.approved'),
+        'confirmed': t('bookings.statuses.confirmed'),
+        'in_transit': t('bookings.statuses.in_transit'),
+        'completed': t('bookings.statuses.completed'),
+        'cancelled': t('bookings.statuses.cancelled'),
+        'rejected': t('bookings.statuses.rejected'),
+        'active': t('bookings.statuses.active')
+      };
+      return statusTranslations[status] || status;
+    };
+
+    // Helper function to translate role names
+    const translateRole = (role) => {
+      const roleTranslations = {
+        'admin': t('roles.admin'),
+        'provider': t('roles.provider'),
+        'customer': t('roles.customer')
+      };
+      return roleTranslations[role] || role;
+    };
+
+    // Password Reset notification
+    if (title.includes('Password Reset')) {
+      return {
+        title: t('notifications.messages.passwordReset.title'),
+        message: t('notifications.messages.passwordReset.message')
+      };
+    }
+
+    // Generic booking status change with "Changed by" pattern
+    if (message.includes('status changed from') && message.includes('Changed by')) {
+      const statusMatch = message.match(/Booking #([a-f0-9]+) status changed from "([^"]+)" to "([^"]+)"\./);
+      const changedByMatch = message.match(/Changed by (admin|provider|customer): (.+?)\./);
+      
+      if (statusMatch && changedByMatch) {
+        const bookingId = statusMatch[1];
+        const oldStatus = statusMatch[2];
+        const newStatus = statusMatch[3];
+        const role = changedByMatch[1];
+        const name = changedByMatch[2];
+
+        return {
+          title: t('notifications.messages.genericStatusChange.title', { 
+            newStatus: translateStatus(newStatus) 
+          }),
+          message: t('notifications.messages.genericStatusChange.message', {
+            bookingId,
+            oldStatus: translateStatus(oldStatus),
+            newStatus: translateStatus(newStatus),
+            role: translateRole(role),
+            name
+          })
+        };
+      }
+    }
+
     // Try to match and translate based on title patterns
     if (title.includes('Booking Request Created') || title.includes('Booking created')) {
       const pickupMatch = message.match(/for (.+?) → (.+?) has been/);

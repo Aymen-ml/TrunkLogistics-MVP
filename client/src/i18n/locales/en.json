@@ -642,6 +642,16 @@
     "filters": "Filters",
     "searchBookings": "Search bookings",
     "allStatuses": "All Statuses",
+    "statuses": {
+      "pending_review": "Pending Review",
+      "approved": "Approved",
+      "confirmed": "Confirmed",
+      "in_transit": "In Transit",
+      "active": "Active",
+      "completed": "Completed",
+      "cancelled": "Cancelled",
+      "rejected": "Rejected"
+    },
     "dateFrom": "From Date",
     "dateTo": "To Date",
     "clearFilters": "Clear Filters",
@@ -1148,8 +1158,21 @@
       "newTruckAdded": {
         "title": "New Truck Added",
         "message": "Provider {{providerName}} has added a new truck ({{truckType}}) requiring verification."
+      },
+      "passwordReset": {
+        "title": "Password Reset Successful",
+        "message": "Your password has been successfully reset. If you did not request this change, please contact support immediately."
+      },
+      "genericStatusChange": {
+        "title": "Booking {{newStatus}}",
+        "message": "Booking #{{bookingId}} status changed from \"{{oldStatus}}\" to \"{{newStatus}}\". Changed by {{role}}: {{name}}."
       }
     }
+  },
+  "roles": {
+    "admin": "admin",
+    "provider": "provider",
+    "customer": "customer"
   },
   "admin": {
     "title": "Administration",
