@@ -124,9 +124,16 @@ const LandingPage = () => {
       <nav className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            {/* Logo */}
+            {/* Logo - Hidden on mobile, smaller text on mobile */}
             <div className="flex items-center cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-              <TruckLogo showFull={true} />
+              <div className="hidden md:block">
+                <TruckLogo showFull={true} />
+              </div>
+              <div className="md:hidden">
+                <span className="text-xl font-extrabold text-gray-800 dark:text-gray-100" style={{ fontFamily: 'Nunito, Quicksand, sans-serif' }}>
+                  movelinker
+                </span>
+              </div>
             </div>
             
             {/* Desktop Navigation Tabs */}
@@ -400,21 +407,21 @@ const LandingPage = () => {
             </h2>
           </div>
 
-          {/* Tabs */}
-          <div className="flex flex-wrap justify-center gap-3 mb-16">
+          {/* Tabs - Single row on mobile, wrapped on desktop */}
+          <div className="flex justify-center gap-2 md:gap-3 mb-16 overflow-x-auto md:flex-wrap">
             {tabs.map((tab) => {
               const Icon = tab.icon;
               return (
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`flex items-center px-5 py-3 rounded-xl font-semibold text-sm md:text-base transition-all duration-200 ${
+                  className={`flex items-center px-3 md:px-5 py-2 md:py-3 rounded-xl font-semibold text-xs md:text-base transition-all duration-200 whitespace-nowrap flex-shrink-0 ${
                     activeTab === tab.id
                       ? 'bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-lg scale-105'
                       : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
                   }`}
                 >
-                  <Icon className="h-5 w-5 mr-2" />
+                  <Icon className="h-4 md:h-5 w-4 md:w-5 mr-1 md:mr-2" />
                   {tab.label}
                 </button>
               );
@@ -424,7 +431,7 @@ const LandingPage = () => {
           {/* Tab Content with Image Mockup */}
           <div className="grid lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
             {/* Features List */}
-            <div className="space-y-8 order-2 lg:order-1">
+            <div className="space-y-8 order-1 lg:order-1">
               {features[activeTab].map((feature, index) => {
                 const Icon = feature.icon;
                 return (
@@ -445,8 +452,8 @@ const LandingPage = () => {
               })}
             </div>
 
-            {/* App Screenshot/Mockup */}
-            <div className="order-1 lg:order-2 flex justify-center">
+            {/* App Screenshot/Mockup - Hidden on mobile */}
+            <div className="hidden lg:flex order-2 justify-center">
               <div className="relative w-full max-w-md">
                 {/* Phone Frame */}
                 <div className="relative">
