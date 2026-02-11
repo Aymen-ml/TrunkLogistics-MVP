@@ -577,7 +577,7 @@ const BookingList = () => {
         </div>
 
         {/* Bookings Cards - Mobile */}
-        <div className="md:hidden space-y-4">
+        <div className="md:hidden space-y-3">
           {filteredBookings.length === 0 ? (
             <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm px-6 py-12 text-center">
               <Package className="mx-auto h-12 w-12 text-gray-400 dark:text-gray-500 mb-3" />
@@ -587,100 +587,100 @@ const BookingList = () => {
           ) : (
             filteredBookings.map((booking) => (
               <div key={booking.id} className="bg-white dark:bg-gray-800 rounded-lg shadow-sm overflow-hidden">
-                <div className="p-4">
-                  {/* Header */}
-                  <div className="flex items-start justify-between mb-3">
-                    <div className="flex items-center space-x-3">
-                      <div className={`flex-shrink-0 h-10 w-10 flex items-center justify-center rounded-lg ${
-                        booking.service_type === 'rental' ? 'bg-orange-100 text-orange-600' : 'bg-blue-100 dark:bg-blue-900 text-blue-600'
-                      }`}>
-                        {booking.service_type === 'rental' ? (
-                          <Settings className="h-5 w-5" />
-                        ) : (
-                          <Package className="h-5 w-5" />
-                        )}
-                      </div>
-                      <div>
-                        <div className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                <div className="p-3">
+                  {/* Header with Icon and Info */}
+                  <div className="flex items-start gap-3 mb-3">
+                    <div className={`flex-shrink-0 h-12 w-12 flex items-center justify-center rounded-lg ${
+                      booking.service_type === 'rental' ? 'bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400' : 'bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400'
+                    }`}>
+                      {booking.service_type === 'rental' ? (
+                        <Settings className="h-6 w-6" />
+                      ) : (
+                        <Package className="h-6 w-6" />
+                      )}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-start justify-between gap-2 mb-1">
+                        <div className="text-sm font-semibold text-gray-900 dark:text-gray-100 truncate">
                           #{booking.reference || booking.id.slice(-8)}
                         </div>
-                        <div className="text-xs text-gray-500 dark:text-gray-400">
-                          {VEHICLE_TYPE_LABELS[booking.truck_type] || booking.truck_type || t('bookings.vehicle')}
-                        </div>
+                      </div>
+                      <div className="text-xs text-gray-500 dark:text-gray-400 mb-1.5 truncate">
+                        {VEHICLE_TYPE_LABELS[booking.truck_type] || booking.truck_type || t('bookings.vehicle')}
+                      </div>
+                      {/* Status Badge */}
+                      <div className="flex flex-wrap gap-1.5">
+                        <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${getStatusColor(booking.status)}`}>
+                          <span className="mr-1">{getStatusIcon(booking.status, booking.service_type)}</span>
+                          <span className="truncate">{getStatusLabel(booking.status, booking.service_type)}</span>
+                        </span>
                       </div>
                     </div>
-                    <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium whitespace-nowrap ${getStatusColor(booking.status)}`}>
-                      <span className="mr-1">{getStatusIcon(booking.status, booking.service_type)}</span>
-                      {getStatusLabel(booking.status, booking.service_type)}
-                    </span>
                   </div>
 
-                  {/* Location/Address */}
-                  <div className="mb-3">
-                    <div className="flex items-center text-sm text-gray-700 dark:text-gray-300">
-                      <MapPin className="h-4 w-4 text-gray-400 mr-2 flex-shrink-0" />
-                      {booking.service_type === 'rental' ? (
-                        <span className="truncate">{booking.work_address || t('bookings.workLocation')}</span>
-                      ) : (
-                        <span className="truncate">{booking.pickup_city} → {booking.destination_city}</span>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Date */}
-                  <div className="mb-3">
-                    <div className="flex items-center text-sm text-gray-700 dark:text-gray-300">
-                      <Calendar className="h-4 w-4 text-gray-400 mr-2 flex-shrink-0" />
-                      {booking.service_type === 'rental' ? (
-                        booking.rental_start_datetime ? (
-                          <span>{new Date(booking.rental_start_datetime).toLocaleDateString()}</span>
-                        ) : t('bookings.noDate')
-                      ) : (
-                        booking.pickup_date ? (
-                          <span>{new Date(booking.pickup_date).toLocaleDateString()}</span>
-                        ) : t('bookings.noDate')
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Price */}
-                  <div className="mb-4">
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-500 dark:text-gray-400">{t('bookings.price')}</span>
-                      <span className="text-lg font-semibold text-gray-900 dark:text-gray-100">
-                        {formatCurrency(booking.total_price)}
+                  {/* Location/Address - Compact */}
+                  <div className="mb-2">
+                    <div className="flex items-start text-xs text-gray-600 dark:text-gray-400">
+                      <MapPin className="h-3.5 w-3.5 text-gray-400 mr-1.5 flex-shrink-0 mt-0.5" />
+                      <span className="line-clamp-1 break-all">
+                        {booking.service_type === 'rental' ? (
+                          booking.work_address || t('bookings.workLocation')
+                        ) : (
+                          `${booking.pickup_city} → ${booking.destination_city}`
+                        )}
                       </span>
                     </div>
                   </div>
 
-                  {/* Company info */}
+                  {/* Date and Price - Single Row */}
+                  <div className="flex items-center justify-between mb-2 text-xs">
+                    <div className="flex items-center text-gray-600 dark:text-gray-400">
+                      <Calendar className="h-3.5 w-3.5 text-gray-400 mr-1.5 flex-shrink-0" />
+                      <span className="truncate">
+                        {booking.service_type === 'rental' ? (
+                          booking.rental_start_datetime ? (
+                            new Date(booking.rental_start_datetime).toLocaleDateString()
+                          ) : t('bookings.noDate')
+                        ) : (
+                          booking.pickup_date ? (
+                            new Date(booking.pickup_date).toLocaleDateString()
+                          ) : t('bookings.noDate')
+                        )}
+                      </span>
+                    </div>
+                    <span className="text-sm font-bold text-gray-900 dark:text-gray-100 ml-2 flex-shrink-0">
+                      {formatCurrency(booking.total_price)}
+                    </span>
+                  </div>
+
+                  {/* Company info - Compact */}
                   {user.role === 'customer' && booking.provider_company && (
-                    <div className="text-xs text-blue-600 dark:text-blue-400 mb-3">
+                    <div className="text-xs text-blue-600 dark:text-blue-400 mb-2 truncate">
                       {t('bookings.provider')}: {booking.provider_company}
                     </div>
                   )}
                   {user.role === 'provider' && booking.customer_company && (
-                    <div className="text-xs text-green-600 dark:text-green-400 mb-3">
+                    <div className="text-xs text-green-600 dark:text-green-400 mb-2 truncate">
                       {t('bookings.customer')}: {booking.customer_company}
                     </div>
                   )}
 
-                  {/* Actions */}
-                  <div className="flex items-center gap-2 pt-3 border-t border-gray-200 dark:border-gray-700">
+                  {/* Actions - Bottom */}
+                  <div className="flex items-center gap-2 mt-3 pt-2.5 border-t border-gray-200 dark:border-gray-700">
                     <Link
                       to={`/bookings/${booking.id}`}
-                      className="flex-1 inline-flex items-center justify-center px-3 py-2 border border-gray-300 dark:border-gray-600 shadow-sm text-sm font-medium rounded-md text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors"
+                      className="flex-1 inline-flex items-center justify-center px-3 py-1.5 border border-gray-300 dark:border-gray-600 shadow-sm text-xs font-medium rounded-md text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors"
                     >
-                      <Eye className="h-4 w-4 mr-1" />
+                      <Eye className="h-3.5 w-3.5 mr-1" />
                       {t('bookings.viewDetails')}
                     </Link>
                     {(user.role === 'customer' && booking.status === 'pending_review') && (
                       <button
                         onClick={() => handleDeleteBooking(booking.id)}
                         disabled={deletingBookingId === booking.id}
-                        className="inline-flex items-center justify-center px-3 py-2 border border-red-300 dark:border-red-600 shadow-sm text-sm font-medium rounded-md text-red-700 dark:text-red-300 bg-white dark:bg-gray-700 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors disabled:opacity-50"
+                        className="inline-flex items-center justify-center px-2.5 py-1.5 border border-red-300 dark:border-red-600 shadow-sm text-xs font-medium rounded-md text-red-700 dark:text-red-300 bg-white dark:bg-gray-700 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors disabled:opacity-50"
                       >
-                        <Trash2 className="h-4 w-4" />
+                        <Trash2 className="h-3.5 w-3.5" />
                       </button>
                     )}
                   </div>
