@@ -415,8 +415,8 @@ const LandingPage = () => {
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`flex items-center px-2 sm:px-3 md:px-5 py-2 sm:py-2 md:py-3 rounded-md sm:rounded-lg md:rounded-xl font-semibold text-[10px] sm:text-xs md:text-base transition-all duration-200 whitespace-nowrap ${
-                    index === 2 ? 'w-full sm:w-auto justify-center' : 'flex-shrink-0'
+                  className={`flex items-center px-3 sm:px-3 md:px-5 py-2 sm:py-2 md:py-3 rounded-md sm:rounded-lg md:rounded-xl font-semibold text-xs sm:text-xs md:text-base transition-all duration-200 whitespace-nowrap ${
+                    index === 2 ? 'w-full sm:w-auto justify-center' : 'basis-[calc(50%-4px)] sm:basis-auto flex-shrink-0'
                   } ${
                     activeTab === tab.id
                       ? 'bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-lg scale-105'
