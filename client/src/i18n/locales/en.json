@@ -1087,6 +1087,68 @@
       "message": "Message",
       "system": "System",
       "payment": "Payment"
+    },
+    "messages": {
+      "bookingCreated": {
+        "title": "Booking Request Created",
+        "message": "Your booking request for {{pickup}} → {{destination}} has been created and is pending review."
+      },
+      "bookingApproved": {
+        "title": "Booking Approved",
+        "message": "Your booking has been approved and is ready for pickup."
+      },
+      "bookingConfirmed": {
+        "title": "Booking Confirmed",
+        "message": "Your booking has been confirmed by the provider."
+      },
+      "bookingInTransit": {
+        "title": "Booking In Transit",
+        "message": "Your cargo is now in transit."
+      },
+      "bookingCompleted": {
+        "title": "Booking Completed",
+        "message": "Your booking has been completed successfully."
+      },
+      "bookingCancelled": {
+        "title": "Booking Cancelled",
+        "message": "Your booking has been cancelled."
+      },
+      "bookingRejected": {
+        "title": "Booking Rejected",
+        "message": "Your booking has been rejected."
+      },
+      "documentUploaded": {
+        "title": "Document Uploaded",
+        "message": "Your document \"{{documentName}}\" has been uploaded and is pending verification."
+      },
+      "documentVerified": {
+        "title": "Document Verified",
+        "message": "Your document \"{{documentName}}\" has been verified."
+      },
+      "documentApproved": {
+        "title": "Document Approved",
+        "message": "Your document \"{{documentName}}\" has been approved."
+      },
+      "documentRejected": {
+        "title": "Document Rejected",
+        "message": "Your document \"{{documentName}}\" has been rejected."
+      },
+      "providerApproved": {
+        "title": "Provider Account Approved",
+        "message": "Congratulations! Your provider account has been approved. You can now add trucks and receive bookings."
+      },
+      "providerRejected": {
+        "title": "Provider Account Rejected",
+        "message": "Your provider account verification was not approved. Please contact support for more information."
+      },
+      "newBookingRequest": {
+        "title": "New Booking Request",
+        "message": "New booking request from {{customerName}} for {{pickup}} → {{destination}} requires review."
+      },
+      "newTruckAdded": {
+        "title": "New Truck Added",
+        "message": "Provider {{providerName}} has added a new truck ({{truckType}}) requiring verification."
+      }
     }
   },
   "admin": {

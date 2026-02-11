@@ -63,8 +63,10 @@ const NotificationCenter = () => {
         return '📦';
       case 'document_uploaded':
       case 'document_verified':
+      case 'document_verification':
         return '📄';
       case 'provider_verified':
+      case 'provider_verification':
         return '✅';
       case 'admin_alert':
         return '⚠️';
@@ -73,6 +75,150 @@ const NotificationCenter = () => {
       default:
         return '📢';
     }
+  };
+
+  const translateNotification = (notification) => {
+    const { title, message, type } = notification;
+
+    // Try to match and translate based on title patterns
+    if (title.includes('Booking Request Created') || title.includes('Booking created')) {
+      const pickupMatch = message.match(/for (.+?) → (.+?) has been/);
+      if (pickupMatch) {
+        return {
+          title: t('notifications.messages.bookingCreated.title'),
+          message: t('notifications.messages.bookingCreated.message', {
+            pickup: pickupMatch[1],
+            destination: pickupMatch[2]
+          })
+        };
+      }
+    }
+
+    if (title.includes('Approved') && type === 'booking_status') {
+      return {
+        title: t('notifications.messages.bookingApproved.title'),
+        message: t('notifications.messages.bookingApproved.message')
+      };
+    }
+
+    if (title.includes('Confirmed') && type === 'booking_status') {
+      return {
+        title: t('notifications.messages.bookingConfirmed.title'),
+        message: t('notifications.messages.bookingConfirmed.message')
+      };
+    }
+
+    if (title.toLowerCase().includes('in transit') || title.includes('In_transit')) {
+      return {
+        title: t('notifications.messages.bookingInTransit.title'),
+        message: t('notifications.messages.bookingInTransit.message')
+      };
+    }
+
+    if (title.includes('Completed') && type === 'booking_status') {
+      return {
+        title: t('notifications.messages.bookingCompleted.title'),
+        message: t('notifications.messages.bookingCompleted.message')
+      };
+    }
+
+    if (title.includes('Cancelled') && type === 'booking_status') {
+      return {
+        title: t('notifications.messages.bookingCancelled.title'),
+        message: t('notifications.messages.bookingCancelled.message')
+      };
+    }
+
+    if (title.includes('Rejected') && type === 'booking_status') {
+      return {
+        title: t('notifications.messages.bookingRejected.title'),
+        message: t('notifications.messages.bookingRejected.message')
+      };
+    }
+
+    // Document notifications
+    if (title.includes('Document Uploaded')) {
+      const docMatch = message.match(/document \"(.+?)\" has been uploaded/);
+      const documentName = docMatch ? docMatch[1] : '';
+      return {
+        title: t('notifications.messages.documentUploaded.title'),
+        message: t('notifications.messages.documentUploaded.message', { documentName })
+      };
+    }
+
+    if (title.includes('Document Approved')) {
+      const docMatch = message.match(/document \"(.+?)\" has been/);
+      const documentName = docMatch ? docMatch[1] : '';
+      return {
+        title: t('notifications.messages.documentApproved.title'),
+        message: t('notifications.messages.documentApproved.message', { documentName })
+      };
+    }
+
+    if (title.includes('Document Rejected')) {
+      const docMatch = message.match(/document \"(.+?)\" has been/);
+      const documentName = docMatch ? docMatch[1] : '';
+      return {
+        title: t('notifications.messages.documentRejected.title'),
+        message: t('notifications.messages.documentRejected.message', { documentName })
+      };
+    }
+
+    if ((title.includes('Document Verified') || title.includes('Document verified')) && type === 'document_verification') {
+      const docMatch = message.match(/document \"(.+?)\" has been/);
+      const documentName = docMatch ? docMatch[1] : '';
+      return {
+        title: t('notifications.messages.documentVerified.title'),
+        message: t('notifications.messages.documentVerified.message', { documentName })
+      };
+    }
+
+    // Provider notifications
+    if (title.includes('Provider Account Approved') || (title.includes('Approved') && type === 'provider_verification')) {
+      return {
+        title: t('notifications.messages.providerApproved.title'),
+        message: t('notifications.messages.providerApproved.message')
+      };
+    }
+
+    if (title.includes('Provider Account') && title.includes('not approved') || (title.toLowerCase().includes('rejected') && type === 'provider_verification')) {
+      return {
+        title: t('notifications.messages.providerRejected.title'),
+        message: t('notifications.messages.providerRejected.message')
+      };
+    }
+
+    // Admin notifications
+    if (title.includes('New Booking Request')) {
+      const matches = message.match(/from (.+?) for (.+?) → (.+?) requires/);
+      if (matches) {
+        return {
+          title: t('notifications.messages.newBookingRequest.title'),
+          message: t('notifications.messages.newBookingRequest.message', {
+            customerName: matches[1],
+            pickup: matches[2],
+            destination: matches[3]
+          })
+        };
+      }
+    }
+
+    if (title.includes('New Truck')) {
+      const providerMatch = message.match(/Provider (.+?) has added/);
+      const truckMatch = message.match(/truck \\((.+?)\\)/);
+      if (providerMatch && truckMatch) {
+        return {
+          title: t('notifications.messages.newTruckAdded.title'),
+          message: t('notifications.messages.newTruckAdded.message', {
+            providerName: providerMatch[1],
+            truckType: truckMatch[1]
+          })
+        };
+      }
+    }
+
+    // Return original if no match
+    return { title, message };
   };
 
   const formatDate = (dateString) => {
@@ -229,7 +375,9 @@ const NotificationCenter = () => {
             </div>
           ) : (
             <div className="divide-y divide-gray-200 dark:divide-gray-700">
-              {displayNotifications.map((notification) => (
+              {displayNotifications.map((notification) => {
+                const translatedContent = translateNotification(notification);
+                return (
                 <div
                   key={notification.id}
                   className={`p-4 hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors ${
@@ -246,10 +394,10 @@ const NotificationCenter = () => {
                           <p className={`text-base font-semibold mb-1 ${
                             !notification.is_read ? 'text-gray-900 dark:text-gray-100' : 'text-gray-700 dark:text-gray-200'
                           }`}>
-                            {notification.title}
+                            {translatedContent.title}
                           </p>
                           <p className="text-sm text-gray-600 dark:text-gray-400 dark:text-gray-500 mb-2 leading-relaxed">
-                            {notification.message}
+                            {translatedContent.message}
                           </p>
                           <div className="flex items-center gap-2">
                             <p className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 font-medium">
@@ -290,7 +438,8 @@ const NotificationCenter = () => {
                     </div>
                   </div>
                 </div>
-              ))}
+                );
+              })}
               
               {hasMore && (
                 <div className="p-4 text-center border-t border-gray-200 dark:border-gray-700">

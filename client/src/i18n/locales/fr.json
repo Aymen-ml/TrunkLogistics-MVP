@@ -1087,6 +1087,68 @@
       "message": "Message",
       "system": "Système",
       "payment": "Paiement"
+    },
+    "messages": {
+      "bookingCreated": {
+        "title": "Demande de Réservation Créée",
+        "message": "Votre demande de réservation pour {{pickup}} → {{destination}} a été créée et est en attente d'examen."
+      },
+      "bookingApproved": {
+        "title": "Réservation Approuvée",
+        "message": "Votre réservation a été approuvée et est prête pour l'enlèvement."
+      },
+      "bookingConfirmed": {
+        "title": "Réservation Confirmée",
+        "message": "Votre réservation a été confirmée par le prestataire."
+      },
+      "bookingInTransit": {
+        "title": "Réservation En Transit",
+        "message": "Votre cargaison est maintenant en transit."
+      },
+      "bookingCompleted": {
+        "title": "Réservation Terminée",
+        "message": "Votre réservation a été terminée avec succès."
+      },
+      "bookingCancelled": {
+        "title": "Réservation Annulée",
+        "message": "Votre réservation a été annulée."
+      },
+      "bookingRejected": {
+        "title": "Réservation Rejetée",
+        "message": "Votre réservation a été rejetée."
+      },
+      "documentUploaded": {
+        "title": "Document Téléchargé",
+        "message": "Votre document \"{{documentName}}\" a été téléchargé et est en attente de vérification."
+      },
+      "documentVerified": {
+        "title": "Document Vérifié",
+        "message": "Votre document \"{{documentName}}\" a été vérifié."
+      },
+      "documentApproved": {
+        "title": "Document Approuvé",
+        "message": "Votre document \"{{documentName}}\" a été approuvé."
+      },
+      "documentRejected": {
+        "title": "Document Rejeté",
+        "message": "Votre document \"{{documentName}}\" a été rejeté."
+      },
+      "providerApproved": {
+        "title": "Compte Prestataire Approuvé",
+        "message": "Félicitations ! Votre compte prestataire a été approuvé. Vous pouvez maintenant ajouter des camions et recevoir des réservations."
+      },
+      "providerRejected": {
+        "title": "Compte Prestataire Rejeté",
+        "message": "La vérification de votre compte prestataire n'a pas été approuvée. Veuillez contacter le support pour plus d'informations."
+      },
+      "newBookingRequest": {
+        "title": "Nouvelle Demande de Réservation",
+        "message": "Nouvelle demande de réservation de {{customerName}} pour {{pickup}} → {{destination}} nécessite un examen."
+      },
+      "newTruckAdded": {
+        "title": "Nouveau Camion Ajouté",
+        "message": "Le prestataire {{providerName}} a ajouté un nouveau camion ({{truckType}}) nécessitant une vérification."
+      }
     }
   },
   "admin": {
