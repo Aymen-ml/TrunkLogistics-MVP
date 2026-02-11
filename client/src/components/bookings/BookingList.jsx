@@ -577,52 +577,47 @@ const BookingList = () => {
         </div>
 
         {/* Bookings Cards - Mobile */}
-        <div className="md:hidden space-y-3">
+        <div className="md:hidden w-full space-y-3">
           {filteredBookings.length === 0 ? (
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm px-6 py-12 text-center">
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm px-6 py-12 text-center w-full">
               <Package className="mx-auto h-12 w-12 text-gray-400 dark:text-gray-500 mb-3" />
               <p className="text-sm font-medium text-gray-900 dark:text-gray-100">{t('bookings.notFound')}</p>
               <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{t('bookings.tryAdjustingFilters')}</p>
             </div>
           ) : (
             filteredBookings.map((booking) => (
-              <div key={booking.id} className="bg-white dark:bg-gray-800 rounded-lg shadow-sm overflow-hidden">
-                <div className="p-3">
+              <div key={booking.id} className="bg-white dark:bg-gray-800 rounded-lg shadow-sm overflow-hidden w-full">
+                <div className="p-3 w-full">
                   {/* Header with Icon and Info */}
-                  <div className="flex items-start gap-3 mb-3">
-                    <div className={`flex-shrink-0 h-12 w-12 flex items-center justify-center rounded-lg ${
+                  <div className="flex items-start gap-2 mb-2 w-full">
+                    <div className={`flex-shrink-0 h-10 w-10 flex items-center justify-center rounded-lg ${
                       booking.service_type === 'rental' ? 'bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400' : 'bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400'
                     }`}>
                       {booking.service_type === 'rental' ? (
-                        <Settings className="h-6 w-6" />
+                        <Settings className="h-5 w-5" />
                       ) : (
-                        <Package className="h-6 w-6" />
+                        <Package className="h-5 w-5" />
                       )}
                     </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-start justify-between gap-2 mb-1">
-                        <div className="text-sm font-semibold text-gray-900 dark:text-gray-100 truncate">
-                          #{booking.reference || booking.id.slice(-8)}
-                        </div>
+                    <div className="flex-1 min-w-0 w-0">
+                      <div className="text-xs font-semibold text-gray-900 dark:text-gray-100 truncate mb-0.5">
+                        #{booking.reference || booking.id.slice(-8)}
                       </div>
-                      <div className="text-xs text-gray-500 dark:text-gray-400 mb-1.5 truncate">
+                      <div className="text-xs text-gray-500 dark:text-gray-400 truncate mb-1">
                         {VEHICLE_TYPE_LABELS[booking.truck_type] || booking.truck_type || t('bookings.vehicle')}
                       </div>
                       {/* Status Badge */}
-                      <div className="flex flex-wrap gap-1.5">
-                        <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${getStatusColor(booking.status)}`}>
-                          <span className="mr-1">{getStatusIcon(booking.status, booking.service_type)}</span>
-                          <span className="truncate">{getStatusLabel(booking.status, booking.service_type)}</span>
-                        </span>
-                      </div>
+                      <span className={`inline-flex items-center px-1.5 py-0.5 rounded-full text-[10px] font-medium whitespace-nowrap ${getStatusColor(booking.status)}`}>
+                        {getStatusLabel(booking.status, booking.service_type)}
+                      </span>
                     </div>
                   </div>
 
                   {/* Location/Address - Compact */}
-                  <div className="mb-2">
+                  <div className="mb-1.5 w-full">
                     <div className="flex items-start text-xs text-gray-600 dark:text-gray-400">
-                      <MapPin className="h-3.5 w-3.5 text-gray-400 mr-1.5 flex-shrink-0 mt-0.5" />
-                      <span className="line-clamp-1 break-all">
+                      <MapPin className="h-3 w-3 text-gray-400 mr-1 flex-shrink-0 mt-0.5" />
+                      <span className="truncate flex-1 min-w-0">
                         {booking.service_type === 'rental' ? (
                           booking.work_address || t('bookings.workLocation')
                         ) : (
@@ -633,9 +628,9 @@ const BookingList = () => {
                   </div>
 
                   {/* Date and Price - Single Row */}
-                  <div className="flex items-center justify-between mb-2 text-xs">
-                    <div className="flex items-center text-gray-600 dark:text-gray-400">
-                      <Calendar className="h-3.5 w-3.5 text-gray-400 mr-1.5 flex-shrink-0" />
+                  <div className="flex items-center justify-between mb-1.5 text-xs w-full min-w-0">
+                    <div className="flex items-center text-gray-600 dark:text-gray-400 min-w-0 flex-1">
+                      <Calendar className="h-3 w-3 text-gray-400 mr-1 flex-shrink-0" />
                       <span className="truncate">
                         {booking.service_type === 'rental' ? (
                           booking.rental_start_datetime ? (
@@ -648,39 +643,39 @@ const BookingList = () => {
                         )}
                       </span>
                     </div>
-                    <span className="text-sm font-bold text-gray-900 dark:text-gray-100 ml-2 flex-shrink-0">
+                    <span className="text-xs font-bold text-gray-900 dark:text-gray-100 ml-2 flex-shrink-0">
                       {formatCurrency(booking.total_price)}
                     </span>
                   </div>
 
                   {/* Company info - Compact */}
                   {user.role === 'customer' && booking.provider_company && (
-                    <div className="text-xs text-blue-600 dark:text-blue-400 mb-2 truncate">
+                    <div className="text-[10px] text-blue-600 dark:text-blue-400 mb-1.5 truncate w-full">
                       {t('bookings.provider')}: {booking.provider_company}
                     </div>
                   )}
                   {user.role === 'provider' && booking.customer_company && (
-                    <div className="text-xs text-green-600 dark:text-green-400 mb-2 truncate">
+                    <div className="text-[10px] text-green-600 dark:text-green-400 mb-1.5 truncate w-full">
                       {t('bookings.customer')}: {booking.customer_company}
                     </div>
                   )}
 
                   {/* Actions - Bottom */}
-                  <div className="flex items-center gap-2 mt-3 pt-2.5 border-t border-gray-200 dark:border-gray-700">
+                  <div className="flex items-center gap-1.5 mt-2 pt-2 border-t border-gray-200 dark:border-gray-700 w-full">
                     <Link
                       to={`/bookings/${booking.id}`}
-                      className="flex-1 inline-flex items-center justify-center px-3 py-1.5 border border-gray-300 dark:border-gray-600 shadow-sm text-xs font-medium rounded-md text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors"
+                      className="flex-1 min-w-0 inline-flex items-center justify-center px-2 py-1.5 border border-gray-300 dark:border-gray-600 shadow-sm text-[10px] font-medium rounded-md text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors"
                     >
-                      <Eye className="h-3.5 w-3.5 mr-1" />
-                      {t('bookings.viewDetails')}
+                      <Eye className="h-3 w-3 mr-1 flex-shrink-0" />
+                      <span className="truncate">{t('bookings.viewDetails')}</span>
                     </Link>
                     {(user.role === 'customer' && booking.status === 'pending_review') && (
                       <button
                         onClick={() => handleDeleteBooking(booking.id)}
                         disabled={deletingBookingId === booking.id}
-                        className="inline-flex items-center justify-center px-2.5 py-1.5 border border-red-300 dark:border-red-600 shadow-sm text-xs font-medium rounded-md text-red-700 dark:text-red-300 bg-white dark:bg-gray-700 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors disabled:opacity-50"
+                        className="flex-shrink-0 inline-flex items-center justify-center px-2 py-1.5 border border-red-300 dark:border-red-600 shadow-sm text-xs font-medium rounded-md text-red-700 dark:text-red-300 bg-white dark:bg-gray-700 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors disabled:opacity-50"
                       >
-                        <Trash2 className="h-3.5 w-3.5" />
+                        <Trash2 className="h-3 w-3" />
                       </button>
                     )}
                   </div>
