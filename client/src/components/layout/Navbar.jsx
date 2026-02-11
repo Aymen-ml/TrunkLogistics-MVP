@@ -48,7 +48,14 @@ const Navbar = () => {
           <div className="flex justify-between h-16">
             <div className="flex items-center">
               <Link to="/" className="flex items-center">
-                <TruckLogo className="h-20 w-20" showFull={true} />
+                <div className="hidden md:block">
+                  <TruckLogo className="h-20 w-20" showFull={true} />
+                </div>
+                <div className="md:hidden">
+                  <span className="text-2xl font-extrabold text-gray-800 dark:text-gray-100" style={{ fontFamily: 'Nunito, Quicksand, sans-serif' }}>
+                    movelinker
+                  </span>
+                </div>
               </Link>
             </div>
             <div className="flex items-center space-x-4">
@@ -78,7 +85,14 @@ const Navbar = () => {
           {/* Logo and brand */}
           <div className="flex items-center">
             <Link to="/dashboard" className="flex items-center">
-              <TruckLogo className="h-20 w-20" showFull={true} />
+              <div className="hidden md:block">
+                <TruckLogo className="h-20 w-20" showFull={true} />
+              </div>
+              <div className="md:hidden">
+                <span className="text-2xl font-extrabold text-gray-800 dark:text-gray-100" style={{ fontFamily: 'Nunito, Quicksand, sans-serif' }}>
+                  movelinker
+                </span>
+              </div>
             </Link>
           </div>
 

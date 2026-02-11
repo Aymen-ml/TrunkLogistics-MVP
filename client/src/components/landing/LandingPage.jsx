@@ -130,7 +130,7 @@ const LandingPage = () => {
                 <TruckLogo showFull={true} />
               </div>
               <div className="md:hidden">
-                <span className="text-xl font-extrabold text-gray-800 dark:text-gray-100" style={{ fontFamily: 'Nunito, Quicksand, sans-serif' }}>
+                <span className="text-2xl font-extrabold text-gray-800 dark:text-gray-100" style={{ fontFamily: 'Nunito, Quicksand, sans-serif' }}>
                   movelinker
                 </span>
               </div>
