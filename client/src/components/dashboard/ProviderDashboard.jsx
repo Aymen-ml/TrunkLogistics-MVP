@@ -968,8 +968,6 @@ const ProviderDashboard = () => {
                           </Link>
                         </div>
                       </div>
-                        </div>
-                      </div>
                     );
                   })
                 );
