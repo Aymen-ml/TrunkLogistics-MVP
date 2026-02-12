@@ -252,30 +252,30 @@ const DocumentVerification = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
         <div className="mb-8">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div className="flex items-center">
               <FileText className="h-8 w-8 text-primary-600 mr-3" />
               <div>
-                <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">{t('admin.documents.verification')}</h1>
-                <p className="mt-2 text-gray-600 dark:text-gray-400">
+                <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100">{t('admin.documents.verification')}</h1>
+                <p className="mt-1 sm:mt-2 text-sm sm:text-base text-gray-600 dark:text-gray-400">
                   {t('admin.documents.viewAndVerify')}
                 </p>
               </div>
             </div>
-            <div className="flex items-center space-x-3">
+            <div className="flex items-center gap-2 w-full sm:w-auto">
               <button
                 onClick={() => fetchDocuments()}
-                className="inline-flex items-center px-3 py-2 border border-gray-300 dark:border-gray-600 text-sm font-medium rounded-md text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:bg-gray-900"
+                className="flex-1 sm:flex-none inline-flex items-center justify-center px-3 py-2 border border-gray-300 dark:border-gray-600 text-sm font-medium rounded-md text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:bg-gray-900"
               >
-                <RefreshCw className="h-4 w-4 mr-2" />
-                {t('admin.documents.refresh')}
+                <RefreshCw className="h-4 w-4 sm:mr-2" />
+                <span className="hidden sm:inline">{t('admin.documents.refresh')}</span>
               </button>
               <button
                 onClick={() => setShowFilters(!showFilters)}
-                className="inline-flex items-center px-3 py-2 border border-gray-300 dark:border-gray-600 text-sm font-medium rounded-md text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:bg-gray-900"
+                className="flex-1 sm:flex-none inline-flex items-center justify-center px-3 py-2 border border-gray-300 dark:border-gray-600 text-sm font-medium rounded-md text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:bg-gray-900"
               >
                 <Filter className="h-4 w-4 mr-2" />
-                {showFilters ? t('admin.documents.hideFilters') : t('admin.documents.showFilters')}
+                <span className="truncate">{showFilters ? t('admin.documents.hideFilters') : t('admin.documents.showFilters')}</span>
               </button>
             </div>
           </div>

@@ -269,10 +269,10 @@ const BookingList = () => {
         {/* Filters */}
         <div className="bg-white dark:bg-gray-800 shadow-sm rounded-lg mb-6">
           <div className="px-4 py-4 border-b border-gray-200 dark:border-gray-700">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <Filter className="h-5 w-5 text-gray-400" />
-                <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">{t('bookings.filters')}</h3>
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+              <div className="flex items-center gap-2 flex-wrap">
+                <Filter className="h-5 w-5 text-gray-400 flex-shrink-0" />
+                <h3 className="text-base sm:text-lg font-medium text-gray-900 dark:text-gray-100">{t('bookings.filters')}</h3>
                 {activeFiltersCount > 0 && (
                   <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 dark:bg-primary-900/20 text-primary-800 dark:text-primary-400">
                     {activeFiltersCount} active
@@ -283,7 +283,7 @@ const BookingList = () => {
                 <button
                   type="button"
                   onClick={clearFilters}
-                  className="inline-flex items-center gap-1 text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200"
+                  className="inline-flex items-center gap-1 text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 whitespace-nowrap"
                 >
                   <X className="h-4 w-4" />
                   {t('bookings.clearFilters')}
