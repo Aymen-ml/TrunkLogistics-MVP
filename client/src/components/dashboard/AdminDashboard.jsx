@@ -248,78 +248,78 @@ const AdminDashboard = () => {
 
         {/* Quick Actions */}
         <div className="mb-8">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 gap-4">
             <Link
               to="/admin/users"
-              className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow group"
+              className="bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow group"
             >
               <div className="flex items-center">
                 <div className="flex-shrink-0">
-                  <Users className="h-8 w-8 text-primary-600 group-hover:text-accent-500 transition-colors" />
+                  <Users className="h-6 w-6 sm:h-8 sm:w-8 text-primary-600 group-hover:text-accent-500 transition-colors" />
                 </div>
-                <div className="ml-4">
-                  <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">{t('dashboard.manageUsers')}</h3>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500">{t('dashboard.manageUsersDesc')}</p>
+                <div className="ml-3 sm:ml-4 min-w-0 flex-1">
+                  <h3 className="text-sm sm:text-lg font-medium text-gray-900 dark:text-gray-100 truncate">{t('dashboard.manageUsers')}</h3>
+                  <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 truncate">{t('dashboard.manageUsersDesc')}</p>
                 </div>
               </div>
             </Link>
 
             <Link
               to="/admin/analytics"
-              className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow group"
+              className="bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow group"
             >
               <div className="flex items-center">
                 <div className="flex-shrink-0">
-                  <TrendingUp className="h-8 w-8 text-indigo-600 group-hover:text-indigo-700" />
+                  <TrendingUp className="h-6 w-6 sm:h-8 sm:w-8 text-indigo-600 group-hover:text-indigo-700" />
                 </div>
-                <div className="ml-4">
-                  <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">{t('dashboard.analytics')}</h3>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500">{t('dashboard.trendsAndFunnels')}</p>
+                <div className="ml-3 sm:ml-4 min-w-0 flex-1">
+                  <h3 className="text-sm sm:text-lg font-medium text-gray-900 dark:text-gray-100 truncate">{t('dashboard.analytics')}</h3>
+                  <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 truncate">{t('dashboard.trendsAndFunnels')}</p>
                 </div>
               </div>
             </Link>
 
             <Link
               to="/admin/bookings"
-              className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow group"
+              className="bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow group"
             >
               <div className="flex items-center">
                 <div className="flex-shrink-0">
-                  <Package className="h-8 w-8 text-green-600 group-hover:text-green-700" />
+                  <Package className="h-6 w-6 sm:h-8 sm:w-8 text-green-600 group-hover:text-green-700" />
                 </div>
-                <div className="ml-4">
-                  <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">{t('dashboard.bookings')}</h3>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500">{t('dashboard.reviewBookings')}</p>
+                <div className="ml-3 sm:ml-4 min-w-0 flex-1">
+                  <h3 className="text-sm sm:text-lg font-medium text-gray-900 dark:text-gray-100 truncate">{t('dashboard.bookings')}</h3>
+                  <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 truncate">{t('dashboard.reviewBookings')}</p>
                 </div>
               </div>
             </Link>
 
             <Link
               to="/admin/documents"
-              className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow group"
+              className="bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow group"
             >
               <div className="flex items-center">
                 <div className="flex-shrink-0">
-                  <FileText className="h-8 w-8 text-purple-600 group-hover:text-purple-700" />
+                  <FileText className="h-6 w-6 sm:h-8 sm:w-8 text-purple-600 group-hover:text-purple-700" />
                 </div>
-                <div className="ml-4">
-                  <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">{t('dashboard.documentVerification')}</h3>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500">{t('dashboard.reviewDocuments')}</p>
+                <div className="ml-3 sm:ml-4 min-w-0 flex-1">
+                  <h3 className="text-sm sm:text-lg font-medium text-gray-900 dark:text-gray-100 truncate">{t('dashboard.documentVerification')}</h3>
+                  <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 truncate">{t('dashboard.reviewDocuments')}</p>
                 </div>
               </div>
             </Link>
 
             <Link
               to="/admin/providers"
-              className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow group"
+              className="bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow group"
             >
               <div className="flex items-center">
                 <div className="flex-shrink-0">
-                  <Building className="h-8 w-8 text-orange-600 group-hover:text-orange-700" />
+                  <Building className="h-6 w-6 sm:h-8 sm:w-8 text-orange-600 group-hover:text-orange-700" />
                 </div>
-                <div className="ml-4">
-                  <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">{t('dashboard.providerVerification')}</h3>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500">{t('dashboard.reviewProviders')}</p>
+                <div className="ml-3 sm:ml-4 min-w-0 flex-1">
+                  <h3 className="text-sm sm:text-lg font-medium text-gray-900 dark:text-gray-100 truncate">{t('dashboard.providerVerification')}</h3>
+                  <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 truncate">{t('dashboard.reviewProviders')}</p>
                 </div>
               </div>
             </Link>
