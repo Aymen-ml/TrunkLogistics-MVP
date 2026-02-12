@@ -523,170 +523,262 @@ const DocumentVerification = () => {
           
           {documents.length === 0 ? (
             <div className="text-center py-12">
-              <AlertCircle className="mx-auto h-12 w-12 text-gray-400 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500" />
+              <AlertCircle className="mx-auto h-12 w-12 text-gray-400" />
               <h3 className="mt-2 text-sm font-medium text-gray-900 dark:text-gray-100">{t('admin.documents.noDocuments')}</h3>
               <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
                 {t('admin.documents.adjustFilters')}
               </p>
             </div>
           ) : (
-            <div className="overflow-x-auto">
-              <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                <thead className="bg-gray-50 dark:bg-gray-900">
-                  <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                      Document
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                      Truck & Provider
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                      Type & Service
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                      Status
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                      Uploaded
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                      Actions
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-                  {documents.map((document) => (
-                    <tr key={document.id} className="hover:bg-gray-50 dark:bg-gray-900">
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="flex items-center">
-                          <div className="flex-shrink-0">
-                            {getFileIcon(document.mime_type)}
-                          </div>
-                          <div className="ml-4">
-                            <div className="text-sm font-medium text-gray-900 dark:text-gray-100">
-                              {document.file_name || t('admin.documents.unnamedDocument')}
-                            </div>
-                            <div className="text-sm text-gray-500 dark:text-gray-400">
-                              {document.file_size ? `${(document.file_size / 1024).toFixed(1)} KB` : t('admin.documents.unknownSize')}
-                            </div>
-                          </div>
+            <>
+              {/* Mobile Cards */}
+              <div className="md:hidden divide-y divide-gray-200 dark:divide-gray-700">
+                {documents.map((document) => (
+                  <div key={document.id} className="p-3">
+                    <div className="flex items-start gap-2 mb-2">
+                      <div className="flex-shrink-0">
+                        {getFileIcon(document.mime_type)}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="text-xs font-medium text-gray-900 dark:text-gray-100 truncate">
+                          {document.file_name || t('admin.documents.unnamedDocument')}
                         </div>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm text-gray-900 dark:text-gray-100">
-                          {document.license_plate && (
-                            <div className="flex items-center">
-                              <Truck className="h-4 w-4 text-blue-500 mr-1" />
-                              {document.license_plate}
-                            </div>
-                          )}
-                          {document.truck_type && (
-                            <div className="text-xs text-gray-500 dark:text-gray-400">
-                              {document.truck_type} • {document.make} {document.model} {document.year}
-                            </div>
-                          )}
+                        <div className="text-[10px] text-gray-500 dark:text-gray-400">
+                          {document.file_size ? `${(document.file_size / 1024).toFixed(1)} KB` : t('admin.documents.unknownSize')}
                         </div>
-                        <div className="text-sm text-gray-500 dark:text-gray-400">
-                          {document.provider_company && (
-                            <div className="flex items-center">
-                              <Building className="h-4 w-4 text-purple-500 mr-1" />
-                              {document.provider_company}
-                            </div>
-                          )}
-                          {document.provider_first_name && document.provider_last_name && (
-                            <div className="text-xs text-gray-500 dark:text-gray-400">
-                              {document.provider_first_name} {document.provider_last_name}
-                            </div>
-                          )}
+                        <div className="mt-1">
+                          {getStatusBadge(document.verification_status)}
                         </div>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm text-gray-900 dark:text-gray-100">
-                          {getDocumentTypeLabel(document.document_type)}
+                      </div>
+                    </div>
+                    
+                    <div className="space-y-1 mb-2 text-[10px]">
+                      {document.license_plate && (
+                        <div className="flex items-center text-gray-600 dark:text-gray-400 truncate">
+                          <Truck className="h-3 w-3 text-blue-500 mr-1 flex-shrink-0" />
+                          <span className="truncate">{document.license_plate}</span>
                         </div>
-                        <div className="text-sm text-gray-500 dark:text-gray-400">
-                          <div className="flex items-center">
-                            {getServiceTypeIcon(document.service_type)}
-                            <span className="ml-1">
-                              {document.service_type === 'rental' ? t('bookings.equipmentRental') : t('bookings.transportation')}
-                            </span>
-                          </div>
+                      )}
+                      {document.provider_company && (
+                        <div className="flex items-center text-gray-600 dark:text-gray-400 truncate">
+                          <Building className="h-3 w-3 text-purple-500 mr-1 flex-shrink-0" />
+                          <span className="truncate">{document.provider_company}</span>
                         </div>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        {getStatusBadge(document.verification_status)}
-                        {document.verified_at && (
-                          <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                            {new Date(document.verified_at).toLocaleDateString()}
-                          </div>
-                        )}
-                        {document.verified_by_first_name && (
-                          <div className="text-xs text-gray-500 dark:text-gray-400">
-                            by {document.verified_by_first_name} {document.verified_by_last_name}
-                          </div>
-                        )}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
-                        {new Date(document.uploaded_at).toLocaleDateString()}
-                        <div className="text-xs text-gray-400 dark:text-gray-400 dark:text-gray-400 dark:text-gray-500">
-                          {new Date(document.uploaded_at).toLocaleTimeString()}
-                        </div>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                        <div className="flex items-center space-x-2">
-                          {/* View Document Button */}
+                      )}
+                      <div className="text-gray-500 dark:text-gray-400">
+                        {getDocumentTypeLabel(document.document_type)}
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-center gap-1.5 flex-wrap">
+                      <button
+                        onClick={() => handleViewDocument(document.id, document.file_name)}
+                        className="flex-1 min-w-0 inline-flex items-center justify-center px-2 py-1 border border-gray-300 dark:border-gray-600 text-[10px] font-medium rounded text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 hover:bg-gray-50"
+                      >
+                        <Eye className="h-3 w-3 mr-1" />
+                        View
+                      </button>
+                      {document.verification_status === 'pending' && (
+                        <>
                           <button
-                            onClick={() => handleViewDocument(document.id, document.file_name)}
-                            className="inline-flex items-center px-2 py-1 border border-gray-300 dark:border-gray-600 text-xs font-medium rounded text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:bg-gray-900"
-                            title="View Document"
+                            onClick={() => {
+                              const notes = prompt('Add verification notes (optional):');
+                              handleVerification(document.id, 'approved', notes);
+                            }}
+                            disabled={verifying[document.id]}
+                            className="flex-1 min-w-0 inline-flex items-center justify-center px-2 py-1 border border-transparent text-[10px] font-medium rounded text-white bg-green-600 hover:bg-green-700 disabled:opacity-50"
                           >
-                            <Eye className="h-3 w-3 mr-1" />
-                            View
-                          </button>
-
-                          {document.verification_status === 'pending' && (
-                            <>
-                              <button
-                                onClick={() => {
-                                  const notes = prompt('Add verification notes (optional):');
-                                  handleVerification(document.id, 'approved', notes);
-                                }}
-                                disabled={verifying[document.id]}
-                                className="inline-flex items-center px-2 py-1 border border-transparent text-xs font-medium rounded text-white bg-green-600 hover:bg-green-700 disabled:opacity-50"
-                                title="Approve Document"
-                              >
-                                {verifying[document.id] ? (
-                                  <div className="animate-spin rounded-full h-3 w-3 border-b-2 border-white mr-1"></div>
-                                ) : (
-                                  <Check className="h-3 w-3 mr-1" />
-                                )}
+                            {verifying[document.id] ? (
+                              <div className="animate-spin rounded-full h-3 w-3 border-b-2 border-white"></div>
+                            ) : (
+                              <>
+                                <Check className="h-3 w-3 mr-1" />
                                 Approve
-                              </button>
-                              <button
-                                onClick={() => {
-                                  const notes = prompt('Add rejection reason (optional):');
-                                  handleVerification(document.id, 'rejected', notes);
-                                }}
-                                disabled={verifying[document.id]}
-                                className="inline-flex items-center px-2 py-1 border border-transparent text-xs font-medium rounded text-white bg-red-600 hover:bg-red-700 disabled:opacity-50"
-                                title="Reject Document"
-                              >
-                                {verifying[document.id] ? (
-                                  <div className="animate-spin rounded-full h-3 w-3 border-b-2 border-white mr-1"></div>
-                                ) : (
-                                  <X className="h-3 w-3 mr-1" />
-                                )}
+                              </>
+                            )}
+                          </button>
+                          <button
+                            onClick={() => {
+                              const notes = prompt('Add rejection reason (optional):');
+                              handleVerification(document.id, 'rejected', notes);
+                            }}
+                            disabled={verifying[document.id]}
+                            className="flex-1 min-w-0 inline-flex items-center justify-center px-2 py-1 border border-transparent text-[10px] font-medium rounded text-white bg-red-600 hover:bg-red-700 disabled:opacity-50"
+                          >
+                            {verifying[document.id] ? (
+                              <div className="animate-spin rounded-full h-3 w-3 border-b-2 border-white"></div>
+                            ) : (
+                              <>
+                                <X className="h-3 w-3 mr-1" />
                                 Reject
-                              </button>
-                            </>
-                          )}
-                        </div>
-                      </td>
+                              </>
+                            )}
+                          </button>
+                        </>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Desktop Table */}
+              <div className="hidden md:block overflow-x-auto">
+                <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                  <thead className="bg-gray-50 dark:bg-gray-900">
+                    <tr>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                        Document
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                        Truck & Provider
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                        Type & Service
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                        Status
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                        Uploaded
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                        Actions
+                      </th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                  </thead>
+                  <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                    {documents.map((document) => (
+                      <tr key={document.id} className="hover:bg-gray-50 dark:bg-gray-900">
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <div className="flex items-center">
+                            <div className="flex-shrink-0">
+                              {getFileIcon(document.mime_type)}
+                            </div>
+                            <div className="ml-4">
+                              <div className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                                {document.file_name || t('admin.documents.unnamedDocument')}
+                              </div>
+                              <div className="text-sm text-gray-500 dark:text-gray-400">
+                                {document.file_size ? `${(document.file_size / 1024).toFixed(1)} KB` : t('admin.documents.unknownSize')}
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <div className="text-sm text-gray-900 dark:text-gray-100">
+                            {document.license_plate && (
+                              <div className="flex items-center">
+                                <Truck className="h-4 w-4 text-blue-500 mr-1" />
+                                {document.license_plate}
+                              </div>
+                            )}
+                            {document.truck_type && (
+                              <div className="text-xs text-gray-500 dark:text-gray-400">
+                                {document.truck_type} • {document.make} {document.model} {document.year}
+                              </div>
+                            )}
+                          </div>
+                          <div className="text-sm text-gray-500 dark:text-gray-400">
+                            {document.provider_company && (
+                              <div className="flex items-center">
+                                <Building className="h-4 w-4 text-purple-500 mr-1" />
+                                {document.provider_company}
+                              </div>
+                            )}
+                            {document.provider_first_name && document.provider_last_name && (
+                              <div className="text-xs text-gray-500 dark:text-gray-400">
+                                {document.provider_first_name} {document.provider_last_name}
+                              </div>
+                            )}
+                          </div>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <div className="text-sm text-gray-900 dark:text-gray-100">
+                            {getDocumentTypeLabel(document.document_type)}
+                          </div>
+                          <div className="text-sm text-gray-500 dark:text-gray-400">
+                            <div className="flex items-center">
+                              {getServiceTypeIcon(document.service_type)}
+                              <span className="ml-1">
+                                {document.service_type === 'rental' ? t('bookings.equipmentRental') : t('bookings.transportation')}
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          {getStatusBadge(document.verification_status)}
+                          {document.verified_at && (
+                            <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                              {new Date(document.verified_at).toLocaleDateString()}
+                            </div>
+                          )}
+                          {document.verified_by_first_name && (
+                            <div className="text-xs text-gray-500 dark:text-gray-400">
+                              by {document.verified_by_first_name} {document.verified_by_last_name}
+                            </div>
+                          )}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
+                          {new Date(document.uploaded_at).toLocaleDateString()}
+                          <div className="text-xs text-gray-400">
+                            {new Date(document.uploaded_at).toLocaleTimeString()}
+                          </div>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                          <div className="flex items-center space-x-2">
+                            <button
+                              onClick={() => handleViewDocument(document.id, document.file_name)}
+                              className="inline-flex items-center px-2 py-1 border border-gray-300 dark:border-gray-600 text-xs font-medium rounded text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:bg-gray-900"
+                              title="View Document"
+                            >
+                              <Eye className="h-3 w-3 mr-1" />
+                              View
+                            </button>
+
+                            {document.verification_status === 'pending' && (
+                              <>
+                                <button
+                                  onClick={() => {
+                                    const notes = prompt('Add verification notes (optional):');
+                                    handleVerification(document.id, 'approved', notes);
+                                  }}
+                                  disabled={verifying[document.id]}
+                                  className="inline-flex items-center px-2 py-1 border border-transparent text-xs font-medium rounded text-white bg-green-600 hover:bg-green-700 disabled:opacity-50"
+                                  title="Approve Document"
+                                >
+                                  {verifying[document.id] ? (
+                                    <div className="animate-spin rounded-full h-3 w-3 border-b-2 border-white mr-1"></div>
+                                  ) : (
+                                    <Check className="h-3 w-3 mr-1" />
+                                  )}
+                                  Approve
+                                </button>
+                                <button
+                                  onClick={() => {
+                                    const notes = prompt('Add rejection reason (optional):');
+                                    handleVerification(document.id, 'rejected', notes);
+                                  }}
+                                  disabled={verifying[document.id]}
+                                  className="inline-flex items-center px-2 py-1 border border-transparent text-xs font-medium rounded text-white bg-red-600 hover:bg-red-700 disabled:opacity-50"
+                                  title="Reject Document"
+                                >
+                                  {verifying[document.id] ? (
+                                    <div className="animate-spin rounded-full h-3 w-3 border-b-2 border-white mr-1"></div>
+                                  ) : (
+                                    <X className="h-3 w-3 mr-1" />
+                                  )}
+                                  Reject
+                                </button>
+                              </>
+                            )}
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </>
           )}
         </div>
       </div>

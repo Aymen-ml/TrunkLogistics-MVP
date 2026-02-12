@@ -280,8 +280,73 @@ const UserManagement = () => {
           
           <ul className="divide-y divide-gray-200 dark:divide-gray-700">
             {filteredUsers.map((user) => (
-              <li key={user.id} className="px-4 py-6 sm:px-6">
-                <div className="flex items-center justify-between">
+              <li key={user.id} className="px-4 py-4 sm:px-6">
+                {/* Mobile Layout */}
+                <div className="md:hidden">
+                  <div className="flex items-start gap-2 mb-2">
+                    <div className="flex-shrink-0">
+                      <div className="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center">
+                        <Users className="h-5 w-5 text-gray-500 dark:text-gray-400" />
+                      </div>
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-medium text-gray-900 dark:text-gray-100 truncate">
+                        {user.first_name} {user.last_name}
+                      </p>
+                      <div className="flex flex-wrap gap-1 mt-1">
+                        {getRoleBadge(user.role)}
+                        {getStatusBadge(user.is_active)}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="space-y-1 mb-3">
+                    <div className="flex items-center text-xs text-gray-500 dark:text-gray-400 truncate">
+                      <Mail className="h-3 w-3 mr-1 flex-shrink-0" />
+                      <span className="truncate">{user.email}</span>
+                    </div>
+                    {user.phone && (
+                      <div className="flex items-center text-xs text-gray-500 dark:text-gray-400">
+                        <Phone className="h-3 w-3 mr-1 flex-shrink-0" />
+                        <span>{user.phone}</span>
+                      </div>
+                    )}
+                    <div className="flex items-center text-xs text-gray-500 dark:text-gray-400">
+                      <Calendar className="h-3 w-3 mr-1 flex-shrink-0" />
+                      <span>{new Date(user.created_at).toLocaleDateString()}</span>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={() => handleToggleStatus(user.id, user.is_active)}
+                      disabled={updating[user.id]}
+                      className={`flex-1 inline-flex items-center justify-center px-2 py-1.5 border border-transparent text-xs leading-4 font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 ${
+                        user.is_active
+                          ? 'text-white bg-red-600 hover:bg-red-700 focus:ring-red-500'
+                          : 'text-white bg-green-600 hover:bg-green-700 focus:ring-green-500'
+                      }`}
+                    >
+                      {updating[user.id] ? (
+                        <div className="animate-spin rounded-full h-3 w-3 border-b-2 border-white mr-1"></div>
+                      ) : user.is_active ? (
+                        <UserX className="h-3 w-3 mr-1" />
+                      ) : (
+                        <UserCheck className="h-3 w-3 mr-1" />
+                      )}
+                      <span className="truncate">{user.is_active ? 'Deactivate' : 'Activate'}</span>
+                    </button>
+
+                    <button
+                      onClick={() => handleDeleteUser(user.id)}
+                      disabled={updating[user.id]}
+                      className="flex-shrink-0 inline-flex items-center px-2 py-1.5 border border-transparent text-xs leading-4 font-medium rounded-md text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 disabled:opacity-50"
+                    >
+                      {t('admin.userManagement.deleteUser')}
+                    </button>
+                  </div>
+                </div>
+
+                {/* Desktop Layout */}
+                <div className="hidden md:flex items-center justify-between">
                   <div className="flex items-center">
                     <div className="flex-shrink-0">
                       <div className="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center">
